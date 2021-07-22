@@ -105,7 +105,7 @@
   
     
       <article
-id="post-test-site"
+id="post-1-blog"
 class="article article-type-post"
 >
 
@@ -116,109 +116,21 @@ class="article article-type-post"
 
     <div class="article-body">
     <header class="article-title">
-        <a href="/2021/07/22/test-site/">test_site</a>
+        <a href="/2021/07/22/1-blog/">一个简单的估计</a>
     </header>
     <div class="article-entry post-inner-html">
         
-        
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-07-22T13:22:36.000Z" itemprop="datePublished">2021-07-22</time>
-</div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-test-my-site"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2021/07/22/test-my-site/">test_my_site</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-07-22T13:08:25.000Z" itemprop="datePublished">2021-07-22</time>
-</div>
-    
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-hello-world"
-class="article article-type-post"
->
-
-
-
-<div class="article-inner">
-    
-
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2021/07/22/hello-world/">Hello World</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre><code class="bash">$ hexo new &quot;My New Post&quot;
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre><code class="bash">$ hexo server
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre><code class="bash">$ hexo generate
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre><code class="bash">$ hexo deploy
-</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+        <h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我们不妨思考这样的一个问题</p>
+<p>对于有$n$个点，$m$条边的无向图$G$（不妨认为它没有重边和自环），记$V$为其点集，$E$为其边集，给予每个点一个权值$c_i$，定义函数$f(G) = \sum_{uv \in E} [c_u &gt; c_v]$</p>
+<p>现在，不妨设初始状态为$G_0$，并且我们有$q$次修改，每次修改将提升一个点的权值，设前$i$次修改后的图为$G_i$，那么$S = f(G_0) + \sum_{i=0}^{q-1} |f(G_{i+1}) - f(G_i)|$大概有多大呢？</p>
+<p>这个式子相当于描述每个点维护比自己大的邻点集合时的一种复杂程度</p>
+<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>我们可以先构造一类特殊的操作：$\sqrt m$个点的完全图，初始时的权值为$1, 2, 3, …, \sqrt m$，之后从$1$到$\sqrt m$循环操作，每次将$i$号节点的值增加$\sqrt m$，这样，每次大小关系的平均变动数量将是一个$\sqrt m$级的大小</p>
+<p>上述构造可以揭示$\sqrt m$是一个下限，下面我们证明它也是一个上限</p>
+<p>我们不妨根据点度分类，称度数$&gt; \sqrt m$的点为大点，而度数$ \leq \sqrt  m$的点为小点</p>
+<p>显然，我们对小点操作时，其带来的变动不可能超过$\sqrt m$，而度数$&gt; \sqrt m$的大点也只可能有$\sqrt m$个，因此操作大点时，对大点之间的大小关系的变动也不可能超过$\sqrt m$个，那么我们只需要估计大点和小点之间的关系变动情况了</p>
+<p>对于这部分，我们设想有这样的一个势函数$\phi(G)$，当操作小点时，每改变一次其与大点之间的关系，那么这个势函数增加$1$，而当操作大点时，每改变一次其与小点之间的关系，则减小$1$</p>
+<p>每次操作小点时，$\phi(G)$不会增加超过$\sqrt m$，而操作大点时，$\phi(G)$总是减小的，并且$\phi(G)$非负是显而易见的，用$\phi(G)$来刻画大点和小点之间的关系变动情况</p>
+<p>我们可以知道题述函数大概具有$O(m + q \sqrt m)$的复杂程度…</p>
 
         
     </div>
@@ -234,9 +146,13 @@ class="article article-type-post"
 <footer class="article-footer">
     <div class="article-more-info">
     <div class="article-date">
-  <time datetime="2021-07-22T13:02:59.359Z" itemprop="datePublished">2021-07-22</time>
+  <time datetime="2021-07-22T15:03:02.000Z" itemprop="datePublished">2021-07-22</time>
 </div>
     
+    
+        <div class="article-tag">
+        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/complexity/" rel="tag">complexity</a></li></ul>
+        </div>
     
     </div>
 </footer>
@@ -265,6 +181,13 @@ class="article article-type-post"
 
     
       
+  <div class="widget-wrap widget-tags">
+    <div class="widget-title"><span>Tags</span></div>
+    <div class="widget-inner">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/complexity/" rel="tag">complexity</a></li></ul>
+    </div>
+  </div>
+
 
     
       
@@ -274,15 +197,7 @@ class="article article-type-post"
       <ul>
         
           <li>
-            <a href="/2021/07/22/test-site/">test_site</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/22/test-my-site/">test_my_site</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/22/hello-world/">Hello World</a>
+            <a href="/2021/07/22/1-blog/">一个简单的估计</a>
           </li>
         
       </ul>
