@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="记录一下B树的实现">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Btree">
+<meta property="og:url" content="http://sremoon.github.io/2021/07/23/Btree/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="记录一下B树的实现">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-23T14:44:58.000Z">
+<meta property="article:modified_time" content="2021-07-23T14:46:15.610Z">
+<meta property="article:author" content="remoon">
+<meta property="article:tag" content="ds">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sremoon.github.io/2021/07/23/Btree/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2021/07/23/Btree/","path":"2021/07/23/Btree/","title":"Btree"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Btree | SreMoon's Lake</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="remoon"
+      src="/images/lalala.jpg">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/07/23/Btree/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lalala.jpg">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Btree
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2021-07-23 22:44:58 / Modified: 22:46:15" itemprop="dateCreated datePublished" datetime="2021-07-23T22:44:58+08:00">2021-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/codes/" itemprop="url" rel="index"><span itemprop="name">codes</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>6.8k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>6 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">记录一下B树的实现</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <span id="more"></span>
+
+<pre><code class="C++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int M = 5; // 几路的B树
+const int INF = 1e9 + 5;
+
+struct BTree &#123;
+    
+    struct Bnode;
+    Bnode *root;
+    
+    struct Bnode &#123;
+        int size, val[M + 1];
+        Bnode *parent, *son[M + 2];
+        Bnode(Bnode* parent_ = nullptr) &#123; 
+            size = 0; parent = parent_;
+            for(int i = 0; i &lt;= M; i ++) son[i] = nullptr;
+        &#125;
+        int &amp;begin_val() &#123; return val[0]; &#125;
+        Bnode *&amp;begin_son() &#123; return son[0]; &#125;
+        int &amp;end_val() &#123; return val[size - 1]; &#125;
+        Bnode *end_son() &#123; return son[size]; &#125;
+        bool empty() &#123; return !size; &#125;
+        bool is_full() &#123; return size &gt;= M; &#125;
+        bool is_enough() &#123; return size &gt;= ceil(M / 2.0); &#125;
+        bool not_enough() &#123; return size &lt; ceil(M / 2.0) - 1; &#125;
+        bool is_leaf() &#123; return !size || (son[0] == nullptr); &#125;
+        bool is_root() &#123; return parent == nullptr; &#125;
+        void set_parent(Bnode *nson) &#123; if(nson) nson -&gt; parent = this; &#125;
+        void print() &#123;
+            if(!size) printf(&quot;empty!\n&quot;);
+            for(int i = 0; i &lt; size; i ++) printf(&quot;%d &quot;, val[i]); 
+            printf(&quot;\n&quot;);
+        &#125;
+        int find(int val_) &#123; // if in (val[i], val[i + 1] ], then in son[i + 1]
+            for(int i = 0; i &lt; size; i ++) if(val_ &lt;= val[i]) return i;
+            return size;
+        &#125;
+        int get_val_id(int val_) &#123;
+            for(int i = 0; i &lt; size; i ++) if(val[i] == val_) return i;
+            return -1;
+        &#125;
+        int get_son_id(Bnode *son_) &#123;
+            for(int i = 0; i &lt;= size; i ++) if(son[i] == son_) return i;
+            return -1;
+        &#125;
+        void rightshift(int pos) &#123; // move son[pos],val[pos],...son[size], thus son[pos], val[pos] are empty, noticing size ++
+            for(int i = size - 1; i &gt;= pos; i --) val[i + 1] = val[i];
+            for(int i = size; i &gt;= pos; i --) son[i + 1] = son[i];
+            size ++;
+        &#125;
+        void rightshift2(int pos) &#123; // move val[pos],...,son[size], thus val[pos],son[pos+1] are empty, noticing size ++
+            rightshift(pos + 1); val[pos + 1] = val[pos];
+        &#125;
+        void leftshift(int pos) &#123; // move son[pos],val[pos],...,son[size], thus son[pos], val[pos] can be deleted, noticing size --
+            size --;
+            for(int i = pos; i &lt;= size - 1; i ++) val[i] = val[i + 1];
+            for(int i = pos; i &lt;= size; i ++) son[i] = son[i + 1];
+        &#125;
+        void leftshift2(int pos) &#123; // empty val[pos], son[pos + 1], noticing size --
+            val[pos] = val[pos + 1]; leftshift(pos + 1); 
+        &#125;
+        void insert_begin(int val_, Bnode *son_ = nullptr) &#123;  
+            rightshift(0);
+            val[0] = val_;
+            son[0] = son_; set_parent(son_);
+        &#125;
+        void insert_end(int val_, Bnode *son_ = nullptr) &#123;
+            val[size ++] = val_; 
+            son[size] = son_; set_parent(son_);
+        &#125;
+        void insert_mid_before(int pos_, int val_, Bnode *son_ = nullptr) &#123; // insert son[pos], val[pos]
+            rightshift(pos_);
+            val[pos_] = val_;
+            son[pos_] = son_; set_parent(son_);
+        &#125;
+        void insert_mid_after(int pos_, int val_, Bnode *son_ = nullptr) &#123; // insert val[pos], son[pos + 1]
+            rightshift2(pos_);
+            val[pos_] = val_;
+            son[pos_ + 1] = son_; set_parent(son_);
+        &#125;
+        void delete_begin() &#123; // delete son[0], val[0]
+            leftshift(0);
+        &#125;
+        void delete_end() &#123; // delete val[size - 1], son[size]
+            size --;
+        &#125;
+        void delete_mid_before(int pos_) &#123; // delete son[pos], val[pos]
+            leftshift(pos_);
+        &#125;
+        void delete_mid_after(int pos_) &#123; //delete val[pos], son[pos + 1]
+            leftshift2(pos_);
+        &#125;
+        void insert_leaf(int val_) &#123; // leaf case
+            int pos_ = find(val_);
+            insert_mid_before(pos_, val_);
+        &#125;
+        void Move(int L_, Bnode* Rnode) &#123; //move val[L_],son[L+1]...,val[size-1],son[size] from (this) to Rnode
+            int R_ = this -&gt; size - 1;
+            for(int i = L_; i &lt;= R_; i ++) Rnode -&gt; insert_end(val[i], son[i + 1]);
+             size -= R_ - L_ + 1; // equals to &quot;for(int i = L_; i &lt;= R_; i ++) delete_end();&quot;
+        &#125;
+        void split() &#123;
+            if(parent == nullptr) &#123;
+                parent = new Bnode();
+                parent -&gt; son[0] = this;
+            &#125;
+            Bnode* brother = new Bnode(parent);
+            int lr = ceil(M / 2.0) - 2, rl = lr + 2, pos = parent -&gt; get_son_id(this);
+            parent -&gt; insert_mid_after(pos, val[lr + 1], brother);
+            Move(rl, brother); 
+            brother -&gt; son[0] = this -&gt; end_son(); 
+            brother -&gt; set_parent(brother -&gt; son[0]);
+            this -&gt; delete_end();
+        &#125;
+    &#125;;
+    void Insert(int val) &#123; // use this function to insert v
+        if(root == nullptr) root = new Bnode();
+        Bnode *now = root;
+        while(!now -&gt; is_leaf())
+            now = now -&gt; son[now -&gt; find(val)];
+        now -&gt; insert_leaf(val);
+        while(!now -&gt; is_root()) &#123;
+            if(!now -&gt; is_full()) return;
+            now -&gt; split();
+            now = now -&gt; parent;
+        &#125;
+        if(!now -&gt; is_full()) return;
+        now -&gt; split(); root = now -&gt; parent;
+    &#125;
+    
+    void val_locate(int val, Bnode* &amp;now, int &amp;pos) &#123;
+        while(now != nullptr) &#123;
+            pos = now -&gt; find(val);
+            if(pos != now -&gt; size &amp;&amp; now -&gt; val[pos] == val) return;
+            now = now -&gt; son[pos];
+        &#125;
+        pos = - 1;
+    &#125;;
+    void precursor(Bnode* &amp;now, int &amp;pos, int first_step) &#123;
+        now = now -&gt; son[first_step];
+        while(!now -&gt; is_leaf()) now = now -&gt; son[now -&gt; size];
+        pos = now -&gt; size - 1;
+    &#125;
+    bool Adjust(Bnode* &amp;now) &#123;
+        Bnode* parent = now -&gt; parent;
+        if(!now -&gt; not_enough()) return 1;
+        int pos = parent -&gt; get_son_id(now);
+        if(!pos) &#123;
+             // adjust with son[pos](now), val[pos], son[pos+1](bro)
+             Bnode *bro = parent -&gt; son[pos + 1];
+             if(bro -&gt; is_enough()) &#123; // the move case
+                now -&gt; insert_end(parent -&gt; val[pos], bro -&gt; begin_son());
+                parent -&gt; val[pos] = bro -&gt; begin_val();
+                bro -&gt; delete_begin();
+             &#125;
+             else &#123; // the merge case
+                now -&gt; insert_end(parent -&gt; val[pos], bro -&gt; begin_son());
+                bro -&gt; Move(0, now);
+                parent -&gt; delete_mid_after(pos);
+                delete bro;
+             &#125;
+        &#125;
+        else &#123;
+            // adjust with son[pos-1](bro), val[pos-1], son[pos](now)
+             Bnode *bro = parent -&gt; son[pos - 1];
+             if(bro -&gt; is_enough()) &#123;
+                now -&gt; insert_begin(parent -&gt; val[pos - 1], bro -&gt; end_son());
+                parent -&gt; val[pos - 1] = bro -&gt; end_val();
+                bro -&gt; delete_end();
+             &#125;
+             else &#123;
+                bro -&gt; insert_end(parent -&gt; val[pos - 1], now -&gt; begin_son());
+                now -&gt; Move(0, bro);
+                parent -&gt; delete_mid_after(pos - 1);
+                delete now;
+                now = bro;
+             &#125;
+        &#125;
+        if(root -&gt; empty()) &#123;
+            root = now;
+            root -&gt; parent = nullptr;
+            return 1;
+        &#125;
+        now = now -&gt; parent;
+        return 0;
+    &#125;
+    void Delete(int val) &#123; // use this function to delete v
+        int pos; Bnode* now = root;
+        val_locate(val, now, pos);
+        if(now == nullptr) return;
+        if(!now -&gt; is_leaf()) &#123;
+            int ppos; Bnode* pre = now;
+            precursor(pre, ppos, pos);
+            swap(pre -&gt; val[ppos], now -&gt; val[pos]);
+            now = pre; pos = ppos;
+        &#125;
+        now -&gt; delete_mid_before(pos); // leaf case, deleted
+        if(now -&gt; is_root() &amp;&amp; now -&gt; empty()) &#123;
+            delete root;
+            root = nullptr;
+            return;
+        &#125;
+        while(!now -&gt; is_root() &amp;&amp; !Adjust(now));
+    &#125;
+    
+    
+    // use for debugging
+    int len, dep;
+    char output[123456];
+    int ck[123456], tmp[123];
+    void write(int x) &#123;
+        int tlen = 0;
+        if(!x) tmp[++ tlen] = 0;
+        while(x) tmp[++ tlen] = x % 10, x /= 10;
+        for(int i = tlen; i; i --) output[++ len] = tmp[i] + &#39;0&#39;;
+    &#125;
+    void dfs(Bnode* now) &#123;
+        if(now == nullptr) return;
+        output[++ len] = &#39; &#39;; ck[len] = 1;
+        dfs(now -&gt; son[0]);
+        output[++ len] = &#39; &#39;; ck[len] = -1;
+        for(int i = 0; i &lt; now -&gt; size; i ++) &#123;
+            write(now -&gt; val[i]);
+            output[++ len] = &#39; &#39;; ck[len] = 1;
+            dfs(now -&gt; son[i + 1]); 
+            output[++ len] = &#39; &#39;; ck[len] = -1;
+        &#125;
+    &#125;
+    void print() &#123;
+        len = 0; dep = 0;
+        for(int i = 0; i &lt;= 100000; i ++) ck[i] = 0;
+        dfs(root);
+        for(int i = 1; i &lt;= len; i ++) printf(&quot;%c&quot;, output[i]); 
+        // the next part is using for special output
+         
+        //int maxdep = 0;
+        //for(int i = 1; i &lt;= len; i ++) dep += ck[i], maxdep = max(maxdep, dep);
+        //for(int D = 0; D &lt;= maxdep; D ++) &#123;
+        //    for(int i = 1; i &lt;= len; i ++) dep += ck[i], printf(&quot;%c&quot;, (dep == D) ? output[i] : &#39; &#39;); 
+        //    printf(&quot;\n&quot;);
+        //&#125;
+    &#125;
+&#125; T;
+
+
+int main() &#123;
+    for(int i = 1; i &lt;= 10; i ++) T.Insert(i ^ 7);
+    T.print();
+    return 0;
+&#125;
+</code></pre>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ds/" rel="tag"># ds</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/23/matrix-analysis-1/" rel="prev" title="矩阵分析 1">
+                  <i class="fa fa-chevron-left"></i> 矩阵分析 1
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/23/problem-1/" rel="next" title="2021杭电多校第二场T9">
+                  2021杭电多校第二场T9 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">15k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">14 mins.</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
