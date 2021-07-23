@@ -20,23 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta property="og:type" content="website">
-<meta property="og:title" content="SreMoon&#39;s Lake">
-<meta property="og:url" content="http://sremoon.github.io/index.html">
+<meta name="description" content="矩阵之间的关系 相抵：存在非奇异矩阵$P, Q$，使得$B &#x3D; PAQ$时，则称$A$与$B$相抵 相似：存在非奇异方阵$P$，使得$B &#x3D; P^{-1}AP$时，称$A$与$B$相似 合同：存在非奇异方阵$P$，使得$B &#x3D; P^TAP$时，称$A$与$B$合同  特征值 对于方阵$A$，如果存在$\lambda \in P$以及非零向量$x \in V^n$，使得$Ax &#x3D; \lambda">
+<meta property="og:type" content="article">
+<meta property="og:title" content="matrix_analysis_1">
+<meta property="og:url" content="http://sremoon.github.io/2021/07/23/advanced-algebra-1/index.html">
 <meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="矩阵之间的关系 相抵：存在非奇异矩阵$P, Q$，使得$B &#x3D; PAQ$时，则称$A$与$B$相抵 相似：存在非奇异方阵$P$，使得$B &#x3D; P^{-1}AP$时，称$A$与$B$相似 合同：存在非奇异方阵$P$，使得$B &#x3D; P^TAP$时，称$A$与$B$合同  特征值 对于方阵$A$，如果存在$\lambda \in P$以及非零向量$x \in V^n$，使得$Ax &#x3D; \lambda">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-23T04:43:53.000Z">
+<meta property="article:modified_time" content="2021-07-23T06:14:54.658Z">
 <meta property="article:author" content="remoon">
+<meta property="article:tag" content="matrix_analysis">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://sremoon.github.io/">
+<link rel="canonical" href="http://sremoon.github.io/2021/07/23/advanced-algebra-1/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2021/07/23/advanced-algebra-1/","path":"2021/07/23/advanced-algebra-1/","title":"matrix_analysis_1"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>SreMoon's Lake</title>
+<title>matrix_analysis_1 | SreMoon's Lake</title>
   
 
 
@@ -100,7 +105,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -113,6 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">矩阵之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-text">特征值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">不变子空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Schur-TH"><span class="nav-text">Schur TH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%98%B5"><span class="nav-text">正定矩阵</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -172,16 +178,17 @@
 </noscript>
 
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
     <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/07/23/advanced-algebra-1/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -194,9 +201,9 @@
       <meta itemprop="name" content="SreMoon's Lake">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/23/advanced-algebra-1/" class="post-title-link" itemprop="url">matrix_analysis_1</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          matrix_analysis_1
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -245,7 +252,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <span id="more"></span>
+        <span id="more"></span>
 
 <h4 id="矩阵之间的关系"><a href="#矩阵之间的关系" class="headerlink" title="矩阵之间的关系"></a>矩阵之间的关系</h4><ul>
 <li><strong>相抵</strong>：存在非奇异矩阵$P, Q$，使得$B = PAQ$时，则称$A$与$B$相抵</li>
@@ -391,7 +398,6 @@
 </li>
 </ul>
 
-      
     </div>
 
     
@@ -399,114 +405,25 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
+          <div class="post-tags">
+              <a href="/tags/matrix-analysis/" rel="tag"># matrix_analysis</a>
+          </div>
 
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/07/22/1-/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/lalala.jpg">
-      <meta itemprop="name" content="remoon">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="SreMoon's Lake">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/07/22/1-/" class="post-title-link" itemprop="url">一个简单的估计</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2021-07-22 23:03:02" itemprop="dateCreated datePublished" datetime="2021-07-22T23:03:02+08:00">2021-07-22</time>
-    </span>
-      <span class="post-meta-item">
-        <span class="post-meta-item-icon">
-          <i class="far fa-calendar-check"></i>
-        </span>
-        <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-23 10:17:55" itemprop="dateModified" datetime="2021-07-23T10:17:55+08:00">2021-07-23</time>
-      </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">In</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
-        </span>
-    </span>
-
-  
-      </div>
-      <div class="post-meta">
-    <span class="post-meta-item" title="Symbols count in article">
-      <span class="post-meta-item-icon">
-        <i class="far fa-file-word"></i>
-      </span>
-      <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>837</span>
-    </span>
-    <span class="post-meta-item" title="Reading time">
-      <span class="post-meta-item-icon">
-        <i class="far fa-clock"></i>
-      </span>
-      <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
-    </span>
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>对于一个简单问题的简单估计</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/07/22/1-/">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/22/1-/" rel="prev" title="一个简单的估计">
+                  <i class="fa fa-chevron-left"></i> 一个简单的估计
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
