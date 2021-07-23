@@ -25,8 +25,8 @@
       </tags>
   </entry>
   <entry>
-    <title>matrix_analysis_1</title>
-    <url>/2021/07/23/advanced-algebra-1/</url>
+    <title>矩阵分析 1</title>
+    <url>/2021/07/23/matrix-analysis-1/</url>
     <content><![CDATA[<span id="more"></span>
 
 <h4 id="矩阵之间的关系"><a href="#矩阵之间的关系" class="headerlink" title="矩阵之间的关系"></a>矩阵之间的关系</h4><ul>
@@ -44,7 +44,8 @@
 </ul>
 </li>
 <li><p>example</p>
-<p>矩阵$A = \begin{bmatrix}<br>0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_n \<br> 1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\<br>0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\<br>\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \<br> 0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1<br>\end{bmatrix}$</p>
+<p>矩阵</p>
+<p>$$A = \begin{pmatrix}<br>0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\<br>1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\<br>0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\<br>\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\<br>0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1<br>\end{pmatrix}$$</p>
 <p>的特征多项式为$f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + … + a_n$</p>
 </li>
 <li><p>对可逆矩阵$A, B \in C^{n*n}$，由$|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|$，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p>
