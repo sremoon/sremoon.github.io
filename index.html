@@ -1,462 +1,437 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    
-    <title>SreMoon&#39;s Lake</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-<link rel="stylesheet" href="/dist/build.css?v=1623049492098.css">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-    <script>
-        window.isPost = false
-        window.aomori = {
-            
-            
-            
-        }
-        window.aomori_logo_typed_animated = false
-        window.aomori_search_algolia = false
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    </script>
-
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body>
-
-    <div class="container">
-    <header class="header">
-        <div class="header-type">
-            
-            <div class="header-type-inner">
-                
-                    <a class="header-type-title" href="/">SreMoon&#39;s Lake</a>
-                
-    
-                
-            </div>
-        </div>
-        <div class="header-menu">
-            <div class="header-menu-inner">
-                
-            </div>
-            <div class="header-menu-social">
-                
-            </div>
-        </div>
-
-        <div class="header-menu-mobile">
-            <div class="header-menu-mobile-inner" id="mobile-menu-open">
-                <i class="icon icon-menu"></i>
-            </div>
-        </div>
-    </header>
-
-    <div class="header-menu-mobile-menu">
-        <div class="header-menu-mobile-menu-bg"></div>
-        <div class="header-menu-mobile-menu-wrap">
-            <div class="header-menu-mobile-menu-inner">
-                <div class="header-menu-mobile-menu-close" id="mobile-menu-close">
-                    <i class="icon icon-cross"></i>
-                </div>
-                <div class="header-menu-mobile-menu-list">
-                    
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-    <div class="container">
-        <div class="main">
-            <section class="inner">
-                <section class="inner-main">
-                    <div class="index">
-  
-    
-      <article
-id="post-matrix-analysis-1"
-class="article article-type-post"
->
+<link rel="stylesheet" href="/css/main.css">
 
 
 
-<div class="article-inner">
-    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2021/07/23/matrix-analysis-1/">矩阵分析 1</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <span id="more"></span>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta property="og:type" content="website">
+<meta property="og:title" content="SreMoon&#39;s Lake">
+<meta property="og:url" content="http://sremoon.github.io/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:locale" content="en_US">
+<meta property="article:author" content="remoon">
+<meta name="twitter:card" content="summary">
 
-<h4 id="矩阵之间的关系"><a href="#矩阵之间的关系" class="headerlink" title="矩阵之间的关系"></a>矩阵之间的关系</h4><ul>
-<li><strong>相抵</strong>：存在非奇异矩阵$P, Q$，使得$B = PAQ$时，则称$A$与$B$相抵</li>
-<li><strong>相似</strong>：存在非奇异方阵$P$，使得$B = P^{-1}AP$时，称$A$与$B$相似</li>
-<li><strong>合同</strong>：存在非奇异方阵$P$，使得$B = P^TAP$时，称$A$与$B$合同</li>
-</ul>
-<h4 id="特征值"><a href="#特征值" class="headerlink" title="特征值"></a>特征值</h4><ul>
-<li><p>对于方阵$A$，如果存在$\lambda \in P$以及非零向量$x \in V^n$，使得$Ax = \lambda x$，则称$\lambda$为$A$的<strong>特征值</strong>，$x$为$A$的<strong>特征向量</strong></p>
-</li>
-<li><p>$Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0$，因此非零向量$x$存在，要求$|\lambda I - A| = 0$，称$f(\lambda) = |\lambda I - A|$为矩阵$A$的<strong>特征多项式</strong></p>
-<ul>
-<li>$|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)$，其中$A_k$表示矩阵$A$的所有$k$阶主子式的和，$\lambda_1, …, \lambda_n$表示矩阵$A$的所有特征值</li>
-<li>对于上式中的$A_1$，即$a_{11} + a_{22} + … + a_{nn}$，我们称其为矩阵的迹，记做$tr(A)$，由根与系数的关系，我们知道$A_1 = tr(A) = \sum \lambda_i$，$A_n = |A| = \prod\lambda_i$</li>
-</ul>
-</li>
-<li><p>example</p>
-<p>矩阵</p>
-<p>$$A = \begin{pmatrix}<br>0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\<br>1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\<br>0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\<br>\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\<br>0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1<br>\end{pmatrix}$$</p>
-<p>的特征多项式为$f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + … + a_n$</p>
-</li>
-<li><p>对可逆矩阵$A, B \in C^{n*n}$，由$|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|$，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p>
-</li>
-<li><p>对$A \in C^{m * n}, B \in C^{n * m}$，由$\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|$，我们可以知道$AB$与$BA$有相同的非零特征值</p>
-</li>
-<li><p>设$\lambda_i$是$|\lambda I - A|$的$m_i$重根，则称$m_i$是$\lambda_i$的<strong>代数重复度</strong>，注意到$\sum m_i = n$</p>
-</li>
-<li><p>记$V_{\lambda_i} = {x:(\lambda_i I - A)x = 0}$为$A$的属于$\lambda_i$的<strong>特征子空间</strong>，并称$\dim (V_{\lambda_i})$为$\lambda_i$的<strong>几何重复度</strong></p>
-</li>
-<li><p><strong>几何重复度</strong>不大于<strong>代数重复度</strong></p>
-<ul>
-<li>通过代数重复度构造出一组包含$(\lambda_i I - A)x = 0$的基础解系的基，记这组基的坐标为$C$，考虑$C^{-1}AC$的特征多项式</li>
-</ul>
-</li>
-<li><p>设$\lambda_1, …, \lambda_r$是矩阵$A$的不同的特征值，$x_{1}^{(i)}, …, x_{s_i}^{(i)}$是属于$\lambda_i$的线性无关的特征向量，那么$x_1^{(1)}, …, x_{s_1}^{(1)}, …, x_1^{(r)}, …, x_{s_r}^{(r)}$也是线性无关的</p>
-<ul>
-<li>利用线性无关的充要条件为零向量的组合系数仅有$0$，对于$kx^{(i)}$，注意到乘以$\lambda_j$和$Ax^{(i)} = \lambda_i x^{(i)}$将是两种不一样的变化即可</li>
-</ul>
-</li>
-<li><p>矩阵$A$可对角化（和对角矩阵相似）的充要条件为$A$为$n$个线性无关的特征向量</p>
-<ul>
-<li><p>注意到以这$n$个特征向量为基即可，也因此，相似中的转移矩阵即为这$n$个特征向量的坐标</p>
-</li>
-<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p>
-</li>
-<li><p>如果$A$有$n$个线性无关的特征向量，则称$A$有完备的特征向量系</p>
-<p>否则，称$A$为<strong>亏损矩阵</strong></p>
-</li>
-<li><p>如果每个代数重复度和几何重复度相等，则称$A$为<strong>单纯矩阵</strong></p>
-</li>
-<li><p>$A$可对角化的充要条件有其他不同的表述，比如$V^n = V_{\lambda_1} \oplus … \oplus V_{\lambda_r}$</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="不变子空间"><a href="#不变子空间" class="headerlink" title="不变子空间"></a>不变子空间</h4><ul>
-<li>对于线性变换$\mathscr{A}$，如果$\mathscr{A}W \subseteq W$，则称$W$为$\mathscr{A}$的<strong>不变子空间</strong></li>
-<li>有两类较为容易发现的子空间<ul>
-<li>$\ker \mathscr{A} = \mathscr{A}^{-1}(0)  = {x:\mathscr{A}x = 0}$，核空间</li>
-<li>$\text{Im} \mathscr{A} = \mathscr{A}V$，值域</li>
-<li>联系方程组，我们可以知道，若线性变换$\mathscr{A}$对应于矩阵$A$，核空间实际上对应于$A$的解空间，我们记$\dim \ker \mathscr{A} = \text{null } A$，而值域实际上是$A$的列向量张成的空间，因此其维数应该是$\text{rank} A$</li>
-<li><strong>维数公式</strong>：$\text{rank} A +\text{null } A = n $</li>
-</ul>
-</li>
-</ul>
-<h4 id="Schur-TH"><a href="#Schur-TH" class="headerlink" title="Schur TH"></a>Schur TH</h4><ul>
-<li><p>任何$n$阶矩阵都酉相似于一个上三角阵，即存在一个$n$阶酉矩阵$U$和一个上三角阵$R$，使得</p>
-<p>$$A = UTU^H$$</p>
-<p>式中$T$的主对角元为$A$的特征值</p>
-<ul>
-<li>每一次选择一个特征向量后进行归纳</li>
-</ul>
-</li>
-<li><p>如果$A^H = A$，则称$A$为<strong>埃米尔特矩阵</strong></p>
-<ul>
-<li>对埃米尔特矩阵运用Schur TH：$A = UTU^H$，从而$A^H  = UT^HU^H$，由$A=A^H$，我们得到$T = T^H$，也就是说，$T$是对角矩阵，并且$A$的特征值都是实数</li>
-</ul>
-</li>
-</ul>
-<h4 id="正定矩阵"><a href="#正定矩阵" class="headerlink" title="正定矩阵"></a>正定矩阵</h4><ul>
-<li><p>对于埃米尔特矩阵$A$，如果$x^HAx\geq 0$，则称$A$为半正定矩阵，记作$A\geq 0$；类似的，如果$x^HAx &gt; 0$，则称$A$为正定矩阵，记作$A&gt;0$</p>
-<ul>
-<li>如果$A&gt;0$，$k&gt;0$，那么$kA&gt;0$</li>
-<li>如果$A \geq 0, B \geq 0$，那么$A+B\geq 0$</li>
-</ul>
-</li>
-<li><p>矩阵$A$正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
-<ul>
-<li>神奇恒等式：设$\lambda$为$A$的特征值，$\xi$为对应的单位特征向量，那么$\lambda = \xi^HA\xi$</li>
-</ul>
-</li>
-<li><p>矩阵$A$为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）$P$，使得$A=P^HP$</p>
-<ul>
-<li>如果$A&gt;0$，那么$A^{-1}&gt;0$</li>
-<li>如果$A&gt;0$，且$C$非奇异，则$C^HAC&gt;0$</li>
-<li>如果$A \geq 0$，则$C^HAC \geq 0$</li>
-</ul>
-</li>
-<li><p>设$A,B$都是$n$阶埃米尔特矩阵，且$B&gt;0$，则存在非奇异矩阵$Q$，使得$Q^HBQ=I, Q^HAQ=\text{diag}\{\lambda_1, …, \lambda_n\}$（可同时对角化），且$\lambda_1,…,\lambda_n$为$AB^{-1}$的特征值</p>
-</li>
-<li><p>如果$A-B\geq 0$，那么称$A$大于等于$B$，记做$A\geq B$</p>
-<ul>
-<li><p>这不是一个well order…</p>
-</li>
-<li><p>$A \geq B$等价于$x^HAx\geq x^HBx$恒成立</p>
-<p>以下性质几乎是显然的</p>
-<ul>
-<li><p>如果$A, B$是对角阵，那么条件也等价于$a_{ii} \geq b_{ii}$</p>
-</li>
-<li><p>$A \geq B, B \geq C$可得$A \geq C$</p>
-</li>
-<li><p>$A \geq B$，且$k&gt;0$，那么$kA \geq kB$</p>
-</li>
-<li><p>若$A_1 \geq B_1, A_2 \geq B_2$，那么$A_1 + A_2 \geq B_1 + B_2$</p>
-</li>
-<li><p>若$A \geq B$，那么$P^HAP\geq P^HBP$</p>
-</li>
-</ul>
-</li>
-<li><p>若$A \geq 0$，则$A \leq tr(A)I$（利用$tr(A)\geq \lambda_i$）</p>
-</li>
-<li><p>若$A\geq B$，则$B^{-1} \geq A^{-1}$</p>
-</li>
-<li><p>若$A, B$可交换，且$A \geq B$，那么$A^2 \geq B^2$</p>
-</li>
-<li><p>$Schwartz$不等式：若$A,B$分别为$n\times m, m \times l$的矩阵，且$AA^H$非奇异，则$B^HB \geq (AB)^H(AA^H)^{-1}(AB)$，等号成立当且仅当存在$n \times l$的矩阵$C$，使$B=A^HC$</p>
-</li>
-</ul>
-</li>
-<li><p>对埃尔米特矩阵$A$，有$\lambda_{min} I \leq A \leq \lambda_{max} I$</p>
-</li>
-<li><p>定义：记$R(x) = \frac{x^HAx}{x^Hx}$，称其为<strong>诶尔米特矩阵</strong>$A$的瑞利商</p>
-<ul>
-<li>瑞利商是实数（注意到$R(x) = R(x)^H$）</li>
-<li>$\forall k \neq 0, R(kx) = R(x)$</li>
-<li>$\lambda_{min} \leq R(x) \leq \lambda_{max}$，并且可以取得等号</li>
-</ul>
-</li>
-<li><p><strong>极大极小定理</strong>：设$A$是$n$阶埃尔米特矩阵，其特征值为$\lambda_1 \geq \lambda_2 … \geq \lambda_n$，$V_i$是$C^n$中$i$维子空间，那么</p>
-<p>$$\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)$$</p>
-<p>$$\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)$$</p>
-<ul>
-<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取$x_1, x_2, …, x_n$为分别属于$\lambda_1, …, \lambda_n$的特征向量，并且其构成标准正交向量基，那么对于$\lambda_i$而言，当我们考虑$Span(x_1, …, x_i)$时，这个空间中的最小值恰好就是$\lambda_i$，而对于其他的$i$维空间，必然跟$Span(x_{i+1}, …, x_n)$有交，此时$Span(x_{i+1}, …, x_n)$中向量的存在将使最小值比$\lambda_i$小，从而取到等号</li>
-</ul>
-</li>
-</ul>
 
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-07-23T04:43:53.000Z" itemprop="datePublished">2021-07-23</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/notes/">notes</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/matrix-analysis/" rel="tag">matrix_analysis</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
-  
-    
-      <article
-id="post-1-"
-class="article article-type-post"
->
+<link rel="canonical" href="http://sremoon.github.io/">
 
 
 
-<div class="article-inner">
-    
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
 
-    <div class="article-body">
-    <header class="article-title">
-        <a href="/2021/07/22/1-/">一个简单的估计</a>
-    </header>
-    <div class="article-entry post-inner-html">
-        
-        <span id="more"></span>
-
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我们不妨思考这样的一个问题</p>
-<p>对于有$n$个点，$m$条边的无向图$G$（不妨认为它没有重边和自环），记$V$为其点集，$E$为其边集，给予每个点一个权值$c_i$，定义函数$f(G) = \sum_{uv \in E} [c_u &gt; c_v]$</p>
-<p>现在，不妨设初始状态为$G_0$，并且我们有$q$次修改，每次修改将提升一个点的权值，设前$i$次修改后的图为$G_i$，那么$S = f(G_0) + \sum_{i=0}^{q-1} |f(G_{i+1}) - f(G_i)|$大概有多大呢？</p>
-<p>这个式子相当于描述每个点维护比自己大的邻点集合时的一种复杂程度</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>我们可以先构造一类特殊的操作：$\sqrt m$个点的完全图，初始时的权值为$1, 2, 3, …, \sqrt m$，之后从$1$到$\sqrt m$循环操作，每次将$i$号节点的值增加$\sqrt m$，这样，每次大小关系的平均变动数量将是一个$\sqrt m$级的大小</p>
-<p>上述构造可以揭示$\sqrt m$是一个下限，下面我们证明它也是一个上限</p>
-<p>我们不妨根据点度分类，称度数$&gt; \sqrt m$的点为大点，而度数$ \leq \sqrt  m$的点为小点</p>
-<p>显然，我们对小点操作时，其带来的变动不可能超过$\sqrt m$，而度数$&gt; \sqrt m$的大点也只可能有$\sqrt m$个，因此操作大点时，对大点之间的大小关系的变动也不可能超过$\sqrt m$个，那么我们只需要估计大点和小点之间的关系变动情况了</p>
-<p>对于这部分，我们设想有这样的一个势函数$\phi(G)$，当操作小点时，每改变一次其与大点之间的关系，那么这个势函数增加$1$，而当操作大点时，每改变一次其与小点之间的关系，则减小$1$</p>
-<p>每次操作小点时，$\phi(G)$不会增加超过$\sqrt m$，而操作大点时，$\phi(G)$总是减小的，并且$\phi(G)$非负是显而易见的，用$\phi(G)$来刻画大点和小点之间的关系变动情况</p>
-<p>我们可以知道题述函数大概具有$O(m + q \sqrt m)$的复杂程度…</p>
-
-        
-    </div>
-    </div>
-
-    <div class="article-badge">
-        
-        
-    </div>
-
-</div>
-
-<footer class="article-footer">
-    <div class="article-more-info">
-    <div class="article-date">
-  <time datetime="2021-07-22T15:03:02.000Z" itemprop="datePublished">2021-07-22</time>
-</div>
-    
-        <div class="article-category">
-        <a class="article-category-link" href="/categories/thoughts/">thoughts</a>
-        </div>
-    
-    
-        <div class="article-tag">
-        <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/complexity/" rel="tag">complexity</a></li></ul>
-        </div>
-    
-    </div>
-</footer>
-
-</article>
-
-    
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>SreMoon's Lake</title>
   
 
-  
-</div>
-
-                </section>
-            </section>
-
-            
-            <aside class="sidebar ">
-                
 
 
-<div class="widget" id="widget">
-    
-      
-    
-      
-  <div class="widget-wrap widget-cate">
-    <div class="widget-title"><span>Categories</span></div>
-    <div class="widget-inner">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/notes/">notes</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/thoughts/">thoughts</a></li></ul>
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
     </div>
   </div>
 
+  <div class="site-meta">
 
-    
-      
-  <div class="widget-wrap widget-tags">
-    <div class="widget-title"><span>Tags</span></div>
-    <div class="widget-inner">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/complexity/" rel="tag">complexity</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/matrix-analysis/" rel="tag">matrix_analysis</a></li></ul>
-    </div>
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
   </div>
 
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
-    
-      
-  <div class="widget-wrap widget-recent-posts">
-    <div class="widget-title"><span>Recent Posts</span></div>
-    <div class="widget-inner">
-      <ul>
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
         
-          <li>
-            <a href="/2021/07/23/matrix-analysis-1/">矩阵分析 1</a>
-          </li>
-        
-          <li>
-            <a href="/2021/07/22/1-/">一个简单的估计</a>
-          </li>
-        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
       </ul>
-    </div>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="remoon"
+      src="/images/lalala.jpg">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
   </div>
 
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
     
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/07/23/matrix-analysis-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lalala.jpg">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/23/matrix-analysis-1/" class="post-title-link" itemprop="url">矩阵分析 1</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
       
-  <div class="widget-wrap widget-archive">
-    <div class="widget-title"><span>Archive</span></div>
-    <div class="widget-inner">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/">2021</a></li></ul>
-    </div>
-  </div>
 
+      <time title="Created: 2021-07-23 12:43:53 / Modified: 14:45:23" itemprop="dateCreated datePublished" datetime="2021-07-23T12:43:53+08:00">2021-07-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
 
-    
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>4.1k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>4 mins.</span>
+    </span>
 </div>
 
-<div id="backtop"><i class="icon icon-arrow-up"></i></div>
-            </aside>
-            
         </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一些杂记</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/23/matrix-analysis-1/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
-    <footer class="footer">
-    <div class="footer-wave">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="#3c4859" fill-opacity="1" d="M0,160L60,181.3C120,203,240,245,360,240C480,235,600,181,720,186.7C840,192,960,256,1080,261.3C1200,267,1320,213,1380,186.7L1440,160L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path></svg>
-    </div>
+    
+    
+    
 
-    <div class="footer-wrap">
-        <div class="footer-inner"> 
-            SreMoon&#39;s Lake &copy; 2021<br>
-            Powered By Hexo · Theme By <a href="https://github.com/lh1me/hexo-theme-aomori" target="_blank">Aomori</a>
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/07/22/1-/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/lalala.jpg">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/07/22/1-/" class="post-title-link" itemprop="url">一个简单的估计</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-22 23:03:02" itemprop="dateCreated datePublished" datetime="2021-07-22T23:03:02+08:00">2021-07-22</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-23 10:17:55" itemprop="dateModified" datetime="2021-07-23T10:17:55+08:00">2021-07-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/thoughts/" itemprop="url" rel="index"><span itemprop="name">thoughts</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>837</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>1 mins.</span>
+    </span>
+</div>
+
         </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>对于一个简单问题的简单估计</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/07/22/1-/">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
     </div>
 
-</footer>
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
 
 
 
 
 
+</div>
+  </main>
 
-<script src="/dist/build.js?1623049492098.js"></script>
-
-
-<script src="/dist/custom.js?1623049492098.js"></script>
-
-
+  <footer class="footer">
+    <div class="footer-inner">
 
 
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">5k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">5 mins.</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
 
 
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
 
 
 
 </body>
-
 </html>
