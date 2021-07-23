@@ -50,7 +50,7 @@
 </li>
 <li><p>对可逆矩阵$A, B \in C^{n*n}$，由$|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|$，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p>
 </li>
-<li><p>对$A \in C^{m <em>n}, B \in C^{n</em>m}$，由$\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|$，我们可以知道$AB$与$BA$有相同的非零特征值</p>
+<li><p>对$A \in C^{m * n}, B \in C^{n * m}$，由$\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|$，我们可以知道$AB$与$BA$有相同的非零特征值</p>
 </li>
 <li><p>设$\lambda_i$是$|\lambda I - A|$的$m_i$重根，则称$m_i$是$\lambda_i$的<strong>代数重复度</strong>，注意到$\sum m_i = n$</p>
 </li>
