@@ -593,4 +593,186 @@ int main() &#123;
         <tag>number_theory</tag>
       </tags>
   </entry>
+  <entry>
+    <title>矩阵分析 2</title>
+    <url>/2021/07/23/matrix-analysis-2/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<h4 id="lambda-矩阵"><a href="#lambda-矩阵" class="headerlink" title="$\lambda$矩阵"></a>$\lambda$矩阵</h4><ul>
+<li>$\lambda$矩阵：矩阵中的每一项都是关于$\lambda$的多项式的矩阵称为$\lambda$矩阵</li>
+<li>$\lambda$矩阵的秩：若$A(\lambda)$至少有一个$r$阶子式不是零多项式，并且所有的$r+1$阶子式都是零多项式，则称$A(\lambda)$的秩为$r$，记作$\text{rank} A(\lambda)$</li>
+<li>可逆矩阵：$A(\lambda)$称作可逆矩阵，当且仅当存在$B(\lambda)$，使得$A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I$，并且，记$B(\lambda) = A(\lambda)^{-1}$</li>
+<li>可逆矩阵的充要条件：$A(\lambda)$可逆，当且仅当$|A(\lambda)|$是一个非零常数</li>
+<li>如果存在可逆矩阵$P(\lambda), Q(\lambda)$，使得$B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)$，则称$B(\lambda)$与$A(\lambda)$相抵，记作$A(\lambda) \simeq B(\lambda)$</li>
+</ul>
+<h4 id="lambda-矩阵的标准形"><a href="#lambda-矩阵的标准形" class="headerlink" title="$\lambda$矩阵的标准形"></a>$\lambda$矩阵的标准形</h4><ul>
+<li><p>每个$A(\lambda)$都相抵与一个Simth标准形，即</p>
+<p>$$A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), …, d_r(\lambda),0…0 \}$$</p>
+<p>其中$d_i(\lambda)$的首项系数为$1$，并且$d_{i - 1}(\lambda) \mid d_i(\lambda)$</p>
+<ul>
+<li>考虑多项式的辗转相除，并利用归纳法</li>
+</ul>
+</li>
+</ul>
+<h4 id="不变因子，行列式因子，初等因子"><a href="#不变因子，行列式因子，初等因子" class="headerlink" title="不变因子，行列式因子，初等因子"></a>不变因子，行列式因子，初等因子</h4><ul>
+<li><p>不变因子：Simth标准形中的$d_1(\lambda)$, $d_2(\lambda)$, …, $d_r(\lambda)$称为$A(\lambda)$的不变因子</p>
+</li>
+<li><p>行列式因子：$A(\lambda)$的所有$k$阶子式的最大公因式称为$A(\lambda)$的$k$阶行列式因子，记作$D_k(\lambda)$</p>
+</li>
+<li><p>初等因子：对于不变因子，不妨设$d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}$，那么$(\lambda- \lambda_j)^{r_{ij}}$的全体称为初等因子</p>
+</li>
+<li><p>example</p>
+<p>$$A(x) = \begin{pmatrix}<br>-x+1 &amp;x^2  &amp; x \\<br> x&amp; x &amp;-x \\<br> x^2+1 &amp; x^2 &amp; -x^2<br>\end{pmatrix}$$</p>
+<p>的行列式因子为$D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2$</p>
+<p>而其不变因子为$d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)$</p>
+<p>其初等因子则为$x, x^2, (x+1)$</p>
+</li>
+<li><p>相抵的矩阵有相同的秩和行列式因子</p>
+<ul>
+<li>只需要子式之间的整除关系即可</li>
+</ul>
+</li>
+<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：$D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)$，由此，我们得到结论：</p>
+<ul>
+<li>相抵的矩阵有相同的不变因子</li>
+<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
+<li>一个矩阵的Smith标准形是唯一的</li>
+</ul>
+</li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
+</li>
+<li><p>分块矩阵的初等因子是好求的：设$A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), …, A_m(\lambda)\}$，则$A_i(\lambda)$的初等因子的全体的集合为$A(\lambda)$的初等因子</p>
+<ul>
+<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
+</ul>
+</li>
+<li></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>matrix_analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>牛客多校第二场</title>
+    <url>/2021/07/26/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/</url>
+    <content><![CDATA[<span id="more"></span>
+
+<p>把一些没时间写的和没时间想的还有不会做的补一下…</p>
+<h4 id="G"><a href="#G" class="headerlink" title="G"></a>G</h4><h5 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h5><p>给定$n$个区间，将这些区间分为$k$组，要求每组之间有交，使得每一组区间的交的和最大</p>
+<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于一个确定的区间组而言，我们往其中添加一个区间，答案显然是不增的</p>
+<p>特别的，如果这个区间组中存在着被其完全包含的区间，那么我们就可以无视这个区间</p>
+<p>因此，对于包含其余区间的区间而言，要么我们选择无视它，要么选择将其单独归为一组</p>
+<p>我们考虑去除这些区间后，剩下的区间，它们互相之间没有包含关系，也就是说，它们的右端点随左端点递增而递增</p>
+<p>此时，将左端点相邻的区间分在一组是较为优秀的</p>
+<p>设$f_{i, j}$表示对于前$i$个区间，分出了$j$组的方案数，转移考虑最后一段区间即可，注意到合法的转移点是一段左端点不降的区间，可以用单调队列优化</p>
+<pre><code class="C++">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define rep(io, st, ed) for(int io = st; io &lt;= ed; io ++)
+
+const int sid = 5e3 + 5;
+
+int n, K;
+struct segment &#123;
+    int l, r;
+    segment() &#123;&#125;
+    segment(int l_, int r_) : l(l_), r(r_) &#123;&#125;
+    friend bool operator &lt; (segment a, segment b) &#123; 
+        if(a.l != b.l) return a.l &lt; b.l;
+        return a.r &lt; b.r;
+    &#125;
+&#125; p[sid], t[sid];
+
+int tn, vn;
+int f[sid][sid], v[sid], q[sid];
+
+int main() &#123;
+    cin &gt;&gt; n &gt;&gt; K;
+    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; p[i].l &gt;&gt; p[i].r;
+    p[n + 1].l = -1; 
+    sort(p + 1, p + n + 1);
+    
+    for(int i = 1, j = i; i &lt;= n; i = j) &#123;
+        while(p[j].l == p[i].l) j ++;
+        p[++ tn] = p[i];
+        for(int k = i + 1; k &lt; j; k ++) v[++ vn] = p[k].r - p[k].l;
+    &#125;
+    int tmp = 0;
+    for(int i = 1; i &lt;= tn; i ++) &#123;
+        bool flag = 0;
+        for(int j = 1; j &lt;= tn; j ++) 
+            if(i != j &amp;&amp; p[i].l &lt;= p[j].l &amp;&amp; p[j].r &lt;= p[i].r)
+                flag = 1;
+        if(!flag) t[++ tmp] = p[i];
+        else v[++ vn] = p[i].r - p[i].l;
+    &#125;
+    tn = tmp;
+    sort(v + 1, v + vn + 1);
+        
+    rep(i, 0, n) rep(k, 0, K) f[i][k] = (i || k) ? -1e9 : 0;
+
+    for(int k = 1; k &lt;= K; k ++) &#123;
+        int fr = 1, to = 0;
+        q[++ to] = 0;
+        for(int i = 1; i &lt;= tn; i ++) &#123;
+            while(fr &lt;= to &amp;&amp; t[q[fr] + 1].r &lt;= t[i].l) fr ++;
+            #define pre q[fr]
+            if(fr &lt;= to) f[i][k] = f[pre][k - 1] + t[pre + 1].r - t[i].l;
+            while(fr &lt;= to &amp;&amp; f[i][k - 1] + t[i + 1].r &gt;= f[q[to]][k - 1] + t[q[to] + 1].r) to --;
+            q[++ to] = i;
+        &#125;
+    &#125;
+    
+    int ans = 0, suf = 0;
+    for(int k = K, lst = vn; k &gt;= 0 &amp;&amp; (~lst); k --, lst --) &#123;
+        if(f[tn][k]) ans = max(ans, f[tn][k] + suf);
+        suf += v[lst];
+    &#125;
+    printf(&quot;%d\n&quot;, ans);
+    return 0;
+&#125;
+</code></pre>
+<h4 id="J"><a href="#J" class="headerlink" title="J"></a>J</h4><h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>sb卡常出题人</p>
+<h4 id="L"><a href="#L" class="headerlink" title="L"></a>L</h4><h5 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h5><p>给定$n$个点，$m$条边，每次操作为增加一个点的点权</p>
+<p>对于每个点，询问有多少次操作后，这个点的点权比其所有相邻点多大</p>
+<h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>分块，设$B = \sqrt m$，称$\leq B$的点为小点，而$&gt; B$的点为大点</p>
+<p>对于小点而言，其邻点只有$B$个，随意暴力</p>
+<p>对于大点而言，其大点的邻居可以不用考虑</p>
+<p>取大点为研究对象，考虑其小点邻居，我们直接分权值，存下其邻居中的小点冠军，当权值增加时，我们把相应的小点冠军给取消</p>
+<p>这个题中可以利用权值比较小的条件，权值较大时离散化一下即可…</p>
+<h4 id="A"><a href="#A" class="headerlink" title="A"></a>A</h4><h5 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h5><p>给定序列$a_i$，求满足排序后是等差数列的子区间的数量</p>
+<p>$1 \leq n \leq 10^5$</p>
+<h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>这里有一个引理？</p>
+<ul>
+<li>对于序列$b_i$，如果排序后为等差数列，那么公差$d = gcd(b_2 - b_1, …, b_n-b_{n-1})$</li>
+</ul>
+<p>要证明这个引理，我们只需要考虑证明交换相邻两个数的位置不改变这个式子的值</p>
+<p>Case1：我们交换了$1, 2$，那么只需证明$gcd(b_2-b_1, b_3-b_2) = gcd(b_2-b_1, b_3-b_1)$，由$gcd(x, y) = gcd(x, x + y)$，这个是正确的，交换$n, (n-1)$时同理</p>
+<p>Case2：不妨假设我们交换了$i, i + 1(i \neq 1, i+1 \neq n)$，那么我们只要证明$gcd(b_{i+2}-b_{i+1}, b_{i+1}-b_i, b_i-b_{i-1}) = gcd(b_{i+2}-b_{i}, b_{i}-b_{i+1}, b_{i+1}-b_{i-1})$，这一点则由$gcd(x, y, z) = gcd(x+y, y, z+y)$得出</p>
+<p>我们只需要计数满足$max - min = d*(r-l)$的区间个数即可</p>
+<p>对$r$进行扫描线，$max$和$min$的变化都只有$O(n)$段，而每个$l$而言，$gcd(b_{l+1}-b_l, …, b_r - b_{r-1})$至多改变$\log$次，因此可以每次对$l$进行逐个单点修改</p>
+<p>注意到排序后满足$gcd$为$d$的$max - min$极小的序列就是等差数列，因此我们有$max - min \geq d * (r - l)$，即$max - min + d * l \geq d * r$，而$gcd$对同一个$r$至多$log$段，对于每一段维护最小值及个数即可</p>
+<h4 id="E"><a href="#E" class="headerlink" title="E"></a>E</h4><h5 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h5><p>给定一棵树，经过边$e$将花费$w_e$升油，而到达$i$号点将得到$x_i$升油</p>
+<p>$q$次询问，每次询问给定$x, d, p$，表示从$x$号点，初始有$d$升油，不能经过$p$号的情况下，有多少点是可达的</p>
+<h5 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h5><p>虽然思路很平凡，但是没人翻译，估计也没啥人愿意写…</p>
+<h5 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h5><p>点分治，之后我们可以强制$x$走到根节点，往下走到其他点</p>
+<p>对于每个点预处理出根节点走到它最少需要多少油，计算贡献时，去除$p$及自己所在的子树，在$dfn$序上将对应连续的三段，差分之后，扫描线维护树状数组即可</p>
+<h4 id="B"><a href="#B" class="headerlink" title="B"></a>B</h4><h5 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h5><p>给定一个$2$行的棋盘，第一行有$a$个炮，第二行有$b$个炮，对$k = 0, 1, …, a + b - 4$求发生$k$个炮吃炮事件的方案数</p>
+<p>特别的，你还需要输出第一行吃炮事件完全优先于第二行吃炮事件发生的方案数</p>
+<h5 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h5><p>显而易见，一个含有$x$枚棋子的行吃炮的方案数为$2(x - 2)$，一个含有$x$枚棋子的行吃$m$个炮的方案数为$2^m(x-2)(x-3)(x-m+1)=2^m (x-2)_{m}$</p>
+<p>一般的，输出$2^k \sum_{i+j = k} (a-2)_i (b-2)<em>j \binom{i}{k}$；对于特别的情况，输出$2^k \sum</em>{i+j=k} (a-2)_i (b-2)_j$</p>
+<p>而$2^k \sum_{i+j = k} (a-2)_i (b-2)<em>j \binom{i}{k} = 2^k * k! * \sum</em>{i+j = k} \binom{a-2}{i} \binom{b-2}{j} = 2^k * k! * \binom{a+b-4}{k}$</p>
+<p>且$2^k \sum_{i+j=k} (a-2)_i (b-2)<em>j = 2^k \frac{(a-2)!(b-2)!}{(a+b-4-k)!}\sum</em>{i+j=k} \binom{a+b-4-k}{a-2-i}$，后面是一个组合数列和，可以求</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+      </tags>
+  </entry>
 </search>
