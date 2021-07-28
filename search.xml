@@ -27,7 +27,11 @@
 <li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
 <li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
 <li><p>example</p>
-<p><span class="math inline">\(A(x) = \begin{pmatrix} -x+1 &amp;x^2 &amp; x \\  x&amp; x &amp;-x \\  x^2+1 &amp; x^2 &amp; -x^2 \end{pmatrix}\)</span></p>
+<p><span class="math display">\[A(x) = \begin{pmatrix}
+-x+1 &amp;x^2  &amp; x \\
+ x&amp; x &amp;-x \\
+ x^2+1 &amp; x^2 &amp; -x^2
+\end{pmatrix}\]</span></p>
 <p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
 <p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
 <p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
@@ -41,12 +45,46 @@
 <li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
 <li>一个矩阵的Smith标准形是唯一的</li>
 </ul></li>
-<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p></li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
+<ul>
+<li>如果用初等因子来描述相抵，那么将是：两个有相同的初等因子和秩的矩阵相抵</li>
+</ul></li>
 <li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
 <ul>
 <li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
 </ul></li>
-<li></li>
+</ul>
+<h4 id="若尔当标准形">若尔当标准形</h4>
+<ul>
+<li><p>若尔当块</p>
+<p><span class="math display">\[J(x, k) = \begin{pmatrix}
+x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; x &amp;1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;x\end{pmatrix}\]</span></p>
+<p>考虑<span class="math inline">\(J(x, k)\)</span>的特征矩阵</p>
+<p><span class="math display">\[\lambda I - J = \begin{pmatrix}
+\lambda - x &amp; - 1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; \lambda - x &amp; -1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;-1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;\lambda - x\end{pmatrix}\]</span></p>
+<p>由于去掉左边<span class="math inline">\(k\)</span>列和右边<span class="math inline">\(k\)</span>列的主子式的绝对值为<span class="math inline">\(1\)</span>，而<span class="math inline">\(|\lambda I - J| = (\lambda - x)^k\)</span></p>
+<p>因此，其行列式因子为<span class="math inline">\(D_1(\lambda) = ... = D_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(D_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>那么，其不变因子为<span class="math inline">\(d_1(\lambda) = ... = d_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(d_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>初等因子则只有<span class="math inline">\((\lambda - x)^k\)</span></p></li>
+<li><p>若尔当标准形</p>
+<p>形如</p>
+<p><span class="math display">\[J = \begin{pmatrix} J_1 &amp;&amp;&amp;\\ &amp;J_2&amp;&amp; \\&amp;&amp;...&amp; \\&amp;&amp;&amp;J_n \end{pmatrix}\]</span></p>
+<p>的矩阵称为若尔当标准形，其中<span class="math inline">\(J_i\)</span>为若尔当块</p>
+<p>由于<span class="math inline">\(J_i\)</span>的初等因子只有<span class="math inline">\((\lambda - \lambda_i)^{k_i}\)</span>，因此<span class="math inline">\(J\)</span>的初等因子为<span class="math inline">\((\lambda- \lambda_i)^{k_i}\)</span>的全体，并且<span class="math inline">\(\sum k_i = n\)</span></p></li>
+<li><p>定理：矩阵<span class="math inline">\(A \sim B\)</span>的充要条件是<span class="math inline">\(\lambda I - A \cong \lambda I - B\)</span></p>
+<p>这个定理的证明比较复杂，我们省去，关键在于利用<span class="math inline">\(\lambda I - A\)</span>是关于<span class="math inline">\(\lambda\)</span>的一次式进行次数限制</p></li>
+<li><p>定理：每个<span class="math inline">\(A\)</span>都与一个若尔当标准形<span class="math inline">\(J\)</span>相似，并且这个若尔当标准形除了<span class="math inline">\(J\)</span>中若尔当块的排列顺序外，被<span class="math inline">\(A\)</span>所唯一决定</p>
+<ul>
+<li><p>由于<span class="math inline">\(|\lambda I - A|\)</span>的次数为<span class="math inline">\(n\)</span>，因此<span class="math inline">\(D_n(\lambda) = \prod (\lambda - \lambda_i)^{m_i}\)</span>，其中<span class="math inline">\(\sum m_i = n\)</span></p>
+<p>由于<span class="math inline">\(D_n(\lambda) = \prod d_i(\lambda)\)</span>，因此初等因子的次数的和应该等于<span class="math inline">\(D_n(\lambda)\)</span>，也就是<span class="math inline">\(\lambda I - A\)</span>的初等因子的次数的和为<span class="math inline">\(n\)</span></p>
+<p>不妨设<span class="math inline">\(\lambda I - A\)</span>的初等因子为<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;} (\sum m_i&#39; = n)\)</span>，对于每个<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>，存在若尔当块<span class="math inline">\(J_i\)</span>，使得<span class="math inline">\(\lambda I - J_i\)</span>以<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>作为初等因子</p>
+<p>将这些<span class="math inline">\(J_i\)</span>组合在一起，得到一个若尔当标准形<span class="math inline">\(J\)</span></p>
+<p><span class="math inline">\(\lambda I - J\)</span>与<span class="math inline">\(\lambda I - A\)</span>有相同的初等因子，并且秩相等，因此<span class="math inline">\(\lambda I - J \cong \lambda I - A\)</span>，而且<span class="math inline">\(J\)</span>是唯一确定的，由上一条定理知，<span class="math inline">\(A \sim J\)</span></p></li>
+</ul></li>
 </ul>
 ]]></content>
       <categories>
@@ -760,6 +798,81 @@
       </categories>
       <tags>
         <tag>ds</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矩阵分析 3</title>
+    <url>/2021/07/28/matrix-analysis-3/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>这一章的内容十分的有趣</p>
+<h4 id="三角分解">三角分解</h4>
+<p>我们先对三角分解作一个简单的定义</p>
+<ul>
+<li>如果矩阵<span class="math inline">\(A\)</span>可以表示为一个上三角矩阵<span class="math inline">\(L\)</span>和一个下三角矩阵<span class="math inline">\(U\)</span>的乘积，即<span class="math inline">\(A = LU\)</span>，那么这种乘积称为<span class="math inline">\(A\)</span>的<strong>三角分解</strong>或<strong><span class="math inline">\(LU\)</span>分解</strong>，特别的，如果<span class="math inline">\(L\)</span>是单位下三角矩阵（主对角线上的元素为<span class="math inline">\(1\)</span>），那么此时的三角分解称为<strong>Doolittle分解</strong>，如果<span class="math inline">\(U\)</span>是单位上三角矩阵，那么称为<strong>Crout分解</strong></li>
+</ul>
+<p>在讨论三角分解的存在性之前，我们先对唯一性来作一些描述</p>
+<p>如果<span class="math inline">\(A = LU\)</span>，并且<span class="math inline">\(L, U\)</span>都不是单位三角矩阵，那么对于任意<span class="math inline">\(k \neq 0\)</span>，<span class="math inline">\(A = (kL)(k^{-1}U)\)</span>将是另一种分解方式，而加入了单位三角矩阵的限制后，我们就有了下述结论</p>
+<ul>
+<li><p>对于方阵<span class="math inline">\(A\)</span>，其可以唯一地分解为</p>
+<p><span class="math display">\[A = LDU\]</span></p>
+<p>的充要条件为<span class="math inline">\(A\)</span>的前<span class="math inline">\(n - 1\)</span>个顺序主子式<span class="math inline">\(H_1,H_2,...,H_{n-1}\)</span>都不为<span class="math inline">\(0\)</span>，式中<span class="math inline">\(L, U\)</span>分别为单位下三角矩阵，单位上三角矩阵，<span class="math inline">\(D\)</span>为对角矩阵，并且设<span class="math inline">\(D = diag\{d_1,d_2,...,d_n\}\)</span>，则<span class="math inline">\(d_1 = 1, d_i = H_i/H_{i-1}\)</span></p>
+<ul>
+<li>这个定理的证明按照大小进行归纳即可</li>
+</ul></li>
+<li><p>由于<span class="math inline">\(LDU\)</span>分解是唯一的，因此Doolittle分解和Crout分解也都是唯一的</p></li>
+</ul>
+<p>我们还可以讨论特殊矩阵的<span class="math inline">\(LDU\)</span>分解</p>
+<ul>
+<li><p>对于对称正定矩阵<span class="math inline">\(A\)</span>，存在一个实的可逆下三角矩阵<span class="math inline">\(L\)</span>，使得</p>
+<p><span class="math display">\[A = LL^T\]</span></p>
+<p>在限定<span class="math inline">\(L\)</span>的对角线元素为正时，<span class="math inline">\(L\)</span>是唯一的</p>
+<ul>
+<li><p>存在性：由于<span class="math inline">\(A\)</span>的顺序主子式都大于<span class="math inline">\(0\)</span>，因此<span class="math inline">\(A\)</span>存在<span class="math inline">\(LDU\)</span>分解，不妨设<span class="math inline">\(A = LDU\)</span></p>
+<p>由于<span class="math inline">\(A = A^T\)</span>，那么<span class="math inline">\(LDU = U^TDL^T\)</span>，由<span class="math inline">\(LDU\)</span>分解的唯一性，我们得到<span class="math inline">\(U^T = L\)</span></p>
+<p>即<span class="math inline">\(A = LDL^T\)</span>，由于<span class="math inline">\(|A| \neq 0\)</span>，因此<span class="math inline">\(L, D\)</span>都可逆，那么<span class="math inline">\(D = L^{-1}A(L^{-1})^T\)</span>，如此，<span class="math inline">\(D\)</span>也是正定矩阵，因此<span class="math inline">\(D\)</span>中元素都将大于<span class="math inline">\(0\)</span>，设<span class="math inline">\(D = diag(d_1, d_2, ..., d_n)\)</span>，再设<span class="math inline">\(D&#39; = diag(\sqrt d_1, \sqrt d_2, ..., \sqrt d_n)\)</span>，那么<span class="math inline">\(A = (LD&#39;)(LD&#39;)^T\)</span>，由<span class="math inline">\(|LD&#39;| = |L||D&#39;| \neq 0\)</span>知<span class="math inline">\(LD&#39;\)</span>可逆</p></li>
+<li><p>唯一性：设<span class="math inline">\(A = L_1L_1^T = L_2L_2^T\)</span>，则<span class="math inline">\((L_2^{-1}L_1) = (L_2^{-1}L_1)^T\)</span>，<span class="math inline">\(L_2^{-1}L_1\)</span>是上三角矩阵，因此<span class="math inline">\(L_2^{-1}L_1 = I\)</span>，即<span class="math inline">\(L_1 = L_2\)</span></p></li>
+</ul></li>
+</ul>
+<h4 id="qr分解"><span class="math inline">\(QR\)</span>分解</h4>
+<ul>
+<li><p>如果实（复）非奇异矩阵<span class="math inline">\(A\)</span>能表示为一个正交（酉）矩阵<span class="math inline">\(Q\)</span>和一个实（复）非奇异上三角矩阵<span class="math inline">\(R\)</span>的乘积，那么</p>
+<p><span class="math display">\[A = QR\]</span></p>
+<p>就称为<span class="math inline">\(A\)</span>的<span class="math inline">\(QR\)</span>分解</p></li>
+<li><p>任何非奇异矩阵<span class="math inline">\(A\)</span>都存在<span class="math inline">\(QR\)</span>分解，并且除了对角线上的元素差一个绝对值为<span class="math inline">\(1\)</span>的因子外，<span class="math inline">\(QR\)</span>分解是唯一的</p>
+<ul>
+<li><p>存在性：设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\((a_1, a_2, ..., a_n)\)</span>，其可以构成一组基，我们对这组基进行Schmidt正交化，得到一组标准正交基<span class="math inline">\((b_1, b_2, ..., b_n)\)</span></p>
+<p>那么，由Schmidt正交化的公式<span class="math inline">\(b_i&#39; = a_i - \sum_{j &lt; i} b_j&#39; * \frac{(a_i, b_j)}{(b_j, b_j)}\)</span>，标准化之后乘一个非零常数，应该存在<span class="math inline">\(R\)</span>为非奇异上三角矩阵，使得<span class="math inline">\((b_1, b_2, ..., b_n) = (a_1, a_2, ..., a_n) R\)</span></p>
+<p>由于<span class="math inline">\(R\)</span>可逆，那么<span class="math inline">\((a_1, a_2, ..., a_n) = (b_1,b_2,...,b_n)R^{-1}\)</span>，取<span class="math inline">\(Q = (b_1,b_2,...,b_n)\)</span>即可</p></li>
+<li><p>唯一性：设<span class="math inline">\(A = Q_1R_1 = Q_2R_2\)</span>，那么<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1}\)</span>，<span class="math inline">\(Q_2^{-1}Q_1\)</span>为正交阵，<span class="math inline">\(R_2R_1^{-1}\)</span>为上三角阵，不难知道，<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1} = I\)</span>，即<span class="math inline">\(Q_1 = Q_2\)</span></p></li>
+</ul></li>
+</ul>
+<h4 id="奇异值分解">奇异值分解</h4>
+<p>矩阵的奇异值分解又称<strong>SVD(Singular Value Decomposition)分解</strong></p>
+<h5 id="奇异值">奇异值</h5>
+<ul>
+<li><p>引理：矩阵<span class="math inline">\(AA^H\)</span>的特征值为非负实数</p>
+<ul>
+<li>矩阵<span class="math inline">\(AA^H\)</span>半正定，并且为埃尔米特矩阵，因此其特征值为非负实数</li>
+</ul></li>
+<li><p>对于矩阵<span class="math inline">\(A\)</span>，我们记<span class="math inline">\(AA^H\)</span>的特征值为<span class="math inline">\(\lambda_1, \lambda_2,...,\lambda_n\)</span>，其中<span class="math inline">\(\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_r &gt; \lambda_{r+1} = ... = \lambda_n = 0\)</span>，那么，我们称<span class="math inline">\(\sigma_i = \sqrt \lambda_{i}\)</span>为矩阵<span class="math inline">\(A\)</span>的奇异值</p></li>
+<li><p>若<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>酉相抵（存在酉矩阵<span class="math inline">\(U, V\)</span>，使得<span class="math inline">\(B = UAV\)</span>），则<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</p>
+<ul>
+<li><span class="math inline">\(B^HB = V^HA^HU^HUAV=V^H(A^HA)V = V^{-1}(A^HA)V\)</span>，那么<span class="math inline">\(B^HB\)</span>与<span class="math inline">\(A^HA\)</span>有相同的特征值，因此<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</li>
+</ul></li>
+</ul>
+<h5 id="奇异值分解-1">奇异值分解</h5>
+<ul>
+<li><p>对于任意复矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U, V\)</span>，使得</p>
+<p><span class="math display">\[U^HAV = diag(\sigma_1, \sigma_2, ..., \sigma_r, 0, ..., 0)\]</span></p>
+<p>其中<span class="math inline">\(\sigma_1, \sigma_2, ..., \sigma_r\)</span>为<span class="math inline">\(A\)</span>的奇异值</p></li>
+</ul>
+<p>暂定</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>matrix_analysis</tag>
       </tags>
   </entry>
 </search>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-23T15:00:15.000Z">
-<meta property="article:modified_time" content="2021-07-28T12:49:27.179Z">
+<meta property="article:modified_time" content="2021-07-28T13:31:44.274Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="matrix_analysis">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E7%9F%A9%E9%98%B5"><span class="nav-text">\(\lambda\)矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E7%9F%A9%E9%98%B5%E7%9A%84%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-text">\(\lambda\)矩阵的标准形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%9B%A0%E5%AD%90%E8%A1%8C%E5%88%97%E5%BC%8F%E5%9B%A0%E5%AD%90%E5%88%9D%E7%AD%89%E5%9B%A0%E5%AD%90"><span class="nav-text">不变因子，行列式因子，初等因子</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E7%9F%A9%E9%98%B5"><span class="nav-text">\(\lambda\)矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E7%9F%A9%E9%98%B5%E7%9A%84%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-text">\(\lambda\)矩阵的标准形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%9B%A0%E5%AD%90%E8%A1%8C%E5%88%97%E5%BC%8F%E5%9B%A0%E5%AD%90%E5%88%9D%E7%AD%89%E5%9B%A0%E5%AD%90"><span class="nav-text">不变因子，行列式因子，初等因子</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8B%A5%E5%B0%94%E5%BD%93%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-text">若尔当标准形</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,7 +135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -220,7 +220,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-07-28 20:49:27" itemprop="dateModified" datetime="2021-07-28T20:49:27+08:00">2021-07-28</time>
+        <time title="Modified: 2021-07-28 21:31:44" itemprop="dateModified" datetime="2021-07-28T21:31:44+08:00">2021-07-28</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,14 +240,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.7k</span>
+      <span>3.4k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
+      <span>3 mins.</span>
     </span>
 </div>
 
@@ -283,7 +283,11 @@
 <li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
 <li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
 <li><p>example</p>
-<p><span class="math inline">\(A(x) = \begin{pmatrix} -x+1 &amp;x^2 &amp; x \\  x&amp; x &amp;-x \\  x^2+1 &amp; x^2 &amp; -x^2 \end{pmatrix}\)</span></p>
+<p><span class="math display">\[A(x) = \begin{pmatrix}
+-x+1 &amp;x^2  &amp; x \\
+ x&amp; x &amp;-x \\
+ x^2+1 &amp; x^2 &amp; -x^2
+\end{pmatrix}\]</span></p>
 <p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
 <p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
 <p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
@@ -297,12 +301,46 @@
 <li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
 <li>一个矩阵的Smith标准形是唯一的</li>
 </ul></li>
-<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p></li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
+<ul>
+<li>如果用初等因子来描述相抵，那么将是：两个有相同的初等因子和秩的矩阵相抵</li>
+</ul></li>
 <li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
 <ul>
 <li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
 </ul></li>
-<li></li>
+</ul>
+<h4 id="若尔当标准形">若尔当标准形</h4>
+<ul>
+<li><p>若尔当块</p>
+<p><span class="math display">\[J(x, k) = \begin{pmatrix}
+x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; x &amp;1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;x\end{pmatrix}\]</span></p>
+<p>考虑<span class="math inline">\(J(x, k)\)</span>的特征矩阵</p>
+<p><span class="math display">\[\lambda I - J = \begin{pmatrix}
+\lambda - x &amp; - 1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; \lambda - x &amp; -1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;-1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;\lambda - x\end{pmatrix}\]</span></p>
+<p>由于去掉左边<span class="math inline">\(k\)</span>列和右边<span class="math inline">\(k\)</span>列的主子式的绝对值为<span class="math inline">\(1\)</span>，而<span class="math inline">\(|\lambda I - J| = (\lambda - x)^k\)</span></p>
+<p>因此，其行列式因子为<span class="math inline">\(D_1(\lambda) = ... = D_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(D_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>那么，其不变因子为<span class="math inline">\(d_1(\lambda) = ... = d_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(d_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>初等因子则只有<span class="math inline">\((\lambda - x)^k\)</span></p></li>
+<li><p>若尔当标准形</p>
+<p>形如</p>
+<p><span class="math display">\[J = \begin{pmatrix} J_1 &amp;&amp;&amp;\\ &amp;J_2&amp;&amp; \\&amp;&amp;...&amp; \\&amp;&amp;&amp;J_n \end{pmatrix}\]</span></p>
+<p>的矩阵称为若尔当标准形，其中<span class="math inline">\(J_i\)</span>为若尔当块</p>
+<p>由于<span class="math inline">\(J_i\)</span>的初等因子只有<span class="math inline">\((\lambda - \lambda_i)^{k_i}\)</span>，因此<span class="math inline">\(J\)</span>的初等因子为<span class="math inline">\((\lambda- \lambda_i)^{k_i}\)</span>的全体，并且<span class="math inline">\(\sum k_i = n\)</span></p></li>
+<li><p>定理：矩阵<span class="math inline">\(A \sim B\)</span>的充要条件是<span class="math inline">\(\lambda I - A \cong \lambda I - B\)</span></p>
+<p>这个定理的证明比较复杂，我们省去，关键在于利用<span class="math inline">\(\lambda I - A\)</span>是关于<span class="math inline">\(\lambda\)</span>的一次式进行次数限制</p></li>
+<li><p>定理：每个<span class="math inline">\(A\)</span>都与一个若尔当标准形<span class="math inline">\(J\)</span>相似，并且这个若尔当标准形除了<span class="math inline">\(J\)</span>中若尔当块的排列顺序外，被<span class="math inline">\(A\)</span>所唯一决定</p>
+<ul>
+<li><p>由于<span class="math inline">\(|\lambda I - A|\)</span>的次数为<span class="math inline">\(n\)</span>，因此<span class="math inline">\(D_n(\lambda) = \prod (\lambda - \lambda_i)^{m_i}\)</span>，其中<span class="math inline">\(\sum m_i = n\)</span></p>
+<p>由于<span class="math inline">\(D_n(\lambda) = \prod d_i(\lambda)\)</span>，因此初等因子的次数的和应该等于<span class="math inline">\(D_n(\lambda)\)</span>，也就是<span class="math inline">\(\lambda I - A\)</span>的初等因子的次数的和为<span class="math inline">\(n\)</span></p>
+<p>不妨设<span class="math inline">\(\lambda I - A\)</span>的初等因子为<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;} (\sum m_i&#39; = n)\)</span>，对于每个<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>，存在若尔当块<span class="math inline">\(J_i\)</span>，使得<span class="math inline">\(\lambda I - J_i\)</span>以<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>作为初等因子</p>
+<p>将这些<span class="math inline">\(J_i\)</span>组合在一起，得到一个若尔当标准形<span class="math inline">\(J\)</span></p>
+<p><span class="math inline">\(\lambda I - J\)</span>与<span class="math inline">\(\lambda I - A\)</span>有相同的初等因子，并且秩相等，因此<span class="math inline">\(\lambda I - J \cong \lambda I - A\)</span>，而且<span class="math inline">\(J\)</span>是唯一确定的，由上一条定理知，<span class="math inline">\(A \sim J\)</span></p></li>
+</ul></li>
 </ul>
 
     </div>
@@ -360,14 +398,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">21k</span>
+    <span title="Symbols count total">25k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">19 mins.</span>
+    <span title="Reading time total">22 mins.</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
