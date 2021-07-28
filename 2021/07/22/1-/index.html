@@ -240,7 +240,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>837</span>
+      <span>900</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -260,18 +260,19 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我们不妨思考这样的一个问题</p>
-<p>对于有$n$个点，$m$条边的无向图$G$（不妨认为它没有重边和自环），记$V$为其点集，$E$为其边集，给予每个点一个权值$c_i$，定义函数$f(G) = \sum_{uv \in E} [c_u &gt; c_v]$</p>
-<p>现在，不妨设初始状态为$G_0$，并且我们有$q$次修改，每次修改将提升一个点的权值，设前$i$次修改后的图为$G_i$，那么$S = f(G_0) + \sum_{i=0}^{q-1} |f(G_{i+1}) - f(G_i)|$大概有多大呢？</p>
+<h4 id="问题">问题</h4>
+<p>我们不妨思考这样的一个问题</p>
+<p>对于有<span class="math inline">\(n\)</span>个点，<span class="math inline">\(m\)</span>条边的无向图<span class="math inline">\(G\)</span>（不妨认为它没有重边和自环），记<span class="math inline">\(V\)</span>为其点集，<span class="math inline">\(E\)</span>为其边集，给予每个点一个权值<span class="math inline">\(c_i\)</span>，定义函数<span class="math inline">\(f(G) = \sum_{uv \in E} [c_u &gt; c_v]\)</span></p>
+<p>现在，不妨设初始状态为<span class="math inline">\(G_0\)</span>，并且我们有<span class="math inline">\(q\)</span>次修改，每次修改将提升一个点的权值，设前<span class="math inline">\(i\)</span>次修改后的图为<span class="math inline">\(G_i\)</span>，那么<span class="math inline">\(S = f(G_0) + \sum_{i=0}^{q-1} |f(G_{i+1}) - f(G_i)|\)</span>大概有多大呢？</p>
 <p>这个式子相当于描述每个点维护比自己大的邻点集合时的一种复杂程度</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>我们可以先构造一类特殊的操作：$\sqrt m$个点的完全图，初始时的权值为$1, 2, 3, …, \sqrt m$，之后从$1$到$\sqrt m$循环操作，每次将$i$号节点的值增加$\sqrt m$，这样，每次大小关系的平均变动数量将是一个$\sqrt m$级的大小</p>
-<p>上述构造可以揭示$\sqrt m$是一个下限，下面我们证明它也是一个上限</p>
-<p>我们不妨根据点度分类，称度数$&gt; \sqrt m$的点为大点，而度数$ \leq \sqrt  m$的点为小点</p>
-<p>显然，我们对小点操作时，其带来的变动不可能超过$\sqrt m$，而度数$&gt; \sqrt m$的大点也只可能有$\sqrt m$个，因此操作大点时，对大点之间的大小关系的变动也不可能超过$\sqrt m$个，那么我们只需要估计大点和小点之间的关系变动情况了</p>
-<p>对于这部分，我们设想有这样的一个势函数$\phi(G)$，当操作小点时，每改变一次其与大点之间的关系，那么这个势函数增加$1$，而当操作大点时，每改变一次其与小点之间的关系，则减小$1$</p>
-<p>每次操作小点时，$\phi(G)$不会增加超过$\sqrt m$，而操作大点时，$\phi(G)$总是减小的，并且$\phi(G)$非负是显而易见的，用$\phi(G)$来刻画大点和小点之间的关系变动情况</p>
-<p>我们可以知道题述函数大概具有$O(m + q \sqrt m)$的复杂程度…</p>
+<h4 id="思考">思考</h4>
+<p>我们可以先构造一类特殊的操作：<span class="math inline">\(\sqrt m\)</span>个点的完全图，初始时的权值为<span class="math inline">\(1, 2, 3, ..., \sqrt m\)</span>，之后从<span class="math inline">\(1\)</span>到<span class="math inline">\(\sqrt m\)</span>循环操作，每次将<span class="math inline">\(i\)</span>号节点的值增加<span class="math inline">\(\sqrt m\)</span>，这样，每次大小关系的平均变动数量将是一个<span class="math inline">\(\sqrt m\)</span>级的大小</p>
+<p>上述构造可以揭示<span class="math inline">\(\sqrt m\)</span>是一个下限，下面我们证明它也是一个上限</p>
+<p>我们不妨根据点度分类，称度数<span class="math inline">\(&gt; \sqrt m\)</span>的点为大点，而度数$ m$的点为小点</p>
+<p>显然，我们对小点操作时，其带来的变动不可能超过<span class="math inline">\(\sqrt m\)</span>，而度数<span class="math inline">\(&gt; \sqrt m\)</span>的大点也只可能有<span class="math inline">\(\sqrt m\)</span>个，因此操作大点时，对大点之间的大小关系的变动也不可能超过<span class="math inline">\(\sqrt m\)</span>个，那么我们只需要估计大点和小点之间的关系变动情况了</p>
+<p>对于这部分，我们设想有这样的一个势函数<span class="math inline">\(\phi(G)\)</span>，当操作小点时，每改变一次其与大点之间的关系，那么这个势函数增加<span class="math inline">\(1\)</span>，而当操作大点时，每改变一次其与小点之间的关系，则减小<span class="math inline">\(1\)</span></p>
+<p>每次操作小点时，<span class="math inline">\(\phi(G)\)</span>不会增加超过<span class="math inline">\(\sqrt m\)</span>，而操作大点时，<span class="math inline">\(\phi(G)\)</span>总是减小的，并且<span class="math inline">\(\phi(G)\)</span>非负是显而易见的，用<span class="math inline">\(\phi(G)\)</span>来刻画大点和小点之间的关系变动情况</p>
+<p>我们可以知道题述函数大概具有<span class="math inline">\(O(m + q \sqrt m)\)</span>的复杂程度...</p>
 
     </div>
 
@@ -325,14 +326,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">20k</span>
+    <span title="Symbols count total">21k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">18 mins.</span>
+    <span title="Reading time total">19 mins.</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

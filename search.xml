@@ -1,177 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>一个简单的估计</title>
-    <url>/2021/07/22/1-/</url>
+    <title>矩阵分析 2</title>
+    <url>/2021/07/23/matrix-analysis-2/</url>
     <content><![CDATA[<span id="more"></span>
-
-<h4 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h4><p>我们不妨思考这样的一个问题</p>
-<p>对于有$n$个点，$m$条边的无向图$G$（不妨认为它没有重边和自环），记$V$为其点集，$E$为其边集，给予每个点一个权值$c_i$，定义函数$f(G) = \sum_{uv \in E} [c_u &gt; c_v]$</p>
-<p>现在，不妨设初始状态为$G_0$，并且我们有$q$次修改，每次修改将提升一个点的权值，设前$i$次修改后的图为$G_i$，那么$S = f(G_0) + \sum_{i=0}^{q-1} |f(G_{i+1}) - f(G_i)|$大概有多大呢？</p>
-<p>这个式子相当于描述每个点维护比自己大的邻点集合时的一种复杂程度</p>
-<h4 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h4><p>我们可以先构造一类特殊的操作：$\sqrt m$个点的完全图，初始时的权值为$1, 2, 3, …, \sqrt m$，之后从$1$到$\sqrt m$循环操作，每次将$i$号节点的值增加$\sqrt m$，这样，每次大小关系的平均变动数量将是一个$\sqrt m$级的大小</p>
-<p>上述构造可以揭示$\sqrt m$是一个下限，下面我们证明它也是一个上限</p>
-<p>我们不妨根据点度分类，称度数$&gt; \sqrt m$的点为大点，而度数$ \leq \sqrt  m$的点为小点</p>
-<p>显然，我们对小点操作时，其带来的变动不可能超过$\sqrt m$，而度数$&gt; \sqrt m$的大点也只可能有$\sqrt m$个，因此操作大点时，对大点之间的大小关系的变动也不可能超过$\sqrt m$个，那么我们只需要估计大点和小点之间的关系变动情况了</p>
-<p>对于这部分，我们设想有这样的一个势函数$\phi(G)$，当操作小点时，每改变一次其与大点之间的关系，那么这个势函数增加$1$，而当操作大点时，每改变一次其与小点之间的关系，则减小$1$</p>
-<p>每次操作小点时，$\phi(G)$不会增加超过$\sqrt m$，而操作大点时，$\phi(G)$总是减小的，并且$\phi(G)$非负是显而易见的，用$\phi(G)$来刻画大点和小点之间的关系变动情况</p>
-<p>我们可以知道题述函数大概具有$O(m + q \sqrt m)$的复杂程度…</p>
-]]></content>
-      <categories>
-        <category>thoughts</category>
-      </categories>
-      <tags>
-        <tag>complexity</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>矩阵分析 1</title>
-    <url>/2021/07/23/matrix-analysis-1/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h4 id="矩阵之间的关系"><a href="#矩阵之间的关系" class="headerlink" title="矩阵之间的关系"></a>矩阵之间的关系</h4><ul>
-<li><strong>相抵</strong>：存在非奇异矩阵$P, Q$，使得$B = PAQ$时，则称$A$与$B$相抵</li>
-<li><strong>相似</strong>：存在非奇异方阵$P$，使得$B = P^{-1}AP$时，称$A$与$B$相似</li>
-<li><strong>合同</strong>：存在非奇异方阵$P$，使得$B = P^TAP$时，称$A$与$B$合同</li>
-</ul>
-<h4 id="特征值"><a href="#特征值" class="headerlink" title="特征值"></a>特征值</h4><ul>
-<li><p>对于方阵$A$，如果存在$\lambda \in P$以及非零向量$x \in V^n$，使得$Ax = \lambda x$，则称$\lambda$为$A$的<strong>特征值</strong>，$x$为$A$的<strong>特征向量</strong></p>
-</li>
-<li><p>$Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0$，因此非零向量$x$存在，要求$|\lambda I - A| = 0$，称$f(\lambda) = |\lambda I - A|$为矩阵$A$的<strong>特征多项式</strong></p>
+<h4 id="lambda矩阵"><span class="math inline">\(\lambda\)</span>矩阵</h4>
 <ul>
-<li>$|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)$，其中$A_k$表示矩阵$A$的所有$k$阶主子式的和，$\lambda_1, …, \lambda_n$表示矩阵$A$的所有特征值</li>
-<li>对于上式中的$A_1$，即$a_{11} + a_{22} + … + a_{nn}$，我们称其为矩阵的迹，记做$tr(A)$，由根与系数的关系，我们知道$A_1 = tr(A) = \sum \lambda_i$，$A_n = |A| = \prod\lambda_i$</li>
+<li><span class="math inline">\(\lambda\)</span>矩阵：矩阵中的每一项都是关于<span class="math inline">\(\lambda\)</span>的多项式的矩阵称为<span class="math inline">\(\lambda\)</span>矩阵</li>
+<li><span class="math inline">\(\lambda\)</span>矩阵的秩：若<span class="math inline">\(A(\lambda)\)</span>至少有一个<span class="math inline">\(r\)</span>阶子式不是零多项式，并且所有的<span class="math inline">\(r+1\)</span>阶子式都是零多项式，则称<span class="math inline">\(A(\lambda)\)</span>的秩为<span class="math inline">\(r\)</span>，记作<span class="math inline">\(\text{rank} A(\lambda)\)</span></li>
+<li>可逆矩阵：<span class="math inline">\(A(\lambda)\)</span>称作可逆矩阵，当且仅当存在<span class="math inline">\(B(\lambda)\)</span>，使得<span class="math inline">\(A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I\)</span>，并且，记<span class="math inline">\(B(\lambda) = A(\lambda)^{-1}\)</span></li>
+<li>可逆矩阵的充要条件：<span class="math inline">\(A(\lambda)\)</span>可逆，当且仅当<span class="math inline">\(|A(\lambda)|\)</span>是一个非零常数</li>
+<li>如果存在可逆矩阵<span class="math inline">\(P(\lambda), Q(\lambda)\)</span>，使得<span class="math inline">\(B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)\)</span>，则称<span class="math inline">\(B(\lambda)\)</span>与<span class="math inline">\(A(\lambda)\)</span>相抵，记作<span class="math inline">\(A(\lambda) \simeq B(\lambda)\)</span></li>
 </ul>
-</li>
+<h4 id="lambda矩阵的标准形"><span class="math inline">\(\lambda\)</span>矩阵的标准形</h4>
+<ul>
+<li><p>每个<span class="math inline">\(A(\lambda)\)</span>都相抵与一个Smith标准形，即</p>
+<p><span class="math display">\[A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), ..., d_r(\lambda),0...0 \}\]</span></p>
+<p>其中<span class="math inline">\(d_i(\lambda)\)</span>的首项系数为<span class="math inline">\(1\)</span>，并且<span class="math inline">\(d_{i - 1}(\lambda) \mid d_i(\lambda)\)</span></p>
+<ul>
+<li>考虑多项式的辗转相除，并利用归纳法</li>
+</ul></li>
+</ul>
+<h4 id="不变因子行列式因子初等因子">不变因子，行列式因子，初等因子</h4>
+<ul>
+<li><p>不变因子：Smith标准形中的<span class="math inline">\(d_1(\lambda)\)</span>, <span class="math inline">\(d_2(\lambda)\)</span>, ..., <span class="math inline">\(d_r(\lambda)\)</span>称为<span class="math inline">\(A(\lambda)\)</span>的不变因子</p></li>
+<li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
+<li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
 <li><p>example</p>
-<p>矩阵</p>
-<p>$$A = \begin{pmatrix}<br>0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\<br>1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\<br>0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\<br>\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\<br>0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1<br>\end{pmatrix}$$</p>
-<p>的特征多项式为$f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + … + a_n$</p>
-</li>
-<li><p>对可逆矩阵$A, B \in C^{n*n}$，由$|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|$，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p>
-</li>
-<li><p>对$A \in C^{m * n}, B \in C^{n * m}$，由$\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|$，我们可以知道$AB$与$BA$有相同的非零特征值</p>
-</li>
-<li><p>设$\lambda_i$是$|\lambda I - A|$的$m_i$重根，则称$m_i$是$\lambda_i$的<strong>代数重复度</strong>，注意到$\sum m_i = n$</p>
-</li>
-<li><p>记$V_{\lambda_i} = {x:(\lambda_i I - A)x = 0}$为$A$的属于$\lambda_i$的<strong>特征子空间</strong>，并称$\dim (V_{\lambda_i})$为$\lambda_i$的<strong>几何重复度</strong></p>
-</li>
-<li><p><strong>几何重复度</strong>不大于<strong>代数重复度</strong></p>
+<p><span class="math inline">\(A(x) = \begin{pmatrix} -x+1 &amp;x^2 &amp; x \\  x&amp; x &amp;-x \\  x^2+1 &amp; x^2 &amp; -x^2 \end{pmatrix}\)</span></p>
+<p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
+<p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
+<p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
+<li><p>相抵的矩阵有相同的秩和行列式因子</p>
 <ul>
-<li>通过代数重复度构造出一组包含$(\lambda_i I - A)x = 0$的基础解系的基，记这组基的坐标为$C$，考虑$C^{-1}AC$的特征多项式</li>
-</ul>
-</li>
-<li><p>设$\lambda_1, …, \lambda_r$是矩阵$A$的不同的特征值，$x_{1}^{(i)}, …, x_{s_i}^{(i)}$是属于$\lambda_i$的线性无关的特征向量，那么$x_1^{(1)}, …, x_{s_1}^{(1)}, …, x_1^{(r)}, …, x_{s_r}^{(r)}$也是线性无关的</p>
+<li>只需要子式之间的整除关系即可</li>
+</ul></li>
+<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：<span class="math inline">\(D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)\)</span>，由此，我们得到结论：</p>
 <ul>
-<li>利用线性无关的充要条件为零向量的组合系数仅有$0$，对于$kx^{(i)}$，注意到乘以$\lambda_j$和$Ax^{(i)} = \lambda_i x^{(i)}$将是两种不一样的变化即可</li>
-</ul>
-</li>
-<li><p>矩阵$A$可对角化（和对角矩阵相似）的充要条件为$A$为$n$个线性无关的特征向量</p>
+<li>相抵的矩阵有相同的不变因子</li>
+<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
+<li>一个矩阵的Smith标准形是唯一的</li>
+</ul></li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p></li>
+<li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
 <ul>
-<li><p>注意到以这$n$个特征向量为基即可，也因此，相似中的转移矩阵即为这$n$个特征向量的坐标</p>
-</li>
-<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p>
-</li>
-<li><p>如果$A$有$n$个线性无关的特征向量，则称$A$有完备的特征向量系</p>
-<p>否则，称$A$为<strong>亏损矩阵</strong></p>
-</li>
-<li><p>如果每个代数重复度和几何重复度相等，则称$A$为<strong>单纯矩阵</strong></p>
-</li>
-<li><p>$A$可对角化的充要条件有其他不同的表述，比如$V^n = V_{\lambda_1} \oplus … \oplus V_{\lambda_r}$</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="不变子空间"><a href="#不变子空间" class="headerlink" title="不变子空间"></a>不变子空间</h4><ul>
-<li>对于线性变换$\mathscr{A}$，如果$\mathscr{A}W \subseteq W$，则称$W$为$\mathscr{A}$的<strong>不变子空间</strong></li>
-<li>有两类较为容易发现的子空间<ul>
-<li>$\ker \mathscr{A} = \mathscr{A}^{-1}(0)  = {x:\mathscr{A}x = 0}$，核空间</li>
-<li>$\text{Im} \mathscr{A} = \mathscr{A}V$，值域</li>
-<li>联系方程组，我们可以知道，若线性变换$\mathscr{A}$对应于矩阵$A$，核空间实际上对应于$A$的解空间，我们记$\dim \ker \mathscr{A} = \text{null } A$，而值域实际上是$A$的列向量张成的空间，因此其维数应该是$\text{rank} A$</li>
-<li><strong>维数公式</strong>：$\text{rank} A +\text{null } A = n $</li>
-</ul>
-</li>
-</ul>
-<h4 id="Schur-TH"><a href="#Schur-TH" class="headerlink" title="Schur TH"></a>Schur TH</h4><ul>
-<li><p>任何$n$阶矩阵都酉相似于一个上三角阵，即存在一个$n$阶酉矩阵$U$和一个上三角阵$R$，使得</p>
-<p>$$A = UTU^H$$</p>
-<p>式中$T$的主对角元为$A$的特征值</p>
-<ul>
-<li>每一次选择一个特征向量后进行归纳</li>
-</ul>
-</li>
-<li><p>如果$A^H = A$，则称$A$为<strong>埃米尔特矩阵</strong></p>
-<ul>
-<li>对埃米尔特矩阵运用Schur TH：$A = UTU^H$，从而$A^H  = UT^HU^H$，由$A=A^H$，我们得到$T = T^H$，也就是说，$T$是对角矩阵，并且$A$的特征值都是实数</li>
-</ul>
-</li>
-</ul>
-<h4 id="正定矩阵"><a href="#正定矩阵" class="headerlink" title="正定矩阵"></a>正定矩阵</h4><ul>
-<li><p>对于埃米尔特矩阵$A$，如果$x^HAx\geq 0$，则称$A$为半正定矩阵，记作$A\geq 0$；类似的，如果$x^HAx &gt; 0$，则称$A$为正定矩阵，记作$A&gt;0$</p>
-<ul>
-<li>如果$A&gt;0$，$k&gt;0$，那么$kA&gt;0$</li>
-<li>如果$A \geq 0, B \geq 0$，那么$A+B\geq 0$</li>
-</ul>
-</li>
-<li><p>矩阵$A$正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
-<ul>
-<li>神奇恒等式：设$\lambda$为$A$的特征值，$\xi$为对应的单位特征向量，那么$\lambda = \xi^HA\xi$</li>
-</ul>
-</li>
-<li><p>矩阵$A$为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）$P$，使得$A=P^HP$</p>
-<ul>
-<li>如果$A&gt;0$，那么$A^{-1}&gt;0$</li>
-<li>如果$A&gt;0$，且$C$非奇异，则$C^HAC&gt;0$</li>
-<li>如果$A \geq 0$，则$C^HAC \geq 0$</li>
-</ul>
-</li>
-<li><p>设$A,B$都是$n$阶埃米尔特矩阵，且$B&gt;0$，则存在非奇异矩阵$Q$，使得$Q^HBQ=I, Q^HAQ=\text{diag}\{\lambda_1, …, \lambda_n\}$（可同时对角化），且$\lambda_1,…,\lambda_n$为$AB^{-1}$的特征值</p>
-</li>
-<li><p>如果$A-B\geq 0$，那么称$A$大于等于$B$，记做$A\geq B$</p>
-<ul>
-<li><p>这不是一个well order…</p>
-</li>
-<li><p>$A \geq B$等价于$x^HAx\geq x^HBx$恒成立</p>
-<p>以下性质几乎是显然的</p>
-<ul>
-<li><p>如果$A, B$是对角阵，那么条件也等价于$a_{ii} \geq b_{ii}$</p>
-</li>
-<li><p>$A \geq B, B \geq C$可得$A \geq C$</p>
-</li>
-<li><p>$A \geq B$，且$k&gt;0$，那么$kA \geq kB$</p>
-</li>
-<li><p>若$A_1 \geq B_1, A_2 \geq B_2$，那么$A_1 + A_2 \geq B_1 + B_2$</p>
-</li>
-<li><p>若$A \geq B$，那么$P^HAP\geq P^HBP$</p>
-</li>
-</ul>
-</li>
-<li><p>若$A \geq 0$，则$A \leq tr(A)I$（利用$tr(A)\geq \lambda_i$）</p>
-</li>
-<li><p>若$A\geq B$，则$B^{-1} \geq A^{-1}$</p>
-</li>
-<li><p>若$A, B$可交换，且$A \geq B$，那么$A^2 \geq B^2$</p>
-</li>
-<li><p>$Schwartz$不等式：若$A,B$分别为$n\times m, m \times l$的矩阵，且$AA^H$非奇异，则$B^HB \geq (AB)^H(AA^H)^{-1}(AB)$，等号成立当且仅当存在$n \times l$的矩阵$C$，使$B=A^HC$</p>
-</li>
-</ul>
-</li>
-<li><p>对埃尔米特矩阵$A$，有$\lambda_{min} I \leq A \leq \lambda_{max} I$</p>
-</li>
-<li><p>定义：记$R(x) = \frac{x^HAx}{x^Hx}$，称其为<strong>诶尔米特矩阵</strong>$A$的瑞利商</p>
-<ul>
-<li>瑞利商是实数（注意到$R(x) = R(x)^H$）</li>
-<li>$\forall k \neq 0, R(kx) = R(x)$</li>
-<li>$\lambda_{min} \leq R(x) \leq \lambda_{max}$，并且可以取得等号</li>
-</ul>
-</li>
-<li><p><strong>极大极小定理</strong>：设$A$是$n$阶埃尔米特矩阵，其特征值为$\lambda_1 \geq \lambda_2 … \geq \lambda_n$，$V_i$是$C^n$中$i$维子空间，那么</p>
-<p>$$\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)$$</p>
-<p>$$\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)$$</p>
-<ul>
-<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取$x_1, x_2, …, x_n$为分别属于$\lambda_1, …, \lambda_n$的特征向量，并且其构成标准正交向量基，那么对于$\lambda_i$而言，当我们考虑$Span(x_1, …, x_i)$时，这个空间中的最小值恰好就是$\lambda_i$，而对于其他的$i$维空间，必然跟$Span(x_{i+1}, …, x_n)$有交，此时$Span(x_{i+1}, …, x_n)$中向量的存在将使最小值比$\lambda_i$小，从而取到等号</li>
-</ul>
-</li>
+<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
+</ul></li>
+<li></li>
 </ul>
 ]]></content>
       <categories>
@@ -182,471 +57,127 @@
       </tags>
   </entry>
   <entry>
-    <title>Btree</title>
-    <url>/2021/07/23/Btree/</url>
+    <title>矩阵分析 1</title>
+    <url>/2021/07/23/matrix-analysis-1/</url>
     <content><![CDATA[<span id="more"></span>
-
-<pre><code class="C++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-const int M = 5; // 几路的B树
-const int INF = 1e9 + 5;
-
-struct BTree &#123;
-    
-    struct Bnode;
-    Bnode *root;
-    
-    struct Bnode &#123;
-        int size, val[M + 1];
-        Bnode *parent, *son[M + 2];
-        Bnode(Bnode* parent_ = nullptr) &#123; 
-            size = 0; parent = parent_;
-            for(int i = 0; i &lt;= M; i ++) son[i] = nullptr;
-        &#125;
-        int &amp;begin_val() &#123; return val[0]; &#125;
-        Bnode *&amp;begin_son() &#123; return son[0]; &#125;
-        int &amp;end_val() &#123; return val[size - 1]; &#125;
-        Bnode *end_son() &#123; return son[size]; &#125;
-        bool empty() &#123; return !size; &#125;
-        bool is_full() &#123; return size &gt;= M; &#125;
-        bool is_enough() &#123; return size &gt;= ceil(M / 2.0); &#125;
-        bool not_enough() &#123; return size &lt; ceil(M / 2.0) - 1; &#125;
-        bool is_leaf() &#123; return !size || (son[0] == nullptr); &#125;
-        bool is_root() &#123; return parent == nullptr; &#125;
-        void set_parent(Bnode *nson) &#123; if(nson) nson -&gt; parent = this; &#125;
-        void print() &#123;
-            if(!size) printf(&quot;empty!\n&quot;);
-            for(int i = 0; i &lt; size; i ++) printf(&quot;%d &quot;, val[i]); 
-            printf(&quot;\n&quot;);
-        &#125;
-        int find(int val_) &#123; // if in (val[i], val[i + 1] ], then in son[i + 1]
-            for(int i = 0; i &lt; size; i ++) if(val_ &lt;= val[i]) return i;
-            return size;
-        &#125;
-        int get_val_id(int val_) &#123;
-            for(int i = 0; i &lt; size; i ++) if(val[i] == val_) return i;
-            return -1;
-        &#125;
-        int get_son_id(Bnode *son_) &#123;
-            for(int i = 0; i &lt;= size; i ++) if(son[i] == son_) return i;
-            return -1;
-        &#125;
-        void rightshift(int pos) &#123; // move son[pos],val[pos],...son[size], thus son[pos], val[pos] are empty, noticing size ++
-            for(int i = size - 1; i &gt;= pos; i --) val[i + 1] = val[i];
-            for(int i = size; i &gt;= pos; i --) son[i + 1] = son[i];
-            size ++;
-        &#125;
-        void rightshift2(int pos) &#123; // move val[pos],...,son[size], thus val[pos],son[pos+1] are empty, noticing size ++
-            rightshift(pos + 1); val[pos + 1] = val[pos];
-        &#125;
-        void leftshift(int pos) &#123; // move son[pos],val[pos],...,son[size], thus son[pos], val[pos] can be deleted, noticing size --
-            size --;
-            for(int i = pos; i &lt;= size - 1; i ++) val[i] = val[i + 1];
-            for(int i = pos; i &lt;= size; i ++) son[i] = son[i + 1];
-        &#125;
-        void leftshift2(int pos) &#123; // empty val[pos], son[pos + 1], noticing size --
-            val[pos] = val[pos + 1]; leftshift(pos + 1); 
-        &#125;
-        void insert_begin(int val_, Bnode *son_ = nullptr) &#123;  
-            rightshift(0);
-            val[0] = val_;
-            son[0] = son_; set_parent(son_);
-        &#125;
-        void insert_end(int val_, Bnode *son_ = nullptr) &#123;
-            val[size ++] = val_; 
-            son[size] = son_; set_parent(son_);
-        &#125;
-        void insert_mid_before(int pos_, int val_, Bnode *son_ = nullptr) &#123; // insert son[pos], val[pos]
-            rightshift(pos_);
-            val[pos_] = val_;
-            son[pos_] = son_; set_parent(son_);
-        &#125;
-        void insert_mid_after(int pos_, int val_, Bnode *son_ = nullptr) &#123; // insert val[pos], son[pos + 1]
-            rightshift2(pos_);
-            val[pos_] = val_;
-            son[pos_ + 1] = son_; set_parent(son_);
-        &#125;
-        void delete_begin() &#123; // delete son[0], val[0]
-            leftshift(0);
-        &#125;
-        void delete_end() &#123; // delete val[size - 1], son[size]
-            size --;
-        &#125;
-        void delete_mid_before(int pos_) &#123; // delete son[pos], val[pos]
-            leftshift(pos_);
-        &#125;
-        void delete_mid_after(int pos_) &#123; //delete val[pos], son[pos + 1]
-            leftshift2(pos_);
-        &#125;
-        void insert_leaf(int val_) &#123; // leaf case
-            int pos_ = find(val_);
-            insert_mid_before(pos_, val_);
-        &#125;
-        void Move(int L_, Bnode* Rnode) &#123; //move val[L_],son[L+1]...,val[size-1],son[size] from (this) to Rnode
-            int R_ = this -&gt; size - 1;
-            for(int i = L_; i &lt;= R_; i ++) Rnode -&gt; insert_end(val[i], son[i + 1]);
-             size -= R_ - L_ + 1; // equals to &quot;for(int i = L_; i &lt;= R_; i ++) delete_end();&quot;
-        &#125;
-        void split() &#123;
-            if(parent == nullptr) &#123;
-                parent = new Bnode();
-                parent -&gt; son[0] = this;
-            &#125;
-            Bnode* brother = new Bnode(parent);
-            int lr = ceil(M / 2.0) - 2, rl = lr + 2, pos = parent -&gt; get_son_id(this);
-            parent -&gt; insert_mid_after(pos, val[lr + 1], brother);
-            Move(rl, brother); 
-            brother -&gt; son[0] = this -&gt; end_son(); 
-            brother -&gt; set_parent(brother -&gt; son[0]);
-            this -&gt; delete_end();
-        &#125;
-    &#125;;
-    void Insert(int val) &#123; // use this function to insert v
-        if(root == nullptr) root = new Bnode();
-        Bnode *now = root;
-        while(!now -&gt; is_leaf())
-            now = now -&gt; son[now -&gt; find(val)];
-        now -&gt; insert_leaf(val);
-        while(!now -&gt; is_root()) &#123;
-            if(!now -&gt; is_full()) return;
-            now -&gt; split();
-            now = now -&gt; parent;
-        &#125;
-        if(!now -&gt; is_full()) return;
-        now -&gt; split(); root = now -&gt; parent;
-    &#125;
-    
-    void val_locate(int val, Bnode* &amp;now, int &amp;pos) &#123;
-        while(now != nullptr) &#123;
-            pos = now -&gt; find(val);
-            if(pos != now -&gt; size &amp;&amp; now -&gt; val[pos] == val) return;
-            now = now -&gt; son[pos];
-        &#125;
-        pos = - 1;
-    &#125;;
-    void precursor(Bnode* &amp;now, int &amp;pos, int first_step) &#123;
-        now = now -&gt; son[first_step];
-        while(!now -&gt; is_leaf()) now = now -&gt; son[now -&gt; size];
-        pos = now -&gt; size - 1;
-    &#125;
-    bool Adjust(Bnode* &amp;now) &#123;
-        Bnode* parent = now -&gt; parent;
-        if(!now -&gt; not_enough()) return 1;
-        int pos = parent -&gt; get_son_id(now);
-        if(!pos) &#123;
-             // adjust with son[pos](now), val[pos], son[pos+1](bro)
-             Bnode *bro = parent -&gt; son[pos + 1];
-             if(bro -&gt; is_enough()) &#123; // the move case
-                now -&gt; insert_end(parent -&gt; val[pos], bro -&gt; begin_son());
-                parent -&gt; val[pos] = bro -&gt; begin_val();
-                bro -&gt; delete_begin();
-             &#125;
-             else &#123; // the merge case
-                now -&gt; insert_end(parent -&gt; val[pos], bro -&gt; begin_son());
-                bro -&gt; Move(0, now);
-                parent -&gt; delete_mid_after(pos);
-                delete bro;
-             &#125;
-        &#125;
-        else &#123;
-            // adjust with son[pos-1](bro), val[pos-1], son[pos](now)
-             Bnode *bro = parent -&gt; son[pos - 1];
-             if(bro -&gt; is_enough()) &#123;
-                now -&gt; insert_begin(parent -&gt; val[pos - 1], bro -&gt; end_son());
-                parent -&gt; val[pos - 1] = bro -&gt; end_val();
-                bro -&gt; delete_end();
-             &#125;
-             else &#123;
-                bro -&gt; insert_end(parent -&gt; val[pos - 1], now -&gt; begin_son());
-                now -&gt; Move(0, bro);
-                parent -&gt; delete_mid_after(pos - 1);
-                delete now;
-                now = bro;
-             &#125;
-        &#125;
-        if(root -&gt; empty()) &#123;
-            root = now;
-            root -&gt; parent = nullptr;
-            return 1;
-        &#125;
-        now = now -&gt; parent;
-        return 0;
-    &#125;
-    void Delete(int val) &#123; // use this function to delete v
-        int pos; Bnode* now = root;
-        val_locate(val, now, pos);
-        if(now == nullptr) return;
-        if(!now -&gt; is_leaf()) &#123;
-            int ppos; Bnode* pre = now;
-            precursor(pre, ppos, pos);
-            swap(pre -&gt; val[ppos], now -&gt; val[pos]);
-            now = pre; pos = ppos;
-        &#125;
-        now -&gt; delete_mid_before(pos); // leaf case, deleted
-        if(now -&gt; is_root() &amp;&amp; now -&gt; empty()) &#123;
-            delete root;
-            root = nullptr;
-            return;
-        &#125;
-        while(!now -&gt; is_root() &amp;&amp; !Adjust(now));
-    &#125;
-    
-    
-    // use for debugging
-    int len, dep;
-    char output[123456];
-    int ck[123456], tmp[123];
-    void write(int x) &#123;
-        int tlen = 0;
-        if(!x) tmp[++ tlen] = 0;
-        while(x) tmp[++ tlen] = x % 10, x /= 10;
-        for(int i = tlen; i; i --) output[++ len] = tmp[i] + &#39;0&#39;;
-    &#125;
-    void dfs(Bnode* now) &#123;
-        if(now == nullptr) return;
-        output[++ len] = &#39; &#39;; ck[len] = 1;
-        dfs(now -&gt; son[0]);
-        output[++ len] = &#39; &#39;; ck[len] = -1;
-        for(int i = 0; i &lt; now -&gt; size; i ++) &#123;
-            write(now -&gt; val[i]);
-            output[++ len] = &#39; &#39;; ck[len] = 1;
-            dfs(now -&gt; son[i + 1]); 
-            output[++ len] = &#39; &#39;; ck[len] = -1;
-        &#125;
-    &#125;
-    void print() &#123;
-        len = 0; dep = 0;
-        for(int i = 0; i &lt;= 100000; i ++) ck[i] = 0;
-        dfs(root);
-        for(int i = 1; i &lt;= len; i ++) printf(&quot;%c&quot;, output[i]); 
-        // the next part is using for special output
-         
-        //int maxdep = 0;
-        //for(int i = 1; i &lt;= len; i ++) dep += ck[i], maxdep = max(maxdep, dep);
-        //for(int D = 0; D &lt;= maxdep; D ++) &#123;
-        //    for(int i = 1; i &lt;= len; i ++) dep += ck[i], printf(&quot;%c&quot;, (dep == D) ? output[i] : &#39; &#39;); 
-        //    printf(&quot;\n&quot;);
-        //&#125;
-    &#125;
-&#125; T;
-
-
-int main() &#123;
-    for(int i = 1; i &lt;= 10; i ++) T.Insert(i ^ 7);
-    T.print();
-    return 0;
-&#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>codes</category>
-      </categories>
-      <tags>
-        <tag>ds</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>2021杭电多校第二场T9</title>
-    <url>/2021/07/23/problem-1/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h4 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h4><p>杭电多校的好题太少了，出题人要么是水平问题，要么是态度问题…</p>
-<h4 id="题面"><a href="#题面" class="headerlink" title="题面"></a>题面</h4><p>给定$n$个数$a_1, …, a_n$，询问有多少个三元有序对$(i, j, k)$满足$i &lt; j &lt; k$，并且$a_i a_j a_k$是一个完全平方数</p>
-<p>$n \leq 10^5, \max a_i \leq 10^5$</p>
-<h4 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h4><p>首先，我们将$a_i$质因数分解为$p_1^{r_1}…p_k^{r_k}$，不难发现只有$r_1$的奇偶影响答案的统计，因此我们只需要考虑形如$p_1…p_k$的数即可</p>
-<p>记$M = 10^5$，分最大质因子$ &gt; \sqrt M$的数和最大质因子$\leq \sqrt M$的数考虑</p>
-<p>三元组只可能是下列两种情况之一：</p>
+<h4 id="矩阵之间的关系">矩阵之间的关系</h4>
 <ul>
-<li>三个数的最大质因子都$\leq \sqrt M$，形如这样的数可以爆搜，大概有1600000组</li>
-<li>三个数中有两个数的最大质因子$ &gt; \sqrt M$，我们可以枚举最大质因子$p$，如果最大质因子为$p$的数有$&lt; \sqrt M$个，那么我们直接暴力枚举，否则，最大质因子为$p$的数对应的值只会有$&lt; \sqrt M$个，我们按照权值来暴力，此时，由于每个最大质因子$p$的平均复杂度$&lt; \sqrt M$，因此总复杂度小于$M \sqrt M$</li>
+<li><strong>相抵</strong>：存在非奇异矩阵<span class="math inline">\(P, Q\)</span>，使得<span class="math inline">\(B = PAQ\)</span>时，则称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相抵</li>
+<li><strong>相似</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^{-1}AP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相似</li>
+<li><strong>合同</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^TAP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>合同</li>
 </ul>
-<p>做法挺明显的….码的时候有一点点细节</p>
-<pre><code class="C++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-#define ll long long
-#define gc getchar
-inline int read() &#123;
-    int p = 0, w = 1; char c = gc();
-    while(c &gt; &#39;9&#39; || c &lt; &#39;0&#39;) &#123; if(c == &#39;-&#39;) w = -1; c = gc(); &#125;
-    while(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) p = p * 10 + c - &#39;0&#39;, c = gc();
-    return p * w;
-&#125;
-
-#define rep(io, st, ed) for(int io = st; io &lt;= ed; io ++)
-#define drep(io, ed, st) for(int io = ed; io &gt;= st; io --)
-
-const int sid = 1e5 + 5;
-
-int n, M = 1e5;
-vector &lt;int&gt; arr[sid];
-int _gcd[500][500], mul[500][500];
-int maxfac[sid], tr[sid], pr[sid], nop[sid], cnt;
-int num[sid], tnum[sid];
-
-int gcd(int a, int b) &#123;
-    return b ? gcd(b, a % b) : a;
-&#125;
-
-void init() &#123;
-    rep(i, 2, M) &#123;
-        if(!nop[i]) pr[++ cnt] = i;
-        for(int j = 1; j &lt;= cnt; j ++) &#123;
-            int p = i * pr[j];
-            if(p &gt; M) break; nop[p] = 1;
-            if(i % pr[j] == 0) break;
-        &#125;
-    &#125;
-    int sqrt_M = sqrt(M) + 1;
-    rep(i, 0, sqrt_M) rep(j, 0, sqrt_M) _gcd[i][j] = gcd(i, j);
-    rep(i, 0, sqrt_M) rep(j, 0, sqrt_M) 
-        if(i || j) mul[i][j] = i * j / _gcd[i][j] / _gcd[i][j];
-        else mul[i][j] = 0;
-    rep(i, 1, M) &#123;
-        int t = i; tr[i] = 1;
-        for(int j = 1; pr[j] * pr[j] &lt;= t; j ++)
-            if(t % pr[j] == 0) &#123;
-                int num = 0;
-                while(t % pr[j] == 0) t /= pr[j], num ++;
-                if(num &amp; 1) tr[i] *= pr[j];
-            &#125;
-        if(t &gt; sqrt_M) maxfac[i] = t;
-        else tr[i] *= t;
-    &#125;
-&#125;
-
-long long ans;
-void dfs(int dep, int v1, int v2, int v3) &#123;
-    if(dep == 0) &#123;
-        if(v1 == v2 &amp;&amp; v1 == v3) ans += 1ll * num[v1] * (num[v1] - 1) * (num[v1] - 2) / 6;
-        else if(v1 == v2) ans += 1ll * num[v1] * (num[v1] - 1) / 2 * num[v3];
-        else ans += 1ll * num[v1] * num[v2] * num[v3];
-        return;
-        
-    &#125;
-    dfs(dep - 1, v1, v2, v3);
-    if(v1 == v2 &amp;&amp; v1 == v3) &#123;
-        int v1_ = v1 * pr[dep];
-        if(v1_ &lt;= M) dfs(dep - 1, v1_, v1_, v1);
-        return;
-    &#125;
-    if(v1 == v2) &#123;
-        int v1_ = v1 * pr[dep], v3_ = v3 * pr[dep];
-        if(v1_ &lt;= M) dfs(dep - 1, v1_, v1_, v3);
-        if(v1_ &lt;= M &amp;&amp; v3_ &lt;= M) dfs(dep - 1, v1, v1_, v3_);
-        return;
-    &#125;
-    int v1_ = v1 * pr[dep], v2_ = v2 * pr[dep], v3_ = v3 * pr[dep];
-    if(v1_ &lt;= M &amp;&amp; v2_ &lt;= M) dfs(dep - 1, v1_, v2_, v3);
-    if(v1_ &lt;= M &amp;&amp; v3_ &lt;= M) dfs(dep - 1, v1_, v2, v3_);
-    if(v2_ &lt;= M &amp;&amp; v3_ &lt;= M) dfs(dep - 1, v1, v2_, v3_);
-&#125;
-
-void solve() &#123;
-    n = read();
-    ans = 0;
-    rep(i, 1, M) num[i] = 0;
-    rep(i, 1, n) &#123;
-        int x = read();
-        if(!maxfac[x]) num[ tr[x] ] ++;
-        else arr[ maxfac[x] ].push_back(tr[x]);
-    &#125;
-    
-    int sqrt_M = sqrt(M), lim = 0;
-    while(pr[lim] &lt;= sqrt_M) lim ++;
-    
-    dfs(lim, 1, 1, 1);
-    rep(i, lim + 1, cnt) &#123;
-        int p = pr[i];
-        if(arr[p].size() &lt; sqrt_M) &#123;
-            rep(i, 0, (int)arr[p].size() - 1) rep(j, 0, i - 1)
-                ans += num[ mul[ arr[p][i] ][ arr[p][j] ] ];
-        &#125;
-        else &#123;
-            int Lim = M / pr[i];
-            rep(i, 1, Lim) tnum[i] = 0;
-            for(auto x : arr[p]) tnum[x] ++;
-            rep(i, 1, Lim) if(tnum[i]) rep(j, 1, i) if(tnum[j]) &#123;
-                if(i == j) ans += 1ll * tnum[i] * (tnum[i] - 1) / 2 * num[ mul[i][j] ];
-                else ans += 1ll * tnum[i] * tnum[j] * num[ mul[i][j] ];
-            &#125;
-        &#125;
-        arr[p].clear();
-    &#125;
-    
-    printf(&quot;%lld\n&quot;, ans);
-&#125;
-
-int main() &#123;
-    init();
-    int T = read();
-    while(T --) solve();
-    return 0;
-&#125;
-</code></pre>
-]]></content>
-      <categories>
-        <category>problems</category>
-      </categories>
-      <tags>
-        <tag>number_theory</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>矩阵分析 2</title>
-    <url>/2021/07/23/matrix-analysis-2/</url>
-    <content><![CDATA[<span id="more"></span>
-
-<h4 id="lambda-矩阵"><a href="#lambda-矩阵" class="headerlink" title="$\lambda$矩阵"></a>$\lambda$矩阵</h4><ul>
-<li>$\lambda$矩阵：矩阵中的每一项都是关于$\lambda$的多项式的矩阵称为$\lambda$矩阵</li>
-<li>$\lambda$矩阵的秩：若$A(\lambda)$至少有一个$r$阶子式不是零多项式，并且所有的$r+1$阶子式都是零多项式，则称$A(\lambda)$的秩为$r$，记作$\text{rank} A(\lambda)$</li>
-<li>可逆矩阵：$A(\lambda)$称作可逆矩阵，当且仅当存在$B(\lambda)$，使得$A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I$，并且，记$B(\lambda) = A(\lambda)^{-1}$</li>
-<li>可逆矩阵的充要条件：$A(\lambda)$可逆，当且仅当$|A(\lambda)|$是一个非零常数</li>
-<li>如果存在可逆矩阵$P(\lambda), Q(\lambda)$，使得$B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)$，则称$B(\lambda)$与$A(\lambda)$相抵，记作$A(\lambda) \simeq B(\lambda)$</li>
-</ul>
-<h4 id="lambda-矩阵的标准形"><a href="#lambda-矩阵的标准形" class="headerlink" title="$\lambda$矩阵的标准形"></a>$\lambda$矩阵的标准形</h4><ul>
-<li><p>每个$A(\lambda)$都相抵与一个Simth标准形，即</p>
-<p>$$A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), …, d_r(\lambda),0…0 \}$$</p>
-<p>其中$d_i(\lambda)$的首项系数为$1$，并且$d_{i - 1}(\lambda) \mid d_i(\lambda)$</p>
+<h4 id="特征值">特征值</h4>
 <ul>
-<li>考虑多项式的辗转相除，并利用归纳法</li>
-</ul>
-</li>
-</ul>
-<h4 id="不变因子，行列式因子，初等因子"><a href="#不变因子，行列式因子，初等因子" class="headerlink" title="不变因子，行列式因子，初等因子"></a>不变因子，行列式因子，初等因子</h4><ul>
-<li><p>不变因子：Simth标准形中的$d_1(\lambda)$, $d_2(\lambda)$, …, $d_r(\lambda)$称为$A(\lambda)$的不变因子</p>
-</li>
-<li><p>行列式因子：$A(\lambda)$的所有$k$阶子式的最大公因式称为$A(\lambda)$的$k$阶行列式因子，记作$D_k(\lambda)$</p>
-</li>
-<li><p>初等因子：对于不变因子，不妨设$d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}$，那么$(\lambda- \lambda_j)^{r_{ij}}$的全体称为初等因子</p>
-</li>
+<li><p>对于方阵<span class="math inline">\(A\)</span>，如果存在<span class="math inline">\(\lambda \in P\)</span>以及非零向量<span class="math inline">\(x \in V^n\)</span>，使得<span class="math inline">\(Ax = \lambda x\)</span>，则称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的<strong>特征值</strong>，<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>特征向量</strong></p></li>
+<li><p><span class="math inline">\(Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0\)</span>，因此非零向量<span class="math inline">\(x\)</span>存在，要求<span class="math inline">\(|\lambda I - A| = 0\)</span>，称<span class="math inline">\(f(\lambda) = |\lambda I - A|\)</span>为矩阵<span class="math inline">\(A\)</span>的<strong>特征多项式</strong></p>
+<ul>
+<li><span class="math inline">\(|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)\)</span>，其中<span class="math inline">\(A_k\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有<span class="math inline">\(k\)</span>阶主子式的和，<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有特征值</li>
+<li>对于上式中的<span class="math inline">\(A_1\)</span>，即<span class="math inline">\(a_{11} + a_{22} + ... + a_{nn}\)</span>，我们称其为矩阵的迹，记做<span class="math inline">\(tr(A)\)</span>，由根与系数的关系，我们知道<span class="math inline">\(A_1 = tr(A) = \sum \lambda_i\)</span>，<span class="math inline">\(A_n = |A| = \prod\lambda_i\)</span></li>
+</ul></li>
 <li><p>example</p>
-<p>$$A(x) = \begin{pmatrix}<br>-x+1 &amp;x^2  &amp; x \\<br> x&amp; x &amp;-x \\<br> x^2+1 &amp; x^2 &amp; -x^2<br>\end{pmatrix}$$</p>
-<p>的行列式因子为$D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2$</p>
-<p>而其不变因子为$d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)$</p>
-<p>其初等因子则为$x, x^2, (x+1)$</p>
-</li>
-<li><p>相抵的矩阵有相同的秩和行列式因子</p>
+<p>矩阵</p>
+<p><span class="math display">\[A = \begin{pmatrix}
+0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\
+1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\ 
+0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\ 
+\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\\
+0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1 
+\end{pmatrix}\]</span></p>
+<p>的特征多项式为<span class="math inline">\(f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + ... + a_n\)</span></p></li>
+<li><p>对可逆矩阵<span class="math inline">\(A, B \in C^{n*n}\)</span>，由<span class="math inline">\(|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|\)</span>，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p></li>
+<li><p>对<span class="math inline">\(A \in C^{m \times n}, B \in C^{n \times m}\)</span>，由<span class="math inline">\(\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|\)</span>，我们可以知道<span class="math inline">\(AB\)</span>与<span class="math inline">\(BA\)</span>有相同的非零特征值</p></li>
+<li><p>设<span class="math inline">\(\lambda_i\)</span>是<span class="math inline">\(|\lambda I - A|\)</span>的<span class="math inline">\(m_i\)</span>重根，则称<span class="math inline">\(m_i\)</span>是<span class="math inline">\(\lambda_i\)</span>的<strong>代数重复度</strong>，注意到<span class="math inline">\(\sum m_i = n\)</span></p></li>
+<li><p>记<span class="math inline">\(V_{\lambda_i} = \{x:(\lambda_i I - A)x = 0\}\)</span>为<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda_i\)</span>的<strong>特征子空间</strong>，并称<span class="math inline">\(\dim (V_{\lambda_i})\)</span>为<span class="math inline">\(\lambda_i\)</span>的<strong>几何重复度</strong></p></li>
+<li><p><strong>几何重复度</strong>不大于<strong>代数重复度</strong></p>
 <ul>
-<li>只需要子式之间的整除关系即可</li>
-</ul>
-</li>
-<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：$D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)$，由此，我们得到结论：</p>
+<li>通过代数重复度构造出一组包含<span class="math inline">\((\lambda_i I - A)x = 0\)</span>的基础解系的基，记这组基的坐标为<span class="math inline">\(C\)</span>，考虑<span class="math inline">\(C^{-1}AC\)</span>的特征多项式</li>
+</ul></li>
+<li><p>设<span class="math inline">\(\lambda_1, ..., \lambda_r\)</span>是矩阵<span class="math inline">\(A\)</span>的不同的特征值，<span class="math inline">\(x_{1}^{(i)}, ..., x_{s_i}^{(i)}\)</span>是属于<span class="math inline">\(\lambda_i\)</span>的线性无关的特征向量，那么<span class="math inline">\(x_1^{(1)}, ..., x_{s_1}^{(1)}, ..., x_1^{(r)}, ..., x_{s_r}^{(r)}\)</span>也是线性无关的</p>
 <ul>
-<li>相抵的矩阵有相同的不变因子</li>
-<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
-<li>一个矩阵的Smith标准形是唯一的</li>
-</ul>
-</li>
-<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
-</li>
-<li><p>分块矩阵的初等因子是好求的：设$A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), …, A_m(\lambda)\}$，则$A_i(\lambda)$的初等因子的全体的集合为$A(\lambda)$的初等因子</p>
+<li>利用线性无关的充要条件为零向量的组合系数仅有<span class="math inline">\(0\)</span>，对于<span class="math inline">\(kx^{(i)}\)</span>，注意到乘以<span class="math inline">\(\lambda_j\)</span>和<span class="math inline">\(Ax^{(i)} = \lambda_i x^{(i)}\)</span>将是两种不一样的变化即可</li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>可对角化（和对角矩阵相似）的充要条件为<span class="math inline">\(A\)</span>为<span class="math inline">\(n\)</span>个线性无关的特征向量</p>
 <ul>
-<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
+<li><p>注意到以这<span class="math inline">\(n\)</span>个特征向量为基即可，也因此，相似中的转移矩阵即为这<span class="math inline">\(n\)</span>个特征向量的坐标</p></li>
+<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>有<span class="math inline">\(n\)</span>个线性无关的特征向量，则称<span class="math inline">\(A\)</span>有完备的特征向量系</p>
+<p>否则，称<span class="math inline">\(A\)</span>为<strong>亏损矩阵</strong></p></li>
+<li><p>如果每个代数重复度和几何重复度相等，则称<span class="math inline">\(A\)</span>为<strong>单纯矩阵</strong></p></li>
+<li><p><span class="math inline">\(A\)</span>可对角化的充要条件有其他不同的表述，比如<span class="math inline">\(V^n = V_{\lambda_1} \oplus ... \oplus V_{\lambda_r}\)</span></p></li>
+</ul></li>
 </ul>
-</li>
-<li></li>
+<h4 id="不变子空间">不变子空间</h4>
+<ul>
+<li>对于线性变换<span class="math inline">\(\mathscr{A}\)</span>，如果<span class="math inline">\(\mathscr{A}W \subseteq W\)</span>，则称<span class="math inline">\(W\)</span>为<span class="math inline">\(\mathscr{A}\)</span>的<strong>不变子空间</strong></li>
+<li>有两类较为容易发现的子空间
+<ul>
+<li><span class="math inline">\(\ker \mathscr{A} = \mathscr{A}^{-1}(0) = \{x:\mathscr{A}x = 0\}\)</span>，核空间</li>
+<li><span class="math inline">\(\text{Im} \mathscr{A} = \mathscr{A}V\)</span>，值域</li>
+<li>联系方程组，我们可以知道，若线性变换<span class="math inline">\(\mathscr{A}\)</span>对应于矩阵<span class="math inline">\(A\)</span>，核空间实际上对应于<span class="math inline">\(A\)</span>的解空间，我们记<span class="math inline">\(\dim \ker \mathscr{A} = \text{null } A\)</span>，而值域实际上是<span class="math inline">\(A\)</span>的列向量张成的空间，因此其维数应该是<span class="math inline">\(\text{rank} A\)</span></li>
+<li><strong>维数公式</strong>：$ A + A = n $</li>
+</ul></li>
+</ul>
+<h4 id="schur-th">Schur TH</h4>
+<ul>
+<li><p>任何<span class="math inline">\(n\)</span>阶矩阵都酉相似于一个上三角阵，即存在一个<span class="math inline">\(n\)</span>阶酉矩阵<span class="math inline">\(U\)</span>和一个上三角阵<span class="math inline">\(R\)</span>，使得</p>
+<p><span class="math display">\[A = UTU^H\]</span></p>
+<p>式中<span class="math inline">\(T\)</span>的主对角元为<span class="math inline">\(A\)</span>的特征值</p>
+<ul>
+<li>每一次选择一个特征向量后进行归纳</li>
+</ul></li>
+<li><p>如果<span class="math inline">\(A^H = A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>埃米尔特矩阵</strong></p>
+<ul>
+<li>对埃米尔特矩阵运用Schur TH：<span class="math inline">\(A = UTU^H\)</span>，从而<span class="math inline">\(A^H = UT^HU^H\)</span>，由<span class="math inline">\(A=A^H\)</span>，我们得到<span class="math inline">\(T = T^H\)</span>，也就是说，<span class="math inline">\(T\)</span>是对角矩阵，并且<span class="math inline">\(A\)</span>的特征值都是实数</li>
+</ul></li>
+</ul>
+<h4 id="正定矩阵">正定矩阵</h4>
+<ul>
+<li><p>对于埃米尔特矩阵<span class="math inline">\(A\)</span>，如果<span class="math inline">\(x^HAx\geq 0\)</span>，则称<span class="math inline">\(A\)</span>为半正定矩阵，记作<span class="math inline">\(A\geq 0\)</span>；类似的，如果<span class="math inline">\(x^HAx &gt; 0\)</span>，则称<span class="math inline">\(A\)</span>为正定矩阵，记作<span class="math inline">\(A&gt;0\)</span></p>
+<ul>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A \geq 0, B \geq 0\)</span>，那么<span class="math inline">\(A+B\geq 0\)</span></li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
+<ul>
+<li>神奇恒等式：设<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的特征值，<span class="math inline">\(\xi\)</span>为对应的单位特征向量，那么<span class="math inline">\(\lambda = \xi^HA\xi\)</span></li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）<span class="math inline">\(P\)</span>，使得<span class="math inline">\(A=P^HP\)</span></p>
+<ul>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，那么<span class="math inline">\(A^{-1}&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，且<span class="math inline">\(C\)</span>非奇异，则<span class="math inline">\(C^HAC&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(C^HAC \geq 0\)</span></li>
+</ul></li>
+<li><p>设<span class="math inline">\(A,B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(B&gt;0\)</span>，则存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得<span class="math inline">\(Q^HBQ=I, Q^HAQ=\text{diag}\\{\lambda_1, ..., \lambda_n\\}\)</span>（可同时对角化），且<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>为<span class="math inline">\(AB^{-1}\)</span>的特征值</p></li>
+<li><p>如果<span class="math inline">\(A-B\geq 0\)</span>，那么称<span class="math inline">\(A\)</span>大于等于<span class="math inline">\(B\)</span>，记做<span class="math inline">\(A\geq B\)</span></p>
+<ul>
+<li><p>这不是一个well order...</p></li>
+<li><p><span class="math inline">\(A \geq B\)</span>等价于<span class="math inline">\(x^HAx\geq x^HBx\)</span>恒成立</p>
+<p>以下性质几乎是显然的</p>
+<ul>
+<li><p>如果<span class="math inline">\(A, B\)</span>是对角阵，那么条件也等价于<span class="math inline">\(a_{ii} \geq b_{ii}\)</span></p></li>
+<li><p><span class="math inline">\(A \geq B, B \geq C\)</span>可得<span class="math inline">\(A \geq C\)</span></p></li>
+<li><p><span class="math inline">\(A \geq B\)</span>，且<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA \geq kB\)</span></p></li>
+<li><p>若<span class="math inline">\(A_1 \geq B_1, A_2 \geq B_2\)</span>，那么<span class="math inline">\(A_1 + A_2 \geq B_1 + B_2\)</span></p></li>
+<li><p>若<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(P^HAP\geq P^HBP\)</span></p></li>
+</ul></li>
+<li><p>若<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(A \leq tr(A)I\)</span>（利用<span class="math inline">\(tr(A)\geq \lambda_i\)</span>）</p></li>
+<li><p>若<span class="math inline">\(A\geq B\)</span>，则<span class="math inline">\(B^{-1} \geq A^{-1}\)</span></p></li>
+<li><p>若<span class="math inline">\(A, B\)</span>可交换，且<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(A^2 \geq B^2\)</span></p></li>
+<li><p><span class="math inline">\(Schwartz\)</span>不等式：若<span class="math inline">\(A,B\)</span>分别为<span class="math inline">\(n\times m, m \times l\)</span>的矩阵，且<span class="math inline">\(AA^H\)</span>非奇异，则<span class="math inline">\(B^HB \geq (AB)^H(AA^H)^{-1}(AB)\)</span>，等号成立当且仅当存在<span class="math inline">\(n \times l\)</span>的矩阵<span class="math inline">\(C\)</span>，使<span class="math inline">\(B=A^HC\)</span></p></li>
+</ul></li>
+<li><p>对埃尔米特矩阵<span class="math inline">\(A\)</span>，有<span class="math inline">\(\lambda_{min} I \leq A \leq \lambda_{max} I\)</span></p></li>
+<li><p>定义：记<span class="math inline">\(R(x) = \frac{x^HAx}{x^Hx}\)</span>，称其为<strong>诶尔米特矩阵</strong><span class="math inline">\(A\)</span>的瑞利商</p>
+<ul>
+<li>瑞利商是实数（注意到<span class="math inline">\(R(x) = R(x)^H\)</span>）</li>
+<li><span class="math inline">\(\forall k \neq 0, R(kx) = R(x)\)</span></li>
+<li><span class="math inline">\(\lambda_{min} \leq R(x) \leq \lambda_{max}\)</span>，并且可以取得等号</li>
+</ul></li>
+<li><p><strong>极大极小定理</strong>：设<span class="math inline">\(A\)</span>是<span class="math inline">\(n\)</span>阶埃尔米特矩阵，其特征值为<span class="math inline">\(\lambda_1 \geq \lambda_2 ... \geq \lambda_n\)</span>，<span class="math inline">\(V_i\)</span>是<span class="math inline">\(C^n\)</span>中<span class="math inline">\(i\)</span>维子空间，那么</p>
+<p><span class="math display">\[\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)\]</span></p>
+<p><span class="math display">\[\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)\]</span></p>
+<ul>
+<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取<span class="math inline">\(x_1, x_2, ..., x_n\)</span>为分别属于<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>的特征向量，并且其构成标准正交向量基，那么对于<span class="math inline">\(\lambda_i\)</span>而言，当我们考虑<span class="math inline">\(Span(x_1, ..., x_i)\)</span>时，这个空间中的最小值恰好就是<span class="math inline">\(\lambda_i\)</span>，而对于其他的<span class="math inline">\(i\)</span>维空间，必然跟<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>有交，此时<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>中向量的存在将使最小值比<span class="math inline">\(\lambda_i\)</span>小，从而取到等号</li>
+</ul></li>
 </ul>
 ]]></content>
       <categories>
@@ -660,119 +191,575 @@ int main() &#123;
     <title>牛客多校第二场</title>
     <url>/2021/07/26/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/</url>
     <content><![CDATA[<span id="more"></span>
-
-<p>把一些没时间写的和没时间想的还有不会做的补一下…</p>
-<h4 id="G"><a href="#G" class="headerlink" title="G"></a>G</h4><h5 id="题意"><a href="#题意" class="headerlink" title="题意"></a>题意</h5><p>给定$n$个区间，将这些区间分为$k$组，要求每组之间有交，使得每一组区间的交的和最大</p>
-<h5 id="题解"><a href="#题解" class="headerlink" title="题解"></a>题解</h5><p>对于一个确定的区间组而言，我们往其中添加一个区间，答案显然是不增的</p>
+<p>把一些没时间写的和没时间想的还有不会做的补一下...</p>
+<h4 id="g">G</h4>
+<h5 id="题意">题意</h5>
+<p>给定<span class="math inline">\(n\)</span>个区间，将这些区间分为<span class="math inline">\(k\)</span>组，要求每组之间有交，使得每一组区间的交的和最大</p>
+<h5 id="题解">题解</h5>
+<p>对于一个确定的区间组而言，我们往其中添加一个区间，答案显然是不增的</p>
 <p>特别的，如果这个区间组中存在着被其完全包含的区间，那么我们就可以无视这个区间</p>
 <p>因此，对于包含其余区间的区间而言，要么我们选择无视它，要么选择将其单独归为一组</p>
 <p>我们考虑去除这些区间后，剩下的区间，它们互相之间没有包含关系，也就是说，它们的右端点随左端点递增而递增</p>
 <p>此时，将左端点相邻的区间分在一组是较为优秀的</p>
-<p>设$f_{i, j}$表示对于前$i$个区间，分出了$j$组的方案数，转移考虑最后一段区间即可，注意到合法的转移点是一段左端点不降的区间，可以用单调队列优化</p>
-<pre><code class="C++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-#define rep(io, st, ed) for(int io = st; io &lt;= ed; io ++)
-
-const int sid = 5e3 + 5;
-
-int n, K;
-struct segment &#123;
-    int l, r;
-    segment() &#123;&#125;
-    segment(int l_, int r_) : l(l_), r(r_) &#123;&#125;
-    friend bool operator &lt; (segment a, segment b) &#123; 
-        if(a.l != b.l) return a.l &lt; b.l;
-        return a.r &lt; b.r;
-    &#125;
-&#125; p[sid], t[sid];
-
-int tn, vn;
-int f[sid][sid], v[sid], q[sid];
-
-int main() &#123;
-    cin &gt;&gt; n &gt;&gt; K;
-    for(int i = 1; i &lt;= n; i ++) cin &gt;&gt; p[i].l &gt;&gt; p[i].r;
-    p[n + 1].l = -1; 
-    sort(p + 1, p + n + 1);
-    
-    for(int i = 1, j = i; i &lt;= n; i = j) &#123;
-        while(p[j].l == p[i].l) j ++;
-        p[++ tn] = p[i];
-        for(int k = i + 1; k &lt; j; k ++) v[++ vn] = p[k].r - p[k].l;
-    &#125;
-    int tmp = 0;
-    for(int i = 1; i &lt;= tn; i ++) &#123;
-        bool flag = 0;
-        for(int j = 1; j &lt;= tn; j ++) 
-            if(i != j &amp;&amp; p[i].l &lt;= p[j].l &amp;&amp; p[j].r &lt;= p[i].r)
-                flag = 1;
-        if(!flag) t[++ tmp] = p[i];
-        else v[++ vn] = p[i].r - p[i].l;
-    &#125;
-    tn = tmp;
-    sort(v + 1, v + vn + 1);
-        
-    rep(i, 0, n) rep(k, 0, K) f[i][k] = (i || k) ? -1e9 : 0;
-
-    for(int k = 1; k &lt;= K; k ++) &#123;
-        int fr = 1, to = 0;
-        q[++ to] = 0;
-        for(int i = 1; i &lt;= tn; i ++) &#123;
-            while(fr &lt;= to &amp;&amp; t[q[fr] + 1].r &lt;= t[i].l) fr ++;
-            #define pre q[fr]
-            if(fr &lt;= to) f[i][k] = f[pre][k - 1] + t[pre + 1].r - t[i].l;
-            while(fr &lt;= to &amp;&amp; f[i][k - 1] + t[i + 1].r &gt;= f[q[to]][k - 1] + t[q[to] + 1].r) to --;
-            q[++ to] = i;
-        &#125;
-    &#125;
-    
-    int ans = 0, suf = 0;
-    for(int k = K, lst = vn; k &gt;= 0 &amp;&amp; (~lst); k --, lst --) &#123;
-        if(f[tn][k]) ans = max(ans, f[tn][k] + suf);
-        suf += v[lst];
-    &#125;
-    printf(&quot;%d\n&quot;, ans);
-    return 0;
-&#125;
-</code></pre>
-<h4 id="J"><a href="#J" class="headerlink" title="J"></a>J</h4><h5 id="题解-1"><a href="#题解-1" class="headerlink" title="题解"></a>题解</h5><p>sb卡常出题人</p>
-<h4 id="L"><a href="#L" class="headerlink" title="L"></a>L</h4><h5 id="题意-1"><a href="#题意-1" class="headerlink" title="题意"></a>题意</h5><p>给定$n$个点，$m$条边，每次操作为增加一个点的点权</p>
+<p>设<span class="math inline">\(f_{i, j}\)</span>表示对于前<span class="math inline">\(i\)</span>个区间，分出了<span class="math inline">\(j\)</span>组的方案数，转移考虑最后一段区间即可，注意到合法的转移点是一段左端点不降的区间，可以用单调队列优化</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define rep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>st<span class="op">,</span><span class="pp"> </span>ed<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&lt;=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">++)</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> sid <span class="op">=</span> <span class="fl">5e3</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n<span class="op">,</span> K<span class="op">;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> segment <span class="op">&#123;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> l<span class="op">,</span> r<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    segment<span class="op">()</span> <span class="op">&#123;&#125;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    segment<span class="op">(</span><span class="dt">int</span> <span class="va">l_</span><span class="op">,</span> <span class="dt">int</span> <span class="va">r_</span><span class="op">)</span> <span class="op">:</span> l<span class="op">(</span><span class="va">l_</span><span class="op">),</span> r<span class="op">(</span><span class="va">r_</span><span class="op">)</span> <span class="op">&#123;&#125;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    <span class="kw">friend</span> <span class="dt">bool</span> <span class="kw">operator</span> <span class="op">&lt;</span> <span class="op">(</span>segment a<span class="op">,</span> segment b<span class="op">)</span> <span class="op">&#123;</span> </span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>a<span class="op">.</span>l <span class="op">!=</span> b<span class="op">.</span>l<span class="op">)</span> <span class="cf">return</span> a<span class="op">.</span>l <span class="op">&lt;</span> b<span class="op">.</span>l<span class="op">;</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> a<span class="op">.</span>r <span class="op">&lt;</span> b<span class="op">.</span>r<span class="op">;</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span> p<span class="op">[</span>sid<span class="op">],</span> t<span class="op">[</span>sid<span class="op">];</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> tn<span class="op">,</span> vn<span class="op">;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> f<span class="op">[</span>sid<span class="op">][</span>sid<span class="op">],</span> v<span class="op">[</span>sid<span class="op">],</span> q<span class="op">[</span>sid<span class="op">];</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    cin <span class="op">&gt;&gt;</span> n <span class="op">&gt;&gt;</span> K<span class="op">;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> n<span class="op">;</span> i <span class="op">++)</span> cin <span class="op">&gt;&gt;</span> p<span class="op">[</span>i<span class="op">].</span>l <span class="op">&gt;&gt;</span> p<span class="op">[</span>i<span class="op">].</span>r<span class="op">;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    p<span class="op">[</span>n <span class="op">+</span> <span class="dv">1</span><span class="op">].</span>l <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">(</span>p <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> p <span class="op">+</span> n <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> j <span class="op">=</span> i<span class="op">;</span> i <span class="op">&lt;=</span> n<span class="op">;</span> i <span class="op">=</span> j<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>p<span class="op">[</span>j<span class="op">].</span>l <span class="op">==</span> p<span class="op">[</span>i<span class="op">].</span>l<span class="op">)</span> j <span class="op">++;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        p<span class="op">[++</span> tn<span class="op">]</span> <span class="op">=</span> p<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> i <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> k <span class="op">&lt;</span> j<span class="op">;</span> k <span class="op">++)</span> v<span class="op">[++</span> vn<span class="op">]</span> <span class="op">=</span> p<span class="op">[</span>k<span class="op">].</span>r <span class="op">-</span> p<span class="op">[</span>k<span class="op">].</span>l<span class="op">;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> tmp <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> tn<span class="op">;</span> i <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> flag <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;=</span> tn<span class="op">;</span> j <span class="op">++)</span> </span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>i <span class="op">!=</span> j <span class="op">&amp;&amp;</span> p<span class="op">[</span>i<span class="op">].</span>l <span class="op">&lt;=</span> p<span class="op">[</span>j<span class="op">].</span>l <span class="op">&amp;&amp;</span> p<span class="op">[</span>j<span class="op">].</span>r <span class="op">&lt;=</span> p<span class="op">[</span>i<span class="op">].</span>r<span class="op">)</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>                flag <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>flag<span class="op">)</span> t<span class="op">[++</span> tmp<span class="op">]</span> <span class="op">=</span> p<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> v<span class="op">[++</span> vn<span class="op">]</span> <span class="op">=</span> p<span class="op">[</span>i<span class="op">].</span>r <span class="op">-</span> p<span class="op">[</span>i<span class="op">].</span>l<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    tn <span class="op">=</span> tmp<span class="op">;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>    sort<span class="op">(</span>v <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> v <span class="op">+</span> vn <span class="op">+</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> n<span class="op">)</span> rep<span class="op">(</span>k<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> K<span class="op">)</span> f<span class="op">[</span>i<span class="op">][</span>k<span class="op">]</span> <span class="op">=</span> <span class="op">(</span>i <span class="op">||</span> k<span class="op">)</span> <span class="op">?</span> <span class="op">-</span><span class="fl">1e9</span> <span class="op">:</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> k <span class="op">&lt;=</span> K<span class="op">;</span> k <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> fr <span class="op">=</span> <span class="dv">1</span><span class="op">,</span> to <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>        q<span class="op">[++</span> to<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> tn<span class="op">;</span> i <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span><span class="op">(</span>fr <span class="op">&lt;=</span> to <span class="op">&amp;&amp;</span> t<span class="op">[</span>q<span class="op">[</span>fr<span class="op">]</span> <span class="op">+</span> <span class="dv">1</span><span class="op">].</span>r <span class="op">&lt;=</span> t<span class="op">[</span>i<span class="op">].</span>l<span class="op">)</span> fr <span class="op">++;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>            <span class="pp">#define pre </span>q<span class="op">[</span>fr<span class="op">]</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>fr <span class="op">&lt;=</span> to<span class="op">)</span> f<span class="op">[</span>i<span class="op">][</span>k<span class="op">]</span> <span class="op">=</span> f<span class="op">[</span>pre<span class="op">][</span>k <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> t<span class="op">[</span>pre <span class="op">+</span> <span class="dv">1</span><span class="op">].</span>r <span class="op">-</span> t<span class="op">[</span>i<span class="op">].</span>l<span class="op">;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>            <span class="cf">while</span><span class="op">(</span>fr <span class="op">&lt;=</span> to <span class="op">&amp;&amp;</span> f<span class="op">[</span>i<span class="op">][</span>k <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> t<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">].</span>r <span class="op">&gt;=</span> f<span class="op">[</span>q<span class="op">[</span>to<span class="op">]][</span>k <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">+</span> t<span class="op">[</span>q<span class="op">[</span>to<span class="op">]</span> <span class="op">+</span> <span class="dv">1</span><span class="op">].</span>r<span class="op">)</span> to <span class="op">--;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>            q<span class="op">[++</span> to<span class="op">]</span> <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ans <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> suf <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> k <span class="op">=</span> K<span class="op">,</span> lst <span class="op">=</span> vn<span class="op">;</span> k <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">&amp;&amp;</span> <span class="op">(~</span>lst<span class="op">);</span> k <span class="op">--,</span> lst <span class="op">--)</span> <span class="op">&#123;</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>f<span class="op">[</span>tn<span class="op">][</span>k<span class="op">])</span> ans <span class="op">=</span> max<span class="op">(</span>ans<span class="op">,</span> f<span class="op">[</span>tn<span class="op">][</span>k<span class="op">]</span> <span class="op">+</span> suf<span class="op">);</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        suf <span class="op">+=</span> v<span class="op">[</span>lst<span class="op">];</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d\n</span><span class="st">&quot;</span><span class="op">,</span> ans<span class="op">);</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span></code></pre></div>
+<h4 id="j">J</h4>
+<h5 id="题解-1">题解</h5>
+<p>sb卡常出题人</p>
+<h4 id="l">L</h4>
+<h5 id="题意-1">题意</h5>
+<p>给定<span class="math inline">\(n\)</span>个点，<span class="math inline">\(m\)</span>条边，每次操作为增加一个点的点权</p>
 <p>对于每个点，询问有多少次操作后，这个点的点权比其所有相邻点多大</p>
-<h5 id="题解-2"><a href="#题解-2" class="headerlink" title="题解"></a>题解</h5><p>分块，设$B = \sqrt m$，称$\leq B$的点为小点，而$&gt; B$的点为大点</p>
-<p>对于小点而言，其邻点只有$B$个，随意暴力</p>
+<h5 id="题解-2">题解</h5>
+<p>分块，设<span class="math inline">\(B = \sqrt m\)</span>，称<span class="math inline">\(\leq B\)</span>的点为小点，而<span class="math inline">\(&gt; B\)</span>的点为大点</p>
+<p>对于小点而言，其邻点只有<span class="math inline">\(B\)</span>个，随意暴力</p>
 <p>对于大点而言，其大点的邻居可以不用考虑</p>
 <p>取大点为研究对象，考虑其小点邻居，我们直接分权值，存下其邻居中的小点冠军，当权值增加时，我们把相应的小点冠军给取消</p>
-<p>这个题中可以利用权值比较小的条件，权值较大时离散化一下即可…</p>
-<h4 id="A"><a href="#A" class="headerlink" title="A"></a>A</h4><h5 id="题意-2"><a href="#题意-2" class="headerlink" title="题意"></a>题意</h5><p>给定序列$a_i$，求满足排序后是等差数列的子区间的数量</p>
-<p>$1 \leq n \leq 10^5$</p>
-<h5 id="题解-3"><a href="#题解-3" class="headerlink" title="题解"></a>题解</h5><p>这里有一个引理？</p>
+<p>这个题中可以利用权值比较小的条件，权值较大时离散化一下即可...</p>
+<h4 id="a">A</h4>
+<h5 id="题意-2">题意</h5>
+<p>给定序列<span class="math inline">\(a_i\)</span>，求满足排序后是等差数列的子区间的数量</p>
+<p><span class="math inline">\(1 \leq n \leq 10^5\)</span></p>
+<h5 id="题解-3">题解</h5>
+<p>这里有一个引理？</p>
 <ul>
-<li>对于序列$b_i$，如果排序后为等差数列，那么公差$d = gcd(b_2 - b_1, …, b_n-b_{n-1})$</li>
+<li>对于序列<span class="math inline">\(b_i\)</span>，如果排序后为等差数列，那么公差<span class="math inline">\(d = gcd(b_2 - b_1, ..., b_n-b_{n-1})\)</span></li>
 </ul>
 <p>要证明这个引理，我们只需要考虑证明交换相邻两个数的位置不改变这个式子的值</p>
-<p>Case1：我们交换了$1, 2$，那么只需证明$gcd(b_2-b_1, b_3-b_2) = gcd(b_2-b_1, b_3-b_1)$，由$gcd(x, y) = gcd(x, x + y)$，这个是正确的，交换$n, (n-1)$时同理</p>
-<p>Case2：不妨假设我们交换了$i, i + 1(i \neq 1, i+1 \neq n)$，那么我们只要证明$gcd(b_{i+2}-b_{i+1}, b_{i+1}-b_i, b_i-b_{i-1}) = gcd(b_{i+2}-b_{i}, b_{i}-b_{i+1}, b_{i+1}-b_{i-1})$，这一点则由$gcd(x, y, z) = gcd(x+y, y, z+y)$得出</p>
-<p>我们只需要计数满足$max - min = d*(r-l)$的区间个数即可</p>
-<p>对$r$进行扫描线，$max$和$min$的变化都只有$O(n)$段，而每个$l$而言，$gcd(b_{l+1}-b_l, …, b_r - b_{r-1})$至多改变$\log$次，因此可以每次对$l$进行逐个单点修改</p>
-<p>注意到排序后满足$gcd$为$d$的$max - min$极小的序列就是等差数列，因此我们有$max - min \geq d * (r - l)$，即$max - min + d * l \geq d * r$，而$gcd$对同一个$r$至多$log$段，对于每一段维护最小值及个数即可</p>
-<h4 id="E"><a href="#E" class="headerlink" title="E"></a>E</h4><h5 id="题意-3"><a href="#题意-3" class="headerlink" title="题意"></a>题意</h5><p>给定一棵树，经过边$e$将花费$w_e$升油，而到达$i$号点将得到$x_i$升油</p>
-<p>$q$次询问，每次询问给定$x, d, p$，表示从$x$号点，初始有$d$升油，不能经过$p$号的情况下，有多少点是可达的</p>
-<h5 id="吐槽"><a href="#吐槽" class="headerlink" title="吐槽"></a>吐槽</h5><p>虽然思路很平凡，但是没人翻译，估计也没啥人愿意写…</p>
-<h5 id="题解-4"><a href="#题解-4" class="headerlink" title="题解"></a>题解</h5><p>点分治，之后我们可以强制$x$走到根节点，往下走到其他点</p>
-<p>对于每个点预处理出根节点走到它最少需要多少油，计算贡献时，去除$p$及自己所在的子树，在$dfn$序上将对应连续的三段，差分之后，扫描线维护树状数组即可</p>
-<h4 id="B"><a href="#B" class="headerlink" title="B"></a>B</h4><h5 id="题意-4"><a href="#题意-4" class="headerlink" title="题意"></a>题意</h5><p>给定一个$2$行的棋盘，第一行有$a$个炮，第二行有$b$个炮，对$k = 0, 1, …, a + b - 4$求发生$k$个炮吃炮事件的方案数</p>
+<p>Case1：我们交换了<span class="math inline">\(1, 2\)</span>，那么只需证明<span class="math inline">\(gcd(b_2-b_1, b_3-b_2) = gcd(b_2-b_1, b_3-b_1)\)</span>，由<span class="math inline">\(gcd(x, y) = gcd(x, x + y)\)</span>，这个是正确的，交换<span class="math inline">\(n, (n-1)\)</span>时同理</p>
+<p>Case2：不妨假设我们交换了<span class="math inline">\(i, i + 1(i \neq 1, i+1 \neq n)\)</span>，那么我们只要证明<span class="math inline">\(gcd(b_{i+2}-b_{i+1}, b_{i+1}-b_i, b_i-b_{i-1}) = gcd(b_{i+2}-b_{i}, b_{i}-b_{i+1}, b_{i+1}-b_{i-1})\)</span>，这一点则由<span class="math inline">\(gcd(x, y, z) = gcd(x+y, y, z+y)\)</span>得出</p>
+<p>我们只需要计数满足<span class="math inline">\(max - min = d*(r-l)\)</span>的区间个数即可</p>
+<p>对<span class="math inline">\(r\)</span>进行扫描线，<span class="math inline">\(max\)</span>和<span class="math inline">\(min\)</span>的变化都只有<span class="math inline">\(O(n)\)</span>段，而每个<span class="math inline">\(l\)</span>而言，<span class="math inline">\(gcd(b_{l+1}-b_l, ..., b_r - b_{r-1})\)</span>至多改变<span class="math inline">\(\log\)</span>次，因此可以每次对<span class="math inline">\(l\)</span>进行逐个单点修改</p>
+<p>注意到排序后满足<span class="math inline">\(gcd\)</span>为<span class="math inline">\(d\)</span>的<span class="math inline">\(max - min\)</span>极小的序列就是等差数列，因此我们有<span class="math inline">\(max - min \geq d * (r - l)\)</span>，即<span class="math inline">\(max - min + d * l \geq d * r\)</span>，而<span class="math inline">\(gcd\)</span>对同一个<span class="math inline">\(r\)</span>至多<span class="math inline">\(log\)</span>段，对于每一段维护最小值及个数即可</p>
+<h4 id="e">E</h4>
+<h5 id="题意-3">题意</h5>
+<p>给定一棵树，经过边<span class="math inline">\(e\)</span>将花费<span class="math inline">\(w_e\)</span>升油，而到达<span class="math inline">\(i\)</span>号点将得到<span class="math inline">\(x_i\)</span>升油</p>
+<p><span class="math inline">\(q\)</span>次询问，每次询问给定<span class="math inline">\(x, d, p\)</span>，表示从<span class="math inline">\(x\)</span>号点，初始有<span class="math inline">\(d\)</span>升油，不能经过<span class="math inline">\(p\)</span>号的情况下，有多少点是可达的</p>
+<h5 id="吐槽">吐槽</h5>
+<p>虽然思路很平凡，但是没人翻译，估计也没啥人愿意写...</p>
+<h5 id="题解-4">题解</h5>
+<p>点分治，之后我们可以强制<span class="math inline">\(x\)</span>走到根节点，往下走到其他点</p>
+<p>对于每个点预处理出根节点走到它最少需要多少油，计算贡献时，去除<span class="math inline">\(p\)</span>及自己所在的子树，在<span class="math inline">\(dfn\)</span>序上将对应连续的三段，差分之后，扫描线维护树状数组即可</p>
+<h4 id="b">B</h4>
+<h5 id="题意-4">题意</h5>
+<p>给定一个<span class="math inline">\(2\)</span>行的棋盘，第一行有<span class="math inline">\(a\)</span>个炮，第二行有<span class="math inline">\(b\)</span>个炮，对<span class="math inline">\(k = 0, 1, ..., a + b - 4\)</span>求发生<span class="math inline">\(k\)</span>个炮吃炮事件的方案数</p>
 <p>特别的，你还需要输出第一行吃炮事件完全优先于第二行吃炮事件发生的方案数</p>
-<h5 id="题解-5"><a href="#题解-5" class="headerlink" title="题解"></a>题解</h5><p>显而易见，一个含有$x$枚棋子的行吃炮的方案数为$2(x - 2)$，一个含有$x$枚棋子的行吃$m$个炮的方案数为$2^m(x-2)(x-3)(x-m+1)=2^m (x-2)_{m}$</p>
-<p>一般的，输出$2^k \sum_{i+j = k} (a-2)_i (b-2)<em>j \binom{i}{k}$；对于特别的情况，输出$2^k \sum</em>{i+j=k} (a-2)_i (b-2)_j$</p>
-<p>而$2^k \sum_{i+j = k} (a-2)_i (b-2)<em>j \binom{i}{k} = 2^k * k! * \sum</em>{i+j = k} \binom{a-2}{i} \binom{b-2}{j} = 2^k * k! * \binom{a+b-4}{k}$</p>
-<p>且$2^k \sum_{i+j=k} (a-2)_i (b-2)<em>j = 2^k \frac{(a-2)!(b-2)!}{(a+b-4-k)!}\sum</em>{i+j=k} \binom{a+b-4-k}{a-2-i}$，后面是一个组合数列和，可以求</p>
+<h5 id="吐槽-1">吐槽</h5>
+<p>感觉也就这样...</p>
+<h5 id="题解-5">题解</h5>
+<p>显而易见，一个含有<span class="math inline">\(x\)</span>枚棋子的行吃炮的方案数为<span class="math inline">\(2(x - 2)\)</span>，一个含有<span class="math inline">\(x\)</span>枚棋子的行吃<span class="math inline">\(m\)</span>个炮的方案数为<span class="math inline">\(2^m(x-2)(x-3)(x-m+1)=2^m (x-2)_{m}\)</span></p>
+<p>一般的，输出$2^k _{i+j = k} (a-2)_i (b-2)_j  $；</p>
+<p>对于特别的情况，输出<span class="math inline">\(2^k \sum_{i+j=k} (a-2)_i (b-2)_j\)</span></p>
+<p>而<span class="math inline">\(2^k \sum_{i+j = k} (a-2)_i (b-2)_j C^i_k = 2^k k! \sum_{i+j = k} C^{a-2}_i C^{b-2}_j = 2^k k! C^{a+b-4}_k\)</span></p>
+<p>且<span class="math inline">\(2^k \sum_{i+j=k} (a-2)_i (b-2)_j = 2^k \frac{(a-2)!(b-2)!}{(a+b-4-k)!}\sum_{i+j=k} C^{a+b-4-k}_{a-2-i}\)</span></p>
+<p>后面是一个组合数列和，可以求</p>
 ]]></content>
       <categories>
         <category>problems</category>
       </categories>
       <tags>
         <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>一个简单的估计</title>
+    <url>/2021/07/22/1-/</url>
+    <content><![CDATA[<span id="more"></span>
+<h4 id="问题">问题</h4>
+<p>我们不妨思考这样的一个问题</p>
+<p>对于有<span class="math inline">\(n\)</span>个点，<span class="math inline">\(m\)</span>条边的无向图<span class="math inline">\(G\)</span>（不妨认为它没有重边和自环），记<span class="math inline">\(V\)</span>为其点集，<span class="math inline">\(E\)</span>为其边集，给予每个点一个权值<span class="math inline">\(c_i\)</span>，定义函数<span class="math inline">\(f(G) = \sum_{uv \in E} [c_u &gt; c_v]\)</span></p>
+<p>现在，不妨设初始状态为<span class="math inline">\(G_0\)</span>，并且我们有<span class="math inline">\(q\)</span>次修改，每次修改将提升一个点的权值，设前<span class="math inline">\(i\)</span>次修改后的图为<span class="math inline">\(G_i\)</span>，那么<span class="math inline">\(S = f(G_0) + \sum_{i=0}^{q-1} |f(G_{i+1}) - f(G_i)|\)</span>大概有多大呢？</p>
+<p>这个式子相当于描述每个点维护比自己大的邻点集合时的一种复杂程度</p>
+<h4 id="思考">思考</h4>
+<p>我们可以先构造一类特殊的操作：<span class="math inline">\(\sqrt m\)</span>个点的完全图，初始时的权值为<span class="math inline">\(1, 2, 3, ..., \sqrt m\)</span>，之后从<span class="math inline">\(1\)</span>到<span class="math inline">\(\sqrt m\)</span>循环操作，每次将<span class="math inline">\(i\)</span>号节点的值增加<span class="math inline">\(\sqrt m\)</span>，这样，每次大小关系的平均变动数量将是一个<span class="math inline">\(\sqrt m\)</span>级的大小</p>
+<p>上述构造可以揭示<span class="math inline">\(\sqrt m\)</span>是一个下限，下面我们证明它也是一个上限</p>
+<p>我们不妨根据点度分类，称度数<span class="math inline">\(&gt; \sqrt m\)</span>的点为大点，而度数$ m$的点为小点</p>
+<p>显然，我们对小点操作时，其带来的变动不可能超过<span class="math inline">\(\sqrt m\)</span>，而度数<span class="math inline">\(&gt; \sqrt m\)</span>的大点也只可能有<span class="math inline">\(\sqrt m\)</span>个，因此操作大点时，对大点之间的大小关系的变动也不可能超过<span class="math inline">\(\sqrt m\)</span>个，那么我们只需要估计大点和小点之间的关系变动情况了</p>
+<p>对于这部分，我们设想有这样的一个势函数<span class="math inline">\(\phi(G)\)</span>，当操作小点时，每改变一次其与大点之间的关系，那么这个势函数增加<span class="math inline">\(1\)</span>，而当操作大点时，每改变一次其与小点之间的关系，则减小<span class="math inline">\(1\)</span></p>
+<p>每次操作小点时，<span class="math inline">\(\phi(G)\)</span>不会增加超过<span class="math inline">\(\sqrt m\)</span>，而操作大点时，<span class="math inline">\(\phi(G)\)</span>总是减小的，并且<span class="math inline">\(\phi(G)\)</span>非负是显而易见的，用<span class="math inline">\(\phi(G)\)</span>来刻画大点和小点之间的关系变动情况</p>
+<p>我们可以知道题述函数大概具有<span class="math inline">\(O(m + q \sqrt m)\)</span>的复杂程度...</p>
+]]></content>
+      <categories>
+        <category>thoughts</category>
+      </categories>
+      <tags>
+        <tag>complexity</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021杭电多校第二场T9</title>
+    <url>/2021/07/23/problem-1/</url>
+    <content><![CDATA[<span id="more"></span>
+<h4 id="吐槽">吐槽</h4>
+<p>杭电多校的好题太少了，出题人要么是水平问题，要么是态度问题...</p>
+<h4 id="题面">题面</h4>
+<p>给定<span class="math inline">\(n\)</span>个数<span class="math inline">\(a_1, ..., a_n\)</span>，询问有多少个三元有序对<span class="math inline">\((i, j, k)\)</span>满足<span class="math inline">\(i &lt; j &lt; k\)</span>，并且<span class="math inline">\(a_i a_j a_k\)</span>是一个完全平方数</p>
+<p><span class="math inline">\(n \leq 10^5, \max a_i \leq 10^5\)</span></p>
+<h4 id="题解">题解</h4>
+<p>首先，我们将<span class="math inline">\(a_i\)</span>质因数分解为<span class="math inline">\(p_1^{r_1}...p_k^{r_k}\)</span>，不难发现只有<span class="math inline">\(r_1\)</span>的奇偶影响答案的统计，因此我们只需要考虑形如<span class="math inline">\(p_1...p_k\)</span>的数即可</p>
+<p>记<span class="math inline">\(M = 10^5\)</span>，分最大质因子<span class="math inline">\(&gt; \sqrt M\)</span>的数和最大质因子<span class="math inline">\(\leq \sqrt M\)</span>的数考虑</p>
+<p>三元组只可能是下列两种情况之一：</p>
+<ul>
+<li>三个数的最大质因子都<span class="math inline">\(\leq \sqrt M\)</span>，形如这样的数可以爆搜，大概有1600000组</li>
+<li>三个数中有两个数的最大质因子<span class="math inline">\(&gt; \sqrt M\)</span>，我们可以枚举最大质因子<span class="math inline">\(p\)</span>，如果最大质因子为<span class="math inline">\(p\)</span>的数有<span class="math inline">\(&lt; \sqrt M\)</span>个，那么我们直接暴力枚举，否则，最大质因子为<span class="math inline">\(p\)</span>的数对应的值只会有<span class="math inline">\(&lt; \sqrt M\)</span>个，我们按照权值来暴力，此时，由于每个最大质因子<span class="math inline">\(p\)</span>的平均复杂度<span class="math inline">\(&lt; \sqrt M\)</span>，因此总复杂度小于<span class="math inline">\(M \sqrt M\)</span></li>
+</ul>
+<p>做法挺明显的....码的时候有一点点细节</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ll </span><span class="dt">long</span><span class="pp"> </span><span class="dt">long</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define gc </span>getchar</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">int</span> read<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> p <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> w <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="dt">char</span> c <span class="op">=</span> gc<span class="op">();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c <span class="op">&gt;</span> <span class="ch">&#39;9&#39;</span> <span class="op">||</span> c <span class="op">&lt;</span> <span class="ch">&#39;0&#39;</span><span class="op">)</span> <span class="op">&#123;</span> <span class="cf">if</span><span class="op">(</span>c <span class="op">==</span> <span class="ch">&#39;-&#39;</span><span class="op">)</span> w <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> c <span class="op">=</span> gc<span class="op">();</span> <span class="op">&#125;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">&#39;0&#39;</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">&#39;9&#39;</span><span class="op">)</span> p <span class="op">=</span> p <span class="op">*</span> <span class="dv">10</span> <span class="op">+</span> c <span class="op">-</span> <span class="ch">&#39;0&#39;</span><span class="op">,</span> c <span class="op">=</span> gc<span class="op">();</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p <span class="op">*</span> w<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#define rep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>st<span class="op">,</span><span class="pp"> </span>ed<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&lt;=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">++)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#define drep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>ed<span class="op">,</span><span class="pp"> </span>st<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&gt;=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">--)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> sid <span class="op">=</span> <span class="fl">1e5</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n<span class="op">,</span> M <span class="op">=</span> <span class="fl">1e5</span><span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vector <span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> arr<span class="op">[</span>sid<span class="op">];</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> _gcd<span class="op">[</span><span class="dv">500</span><span class="op">][</span><span class="dv">500</span><span class="op">],</span> mul<span class="op">[</span><span class="dv">500</span><span class="op">][</span><span class="dv">500</span><span class="op">];</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> maxfac<span class="op">[</span>sid<span class="op">],</span> <span class="fu">tr</span><span class="op">[</span>sid<span class="op">],</span> pr<span class="op">[</span>sid<span class="op">],</span> nop<span class="op">[</span>sid<span class="op">],</span> cnt<span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> num<span class="op">[</span>sid<span class="op">],</span> tnum<span class="op">[</span>sid<span class="op">];</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> gcd<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b <span class="op">?</span> gcd<span class="op">(</span>b<span class="op">,</span> a <span class="op">%</span> b<span class="op">)</span> <span class="op">:</span> a<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> init<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> M<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>nop<span class="op">[</span>i<span class="op">])</span> pr<span class="op">[++</span> cnt<span class="op">]</span> <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;=</span> cnt<span class="op">;</span> j <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> p <span class="op">=</span> i <span class="op">*</span> pr<span class="op">[</span>j<span class="op">];</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>p <span class="op">&gt;</span> M<span class="op">)</span> <span class="cf">break</span><span class="op">;</span> nop<span class="op">[</span>p<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>i <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sqrt_M <span class="op">=</span> sqrt<span class="op">(</span>M<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> gcd<span class="op">(</span>i<span class="op">,</span> j<span class="op">);</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>i <span class="op">||</span> j<span class="op">)</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> i <span class="op">*</span> j <span class="op">/</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">/</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">];</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> M<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> t <span class="op">=</span> i<span class="op">;</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">*</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">&lt;=</span> t<span class="op">;</span> j <span class="op">++)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>t <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="dt">int</span> num <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                <span class="cf">while</span><span class="op">(</span>t <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> t <span class="op">/=</span> pr<span class="op">[</span>j<span class="op">],</span> num <span class="op">++;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>num <span class="op">&amp;</span> <span class="dv">1</span><span class="op">)</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">*=</span> pr<span class="op">[</span>j<span class="op">];</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>t <span class="op">&gt;</span> sqrt_M<span class="op">)</span> maxfac<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> t<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">*=</span> t<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="dt">long</span> <span class="dt">long</span> ans<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> dfs<span class="op">(</span><span class="dt">int</span> dep<span class="op">,</span> <span class="dt">int</span> v1<span class="op">,</span> <span class="dt">int</span> v2<span class="op">,</span> <span class="dt">int</span> v3<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>dep <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2 <span class="op">&amp;&amp;</span> v1 <span class="op">==</span> v3<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">2</span><span class="op">)</span> <span class="op">/</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> num<span class="op">[</span>v3<span class="op">];</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span>v2<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span>v3<span class="op">];</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> v2<span class="op">,</span> v3<span class="op">);</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2 <span class="op">&amp;&amp;</span> v1 <span class="op">==</span> v3<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v1<span class="op">);</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v3_</span> <span class="op">=</span> v3 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v3<span class="op">);</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v2_</span> <span class="op">=</span> v2 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v3_</span> <span class="op">=</span> v3 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v2_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v2_</span><span class="op">,</span> v3<span class="op">);</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v2<span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v2_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> <span class="va">v2_</span><span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solve<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> read<span class="op">();</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> M<span class="op">)</span> num<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> n<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> x <span class="op">=</span> read<span class="op">();</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>maxfac<span class="op">[</span>x<span class="op">])</span> num<span class="op">[</span> <span class="fu">tr</span><span class="op">[</span>x<span class="op">]</span> <span class="op">]</span> <span class="op">++;</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> arr<span class="op">[</span> maxfac<span class="op">[</span>x<span class="op">]</span> <span class="op">].</span>push_back<span class="op">(</span><span class="fu">tr</span><span class="op">[</span>x<span class="op">]);</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sqrt_M <span class="op">=</span> sqrt<span class="op">(</span>M<span class="op">),</span> lim <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>pr<span class="op">[</span>lim<span class="op">]</span> <span class="op">&lt;=</span> sqrt_M<span class="op">)</span> lim <span class="op">++;</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    dfs<span class="op">(</span>lim<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> lim <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> cnt<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> p <span class="op">=</span> pr<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>arr<span class="op">[</span>p<span class="op">].</span>size<span class="op">()</span> <span class="op">&lt;</span> sqrt_M<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span>arr<span class="op">[</span>p<span class="op">].</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> i <span class="op">-</span> <span class="dv">1</span><span class="op">)</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>                ans <span class="op">+=</span> num<span class="op">[</span> mul<span class="op">[</span> arr<span class="op">[</span>p<span class="op">][</span>i<span class="op">]</span> <span class="op">][</span> arr<span class="op">[</span>p<span class="op">][</span>j<span class="op">]</span> <span class="op">]</span> <span class="op">];</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">&#123;</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> Lim <span class="op">=</span> M <span class="op">/</span> pr<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> Lim<span class="op">)</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="kw">auto</span> x <span class="op">:</span> arr<span class="op">[</span>p<span class="op">])</span> tnum<span class="op">[</span>x<span class="op">]</span> <span class="op">++;</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> Lim<span class="op">)</span> <span class="cf">if</span><span class="op">(</span>tnum<span class="op">[</span>i<span class="op">])</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> i<span class="op">)</span> <span class="cf">if</span><span class="op">(</span>tnum<span class="op">[</span>j<span class="op">])</span> <span class="op">&#123;</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>i <span class="op">==</span> j<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> num<span class="op">[</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">];</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> tnum<span class="op">[</span>j<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">];</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>        arr<span class="op">[</span>p<span class="op">].</span>clear<span class="op">();</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span><span class="op">,</span> ans<span class="op">);</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    init<span class="op">();</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> T <span class="op">=</span> read<span class="op">();</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>T <span class="op">--)</span> solve<span class="op">();</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span></code></pre></div>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>number_theory</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Btree</title>
+    <url>/2021/07/23/Btree/</url>
+    <content><![CDATA[<span id="more"></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> M <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// 几路的B树</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> INF <span class="op">=</span> <span class="fl">1e9</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> BTree <span class="op">&#123;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Bnode<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    Bnode <span class="op">*</span>root<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Bnode <span class="op">&#123;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> size<span class="op">,</span> val<span class="op">[</span>M <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*</span>parent<span class="op">,</span> <span class="op">*</span>son<span class="op">[</span>M <span class="op">+</span> <span class="dv">2</span><span class="op">];</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        Bnode<span class="op">(</span>Bnode<span class="op">*</span> <span class="va">parent_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> parent <span class="op">=</span> <span class="va">parent_</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> M<span class="op">;</span> i <span class="op">++)</span> son<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="op">&amp;</span>begin_val<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> val<span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*&amp;</span>begin_son<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> son<span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="op">&amp;</span>end_val<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> val<span class="op">[</span>size <span class="op">-</span> <span class="dv">1</span><span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*</span>end_son<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> son<span class="op">[</span>size<span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> empty<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> <span class="op">!</span>size<span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_full<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> size <span class="op">&gt;=</span> M<span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_enough<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> size <span class="op">&gt;=</span> ceil<span class="op">(</span>M <span class="op">/</span> <span class="fl">2.0</span><span class="op">);</span> <span class="op">&#125;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> not_enough<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> size <span class="op">&lt;</span> ceil<span class="op">(</span>M <span class="op">/</span> <span class="fl">2.0</span><span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_leaf<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> <span class="op">!</span>size <span class="op">||</span> <span class="op">(</span>son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="kw">nullptr</span><span class="op">);</span> <span class="op">&#125;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_root<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> parent <span class="op">==</span> <span class="kw">nullptr</span><span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> set_parent<span class="op">(</span>Bnode <span class="op">*</span>nson<span class="op">)</span> <span class="op">&#123;</span> <span class="cf">if</span><span class="op">(</span>nson<span class="op">)</span> nson <span class="op">-&gt;</span> parent <span class="op">=</span> <span class="kw">this</span><span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> print<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(!</span>size<span class="op">)</span> printf<span class="op">(</span><span class="st">&quot;empty!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i <span class="op">++)</span> printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> &quot;</span><span class="op">,</span> val<span class="op">[</span>i<span class="op">]);</span> </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> find<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// if in (val[i], val[i + 1] ], then in son[i + 1]</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="cf">if</span><span class="op">(</span><span class="va">val_</span> <span class="op">&lt;=</span> val<span class="op">[</span>i<span class="op">])</span> <span class="cf">return</span> i<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> size<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> get_val_id<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>val<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> <span class="va">val_</span><span class="op">)</span> <span class="cf">return</span> i<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> get_son_id<span class="op">(</span>Bnode <span class="op">*</span><span class="va">son_</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>son<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> <span class="va">son_</span><span class="op">)</span> <span class="cf">return</span> i<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> rightshift<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// move son[pos],val[pos],...son[size], thus son[pos], val[pos] are empty, noticing size ++</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&gt;=</span> pos<span class="op">;</span> i <span class="op">--)</span> val<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> size<span class="op">;</span> i <span class="op">&gt;=</span> pos<span class="op">;</span> i <span class="op">--)</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> son<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            size <span class="op">++;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> rightshift2<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// move val[pos],...,son[size], thus val[pos],son[pos+1] are empty, noticing size ++</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>            rightshift<span class="op">(</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">);</span> val<span class="op">[</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>pos<span class="op">];</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> leftshift<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// move son[pos],val[pos],...,son[size], thus son[pos], val[pos] can be deleted, noticing size --</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>            size <span class="op">--;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> pos<span class="op">;</span> i <span class="op">&lt;=</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">++)</span> val<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> pos<span class="op">;</span> i <span class="op">&lt;=</span> size<span class="op">;</span> i <span class="op">++)</span> son<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> leftshift2<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// empty val[pos], son[pos + 1], noticing size --</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span>pos<span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">];</span> leftshift<span class="op">(</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_begin<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span>  </span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>            rightshift<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_end<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span>size <span class="op">++]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span> </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span>size<span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_mid_before<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">,</span> <span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// insert son[pos], val[pos]</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>            rightshift<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span><span class="va">pos_</span><span class="op">]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span><span class="va">pos_</span><span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_mid_after<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">,</span> <span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// insert val[pos], son[pos + 1]</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>            rightshift2<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span><span class="va">pos_</span><span class="op">]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span><span class="va">pos_</span> <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_begin<span class="op">()</span> <span class="op">&#123;</span> <span class="co">// delete son[0], val[0]</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>            leftshift<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_end<span class="op">()</span> <span class="op">&#123;</span> <span class="co">// delete val[size - 1], son[size]</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>            size <span class="op">--;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_mid_before<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// delete son[pos], val[pos]</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>            leftshift<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_mid_after<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">//delete val[pos], son[pos + 1]</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>            leftshift2<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_leaf<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// leaf case</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> <span class="va">pos_</span> <span class="op">=</span> find<span class="op">(</span><span class="va">val_</span><span class="op">);</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>            insert_mid_before<span class="op">(</span><span class="va">pos_</span><span class="op">,</span> <span class="va">val_</span><span class="op">);</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> Move<span class="op">(</span><span class="dt">int</span> L_<span class="op">,</span> Bnode<span class="op">*</span> Rnode<span class="op">)</span> <span class="op">&#123;</span> <span class="co">//move val[L_],son[L+1]...,val[size-1],son[size] from (this) to Rnode</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> R_ <span class="op">=</span> <span class="kw">this</span> <span class="op">-&gt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> L_<span class="op">;</span> i <span class="op">&lt;=</span> R_<span class="op">;</span> i <span class="op">++)</span> Rnode <span class="op">-&gt;</span> insert_end<span class="op">(</span>val<span class="op">[</span>i<span class="op">],</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>             size <span class="op">-=</span> R_ <span class="op">-</span> L_ <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// equals to &quot;for(int i = L_; i &lt;= R_; i ++) delete_end();&quot;</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> split<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>parent <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">=</span> <span class="kw">new</span> Bnode<span class="op">();</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="kw">this</span><span class="op">;</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>            Bnode<span class="op">*</span> brother <span class="op">=</span> <span class="kw">new</span> Bnode<span class="op">(</span>parent<span class="op">);</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> lr <span class="op">=</span> ceil<span class="op">(</span>M <span class="op">/</span> <span class="fl">2.0</span><span class="op">)</span> <span class="op">-</span> <span class="dv">2</span><span class="op">,</span> rl <span class="op">=</span> lr <span class="op">+</span> <span class="dv">2</span><span class="op">,</span> pos <span class="op">=</span> parent <span class="op">-&gt;</span> get_son_id<span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>            parent <span class="op">-&gt;</span> insert_mid_after<span class="op">(</span>pos<span class="op">,</span> val<span class="op">[</span>lr <span class="op">+</span> <span class="dv">1</span><span class="op">],</span> brother<span class="op">);</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>            Move<span class="op">(</span>rl<span class="op">,</span> brother<span class="op">);</span> </span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>            brother <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="kw">this</span> <span class="op">-&gt;</span> end_son<span class="op">();</span> </span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>            brother <span class="op">-&gt;</span> set_parent<span class="op">(</span>brother <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span> <span class="op">-&gt;</span> delete_end<span class="op">();</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;;</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> Insert<span class="op">(</span><span class="dt">int</span> val<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// use this function to insert v</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>root <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> root <span class="op">=</span> <span class="kw">new</span> Bnode<span class="op">();</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*</span>now <span class="op">=</span> root<span class="op">;</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_leaf<span class="op">())</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>now <span class="op">-&gt;</span> find<span class="op">(</span>val<span class="op">)];</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>        now <span class="op">-&gt;</span> insert_leaf<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_root<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_full<span class="op">())</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>            now <span class="op">-&gt;</span> split<span class="op">();</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_full<span class="op">())</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        now <span class="op">-&gt;</span> split<span class="op">();</span> root <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> val_locate<span class="op">(</span><span class="dt">int</span> val<span class="op">,</span> Bnode<span class="op">*</span> <span class="op">&amp;</span>now<span class="op">,</span> <span class="dt">int</span> <span class="op">&amp;</span>pos<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>now <span class="op">!=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> now <span class="op">-&gt;</span> find<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>pos <span class="op">!=</span> now <span class="op">-&gt;</span> size <span class="op">&amp;&amp;</span> now <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">]</span> <span class="op">==</span> val<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>pos<span class="op">];</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>        pos <span class="op">=</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;;</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> precursor<span class="op">(</span>Bnode<span class="op">*</span> <span class="op">&amp;</span>now<span class="op">,</span> <span class="dt">int</span> <span class="op">&amp;</span>pos<span class="op">,</span> <span class="dt">int</span> first_step<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>        now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>first_step<span class="op">];</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_leaf<span class="op">())</span> now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>now <span class="op">-&gt;</span> size<span class="op">];</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>        pos <span class="op">=</span> now <span class="op">-&gt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> Adjust<span class="op">(</span>Bnode<span class="op">*</span> <span class="op">&amp;</span>now<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>        Bnode<span class="op">*</span> parent <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> not_enough<span class="op">())</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> pos <span class="op">=</span> parent <span class="op">-&gt;</span> get_son_id<span class="op">(</span>now<span class="op">);</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>pos<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>             <span class="co">// adjust with son[pos](now), val[pos], son[pos+1](bro)</span></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>             Bnode <span class="op">*</span>bro <span class="op">=</span> parent <span class="op">-&gt;</span> son<span class="op">[</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span><span class="op">(</span>bro <span class="op">-&gt;</span> is_enough<span class="op">())</span> <span class="op">&#123;</span> <span class="co">// the move case</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> insert_end<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">],</span> bro <span class="op">-&gt;</span> begin_son<span class="op">());</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">]</span> <span class="op">=</span> bro <span class="op">-&gt;</span> begin_val<span class="op">();</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> delete_begin<span class="op">();</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>             <span class="cf">else</span> <span class="op">&#123;</span> <span class="co">// the merge case</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> insert_end<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">],</span> bro <span class="op">-&gt;</span> begin_son<span class="op">());</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> Move<span class="op">(</span><span class="dv">0</span><span class="op">,</span> now<span class="op">);</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> delete_mid_after<span class="op">(</span>pos<span class="op">);</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>                <span class="kw">delete</span> bro<span class="op">;</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">&#123;</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>            <span class="co">// adjust with son[pos-1](bro), val[pos-1], son[pos](now)</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>             Bnode <span class="op">*</span>bro <span class="op">=</span> parent <span class="op">-&gt;</span> son<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span><span class="op">(</span>bro <span class="op">-&gt;</span> is_enough<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> insert_begin<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">],</span> bro <span class="op">-&gt;</span> end_son<span class="op">());</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> val<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> bro <span class="op">-&gt;</span> end_val<span class="op">();</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> delete_end<span class="op">();</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>             <span class="cf">else</span> <span class="op">&#123;</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> insert_end<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">],</span> now <span class="op">-&gt;</span> begin_son<span class="op">());</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> Move<span class="op">(</span><span class="dv">0</span><span class="op">,</span> bro<span class="op">);</span></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> delete_mid_after<span class="op">(</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>                <span class="kw">delete</span> now<span class="op">;</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>                now <span class="op">=</span> bro<span class="op">;</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>root <span class="op">-&gt;</span> empty<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>            root <span class="op">=</span> now<span class="op">;</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>            root <span class="op">-&gt;</span> parent <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>        now <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> Delete<span class="op">(</span><span class="dt">int</span> val<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// use this function to delete v</span></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> pos<span class="op">;</span> Bnode<span class="op">*</span> now <span class="op">=</span> root<span class="op">;</span></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>        val_locate<span class="op">(</span>val<span class="op">,</span> now<span class="op">,</span> pos<span class="op">);</span></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>now <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_leaf<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> ppos<span class="op">;</span> Bnode<span class="op">*</span> pre <span class="op">=</span> now<span class="op">;</span></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>            precursor<span class="op">(</span>pre<span class="op">,</span> ppos<span class="op">,</span> pos<span class="op">);</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>            swap<span class="op">(</span>pre <span class="op">-&gt;</span> val<span class="op">[</span>ppos<span class="op">],</span> now <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">]);</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> pre<span class="op">;</span> pos <span class="op">=</span> ppos<span class="op">;</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>        now <span class="op">-&gt;</span> delete_mid_before<span class="op">(</span>pos<span class="op">);</span> <span class="co">// leaf case, deleted</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>now <span class="op">-&gt;</span> is_root<span class="op">()</span> <span class="op">&amp;&amp;</span> now <span class="op">-&gt;</span> empty<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>            <span class="kw">delete</span> root<span class="op">;</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>            root <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_root<span class="op">()</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>Adjust<span class="op">(</span>now<span class="op">));</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>    <span class="co">// use for debugging</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len<span class="op">,</span> dep<span class="op">;</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> output<span class="op">[</span><span class="dv">123456</span><span class="op">];</span></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ck<span class="op">[</span><span class="dv">123456</span><span class="op">],</span> tmp<span class="op">[</span><span class="dv">123</span><span class="op">];</span></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> write<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> tlen <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>x<span class="op">)</span> tmp<span class="op">[++</span> tlen<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>x<span class="op">)</span> tmp<span class="op">[++</span> tlen<span class="op">]</span> <span class="op">=</span> x <span class="op">%</span> <span class="dv">10</span><span class="op">,</span> x <span class="op">/=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> tlen<span class="op">;</span> i<span class="op">;</span> i <span class="op">--)</span> output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> tmp<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> <span class="ch">&#39;0&#39;</span><span class="op">;</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> dfs<span class="op">(</span>Bnode<span class="op">*</span> now<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>now <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>        output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>        dfs<span class="op">(</span>now <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>        output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> now <span class="op">-&gt;</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>            write<span class="op">(</span>now <span class="op">-&gt;</span> val<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>            output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>            dfs<span class="op">(</span>now <span class="op">-&gt;</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]);</span> </span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>            output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>        len <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> dep <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">100000</span><span class="op">;</span> i <span class="op">++)</span> ck<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>        dfs<span class="op">(</span>root<span class="op">);</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> len<span class="op">;</span> i <span class="op">++)</span> printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%c</span><span class="st">&quot;</span><span class="op">,</span> output<span class="op">[</span>i<span class="op">]);</span> </span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>        <span class="co">// the next part is using for special output</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>        <span class="co">//int maxdep = 0;</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>        <span class="co">//for(int i = 1; i &lt;= len; i ++) dep += ck[i], maxdep = max(maxdep, dep);</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>        <span class="co">//for(int D = 0; D &lt;= maxdep; D ++) &#123;</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>        <span class="co">//  for(int i = 1; i &lt;= len; i ++) dep += ck[i], printf(&quot;%c&quot;, (dep == D) ? output[i] : &#39; &#39;); </span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>        <span class="co">//  printf(&quot;\n&quot;);</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>        <span class="co">//&#125;</span></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span> T<span class="op">;</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">10</span><span class="op">;</span> i <span class="op">++)</span> T<span class="op">.</span>Insert<span class="op">(</span>i <span class="op">^</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>    T<span class="op">.</span>print<span class="op">();</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span></code></pre></div>
+]]></content>
+      <categories>
+        <category>codes</category>
+      </categories>
+      <tags>
+        <tag>ds</tag>
       </tags>
   </entry>
 </search>

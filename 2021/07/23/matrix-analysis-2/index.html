@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-23T15:00:15.000Z">
-<meta property="article:modified_time" content="2021-07-23T15:26:22.582Z">
+<meta property="article:modified_time" content="2021-07-28T12:49:27.179Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="matrix_analysis">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda-%E7%9F%A9%E9%98%B5"><span class="nav-text">$\lambda$矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda-%E7%9F%A9%E9%98%B5%E7%9A%84%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-text">$\lambda$矩阵的标准形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%9B%A0%E5%AD%90%EF%BC%8C%E8%A1%8C%E5%88%97%E5%BC%8F%E5%9B%A0%E5%AD%90%EF%BC%8C%E5%88%9D%E7%AD%89%E5%9B%A0%E5%AD%90"><span class="nav-text">不变因子，行列式因子，初等因子</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E7%9F%A9%E9%98%B5"><span class="nav-text">\(\lambda\)矩阵</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lambda%E7%9F%A9%E9%98%B5%E7%9A%84%E6%A0%87%E5%87%86%E5%BD%A2"><span class="nav-text">\(\lambda\)矩阵的标准形</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%9B%A0%E5%AD%90%E8%A1%8C%E5%88%97%E5%BC%8F%E5%9B%A0%E5%AD%90%E5%88%9D%E7%AD%89%E5%9B%A0%E5%AD%90"><span class="nav-text">不变因子，行列式因子，初等因子</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -212,10 +212,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-07-23 23:00:15 / Modified: 23:26:22" itemprop="dateCreated datePublished" datetime="2021-07-23T23:00:15+08:00">2021-07-23</time>
+      <time title="Created: 2021-07-23 23:00:15" itemprop="dateCreated datePublished" datetime="2021-07-23T23:00:15+08:00">2021-07-23</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-28 20:49:27" itemprop="dateModified" datetime="2021-07-28T20:49:27+08:00">2021-07-28</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -234,14 +240,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.6k</span>
+      <span>1.7k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -254,55 +260,48 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-
-<h4 id="lambda-矩阵"><a href="#lambda-矩阵" class="headerlink" title="$\lambda$矩阵"></a>$\lambda$矩阵</h4><ul>
-<li>$\lambda$矩阵：矩阵中的每一项都是关于$\lambda$的多项式的矩阵称为$\lambda$矩阵</li>
-<li>$\lambda$矩阵的秩：若$A(\lambda)$至少有一个$r$阶子式不是零多项式，并且所有的$r+1$阶子式都是零多项式，则称$A(\lambda)$的秩为$r$，记作$\text{rank} A(\lambda)$</li>
-<li>可逆矩阵：$A(\lambda)$称作可逆矩阵，当且仅当存在$B(\lambda)$，使得$A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I$，并且，记$B(\lambda) = A(\lambda)^{-1}$</li>
-<li>可逆矩阵的充要条件：$A(\lambda)$可逆，当且仅当$|A(\lambda)|$是一个非零常数</li>
-<li>如果存在可逆矩阵$P(\lambda), Q(\lambda)$，使得$B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)$，则称$B(\lambda)$与$A(\lambda)$相抵，记作$A(\lambda) \simeq B(\lambda)$</li>
+<h4 id="lambda矩阵"><span class="math inline">\(\lambda\)</span>矩阵</h4>
+<ul>
+<li><span class="math inline">\(\lambda\)</span>矩阵：矩阵中的每一项都是关于<span class="math inline">\(\lambda\)</span>的多项式的矩阵称为<span class="math inline">\(\lambda\)</span>矩阵</li>
+<li><span class="math inline">\(\lambda\)</span>矩阵的秩：若<span class="math inline">\(A(\lambda)\)</span>至少有一个<span class="math inline">\(r\)</span>阶子式不是零多项式，并且所有的<span class="math inline">\(r+1\)</span>阶子式都是零多项式，则称<span class="math inline">\(A(\lambda)\)</span>的秩为<span class="math inline">\(r\)</span>，记作<span class="math inline">\(\text{rank} A(\lambda)\)</span></li>
+<li>可逆矩阵：<span class="math inline">\(A(\lambda)\)</span>称作可逆矩阵，当且仅当存在<span class="math inline">\(B(\lambda)\)</span>，使得<span class="math inline">\(A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I\)</span>，并且，记<span class="math inline">\(B(\lambda) = A(\lambda)^{-1}\)</span></li>
+<li>可逆矩阵的充要条件：<span class="math inline">\(A(\lambda)\)</span>可逆，当且仅当<span class="math inline">\(|A(\lambda)|\)</span>是一个非零常数</li>
+<li>如果存在可逆矩阵<span class="math inline">\(P(\lambda), Q(\lambda)\)</span>，使得<span class="math inline">\(B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)\)</span>，则称<span class="math inline">\(B(\lambda)\)</span>与<span class="math inline">\(A(\lambda)\)</span>相抵，记作<span class="math inline">\(A(\lambda) \simeq B(\lambda)\)</span></li>
 </ul>
-<h4 id="lambda-矩阵的标准形"><a href="#lambda-矩阵的标准形" class="headerlink" title="$\lambda$矩阵的标准形"></a>$\lambda$矩阵的标准形</h4><ul>
-<li><p>每个$A(\lambda)$都相抵与一个Simth标准形，即</p>
-<p>$$A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), …, d_r(\lambda),0…0 \}$$</p>
-<p>其中$d_i(\lambda)$的首项系数为$1$，并且$d_{i - 1}(\lambda) \mid d_i(\lambda)$</p>
+<h4 id="lambda矩阵的标准形"><span class="math inline">\(\lambda\)</span>矩阵的标准形</h4>
+<ul>
+<li><p>每个<span class="math inline">\(A(\lambda)\)</span>都相抵与一个Smith标准形，即</p>
+<p><span class="math display">\[A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), ..., d_r(\lambda),0...0 \}\]</span></p>
+<p>其中<span class="math inline">\(d_i(\lambda)\)</span>的首项系数为<span class="math inline">\(1\)</span>，并且<span class="math inline">\(d_{i - 1}(\lambda) \mid d_i(\lambda)\)</span></p>
 <ul>
 <li>考虑多项式的辗转相除，并利用归纳法</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="不变因子，行列式因子，初等因子"><a href="#不变因子，行列式因子，初等因子" class="headerlink" title="不变因子，行列式因子，初等因子"></a>不变因子，行列式因子，初等因子</h4><ul>
-<li><p>不变因子：Simth标准形中的$d_1(\lambda)$, $d_2(\lambda)$, …, $d_r(\lambda)$称为$A(\lambda)$的不变因子</p>
-</li>
-<li><p>行列式因子：$A(\lambda)$的所有$k$阶子式的最大公因式称为$A(\lambda)$的$k$阶行列式因子，记作$D_k(\lambda)$</p>
-</li>
-<li><p>初等因子：对于不变因子，不妨设$d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}$，那么$(\lambda- \lambda_j)^{r_{ij}}$的全体称为初等因子</p>
-</li>
+<h4 id="不变因子行列式因子初等因子">不变因子，行列式因子，初等因子</h4>
+<ul>
+<li><p>不变因子：Smith标准形中的<span class="math inline">\(d_1(\lambda)\)</span>, <span class="math inline">\(d_2(\lambda)\)</span>, ..., <span class="math inline">\(d_r(\lambda)\)</span>称为<span class="math inline">\(A(\lambda)\)</span>的不变因子</p></li>
+<li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
+<li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
 <li><p>example</p>
-<p>$$A(x) = \begin{pmatrix}<br>-x+1 &amp;x^2  &amp; x \\<br> x&amp; x &amp;-x \\<br> x^2+1 &amp; x^2 &amp; -x^2<br>\end{pmatrix}$$</p>
-<p>的行列式因子为$D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2$</p>
-<p>而其不变因子为$d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)$</p>
-<p>其初等因子则为$x, x^2, (x+1)$</p>
-</li>
+<p><span class="math inline">\(A(x) = \begin{pmatrix} -x+1 &amp;x^2 &amp; x \\  x&amp; x &amp;-x \\  x^2+1 &amp; x^2 &amp; -x^2 \end{pmatrix}\)</span></p>
+<p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
+<p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
+<p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
 <li><p>相抵的矩阵有相同的秩和行列式因子</p>
 <ul>
 <li>只需要子式之间的整除关系即可</li>
-</ul>
-</li>
-<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：$D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)$，由此，我们得到结论：</p>
+</ul></li>
+<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：<span class="math inline">\(D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)\)</span>，由此，我们得到结论：</p>
 <ul>
 <li>相抵的矩阵有相同的不变因子</li>
 <li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
 <li>一个矩阵的Smith标准形是唯一的</li>
-</ul>
-</li>
-<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
-</li>
-<li><p>分块矩阵的初等因子是好求的：设$A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), …, A_m(\lambda)\}$，则$A_i(\lambda)$的初等因子的全体的集合为$A(\lambda)$的初等因子</p>
+</ul></li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p></li>
+<li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
 <ul>
 <li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
-</ul>
-</li>
+</ul></li>
 <li></li>
 </ul>
 
@@ -361,14 +360,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">20k</span>
+    <span title="Symbols count total">21k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">18 mins.</span>
+    <span title="Reading time total">19 mins.</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

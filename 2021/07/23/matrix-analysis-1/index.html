@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-23T04:43:53.000Z">
-<meta property="article:modified_time" content="2021-07-23T06:45:23.670Z">
+<meta property="article:modified_time" content="2021-07-28T12:48:31.796Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="matrix_analysis">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">矩阵之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-text">特征值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">不变子空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Schur-TH"><span class="nav-text">Schur TH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%98%B5"><span class="nav-text">正定矩阵</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-text">矩阵之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%80%BC"><span class="nav-text">特征值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8F%98%E5%AD%90%E7%A9%BA%E9%97%B4"><span class="nav-text">不变子空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#schur-th"><span class="nav-text">Schur TH</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%AD%A3%E5%AE%9A%E7%9F%A9%E9%98%B5"><span class="nav-text">正定矩阵</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -212,10 +212,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-07-23 12:43:53 / Modified: 14:45:23" itemprop="dateCreated datePublished" datetime="2021-07-23T12:43:53+08:00">2021-07-23</time>
+      <time title="Created: 2021-07-23 12:43:53" itemprop="dateCreated datePublished" datetime="2021-07-23T12:43:53+08:00">2021-07-23</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-07-28 20:48:31" itemprop="dateModified" datetime="2021-07-28T20:48:31+08:00">2021-07-28</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -234,7 +240,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>4.1k</span>
+      <span>4.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -254,150 +260,124 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-
-<h4 id="矩阵之间的关系"><a href="#矩阵之间的关系" class="headerlink" title="矩阵之间的关系"></a>矩阵之间的关系</h4><ul>
-<li><strong>相抵</strong>：存在非奇异矩阵$P, Q$，使得$B = PAQ$时，则称$A$与$B$相抵</li>
-<li><strong>相似</strong>：存在非奇异方阵$P$，使得$B = P^{-1}AP$时，称$A$与$B$相似</li>
-<li><strong>合同</strong>：存在非奇异方阵$P$，使得$B = P^TAP$时，称$A$与$B$合同</li>
-</ul>
-<h4 id="特征值"><a href="#特征值" class="headerlink" title="特征值"></a>特征值</h4><ul>
-<li><p>对于方阵$A$，如果存在$\lambda \in P$以及非零向量$x \in V^n$，使得$Ax = \lambda x$，则称$\lambda$为$A$的<strong>特征值</strong>，$x$为$A$的<strong>特征向量</strong></p>
-</li>
-<li><p>$Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0$，因此非零向量$x$存在，要求$|\lambda I - A| = 0$，称$f(\lambda) = |\lambda I - A|$为矩阵$A$的<strong>特征多项式</strong></p>
+<h4 id="矩阵之间的关系">矩阵之间的关系</h4>
 <ul>
-<li>$|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)$，其中$A_k$表示矩阵$A$的所有$k$阶主子式的和，$\lambda_1, …, \lambda_n$表示矩阵$A$的所有特征值</li>
-<li>对于上式中的$A_1$，即$a_{11} + a_{22} + … + a_{nn}$，我们称其为矩阵的迹，记做$tr(A)$，由根与系数的关系，我们知道$A_1 = tr(A) = \sum \lambda_i$，$A_n = |A| = \prod\lambda_i$</li>
+<li><strong>相抵</strong>：存在非奇异矩阵<span class="math inline">\(P, Q\)</span>，使得<span class="math inline">\(B = PAQ\)</span>时，则称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相抵</li>
+<li><strong>相似</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^{-1}AP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相似</li>
+<li><strong>合同</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^TAP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>合同</li>
 </ul>
-</li>
+<h4 id="特征值">特征值</h4>
+<ul>
+<li><p>对于方阵<span class="math inline">\(A\)</span>，如果存在<span class="math inline">\(\lambda \in P\)</span>以及非零向量<span class="math inline">\(x \in V^n\)</span>，使得<span class="math inline">\(Ax = \lambda x\)</span>，则称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的<strong>特征值</strong>，<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>特征向量</strong></p></li>
+<li><p><span class="math inline">\(Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0\)</span>，因此非零向量<span class="math inline">\(x\)</span>存在，要求<span class="math inline">\(|\lambda I - A| = 0\)</span>，称<span class="math inline">\(f(\lambda) = |\lambda I - A|\)</span>为矩阵<span class="math inline">\(A\)</span>的<strong>特征多项式</strong></p>
+<ul>
+<li><span class="math inline">\(|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)\)</span>，其中<span class="math inline">\(A_k\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有<span class="math inline">\(k\)</span>阶主子式的和，<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有特征值</li>
+<li>对于上式中的<span class="math inline">\(A_1\)</span>，即<span class="math inline">\(a_{11} + a_{22} + ... + a_{nn}\)</span>，我们称其为矩阵的迹，记做<span class="math inline">\(tr(A)\)</span>，由根与系数的关系，我们知道<span class="math inline">\(A_1 = tr(A) = \sum \lambda_i\)</span>，<span class="math inline">\(A_n = |A| = \prod\lambda_i\)</span></li>
+</ul></li>
 <li><p>example</p>
 <p>矩阵</p>
-<p>$$A = \begin{pmatrix}<br>0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\<br>1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\<br>0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\<br>\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\<br>0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1<br>\end{pmatrix}$$</p>
-<p>的特征多项式为$f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + … + a_n$</p>
-</li>
-<li><p>对可逆矩阵$A, B \in C^{n*n}$，由$|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|$，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p>
-</li>
-<li><p>对$A \in C^{m * n}, B \in C^{n * m}$，由$\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|$，我们可以知道$AB$与$BA$有相同的非零特征值</p>
-</li>
-<li><p>设$\lambda_i$是$|\lambda I - A|$的$m_i$重根，则称$m_i$是$\lambda_i$的<strong>代数重复度</strong>，注意到$\sum m_i = n$</p>
-</li>
-<li><p>记$V_{\lambda_i} = {x:(\lambda_i I - A)x = 0}$为$A$的属于$\lambda_i$的<strong>特征子空间</strong>，并称$\dim (V_{\lambda_i})$为$\lambda_i$的<strong>几何重复度</strong></p>
-</li>
+<p><span class="math display">\[A = \begin{pmatrix}
+0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\
+1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\ 
+0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\ 
+\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\\
+0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1 
+\end{pmatrix}\]</span></p>
+<p>的特征多项式为<span class="math inline">\(f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + ... + a_n\)</span></p></li>
+<li><p>对可逆矩阵<span class="math inline">\(A, B \in C^{n*n}\)</span>，由<span class="math inline">\(|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|\)</span>，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p></li>
+<li><p>对<span class="math inline">\(A \in C^{m \times n}, B \in C^{n \times m}\)</span>，由<span class="math inline">\(\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|\)</span>，我们可以知道<span class="math inline">\(AB\)</span>与<span class="math inline">\(BA\)</span>有相同的非零特征值</p></li>
+<li><p>设<span class="math inline">\(\lambda_i\)</span>是<span class="math inline">\(|\lambda I - A|\)</span>的<span class="math inline">\(m_i\)</span>重根，则称<span class="math inline">\(m_i\)</span>是<span class="math inline">\(\lambda_i\)</span>的<strong>代数重复度</strong>，注意到<span class="math inline">\(\sum m_i = n\)</span></p></li>
+<li><p>记<span class="math inline">\(V_{\lambda_i} = \{x:(\lambda_i I - A)x = 0\}\)</span>为<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda_i\)</span>的<strong>特征子空间</strong>，并称<span class="math inline">\(\dim (V_{\lambda_i})\)</span>为<span class="math inline">\(\lambda_i\)</span>的<strong>几何重复度</strong></p></li>
 <li><p><strong>几何重复度</strong>不大于<strong>代数重复度</strong></p>
 <ul>
-<li>通过代数重复度构造出一组包含$(\lambda_i I - A)x = 0$的基础解系的基，记这组基的坐标为$C$，考虑$C^{-1}AC$的特征多项式</li>
-</ul>
-</li>
-<li><p>设$\lambda_1, …, \lambda_r$是矩阵$A$的不同的特征值，$x_{1}^{(i)}, …, x_{s_i}^{(i)}$是属于$\lambda_i$的线性无关的特征向量，那么$x_1^{(1)}, …, x_{s_1}^{(1)}, …, x_1^{(r)}, …, x_{s_r}^{(r)}$也是线性无关的</p>
+<li>通过代数重复度构造出一组包含<span class="math inline">\((\lambda_i I - A)x = 0\)</span>的基础解系的基，记这组基的坐标为<span class="math inline">\(C\)</span>，考虑<span class="math inline">\(C^{-1}AC\)</span>的特征多项式</li>
+</ul></li>
+<li><p>设<span class="math inline">\(\lambda_1, ..., \lambda_r\)</span>是矩阵<span class="math inline">\(A\)</span>的不同的特征值，<span class="math inline">\(x_{1}^{(i)}, ..., x_{s_i}^{(i)}\)</span>是属于<span class="math inline">\(\lambda_i\)</span>的线性无关的特征向量，那么<span class="math inline">\(x_1^{(1)}, ..., x_{s_1}^{(1)}, ..., x_1^{(r)}, ..., x_{s_r}^{(r)}\)</span>也是线性无关的</p>
 <ul>
-<li>利用线性无关的充要条件为零向量的组合系数仅有$0$，对于$kx^{(i)}$，注意到乘以$\lambda_j$和$Ax^{(i)} = \lambda_i x^{(i)}$将是两种不一样的变化即可</li>
-</ul>
-</li>
-<li><p>矩阵$A$可对角化（和对角矩阵相似）的充要条件为$A$为$n$个线性无关的特征向量</p>
+<li>利用线性无关的充要条件为零向量的组合系数仅有<span class="math inline">\(0\)</span>，对于<span class="math inline">\(kx^{(i)}\)</span>，注意到乘以<span class="math inline">\(\lambda_j\)</span>和<span class="math inline">\(Ax^{(i)} = \lambda_i x^{(i)}\)</span>将是两种不一样的变化即可</li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>可对角化（和对角矩阵相似）的充要条件为<span class="math inline">\(A\)</span>为<span class="math inline">\(n\)</span>个线性无关的特征向量</p>
 <ul>
-<li><p>注意到以这$n$个特征向量为基即可，也因此，相似中的转移矩阵即为这$n$个特征向量的坐标</p>
-</li>
-<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p>
-</li>
-<li><p>如果$A$有$n$个线性无关的特征向量，则称$A$有完备的特征向量系</p>
-<p>否则，称$A$为<strong>亏损矩阵</strong></p>
-</li>
-<li><p>如果每个代数重复度和几何重复度相等，则称$A$为<strong>单纯矩阵</strong></p>
-</li>
-<li><p>$A$可对角化的充要条件有其他不同的表述，比如$V^n = V_{\lambda_1} \oplus … \oplus V_{\lambda_r}$</p>
-</li>
+<li><p>注意到以这<span class="math inline">\(n\)</span>个特征向量为基即可，也因此，相似中的转移矩阵即为这<span class="math inline">\(n\)</span>个特征向量的坐标</p></li>
+<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>有<span class="math inline">\(n\)</span>个线性无关的特征向量，则称<span class="math inline">\(A\)</span>有完备的特征向量系</p>
+<p>否则，称<span class="math inline">\(A\)</span>为<strong>亏损矩阵</strong></p></li>
+<li><p>如果每个代数重复度和几何重复度相等，则称<span class="math inline">\(A\)</span>为<strong>单纯矩阵</strong></p></li>
+<li><p><span class="math inline">\(A\)</span>可对角化的充要条件有其他不同的表述，比如<span class="math inline">\(V^n = V_{\lambda_1} \oplus ... \oplus V_{\lambda_r}\)</span></p></li>
+</ul></li>
 </ul>
-</li>
+<h4 id="不变子空间">不变子空间</h4>
+<ul>
+<li>对于线性变换<span class="math inline">\(\mathscr{A}\)</span>，如果<span class="math inline">\(\mathscr{A}W \subseteq W\)</span>，则称<span class="math inline">\(W\)</span>为<span class="math inline">\(\mathscr{A}\)</span>的<strong>不变子空间</strong></li>
+<li>有两类较为容易发现的子空间
+<ul>
+<li><span class="math inline">\(\ker \mathscr{A} = \mathscr{A}^{-1}(0) = \{x:\mathscr{A}x = 0\}\)</span>，核空间</li>
+<li><span class="math inline">\(\text{Im} \mathscr{A} = \mathscr{A}V\)</span>，值域</li>
+<li>联系方程组，我们可以知道，若线性变换<span class="math inline">\(\mathscr{A}\)</span>对应于矩阵<span class="math inline">\(A\)</span>，核空间实际上对应于<span class="math inline">\(A\)</span>的解空间，我们记<span class="math inline">\(\dim \ker \mathscr{A} = \text{null } A\)</span>，而值域实际上是<span class="math inline">\(A\)</span>的列向量张成的空间，因此其维数应该是<span class="math inline">\(\text{rank} A\)</span></li>
+<li><strong>维数公式</strong>：$ A + A = n $</li>
+</ul></li>
 </ul>
-<h4 id="不变子空间"><a href="#不变子空间" class="headerlink" title="不变子空间"></a>不变子空间</h4><ul>
-<li>对于线性变换$\mathscr{A}$，如果$\mathscr{A}W \subseteq W$，则称$W$为$\mathscr{A}$的<strong>不变子空间</strong></li>
-<li>有两类较为容易发现的子空间<ul>
-<li>$\ker \mathscr{A} = \mathscr{A}^{-1}(0)  = {x:\mathscr{A}x = 0}$，核空间</li>
-<li>$\text{Im} \mathscr{A} = \mathscr{A}V$，值域</li>
-<li>联系方程组，我们可以知道，若线性变换$\mathscr{A}$对应于矩阵$A$，核空间实际上对应于$A$的解空间，我们记$\dim \ker \mathscr{A} = \text{null } A$，而值域实际上是$A$的列向量张成的空间，因此其维数应该是$\text{rank} A$</li>
-<li><strong>维数公式</strong>：$\text{rank} A +\text{null } A = n $</li>
-</ul>
-</li>
-</ul>
-<h4 id="Schur-TH"><a href="#Schur-TH" class="headerlink" title="Schur TH"></a>Schur TH</h4><ul>
-<li><p>任何$n$阶矩阵都酉相似于一个上三角阵，即存在一个$n$阶酉矩阵$U$和一个上三角阵$R$，使得</p>
-<p>$$A = UTU^H$$</p>
-<p>式中$T$的主对角元为$A$的特征值</p>
+<h4 id="schur-th">Schur TH</h4>
+<ul>
+<li><p>任何<span class="math inline">\(n\)</span>阶矩阵都酉相似于一个上三角阵，即存在一个<span class="math inline">\(n\)</span>阶酉矩阵<span class="math inline">\(U\)</span>和一个上三角阵<span class="math inline">\(R\)</span>，使得</p>
+<p><span class="math display">\[A = UTU^H\]</span></p>
+<p>式中<span class="math inline">\(T\)</span>的主对角元为<span class="math inline">\(A\)</span>的特征值</p>
 <ul>
 <li>每一次选择一个特征向量后进行归纳</li>
-</ul>
-</li>
-<li><p>如果$A^H = A$，则称$A$为<strong>埃米尔特矩阵</strong></p>
+</ul></li>
+<li><p>如果<span class="math inline">\(A^H = A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>埃米尔特矩阵</strong></p>
 <ul>
-<li>对埃米尔特矩阵运用Schur TH：$A = UTU^H$，从而$A^H  = UT^HU^H$，由$A=A^H$，我们得到$T = T^H$，也就是说，$T$是对角矩阵，并且$A$的特征值都是实数</li>
+<li>对埃米尔特矩阵运用Schur TH：<span class="math inline">\(A = UTU^H\)</span>，从而<span class="math inline">\(A^H = UT^HU^H\)</span>，由<span class="math inline">\(A=A^H\)</span>，我们得到<span class="math inline">\(T = T^H\)</span>，也就是说，<span class="math inline">\(T\)</span>是对角矩阵，并且<span class="math inline">\(A\)</span>的特征值都是实数</li>
+</ul></li>
 </ul>
-</li>
-</ul>
-<h4 id="正定矩阵"><a href="#正定矩阵" class="headerlink" title="正定矩阵"></a>正定矩阵</h4><ul>
-<li><p>对于埃米尔特矩阵$A$，如果$x^HAx\geq 0$，则称$A$为半正定矩阵，记作$A\geq 0$；类似的，如果$x^HAx &gt; 0$，则称$A$为正定矩阵，记作$A&gt;0$</p>
+<h4 id="正定矩阵">正定矩阵</h4>
 <ul>
-<li>如果$A&gt;0$，$k&gt;0$，那么$kA&gt;0$</li>
-<li>如果$A \geq 0, B \geq 0$，那么$A+B\geq 0$</li>
-</ul>
-</li>
-<li><p>矩阵$A$正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
+<li><p>对于埃米尔特矩阵<span class="math inline">\(A\)</span>，如果<span class="math inline">\(x^HAx\geq 0\)</span>，则称<span class="math inline">\(A\)</span>为半正定矩阵，记作<span class="math inline">\(A\geq 0\)</span>；类似的，如果<span class="math inline">\(x^HAx &gt; 0\)</span>，则称<span class="math inline">\(A\)</span>为正定矩阵，记作<span class="math inline">\(A&gt;0\)</span></p>
 <ul>
-<li>神奇恒等式：设$\lambda$为$A$的特征值，$\xi$为对应的单位特征向量，那么$\lambda = \xi^HA\xi$</li>
-</ul>
-</li>
-<li><p>矩阵$A$为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）$P$，使得$A=P^HP$</p>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A \geq 0, B \geq 0\)</span>，那么<span class="math inline">\(A+B\geq 0\)</span></li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
 <ul>
-<li>如果$A&gt;0$，那么$A^{-1}&gt;0$</li>
-<li>如果$A&gt;0$，且$C$非奇异，则$C^HAC&gt;0$</li>
-<li>如果$A \geq 0$，则$C^HAC \geq 0$</li>
-</ul>
-</li>
-<li><p>设$A,B$都是$n$阶埃米尔特矩阵，且$B&gt;0$，则存在非奇异矩阵$Q$，使得$Q^HBQ=I, Q^HAQ=\text{diag}\{\lambda_1, …, \lambda_n\}$（可同时对角化），且$\lambda_1,…,\lambda_n$为$AB^{-1}$的特征值</p>
-</li>
-<li><p>如果$A-B\geq 0$，那么称$A$大于等于$B$，记做$A\geq B$</p>
+<li>神奇恒等式：设<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的特征值，<span class="math inline">\(\xi\)</span>为对应的单位特征向量，那么<span class="math inline">\(\lambda = \xi^HA\xi\)</span></li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）<span class="math inline">\(P\)</span>，使得<span class="math inline">\(A=P^HP\)</span></p>
 <ul>
-<li><p>这不是一个well order…</p>
-</li>
-<li><p>$A \geq B$等价于$x^HAx\geq x^HBx$恒成立</p>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，那么<span class="math inline">\(A^{-1}&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，且<span class="math inline">\(C\)</span>非奇异，则<span class="math inline">\(C^HAC&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(C^HAC \geq 0\)</span></li>
+</ul></li>
+<li><p>设<span class="math inline">\(A,B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(B&gt;0\)</span>，则存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得<span class="math inline">\(Q^HBQ=I, Q^HAQ=\text{diag}\\{\lambda_1, ..., \lambda_n\\}\)</span>（可同时对角化），且<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>为<span class="math inline">\(AB^{-1}\)</span>的特征值</p></li>
+<li><p>如果<span class="math inline">\(A-B\geq 0\)</span>，那么称<span class="math inline">\(A\)</span>大于等于<span class="math inline">\(B\)</span>，记做<span class="math inline">\(A\geq B\)</span></p>
+<ul>
+<li><p>这不是一个well order...</p></li>
+<li><p><span class="math inline">\(A \geq B\)</span>等价于<span class="math inline">\(x^HAx\geq x^HBx\)</span>恒成立</p>
 <p>以下性质几乎是显然的</p>
 <ul>
-<li><p>如果$A, B$是对角阵，那么条件也等价于$a_{ii} \geq b_{ii}$</p>
-</li>
-<li><p>$A \geq B, B \geq C$可得$A \geq C$</p>
-</li>
-<li><p>$A \geq B$，且$k&gt;0$，那么$kA \geq kB$</p>
-</li>
-<li><p>若$A_1 \geq B_1, A_2 \geq B_2$，那么$A_1 + A_2 \geq B_1 + B_2$</p>
-</li>
-<li><p>若$A \geq B$，那么$P^HAP\geq P^HBP$</p>
-</li>
-</ul>
-</li>
-<li><p>若$A \geq 0$，则$A \leq tr(A)I$（利用$tr(A)\geq \lambda_i$）</p>
-</li>
-<li><p>若$A\geq B$，则$B^{-1} \geq A^{-1}$</p>
-</li>
-<li><p>若$A, B$可交换，且$A \geq B$，那么$A^2 \geq B^2$</p>
-</li>
-<li><p>$Schwartz$不等式：若$A,B$分别为$n\times m, m \times l$的矩阵，且$AA^H$非奇异，则$B^HB \geq (AB)^H(AA^H)^{-1}(AB)$，等号成立当且仅当存在$n \times l$的矩阵$C$，使$B=A^HC$</p>
-</li>
-</ul>
-</li>
-<li><p>对埃尔米特矩阵$A$，有$\lambda_{min} I \leq A \leq \lambda_{max} I$</p>
-</li>
-<li><p>定义：记$R(x) = \frac{x^HAx}{x^Hx}$，称其为<strong>诶尔米特矩阵</strong>$A$的瑞利商</p>
+<li><p>如果<span class="math inline">\(A, B\)</span>是对角阵，那么条件也等价于<span class="math inline">\(a_{ii} \geq b_{ii}\)</span></p></li>
+<li><p><span class="math inline">\(A \geq B, B \geq C\)</span>可得<span class="math inline">\(A \geq C\)</span></p></li>
+<li><p><span class="math inline">\(A \geq B\)</span>，且<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA \geq kB\)</span></p></li>
+<li><p>若<span class="math inline">\(A_1 \geq B_1, A_2 \geq B_2\)</span>，那么<span class="math inline">\(A_1 + A_2 \geq B_1 + B_2\)</span></p></li>
+<li><p>若<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(P^HAP\geq P^HBP\)</span></p></li>
+</ul></li>
+<li><p>若<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(A \leq tr(A)I\)</span>（利用<span class="math inline">\(tr(A)\geq \lambda_i\)</span>）</p></li>
+<li><p>若<span class="math inline">\(A\geq B\)</span>，则<span class="math inline">\(B^{-1} \geq A^{-1}\)</span></p></li>
+<li><p>若<span class="math inline">\(A, B\)</span>可交换，且<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(A^2 \geq B^2\)</span></p></li>
+<li><p><span class="math inline">\(Schwartz\)</span>不等式：若<span class="math inline">\(A,B\)</span>分别为<span class="math inline">\(n\times m, m \times l\)</span>的矩阵，且<span class="math inline">\(AA^H\)</span>非奇异，则<span class="math inline">\(B^HB \geq (AB)^H(AA^H)^{-1}(AB)\)</span>，等号成立当且仅当存在<span class="math inline">\(n \times l\)</span>的矩阵<span class="math inline">\(C\)</span>，使<span class="math inline">\(B=A^HC\)</span></p></li>
+</ul></li>
+<li><p>对埃尔米特矩阵<span class="math inline">\(A\)</span>，有<span class="math inline">\(\lambda_{min} I \leq A \leq \lambda_{max} I\)</span></p></li>
+<li><p>定义：记<span class="math inline">\(R(x) = \frac{x^HAx}{x^Hx}\)</span>，称其为<strong>诶尔米特矩阵</strong><span class="math inline">\(A\)</span>的瑞利商</p>
 <ul>
-<li>瑞利商是实数（注意到$R(x) = R(x)^H$）</li>
-<li>$\forall k \neq 0, R(kx) = R(x)$</li>
-<li>$\lambda_{min} \leq R(x) \leq \lambda_{max}$，并且可以取得等号</li>
-</ul>
-</li>
-<li><p><strong>极大极小定理</strong>：设$A$是$n$阶埃尔米特矩阵，其特征值为$\lambda_1 \geq \lambda_2 … \geq \lambda_n$，$V_i$是$C^n$中$i$维子空间，那么</p>
-<p>$$\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)$$</p>
-<p>$$\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)$$</p>
+<li>瑞利商是实数（注意到<span class="math inline">\(R(x) = R(x)^H\)</span>）</li>
+<li><span class="math inline">\(\forall k \neq 0, R(kx) = R(x)\)</span></li>
+<li><span class="math inline">\(\lambda_{min} \leq R(x) \leq \lambda_{max}\)</span>，并且可以取得等号</li>
+</ul></li>
+<li><p><strong>极大极小定理</strong>：设<span class="math inline">\(A\)</span>是<span class="math inline">\(n\)</span>阶埃尔米特矩阵，其特征值为<span class="math inline">\(\lambda_1 \geq \lambda_2 ... \geq \lambda_n\)</span>，<span class="math inline">\(V_i\)</span>是<span class="math inline">\(C^n\)</span>中<span class="math inline">\(i\)</span>维子空间，那么</p>
+<p><span class="math display">\[\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)\]</span></p>
+<p><span class="math display">\[\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)\]</span></p>
 <ul>
-<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取$x_1, x_2, …, x_n$为分别属于$\lambda_1, …, \lambda_n$的特征向量，并且其构成标准正交向量基，那么对于$\lambda_i$而言，当我们考虑$Span(x_1, …, x_i)$时，这个空间中的最小值恰好就是$\lambda_i$，而对于其他的$i$维空间，必然跟$Span(x_{i+1}, …, x_n)$有交，此时$Span(x_{i+1}, …, x_n)$中向量的存在将使最小值比$\lambda_i$小，从而取到等号</li>
-</ul>
-</li>
+<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取<span class="math inline">\(x_1, x_2, ..., x_n\)</span>为分别属于<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>的特征向量，并且其构成标准正交向量基，那么对于<span class="math inline">\(\lambda_i\)</span>而言，当我们考虑<span class="math inline">\(Span(x_1, ..., x_i)\)</span>时，这个空间中的最小值恰好就是<span class="math inline">\(\lambda_i\)</span>，而对于其他的<span class="math inline">\(i\)</span>维空间，必然跟<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>有交，此时<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>中向量的存在将使最小值比<span class="math inline">\(\lambda_i\)</span>小，从而取到等号</li>
+</ul></li>
 </ul>
 
     </div>
@@ -455,14 +435,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">20k</span>
+    <span title="Symbols count total">21k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">18 mins.</span>
+    <span title="Reading time total">19 mins.</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

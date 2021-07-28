@@ -253,259 +253,257 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-
-<pre><code class="C++">#include &lt;bits/stdc++.h&gt;
-using namespace std;
-
-const int M = 5; // 几路的B树
-const int INF = 1e9 + 5;
-
-struct BTree &#123;
-    
-    struct Bnode;
-    Bnode *root;
-    
-    struct Bnode &#123;
-        int size, val[M + 1];
-        Bnode *parent, *son[M + 2];
-        Bnode(Bnode* parent_ = nullptr) &#123; 
-            size = 0; parent = parent_;
-            for(int i = 0; i &lt;= M; i ++) son[i] = nullptr;
-        &#125;
-        int &amp;begin_val() &#123; return val[0]; &#125;
-        Bnode *&amp;begin_son() &#123; return son[0]; &#125;
-        int &amp;end_val() &#123; return val[size - 1]; &#125;
-        Bnode *end_son() &#123; return son[size]; &#125;
-        bool empty() &#123; return !size; &#125;
-        bool is_full() &#123; return size &gt;= M; &#125;
-        bool is_enough() &#123; return size &gt;= ceil(M / 2.0); &#125;
-        bool not_enough() &#123; return size &lt; ceil(M / 2.0) - 1; &#125;
-        bool is_leaf() &#123; return !size || (son[0] == nullptr); &#125;
-        bool is_root() &#123; return parent == nullptr; &#125;
-        void set_parent(Bnode *nson) &#123; if(nson) nson -&gt; parent = this; &#125;
-        void print() &#123;
-            if(!size) printf(&quot;empty!\n&quot;);
-            for(int i = 0; i &lt; size; i ++) printf(&quot;%d &quot;, val[i]); 
-            printf(&quot;\n&quot;);
-        &#125;
-        int find(int val_) &#123; // if in (val[i], val[i + 1] ], then in son[i + 1]
-            for(int i = 0; i &lt; size; i ++) if(val_ &lt;= val[i]) return i;
-            return size;
-        &#125;
-        int get_val_id(int val_) &#123;
-            for(int i = 0; i &lt; size; i ++) if(val[i] == val_) return i;
-            return -1;
-        &#125;
-        int get_son_id(Bnode *son_) &#123;
-            for(int i = 0; i &lt;= size; i ++) if(son[i] == son_) return i;
-            return -1;
-        &#125;
-        void rightshift(int pos) &#123; // move son[pos],val[pos],...son[size], thus son[pos], val[pos] are empty, noticing size ++
-            for(int i = size - 1; i &gt;= pos; i --) val[i + 1] = val[i];
-            for(int i = size; i &gt;= pos; i --) son[i + 1] = son[i];
-            size ++;
-        &#125;
-        void rightshift2(int pos) &#123; // move val[pos],...,son[size], thus val[pos],son[pos+1] are empty, noticing size ++
-            rightshift(pos + 1); val[pos + 1] = val[pos];
-        &#125;
-        void leftshift(int pos) &#123; // move son[pos],val[pos],...,son[size], thus son[pos], val[pos] can be deleted, noticing size --
-            size --;
-            for(int i = pos; i &lt;= size - 1; i ++) val[i] = val[i + 1];
-            for(int i = pos; i &lt;= size; i ++) son[i] = son[i + 1];
-        &#125;
-        void leftshift2(int pos) &#123; // empty val[pos], son[pos + 1], noticing size --
-            val[pos] = val[pos + 1]; leftshift(pos + 1); 
-        &#125;
-        void insert_begin(int val_, Bnode *son_ = nullptr) &#123;  
-            rightshift(0);
-            val[0] = val_;
-            son[0] = son_; set_parent(son_);
-        &#125;
-        void insert_end(int val_, Bnode *son_ = nullptr) &#123;
-            val[size ++] = val_; 
-            son[size] = son_; set_parent(son_);
-        &#125;
-        void insert_mid_before(int pos_, int val_, Bnode *son_ = nullptr) &#123; // insert son[pos], val[pos]
-            rightshift(pos_);
-            val[pos_] = val_;
-            son[pos_] = son_; set_parent(son_);
-        &#125;
-        void insert_mid_after(int pos_, int val_, Bnode *son_ = nullptr) &#123; // insert val[pos], son[pos + 1]
-            rightshift2(pos_);
-            val[pos_] = val_;
-            son[pos_ + 1] = son_; set_parent(son_);
-        &#125;
-        void delete_begin() &#123; // delete son[0], val[0]
-            leftshift(0);
-        &#125;
-        void delete_end() &#123; // delete val[size - 1], son[size]
-            size --;
-        &#125;
-        void delete_mid_before(int pos_) &#123; // delete son[pos], val[pos]
-            leftshift(pos_);
-        &#125;
-        void delete_mid_after(int pos_) &#123; //delete val[pos], son[pos + 1]
-            leftshift2(pos_);
-        &#125;
-        void insert_leaf(int val_) &#123; // leaf case
-            int pos_ = find(val_);
-            insert_mid_before(pos_, val_);
-        &#125;
-        void Move(int L_, Bnode* Rnode) &#123; //move val[L_],son[L+1]...,val[size-1],son[size] from (this) to Rnode
-            int R_ = this -&gt; size - 1;
-            for(int i = L_; i &lt;= R_; i ++) Rnode -&gt; insert_end(val[i], son[i + 1]);
-             size -= R_ - L_ + 1; // equals to &quot;for(int i = L_; i &lt;= R_; i ++) delete_end();&quot;
-        &#125;
-        void split() &#123;
-            if(parent == nullptr) &#123;
-                parent = new Bnode();
-                parent -&gt; son[0] = this;
-            &#125;
-            Bnode* brother = new Bnode(parent);
-            int lr = ceil(M / 2.0) - 2, rl = lr + 2, pos = parent -&gt; get_son_id(this);
-            parent -&gt; insert_mid_after(pos, val[lr + 1], brother);
-            Move(rl, brother); 
-            brother -&gt; son[0] = this -&gt; end_son(); 
-            brother -&gt; set_parent(brother -&gt; son[0]);
-            this -&gt; delete_end();
-        &#125;
-    &#125;;
-    void Insert(int val) &#123; // use this function to insert v
-        if(root == nullptr) root = new Bnode();
-        Bnode *now = root;
-        while(!now -&gt; is_leaf())
-            now = now -&gt; son[now -&gt; find(val)];
-        now -&gt; insert_leaf(val);
-        while(!now -&gt; is_root()) &#123;
-            if(!now -&gt; is_full()) return;
-            now -&gt; split();
-            now = now -&gt; parent;
-        &#125;
-        if(!now -&gt; is_full()) return;
-        now -&gt; split(); root = now -&gt; parent;
-    &#125;
-    
-    void val_locate(int val, Bnode* &amp;now, int &amp;pos) &#123;
-        while(now != nullptr) &#123;
-            pos = now -&gt; find(val);
-            if(pos != now -&gt; size &amp;&amp; now -&gt; val[pos] == val) return;
-            now = now -&gt; son[pos];
-        &#125;
-        pos = - 1;
-    &#125;;
-    void precursor(Bnode* &amp;now, int &amp;pos, int first_step) &#123;
-        now = now -&gt; son[first_step];
-        while(!now -&gt; is_leaf()) now = now -&gt; son[now -&gt; size];
-        pos = now -&gt; size - 1;
-    &#125;
-    bool Adjust(Bnode* &amp;now) &#123;
-        Bnode* parent = now -&gt; parent;
-        if(!now -&gt; not_enough()) return 1;
-        int pos = parent -&gt; get_son_id(now);
-        if(!pos) &#123;
-             // adjust with son[pos](now), val[pos], son[pos+1](bro)
-             Bnode *bro = parent -&gt; son[pos + 1];
-             if(bro -&gt; is_enough()) &#123; // the move case
-                now -&gt; insert_end(parent -&gt; val[pos], bro -&gt; begin_son());
-                parent -&gt; val[pos] = bro -&gt; begin_val();
-                bro -&gt; delete_begin();
-             &#125;
-             else &#123; // the merge case
-                now -&gt; insert_end(parent -&gt; val[pos], bro -&gt; begin_son());
-                bro -&gt; Move(0, now);
-                parent -&gt; delete_mid_after(pos);
-                delete bro;
-             &#125;
-        &#125;
-        else &#123;
-            // adjust with son[pos-1](bro), val[pos-1], son[pos](now)
-             Bnode *bro = parent -&gt; son[pos - 1];
-             if(bro -&gt; is_enough()) &#123;
-                now -&gt; insert_begin(parent -&gt; val[pos - 1], bro -&gt; end_son());
-                parent -&gt; val[pos - 1] = bro -&gt; end_val();
-                bro -&gt; delete_end();
-             &#125;
-             else &#123;
-                bro -&gt; insert_end(parent -&gt; val[pos - 1], now -&gt; begin_son());
-                now -&gt; Move(0, bro);
-                parent -&gt; delete_mid_after(pos - 1);
-                delete now;
-                now = bro;
-             &#125;
-        &#125;
-        if(root -&gt; empty()) &#123;
-            root = now;
-            root -&gt; parent = nullptr;
-            return 1;
-        &#125;
-        now = now -&gt; parent;
-        return 0;
-    &#125;
-    void Delete(int val) &#123; // use this function to delete v
-        int pos; Bnode* now = root;
-        val_locate(val, now, pos);
-        if(now == nullptr) return;
-        if(!now -&gt; is_leaf()) &#123;
-            int ppos; Bnode* pre = now;
-            precursor(pre, ppos, pos);
-            swap(pre -&gt; val[ppos], now -&gt; val[pos]);
-            now = pre; pos = ppos;
-        &#125;
-        now -&gt; delete_mid_before(pos); // leaf case, deleted
-        if(now -&gt; is_root() &amp;&amp; now -&gt; empty()) &#123;
-            delete root;
-            root = nullptr;
-            return;
-        &#125;
-        while(!now -&gt; is_root() &amp;&amp; !Adjust(now));
-    &#125;
-    
-    
-    // use for debugging
-    int len, dep;
-    char output[123456];
-    int ck[123456], tmp[123];
-    void write(int x) &#123;
-        int tlen = 0;
-        if(!x) tmp[++ tlen] = 0;
-        while(x) tmp[++ tlen] = x % 10, x /= 10;
-        for(int i = tlen; i; i --) output[++ len] = tmp[i] + &#39;0&#39;;
-    &#125;
-    void dfs(Bnode* now) &#123;
-        if(now == nullptr) return;
-        output[++ len] = &#39; &#39;; ck[len] = 1;
-        dfs(now -&gt; son[0]);
-        output[++ len] = &#39; &#39;; ck[len] = -1;
-        for(int i = 0; i &lt; now -&gt; size; i ++) &#123;
-            write(now -&gt; val[i]);
-            output[++ len] = &#39; &#39;; ck[len] = 1;
-            dfs(now -&gt; son[i + 1]); 
-            output[++ len] = &#39; &#39;; ck[len] = -1;
-        &#125;
-    &#125;
-    void print() &#123;
-        len = 0; dep = 0;
-        for(int i = 0; i &lt;= 100000; i ++) ck[i] = 0;
-        dfs(root);
-        for(int i = 1; i &lt;= len; i ++) printf(&quot;%c&quot;, output[i]); 
-        // the next part is using for special output
-         
-        //int maxdep = 0;
-        //for(int i = 1; i &lt;= len; i ++) dep += ck[i], maxdep = max(maxdep, dep);
-        //for(int D = 0; D &lt;= maxdep; D ++) &#123;
-        //    for(int i = 1; i &lt;= len; i ++) dep += ck[i], printf(&quot;%c&quot;, (dep == D) ? output[i] : &#39; &#39;); 
-        //    printf(&quot;\n&quot;);
-        //&#125;
-    &#125;
-&#125; T;
-
-
-int main() &#123;
-    for(int i = 1; i &lt;= 10; i ++) T.Insert(i ^ 7);
-    T.print();
-    return 0;
-&#125;
-</code></pre>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> M <span class="op">=</span> <span class="dv">5</span><span class="op">;</span> <span class="co">// 几路的B树</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> INF <span class="op">=</span> <span class="fl">1e9</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">struct</span> BTree <span class="op">&#123;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Bnode<span class="op">;</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    Bnode <span class="op">*</span>root<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    <span class="kw">struct</span> Bnode <span class="op">&#123;</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> size<span class="op">,</span> val<span class="op">[</span>M <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*</span>parent<span class="op">,</span> <span class="op">*</span>son<span class="op">[</span>M <span class="op">+</span> <span class="dv">2</span><span class="op">];</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>        Bnode<span class="op">(</span>Bnode<span class="op">*</span> <span class="va">parent_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span> </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>            size <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> parent <span class="op">=</span> <span class="va">parent_</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> M<span class="op">;</span> i <span class="op">++)</span> son<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="op">&amp;</span>begin_val<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> val<span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*&amp;</span>begin_son<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> son<span class="op">[</span><span class="dv">0</span><span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="op">&amp;</span>end_val<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> val<span class="op">[</span>size <span class="op">-</span> <span class="dv">1</span><span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*</span>end_son<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> son<span class="op">[</span>size<span class="op">];</span> <span class="op">&#125;</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> empty<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> <span class="op">!</span>size<span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_full<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> size <span class="op">&gt;=</span> M<span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_enough<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> size <span class="op">&gt;=</span> ceil<span class="op">(</span>M <span class="op">/</span> <span class="fl">2.0</span><span class="op">);</span> <span class="op">&#125;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> not_enough<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> size <span class="op">&lt;</span> ceil<span class="op">(</span>M <span class="op">/</span> <span class="fl">2.0</span><span class="op">)</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_leaf<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> <span class="op">!</span>size <span class="op">||</span> <span class="op">(</span>son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">==</span> <span class="kw">nullptr</span><span class="op">);</span> <span class="op">&#125;</span></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="dt">bool</span> is_root<span class="op">()</span> <span class="op">&#123;</span> <span class="cf">return</span> parent <span class="op">==</span> <span class="kw">nullptr</span><span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> set_parent<span class="op">(</span>Bnode <span class="op">*</span>nson<span class="op">)</span> <span class="op">&#123;</span> <span class="cf">if</span><span class="op">(</span>nson<span class="op">)</span> nson <span class="op">-&gt;</span> parent <span class="op">=</span> <span class="kw">this</span><span class="op">;</span> <span class="op">&#125;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> print<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(!</span>size<span class="op">)</span> printf<span class="op">(</span><span class="st">&quot;empty!</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i <span class="op">++)</span> printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%d</span><span class="st"> &quot;</span><span class="op">,</span> val<span class="op">[</span>i<span class="op">]);</span> </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span><span class="op">);</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> find<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// if in (val[i], val[i + 1] ], then in son[i + 1]</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="cf">if</span><span class="op">(</span><span class="va">val_</span> <span class="op">&lt;=</span> val<span class="op">[</span>i<span class="op">])</span> <span class="cf">return</span> i<span class="op">;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> size<span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> get_val_id<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>val<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> <span class="va">val_</span><span class="op">)</span> <span class="cf">return</span> i<span class="op">;</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> get_son_id<span class="op">(</span>Bnode <span class="op">*</span><span class="va">son_</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="cf">if</span><span class="op">(</span>son<span class="op">[</span>i<span class="op">]</span> <span class="op">==</span> <span class="va">son_</span><span class="op">)</span> <span class="cf">return</span> i<span class="op">;</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> rightshift<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// move son[pos],val[pos],...son[size], thus son[pos], val[pos] are empty, noticing size ++</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&gt;=</span> pos<span class="op">;</span> i <span class="op">--)</span> val<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> size<span class="op">;</span> i <span class="op">&gt;=</span> pos<span class="op">;</span> i <span class="op">--)</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> son<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>            size <span class="op">++;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> rightshift2<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// move val[pos],...,son[size], thus val[pos],son[pos+1] are empty, noticing size ++</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>            rightshift<span class="op">(</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">);</span> val<span class="op">[</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>pos<span class="op">];</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> leftshift<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// move son[pos],val[pos],...,son[size], thus son[pos], val[pos] can be deleted, noticing size --</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>            size <span class="op">--;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> pos<span class="op">;</span> i <span class="op">&lt;=</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">++)</span> val<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> pos<span class="op">;</span> i <span class="op">&lt;=</span> size<span class="op">;</span> i <span class="op">++)</span> son<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> leftshift2<span class="op">(</span><span class="dt">int</span> pos<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// empty val[pos], son[pos + 1], noticing size --</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span>pos<span class="op">]</span> <span class="op">=</span> val<span class="op">[</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">];</span> leftshift<span class="op">(</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">);</span> </span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_begin<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span>  </span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>            rightshift<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_end<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span>size <span class="op">++]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span> </span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span>size<span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_mid_before<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">,</span> <span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// insert son[pos], val[pos]</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>            rightshift<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span><span class="va">pos_</span><span class="op">]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span><span class="va">pos_</span><span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_mid_after<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">,</span> <span class="dt">int</span> <span class="va">val_</span><span class="op">,</span> Bnode <span class="op">*</span><span class="va">son_</span> <span class="op">=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// insert val[pos], son[pos + 1]</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>            rightshift2<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>            val<span class="op">[</span><span class="va">pos_</span><span class="op">]</span> <span class="op">=</span> <span class="va">val_</span><span class="op">;</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>            son<span class="op">[</span><span class="va">pos_</span> <span class="op">+</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">son_</span><span class="op">;</span> set_parent<span class="op">(</span><span class="va">son_</span><span class="op">);</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_begin<span class="op">()</span> <span class="op">&#123;</span> <span class="co">// delete son[0], val[0]</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>            leftshift<span class="op">(</span><span class="dv">0</span><span class="op">);</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_end<span class="op">()</span> <span class="op">&#123;</span> <span class="co">// delete val[size - 1], son[size]</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>            size <span class="op">--;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_mid_before<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// delete son[pos], val[pos]</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>            leftshift<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> delete_mid_after<span class="op">(</span><span class="dt">int</span> <span class="va">pos_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">//delete val[pos], son[pos + 1]</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>            leftshift2<span class="op">(</span><span class="va">pos_</span><span class="op">);</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> insert_leaf<span class="op">(</span><span class="dt">int</span> <span class="va">val_</span><span class="op">)</span> <span class="op">&#123;</span> <span class="co">// leaf case</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> <span class="va">pos_</span> <span class="op">=</span> find<span class="op">(</span><span class="va">val_</span><span class="op">);</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>            insert_mid_before<span class="op">(</span><span class="va">pos_</span><span class="op">,</span> <span class="va">val_</span><span class="op">);</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> Move<span class="op">(</span><span class="dt">int</span> L_<span class="op">,</span> Bnode<span class="op">*</span> Rnode<span class="op">)</span> <span class="op">&#123;</span> <span class="co">//move val[L_],son[L+1]...,val[size-1],son[size] from (this) to Rnode</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> R_ <span class="op">=</span> <span class="kw">this</span> <span class="op">-&gt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> L_<span class="op">;</span> i <span class="op">&lt;=</span> R_<span class="op">;</span> i <span class="op">++)</span> Rnode <span class="op">-&gt;</span> insert_end<span class="op">(</span>val<span class="op">[</span>i<span class="op">],</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]);</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>             size <span class="op">-=</span> R_ <span class="op">-</span> L_ <span class="op">+</span> <span class="dv">1</span><span class="op">;</span> <span class="co">// equals to &quot;for(int i = L_; i &lt;= R_; i ++) delete_end();&quot;</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>        <span class="dt">void</span> split<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>parent <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">=</span> <span class="kw">new</span> Bnode<span class="op">();</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="kw">this</span><span class="op">;</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>            Bnode<span class="op">*</span> brother <span class="op">=</span> <span class="kw">new</span> Bnode<span class="op">(</span>parent<span class="op">);</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> lr <span class="op">=</span> ceil<span class="op">(</span>M <span class="op">/</span> <span class="fl">2.0</span><span class="op">)</span> <span class="op">-</span> <span class="dv">2</span><span class="op">,</span> rl <span class="op">=</span> lr <span class="op">+</span> <span class="dv">2</span><span class="op">,</span> pos <span class="op">=</span> parent <span class="op">-&gt;</span> get_son_id<span class="op">(</span><span class="kw">this</span><span class="op">);</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>            parent <span class="op">-&gt;</span> insert_mid_after<span class="op">(</span>pos<span class="op">,</span> val<span class="op">[</span>lr <span class="op">+</span> <span class="dv">1</span><span class="op">],</span> brother<span class="op">);</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>            Move<span class="op">(</span>rl<span class="op">,</span> brother<span class="op">);</span> </span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>            brother <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]</span> <span class="op">=</span> <span class="kw">this</span> <span class="op">-&gt;</span> end_son<span class="op">();</span> </span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>            brother <span class="op">-&gt;</span> set_parent<span class="op">(</span>brother <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>            <span class="kw">this</span> <span class="op">-&gt;</span> delete_end<span class="op">();</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;;</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> Insert<span class="op">(</span><span class="dt">int</span> val<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// use this function to insert v</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>root <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> root <span class="op">=</span> <span class="kw">new</span> Bnode<span class="op">();</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>        Bnode <span class="op">*</span>now <span class="op">=</span> root<span class="op">;</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_leaf<span class="op">())</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>now <span class="op">-&gt;</span> find<span class="op">(</span>val<span class="op">)];</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>        now <span class="op">-&gt;</span> insert_leaf<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_root<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_full<span class="op">())</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>            now <span class="op">-&gt;</span> split<span class="op">();</span></span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_full<span class="op">())</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>        now <span class="op">-&gt;</span> split<span class="op">();</span> root <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> val_locate<span class="op">(</span><span class="dt">int</span> val<span class="op">,</span> Bnode<span class="op">*</span> <span class="op">&amp;</span>now<span class="op">,</span> <span class="dt">int</span> <span class="op">&amp;</span>pos<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>now <span class="op">!=</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>            pos <span class="op">=</span> now <span class="op">-&gt;</span> find<span class="op">(</span>val<span class="op">);</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>pos <span class="op">!=</span> now <span class="op">-&gt;</span> size <span class="op">&amp;&amp;</span> now <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">]</span> <span class="op">==</span> val<span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>pos<span class="op">];</span></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>        pos <span class="op">=</span> <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;;</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> precursor<span class="op">(</span>Bnode<span class="op">*</span> <span class="op">&amp;</span>now<span class="op">,</span> <span class="dt">int</span> <span class="op">&amp;</span>pos<span class="op">,</span> <span class="dt">int</span> first_step<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>        now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>first_step<span class="op">];</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_leaf<span class="op">())</span> now <span class="op">=</span> now <span class="op">-&gt;</span> son<span class="op">[</span>now <span class="op">-&gt;</span> size<span class="op">];</span></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>        pos <span class="op">=</span> now <span class="op">-&gt;</span> size <span class="op">-</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>    <span class="dt">bool</span> Adjust<span class="op">(</span>Bnode<span class="op">*</span> <span class="op">&amp;</span>now<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>        Bnode<span class="op">*</span> parent <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> not_enough<span class="op">())</span> <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> pos <span class="op">=</span> parent <span class="op">-&gt;</span> get_son_id<span class="op">(</span>now<span class="op">);</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>pos<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>             <span class="co">// adjust with son[pos](now), val[pos], son[pos+1](bro)</span></span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>             Bnode <span class="op">*</span>bro <span class="op">=</span> parent <span class="op">-&gt;</span> son<span class="op">[</span>pos <span class="op">+</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span><span class="op">(</span>bro <span class="op">-&gt;</span> is_enough<span class="op">())</span> <span class="op">&#123;</span> <span class="co">// the move case</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> insert_end<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">],</span> bro <span class="op">-&gt;</span> begin_son<span class="op">());</span></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">]</span> <span class="op">=</span> bro <span class="op">-&gt;</span> begin_val<span class="op">();</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> delete_begin<span class="op">();</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>             <span class="cf">else</span> <span class="op">&#123;</span> <span class="co">// the merge case</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> insert_end<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">],</span> bro <span class="op">-&gt;</span> begin_son<span class="op">());</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> Move<span class="op">(</span><span class="dv">0</span><span class="op">,</span> now<span class="op">);</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> delete_mid_after<span class="op">(</span>pos<span class="op">);</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>                <span class="kw">delete</span> bro<span class="op">;</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">&#123;</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>            <span class="co">// adjust with son[pos-1](bro), val[pos-1], son[pos](now)</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>             Bnode <span class="op">*</span>bro <span class="op">=</span> parent <span class="op">-&gt;</span> son<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">];</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a>             <span class="cf">if</span><span class="op">(</span>bro <span class="op">-&gt;</span> is_enough<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> insert_begin<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">],</span> bro <span class="op">-&gt;</span> end_son<span class="op">());</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> val<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">]</span> <span class="op">=</span> bro <span class="op">-&gt;</span> end_val<span class="op">();</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> delete_end<span class="op">();</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>             <span class="cf">else</span> <span class="op">&#123;</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>                bro <span class="op">-&gt;</span> insert_end<span class="op">(</span>parent <span class="op">-&gt;</span> val<span class="op">[</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">],</span> now <span class="op">-&gt;</span> begin_son<span class="op">());</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>                now <span class="op">-&gt;</span> Move<span class="op">(</span><span class="dv">0</span><span class="op">,</span> bro<span class="op">);</span></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>                parent <span class="op">-&gt;</span> delete_mid_after<span class="op">(</span>pos <span class="op">-</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>                <span class="kw">delete</span> now<span class="op">;</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>                now <span class="op">=</span> bro<span class="op">;</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>             <span class="op">&#125;</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>root <span class="op">-&gt;</span> empty<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>            root <span class="op">=</span> now<span class="op">;</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a>            root <span class="op">-&gt;</span> parent <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>        now <span class="op">=</span> now <span class="op">-&gt;</span> parent<span class="op">;</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> Delete<span class="op">(</span><span class="dt">int</span> val<span class="op">)</span> <span class="op">&#123;</span> <span class="co">// use this function to delete v</span></span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> pos<span class="op">;</span> Bnode<span class="op">*</span> now <span class="op">=</span> root<span class="op">;</span></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>        val_locate<span class="op">(</span>val<span class="op">,</span> now<span class="op">,</span> pos<span class="op">);</span></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>now <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_leaf<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> ppos<span class="op">;</span> Bnode<span class="op">*</span> pre <span class="op">=</span> now<span class="op">;</span></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>            precursor<span class="op">(</span>pre<span class="op">,</span> ppos<span class="op">,</span> pos<span class="op">);</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a>            swap<span class="op">(</span>pre <span class="op">-&gt;</span> val<span class="op">[</span>ppos<span class="op">],</span> now <span class="op">-&gt;</span> val<span class="op">[</span>pos<span class="op">]);</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>            now <span class="op">=</span> pre<span class="op">;</span> pos <span class="op">=</span> ppos<span class="op">;</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>        now <span class="op">-&gt;</span> delete_mid_before<span class="op">(</span>pos<span class="op">);</span> <span class="co">// leaf case, deleted</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>now <span class="op">-&gt;</span> is_root<span class="op">()</span> <span class="op">&amp;&amp;</span> now <span class="op">-&gt;</span> empty<span class="op">())</span> <span class="op">&#123;</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>            <span class="kw">delete</span> root<span class="op">;</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>            root <span class="op">=</span> <span class="kw">nullptr</span><span class="op">;</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a>            <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(!</span>now <span class="op">-&gt;</span> is_root<span class="op">()</span> <span class="op">&amp;&amp;</span> <span class="op">!</span>Adjust<span class="op">(</span>now<span class="op">));</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>    <span class="co">// use for debugging</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> len<span class="op">,</span> dep<span class="op">;</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>    <span class="dt">char</span> output<span class="op">[</span><span class="dv">123456</span><span class="op">];</span></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> ck<span class="op">[</span><span class="dv">123456</span><span class="op">],</span> tmp<span class="op">[</span><span class="dv">123</span><span class="op">];</span></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> write<span class="op">(</span><span class="dt">int</span> x<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> tlen <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>x<span class="op">)</span> tmp<span class="op">[++</span> tlen<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a>        <span class="cf">while</span><span class="op">(</span>x<span class="op">)</span> tmp<span class="op">[++</span> tlen<span class="op">]</span> <span class="op">=</span> x <span class="op">%</span> <span class="dv">10</span><span class="op">,</span> x <span class="op">/=</span> <span class="dv">10</span><span class="op">;</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> tlen<span class="op">;</span> i<span class="op">;</span> i <span class="op">--)</span> output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> tmp<span class="op">[</span>i<span class="op">]</span> <span class="op">+</span> <span class="ch">&#39;0&#39;</span><span class="op">;</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> dfs<span class="op">(</span>Bnode<span class="op">*</span> now<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>now <span class="op">==</span> <span class="kw">nullptr</span><span class="op">)</span> <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>        output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a>        dfs<span class="op">(</span>now <span class="op">-&gt;</span> son<span class="op">[</span><span class="dv">0</span><span class="op">]);</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a>        output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;</span> now <span class="op">-&gt;</span> size<span class="op">;</span> i <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a>            write<span class="op">(</span>now <span class="op">-&gt;</span> val<span class="op">[</span>i<span class="op">]);</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a>            output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a>            dfs<span class="op">(</span>now <span class="op">-&gt;</span> son<span class="op">[</span>i <span class="op">+</span> <span class="dv">1</span><span class="op">]);</span> </span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a>            output<span class="op">[++</span> len<span class="op">]</span> <span class="op">=</span> <span class="ch">&#39; &#39;</span><span class="op">;</span> ck<span class="op">[</span>len<span class="op">]</span> <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a>    <span class="dt">void</span> print<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a>        len <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> dep <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">0</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">100000</span><span class="op">;</span> i <span class="op">++)</span> ck<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a>        dfs<span class="op">(</span>root<span class="op">);</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> len<span class="op">;</span> i <span class="op">++)</span> printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%c</span><span class="st">&quot;</span><span class="op">,</span> output<span class="op">[</span>i<span class="op">]);</span> </span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a>        <span class="co">// the next part is using for special output</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a>        <span class="co">//int maxdep = 0;</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a>        <span class="co">//for(int i = 1; i &lt;= len; i ++) dep += ck[i], maxdep = max(maxdep, dep);</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a>        <span class="co">//for(int D = 0; D &lt;= maxdep; D ++) &#123;</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a>        <span class="co">//  for(int i = 1; i &lt;= len; i ++) dep += ck[i], printf(&quot;%c&quot;, (dep == D) ? output[i] : &#39; &#39;); </span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a>        <span class="co">//  printf(&quot;\n&quot;);</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a>        <span class="co">//&#125;</span></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span> T<span class="op">;</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> i <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> i <span class="op">&lt;=</span> <span class="dv">10</span><span class="op">;</span> i <span class="op">++)</span> T<span class="op">.</span>Insert<span class="op">(</span>i <span class="op">^</span> <span class="dv">7</span><span class="op">);</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a>    T<span class="op">.</span>print<span class="op">();</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span></code></pre></div>
 
     </div>
 
@@ -562,14 +560,14 @@ int main() &#123;
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">20k</span>
+    <span title="Symbols count total">21k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">18 mins.</span>
+    <span title="Reading time total">19 mins.</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
