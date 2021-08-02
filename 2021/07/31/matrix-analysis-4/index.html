@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-07-31T13:15:59.000Z">
-<meta property="article:modified_time" content="2021-08-01T06:17:07.464Z">
+<meta property="article:modified_time" content="2021-08-01T16:19:25.696Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="matrix_analysis">
 <meta name="twitter:card" content="summary">
@@ -134,7 +134,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -219,7 +219,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-08-01 14:17:07" itemprop="dateModified" datetime="2021-08-01T14:17:07+08:00">2021-08-01</time>
+        <time title="Modified: 2021-08-02 00:19:25" itemprop="dateModified" datetime="2021-08-02T00:19:25+08:00">2021-08-02</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -239,14 +239,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>1.5k</span>
+      <span>2.6k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -259,7 +259,7 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-<p>这一节来记一些乱七八糟的性质</p>
+<p>这一节来记一些乱七八糟的习题</p>
 <blockquote>
 <p><span class="math inline">\(AA^H\)</span>和<span class="math inline">\(A^HA\)</span>有相同的非零特征值</p>
 </blockquote>
@@ -267,7 +267,7 @@
 <p>设<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(AA^H\)</span>的特征向量，<span class="math inline">\(x\)</span>是对应的特征向量，即<span class="math inline">\(AA^Hx = \lambda x\)</span>，由于<span class="math inline">\(\lambda, x \neq 0\)</span>，因此<span class="math inline">\(\lambda x \neq 0\)</span>，从而<span class="math inline">\(A^Hx \neq 0\)</span>，那么由<span class="math inline">\((A^HA)(A^Hx) = \lambda(A^Hx)\)</span>知，<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(A^HA\)</span>的特征值，那么，<span class="math inline">\(AA^H\)</span>的所有非零特征值都是<span class="math inline">\(A^HA\)</span>的非零特征值，反过来也是如此，因此两者非零特征值的集合是相同的</p>
 <p>下面，我们还需要证明两者的特征值的代数重复度相同，由于<span class="math inline">\(AA^H, A^HA\)</span>都可对角化，我们只需要证明两者的几何重复度相同</p>
 <p>设<span class="math inline">\(x_1, x_2, ..., x_n\)</span>是对应于<span class="math inline">\(AA^H\)</span>的特征值<span class="math inline">\(\lambda\)</span>的线性无关的特征向量，由之前推导的对应关系，我们考虑证明<span class="math inline">\(A^Hx_1, A^Hx_2,...,A^Hx_n\)</span>线性无关</p>
-<p>设有<span class="math inline">\(\sum k_i A^H x_i = 0\)</span>，那么<span class="math inline">\(\sum k_i (AA^H) x_i = 0\)</span>，从而<span class="math inline">\(\lambda \sum k_ix_i = 0\)</span>，因此<span class="math inline">\(k_1=k_2=...=k_n=0\)</span> #</p>
+<p>设有<span class="math inline">\(\sum k_i A^H x_i = 0\)</span>，那么<span class="math inline">\(\sum k_i (AA^H) x_i = 0\)</span>，从而<span class="math inline">\(\lambda \sum k_ix_i = 0\)</span>，因此<span class="math inline">\(k_1=k_2=...=k_n=0\)</span></p>
 <blockquote>
 <p>对于<span class="math inline">\(n*n\)</span>的复矩阵<span class="math inline">\(A\)</span>，设<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>为其<span class="math inline">\(n\)</span>个特征值，那么<span class="math inline">\(\sum_{i=1}^n |\lambda_i|^2 \leq \sum_{1 \leq i, j \leq n} |a_{ij}|^2\)</span>，当且仅当<span class="math inline">\(A\)</span>是正规矩阵时取得等号</p>
 </blockquote>
@@ -282,11 +282,45 @@
 <blockquote>
 <p>矩阵<span class="math inline">\(A\)</span>的非零奇异值的个数是该矩阵的秩</p>
 </blockquote>
-<p>我们知道<span class="math inline">\(rank(A) = rank(AA^H)\)</span>，而对于<span class="math inline">\(AA^H\)</span>而言，其酉相似于一个对角矩阵<span class="math inline">\(B\)</span>，对角线上的元素为<span class="math inline">\(A\)</span>的奇异值的平方，因此<span class="math inline">\(rank(AA^H)\)</span>为<span class="math inline">\(A\)</span>的非零奇异值的个数-</p>
+<p>我们知道<span class="math inline">\(rank(A) = rank(AA^H)\)</span>，而对于<span class="math inline">\(AA^H\)</span>而言，其酉相似于一个对角矩阵<span class="math inline">\(B\)</span>，对角线上的元素为<span class="math inline">\(A\)</span>的奇异值的平方，因此<span class="math inline">\(rank(AA^H)\)</span>为<span class="math inline">\(A\)</span>的非零奇异值的个数</p>
 <blockquote>
 <p>设<span class="math inline">\(A\)</span>为可逆埃米尔特矩阵，且<span class="math inline">\(A\)</span>的谱分解为<span class="math inline">\(\sum \lambda_i x_i x_i^H\)</span>，那么<span class="math inline">\(A^{-1} = \sum \lambda_i^{-1} x_ix_i^H\)</span></p>
 </blockquote>
 <p>设<span class="math inline">\(X = \sum \lambda_i^{-1} x_ix_i^H\)</span>，那么<span class="math inline">\(AX = \sum_{i, j} \lambda_i* \lambda_j^{-1} x_ix_i^H x_jx_j^H = \sum_{i} x_ix_i^H = \sum_{i, j} x_ix_j^H = UU^H = I\)</span></p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>是正规矩阵，则<span class="math inline">\(A\)</span>的奇异值就是<span class="math inline">\(A\)</span>的特征值的模</p>
+</blockquote>
+<p>由<span class="math inline">\(A\)</span>是正规矩阵，<span class="math inline">\(A\)</span>可酉对角化，因此<span class="math inline">\(A = U^H diag(\lambda_1, \lambda_2, ..., \lambda_n) U\)</span></p>
+<p>继而<span class="math inline">\(AA^H = U^H diag(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2) U\)</span>，那么<span class="math inline">\(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2\)</span>就是<span class="math inline">\(AA^H\)</span>的特征值，从而<span class="math inline">\(|\lambda_1|, |\lambda_2|, ..., |\lambda_n|\)</span>就是<span class="math inline">\(A\)</span>的奇异值</p>
+<blockquote>
+<p>酉矩阵特征值值的模都为<span class="math inline">\(1\)</span></p>
+</blockquote>
+<p>由于<span class="math inline">\(x^Hy = x^HU^HUy = (Ux)^H(Uy)\)</span>，对于酉矩阵<span class="math inline">\(U\)</span>的特征值<span class="math inline">\(\lambda\)</span>，我们对其特征向量<span class="math inline">\(x\)</span>进行考察，那么<span class="math inline">\(x^Hx = (Ux)^HUx = \lambda^H \lambda x^Hx = |\lambda|^2 x^Hx\)</span>，故<span class="math inline">\(|\lambda| = 1\)</span></p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>是正规矩阵，且<span class="math inline">\(A\)</span>的特征值的模为<span class="math inline">\(1\)</span>，那么<span class="math inline">\(A\)</span>为酉矩阵</p>
+</blockquote>
+<p>直接运用上题的结论即可</p>
+<blockquote>
+<p>两个正规矩阵相似的充要条件是两者的特征多项式相同</p>
+</blockquote>
+<p>充分性：如果正规矩阵<span class="math inline">\(A, B\)</span>的特征多项式相同，那么存在酉矩阵<span class="math inline">\(U_1, U_2\)</span>，使得<span class="math inline">\(A = U_1^H \Lambda U_1, B = U_2^H \Lambda U_2\)</span>，从而<span class="math inline">\(A = (U_1^{-1}U_2)^H \Lambda (U_1^{-1}U_2)\)</span>，从而两者相似</p>
+<p>必要性：相似矩阵有相同的特征多项式</p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>为实矩阵，且<span class="math inline">\(A^TA = AA^T\)</span>，那么<span class="math inline">\(A\)</span>是对称矩阵</p>
+</blockquote>
+<p><span class="math inline">\(A\)</span>满足正规矩阵的定义，因此有<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(U\)</span>为酉矩阵，<span class="math inline">\(\Lambda\)</span>为特征值构成的对角阵</p>
+<p>那么由<span class="math inline">\(A^H=A\)</span>，<span class="math inline">\(A^H = A^T\)</span>，我们得到<span class="math inline">\(A=A^T\)</span></p>
+<blockquote>
+<p>正规矩阵<span class="math inline">\(A\)</span>是埃尔米特矩阵，当且仅当<span class="math inline">\(A\)</span>的特征值全为实数</p>
+</blockquote>
+<p>”<span class="math inline">\(\Rightarrow\)</span>“：显然</p>
+<p>"<span class="math inline">\(\Leftarrow\)</span>"：我们考虑矩阵<span class="math inline">\(A\)</span>的谱分解，<span class="math inline">\(A = \sum_{i} \lambda_i x_ix_i^H\)</span>，则有<span class="math inline">\(A^H = \sum_i \lambda_i^H x_i x_i^H = \sum_i \lambda_i x_ix_i^H = A\)</span></p>
+<blockquote>
+<p><span class="math inline">\(tr(xy^H) = y^Hx\)</span></p>
+</blockquote>
+<p>取一组标准正交基，设出<span class="math inline">\(x, y\)</span>在这组标准正交基下的坐标为，然后就不难看出了</p>
+<p>特别的，如果我们令<span class="math inline">\(y = Ax\)</span>，则有<span class="math inline">\(tr(Axx^H) = x^HAx\)</span></p>
+<p>暂定</p>
 
     </div>
 
@@ -308,6 +342,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/08/01/2021%E6%9A%91%E6%9C%9Fhdu%E5%A4%9A%E6%A0%A13/" rel="next" title="2021暑期hdu多校3">
+                  2021暑期hdu多校3 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -340,14 +377,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">30k</span>
+    <span title="Symbols count total">35k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">27 mins.</span>
+    <span title="Reading time total">32 mins.</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

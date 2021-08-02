@@ -351,7 +351,7 @@
 </ul>
 <h4 id="schur-th">Schur TH</h4>
 <ul>
-<li><p>任何<span class="math inline">\(n\)</span>阶矩阵都酉相似于一个上三角阵，即存在一个<span class="math inline">\(n\)</span>阶酉矩阵<span class="math inline">\(U\)</span>和一个上三角阵<span class="math inline">\(R\)</span>，使得</p>
+<li><p>任何<span class="math inline">\(n\)</span>阶矩阵都酉相似于一个上三角阵，即存在一个<span class="math inline">\(n\)</span>阶酉矩阵<span class="math inline">\(U\)</span>和一个上三角阵<span class="math inline">\(T\)</span>，使得</p>
 <p><span class="math display">\[A = UTU^H\]</span></p>
 <p>式中<span class="math inline">\(T\)</span>的主对角元为<span class="math inline">\(A\)</span>的特征值</p>
 <ul>
@@ -379,7 +379,7 @@
 <li>如果<span class="math inline">\(A&gt;0\)</span>，且<span class="math inline">\(C\)</span>非奇异，则<span class="math inline">\(C^HAC&gt;0\)</span></li>
 <li>如果<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(C^HAC \geq 0\)</span></li>
 </ul></li>
-<li><p>设<span class="math inline">\(A,B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(B&gt;0\)</span>，则存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得<span class="math inline">\(Q^HBQ=I, Q^HAQ=\text{diag}\\{\lambda_1, ..., \lambda_n\\}\)</span>（可同时对角化），且<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>为<span class="math inline">\(AB^{-1}\)</span>的特征值</p></li>
+<li><p>设<span class="math inline">\(A,B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(B&gt;0\)</span>，则存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得<span class="math inline">\(Q^HBQ=I, Q^HAQ=\text{diag}\{\lambda_1, ..., \lambda_n\}\)</span>（可同时对角化），且<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>为<span class="math inline">\(AB^{-1}\)</span>的特征值</p></li>
 <li><p>如果<span class="math inline">\(A-B\geq 0\)</span>，那么称<span class="math inline">\(A\)</span>大于等于<span class="math inline">\(B\)</span>，记做<span class="math inline">\(A\geq B\)</span></p>
 <ul>
 <li><p>这不是一个well order...</p></li>
@@ -517,7 +517,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
     <title>矩阵分析 4</title>
     <url>/2021/07/31/matrix-analysis-4/</url>
     <content><![CDATA[<span id="more"></span>
-<p>这一节来记一些乱七八糟的性质</p>
+<p>这一节来记一些乱七八糟的习题</p>
 <blockquote>
 <p><span class="math inline">\(AA^H\)</span>和<span class="math inline">\(A^HA\)</span>有相同的非零特征值</p>
 </blockquote>
@@ -525,7 +525,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>设<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(AA^H\)</span>的特征向量，<span class="math inline">\(x\)</span>是对应的特征向量，即<span class="math inline">\(AA^Hx = \lambda x\)</span>，由于<span class="math inline">\(\lambda, x \neq 0\)</span>，因此<span class="math inline">\(\lambda x \neq 0\)</span>，从而<span class="math inline">\(A^Hx \neq 0\)</span>，那么由<span class="math inline">\((A^HA)(A^Hx) = \lambda(A^Hx)\)</span>知，<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(A^HA\)</span>的特征值，那么，<span class="math inline">\(AA^H\)</span>的所有非零特征值都是<span class="math inline">\(A^HA\)</span>的非零特征值，反过来也是如此，因此两者非零特征值的集合是相同的</p>
 <p>下面，我们还需要证明两者的特征值的代数重复度相同，由于<span class="math inline">\(AA^H, A^HA\)</span>都可对角化，我们只需要证明两者的几何重复度相同</p>
 <p>设<span class="math inline">\(x_1, x_2, ..., x_n\)</span>是对应于<span class="math inline">\(AA^H\)</span>的特征值<span class="math inline">\(\lambda\)</span>的线性无关的特征向量，由之前推导的对应关系，我们考虑证明<span class="math inline">\(A^Hx_1, A^Hx_2,...,A^Hx_n\)</span>线性无关</p>
-<p>设有<span class="math inline">\(\sum k_i A^H x_i = 0\)</span>，那么<span class="math inline">\(\sum k_i (AA^H) x_i = 0\)</span>，从而<span class="math inline">\(\lambda \sum k_ix_i = 0\)</span>，因此<span class="math inline">\(k_1=k_2=...=k_n=0\)</span> #</p>
+<p>设有<span class="math inline">\(\sum k_i A^H x_i = 0\)</span>，那么<span class="math inline">\(\sum k_i (AA^H) x_i = 0\)</span>，从而<span class="math inline">\(\lambda \sum k_ix_i = 0\)</span>，因此<span class="math inline">\(k_1=k_2=...=k_n=0\)</span></p>
 <blockquote>
 <p>对于<span class="math inline">\(n*n\)</span>的复矩阵<span class="math inline">\(A\)</span>，设<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>为其<span class="math inline">\(n\)</span>个特征值，那么<span class="math inline">\(\sum_{i=1}^n |\lambda_i|^2 \leq \sum_{1 \leq i, j \leq n} |a_{ij}|^2\)</span>，当且仅当<span class="math inline">\(A\)</span>是正规矩阵时取得等号</p>
 </blockquote>
@@ -540,11 +540,45 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <blockquote>
 <p>矩阵<span class="math inline">\(A\)</span>的非零奇异值的个数是该矩阵的秩</p>
 </blockquote>
-<p>我们知道<span class="math inline">\(rank(A) = rank(AA^H)\)</span>，而对于<span class="math inline">\(AA^H\)</span>而言，其酉相似于一个对角矩阵<span class="math inline">\(B\)</span>，对角线上的元素为<span class="math inline">\(A\)</span>的奇异值的平方，因此<span class="math inline">\(rank(AA^H)\)</span>为<span class="math inline">\(A\)</span>的非零奇异值的个数-</p>
+<p>我们知道<span class="math inline">\(rank(A) = rank(AA^H)\)</span>，而对于<span class="math inline">\(AA^H\)</span>而言，其酉相似于一个对角矩阵<span class="math inline">\(B\)</span>，对角线上的元素为<span class="math inline">\(A\)</span>的奇异值的平方，因此<span class="math inline">\(rank(AA^H)\)</span>为<span class="math inline">\(A\)</span>的非零奇异值的个数</p>
 <blockquote>
 <p>设<span class="math inline">\(A\)</span>为可逆埃米尔特矩阵，且<span class="math inline">\(A\)</span>的谱分解为<span class="math inline">\(\sum \lambda_i x_i x_i^H\)</span>，那么<span class="math inline">\(A^{-1} = \sum \lambda_i^{-1} x_ix_i^H\)</span></p>
 </blockquote>
 <p>设<span class="math inline">\(X = \sum \lambda_i^{-1} x_ix_i^H\)</span>，那么<span class="math inline">\(AX = \sum_{i, j} \lambda_i* \lambda_j^{-1} x_ix_i^H x_jx_j^H = \sum_{i} x_ix_i^H = \sum_{i, j} x_ix_j^H = UU^H = I\)</span></p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>是正规矩阵，则<span class="math inline">\(A\)</span>的奇异值就是<span class="math inline">\(A\)</span>的特征值的模</p>
+</blockquote>
+<p>由<span class="math inline">\(A\)</span>是正规矩阵，<span class="math inline">\(A\)</span>可酉对角化，因此<span class="math inline">\(A = U^H diag(\lambda_1, \lambda_2, ..., \lambda_n) U\)</span></p>
+<p>继而<span class="math inline">\(AA^H = U^H diag(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2) U\)</span>，那么<span class="math inline">\(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2\)</span>就是<span class="math inline">\(AA^H\)</span>的特征值，从而<span class="math inline">\(|\lambda_1|, |\lambda_2|, ..., |\lambda_n|\)</span>就是<span class="math inline">\(A\)</span>的奇异值</p>
+<blockquote>
+<p>酉矩阵特征值值的模都为<span class="math inline">\(1\)</span></p>
+</blockquote>
+<p>由于<span class="math inline">\(x^Hy = x^HU^HUy = (Ux)^H(Uy)\)</span>，对于酉矩阵<span class="math inline">\(U\)</span>的特征值<span class="math inline">\(\lambda\)</span>，我们对其特征向量<span class="math inline">\(x\)</span>进行考察，那么<span class="math inline">\(x^Hx = (Ux)^HUx = \lambda^H \lambda x^Hx = |\lambda|^2 x^Hx\)</span>，故<span class="math inline">\(|\lambda| = 1\)</span></p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>是正规矩阵，且<span class="math inline">\(A\)</span>的特征值的模为<span class="math inline">\(1\)</span>，那么<span class="math inline">\(A\)</span>为酉矩阵</p>
+</blockquote>
+<p>直接运用上题的结论即可</p>
+<blockquote>
+<p>两个正规矩阵相似的充要条件是两者的特征多项式相同</p>
+</blockquote>
+<p>充分性：如果正规矩阵<span class="math inline">\(A, B\)</span>的特征多项式相同，那么存在酉矩阵<span class="math inline">\(U_1, U_2\)</span>，使得<span class="math inline">\(A = U_1^H \Lambda U_1, B = U_2^H \Lambda U_2\)</span>，从而<span class="math inline">\(A = (U_1^{-1}U_2)^H \Lambda (U_1^{-1}U_2)\)</span>，从而两者相似</p>
+<p>必要性：相似矩阵有相同的特征多项式</p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>为实矩阵，且<span class="math inline">\(A^TA = AA^T\)</span>，那么<span class="math inline">\(A\)</span>是对称矩阵</p>
+</blockquote>
+<p><span class="math inline">\(A\)</span>满足正规矩阵的定义，因此有<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(U\)</span>为酉矩阵，<span class="math inline">\(\Lambda\)</span>为特征值构成的对角阵</p>
+<p>那么由<span class="math inline">\(A^H=A\)</span>，<span class="math inline">\(A^H = A^T\)</span>，我们得到<span class="math inline">\(A=A^T\)</span></p>
+<blockquote>
+<p>正规矩阵<span class="math inline">\(A\)</span>是埃尔米特矩阵，当且仅当<span class="math inline">\(A\)</span>的特征值全为实数</p>
+</blockquote>
+<p>”<span class="math inline">\(\Rightarrow\)</span>“：显然</p>
+<p>"<span class="math inline">\(\Leftarrow\)</span>"：我们考虑矩阵<span class="math inline">\(A\)</span>的谱分解，<span class="math inline">\(A = \sum_{i} \lambda_i x_ix_i^H\)</span>，则有<span class="math inline">\(A^H = \sum_i \lambda_i^H x_i x_i^H = \sum_i \lambda_i x_ix_i^H = A\)</span></p>
+<blockquote>
+<p><span class="math inline">\(tr(xy^H) = y^Hx\)</span></p>
+</blockquote>
+<p>取一组标准正交基，设出<span class="math inline">\(x, y\)</span>在这组标准正交基下的坐标为，然后就不难看出了</p>
+<p>特别的，如果我们令<span class="math inline">\(y = Ax\)</span>，则有<span class="math inline">\(tr(Axx^H) = x^HAx\)</span></p>
+<p>暂定</p>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -649,6 +683,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>记</p>
 <p><span class="math display">\[B = (a_1, a_2,..., a_r), C = \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
 <p>由于<span class="math inline">\(r = rank(A) \leq \min\{rank(B), rank(C)\} \leq r\)</span>，因此两者秩都为<span class="math inline">\(r\)</span></p></li>
+<li><p>注意到这个证明中，没有对所取的<span class="math inline">\(a_1,...,a_r\)</span>作任何的限制，因此，我们甚至可以限制<span class="math inline">\(a_1,...,a_r\)</span>为一组标准正交基</p></li>
 </ul></li>
 <li><p>example：</p>
 <p>求</p>
@@ -994,6 +1029,179 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>而<span class="math inline">\(2^k \sum_{i+j = k} (a-2)_i (b-2)_j C^i_k = 2^k k! \sum_{i+j = k} C^{a-2}_i C^{b-2}_j = 2^k k! C^{a+b-4}_k\)</span></p>
 <p>且<span class="math inline">\(2^k \sum_{i+j=k} (a-2)_i (b-2)_j = 2^k \frac{(a-2)!(b-2)!}{(a+b-4-k)!}\sum_{i+j=k} C^{a+b-4-k}_{a-2-i}\)</span></p>
 <p>后面是一个组合数列和，可以求</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2021暑期hdu多校3</title>
+    <url>/2021/08/01/2021%E6%9A%91%E6%9C%9Fhdu%E5%A4%9A%E6%A0%A13/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>老鸽子了</p>
+<h4 id="a">A</h4>
+<h5 id="吐槽">吐槽</h5>
+<p>出题人的符号管理乱七八遭</p>
+<h4 id="e-didnt-i-say-to-make-my-abilities-average-in-the-next-life">E Didn't I Say to Make My Abilities Average in the Next Life?!</h4>
+<h5 id="吐槽-1">吐槽</h5>
+<p>二次元题目</p>
+<p>看完题解感觉自己是...</p>
+<h5 id="题意">题意</h5>
+<p>给定一个序列，<span class="math inline">\(q\)</span>组询问，每次询问一个区间的所有子区间的最大值的和</p>
+<h5 id="题解">题解</h5>
+<p>题解的两个做法感觉都有点复杂，看不太懂，自己写一个</p>
+<p>离线从左到右扫描线，当我们扫到点<span class="math inline">\(r\)</span>时，我们对于每个点<span class="math inline">\(l\)</span>，维护<span class="math inline">\(max_r[l]\)</span>表示<span class="math inline">\([l,r]\)</span>中的最大值，那么<span class="math inline">\(\sum max_i[l]\)</span>将表示<span class="math inline">\([l,l], [l,l+1],...,[l,r]\)</span>的答案的和，从而<span class="math inline">\(\sum_{l \leq L \leq r} \sum max_i[L]\)</span>将是答案</p>
+<p>我们可以用线段树来做到这一点，理清之后还挺好写的</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+    
+#define gc getchar
+inline int read() &#123;
+    int p = 0, w = 1; char c = gc();
+    while(c &gt; &#39;9&#39; || c &lt; &#39;0&#39;) &#123; if(c == &#39;-&#39;) w = -1; c = gc(); &#125;
+    while(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) &#123; p = p * 10 + c - &#39;0&#39;; c = gc(); &#125;
+    return p * w;
+&#125;
+
+#define rep(io, st, ed) for(int io = st; io &lt;= ed; io ++)
+
+const int mod = 1e9 + 7;
+const int sid = 1e6 + 5;
+const int inf = 1e9 + 5;
+
+inline void inc(int &amp;a, int b) &#123; a += b; if(a &gt;= mod) a -= mod; &#125;
+inline void dec(int &amp;a, int b) &#123; a -= b; if(a &lt; 0) a += mod; &#125;
+inline int Inc(int a, int b) &#123; return (a + b &gt;= mod) ? a + b - mod : a + b; &#125;
+inline int Dec(int a, int b) &#123; return (a - b &lt; 0) ? a - b + mod : a - b; &#125;
+inline int mul(int a, int b) &#123; return 1ll * a * b % mod; &#125;
+inline int fp(int a, int k) &#123; 
+    int ret = 1; 
+    while(k) &#123; 
+        if(k &amp; 1) ret = mul(ret, a); 
+        a = mul(a, a); k &gt;&gt;= 1; 
+    &#125;
+    return ret;
+&#125;
+
+struct query &#123;
+    int l, id;
+    query() &#123;&#125;
+    query(int _l, int _id) : l(_l), id(_id) &#123;&#125;
+&#125; ;
+vector &lt;query&gt; Q[sid];
+
+int n, m;
+int a[sid],  ans[sid];
+int lst_time[sid], sumtag[sid], sum[sid];
+int nowv[sid], presum[sid], pret[sid], newt[sid];
+
+#define ls (o &lt;&lt; 1)
+#define rs (o &lt;&lt; 1 | 1)
+void build(int o, int l, int r) &#123;
+    lst_time[o] = sumtag[o] = sum[o] = 0;
+    nowv[o] = presum[o] = pret[o] = newt[o] = 0;
+    if(l == r) return;
+    int mid = (l + r) &gt;&gt; 1;
+    build(ls, l, mid);
+    build(rs, mid + 1, r);
+&#125;
+
+void down(int o, int l, int r, int nv, int ps, int pt, int nt) &#123;
+    inc(sum[o], 1ll * sumtag[o] * (pt - lst_time[o]) % mod);
+    inc(sum[o], 1ll * ps * (r - l + 1) % mod);
+    if(!nowv[o])  // 先前没有标记
+        nowv[o] = nv, presum[o] = ps, pret[o] = pt, newt[o] = nt; 
+    else &#123;
+        inc(presum[o], ps);
+        inc(presum[o], 1ll * nowv[o] * (pt - newt[o]) % mod);
+        newt[o] = nt; nowv[o] = nv;
+    &#125;
+    lst_time[o] = nt; sumtag[o] = mul(r - l + 1, nv);
+&#125;
+
+void pushdown(int o, int l, int r) &#123;
+    if(!nowv[o]) return;
+    int mid = (l + r) &gt;&gt; 1;
+    down(ls, l, mid, nowv[o], presum[o], pret[o], newt[o]);
+    down(rs, mid + 1, r, nowv[o], presum[o], pret[o], newt[o]);
+    nowv[o] = 0; presum[o] = 0;
+&#125;
+
+void pushup(int o, int l, int r, int t) &#123;
+    inc(sum[o], 1ll * (t - lst_time[o]) * sumtag[o] % mod);
+    sumtag[o] = Inc(sumtag[ls], sumtag[rs]);
+    lst_time[o] = t;
+&#125;
+
+void mdf(int o, int l, int r, int ml, int mr, int v, int t) &#123;
+    if(ml &gt; r || mr &lt; l) return;
+    if(ml &lt;= l &amp;&amp; mr &gt;= r) &#123; down(o, l, r, v, 0, t, t); return; &#125;
+    int mid = (l + r) &gt;&gt; 1;
+    pushdown(o, l, r);
+    mdf(ls, l, mid, ml, mr, v, t);
+    mdf(rs, mid + 1, r, ml, mr, v, t);
+    pushup(o, l, r, t);
+&#125;
+
+int qry(int o, int l, int r, int ml, int mr, int t) &#123;
+    if(ml &gt; r || mr &lt; l) return 0;
+    if(ml &lt;= l &amp;&amp; mr &gt;= r) return Inc(sum[o], 1ll * sumtag[o] * (t-lst_time[o]) % mod);
+    int mid = (l + r) &gt;&gt; 1;
+    pushdown(o, l, r);
+    return Inc(qry(ls, l, mid, ml, mr, t), qry(rs, mid + 1, r, ml, mr, t));
+&#125;
+
+int st[sid], top;
+void segment_work(int opt = 0) &#123;
+    a[0] = -inf; top = 0;
+    build(1, 1, n);
+    rep(r, 1, n) &#123;
+        while(top &amp;&amp; a[r] &gt;= a[ st[top] ]) top --;
+        mdf(1, 1, n, st[top] + 1, r, (a[r] + mod) % mod, r - 1);
+        st[++ top] = r;
+        for(auto x : Q[r]) &#123;
+            int l = x.l, id = x.id;
+            if(!opt) inc(ans[id], qry(1, 1, n, l, r, r));
+            else dec(ans[id], qry(1, 1, n, l, r, r));
+            if(opt) &#123;
+                int len = r - l + 1;
+                ans[id] = mul(ans[id], fp(1ll * len * (len + 1) % mod, mod - 2));
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+void solve() &#123;
+    n = read(); m = read();
+    rep(i, 1, n) a[i] = read(), Q[i].clear();
+    rep(i, 1, m) &#123;
+        int l = read(), r = read();
+        Q[r].push_back( query(l, i) );
+        ans[i] = 0;
+    &#125;
+    segment_work();
+    rep(i, 1, n) a[i] = -a[i];
+    segment_work(1);
+    rep(i, 1, m) printf(&quot;%d\n&quot;, ans[i]);
+&#125;
+
+int main() &#123;
+    int T = read();
+    while(T --) solve();
+    return 0;
+&#125;</code></pre>
+<h4 id="g-increasing-subsequence">G Increasing Subsequence</h4>
+<h5 id="题意-1">题意</h5>
+<p>给定一个排列，求极大上升子序列的数量</p>
+<h5 id="题解-1">题解</h5>
+<p><span class="math inline">\(n^2\)</span>做法不难想到，设<span class="math inline">\(f[i]\)</span>表示<span class="math inline">\(a_1,...,a_i\)</span>中的极大上升子序列的数量，考虑转移，<span class="math inline">\(j\)</span>能转移到<span class="math inline">\(i\)</span>，当且仅当<span class="math inline">\(a_j &lt; a_i\)</span>，并且区间<span class="math inline">\([j+1, i-1]\)</span>中，没有在<span class="math inline">\([a_j,a_i]\)</span>中的数</p>
+<p>抽象一下，也即能转移到<span class="math inline">\(f[i]\)</span>的<span class="math inline">\(j\)</span>将构成一个满足下标<span class="math inline">\(j&lt;i\)</span>，权值<span class="math inline">\(a_j &lt; a_i\)</span>的数构成的单调栈</p>
+<p>我们可以考虑用分治解决下标这一维，对于<span class="math inline">\([l, r]\)</span>，考虑<span class="math inline">\([l, mid]\)</span>对<span class="math inline">\([mid + 1, r]\)</span>的贡献</p>
+<p>由于分治，<span class="math inline">\([mid + 1, r]\)</span>中的元素不存在下标上的影响，对权值上的影响，只需要预处理出<span class="math inline">\([mid + 1, r]\)</span>中每个数左边比它小的最大数即可</p>
+<p>对于<span class="math inline">\([l, mid]\)</span>而言，我们按权值大小来建立单调栈，右边相应的按照权值在单调栈上二分即可</p>
 ]]></content>
       <categories>
         <category>problems</category>
