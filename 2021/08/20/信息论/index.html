@@ -28,7 +28,7 @@
 <meta property="og:description" content="看不懂论文，补基础">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-20T15:04:38.000Z">
-<meta property="article:modified_time" content="2021-08-21T09:18:44.833Z">
+<meta property="article:modified_time" content="2021-08-21T09:23:59.181Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="information theory">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#entorpy"><span class="nav-text">Entorpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relative-entropy"><span class="nav-text">Relative entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mutual-information"><span class="nav-text">Mutual information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entropy-bound"><span class="nav-text">Entropy Bound</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entropy-rate"><span class="nav-text">Entropy rate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-compression"><span class="nav-text">Data Compression</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#kraft-inequality"><span class="nav-text">Kraft inequality</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shannon-codes"><span class="nav-text">Shannon codes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#huffman-codes"><span class="nav-text">Huffman Codes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shannon-fano-elias-coding"><span class="nav-text">Shannon-Fano-Elias coding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#channel"><span class="nav-text">Channel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dmc"><span class="nav-text">DMC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#channel-coding"><span class="nav-text">channel coding</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#entropy"><span class="nav-text">Entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#relative-entropy"><span class="nav-text">Relative entropy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mutual-information"><span class="nav-text">Mutual information</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entropy-bound"><span class="nav-text">Entropy Bound</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#entropy-rate"><span class="nav-text">Entropy rate</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#data-compression"><span class="nav-text">Data Compression</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#kraft-inequality"><span class="nav-text">Kraft inequality</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shannon-codes"><span class="nav-text">Shannon codes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#huffman-codes"><span class="nav-text">Huffman codes</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#shannon-fano-elias-coding"><span class="nav-text">Shannon-Fano-Elias coding</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#channel"><span class="nav-text">Channel</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#dmc"><span class="nav-text">DMC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#channel-coding"><span class="nav-text">channel coding</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#typical-set"><span class="nav-text">typical set</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#source-channel-coding-theorem"><span class="nav-text">source-channel coding theorem</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,7 +220,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-08-21 17:18:44" itemprop="dateModified" datetime="2021-08-21T17:18:44+08:00">2021-08-21</time>
+        <time title="Modified: 2021-08-21 17:23:59" itemprop="dateModified" datetime="2021-08-21T17:23:59+08:00">2021-08-21</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -261,7 +261,7 @@
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
 <p>临时补一下...</p>
-<h3 id="entorpy">Entorpy</h3>
+<h3 id="entropy">Entropy</h3>
 <p>对于离散型随机变量<span class="math inline">\(X\)</span>，出于方便，我们用<span class="math inline">\(|X|\)</span>来表示其样本空间的大小，那么，我们定义随机变量<span class="math inline">\(X\)</span>的熵（entropy）</p>
 <p><span class="math display">\[\begin{align}H(X) = \sum_{x \in X} -p(x) \log p(x)  = \sum_{x \in X} p(x) \log \frac{1}{p(x)} \end{align}\]</span></p>
 <p>（特别的，如果<span class="math inline">\(p(x) = 0\)</span>，认为<span class="math inline">\(p(x) \log \frac{1}{p(x)} = 0\)</span>）</p>
@@ -435,13 +435,11 @@
 <p>这个式子只需要对取整号进行简单放缩后，运用定义就可以得到</p>
 <hr />
 <p>Kraft不等式的约束范围非常非常广，事实上，我们只考虑前缀码就足够了</p>
-<ul>
-<li><p>对于一种唯一可解码，设其字母表大小为<span class="math inline">\(D\)</span>​，那么编码长度<span class="math inline">\(l_1, ..., l_m (m = |X|)\)</span>​将满足</p>
+<p>对于一种唯一可解码，设其字母表大小为<span class="math inline">\(D\)</span>​，那么编码长度<span class="math inline">\(l_1, ..., l_m (m = |X|)\)</span>​将满足</p>
 <p><span class="math display">\[\begin{align} \sum_{i=1}^m D^{-l_i} \leq 1\end{align}\]</span></p>
-<p>并且，给定一组满足该不等式的编码长度，那么一定存在一种唯一可解码以这些长度编码</p></li>
-</ul>
+<p>并且，给定一组满足该不等式的编码长度，那么一定存在一种唯一可解码以这些长度编码</p>
 <hr />
-<h5 id="huffman-codes">Huffman Codes</h5>
+<h5 id="huffman-codes">Huffman codes</h5>
 <p>哈夫曼编码可以使得<span class="math inline">\(L(C)\)</span>最小，并且哈夫曼编码是一种前缀码</p>
 <p>这玩意初中生都会了....就不写了</p>
 <p>有个扩展叫canonical codes，就先不学了...</p>
@@ -497,6 +495,7 @@
 <p>而对于有反馈的DMC而言，信道容量并不能得到提高</p></li>
 </ul>
 <hr />
+<h5 id="typical-set">typical set</h5>
 <p>接下来是一点关于典型集的内容...</p>
 <blockquote>
 <p>如果<span class="math inline">\(X_1,...,X_n,...\)</span>是i.i.d.的，那么</p>
@@ -515,9 +514,9 @@
 </ul>
 <p>对于两个随机过程，我们可以定义联合典型集</p>
 <p>如果<span class="math inline">\((x^n , y^n) \in X^n \times Y^n\)</span>在集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>中，那么</p>
-<p><span class="math display">\[\begin{align}2^{-n(H(X) + \epsilon)} \leq p(x^n)  \leq 2^{-n(H(X) - \epsilon)}\end{align}\]</span>​</p>
-<p><span class="math display">\[\begin{align}2^{-n(H(X) + \epsilon)} \leq p(y^n)  \leq 2^{-n(H(X) - \epsilon)}\end{align}\]</span>​</p>
-<p><span class="math display">\[\begin{align}2^{-n(H(X,Y) + \epsilon)} \leq p(x^n, y^n)  \leq 2^{-n(H(X, Y) - \epsilon)}\end{align}\]</span>​</p>
+<p><span class="math inline">\(2^{-n(H(X) + \epsilon)} \leq p(x^n) \leq 2^{-n(H(X) - \epsilon)}\)</span>​</p>
+<p><span class="math inline">\(2^{-n(H(X) + \epsilon)} \leq p(y^n) \leq 2^{-n(H(X) - \epsilon)}\)</span>​</p>
+<p><span class="math inline">\(2^{-n(H(X,Y) + \epsilon)} \leq p(x^n, y^n) \leq 2^{-n(H(X, Y) - \epsilon)}\)</span>​</p>
 <ul>
 <li><p><span class="math inline">\(|A_{\epsilon}^{(n)}| \to 2^{nH(X,Y)}\)</span></p></li>
 <li><p>如果<span class="math inline">\((X&#39;, Y&#39;) \sim p(x^n)p(y^n)\)</span>，那么<span class="math inline">\(p((X&#39;, Y&#39;) \in A_{\epsilon}^{(n)}) \to 2^{-nI(X;Y)}\)</span>​</p>
@@ -526,7 +525,7 @@
 <p>式中为集合的大小乘上相应的概率，具体的写法就分两个方向放缩</p></li>
 </ul></li>
 </ul>
-<hr />
+<h5 id="source-channel-coding-theorem">source-channel coding theorem</h5>
 <ul>
 <li><p>信源信道联合编码定理</p>
 <p>如果<span class="math inline">\(X_1, ..., X_n\)</span>是一个满足渐进均分性，并且<span class="math inline">\(H(X) &lt; C\)</span>，那么存在一种信源信道的联合编码方案，使得<span class="math inline">\(p(X^n \neq (X^n)&#39;) \to 0\)</span></p>
