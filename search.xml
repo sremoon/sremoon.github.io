@@ -1599,7 +1599,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <li><span class="math inline">\(H(X, Y) = H(Y, X)\)</span>​</li>
 </ul>
 <p>定义</p>
-<p><span class="math inline">\(\begin{align} H(X | Y = y) = \sum_x p(x | Y = y) \log \frac{1}{p(x|Y=y)} \end{align}\)</span></p>
+<p><span class="math display">\[\begin{align} H(X | Y = y) = \sum_x p(x | Y = y) \log \frac{1}{p(x|Y=y)} \end{align}\]</span></p>
 <p><span class="math display">\[\begin{align}H(X|Y) &amp;= \sum_{y \in Y} p(y) H(X | Y = y) \\ &amp;= \sum_{y \in Y} p(y) \sum_{x \in X} p(x | y) \log \frac{1}{p(x | y)} \\ &amp;= \sum_{x \in X, y \in Y} p(x, y) \log \frac{1}{p(x|y)}\end{align}\]</span>​</p>
 <p>其中第二项称为条件熵（conditional entropy）</p>
 <p>注意到</p>
