@@ -1574,6 +1574,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
     <url>/2021/08/20/%E4%BF%A1%E6%81%AF%E8%AE%BA/</url>
     <content><![CDATA[<span id="more"></span>
 <p>临时补一下...</p>
+<h2 id="information-theory">Information theory</h2>
 <h3 id="entropy">Entropy</h3>
 <p>对于离散型随机变量<span class="math inline">\(X\)</span>，出于方便，我们用<span class="math inline">\(|X|\)</span>来表示其样本空间的大小，那么，我们定义随机变量<span class="math inline">\(X\)</span>的熵（entropy）</p>
 <p><span class="math display">\[\begin{align}H(X) = \sum_{x \in X} -p(x) \log p(x)  = \sum_{x \in X} p(x) \log \frac{1}{p(x)} \end{align}\]</span></p>
