@@ -1268,7 +1268,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
-    <title>matrix-analysis-6</title>
+    <title>矩阵分析 6</title>
     <url>/2021/08/05/matrix-analysis-6/</url>
     <content><![CDATA[<span id="more"></span>
 <ul>
@@ -1570,8 +1570,100 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
+    <title>通信复杂度</title>
+    <url>/2021/08/22/communication-complexity/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>拿的斯坦福的Tim Roughgarden教授的讲稿看的，基础有限</p>
+<p>这里是一些对于不等式的记录和练习的记录...</p>
+<h3 id="inequalities">Inequalities</h3>
+<ul>
+<li>Chebyshev's inequality</li>
+</ul>
+<blockquote>
+<p>设随机变量<span class="math inline">\(X\)</span>​的期望<span class="math inline">\(E(X) = \mu\)</span>​，方差<span class="math inline">\(D(X) = \sigma^2\)</span>​，那么对于任意正数<span class="math inline">\(\epsilon\)</span>​，有</p>
+<p><span class="math display">\[P( |X - \mu| \geq \epsilon) \leq \frac{\sigma^2}{\epsilon^2}\]</span></p>
+</blockquote>
+<p>这里对离散的情况进行证明，连续的情况只需对上下限作出相应的更改</p>
+<p><span class="math inline">\(\begin{align}P(|X - \mu| \geq \epsilon) &amp;= \sum_{|x-\mu| \geq \epsilon} p(x) \\ &amp;\leq \frac{1}{\epsilon^2}\sum_{|x-\mu|\geq \epsilon} (x-\mu)^2 p(x) \\&amp;\leq \frac{1}{\epsilon^2}\sum (x-\mu)^2 p(x) = \frac{\sigma^2}{\epsilon^2} \end{align}\)</span>​</p>
+<ul>
+<li>Markov's inequality</li>
+</ul>
+<blockquote>
+<p>设随机变量<span class="math inline">\(X\)</span>的绝对值的期望存在，​那么对于任意正数<span class="math inline">\(\epsilon\)</span>​，有</p>
+<p><span class="math display">\[P(|X| \geq \epsilon) \leq \frac{1}{\epsilon} E(|X|)\]</span>​​</p>
+</blockquote>
+<p>还是只对离散情况进行证明</p>
+<p><span class="math inline">\(\begin{align}P(|X| \geq \epsilon) &amp;= \sum_{|x| \geq \epsilon} p(x) \\ &amp;\leq \frac{1}{\epsilon}\sum_{|x|\geq \epsilon} |x| p(x) \\&amp;\leq \frac{1}{\epsilon}\sum |x| p(x) = \frac{E(|X|)}{\epsilon} \end{align}\)</span>​</p>
+<ul>
+<li>Cantelli's inequality</li>
+</ul>
+<blockquote>
+<p>设随机变量<span class="math inline">\(X\)</span>​的期望<span class="math inline">\(E(X) = \mu\)</span>​，方差<span class="math inline">\(D(X) = \sigma^2\)</span>​，那么对于任意正数<span class="math inline">\(\epsilon\)</span>​，有</p>
+<p><span class="math display">\[P( X - \mu \geq \epsilon) \leq \frac{\sigma^2}{\epsilon^2 + \sigma^2}\]</span>​</p>
+</blockquote>
+<p>令<span class="math inline">\(Y = X - \mu\)</span>​，则<span class="math inline">\(E[Y] = 0\)</span>​, <span class="math inline">\(Var[Y] = Var[X - \mu] = \sigma^2\)</span>，那么<span class="math inline">\(\forall x &gt; 0\)</span>,</p>
+<p><span class="math inline">\(\begin{align} P(Y \geq \epsilon) &amp;= P(Y + x \geq \epsilon + x) = P(\frac{Y+x}{\epsilon+x} \geq 1) \\ &amp; \leq P((\frac{Y+x}{\epsilon+x})^2 \geq 1) \leq E[(\frac{Y+x}{\epsilon+x})^2)] = \frac{\sigma^2 + x^2}{(\epsilon+x)^2}\end{align}\)</span></p>
+<p>其中用到了Markov不等式，最后代入<span class="math inline">\(x = \sigma^2 / \epsilon\)</span>​​​即可</p>
+<p>如果令<span class="math inline">\(\epsilon = \sigma\)</span>，我们得到<span class="math inline">\(P(X - \mu \geq \sigma) \leq \frac{1}{2}\)</span>，类似的有<span class="math inline">\(P(X - \mu \leq -\sigma ) \geq \frac{1}{2}\)</span>，因此中位数<span class="math inline">\(v\)</span>一定满足<span class="math inline">\(|v - \mu| \leq \sigma\)</span></p>
+<h3 id="protocol">Protocol</h3>
+<h5 id="one-way-communication">One way communication</h5>
+<p>Alice得到输入<span class="math inline">\(x\)</span>，Bob得到输入<span class="math inline">\(y\)</span>，Alice通过计算，得到<span class="math inline">\(z\)</span>，将<span class="math inline">\(z\)</span>发送给<span class="math inline">\(y\)</span>，Bob通过<span class="math inline">\(z, y\)</span>计算出一个原本需要<span class="math inline">\(x, y\)</span>计算的函数</p>
+<h5 id="public-coins">public coins</h5>
+<p>对于Alice和Bob而言，在开始通信之前，可以认为它们共有一个无限长的01随机序列</p>
+<p>当然，对于一些问题的讨论，也有可能引入private coins的假设来进行讨论，但这时一般会明确指明</p>
+<h5 id="two-sided-error">two-sided error</h5>
+<p>不论<span class="math inline">\(f(x, y) = 0\)</span>，或<span class="math inline">\(f(x, y) = 1\)</span>，只要计算的结果和原本不一样，就认为计算错误</p>
+<p>（这是为了区别认为当<span class="math inline">\(f(x, y) = 0\)</span>时计算出<span class="math inline">\(f^*(x, y) = 1\)</span>的结果不算错误的情况）</p>
+<h5 id="arbitary-constant-error-probability">Arbitary constant error probability</h5>
+<p>任何错误概率在<span class="math inline">\((0, \frac{1}{2})\)</span>内的protocol的通信复杂度相同</p>
+<h5 id="worst-case-communication">worst-case communication</h5>
+<p>通信复杂度以最坏情况计算，即如果一个protocol以s的bit作为通信的bit，那么Alice最多发送s的bit给Bob</p>
+<h3 id="theorem">Theorem</h3>
+<blockquote>
+<p><strong>(Yao 1983)</strong> Let <span class="math inline">\(D\)</span> be a distribution over the space of inputs <span class="math inline">\((x, y)\)</span> to a communication problem, and <span class="math inline">\(\epsilon \in (0, \frac{1}{2})\)</span>. Suppose that every deterministic onw-way protocol <span class="math inline">\(P\)</span> with <span class="math display">\[Pr_{(x, y) \sim D} [P \;wrong\;on \;(x, y)] \leq \epsilon\]</span> has communication cost at least <span class="math inline">\(k\)</span>. Then every randomized one-way protocol <span class="math inline">\(R\)</span> with error at most <span class="math inline">\(\epsilon\)</span> on every input has communication cost at least <span class="math inline">\(k\)</span>.</p>
+</blockquote>
+<p>这个定理表明如果要证明一个随机的protocol的复杂度下限为<span class="math inline">\(c\)</span>，那么我们只需要证明，存在一种概率的分布，在这种分布下，所有的确定性算法的复杂度都不会小于<span class="math inline">\(c\)</span>即可，事实上，这个定理不仅是充分的，而且是必要的</p>
+<h3 id="lower-bounds">Lower Bounds</h3>
+<p>数据流，就是一串数据一个一个输入，且只能输入一遍的流...</p>
+<h5 id="f2">F2</h5>
+<p>对于一串数据<span class="math inline">\(x_1, x_2,..., x_n \in [m]\)</span>，计算<span class="math inline">\(\sum_{i=1}^m f_i^2\)</span>，其中<span class="math inline">\(f_i\)</span>表示<span class="math inline">\(i\)</span>出现的次数</p>
+<p>建立<span class="math inline">\(t\)</span>个<span class="math inline">\(h\)</span>函数，这些<span class="math inline">\(h\)</span>函数把<span class="math inline">\([m] \to \{1, -1\}\)</span>，取<span class="math inline">\((\sum_{i=1}^n h(x_i))^2\)</span>作为答案</p>
+<p>计算之后，观察到期望和<span class="math inline">\(F_2\)</span>相等，方差由<span class="math inline">\(t\)</span>来控制</p>
+<h5 id="f0">F0</h5>
+<p>对于一串数据<span class="math inline">\(x_1, x_2,..., x_n \in [m]\)</span>​，计算<span class="math inline">\(\sum_{i=1}^m [f_i&gt;0]\)</span>​，其中<span class="math inline">\(f_i\)</span>​表示<span class="math inline">\(i\)</span>​出现的次数</p>
+<p>注意到在<span class="math inline">\([0, 1]\)</span>​之间扔<span class="math inline">\(k\)</span>​个随机取值的数，那么最小数的期望为<span class="math inline">\(\frac{1}{1+k}\)</span>，最大数的期望为<span class="math inline">\(1 - \frac{1}{1+k}\)</span>，由此可以建立一个hash函数，通过最小数的期望来得到<span class="math inline">\(F_0\)</span></p>
+<h5 id="index">Index</h5>
+<p>Alice得到<span class="math inline">\((x_1, x_2, ..., x_n) \in \{0,1\}^n\)</span>，Bob得到<span class="math inline">\(i \in [n]\)</span>，计算<span class="math inline">\(f(x, i) = x_i\)</span></p>
+<p>这个问题是<span class="math inline">\(\Omega(n)\)</span>​的，由Kermer在1999年解决</p>
+<p>考虑输入是均匀分布，对于每一个<span class="math inline">\(x\)</span>，Alice会生成一个确定的<span class="math inline">\(z\)</span>，而对于这个<span class="math inline">\(z\)</span>，Bob对于每一个<span class="math inline">\(i\)</span>会生成一个bit作为答案，把这些bit组合到一起，称为<span class="math inline">\(w\)</span>，那么<span class="math inline">\(\frac{1}{n}|x \oplus w|\)</span>就是<span class="math inline">\(x\)</span>错误的概率，然后简单的计算，得出在只用<span class="math inline">\(cn\)</span>个bit的情况下，全局的错误概率总是<span class="math inline">\(\geq \frac{1}{8}\)</span>的来得出结果</p>
+<h5 id="disjointness">Disjointness</h5>
+<p>Alice得到<span class="math inline">\((x_1, x_2, ..., x_n) \in \{0,1\}^n\)</span>，Bob得到<span class="math inline">\((y_1, y_2, ..., y_n) \in \{0,1\}^n\)</span>，计算<span class="math inline">\(f(x, y) = [\exists i \in [n], x_i = y_i]\)</span></p>
+<p>这个问题也是<span class="math inline">\(\Omega(n)\)</span>的，通过规约到Index来解决</p>
+<p>在Index中，令<span class="math inline">\(x&#39; = x\)</span>，<span class="math inline">\(y&#39; = e_i\)</span>，<span class="math inline">\(e_i\)</span>即只在第<span class="math inline">\(i\)</span>位为<span class="math inline">\(1\)</span>的向量，那么对<span class="math inline">\((x&#39;, y&#39;)\)</span>，计算Disjointness，就可以得到Index的答案</p>
+<h5 id="gap-hamming">Gap-Hamming</h5>
+<p>给定参数<span class="math inline">\(t, \epsilon\)</span>，Alice得到<span class="math inline">\((x_1, x_2, ..., x_n) \in \{0,1\}^n\)</span>，Bob得到<span class="math inline">\((y_1, y_2, ..., y_n) \in \{0,1\}^n\)</span>，计算<span class="math inline">\(f(x, y) = \begin{cases} 0 &amp;(d_H(x, y) &gt; t+\epsilon n) \\ 1 &amp; (d_H(x, y) &lt; t - \epsilon n) \\ undefined &amp; o.w.\end{cases}\)</span>​</p>
+<p>对于一般的<span class="math inline">\(t\)</span>来说，这个问题还是<span class="math inline">\(\Omega(n)\)</span>的，通过规约到Index来解决，下面记录了神仙做法...</p>
+<p>在Index中，不妨假设<span class="math inline">\(n\)</span>为奇数，那么，均匀随机生成一个长为<span class="math inline">\(n\)</span>​的，Alice和Bob所共有的01串，Bob生成一个bit，<span class="math inline">\(b = r_i\)</span>，而Alice也生成一个bit，<span class="math inline">\(a = [d_H(x, r) &lt; \frac{n}{2}]\)</span>，经过</p>
+<p>计算，得到<span class="math inline">\(Pr[a = b] = \begin{cases} \frac{1}{2} - \frac{c}{\sqrt n} &amp;(x_i = 1) \\ \frac{1}{2} + \frac{c}{\sqrt n} &amp; (x_i = 0) \end{cases}\)</span>​​​，重复<span class="math inline">\(m\)</span>​遍这样的过程后，将生成的bit组合，得到两个串<span class="math inline">\(A, B\)</span>，通过判定<span class="math inline">\(d_H(A, B)\)</span>与<span class="math inline">\(\frac{m}{2}\)</span>的大小，可以判断出<span class="math inline">\(x_i\)</span>的值</p>
+<p>如此就把Gap-Hamming在<span class="math inline">\(t = \frac{n}{2}\)</span>​的情况规约到了Index，对于<span class="math inline">\(\epsilon\)</span>一般的情况，则在<span class="math inline">\(n\)</span>的选取上动一些手脚即可</p>
+<h5 id="f0的下限">F0的下限</h5>
+<p>注意到<span class="math inline">\(2F_0(x, y) = d_H(x, y) + |x| + |y|\)</span>​</p>
+<p>把计算F0的方法规约到计算Gap-Hamming</p>
+<h5 id="equality">Equality</h5>
+<p>Alice得到一个（长为<span class="math inline">\(n\)</span>的）串<span class="math inline">\(x\)</span>，Bob得到一个串（长为<span class="math inline">\(n\)</span>的）<span class="math inline">\(y\)</span>，判断<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>​是否相等</p>
+<p>这个结果可能令人大吃一惊</p>
+<p>考虑生成两个公有随机串<span class="math inline">\(r_1, r_2\)</span>​​，比较<span class="math inline">\(\langle x, r_1\rangle\)</span>​​和<span class="math inline">\(\langle y, r_1\rangle\)</span>​​，以及<span class="math inline">\(\langle x, r_2\rangle\)</span>​​和<span class="math inline">\(\langle y, r_2\rangle\)</span>，如果都相等，那么<span class="math inline">\(x, y\)</span>将有<span class="math inline">\(\frac{3}{4}\)</span>​​​的概率相等，因此这个问题的通信复杂度为<span class="math inline">\(O(1)\)</span></p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>communication-complexity</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>信息论</title>
-    <url>/2021/08/20/%E4%BF%A1%E6%81%AF%E8%AE%BA/</url>
+    <url>/2021/08/20/information-theory/</url>
     <content><![CDATA[<span id="more"></span>
 <p>临时补一下...</p>
 <h2 id="information-theory">Information theory</h2>
