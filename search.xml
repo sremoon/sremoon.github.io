@@ -372,6 +372,7 @@
 <p>Alice得到一个（长为<span class="math inline">\(n\)</span>的）串<span class="math inline">\(x\)</span>，Bob得到一个串（长为<span class="math inline">\(n\)</span>的）<span class="math inline">\(y\)</span>，判断<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>​是否相等</p>
 <p>这个结果可能令人大吃一惊</p>
 <p>考虑生成两个公有随机串<span class="math inline">\(r_1, r_2\)</span>​​，比较<span class="math inline">\(\langle x, r_1\rangle\)</span>​​和<span class="math inline">\(\langle y, r_1\rangle\)</span>​​，以及<span class="math inline">\(\langle x, r_2\rangle\)</span>​​和<span class="math inline">\(\langle y, r_2\rangle\)</span>，如果都相等，那么<span class="math inline">\(x, y\)</span>将有<span class="math inline">\(\frac{3}{4}\)</span>​​​的概率相等，因此这个问题的通信复杂度为<span class="math inline">\(O(1)\)</span></p>
+<h3 id="end">End</h3>
 ]]></content>
       <categories>
         <category>notes</category>

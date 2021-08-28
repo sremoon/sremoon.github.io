@@ -28,7 +28,7 @@
 <meta property="og:description" content="这玩意资料真难找">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-22T15:07:46.000Z">
-<meta property="article:modified_time" content="2021-08-28T08:48:37.216Z">
+<meta property="article:modified_time" content="2021-08-28T08:53:46.169Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="communication-complexity">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#inequalities"><span class="nav-text">Inequalities</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol"><span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#one-way-communication"><span class="nav-text">One way communication</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#public-coins"><span class="nav-text">public coins</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#two-sided-error"><span class="nav-text">two-sided error</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#arbitary-constant-error-probability"><span class="nav-text">Arbitary constant error probability</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#worst-case-communication"><span class="nav-text">worst-case communication</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#theorem"><span class="nav-text">Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lower-bounds"><span class="nav-text">Lower Bounds</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#f2"><span class="nav-text">F2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#f0"><span class="nav-text">F0</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#index"><span class="nav-text">Index</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#disjointness"><span class="nav-text">Disjointness</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gap-hamming"><span class="nav-text">Gap-Hamming</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#f0%E7%9A%84%E4%B8%8B%E9%99%90"><span class="nav-text">F0的下限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#equality"><span class="nav-text">Equality</span></a></li></ol></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#inequalities"><span class="nav-text">Inequalities</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#protocol"><span class="nav-text">Protocol</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#one-way-communication"><span class="nav-text">One way communication</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#public-coins"><span class="nav-text">public coins</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#two-sided-error"><span class="nav-text">two-sided error</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#arbitary-constant-error-probability"><span class="nav-text">Arbitary constant error probability</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#worst-case-communication"><span class="nav-text">worst-case communication</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#theorem"><span class="nav-text">Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#lower-bounds"><span class="nav-text">Lower Bounds</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#f2"><span class="nav-text">F2</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#f0"><span class="nav-text">F0</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#index"><span class="nav-text">Index</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#disjointness"><span class="nav-text">Disjointness</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#gap-hamming"><span class="nav-text">Gap-Hamming</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#f0%E7%9A%84%E4%B8%8B%E9%99%90"><span class="nav-text">F0的下限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#equality"><span class="nav-text">Equality</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#end"><span class="nav-text">End</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -220,7 +220,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-08-28 16:48:37" itemprop="dateModified" datetime="2021-08-28T16:48:37+08:00">2021-08-28</time>
+        <time title="Modified: 2021-08-28 16:53:46" itemprop="dateModified" datetime="2021-08-28T16:53:46+08:00">2021-08-28</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -340,6 +340,7 @@
 <p>Alice得到一个（长为<span class="math inline">\(n\)</span>的）串<span class="math inline">\(x\)</span>，Bob得到一个串（长为<span class="math inline">\(n\)</span>的）<span class="math inline">\(y\)</span>，判断<span class="math inline">\(x\)</span>和<span class="math inline">\(y\)</span>​是否相等</p>
 <p>这个结果可能令人大吃一惊</p>
 <p>考虑生成两个公有随机串<span class="math inline">\(r_1, r_2\)</span>​​，比较<span class="math inline">\(\langle x, r_1\rangle\)</span>​​和<span class="math inline">\(\langle y, r_1\rangle\)</span>​​，以及<span class="math inline">\(\langle x, r_2\rangle\)</span>​​和<span class="math inline">\(\langle y, r_2\rangle\)</span>，如果都相等，那么<span class="math inline">\(x, y\)</span>将有<span class="math inline">\(\frac{3}{4}\)</span>​​​的概率相等，因此这个问题的通信复杂度为<span class="math inline">\(O(1)\)</span></p>
+<h3 id="end">End</h3>
 
     </div>
 
