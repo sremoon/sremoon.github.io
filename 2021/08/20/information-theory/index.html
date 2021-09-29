@@ -28,7 +28,7 @@
 <meta property="og:description" content="看不懂论文，补基础">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-20T15:04:38.000Z">
-<meta property="article:modified_time" content="2021-08-21T09:33:43.579Z">
+<meta property="article:modified_time" content="2021-09-06T10:57:22.271Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="information theory">
 <meta name="twitter:card" content="summary">
@@ -135,7 +135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -144,7 +144,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -220,7 +220,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-08-21 17:33:43" itemprop="dateModified" datetime="2021-08-21T17:33:43+08:00">2021-08-21</time>
+        <time title="Modified: 2021-09-06 18:57:22" itemprop="dateModified" datetime="2021-09-06T18:57:22+08:00">2021-09-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -324,7 +324,7 @@
 <p><span class="math display">\[\begin{align} V(p, q) = \sum_{x \in X} |p(x) - q(x)|\end{align}\]</span></p>
 <p>Pinsker 不等式：<span class="math inline">\(D(p || q) \geq \frac{1}{2 \ln 2} V^2(p, q)\)</span>​​（不懂，先记着）</p>
 <p>对于<span class="math inline">\(p(x, y), q(x, y)\)</span>，定义条件相对熵为</p>
-<p><span class="math display">\[\begin{align} D( p(y|x) || q(y|x)) &amp;= \sum_{x} p(x) D(p(Y|x)||q(Y|x)) \\ &amp;= \sum_x \sum_y p(x)p(y|x) \log \frac{p(y|x)}{q(y|x)} \\ &amp;= \sum_{x, y} p(x, y) \frac{\log p(y|x)}{ \log q(y|x)}\end{align}\]</span>​</p>
+<p><span class="math display">\[\begin{align} D( p(y|x) || q(y|x)) &amp;= \sum_{x} p(x) D(p(Y|x)||q(Y|x)) \\ &amp;= \sum_x \sum_y p(x)p(y|x) \log \frac{p(y|x)}{q(y|x)} \\ &amp;= \sum_{x, y} p(x, y) \log \frac{ p(y|x)}{q(y|x)}\end{align}\]</span>​</p>
 <p>有了条件相对熵之后，就可以类比的写出链式法则</p>
 <p><span class="math display">\[\begin{align} D(p(x, y) || q(x, y)) = D(p(x) || q(x)) + D(p(y|x) || q(y|x))\end{align}\]</span></p>
 <p>只需注意到<span class="math inline">\(\log \frac{p(x, y)}{q(x, y)} = \log \frac{p(x) p(y|x)}{q(x) q(y|x)} = \log \frac{p(x)}{q(x)} + \log \frac{p(y|x)}{q(y|x)}\)</span></p>
@@ -547,6 +547,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2021/09/07/problem-2/" rel="next" title="problem-2">
+                  problem-2 <i class="fa fa-chevron-right"></i>
+                </a>
             </div>
           </div>
     </footer>
@@ -579,14 +582,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">56k</span>
+    <span title="Symbols count total">76k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">51 mins.</span>
+    <span title="Reading time total">1:09</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2021-08-05T02:12:04.000Z">
-<meta property="article:modified_time" content="2021-08-28T08:52:30.644Z">
+<meta property="article:modified_time" content="2021-09-06T10:39:33.494Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="matrix_analysis">
 <meta name="twitter:card" content="summary">
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%BA%8F%E5%88%97%E7%9A%84%E6%9E%81%E9%99%90"><span class="nav-text">矩阵序列的极限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%BA%A7%E6%95%B0"><span class="nav-text">矩阵级数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0"><span class="nav-text">矩阵函数</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%BA%8F%E5%88%97%E7%9A%84%E6%9E%81%E9%99%90"><span class="nav-text">矩阵序列的极限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E7%BA%A7%E6%95%B0"><span class="nav-text">矩阵级数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%87%BD%E6%95%B0"><span class="nav-text">矩阵函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%BE%AE%E7%A7%AF%E5%88%86"><span class="nav-text">矩阵微积分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%AF%B9%E6%A0%87%E9%87%8F%E7%9A%84%E5%AF%BC%E6%95%B0"><span class="nav-text">矩阵对标量的导数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E9%87%8F%E5%87%BD%E6%95%B0%E5%AF%B9%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0"><span class="nav-text">数量函数对矩阵的导数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%9F%A9%E9%98%B5%E5%AF%B9%E7%9F%A9%E9%98%B5%E7%9A%84%E5%AF%BC%E6%95%B0"><span class="nav-text">矩阵对矩阵的导数</span></a></li></ol></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,7 +135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">13</span>
+          <span class="site-state-item-count">16</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -144,7 +144,7 @@
         <span class="site-state-item-name">categories</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -220,7 +220,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2021-08-28 16:52:30" itemprop="dateModified" datetime="2021-08-28T16:52:30+08:00">2021-08-28</time>
+        <time title="Modified: 2021-09-06 18:39:33" itemprop="dateModified" datetime="2021-09-06T18:39:33+08:00">2021-09-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,14 +240,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>4.4k</span>
+      <span>7.1k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>4 mins.</span>
+      <span>6 mins.</span>
     </span>
 </div>
 
@@ -373,6 +373,71 @@
 <li><p>欧拉公式</p>
 <p><span class="math display">\[\exp(iA) = \cos A + i \sin A\]</span></p></li>
 </ul>
+<p>下面给出一些特殊情况下的矩阵函数的求法</p>
+<ul>
+<li>如果矩阵<span class="math inline">\(A\)</span>具有谱分解<span class="math inline">\(\sum \lambda_i x_ix_i^T\)</span>，那么矩阵函数<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></li>
+</ul>
+<p>首先有一个容易验证的引理：对于多项式<span class="math inline">\(f(x)\)</span>，如果<span class="math inline">\(x\)</span>是<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda\)</span>的一个特征向量，那么<span class="math inline">\(x\)</span>也是<span class="math inline">\(f(A)\)</span>的属于<span class="math inline">\(f(\lambda)\)</span>的一个特征向量</p>
+<p>我们设出部分和<span class="math inline">\(f_N(A) = \sum_{i=0}^N c_iA_i\)</span>，那么根据上面的引理，有<span class="math inline">\(f_N(A) = \sum f_N(\lambda_i) x_ix_i^T\)</span></p>
+<p>令<span class="math inline">\(N \to \infty\)</span>，我们就有<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></p>
+<h3 id="矩阵微积分">矩阵微积分</h3>
+<h5 id="矩阵对标量的导数">矩阵对标量的导数</h5>
+<p>对于矩阵<span class="math inline">\(A\)</span>，如果其元素<span class="math inline">\(a_{ij}\)</span>都是变量<span class="math inline">\(x\)</span>的函数<span class="math inline">\(a_{ij}(x)\)</span>，那么我们称矩阵<span class="math inline">\(A\)</span>为变量<span class="math inline">\(x\)</span>的函数矩阵</p>
+<ul>
+<li>函数矩阵的极限：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a^{*}_{ij}\)</span>存在时，我们称<span class="math inline">\(A\)</span>有极限，且极限为<span class="math inline">\(A^* = \{a^{*}_{ij}\}\)</span></li>
+<li>函数矩阵的连续性：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a_{ij}(x_0)\)</span>时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点连续</li>
+<li>函数矩阵的导数：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} \frac{a_{ij}(x) - a_{ij}(x_0)}{x-x_0} = a&#39;_{ij}(x_0)\)</span>存在时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点可导，且导数为<span class="math inline">\(A&#39;(x_0) = \{a&#39;_{ij}(x_0)\}\)</span></li>
+</ul>
+<p>由于可以看成是每个分量函数的一种组合，因此函数矩阵的导数自然地有</p>
+<ul>
+<li><p><span class="math inline">\((aA+bB)&#39;=aA&#39;+bB&#39;\)</span></p></li>
+<li><p><span class="math inline">\((f(x)A(x))&#39; = f&#39;(x)A(x) + f(x)A&#39;(x)\)</span></p></li>
+</ul>
+<p>还有一些并不能自然得到的性质</p>
+<ul>
+<li><span class="math inline">\((A(x)B(x))&#39;=A&#39;(x)B(x)+A(x)B&#39;(x)\)</span></li>
+<li><span class="math inline">\((A^{-1}(x))&#39;=-A^{-1}(x)A&#39;(x)A^{-1}(x)\)</span></li>
+</ul>
+<p>我们对这两个性质作出证明，首先是性质1</p>
+<p><span class="math inline">\((A(x)B(x))_{ij}&#39; = (\sum_k a_{ik}b_{kj})&#39; = \sum_k a&#39;_{ik}b_{kj} + \sum_k a_{ik}b_{kj}&#39; = (A&#39;B+AB&#39;)_{ij}\)</span></p>
+<p>性质2可以视为是对性质1的简单应用</p>
+<p><span class="math inline">\((A(x)A^{-1}(x))&#39; = A&#39;(x)A^{-1}(x)+(A^{-1}(x))&#39;A(x)=O\)</span></p>
+<p>即使是矩阵对标量的导数，一般也没有简单的形式，比如</p>
+<p><span class="math display">\[\frac{\text{d} A^3}{\text{d} x} = A&#39;AA+AA&#39;A+AAA&#39;\]</span></p>
+<p>不过一些初等函数保持了比较好的性质，对于任何常量矩阵<span class="math inline">\(A\)</span>，总有</p>
+<ul>
+<li><span class="math inline">\((e^{Ax})&#39; = A e^{Ax} = e^{Ax}A\)</span></li>
+<li><span class="math inline">\((\cos Ax)&#39; = -A \sin Ax = - \sin Ax *A\)</span></li>
+<li><span class="math inline">\((\sin Ax)&#39; = A \cos Ax = \cos Ax * A\)</span></li>
+<li><span class="math inline">\((\tr A)&#39; = \tr A&#39;\)</span></li>
+</ul>
+<h5 id="数量函数对矩阵的导数">数量函数对矩阵的导数</h5>
+<p>设<span class="math inline">\(f(A)\)</span>是一个将矩阵<span class="math inline">\(A\)</span>映射到标量上的函数，那么我们定义</p>
+<p><span class="math display">\[\frac{\text{d} f(A)}{\text{d} A} = (\frac{\part f(A)}{\part a_{ij}})_{m \times n}\]</span></p>
+<p>为<span class="math inline">\(f(A)\)</span>对矩阵<span class="math inline">\(A\)</span>的导数</p>
+<p>向量时矩阵的一种特例，因此这里也定义出了向量的情况</p>
+<p>一般导数的线性性和乘法法则仍是成立的，我们考察一些特殊的例子</p>
+<ul>
+<li>设<span class="math inline">\(f(x) = x^TAx\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} x^TAx \\ &amp;=\frac{\part}{\part x_k} \sum_{i, j} a_{ij}x_ix_j \\ &amp;= \sum_i a_{ik}x_i + \sum_{j}a_{kj}x_j \\ &amp;= (Ax)_k + (A^Tx)_k\end{align}\]</span></p>
+<p>因此，我们有</p>
+<p><span class="math display">\[\frac{\text{d} f(x)}{\text{d} x} = (A+A^T)x\]</span></p>
+<ul>
+<li>设<span class="math inline">\(f(x) = ||Ax-b||_2^2\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} 
+||Ax-b||^2_2  \\ &amp;= \frac{\part}{\part x_k}  \sum_i (\sum a_{ij}x_j - b_i)^2 \\ &amp;= \sum_i 2a_{ik}(\sum a_{ij}x_j - b_i) \\ &amp;= 2\sum_{i, j} a_{ik}a_{ij}x_j - 2\sum_i a_{ik}b_i \\ &amp;=2 (A^TAx-A^Tb)_{k}\end{align}\]</span></p>
+<p>因此，<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x} = 2(A^TAx-A^Tb)\)</span></p>
+<p>一般来说，当一个函数取到极值时，其导数为0，而这个函数正是我们十分熟悉的最小二乘法的函数，我们令其导数为0，将得到<span class="math inline">\(x = (A^TA)^{-1} Ab\)</span></p>
+<ul>
+<li>设<span class="math inline">\(f(A) = |A|\)</span>，求<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A}\)</span>，这里<span class="math inline">\(|A|\)</span>是矩阵<span class="math inline">\(A\)</span>的行列式</li>
+</ul>
+<p>事实上，要求对<span class="math inline">\(ij\)</span>位置元素的偏导数，我们可以考虑按矩阵<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>行展开</p>
+<p><span class="math inline">\(A = \sum_j a_{ij} A_{ij}\)</span>，那么，不难直接看出，<span class="math inline">\(\frac{\part f(A)}{\part a_{ij}} = A_{ij}\)</span></p>
+<p>因此，<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (A^*)^T\)</span></p>
+<p>当<span class="math inline">\(|A| \neq 0\)</span>时，我们可以用<span class="math inline">\(A^{-1}\)</span>来表示，即<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (|A|A^{-1})^T = |A|(A^{-1})^T\)</span></p>
+<h5 id="矩阵对矩阵的导数">矩阵对矩阵的导数</h5>
 
     </div>
 
@@ -429,14 +494,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">56k</span>
+    <span title="Symbols count total">76k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">51 mins.</span>
+    <span title="Reading time total">1:09</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

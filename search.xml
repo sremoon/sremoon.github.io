@@ -1,179 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>2021暑期hdu多校3</title>
-    <url>/2021/08/01/2021%E6%9A%91%E6%9C%9Fhdu%E5%A4%9A%E6%A0%A13/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>老鸽子了</p>
-<h4 id="a">A</h4>
-<h5 id="吐槽">吐槽</h5>
-<p>出题人的符号管理乱七八遭</p>
-<h4 id="e-didnt-i-say-to-make-my-abilities-average-in-the-next-life">E Didn't I Say to Make My Abilities Average in the Next Life?!</h4>
-<h5 id="吐槽-1">吐槽</h5>
-<p>二次元题目</p>
-<p>看完题解感觉自己是...</p>
-<h5 id="题意">题意</h5>
-<p>给定一个序列，<span class="math inline">\(q\)</span>组询问，每次询问一个区间的所有子区间的最大值的和</p>
-<h5 id="题解">题解</h5>
-<p>题解的两个做法感觉都有点复杂，看不太懂，自己写一个</p>
-<p>离线从左到右扫描线，当我们扫到点<span class="math inline">\(r\)</span>时，我们对于每个点<span class="math inline">\(l\)</span>，维护<span class="math inline">\(max_r[l]\)</span>表示<span class="math inline">\([l,r]\)</span>中的最大值，那么<span class="math inline">\(\sum max_i[l]\)</span>将表示<span class="math inline">\([l,l], [l,l+1],...,[l,r]\)</span>的答案的和，从而<span class="math inline">\(\sum_{l \leq L \leq r} \sum max_i[L]\)</span>将是答案</p>
-<p>我们可以用线段树来做到这一点，理清之后还挺好写的</p>
-<pre><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-    
-#define gc getchar
-inline int read() &#123;
-    int p = 0, w = 1; char c = gc();
-    while(c &gt; &#39;9&#39; || c &lt; &#39;0&#39;) &#123; if(c == &#39;-&#39;) w = -1; c = gc(); &#125;
-    while(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) &#123; p = p * 10 + c - &#39;0&#39;; c = gc(); &#125;
-    return p * w;
-&#125;
-
-#define rep(io, st, ed) for(int io = st; io &lt;= ed; io ++)
-
-const int mod = 1e9 + 7;
-const int sid = 1e6 + 5;
-const int inf = 1e9 + 5;
-
-inline void inc(int &amp;a, int b) &#123; a += b; if(a &gt;= mod) a -= mod; &#125;
-inline void dec(int &amp;a, int b) &#123; a -= b; if(a &lt; 0) a += mod; &#125;
-inline int Inc(int a, int b) &#123; return (a + b &gt;= mod) ? a + b - mod : a + b; &#125;
-inline int Dec(int a, int b) &#123; return (a - b &lt; 0) ? a - b + mod : a - b; &#125;
-inline int mul(int a, int b) &#123; return 1ll * a * b % mod; &#125;
-inline int fp(int a, int k) &#123; 
-    int ret = 1; 
-    while(k) &#123; 
-        if(k &amp; 1) ret = mul(ret, a); 
-        a = mul(a, a); k &gt;&gt;= 1; 
-    &#125;
-    return ret;
-&#125;
-
-struct query &#123;
-    int l, id;
-    query() &#123;&#125;
-    query(int _l, int _id) : l(_l), id(_id) &#123;&#125;
-&#125; ;
-vector &lt;query&gt; Q[sid];
-
-int n, m;
-int a[sid],  ans[sid];
-int lst_time[sid], sumtag[sid], sum[sid];
-int nowv[sid], presum[sid], pret[sid], newt[sid];
-
-#define ls (o &lt;&lt; 1)
-#define rs (o &lt;&lt; 1 | 1)
-void build(int o, int l, int r) &#123;
-    lst_time[o] = sumtag[o] = sum[o] = 0;
-    nowv[o] = presum[o] = pret[o] = newt[o] = 0;
-    if(l == r) return;
-    int mid = (l + r) &gt;&gt; 1;
-    build(ls, l, mid);
-    build(rs, mid + 1, r);
-&#125;
-
-void down(int o, int l, int r, int nv, int ps, int pt, int nt) &#123;
-    inc(sum[o], 1ll * sumtag[o] * (pt - lst_time[o]) % mod);
-    inc(sum[o], 1ll * ps * (r - l + 1) % mod);
-    if(!nowv[o])  // 先前没有标记
-        nowv[o] = nv, presum[o] = ps, pret[o] = pt, newt[o] = nt; 
-    else &#123;
-        inc(presum[o], ps);
-        inc(presum[o], 1ll * nowv[o] * (pt - newt[o]) % mod);
-        newt[o] = nt; nowv[o] = nv;
-    &#125;
-    lst_time[o] = nt; sumtag[o] = mul(r - l + 1, nv);
-&#125;
-
-void pushdown(int o, int l, int r) &#123;
-    if(!nowv[o]) return;
-    int mid = (l + r) &gt;&gt; 1;
-    down(ls, l, mid, nowv[o], presum[o], pret[o], newt[o]);
-    down(rs, mid + 1, r, nowv[o], presum[o], pret[o], newt[o]);
-    nowv[o] = 0; presum[o] = 0;
-&#125;
-
-void pushup(int o, int l, int r, int t) &#123;
-    inc(sum[o], 1ll * (t - lst_time[o]) * sumtag[o] % mod);
-    sumtag[o] = Inc(sumtag[ls], sumtag[rs]);
-    lst_time[o] = t;
-&#125;
-
-void mdf(int o, int l, int r, int ml, int mr, int v, int t) &#123;
-    if(ml &gt; r || mr &lt; l) return;
-    if(ml &lt;= l &amp;&amp; mr &gt;= r) &#123; down(o, l, r, v, 0, t, t); return; &#125;
-    int mid = (l + r) &gt;&gt; 1;
-    pushdown(o, l, r);
-    mdf(ls, l, mid, ml, mr, v, t);
-    mdf(rs, mid + 1, r, ml, mr, v, t);
-    pushup(o, l, r, t);
-&#125;
-
-int qry(int o, int l, int r, int ml, int mr, int t) &#123;
-    if(ml &gt; r || mr &lt; l) return 0;
-    if(ml &lt;= l &amp;&amp; mr &gt;= r) return Inc(sum[o], 1ll * sumtag[o] * (t-lst_time[o]) % mod);
-    int mid = (l + r) &gt;&gt; 1;
-    pushdown(o, l, r);
-    return Inc(qry(ls, l, mid, ml, mr, t), qry(rs, mid + 1, r, ml, mr, t));
-&#125;
-
-int st[sid], top;
-void segment_work(int opt = 0) &#123;
-    a[0] = -inf; top = 0;
-    build(1, 1, n);
-    rep(r, 1, n) &#123;
-        while(top &amp;&amp; a[r] &gt;= a[ st[top] ]) top --;
-        mdf(1, 1, n, st[top] + 1, r, (a[r] + mod) % mod, r - 1);
-        st[++ top] = r;
-        for(auto x : Q[r]) &#123;
-            int l = x.l, id = x.id;
-            if(!opt) inc(ans[id], qry(1, 1, n, l, r, r));
-            else dec(ans[id], qry(1, 1, n, l, r, r));
-            if(opt) &#123;
-                int len = r - l + 1;
-                ans[id] = mul(ans[id], fp(1ll * len * (len + 1) % mod, mod - 2));
-            &#125;
-        &#125;
-    &#125;
-&#125;
-
-void solve() &#123;
-    n = read(); m = read();
-    rep(i, 1, n) a[i] = read(), Q[i].clear();
-    rep(i, 1, m) &#123;
-        int l = read(), r = read();
-        Q[r].push_back( query(l, i) );
-        ans[i] = 0;
-    &#125;
-    segment_work();
-    rep(i, 1, n) a[i] = -a[i];
-    segment_work(1);
-    rep(i, 1, m) printf(&quot;%d\n&quot;, ans[i]);
-&#125;
-
-int main() &#123;
-    int T = read();
-    while(T --) solve();
-    return 0;
-&#125;</code></pre>
-<h4 id="g-increasing-subsequence">G Increasing Subsequence</h4>
-<h5 id="题意-1">题意</h5>
-<p>给定一个排列，求极大上升子序列的数量</p>
-<h5 id="题解-1">题解</h5>
-<p><span class="math inline">\(n^2\)</span>做法不难想到，设<span class="math inline">\(f[i]\)</span>表示<span class="math inline">\(a_1,...,a_i\)</span>中的极大上升子序列的数量，考虑转移，<span class="math inline">\(j\)</span>能转移到<span class="math inline">\(i\)</span>，当且仅当<span class="math inline">\(a_j &lt; a_i\)</span>，并且区间<span class="math inline">\([j+1, i-1]\)</span>中，没有在<span class="math inline">\([a_j,a_i]\)</span>中的数</p>
-<p>抽象一下，也即能转移到<span class="math inline">\(f[i]\)</span>的<span class="math inline">\(j\)</span>将构成一个满足下标<span class="math inline">\(j&lt;i\)</span>，权值<span class="math inline">\(a_j &lt; a_i\)</span>的数构成的单调栈</p>
-<p>我们可以考虑用分治解决下标这一维，对于<span class="math inline">\([l, r]\)</span>，考虑<span class="math inline">\([l, mid]\)</span>对<span class="math inline">\([mid + 1, r]\)</span>的贡献</p>
-<p>由于分治，<span class="math inline">\([mid + 1, r]\)</span>中的元素不存在下标上的影响，对权值上的影响，只需要预处理出<span class="math inline">\([mid + 1, r]\)</span>中每个数左边比它小的最大数即可</p>
-<p>对于<span class="math inline">\([l, mid]\)</span>而言，我们按权值大小来建立单调栈，右边相应的按照权值在单调栈上二分即可</p>
-]]></content>
-      <categories>
-        <category>problems</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>一个简单的估计</title>
     <url>/2021/07/22/1-/</url>
     <content><![CDATA[<span id="more"></span>
@@ -462,6 +289,273 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
+    <title>2021暑期hdu多校3</title>
+    <url>/2021/08/01/2021%E6%9A%91%E6%9C%9Fhdu%E5%A4%9A%E6%A0%A13/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>老鸽子了</p>
+<h4 id="a">A</h4>
+<h5 id="吐槽">吐槽</h5>
+<p>出题人的符号管理乱七八遭</p>
+<h4 id="e-didnt-i-say-to-make-my-abilities-average-in-the-next-life">E Didn't I Say to Make My Abilities Average in the Next Life?!</h4>
+<h5 id="吐槽-1">吐槽</h5>
+<p>二次元题目</p>
+<p>看完题解感觉自己是...</p>
+<h5 id="题意">题意</h5>
+<p>给定一个序列，<span class="math inline">\(q\)</span>组询问，每次询问一个区间的所有子区间的最大值的和</p>
+<h5 id="题解">题解</h5>
+<p>题解的两个做法感觉都有点复杂，看不太懂，自己写一个</p>
+<p>离线从左到右扫描线，当我们扫到点<span class="math inline">\(r\)</span>时，我们对于每个点<span class="math inline">\(l\)</span>，维护<span class="math inline">\(max_r[l]\)</span>表示<span class="math inline">\([l,r]\)</span>中的最大值，那么<span class="math inline">\(\sum max_i[l]\)</span>将表示<span class="math inline">\([l,l], [l,l+1],...,[l,r]\)</span>的答案的和，从而<span class="math inline">\(\sum_{l \leq L \leq r} \sum max_i[L]\)</span>将是答案</p>
+<p>我们可以用线段树来做到这一点，理清之后还挺好写的</p>
+<pre><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+    
+#define gc getchar
+inline int read() &#123;
+    int p = 0, w = 1; char c = gc();
+    while(c &gt; &#39;9&#39; || c &lt; &#39;0&#39;) &#123; if(c == &#39;-&#39;) w = -1; c = gc(); &#125;
+    while(c &gt;= &#39;0&#39; &amp;&amp; c &lt;= &#39;9&#39;) &#123; p = p * 10 + c - &#39;0&#39;; c = gc(); &#125;
+    return p * w;
+&#125;
+
+#define rep(io, st, ed) for(int io = st; io &lt;= ed; io ++)
+
+const int mod = 1e9 + 7;
+const int sid = 1e6 + 5;
+const int inf = 1e9 + 5;
+
+inline void inc(int &amp;a, int b) &#123; a += b; if(a &gt;= mod) a -= mod; &#125;
+inline void dec(int &amp;a, int b) &#123; a -= b; if(a &lt; 0) a += mod; &#125;
+inline int Inc(int a, int b) &#123; return (a + b &gt;= mod) ? a + b - mod : a + b; &#125;
+inline int Dec(int a, int b) &#123; return (a - b &lt; 0) ? a - b + mod : a - b; &#125;
+inline int mul(int a, int b) &#123; return 1ll * a * b % mod; &#125;
+inline int fp(int a, int k) &#123; 
+    int ret = 1; 
+    while(k) &#123; 
+        if(k &amp; 1) ret = mul(ret, a); 
+        a = mul(a, a); k &gt;&gt;= 1; 
+    &#125;
+    return ret;
+&#125;
+
+struct query &#123;
+    int l, id;
+    query() &#123;&#125;
+    query(int _l, int _id) : l(_l), id(_id) &#123;&#125;
+&#125; ;
+vector &lt;query&gt; Q[sid];
+
+int n, m;
+int a[sid],  ans[sid];
+int lst_time[sid], sumtag[sid], sum[sid];
+int nowv[sid], presum[sid], pret[sid], newt[sid];
+
+#define ls (o &lt;&lt; 1)
+#define rs (o &lt;&lt; 1 | 1)
+void build(int o, int l, int r) &#123;
+    lst_time[o] = sumtag[o] = sum[o] = 0;
+    nowv[o] = presum[o] = pret[o] = newt[o] = 0;
+    if(l == r) return;
+    int mid = (l + r) &gt;&gt; 1;
+    build(ls, l, mid);
+    build(rs, mid + 1, r);
+&#125;
+
+void down(int o, int l, int r, int nv, int ps, int pt, int nt) &#123;
+    inc(sum[o], 1ll * sumtag[o] * (pt - lst_time[o]) % mod);
+    inc(sum[o], 1ll * ps * (r - l + 1) % mod);
+    if(!nowv[o])  // 先前没有标记
+        nowv[o] = nv, presum[o] = ps, pret[o] = pt, newt[o] = nt; 
+    else &#123;
+        inc(presum[o], ps);
+        inc(presum[o], 1ll * nowv[o] * (pt - newt[o]) % mod);
+        newt[o] = nt; nowv[o] = nv;
+    &#125;
+    lst_time[o] = nt; sumtag[o] = mul(r - l + 1, nv);
+&#125;
+
+void pushdown(int o, int l, int r) &#123;
+    if(!nowv[o]) return;
+    int mid = (l + r) &gt;&gt; 1;
+    down(ls, l, mid, nowv[o], presum[o], pret[o], newt[o]);
+    down(rs, mid + 1, r, nowv[o], presum[o], pret[o], newt[o]);
+    nowv[o] = 0; presum[o] = 0;
+&#125;
+
+void pushup(int o, int l, int r, int t) &#123;
+    inc(sum[o], 1ll * (t - lst_time[o]) * sumtag[o] % mod);
+    sumtag[o] = Inc(sumtag[ls], sumtag[rs]);
+    lst_time[o] = t;
+&#125;
+
+void mdf(int o, int l, int r, int ml, int mr, int v, int t) &#123;
+    if(ml &gt; r || mr &lt; l) return;
+    if(ml &lt;= l &amp;&amp; mr &gt;= r) &#123; down(o, l, r, v, 0, t, t); return; &#125;
+    int mid = (l + r) &gt;&gt; 1;
+    pushdown(o, l, r);
+    mdf(ls, l, mid, ml, mr, v, t);
+    mdf(rs, mid + 1, r, ml, mr, v, t);
+    pushup(o, l, r, t);
+&#125;
+
+int qry(int o, int l, int r, int ml, int mr, int t) &#123;
+    if(ml &gt; r || mr &lt; l) return 0;
+    if(ml &lt;= l &amp;&amp; mr &gt;= r) return Inc(sum[o], 1ll * sumtag[o] * (t-lst_time[o]) % mod);
+    int mid = (l + r) &gt;&gt; 1;
+    pushdown(o, l, r);
+    return Inc(qry(ls, l, mid, ml, mr, t), qry(rs, mid + 1, r, ml, mr, t));
+&#125;
+
+int st[sid], top;
+void segment_work(int opt = 0) &#123;
+    a[0] = -inf; top = 0;
+    build(1, 1, n);
+    rep(r, 1, n) &#123;
+        while(top &amp;&amp; a[r] &gt;= a[ st[top] ]) top --;
+        mdf(1, 1, n, st[top] + 1, r, (a[r] + mod) % mod, r - 1);
+        st[++ top] = r;
+        for(auto x : Q[r]) &#123;
+            int l = x.l, id = x.id;
+            if(!opt) inc(ans[id], qry(1, 1, n, l, r, r));
+            else dec(ans[id], qry(1, 1, n, l, r, r));
+            if(opt) &#123;
+                int len = r - l + 1;
+                ans[id] = mul(ans[id], fp(1ll * len * (len + 1) % mod, mod - 2));
+            &#125;
+        &#125;
+    &#125;
+&#125;
+
+void solve() &#123;
+    n = read(); m = read();
+    rep(i, 1, n) a[i] = read(), Q[i].clear();
+    rep(i, 1, m) &#123;
+        int l = read(), r = read();
+        Q[r].push_back( query(l, i) );
+        ans[i] = 0;
+    &#125;
+    segment_work();
+    rep(i, 1, n) a[i] = -a[i];
+    segment_work(1);
+    rep(i, 1, m) printf(&quot;%d\n&quot;, ans[i]);
+&#125;
+
+int main() &#123;
+    int T = read();
+    while(T --) solve();
+    return 0;
+&#125;</code></pre>
+<h4 id="g-increasing-subsequence">G Increasing Subsequence</h4>
+<h5 id="题意-1">题意</h5>
+<p>给定一个排列，求极大上升子序列的数量</p>
+<h5 id="题解-1">题解</h5>
+<p><span class="math inline">\(n^2\)</span>做法不难想到，设<span class="math inline">\(f[i]\)</span>表示<span class="math inline">\(a_1,...,a_i\)</span>中的极大上升子序列的数量，考虑转移，<span class="math inline">\(j\)</span>能转移到<span class="math inline">\(i\)</span>，当且仅当<span class="math inline">\(a_j &lt; a_i\)</span>，并且区间<span class="math inline">\([j+1, i-1]\)</span>中，没有在<span class="math inline">\([a_j,a_i]\)</span>中的数</p>
+<p>抽象一下，也即能转移到<span class="math inline">\(f[i]\)</span>的<span class="math inline">\(j\)</span>将构成一个满足下标<span class="math inline">\(j&lt;i\)</span>，权值<span class="math inline">\(a_j &lt; a_i\)</span>的数构成的单调栈</p>
+<p>我们可以考虑用分治解决下标这一维，对于<span class="math inline">\([l, r]\)</span>，考虑<span class="math inline">\([l, mid]\)</span>对<span class="math inline">\([mid + 1, r]\)</span>的贡献</p>
+<p>由于分治，<span class="math inline">\([mid + 1, r]\)</span>中的元素不存在下标上的影响，对权值上的影响，只需要预处理出<span class="math inline">\([mid + 1, r]\)</span>中每个数左边比它小的最大数即可</p>
+<p>对于<span class="math inline">\([l, mid]\)</span>而言，我们按权值大小来建立单调栈，右边相应的按照权值在单调栈上二分即可</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矩阵分析 2</title>
+    <url>/2021/07/23/matrix-analysis-2/</url>
+    <content><![CDATA[<span id="more"></span>
+<h4 id="lambda矩阵"><span class="math inline">\(\lambda\)</span>矩阵</h4>
+<ul>
+<li><span class="math inline">\(\lambda\)</span>矩阵：矩阵中的每一项都是关于<span class="math inline">\(\lambda\)</span>的多项式的矩阵称为<span class="math inline">\(\lambda\)</span>矩阵</li>
+<li><span class="math inline">\(\lambda\)</span>矩阵的秩：若<span class="math inline">\(A(\lambda)\)</span>至少有一个<span class="math inline">\(r\)</span>阶子式不是零多项式，并且所有的<span class="math inline">\(r+1\)</span>阶子式都是零多项式，则称<span class="math inline">\(A(\lambda)\)</span>的秩为<span class="math inline">\(r\)</span>，记作<span class="math inline">\(\text{rank} A(\lambda)\)</span></li>
+<li>可逆矩阵：<span class="math inline">\(A(\lambda)\)</span>称作可逆矩阵，当且仅当存在<span class="math inline">\(B(\lambda)\)</span>，使得<span class="math inline">\(A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I\)</span>，并且，记<span class="math inline">\(B(\lambda) = A(\lambda)^{-1}\)</span></li>
+<li>可逆矩阵的充要条件：<span class="math inline">\(A(\lambda)\)</span>可逆，当且仅当<span class="math inline">\(|A(\lambda)|\)</span>是一个非零常数</li>
+<li>如果存在可逆矩阵<span class="math inline">\(P(\lambda), Q(\lambda)\)</span>，使得<span class="math inline">\(B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)\)</span>，则称<span class="math inline">\(B(\lambda)\)</span>与<span class="math inline">\(A(\lambda)\)</span>相抵，记作<span class="math inline">\(A(\lambda) \simeq B(\lambda)\)</span></li>
+</ul>
+<h4 id="lambda矩阵的标准形"><span class="math inline">\(\lambda\)</span>矩阵的标准形</h4>
+<ul>
+<li><p>每个<span class="math inline">\(A(\lambda)\)</span>都相抵与一个Smith标准形，即</p>
+<p><span class="math display">\[A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), ..., d_r(\lambda),0...0 \}\]</span></p>
+<p>其中<span class="math inline">\(d_i(\lambda)\)</span>的首项系数为<span class="math inline">\(1\)</span>，并且<span class="math inline">\(d_{i - 1}(\lambda) \mid d_i(\lambda)\)</span></p>
+<ul>
+<li>考虑多项式的辗转相除，并利用归纳法</li>
+</ul></li>
+</ul>
+<h4 id="不变因子行列式因子初等因子">不变因子，行列式因子，初等因子</h4>
+<ul>
+<li><p>不变因子：Smith标准形中的<span class="math inline">\(d_1(\lambda)\)</span>, <span class="math inline">\(d_2(\lambda)\)</span>, ..., <span class="math inline">\(d_r(\lambda)\)</span>称为<span class="math inline">\(A(\lambda)\)</span>的不变因子</p></li>
+<li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
+<li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
+<li><p>example</p>
+<p><span class="math display">\[A(x) = \begin{pmatrix}
+-x+1 &amp;x^2  &amp; x \\
+ x&amp; x &amp;-x \\
+ x^2+1 &amp; x^2 &amp; -x^2
+\end{pmatrix}\]</span></p>
+<p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
+<p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
+<p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
+<li><p>相抵的矩阵有相同的秩和行列式因子</p>
+<ul>
+<li>只需要子式之间的整除关系即可</li>
+</ul></li>
+<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：<span class="math inline">\(D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)\)</span>，由此，我们得到结论：</p>
+<ul>
+<li>相抵的矩阵有相同的不变因子</li>
+<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
+<li>一个矩阵的Smith标准形是唯一的</li>
+</ul></li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
+<ul>
+<li>如果用初等因子来描述相抵，那么将是：两个有相同的初等因子和秩的矩阵相抵</li>
+</ul></li>
+<li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
+<ul>
+<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
+</ul></li>
+</ul>
+<h4 id="若尔当标准形">若尔当标准形</h4>
+<ul>
+<li><p>若尔当块</p>
+<p><span class="math display">\[J(x, k) = \begin{pmatrix}
+x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; x &amp;1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;x\end{pmatrix}\]</span></p>
+<p>考虑<span class="math inline">\(J(x, k)\)</span>的特征矩阵</p>
+<p><span class="math display">\[\lambda I - J = \begin{pmatrix}
+\lambda - x &amp; - 1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; \lambda - x &amp; -1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;-1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;\lambda - x\end{pmatrix}\]</span></p>
+<p>由于去掉左边<span class="math inline">\(k\)</span>列和右边<span class="math inline">\(k\)</span>列的主子式的绝对值为<span class="math inline">\(1\)</span>，而<span class="math inline">\(|\lambda I - J| = (\lambda - x)^k\)</span></p>
+<p>因此，其行列式因子为<span class="math inline">\(D_1(\lambda) = ... = D_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(D_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>那么，其不变因子为<span class="math inline">\(d_1(\lambda) = ... = d_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(d_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>初等因子则只有<span class="math inline">\((\lambda - x)^k\)</span></p></li>
+<li><p>若尔当标准形</p>
+<p>形如</p>
+<p><span class="math display">\[J = \begin{pmatrix} J_1 &amp;&amp;&amp;\\ &amp;J_2&amp;&amp; \\&amp;&amp;...&amp; \\&amp;&amp;&amp;J_n \end{pmatrix}\]</span></p>
+<p>的矩阵称为若尔当标准形，其中<span class="math inline">\(J_i\)</span>为若尔当块</p>
+<p>由于<span class="math inline">\(J_i\)</span>的初等因子只有<span class="math inline">\((\lambda - \lambda_i)^{k_i}\)</span>，因此<span class="math inline">\(J\)</span>的初等因子为<span class="math inline">\((\lambda- \lambda_i)^{k_i}\)</span>的全体，并且<span class="math inline">\(\sum k_i = n\)</span></p></li>
+<li><p>定理：矩阵<span class="math inline">\(A \sim B\)</span>的充要条件是<span class="math inline">\(\lambda I - A \cong \lambda I - B\)</span></p>
+<p>这个定理的证明比较复杂，我们省去，关键在于利用<span class="math inline">\(\lambda I - A\)</span>是关于<span class="math inline">\(\lambda\)</span>的一次式进行次数限制</p></li>
+<li><p>定理：每个<span class="math inline">\(A\)</span>都与一个若尔当标准形<span class="math inline">\(J\)</span>相似，并且这个若尔当标准形除了<span class="math inline">\(J\)</span>中若尔当块的排列顺序外，被<span class="math inline">\(A\)</span>所唯一决定</p>
+<ul>
+<li><p>由于<span class="math inline">\(|\lambda I - A|\)</span>的次数为<span class="math inline">\(n\)</span>，因此<span class="math inline">\(D_n(\lambda) = \prod (\lambda - \lambda_i)^{m_i}\)</span>，其中<span class="math inline">\(\sum m_i = n\)</span></p>
+<p>由于<span class="math inline">\(D_n(\lambda) = \prod d_i(\lambda)\)</span>，因此初等因子的次数的和应该等于<span class="math inline">\(D_n(\lambda)\)</span>，也就是<span class="math inline">\(\lambda I - A\)</span>的初等因子的次数的和为<span class="math inline">\(n\)</span></p>
+<p>不妨设<span class="math inline">\(\lambda I - A\)</span>的初等因子为<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;} (\sum m_i&#39; = n)\)</span>，对于每个<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>，存在若尔当块<span class="math inline">\(J_i\)</span>，使得<span class="math inline">\(\lambda I - J_i\)</span>以<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>作为初等因子</p>
+<p>将这些<span class="math inline">\(J_i\)</span>组合在一起，得到一个若尔当标准形<span class="math inline">\(J\)</span></p>
+<p><span class="math inline">\(\lambda I - J\)</span>与<span class="math inline">\(\lambda I - A\)</span>有相同的初等因子，并且秩相等，因此<span class="math inline">\(\lambda I - J \cong \lambda I - A\)</span>，而且<span class="math inline">\(J\)</span>是唯一确定的，由上一条定理知，<span class="math inline">\(A \sim J\)</span></p></li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>matrix_analysis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>矩阵分析 1</title>
     <url>/2021/07/23/matrix-analysis-1/</url>
     <content><![CDATA[<span id="more"></span>
@@ -593,89 +687,188 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
-    <title>矩阵分析 2</title>
-    <url>/2021/07/23/matrix-analysis-2/</url>
+    <title>矩阵分析 3</title>
+    <url>/2021/07/28/matrix-analysis-3/</url>
     <content><![CDATA[<span id="more"></span>
-<h4 id="lambda矩阵"><span class="math inline">\(\lambda\)</span>矩阵</h4>
+<p>这一章的内容十分的有趣</p>
+<h4 id="三角分解">三角分解</h4>
+<p>我们先对三角分解作一个简单的定义</p>
 <ul>
-<li><span class="math inline">\(\lambda\)</span>矩阵：矩阵中的每一项都是关于<span class="math inline">\(\lambda\)</span>的多项式的矩阵称为<span class="math inline">\(\lambda\)</span>矩阵</li>
-<li><span class="math inline">\(\lambda\)</span>矩阵的秩：若<span class="math inline">\(A(\lambda)\)</span>至少有一个<span class="math inline">\(r\)</span>阶子式不是零多项式，并且所有的<span class="math inline">\(r+1\)</span>阶子式都是零多项式，则称<span class="math inline">\(A(\lambda)\)</span>的秩为<span class="math inline">\(r\)</span>，记作<span class="math inline">\(\text{rank} A(\lambda)\)</span></li>
-<li>可逆矩阵：<span class="math inline">\(A(\lambda)\)</span>称作可逆矩阵，当且仅当存在<span class="math inline">\(B(\lambda)\)</span>，使得<span class="math inline">\(A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I\)</span>，并且，记<span class="math inline">\(B(\lambda) = A(\lambda)^{-1}\)</span></li>
-<li>可逆矩阵的充要条件：<span class="math inline">\(A(\lambda)\)</span>可逆，当且仅当<span class="math inline">\(|A(\lambda)|\)</span>是一个非零常数</li>
-<li>如果存在可逆矩阵<span class="math inline">\(P(\lambda), Q(\lambda)\)</span>，使得<span class="math inline">\(B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)\)</span>，则称<span class="math inline">\(B(\lambda)\)</span>与<span class="math inline">\(A(\lambda)\)</span>相抵，记作<span class="math inline">\(A(\lambda) \simeq B(\lambda)\)</span></li>
+<li>如果矩阵<span class="math inline">\(A\)</span>可以表示为一个上三角矩阵<span class="math inline">\(L\)</span>和一个下三角矩阵<span class="math inline">\(U\)</span>的乘积，即<span class="math inline">\(A = LU\)</span>，那么这种乘积称为<span class="math inline">\(A\)</span>的<strong>三角分解</strong>或<strong><span class="math inline">\(LU\)</span>分解</strong>，特别的，如果<span class="math inline">\(L\)</span>是单位下三角矩阵（主对角线上的元素为<span class="math inline">\(1\)</span>），那么此时的三角分解称为<strong>Doolittle分解</strong>，如果<span class="math inline">\(U\)</span>是单位上三角矩阵，那么称为<strong>Crout分解</strong></li>
 </ul>
-<h4 id="lambda矩阵的标准形"><span class="math inline">\(\lambda\)</span>矩阵的标准形</h4>
+<p>在讨论三角分解的存在性之前，我们先对唯一性来作一些描述</p>
+<p>如果<span class="math inline">\(A = LU\)</span>，并且<span class="math inline">\(L, U\)</span>都不是单位三角矩阵，那么对于任意<span class="math inline">\(k \neq 0\)</span>，<span class="math inline">\(A = (kL)(k^{-1}U)\)</span>将是另一种分解方式，而加入了单位三角矩阵的限制后，我们就有了下述结论</p>
 <ul>
-<li><p>每个<span class="math inline">\(A(\lambda)\)</span>都相抵与一个Smith标准形，即</p>
-<p><span class="math display">\[A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), ..., d_r(\lambda),0...0 \}\]</span></p>
-<p>其中<span class="math inline">\(d_i(\lambda)\)</span>的首项系数为<span class="math inline">\(1\)</span>，并且<span class="math inline">\(d_{i - 1}(\lambda) \mid d_i(\lambda)\)</span></p>
+<li><p>对于方阵<span class="math inline">\(A\)</span>，其可以唯一地分解为</p>
+<p><span class="math display">\[A = LDU\]</span></p>
+<p>的充要条件为<span class="math inline">\(A\)</span>的前<span class="math inline">\(n - 1\)</span>个顺序主子式<span class="math inline">\(H_1,H_2,...,H_{n-1}\)</span>都不为<span class="math inline">\(0\)</span>，式中<span class="math inline">\(L, U\)</span>分别为单位下三角矩阵，单位上三角矩阵，<span class="math inline">\(D\)</span>为对角矩阵，并且设<span class="math inline">\(D = diag\{d_1,d_2,...,d_n\}\)</span>，则<span class="math inline">\(d_1 = 1, d_i = H_i/H_{i-1}\)</span></p>
 <ul>
-<li>考虑多项式的辗转相除，并利用归纳法</li>
+<li>这个定理的证明按照大小进行归纳即可</li>
 </ul></li>
+<li><p>由于<span class="math inline">\(LDU\)</span>分解是唯一的，因此Doolittle分解和Crout分解也都是唯一的</p></li>
 </ul>
-<h4 id="不变因子行列式因子初等因子">不变因子，行列式因子，初等因子</h4>
+<p>我们还可以讨论特殊矩阵的<span class="math inline">\(LDU\)</span>分解</p>
 <ul>
-<li><p>不变因子：Smith标准形中的<span class="math inline">\(d_1(\lambda)\)</span>, <span class="math inline">\(d_2(\lambda)\)</span>, ..., <span class="math inline">\(d_r(\lambda)\)</span>称为<span class="math inline">\(A(\lambda)\)</span>的不变因子</p></li>
-<li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
-<li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
-<li><p>example</p>
-<p><span class="math display">\[A(x) = \begin{pmatrix}
--x+1 &amp;x^2  &amp; x \\
- x&amp; x &amp;-x \\
- x^2+1 &amp; x^2 &amp; -x^2
-\end{pmatrix}\]</span></p>
-<p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
-<p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
-<p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
-<li><p>相抵的矩阵有相同的秩和行列式因子</p>
+<li><p>对于对称正定矩阵<span class="math inline">\(A\)</span>，存在一个实的可逆下三角矩阵<span class="math inline">\(L\)</span>，使得</p>
+<p><span class="math display">\[A = LL^T\]</span></p>
+<p>在限定<span class="math inline">\(L\)</span>的对角线元素为正时，<span class="math inline">\(L\)</span>是唯一的</p>
 <ul>
-<li>只需要子式之间的整除关系即可</li>
-</ul></li>
-<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：<span class="math inline">\(D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)\)</span>，由此，我们得到结论：</p>
-<ul>
-<li>相抵的矩阵有相同的不变因子</li>
-<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
-<li>一个矩阵的Smith标准形是唯一的</li>
-</ul></li>
-<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
-<ul>
-<li>如果用初等因子来描述相抵，那么将是：两个有相同的初等因子和秩的矩阵相抵</li>
-</ul></li>
-<li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
-<ul>
-<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
+<li><p>存在性：由于<span class="math inline">\(A\)</span>的顺序主子式都大于<span class="math inline">\(0\)</span>，因此<span class="math inline">\(A\)</span>存在<span class="math inline">\(LDU\)</span>分解，不妨设<span class="math inline">\(A = LDU\)</span></p>
+<p>由于<span class="math inline">\(A = A^T\)</span>，那么<span class="math inline">\(LDU = U^TDL^T\)</span>，由<span class="math inline">\(LDU\)</span>分解的唯一性，我们得到<span class="math inline">\(U^T = L\)</span></p>
+<p>即<span class="math inline">\(A = LDL^T\)</span>，由于<span class="math inline">\(|A| \neq 0\)</span>，因此<span class="math inline">\(L, D\)</span>都可逆，那么<span class="math inline">\(D = L^{-1}A(L^{-1})^T\)</span>，如此，<span class="math inline">\(D\)</span>也是正定矩阵，因此<span class="math inline">\(D\)</span>中元素都将大于<span class="math inline">\(0\)</span>，设<span class="math inline">\(D = diag(d_1, d_2, ..., d_n)\)</span>，再设<span class="math inline">\(D&#39; = diag(\sqrt d_1, \sqrt d_2, ..., \sqrt d_n)\)</span>，那么<span class="math inline">\(A = (LD&#39;)(LD&#39;)^T\)</span>，由<span class="math inline">\(|LD&#39;| = |L||D&#39;| \neq 0\)</span>知<span class="math inline">\(LD&#39;\)</span>可逆</p></li>
+<li><p>唯一性：设<span class="math inline">\(A = L_1L_1^T = L_2L_2^T\)</span>，则<span class="math inline">\((L_2^{-1}L_1) = (L_2^{-1}L_1)^T\)</span>，<span class="math inline">\(L_2^{-1}L_1\)</span>是上三角矩阵，因此<span class="math inline">\(L_2^{-1}L_1 = I\)</span>，即<span class="math inline">\(L_1 = L_2\)</span></p></li>
 </ul></li>
 </ul>
-<h4 id="若尔当标准形">若尔当标准形</h4>
+<h4 id="qr分解"><span class="math inline">\(QR\)</span>分解</h4>
 <ul>
-<li><p>若尔当块</p>
-<p><span class="math display">\[J(x, k) = \begin{pmatrix}
-x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
- 0&amp; x &amp;1 &amp; 0 &amp; ... &amp; 0 \\
-... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;x\end{pmatrix}\]</span></p>
-<p>考虑<span class="math inline">\(J(x, k)\)</span>的特征矩阵</p>
-<p><span class="math display">\[\lambda I - J = \begin{pmatrix}
-\lambda - x &amp; - 1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
- 0&amp; \lambda - x &amp; -1 &amp; 0 &amp; ... &amp; 0 \\
-... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;-1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;\lambda - x\end{pmatrix}\]</span></p>
-<p>由于去掉左边<span class="math inline">\(k\)</span>列和右边<span class="math inline">\(k\)</span>列的主子式的绝对值为<span class="math inline">\(1\)</span>，而<span class="math inline">\(|\lambda I - J| = (\lambda - x)^k\)</span></p>
-<p>因此，其行列式因子为<span class="math inline">\(D_1(\lambda) = ... = D_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(D_k(\lambda) = (\lambda - x)^k\)</span></p>
-<p>那么，其不变因子为<span class="math inline">\(d_1(\lambda) = ... = d_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(d_k(\lambda) = (\lambda - x)^k\)</span></p>
-<p>初等因子则只有<span class="math inline">\((\lambda - x)^k\)</span></p></li>
-<li><p>若尔当标准形</p>
-<p>形如</p>
-<p><span class="math display">\[J = \begin{pmatrix} J_1 &amp;&amp;&amp;\\ &amp;J_2&amp;&amp; \\&amp;&amp;...&amp; \\&amp;&amp;&amp;J_n \end{pmatrix}\]</span></p>
-<p>的矩阵称为若尔当标准形，其中<span class="math inline">\(J_i\)</span>为若尔当块</p>
-<p>由于<span class="math inline">\(J_i\)</span>的初等因子只有<span class="math inline">\((\lambda - \lambda_i)^{k_i}\)</span>，因此<span class="math inline">\(J\)</span>的初等因子为<span class="math inline">\((\lambda- \lambda_i)^{k_i}\)</span>的全体，并且<span class="math inline">\(\sum k_i = n\)</span></p></li>
-<li><p>定理：矩阵<span class="math inline">\(A \sim B\)</span>的充要条件是<span class="math inline">\(\lambda I - A \cong \lambda I - B\)</span></p>
-<p>这个定理的证明比较复杂，我们省去，关键在于利用<span class="math inline">\(\lambda I - A\)</span>是关于<span class="math inline">\(\lambda\)</span>的一次式进行次数限制</p></li>
-<li><p>定理：每个<span class="math inline">\(A\)</span>都与一个若尔当标准形<span class="math inline">\(J\)</span>相似，并且这个若尔当标准形除了<span class="math inline">\(J\)</span>中若尔当块的排列顺序外，被<span class="math inline">\(A\)</span>所唯一决定</p>
+<li><p>如果实（复）非奇异矩阵<span class="math inline">\(A\)</span>能表示为一个正交（酉）矩阵<span class="math inline">\(Q\)</span>和一个实（复）非奇异上三角矩阵<span class="math inline">\(R\)</span>的乘积，那么</p>
+<p><span class="math display">\[A = QR\]</span></p>
+<p>就称为<span class="math inline">\(A\)</span>的<span class="math inline">\(QR\)</span>分解</p></li>
+<li><p>任何非奇异矩阵<span class="math inline">\(A\)</span>都存在<span class="math inline">\(QR\)</span>分解，并且除了对角线上的元素差一个绝对值为<span class="math inline">\(1\)</span>的因子外，<span class="math inline">\(QR\)</span>分解是唯一的</p>
 <ul>
-<li><p>由于<span class="math inline">\(|\lambda I - A|\)</span>的次数为<span class="math inline">\(n\)</span>，因此<span class="math inline">\(D_n(\lambda) = \prod (\lambda - \lambda_i)^{m_i}\)</span>，其中<span class="math inline">\(\sum m_i = n\)</span></p>
-<p>由于<span class="math inline">\(D_n(\lambda) = \prod d_i(\lambda)\)</span>，因此初等因子的次数的和应该等于<span class="math inline">\(D_n(\lambda)\)</span>，也就是<span class="math inline">\(\lambda I - A\)</span>的初等因子的次数的和为<span class="math inline">\(n\)</span></p>
-<p>不妨设<span class="math inline">\(\lambda I - A\)</span>的初等因子为<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;} (\sum m_i&#39; = n)\)</span>，对于每个<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>，存在若尔当块<span class="math inline">\(J_i\)</span>，使得<span class="math inline">\(\lambda I - J_i\)</span>以<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>作为初等因子</p>
-<p>将这些<span class="math inline">\(J_i\)</span>组合在一起，得到一个若尔当标准形<span class="math inline">\(J\)</span></p>
-<p><span class="math inline">\(\lambda I - J\)</span>与<span class="math inline">\(\lambda I - A\)</span>有相同的初等因子，并且秩相等，因此<span class="math inline">\(\lambda I - J \cong \lambda I - A\)</span>，而且<span class="math inline">\(J\)</span>是唯一确定的，由上一条定理知，<span class="math inline">\(A \sim J\)</span></p></li>
+<li><p>存在性：设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\((a_1, a_2, ..., a_n)\)</span>，其可以构成一组基，我们对这组基进行Schmidt正交化，得到一组标准正交基<span class="math inline">\((b_1, b_2, ..., b_n)\)</span></p>
+<p>那么，由Schmidt正交化的公式<span class="math inline">\(b_i&#39; = a_i - \sum_{j &lt; i} b_j&#39; * \frac{(a_i, b_j)}{(b_j, b_j)}\)</span>，标准化之后乘一个非零常数，应该存在<span class="math inline">\(R\)</span>为非奇异上三角矩阵，使得<span class="math inline">\((b_1, b_2, ..., b_n) = (a_1, a_2, ..., a_n) R\)</span></p>
+<p>由于<span class="math inline">\(R\)</span>可逆，那么<span class="math inline">\((a_1, a_2, ..., a_n) = (b_1,b_2,...,b_n)R^{-1}\)</span>，取<span class="math inline">\(Q = (b_1,b_2,...,b_n)\)</span>即可</p></li>
+<li><p>唯一性：设<span class="math inline">\(A = Q_1R_1 = Q_2R_2\)</span>，那么<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1}\)</span>，<span class="math inline">\(Q_2^{-1}Q_1\)</span>为正交阵，<span class="math inline">\(R_2R_1^{-1}\)</span>为上三角阵，不难知道，<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1} = I\)</span>，即<span class="math inline">\(Q_1 = Q_2\)</span></p></li>
+</ul></li>
+</ul>
+<h4 id="谱分解">谱分解</h4>
+<h5 id="正规矩阵">正规矩阵</h5>
+<ul>
+<li>如果<span class="math inline">\(AA^H = A^HA\)</span>，则称<span class="math inline">\(A\)</span>为<strong>正规矩阵</strong></li>
+<li>如果对实方阵<span class="math inline">\(A\)</span>，<span class="math inline">\(AA^T=A^TA\)</span>，则称<span class="math inline">\(A\)</span>为<strong>实正规矩阵</strong></li>
+</ul>
+<p>正规矩阵有一些较为简单的性质</p>
+<ul>
+<li><p>如果三角阵<span class="math inline">\(L\)</span>是正规矩阵，那么<span class="math inline">\(L\)</span>是对角阵</p>
+<ul>
+<li><p>由<span class="math inline">\(LL^H = LL^H\)</span>，我们有<span class="math inline">\(\sum_{k} \overline{l_{ki}} * l_{kj} = \sum_{k} \overline{l_{jk}} * l_{ik}\)</span>，而当<span class="math inline">\(i = j\)</span>时，有<span class="math inline">\(\sum_k |l_{ki}|^2 = \sum_k |l_{ik}|^2\)</span></p>
+<p>不妨设<span class="math inline">\(L\)</span>是下三角阵，由于<span class="math inline">\(\sum_k |l_{k1}|^2 = \sum_k |l_{1k}|^2 = |l_{11}|^2\)</span>，我们得到<span class="math inline">\(l_{21} = l_{31} = ... = l_{n1} = 0\)</span>，之后对<span class="math inline">\(i = j = 2\)</span>进行讨论，得到<span class="math inline">\(l_{32} = ... = l_{n2} = 0\)</span>，依次类推，我们可以得到<span class="math inline">\(L\)</span>只在对角线上非零，即<span class="math inline">\(L\)</span>为对角阵</p></li>
+</ul></li>
+</ul>
+<p>埃米尔特矩阵和酉矩阵都是正规矩阵，尝试将埃米尔特矩阵和酉矩阵的性质推导到正规矩阵上，一般来说，我们有下述定理</p>
+<ul>
+<li><p>方阵<span class="math inline">\(A\)</span>酉相似于对角阵的充要条件为<span class="math inline">\(A\)</span>是正规矩阵</p>
+<p>考虑这个定理的证明</p>
+<ul>
+<li>充分性：根据Schur定理，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^HLU\)</span>，其中<span class="math inline">\(L\)</span>为上三角阵，并且对角线上为<span class="math inline">\(A\)</span>的特征值，那么由<span class="math inline">\(A^HA= AA^H\)</span>，得到<span class="math inline">\(L^HL = LL^H\)</span>，由于<span class="math inline">\(L\)</span>同时是三角阵和正规阵，那么<span class="math inline">\(L\)</span>将是对角阵，因而<span class="math inline">\(A\)</span>与对角阵<span class="math inline">\(L\)</span>酉相似</li>
+<li>必要性：设<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(\Lambda\)</span>为对角阵，那么<span class="math inline">\(AA^H = U^H \Lambda \Lambda^H U = U^H \Lambda^H \Lambda U = A^HA\)</span></li>
+</ul></li>
+</ul>
+<p>如果<span class="math inline">\(A\)</span>酉相似于对角阵，即<span class="math inline">\(A = U^H \Lambda U\)</span>，那么矩阵<span class="math inline">\(U\)</span>可以看做是<span class="math inline">\(A\)</span>的特征向量的集合，而<span class="math inline">\(\Lambda\)</span>则为<span class="math inline">\(A\)</span>对应的特征值，因此<span class="math inline">\(A\)</span>将有<span class="math inline">\(n\)</span>个互相正交的单位特征向量</p>
+<h5 id="谱分解-1">谱分解</h5>
+<ul>
+<li><p>对于正规矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^H \Lambda U\)</span></p>
+<p>记<span class="math inline">\(U = (u_1, u_2, ..., u_n)\)</span>，那么</p>
+<p><span class="math display">\[\begin{align*}
+ A &amp;= (u_1, u_2, ..., u_n)^H *diag(\lambda_1, \lambda_2,..., \lambda_n)* (u_1, u_2, ..., u_n)\\ 
+ &amp;= \lambda_1 u_1^Hu_1 + \lambda_2 u_2^Hu_2 + ... + \lambda_nu_n^Hu_n
+\end{align*}\]</span></p>
+<p>我们称此为<span class="math inline">\(A\)</span>的谱分解或者特征值分解</p></li>
+<li><p>如果我们将谱分解稍微改写形式<span class="math inline">\(A = \lambda_1(u_{11}^Hu_{11} + ...+u_{1s}^Hu_{1s}) + ... + \lambda_r(u_{r1}^Hu_{r1} + ...+u_{rs}^Hu_{rs})\)</span>，其中<span class="math inline">\(\lambda_i\)</span>互不相同</p>
+<p>记<span class="math inline">\(P_1 = u_{11}^Hu_{11} + ...+u_{1s}^Hu_{1s}, ...,P_r = u_{r1}^Hu_{r1} + ...+u_{rs}^Hu_{rs}\)</span></p>
+<p>由于<span class="math inline">\(u_{11}, ..., u_{1s}, ..., u_{r1}, ..., u_{rs}\)</span>两两正交，我们有<span class="math inline">\(P_iP_j = O, P_i^2 = P_i, P_i^H=P_i\)</span>，因此单独取出<span class="math inline">\(P_i\)</span>，其表示为一种正交投影</p></li>
+</ul>
+<h4 id="最大秩分解">最大秩分解</h4>
+<ul>
+<li><p>设<span class="math inline">\(A\)</span>是秩为<span class="math inline">\(r\)</span>的<span class="math inline">\(m * n\)</span>的矩阵，那么存在秩为<span class="math inline">\(r\)</span>的<span class="math inline">\(m * r\)</span>的矩阵<span class="math inline">\(B\)</span>以及<span class="math inline">\(r * n\)</span>的矩阵<span class="math inline">\(C\)</span>，使得</p>
+<p><span class="math display">\[A = BC\]</span></p>
+<p>也就是说，<span class="math inline">\(A\)</span>可以分解为两个满秩矩阵的积</p>
+<ul>
+<li><p>设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\(a_1, a_2, ...,a_n\)</span>，那么<span class="math inline">\(A = (a_1, a_2, ..., a_n)\)</span></p>
+<p>不妨设列向量中的极大线性无关组为<span class="math inline">\((a_1, a_2, ..., a_r)\)</span>，由于<span class="math inline">\(a_1, a_2,..., a_n\)</span>中任意元素可以被<span class="math inline">\(a_1,...a_r\)</span>表出，不妨设<span class="math inline">\(a_i = \sum_{j=1}^r a_j c_{ji}\)</span></p>
+<p>那么</p>
+<p><span class="math display">\[A = (a_1, a_2,..., a_r) \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
+<p>记</p>
+<p><span class="math display">\[B = (a_1, a_2,..., a_r), C = \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
+<p>由于<span class="math inline">\(r = rank(A) \leq \min\{rank(B), rank(C)\} \leq r\)</span>，因此两者秩都为<span class="math inline">\(r\)</span></p></li>
+<li><p>注意到这个证明中，没有对所取的<span class="math inline">\(a_1,...,a_r\)</span>作任何的限制，因此，我们甚至可以限制<span class="math inline">\(a_1,...,a_r\)</span>为一组标准正交基</p></li>
+</ul></li>
+<li><p>example：</p>
+<p>求</p>
+<p><span class="math display">\[A = \begin{pmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 &amp; 0 \\ 1 &amp; 1 &amp; 0 &amp; 0 \\3 &amp; 3 &amp; 2 &amp; 1\end{pmatrix}\]</span></p>
+<p>的最大秩分解</p>
+<p>我们可以利用初等行变化保持线性关系的性质</p>
+<p>将<span class="math inline">\(A\)</span>化作行标准形</p>
+<p><span class="math display">\[A&#39; = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}\]</span></p>
+<p>取<span class="math inline">\(1, 3, 4\)</span>列的列向量作为极大线性无关组，即</p>
+<p><span class="math display">\[B = \begin{pmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0  \\3 &amp; 2 &amp; 1\end{pmatrix}\]</span></p>
+<p>再取<span class="math inline">\(A&#39;\)</span>中的非零行（也即组合系数），令</p>
+<p><span class="math display">\[C = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\]</span></p>
+<p>那么<span class="math inline">\(A = BC\)</span>，且<span class="math inline">\(B, C\)</span>满秩</p></li>
+</ul>
+<h4 id="奇异值分解">奇异值分解</h4>
+<p>矩阵的奇异值分解又称<strong>SVD(Singular Value Decomposition)分解</strong></p>
+<h5 id="奇异值">奇异值</h5>
+<ul>
+<li><p>引理：矩阵<span class="math inline">\(AA^H\)</span>的特征值为非负实数</p>
+<ul>
+<li>矩阵<span class="math inline">\(AA^H\)</span>半正定，并且为埃尔米特矩阵，因此其特征值为非负实数</li>
+</ul></li>
+<li><p>对于矩阵<span class="math inline">\(A\)</span>，我们记<span class="math inline">\(AA^H\)</span>的特征值为<span class="math inline">\(\lambda_1, \lambda_2,...,\lambda_n\)</span>，我们称<span class="math inline">\(\sigma_i = \sqrt \lambda_{i}\)</span>为矩阵<span class="math inline">\(A\)</span>的奇异值</p></li>
+<li><p>若<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>酉相抵（存在酉矩阵<span class="math inline">\(U, V\)</span>，使得<span class="math inline">\(B = UAV\)</span>），则<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</p>
+<ul>
+<li><span class="math inline">\(B^HB = V^HA^HU^HUAV=V^H(A^HA)V = V^{-1}(A^HA)V\)</span>，那么<span class="math inline">\(B^HB\)</span>与<span class="math inline">\(A^HA\)</span>有相同的特征值，因此<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</li>
+</ul></li>
+</ul>
+<h5 id="奇异值分解-1">奇异值分解</h5>
+<ul>
+<li><p>对于任意<span class="math inline">\(n*m\)</span>大小的复矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U, V\)</span>，使得</p>
+<p><span class="math display">\[U^HAV = diag(\sigma_1, \sigma_2, ..., \sigma_r, 0, ..., 0)\]</span></p>
+<p>其中<span class="math inline">\(\sigma_1, \sigma_2, ..., \sigma_r\)</span>为<span class="math inline">\(A\)</span>的非零奇异值</p>
+<ul>
+<li><p>下面的证明不仅给出了证明方法，而且还给出了构造的具体方法</p></li>
+<li><p>由于<span class="math inline">\(AA^H\)</span>为埃尔米特矩阵，并且半正定，因此存在酉矩阵<span class="math inline">\(U\)</span>，使得</p>
+<p><span class="math display">\[U^HAA^HU = diag(\sigma_1^2, \sigma_2^2, ..., \sigma_r^2, 0, ..., 0) \tag{a}\]</span></p>
+<p>如果记<span class="math inline">\(U = (U_1, U_2)\)</span>，其中<span class="math inline">\(U_1\)</span>为<span class="math inline">\(U\)</span>的前<span class="math inline">\(r\)</span>个列向量构成的矩阵，那么我们可以得到<span class="math display">\[U_1^HAA^HU_1 = \Lambda^2 \tag{b}\]</span></p>
+<p><span class="math display">\[U_2^HAA^HU_2 = O \tag{c}\]</span></p>
+<p>由于<span class="math inline">\(AA^H = O\)</span>，当且仅当<span class="math inline">\(A = O\)</span>（考察对角线上的元素），因此<span class="math inline">\(U_2^HA = O\)</span></p>
+<p>现在我们尝试构造<span class="math inline">\(V = (V_1, V_2)\)</span>，其中<span class="math inline">\(V_1\)</span>为<span class="math inline">\(n * r\)</span>的矩阵，使得<span class="math inline">\(U^HAV = \Lambda\)</span></p>
+<p>不难知道</p>
+<p><span class="math display">\[(U_1, U_2)^H A (V_1, V_2) = \begin{pmatrix} U_1^HAV_1 &amp; U_1^HAV_2\\ U_2^HAV_1 &amp; U_2^HAV_2 \end{pmatrix}\]</span></p>
+<p>与<span class="math inline">\(\begin{pmatrix} \Lambda &amp; O\\ O &amp; O \end{pmatrix}\)</span>对比，我们得到<span class="math inline">\(U_1^HAV_1 = \Lambda, U_1^HAV_2 = U_2^HAV_1 =U_2^HAV_2=O\)</span></p>
+<p>由于<span class="math inline">\(U_2^HA=O\)</span>，后面两项的成立是显然的，观察<span class="math inline">\((b)\)</span>式，我们知道取<span class="math inline">\(V_1 = A^HU_1 \Lambda^{-1}\)</span>可以满足要求，暂定<span class="math inline">\(V_1\)</span>，从而<span class="math inline">\(U_1^HAV_2 = \Lambda^{H} V_1^HV_2\)</span>，只需要取<span class="math inline">\(V_2\)</span>时，保证其与<span class="math inline">\(V_1\)</span>正交即可，这个当然是可以满足的</p>
+<p>我们还需要确定<span class="math inline">\(V_1\)</span>满足酉矩阵的要求，代入<span class="math inline">\(V_1\)</span>，我们得到<span class="math inline">\(V_1^HV_1=(\Lambda^{-1})^H(U_1^HA A^HU_1)\Lambda^{-1} = \Lambda^{-1}\Lambda^2\Lambda^{-1} = I\)</span>，这也就证明了<span class="math inline">\(V_1\)</span>确实满足条件</p></li>
+</ul></li>
+</ul>
+<h4 id="极分解">极分解</h4>
+<ul>
+<li><p>对于任意<span class="math inline">\(n*n\)</span>的复阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U\)</span>和唯一的半正定矩阵<span class="math inline">\(G, H\)</span>，使得</p>
+<p><span class="math display">\[A = GU = UH\]</span></p>
+<ul>
+<li><p>存在性：设<span class="math inline">\(A\)</span>的奇异值分解为<span class="math inline">\(A = U^H_0 \Lambda V\)</span></p>
+<p>那么令<span class="math inline">\(G = U^H_0 \Lambda U, H = V^H \Lambda V, U_1 = U^H_0V\)</span>，得到<span class="math inline">\(A = GU_1 = U_1H\)</span></p></li>
+<li><p>唯一性：由于<span class="math inline">\(U\)</span>可逆，唯一性显然</p></li>
+</ul></li>
+</ul>
+<h4 id="可同时对角化">可同时对角化</h4>
+<p>这个知识点感觉还是点一点...</p>
+<p>一般在高等代数中，就会接触到一个结论</p>
+<ul>
+<li><p>设<span class="math inline">\(A, B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(A\)</span>正定，那么存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得</p>
+<p><span class="math display">\[Q^{H}AQ = I, Q^HBQ= diag\{\lambda_1, \lambda_2, ...\lambda_n\}\]</span></p>
+<ul>
+<li><p>一般采取如下方式证明：由于<span class="math inline">\(A\)</span>正定，因此存在非奇异矩阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(P^HAP = I\)</span>，由于<span class="math inline">\(P^HBP\)</span>仍为埃尔米特矩阵，因此存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\((PU)^H B (PU) = diag\{\lambda_1, ..., \lambda_n\}\)</span>，令<span class="math inline">\(Q = PU\)</span>即可</p></li>
+<li><p>我们尝试考察<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>的值，首先，它们是<span class="math inline">\(P^HBP\)</span>的特征值</p>
+<p>注意到<span class="math inline">\(|\lambda I - P^HBP| = |\lambda P^HAP - P^HBP| = |P^H||P||A|*|\lambda I - A^{-1}B|\)</span></p>
+<p>由于<span class="math inline">\(|P| \neq 0, |A| \neq 0\)</span>，因此<span class="math inline">\(\lambda_1, ... \lambda_n\)</span>也是<span class="math inline">\(A^{-1}B\)</span>的特征追</p></li>
+</ul></li>
+</ul>
+<p>现在我们来考虑同时酉对角化的问题，也即</p>
+<ul>
+<li><p>设<span class="math inline">\(A, B\)</span>为正规矩阵，则<span class="math inline">\(A, B\)</span>可同时酉对角化的充要条件为<span class="math inline">\(AB = BA\)</span></p>
+<ul>
+<li><p>“<span class="math inline">\(\Rightarrow\)</span>”：设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，则<span class="math inline">\(AB = BA\)</span>可以由<span class="math inline">\(\Lambda_1, \Lambda_2\)</span>的可交换性得出</p></li>
+<li><p>“<span class="math inline">\(\Leftarrow\)</span>”：设<span class="math inline">\(A\)</span>对应于特征值<span class="math inline">\(a\)</span>的特征子空间为<span class="math inline">\(V_a\)</span>，取<span class="math inline">\(V_a\)</span>的一组标准正交基为<span class="math inline">\(a_1, a_2,...,a_r\)</span></p>
+<p>注意到<span class="math inline">\(AB a_i = BAa_i = Baa_i = a (Ba_i)\)</span>，这说明<span class="math inline">\(Ba_1, Ba_2,...,Ba_r\)</span>也是<span class="math inline">\(V_a\)</span>中的元素，也说明<span class="math inline">\(BV_a \subseteq V_a\)</span></p>
+<p>设从<span class="math inline">\(C^n\)</span>到<span class="math inline">\(V_a\)</span>的投影变换为<span class="math inline">\(P_a\)</span>，考虑线性映射<span class="math inline">\(B_a = P_aBP_a\)</span>，由于<span class="math inline">\(P_aV_a = V_a\)</span>，因此<span class="math inline">\(B_aV_a \subseteq V_a\)</span>，注意到<span class="math inline">\(B_aB_a^H = P_aBB^HP_a = P_aB^HBP_a = B_a^HB_a\)</span>，那么<span class="math inline">\(B_a\)</span>在<span class="math inline">\(V_a\)</span>上是一个正规变换，也就相应的对应于正规矩阵</p>
+<p>设<span class="math inline">\(B_a\)</span>的线性无关的标准正交特征向量组为<span class="math inline">\(b_1,b_2,...,b_k\)</span>，由于<span class="math inline">\(b_i \in V_a\)</span>，因此<span class="math inline">\(b_i\)</span>是<span class="math inline">\(A\)</span>的一个特征向量，又<span class="math inline">\(B b_i = P_a B P_a b_i = B_ab_i\)</span>，这说明<span class="math inline">\(b_i\)</span>也是<span class="math inline">\(B\)</span>的一个特征向量</p>
+<p>由于<span class="math inline">\(B_a\)</span>在<span class="math inline">\(V_a\)</span>上对应于正规矩阵，那么应该有<span class="math inline">\(k = r\)</span>，那么对于每个特征值，我们都能找到相应的公共特征向量，鉴于<span class="math inline">\(A\)</span>是正规矩阵，我们还可以把这些公共特征向量处理为正交的向量，因此得到两者可以同时酉对角化</p></li>
+</ul></li>
+<li><p>如果<span class="math inline">\(AB = BA\)</span>，且<span class="math inline">\(A, B\)</span>为正规矩阵，那么<span class="math inline">\(AB\)</span>也为正规矩阵</p>
+<ul>
+<li><span class="math inline">\(A, B\)</span>可同时酉对角化，设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，那么<span class="math inline">\(AB = U^H \Lambda_1 \Lambda_2 U\)</span>，因此<span class="math inline">\(AB\)</span>酉相似于对角矩阵，如此<span class="math inline">\(AB\)</span>为正规矩阵</li>
+<li>不难发现，<span class="math inline">\(AB\)</span>的特征值和<span class="math inline">\(A, B\)</span>的特征值之间存在关系，也即在按照同时酉对角化矩阵的顺序排列下时，有<span class="math inline">\(\lambda_{AB}^{(i)} = \lambda_{A}^{(i)} * \lambda_{B}^{(i)}\)</span>，且对应的特征向量也是相同的</li>
 </ul></li>
 </ul>
 ]]></content>
@@ -687,122 +880,163 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
-    <title>矩阵分析 6</title>
-    <url>/2021/08/05/matrix-analysis-6/</url>
+    <title>矩阵分析 5</title>
+    <url>/2021/08/02/matrix-analysis-5/</url>
     <content><![CDATA[<span id="more"></span>
+<h3 id="向量范数">向量范数</h3>
+<h4 id="介绍">介绍</h4>
 <ul>
-<li>完备的赋范线性空间，称为Banach空间</li>
-</ul>
-<h3 id="矩阵序列的极限">矩阵序列的极限</h3>
+<li>定义：如果<span class="math inline">\(V\)</span>是数域<span class="math inline">\(P\)</span>上的线性空间，且对于<span class="math inline">\(x \in V\)</span>，存在<span class="math inline">\(V \to R\)</span>的函数<span class="math inline">\(||x||\)</span>，满足
 <ul>
-<li><p>定义：设有矩阵序列<span class="math inline">\(\{A_k\}\)</span>，其中<span class="math inline">\(A_k = (a_{ij}^{(k)})_{n*n}\)</span>，且当<span class="math inline">\(k \to \infty\)</span>时，<span class="math inline">\(a_{ij}^{(k)} \to a_{ij}\)</span>，则称<span class="math inline">\(\{A_k\}\)</span>收敛，并称<span class="math inline">\(A = (a_{ij})\)</span>为<span class="math inline">\(\{A_k\}\)</span>的极限，记做</p>
-<p><span class="math display">\[\lim_{k \to \infty} A_k = A\]</span></p></li>
-<li><p>不收敛的序列称为发散的</p></li>
-</ul>
-<p>这个定义研究起来并不是很方便，我们可以引出一个等价的定义</p>
-<ul>
-<li>在有限维巴拿赫空间中，矩阵序列<span class="math inline">\(\{A_k\}\)</span>收敛于<span class="math inline">\(A\)</span>等价于矩阵序列<span class="math inline">\(\{A_k\}\)</span>按范数收敛于<span class="math inline">\(A\)</span>
-<ul>
-<li>由于所有范数是等价的，我们不妨取矩阵的F-范数来研究，此时矩阵相等于<span class="math inline">\(n*m\)</span>维的一个向量，由向量范数的性质知道，对于F-范数而言，这个定理是成立的</li>
+<li>非负性：<span class="math inline">\(||x|| \geq 0\)</span>，当且仅当<span class="math inline">\(x = 0\)</span>取等</li>
+<li>齐次性：<span class="math inline">\(||kx|| = |k|*||x||\)</span></li>
+<li>三角不等式：<span class="math inline">\(||x+y|| \leq ||x|| + ||y||\)</span></li>
 </ul></li>
 </ul>
-<p>同大多数极限一样，矩阵极限有相应的运算性质</p>
+<p>这里记录一些常见的范数</p>
 <ul>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，那么序列<span class="math inline">\(\{||A_k||\}\)</span>有界</p></li>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A, \lim_{k \to \infty} B_k = B\)</span>，那么</p>
-<p><span class="math display">\[\lim_{k \to \infty} (aA_k + bB_k) = aA + bB\]</span></p></li>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A. \lim_{k \to \infty} B_k = B\)</span>，那么</p>
-<p><span class="math display">\[\lim_{k \to \infty} A_kB_k = AB\]</span></p>
+<li><p><span class="math inline">\(||x|| = \sqrt {\sum_{i=1}^n |x_i|^2}\)</span>，称作<strong>2-范数</strong>或者<strong>欧式范数</strong>，记为<span class="math inline">\(||x||_2\)</span></p>
 <ul>
-<li><span class="math inline">\(||A_kB_k - AB|| \leq ||(A_k- A)||*||B_k|| + ||(B_k-B)||*||A||\)</span></li>
+<li>该函数显然满足非负性和齐次性，利用柯西不等式可以得到三角不等式也满足</li>
 </ul></li>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，且<span class="math inline">\(A_k(k \in N^{+}), A\)</span>都可逆，那么</p>
-<p><span class="math display">\[\lim_{k \to \infty} A_k^{=1} = A^{-1}\]</span></p>
+<li><p><span class="math inline">\(||x|| = max_{i=1}^n |x_i|\)</span>，称作<strong><span class="math inline">\(\infty-\)</span>范数</strong>，记为<span class="math inline">\(||x||_{\infty}\)</span></p>
 <ul>
-<li><p>注意到对于任意<span class="math inline">\(A_k\)</span>中的子式而言，它可以表示为<span class="math inline">\(A_k\)</span>中元素的连续函数，由连续性，<span class="math inline">\(A_k\)</span>的子式一定收敛于<span class="math inline">\(A\)</span>中对应的子式，特别的，<span class="math inline">\(|A_k| \to |A|\)</span></p>
-<p>同样的，我们将有<span class="math inline">\(\text{adj} A_k \to \text{adj} A\)</span>，从而有<span class="math inline">\(A_k^{-1} \to A^{-1}\)</span></p></li>
+<li>验证三条性质都是简单的</li>
 </ul></li>
-</ul>
-<p>下面是一个基础的定理</p>
+<li><p><span class="math inline">\(||x|| = (\sum_{i=1}^n |x_i|^p)^{\frac{1}{p}}\)</span>，称作<strong>p-范数</strong>，其中<span class="math inline">\(1 \leq p &lt; +\infty\)</span>，记为<span class="math inline">\(||x||_p\)</span></p>
 <ul>
-<li><p><span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>的充要条件是<span class="math inline">\(\rho(A) &lt; 1\)</span></p>
+<li>非负性和齐次性仍然是显然的</li>
+<li>三角不等式则可由Young不等式或Holder不等式得出</li>
+<li>不难发现<span class="math inline">\(p= 2\)</span>和<span class="math inline">\(p \to +\infty\)</span>的情况下，p-范数变为上述两种情况</li>
+</ul></li>
+<li><p>对于正定埃尔米特矩阵<span class="math inline">\(A\)</span>，定义<span class="math inline">\(||x||_A = \sqrt {x^HAx}\)</span>，称作<strong>椭圆范数</strong></p>
 <ul>
-<li><p>考虑矩阵<span class="math inline">\(A\)</span>的若尔当标准形<span class="math inline">\(J\)</span>，即<span class="math inline">\(A = TJT^{-1}\)</span>，那么<span class="math inline">\(A^k = T J^K T^{-1}\)</span></p>
-<p>因此<span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>，当且仅当<span class="math inline">\(\lim_{k \to \infty} J^k = 0\)</span></p>
-<p>设<span class="math inline">\(J = diag\{J_1, ..., J_r\}\)</span>，那么<span class="math inline">\(J^k = diag\{J_1^k, ..., J_r^k\}\)</span></p>
-<p>注意到<span class="math inline">\(J_i^k = \begin{pmatrix} \lambda_i^k &amp; \binom{k}{1} \lambda_i^{k-1} &amp; ... &amp; \binom{k}{n_i - 1} \lambda_i^{k - n_i + 1} \\ 0 &amp; \lambda_i^{k} &amp; ... &amp; \binom{k}{n_i-2} \lambda_{i}^{k-n_i+2} \\ ...&amp;... &amp; ... &amp;... \\ ... &amp; ... &amp; ... &amp; \lambda_i^k\end{pmatrix}\)</span>​</p>
-<p>矩阵每个元素都形如<span class="math inline">\(f(k) * \lambda^k\)</span>，其中<span class="math inline">\(f(k)\)</span>是关于<span class="math inline">\(k\)</span>的多项式</p>
-<p>因此，当<span class="math inline">\(|\lambda| &lt; \rho(A) &lt; 1\)</span>时，就有<span class="math inline">\(J_i^k \to O\)</span>，从而<span class="math inline">\(J^k \to O\)</span></p>
-<p>反过来，当<span class="math inline">\(J^k \to O\)</span>时，<span class="math inline">\(J_i^k \to O\)</span>，因此<span class="math inline">\(\lambda_i^k \to 0\)</span>，从而<span class="math inline">\(|\lambda_i| &lt; 1\)</span>，<span class="math inline">\(\rho(A)&lt;1\)</span></p></li>
+<li><p>非负性和齐次性仍然是显然的</p></li>
+<li><p>三角不等式：由于<span class="math inline">\(A\)</span>是正定埃尔米特矩阵，因此存在非奇异矩阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(A = P^HP\)</span></p>
+<p>那么，<span class="math inline">\(||x||_A = ||Px||_2\)</span>，而<span class="math inline">\(||P(x+y)||_2 = ||Px+Py||_2 \leq ||Px||_2 + ||Py||_2\)</span></p></li>
 </ul></li>
 </ul>
-<h3 id="矩阵级数">矩阵级数</h3>
+<h4 id="向量范数的等价性">向量范数的等价性</h4>
 <ul>
-<li><p>对矩阵序列<span class="math inline">\(\{A_k\}\)</span>，称<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>为矩阵级数，而<span class="math inline">\(A_k\)</span>称为矩阵级数的一般项</p></li>
-<li><p>称<span class="math inline">\(S_k = \sum_{i=0}^k A_i\)</span>为部分和，如果<span class="math inline">\(\{S_k\}\)</span>收敛，那么称矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，否则称矩阵级数发散</p>
+<li><p>称向量范数<span class="math inline">\(||\cdot||_a\)</span>，<span class="math inline">\(||\cdot||_b\)</span>等价，当且仅当存在<span class="math inline">\(c_1, c_2 &gt; 0\)</span>，使得对于任意<span class="math inline">\(x\)</span>，</p>
+<p><span class="math display">\[c_1||x||_b \leq ||x||_a \leq c_2||x||_b\]</span></p></li>
+<li><p>两个范数等价，当且仅当它们具有相同的敛散性</p>
 <ul>
-<li>矩阵级数收敛的充要条件为<span class="math inline">\(n^2\)</span>个对应的数项级数收敛</li>
+<li><p>充分性是显然的，我们考虑必要性的证明</p>
+<p>反证法，不妨设对于任意大的整数<span class="math inline">\(n\)</span>，都存在<span class="math inline">\(x_n\)</span>，使得<span class="math inline">\(||x_n||_b &gt; n||x_n||_a\)</span></p>
+<p>那么，我们考虑序列<span class="math inline">\(x_n&#39; = x_n * ||x_n||_b^{-1}\)</span>，显然<span class="math inline">\(\lim_{n \to \infty} ||x_n&#39;||_b = 1\)</span></p>
+<p>而<span class="math inline">\(||x_n&#39;||_a = ||x_n||_a *||x_n||_b^{-1} &lt; \frac{1}{n}\)</span>，因此<span class="math inline">\(\lim_{n \to \infty} ||x_n&#39;||_a = 0\)</span>，这与有相同的敛散性这一条件矛盾，矛盾的根源在于假设，因此命题是正确的</p></li>
 </ul></li>
-<li><p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，那么<span class="math inline">\(\lim_{n \to \infty} A_n = O\)</span></p>
-<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>都收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} (A_i + B_i) = \sum_{i=0}^{\infty} A_i + \sum_{i=0}^{\infty} B_i\)</span></p>
-<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} kA_i = k \sum_{i=0}^{\infty} A_i\)</span></p></li>
-<li><p>如果<span class="math inline">\(n^2\)</span>个对应的数项级数都绝对收敛，那么称矩阵级数绝对收敛</p>
+<li><p>有限维线性空间上的不同范数是等价的</p>
 <ul>
-<li><p>矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛的充要条件为<span class="math inline">\(\sum_{i=0}^{\infty} ||A_i||\)</span>收敛，其中<span class="math inline">\(||\cdot||\)</span>为任意一种矩阵级数</p>
-<p>把矩阵想象成一个向量，利用<span class="math inline">\(F\)</span>-​范数不难证明</p></li>
-</ul></li>
-</ul>
-<p>仿照数分中的结果，对于矩阵级数，我们有相似的结果</p>
-<ul>
-<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>绝对收敛于<span class="math inline">\(A, B\)</span>，那么<span class="math inline">\(\sum_{i=0}^{\infty} \sum_{j+k = i} A_jB_k\)</span>绝对收敛于<span class="math inline">\(AB\)</span></li>
-<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛，那么<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，并且<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>改变求和次序后，收敛结果不变</li>
-</ul>
-<p>也有一些和数分中有差异的结果</p>
-<ul>
-<li><p>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>（绝对）收敛，那么对于非奇异矩阵<span class="math inline">\(P, Q\)</span>，有<span class="math inline">\(\sum_{i=0}^{\infty} PA_iQ\)</span>（绝对）收敛</p>
-<ul>
-<li><p>在绝对收敛的情况下，给出证明</p>
-<p>注意到<span class="math inline">\(||PA_iQ|| \leq ||P||*||Q|| * ||A_i||\)</span>，而<span class="math inline">\(||P||*||Q||\)</span>为非零常数</p></li>
+<li><p>向量范数的等价关系有传递性，我们只需证明所有范数都与某种范数等价即可</p></li>
+<li><p>首先，由于是有限维线性空间，我们取一组基底<span class="math inline">\(e_1, e_2, ..., e_n\)</span>，对于任意向量<span class="math inline">\(x\)</span>，如果<span class="math inline">\(x = \sum x_ie_i\)</span>，那么，对于向量范数<span class="math inline">\(||\cdot||_a\)</span>，定义<span class="math inline">\(f(x_1, x_2, ..., x_n) = ||x||_a\)</span>，不难证明<span class="math inline">\(f(x_1,x_2,...,x_n)\)</span>是一个连续函数</p>
+<p>不妨设<span class="math inline">\(||x||_b\)</span>是另一种范数，我们考虑<span class="math inline">\(f(x_1,x_2,...,x_n)\)</span>在<span class="math inline">\(||x||_b = 1\)</span>上的分布情况，由<span class="math inline">\(f\)</span>的连续性可知它可以取到最大值<span class="math inline">\(M\)</span>和最小值<span class="math inline">\(m\)</span></p>
+<p>而对于<span class="math inline">\(||x||_b = k(k \neq 0)\)</span>的一般情况，我们有<span class="math inline">\(m \leq ||x * k^{-1}||_a \leq M\)</span>，即<span class="math inline">\(m||x||_b \leq ||x||_a \leq M ||x||_b\)</span></p></li>
 </ul></li>
 </ul>
-<p>接下来考虑矩阵幂级数</p>
+<h3 id="矩阵范数">矩阵范数</h3>
+<h4 id="矩阵范数-1">矩阵范数</h4>
 <ul>
-<li>形如<span class="math inline">\(\sum c_i A^i\)</span>的矩阵级数称为矩阵幂级数</li>
+<li><p>定义：对于矩阵<span class="math inline">\(A\)</span>，如果存在实值函数<span class="math inline">\(||A||\)</span>，满足</p>
+<ul>
+<li>非负性：<span class="math inline">\(||A|| \geq 0\)</span>，当且仅当<span class="math inline">\(A = O\)</span>时取等</li>
+<li>齐次性：<span class="math inline">\(||kA|| = k||A||\)</span></li>
+<li>三角不等式：<span class="math inline">\(||A+B|| \leq ||A|| + ||B||\)</span></li>
+<li>相容性：<span class="math inline">\(||AB|| \leq ||A|| *||B||\)</span></li>
 </ul>
-<p>考虑到范数的相容性，我们有</p>
+<p>称该函数为<strong>矩阵范数</strong></p></li>
+</ul>
+<p>定义中的次乘性的一个感性理解是，当<span class="math inline">\(||A|| &lt; 1\)</span>时，将有<span class="math inline">\(\lim_{n \to \infty} ||A||^n = 0(n \to \infty)\)</span></p>
 <ul>
-<li><p>如果对于某一种矩阵范数，<span class="math inline">\(\sum c_i ||A||^i\)</span>收敛，那么对应的矩阵级数绝对收敛</p></li>
-<li><p>如果对于某一种矩阵范数，<span class="math inline">\(||A||\)</span>落在<span class="math inline">\(\sum c_i z^i\)</span>的收敛圆中，那么对应的矩阵级数绝对收敛</p></li>
-<li><p>如果<span class="math inline">\(A\)</span>​的谱半径<span class="math inline">\(\rho(A)\)</span>​落在纯量幂级数<span class="math inline">\(\sum c_ix^i\)</span>​的收敛圆中，那么对应的矩阵级数绝对收敛；如果<span class="math inline">\(A\)</span>​的特征值有一个落在<span class="math inline">\(\sum c_iz^i\)</span>​​的收敛圆外，那么对应的矩阵级数发散</p>
+<li><p>不难验证下列函数都是矩阵范数</p>
+<p><span class="math display">\[||A||_{m_1} = \sum_{i, j} |a_{ij}|\]</span></p>
+<p><span class="math display">\[||A||_{m_2} = n* \max_{i.j} |a_{i,j}|\]</span></p>
+<p><span class="math display">\[||A||_F = (\sum_{i.j} |a_{ij}|^2)^{1/2}\]</span></p></li>
+</ul>
+<p>最后一种矩阵范数简称为F-范数，F-范数有不错的性质</p>
 <ul>
-<li>考虑若尔当标准形</li>
+<li>设<span class="math inline">\(U, V\)</span>为酉矩阵，那么<span class="math inline">\(||A||_F = ||UAV||_F\)</span>
+<ul>
+<li>注意到<span class="math inline">\(||A||_F = (tr(AA^H))^{1/2}\)</span>，<span class="math inline">\((UAV)(UAV)^H\)</span>和<span class="math inline">\(AA^H\)</span>相似</li>
+</ul></li>
+<li>矩阵范数在有限维线性空间下也有等价性</li>
+</ul>
+<h4 id="算子范数">算子范数</h4>
+<ul>
+<li><p>定义：设<span class="math inline">\(||x||\)</span>是一个向量范数，那么，我们定义<span class="math inline">\(||A|| = \sup_{x \neq 0} \frac{||Ax||}{||x||} = \max_{x = 1} ||Ax||\)</span>为由向量范数<span class="math inline">\(||\cdot||\)</span>诱导出的算子范数</p>
+<ul>
+<li><p>由定义，算子范数满足<span class="math inline">\(||Ax|| \leq ||A|| *||x||\)</span>，此时，我们称矩阵范数<span class="math inline">\(||A||\)</span>和向量范数<span class="math inline">\(||x||\)</span>相容</p></li>
+<li><p>算子范数是一种矩阵范数</p>
+<ul>
+<li>非负性，齐次性，三角不等式都可以转化为向量范数来证明</li>
+<li>对于次乘性，设<span class="math inline">\(x_0\)</span>是在<span class="math inline">\(||x|| = 1\)</span>中，使得<span class="math inline">\(||ABx||\)</span>取到最大值的<span class="math inline">\(x\)</span>，那么<span class="math inline">\(||AB|| = ||ABx_0|| \leq ||A||*||Bx_0|| \leq ||A||*||B||\)</span>，其中的不等式利用的是算子范数的性质</li>
+</ul></li>
+<li><p><span class="math inline">\(||I||=1\)</span>对任何算子范数成立</p></li>
+</ul></li>
+<li><p>我们给出几个特例的算子范数</p>
+<p>对应于向量范数<span class="math inline">\(||x||_1, ||x||_2, ||x||_{\infty}\)</span>的算子范数分别为</p>
+<p><span class="math display">\[||A||_1 = \max_{j} \sum_{i=1}^m |a_{ij}|\]</span></p>
+<p><span class="math display">\[||A||_2 = \sigma_{max} = \sqrt {\lambda_{max} }\]</span></p>
+<p>上式中<span class="math inline">\(\lambda_{max}\)</span>表示矩阵<span class="math inline">\(AA^H\)</span>的最大特征值</p>
+<p><span class="math display">\[||A||_{\infty} =\max_{i} \sum_{j=1}^n |a_{ij}|\]</span></p>
+<p>它们分别被称作列范数，谱范数，行范数</p>
+<ul>
+<li><p>列范数和行范数不难证明，我们对谱范数稍作解释</p>
+<p>对<span class="math inline">\(||x||=1\)</span>，不难得到<span class="math inline">\(||Ax||^2_2 = (Ax)^HAx = x^H A^HAx\)</span></p>
+<p>设<span class="math inline">\(A^HA\)</span>的谱分解为<span class="math inline">\(\sum \lambda_i x_i^Hx_i\)</span>，其中<span class="math inline">\(\lambda_1 \geq ... \geq \lambda_m\)</span>，并设<span class="math inline">\(x = \sum a_ix_i\)</span></p>
+<p>那么<span class="math inline">\(x^HA^HAx = \sum \lambda_i |a_i|^2 \leq \lambda_1\)</span>，当<span class="math inline">\(a_1 = 1\)</span>时可以取到等号</p></li>
 </ul></li>
 </ul>
-<h3 id="矩阵函数">矩阵函数</h3>
+<h3 id="谱范数">谱范数</h3>
+<h4 id="性质">性质</h4>
+<p>谱范数和F-范数一样，有比较好的性质</p>
 <ul>
-<li><p>考虑以下三个矩阵级数</p>
-<p><span class="math display">\[\exp(A) = \sum_{i=0}^{\infty} \frac{A^i}{i!}\]</span></p>
-<p><span class="math display">\[\sin(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i+1}}{(2i+1)!}\]</span></p>
-<p><span class="math display">\[\cos(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i}}{(2i)!}\]</span></p>
-<p>它们都是绝对收敛的，具体而言，设<span class="math inline">\(z = ||A||\)</span>，那么，当<span class="math inline">\(i \geq 1\)</span>时，由<span class="math inline">\(||\frac{A^i}{i!}|| \leq z^i *(i!)^{-1}\)</span>，得到<span class="math inline">\(||\sum_{i=0}^{\infty} \frac{A^i}{i!}|| \leq ||I|| + \sum_{i=1}^{\infty} z^i * (i!)^{-1} = e^z - 1 + ||I||\)</span>，因此<span class="math inline">\(\exp(A)\)</span>绝对收敛</p>
-<p><span class="math inline">\(\sin(A), \cos(A)\)</span>的绝对收敛性可以类似地证明</p></li>
-</ul>
-<p>即使是基础的矩阵函数，性质也和普通的函数有所不同</p>
+<li><p>设<span class="math inline">\(U, V\)</span>为酉矩阵，那么<span class="math inline">\(||A||_2 = ||UAV||_2\)</span></p>
 <ul>
-<li><p>如果<span class="math inline">\(A, B\)</span>可交换，即<span class="math inline">\(AB = BA\)</span>，则有<span class="math inline">\(e^A * e^B = e^B * e^A = e^{A+B}\)</span></p>
-<p>证明：由于<span class="math inline">\(e^A, e^B\)</span>​绝对收敛，我们可以考虑两者的柯西乘积</p>
-<p><span class="math display">\[\begin{align*}e^A * e^B &amp;= (I + A + \frac{1}{2!}A^2 + ...)(I + B + \frac{1}{2!}B^2 + ...) \\ &amp;= I + (A+B) + \frac{1}{2!}(A+B)^2 + ... \\ &amp;= e^{A+B}\end{align*}\]</span></p></li>
-<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\cos(A+B) = \cos A \cos B - \sin A \sin B\)</span></p>
-<p>证明：对比两式同次数的项，显然奇次数项都为0，我们只需要证明</p>
-<p><span class="math display">\[\begin{align*}RHS &amp;= \sum_{i+j = k} (-1)^{i+j} \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} - \sum_{i+j = k-1} (-1)^{i+j} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}\\ &amp;= (-1)^k [\sum_{i+j = k}  \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} + \sum_{i+j = k-1} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}] \\ &amp;= \frac{(-1)^k}{(2k)!} [\sum_{i} \binom{2k}{2i}A^{2i}B^{2k-2i} + \sum_i \binom{2k}{2i+1}A^{2i+1}B^{2k-2i-1}] \\ &amp;= \frac{(-1)^k}{(2k)!} \sum_i \binom{2k}{i} A^i B^{2k-i} \\ &amp;= \frac{(-1)^k}{(2k)!} (A+B)^{2k} \\ &amp;= LHS\end{align*}\]</span></p></li>
-<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\sin(A+B) = \sin A \cos B + \cos A \sin B\)</span>​</p></li>
-</ul>
-<p>当然，也有一些和普通函数相同的性质</p>
+<li>证明：<span class="math inline">\(AA^H\)</span>和<span class="math inline">\((UAV)(UVA)^H\)</span>相似</li>
+</ul></li>
+<li><p><span class="math inline">\(||A||_2 = ||A^H||_2\)</span></p>
 <ul>
-<li><p><span class="math inline">\(\cos(-A) = \cos A, \sin (-A) = -\sin(A)\)</span>​</p></li>
-<li><p>欧拉公式</p>
-<p><span class="math display">\[\exp(iA) = \cos A + i \sin A\]</span></p></li>
+<li><span class="math inline">\(AA^H\)</span>和<span class="math inline">\(A^HA\)</span>有相同的非零特征值</li>
+</ul></li>
+<li><p><span class="math inline">\(||A||_2 = \max_{||x||_2 = 1, ||y||_2=1} |y^HAx|\)</span></p>
+<ul>
+<li><p><span class="math inline">\(|y^HAx| \leq ||y^H||_2 * ||A||_2*||x||_2 \leq ||A||_2\)</span></p>
+<p>存在<span class="math inline">\(x_0\)</span>满足条件，并且使得<span class="math inline">\(||Ax_0||_2 = ||A||_2\)</span>，此时，取<span class="math inline">\(y_0 = Ax_0 * ||Ax_0||^{-1}\)</span>可以取得等号</p></li>
+</ul></li>
+<li><p><span class="math inline">\(||A^HA||_2 = ||A||_2^2\)</span></p>
+<ul>
+<li><p><span class="math inline">\(||A^HA||_2 \leq ||A^H||_2 * ||A||_2 = ||A||_2^2\)</span></p>
+<p><span class="math inline">\(||A^HA||_2 = \max |y^HA^HAx| \geq \max |x^HA^HAx|\)</span></p></li>
+</ul></li>
 </ul>
+<h4 id="谱半径">谱半径</h4>
+<ul>
+<li>定义：设<span class="math inline">\(A\)</span>的特征值为<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>，那么称<span class="math inline">\(\rho(A) = \max_{i} |\lambda_i|\)</span>，称为<span class="math inline">\(A\)</span>的<strong>谱半径</strong></li>
+</ul>
+<p>谱半径有非常良好的性质</p>
+<ul>
+<li><span class="math inline">\(\rho(A) \leq ||A||\)</span>，谱半径不会超过<span class="math inline">\(A\)</span>的<strong>任何</strong>一种范数</li>
+</ul>
+<p>为了证明这个定理，我们需要一个引理 `</p>
+<ul>
+<li><p>引理：对于任何一种矩阵范数<span class="math inline">\(||\cdot||_A\)</span>，存在与其相容的向量范数<span class="math inline">\(||\cdot||_v\)</span></p>
+<ul>
+<li><p>任取<span class="math inline">\(y \neq 0, y \in V\)</span>，那么定义<span class="math inline">\(||x||_v = ||xy^H||_A\)</span></p>
+<p>容易验证这是一个向量范数，我们来考虑相容性</p>
+<p><span class="math inline">\(||M||_A * ||x||_v = ||M||_A*||xy^H||_A \geq ||Mxy^H||_A = ||Mx||_v\)</span></p></li>
+</ul></li>
+</ul>
+<p>现在让我们回到定理的证明，设<span class="math inline">\(\lambda\)</span>为其特征值，<span class="math inline">\(x\)</span>为其对应的特征向量，<span class="math inline">\(||\cdot||_v\)</span>取与其相容的向量范数，那么<span class="math inline">\(|\lambda|*||x||_v = ||\lambda x||_v = ||Ax||_v \leq ||A|| * ||x||_v\)</span>，于是<span class="math inline">\(|\lambda| \leq ||A||\)</span></p>
+<ul>
+<li>如果<span class="math inline">\(A\)</span>的正规矩阵，那么<span class="math inline">\(\rho(A) = ||A||_2\)</span></li>
+</ul>
+<p>即证<span class="math inline">\(A\)</span>的特征值的模的最大值等于<span class="math inline">\(A\)</span>的最大奇异值，这个由特征值的模与奇异值之间的对应关系可以得到</p>
+<ul>
+<li><span class="math inline">\(||A||_2 = \sqrt {\rho(AA^H)}\)</span></li>
+</ul>
+<p>这个是显然的</p>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -1034,163 +1268,187 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
-    <title>矩阵分析 5</title>
-    <url>/2021/08/02/matrix-analysis-5/</url>
+    <title>矩阵分析 6</title>
+    <url>/2021/08/05/matrix-analysis-6/</url>
     <content><![CDATA[<span id="more"></span>
-<h3 id="向量范数">向量范数</h3>
-<h4 id="介绍">介绍</h4>
 <ul>
-<li>定义：如果<span class="math inline">\(V\)</span>是数域<span class="math inline">\(P\)</span>上的线性空间，且对于<span class="math inline">\(x \in V\)</span>，存在<span class="math inline">\(V \to R\)</span>的函数<span class="math inline">\(||x||\)</span>，满足
+<li>完备的赋范线性空间，称为Banach空间</li>
+</ul>
+<h3 id="矩阵序列的极限">矩阵序列的极限</h3>
 <ul>
-<li>非负性：<span class="math inline">\(||x|| \geq 0\)</span>，当且仅当<span class="math inline">\(x = 0\)</span>取等</li>
-<li>齐次性：<span class="math inline">\(||kx|| = |k|*||x||\)</span></li>
-<li>三角不等式：<span class="math inline">\(||x+y|| \leq ||x|| + ||y||\)</span></li>
+<li><p>定义：设有矩阵序列<span class="math inline">\(\{A_k\}\)</span>，其中<span class="math inline">\(A_k = (a_{ij}^{(k)})_{n*n}\)</span>，且当<span class="math inline">\(k \to \infty\)</span>时，<span class="math inline">\(a_{ij}^{(k)} \to a_{ij}\)</span>，则称<span class="math inline">\(\{A_k\}\)</span>收敛，并称<span class="math inline">\(A = (a_{ij})\)</span>为<span class="math inline">\(\{A_k\}\)</span>的极限，记做</p>
+<p><span class="math display">\[\lim_{k \to \infty} A_k = A\]</span></p></li>
+<li><p>不收敛的序列称为发散的</p></li>
+</ul>
+<p>这个定义研究起来并不是很方便，我们可以引出一个等价的定义</p>
+<ul>
+<li>在有限维巴拿赫空间中，矩阵序列<span class="math inline">\(\{A_k\}\)</span>收敛于<span class="math inline">\(A\)</span>等价于矩阵序列<span class="math inline">\(\{A_k\}\)</span>按范数收敛于<span class="math inline">\(A\)</span>
+<ul>
+<li>由于所有范数是等价的，我们不妨取矩阵的F-范数来研究，此时矩阵相等于<span class="math inline">\(n*m\)</span>维的一个向量，由向量范数的性质知道，对于F-范数而言，这个定理是成立的</li>
 </ul></li>
 </ul>
-<p>这里记录一些常见的范数</p>
+<p>同大多数极限一样，矩阵极限有相应的运算性质</p>
 <ul>
-<li><p><span class="math inline">\(||x|| = \sqrt {\sum_{i=1}^n |x_i|^2}\)</span>，称作<strong>2-范数</strong>或者<strong>欧式范数</strong>，记为<span class="math inline">\(||x||_2\)</span></p>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，那么序列<span class="math inline">\(\{||A_k||\}\)</span>有界</p></li>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A, \lim_{k \to \infty} B_k = B\)</span>，那么</p>
+<p><span class="math display">\[\lim_{k \to \infty} (aA_k + bB_k) = aA + bB\]</span></p></li>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A. \lim_{k \to \infty} B_k = B\)</span>，那么</p>
+<p><span class="math display">\[\lim_{k \to \infty} A_kB_k = AB\]</span></p>
 <ul>
-<li>该函数显然满足非负性和齐次性，利用柯西不等式可以得到三角不等式也满足</li>
+<li><span class="math inline">\(||A_kB_k - AB|| \leq ||(A_k- A)||*||B_k|| + ||(B_k-B)||*||A||\)</span></li>
 </ul></li>
-<li><p><span class="math inline">\(||x|| = max_{i=1}^n |x_i|\)</span>，称作<strong><span class="math inline">\(\infty-\)</span>范数</strong>，记为<span class="math inline">\(||x||_{\infty}\)</span></p>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，且<span class="math inline">\(A_k(k \in N^{+}), A\)</span>都可逆，那么</p>
+<p><span class="math display">\[\lim_{k \to \infty} A_k^{=1} = A^{-1}\]</span></p>
 <ul>
-<li>验证三条性质都是简单的</li>
-</ul></li>
-<li><p><span class="math inline">\(||x|| = (\sum_{i=1}^n |x_i|^p)^{\frac{1}{p}}\)</span>，称作<strong>p-范数</strong>，其中<span class="math inline">\(1 \leq p &lt; +\infty\)</span>，记为<span class="math inline">\(||x||_p\)</span></p>
-<ul>
-<li>非负性和齐次性仍然是显然的</li>
-<li>三角不等式则可由Young不等式或Holder不等式得出</li>
-<li>不难发现<span class="math inline">\(p= 2\)</span>和<span class="math inline">\(p \to +\infty\)</span>的情况下，p-范数变为上述两种情况</li>
-</ul></li>
-<li><p>对于正定埃尔米特矩阵<span class="math inline">\(A\)</span>，定义<span class="math inline">\(||x||_A = \sqrt {x^HAx}\)</span>，称作<strong>椭圆范数</strong></p>
-<ul>
-<li><p>非负性和齐次性仍然是显然的</p></li>
-<li><p>三角不等式：由于<span class="math inline">\(A\)</span>是正定埃尔米特矩阵，因此存在非奇异矩阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(A = P^HP\)</span></p>
-<p>那么，<span class="math inline">\(||x||_A = ||Px||_2\)</span>，而<span class="math inline">\(||P(x+y)||_2 = ||Px+Py||_2 \leq ||Px||_2 + ||Py||_2\)</span></p></li>
+<li><p>注意到对于任意<span class="math inline">\(A_k\)</span>中的子式而言，它可以表示为<span class="math inline">\(A_k\)</span>中元素的连续函数，由连续性，<span class="math inline">\(A_k\)</span>的子式一定收敛于<span class="math inline">\(A\)</span>中对应的子式，特别的，<span class="math inline">\(|A_k| \to |A|\)</span></p>
+<p>同样的，我们将有<span class="math inline">\(\text{adj} A_k \to \text{adj} A\)</span>，从而有<span class="math inline">\(A_k^{-1} \to A^{-1}\)</span></p></li>
 </ul></li>
 </ul>
-<h4 id="向量范数的等价性">向量范数的等价性</h4>
+<p>下面是一个基础的定理</p>
 <ul>
-<li><p>称向量范数<span class="math inline">\(||\cdot||_a\)</span>，<span class="math inline">\(||\cdot||_b\)</span>等价，当且仅当存在<span class="math inline">\(c_1, c_2 &gt; 0\)</span>，使得对于任意<span class="math inline">\(x\)</span>，</p>
-<p><span class="math display">\[c_1||x||_b \leq ||x||_a \leq c_2||x||_b\]</span></p></li>
-<li><p>两个范数等价，当且仅当它们具有相同的敛散性</p>
+<li><p><span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>的充要条件是<span class="math inline">\(\rho(A) &lt; 1\)</span></p>
 <ul>
-<li><p>充分性是显然的，我们考虑必要性的证明</p>
-<p>反证法，不妨设对于任意大的整数<span class="math inline">\(n\)</span>，都存在<span class="math inline">\(x_n\)</span>，使得<span class="math inline">\(||x_n||_b &gt; n||x_n||_a\)</span></p>
-<p>那么，我们考虑序列<span class="math inline">\(x_n&#39; = x_n * ||x_n||_b^{-1}\)</span>，显然<span class="math inline">\(\lim_{n \to \infty} ||x_n&#39;||_b = 1\)</span></p>
-<p>而<span class="math inline">\(||x_n&#39;||_a = ||x_n||_a *||x_n||_b^{-1} &lt; \frac{1}{n}\)</span>，因此<span class="math inline">\(\lim_{n \to \infty} ||x_n&#39;||_a = 0\)</span>，这与有相同的敛散性这一条件矛盾，矛盾的根源在于假设，因此命题是正确的</p></li>
-</ul></li>
-<li><p>有限维线性空间上的不同范数是等价的</p>
-<ul>
-<li><p>向量范数的等价关系有传递性，我们只需证明所有范数都与某种范数等价即可</p></li>
-<li><p>首先，由于是有限维线性空间，我们取一组基底<span class="math inline">\(e_1, e_2, ..., e_n\)</span>，对于任意向量<span class="math inline">\(x\)</span>，如果<span class="math inline">\(x = \sum x_ie_i\)</span>，那么，对于向量范数<span class="math inline">\(||\cdot||_a\)</span>，定义<span class="math inline">\(f(x_1, x_2, ..., x_n) = ||x||_a\)</span>，不难证明<span class="math inline">\(f(x_1,x_2,...,x_n)\)</span>是一个连续函数</p>
-<p>不妨设<span class="math inline">\(||x||_b\)</span>是另一种范数，我们考虑<span class="math inline">\(f(x_1,x_2,...,x_n)\)</span>在<span class="math inline">\(||x||_b = 1\)</span>上的分布情况，由<span class="math inline">\(f\)</span>的连续性可知它可以取到最大值<span class="math inline">\(M\)</span>和最小值<span class="math inline">\(m\)</span></p>
-<p>而对于<span class="math inline">\(||x||_b = k(k \neq 0)\)</span>的一般情况，我们有<span class="math inline">\(m \leq ||x * k^{-1}||_a \leq M\)</span>，即<span class="math inline">\(m||x||_b \leq ||x||_a \leq M ||x||_b\)</span></p></li>
+<li><p>考虑矩阵<span class="math inline">\(A\)</span>的若尔当标准形<span class="math inline">\(J\)</span>，即<span class="math inline">\(A = TJT^{-1}\)</span>，那么<span class="math inline">\(A^k = T J^K T^{-1}\)</span></p>
+<p>因此<span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>，当且仅当<span class="math inline">\(\lim_{k \to \infty} J^k = 0\)</span></p>
+<p>设<span class="math inline">\(J = diag\{J_1, ..., J_r\}\)</span>，那么<span class="math inline">\(J^k = diag\{J_1^k, ..., J_r^k\}\)</span></p>
+<p>注意到<span class="math inline">\(J_i^k = \begin{pmatrix} \lambda_i^k &amp; \binom{k}{1} \lambda_i^{k-1} &amp; ... &amp; \binom{k}{n_i - 1} \lambda_i^{k - n_i + 1} \\ 0 &amp; \lambda_i^{k} &amp; ... &amp; \binom{k}{n_i-2} \lambda_{i}^{k-n_i+2} \\ ...&amp;... &amp; ... &amp;... \\ ... &amp; ... &amp; ... &amp; \lambda_i^k\end{pmatrix}\)</span>​</p>
+<p>矩阵每个元素都形如<span class="math inline">\(f(k) * \lambda^k\)</span>，其中<span class="math inline">\(f(k)\)</span>是关于<span class="math inline">\(k\)</span>的多项式</p>
+<p>因此，当<span class="math inline">\(|\lambda| &lt; \rho(A) &lt; 1\)</span>时，就有<span class="math inline">\(J_i^k \to O\)</span>，从而<span class="math inline">\(J^k \to O\)</span></p>
+<p>反过来，当<span class="math inline">\(J^k \to O\)</span>时，<span class="math inline">\(J_i^k \to O\)</span>，因此<span class="math inline">\(\lambda_i^k \to 0\)</span>，从而<span class="math inline">\(|\lambda_i| &lt; 1\)</span>，<span class="math inline">\(\rho(A)&lt;1\)</span></p></li>
 </ul></li>
 </ul>
-<h3 id="矩阵范数">矩阵范数</h3>
-<h4 id="矩阵范数-1">矩阵范数</h4>
+<h3 id="矩阵级数">矩阵级数</h3>
 <ul>
-<li><p>定义：对于矩阵<span class="math inline">\(A\)</span>，如果存在实值函数<span class="math inline">\(||A||\)</span>，满足</p>
+<li><p>对矩阵序列<span class="math inline">\(\{A_k\}\)</span>，称<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>为矩阵级数，而<span class="math inline">\(A_k\)</span>称为矩阵级数的一般项</p></li>
+<li><p>称<span class="math inline">\(S_k = \sum_{i=0}^k A_i\)</span>为部分和，如果<span class="math inline">\(\{S_k\}\)</span>收敛，那么称矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，否则称矩阵级数发散</p>
 <ul>
-<li>非负性：<span class="math inline">\(||A|| \geq 0\)</span>，当且仅当<span class="math inline">\(A = O\)</span>时取等</li>
-<li>齐次性：<span class="math inline">\(||kA|| = k||A||\)</span></li>
-<li>三角不等式：<span class="math inline">\(||A+B|| \leq ||A|| + ||B||\)</span></li>
-<li>相容性：<span class="math inline">\(||AB|| \leq ||A|| *||B||\)</span></li>
-</ul>
-<p>称该函数为<strong>矩阵范数</strong></p></li>
-</ul>
-<p>定义中的次乘性的一个感性理解是，当<span class="math inline">\(||A|| &lt; 1\)</span>时，将有<span class="math inline">\(\lim_{n \to \infty} ||A||^n = 0(n \to \infty)\)</span></p>
-<ul>
-<li><p>不难验证下列函数都是矩阵范数</p>
-<p><span class="math display">\[||A||_{m_1} = \sum_{i, j} |a_{ij}|\]</span></p>
-<p><span class="math display">\[||A||_{m_2} = n* \max_{i.j} |a_{i,j}|\]</span></p>
-<p><span class="math display">\[||A||_F = (\sum_{i.j} |a_{ij}|^2)^{1/2}\]</span></p></li>
-</ul>
-<p>最后一种矩阵范数简称为F-范数，F-范数有不错的性质</p>
-<ul>
-<li>设<span class="math inline">\(U, V\)</span>为酉矩阵，那么<span class="math inline">\(||A||_F = ||UAV||_F\)</span>
-<ul>
-<li>注意到<span class="math inline">\(||A||_F = (tr(AA^H))^{1/2}\)</span>，<span class="math inline">\((UAV)(UAV)^H\)</span>和<span class="math inline">\(AA^H\)</span>相似</li>
+<li>矩阵级数收敛的充要条件为<span class="math inline">\(n^2\)</span>个对应的数项级数收敛</li>
 </ul></li>
-<li>矩阵范数在有限维线性空间下也有等价性</li>
-</ul>
-<h4 id="算子范数">算子范数</h4>
+<li><p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，那么<span class="math inline">\(\lim_{n \to \infty} A_n = O\)</span></p>
+<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>都收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} (A_i + B_i) = \sum_{i=0}^{\infty} A_i + \sum_{i=0}^{\infty} B_i\)</span></p>
+<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} kA_i = k \sum_{i=0}^{\infty} A_i\)</span></p></li>
+<li><p>如果<span class="math inline">\(n^2\)</span>个对应的数项级数都绝对收敛，那么称矩阵级数绝对收敛</p>
 <ul>
-<li><p>定义：设<span class="math inline">\(||x||\)</span>是一个向量范数，那么，我们定义<span class="math inline">\(||A|| = \sup_{x \neq 0} \frac{||Ax||}{||x||} = \max_{x = 1} ||Ax||\)</span>为由向量范数<span class="math inline">\(||\cdot||\)</span>诱导出的算子范数</p>
-<ul>
-<li><p>由定义，算子范数满足<span class="math inline">\(||Ax|| \leq ||A|| *||x||\)</span>，此时，我们称矩阵范数<span class="math inline">\(||A||\)</span>和向量范数<span class="math inline">\(||x||\)</span>相容</p></li>
-<li><p>算子范数是一种矩阵范数</p>
-<ul>
-<li>非负性，齐次性，三角不等式都可以转化为向量范数来证明</li>
-<li>对于次乘性，设<span class="math inline">\(x_0\)</span>是在<span class="math inline">\(||x|| = 1\)</span>中，使得<span class="math inline">\(||ABx||\)</span>取到最大值的<span class="math inline">\(x\)</span>，那么<span class="math inline">\(||AB|| = ||ABx_0|| \leq ||A||*||Bx_0|| \leq ||A||*||B||\)</span>，其中的不等式利用的是算子范数的性质</li>
-</ul></li>
-<li><p><span class="math inline">\(||I||=1\)</span>对任何算子范数成立</p></li>
-</ul></li>
-<li><p>我们给出几个特例的算子范数</p>
-<p>对应于向量范数<span class="math inline">\(||x||_1, ||x||_2, ||x||_{\infty}\)</span>的算子范数分别为</p>
-<p><span class="math display">\[||A||_1 = \max_{j} \sum_{i=1}^m |a_{ij}|\]</span></p>
-<p><span class="math display">\[||A||_2 = \sigma_{max} = \sqrt {\lambda_{max} }\]</span></p>
-<p>上式中<span class="math inline">\(\lambda_{max}\)</span>表示矩阵<span class="math inline">\(AA^H\)</span>的最大特征值</p>
-<p><span class="math display">\[||A||_{\infty} =\max_{i} \sum_{j=1}^n |a_{ij}|\]</span></p>
-<p>它们分别被称作列范数，谱范数，行范数</p>
-<ul>
-<li><p>列范数和行范数不难证明，我们对谱范数稍作解释</p>
-<p>对<span class="math inline">\(||x||=1\)</span>，不难得到<span class="math inline">\(||Ax||^2_2 = (Ax)^HAx = x^H A^HAx\)</span></p>
-<p>设<span class="math inline">\(A^HA\)</span>的谱分解为<span class="math inline">\(\sum \lambda_i x_i^Hx_i\)</span>，其中<span class="math inline">\(\lambda_1 \geq ... \geq \lambda_m\)</span>，并设<span class="math inline">\(x = \sum a_ix_i\)</span></p>
-<p>那么<span class="math inline">\(x^HA^HAx = \sum \lambda_i |a_i|^2 \leq \lambda_1\)</span>，当<span class="math inline">\(a_1 = 1\)</span>时可以取到等号</p></li>
+<li><p>矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛的充要条件为<span class="math inline">\(\sum_{i=0}^{\infty} ||A_i||\)</span>收敛，其中<span class="math inline">\(||\cdot||\)</span>为任意一种矩阵级数</p>
+<p>把矩阵想象成一个向量，利用<span class="math inline">\(F\)</span>-​范数不难证明</p></li>
 </ul></li>
 </ul>
-<h3 id="谱范数">谱范数</h3>
-<h4 id="性质">性质</h4>
-<p>谱范数和F-范数一样，有比较好的性质</p>
+<p>仿照数分中的结果，对于矩阵级数，我们有相似的结果</p>
 <ul>
-<li><p>设<span class="math inline">\(U, V\)</span>为酉矩阵，那么<span class="math inline">\(||A||_2 = ||UAV||_2\)</span></p>
+<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>绝对收敛于<span class="math inline">\(A, B\)</span>，那么<span class="math inline">\(\sum_{i=0}^{\infty} \sum_{j+k = i} A_jB_k\)</span>绝对收敛于<span class="math inline">\(AB\)</span></li>
+<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛，那么<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，并且<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>改变求和次序后，收敛结果不变</li>
+</ul>
+<p>也有一些和数分中有差异的结果</p>
 <ul>
-<li>证明：<span class="math inline">\(AA^H\)</span>和<span class="math inline">\((UAV)(UVA)^H\)</span>相似</li>
-</ul></li>
-<li><p><span class="math inline">\(||A||_2 = ||A^H||_2\)</span></p>
+<li><p>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>（绝对）收敛，那么对于非奇异矩阵<span class="math inline">\(P, Q\)</span>，有<span class="math inline">\(\sum_{i=0}^{\infty} PA_iQ\)</span>（绝对）收敛</p>
 <ul>
-<li><span class="math inline">\(AA^H\)</span>和<span class="math inline">\(A^HA\)</span>有相同的非零特征值</li>
-</ul></li>
-<li><p><span class="math inline">\(||A||_2 = \max_{||x||_2 = 1, ||y||_2=1} |y^HAx|\)</span></p>
-<ul>
-<li><p><span class="math inline">\(|y^HAx| \leq ||y^H||_2 * ||A||_2*||x||_2 \leq ||A||_2\)</span></p>
-<p>存在<span class="math inline">\(x_0\)</span>满足条件，并且使得<span class="math inline">\(||Ax_0||_2 = ||A||_2\)</span>，此时，取<span class="math inline">\(y_0 = Ax_0 * ||Ax_0||^{-1}\)</span>可以取得等号</p></li>
-</ul></li>
-<li><p><span class="math inline">\(||A^HA||_2 = ||A||_2^2\)</span></p>
-<ul>
-<li><p><span class="math inline">\(||A^HA||_2 \leq ||A^H||_2 * ||A||_2 = ||A||_2^2\)</span></p>
-<p><span class="math inline">\(||A^HA||_2 = \max |y^HA^HAx| \geq \max |x^HA^HAx|\)</span></p></li>
+<li><p>在绝对收敛的情况下，给出证明</p>
+<p>注意到<span class="math inline">\(||PA_iQ|| \leq ||P||*||Q|| * ||A_i||\)</span>，而<span class="math inline">\(||P||*||Q||\)</span>为非零常数</p></li>
 </ul></li>
 </ul>
-<h4 id="谱半径">谱半径</h4>
+<p>接下来考虑矩阵幂级数</p>
 <ul>
-<li>定义：设<span class="math inline">\(A\)</span>的特征值为<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>，那么称<span class="math inline">\(\rho(A) = \max_{i} |\lambda_i|\)</span>，称为<span class="math inline">\(A\)</span>的<strong>谱半径</strong></li>
+<li>形如<span class="math inline">\(\sum c_i A^i\)</span>的矩阵级数称为矩阵幂级数</li>
 </ul>
-<p>谱半径有非常良好的性质</p>
+<p>考虑到范数的相容性，我们有</p>
 <ul>
-<li><span class="math inline">\(\rho(A) \leq ||A||\)</span>，谱半径不会超过<span class="math inline">\(A\)</span>的<strong>任何</strong>一种范数</li>
-</ul>
-<p>为了证明这个定理，我们需要一个引理 `</p>
+<li><p>如果对于某一种矩阵范数，<span class="math inline">\(\sum c_i ||A||^i\)</span>收敛，那么对应的矩阵级数绝对收敛</p></li>
+<li><p>如果对于某一种矩阵范数，<span class="math inline">\(||A||\)</span>落在<span class="math inline">\(\sum c_i z^i\)</span>的收敛圆中，那么对应的矩阵级数绝对收敛</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>​的谱半径<span class="math inline">\(\rho(A)\)</span>​落在纯量幂级数<span class="math inline">\(\sum c_ix^i\)</span>​的收敛圆中，那么对应的矩阵级数绝对收敛；如果<span class="math inline">\(A\)</span>​的特征值有一个落在<span class="math inline">\(\sum c_iz^i\)</span>​​的收敛圆外，那么对应的矩阵级数发散</p>
 <ul>
-<li><p>引理：对于任何一种矩阵范数<span class="math inline">\(||\cdot||_A\)</span>，存在与其相容的向量范数<span class="math inline">\(||\cdot||_v\)</span></p>
-<ul>
-<li><p>任取<span class="math inline">\(y \neq 0, y \in V\)</span>，那么定义<span class="math inline">\(||x||_v = ||xy^H||_A\)</span></p>
-<p>容易验证这是一个向量范数，我们来考虑相容性</p>
-<p><span class="math inline">\(||M||_A * ||x||_v = ||M||_A*||xy^H||_A \geq ||Mxy^H||_A = ||Mx||_v\)</span></p></li>
+<li>考虑若尔当标准形</li>
 </ul></li>
 </ul>
-<p>现在让我们回到定理的证明，设<span class="math inline">\(\lambda\)</span>为其特征值，<span class="math inline">\(x\)</span>为其对应的特征向量，<span class="math inline">\(||\cdot||_v\)</span>取与其相容的向量范数，那么<span class="math inline">\(|\lambda|*||x||_v = ||\lambda x||_v = ||Ax||_v \leq ||A|| * ||x||_v\)</span>，于是<span class="math inline">\(|\lambda| \leq ||A||\)</span></p>
+<h3 id="矩阵函数">矩阵函数</h3>
 <ul>
-<li>如果<span class="math inline">\(A\)</span>的正规矩阵，那么<span class="math inline">\(\rho(A) = ||A||_2\)</span></li>
+<li><p>考虑以下三个矩阵级数</p>
+<p><span class="math display">\[\exp(A) = \sum_{i=0}^{\infty} \frac{A^i}{i!}\]</span></p>
+<p><span class="math display">\[\sin(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i+1}}{(2i+1)!}\]</span></p>
+<p><span class="math display">\[\cos(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i}}{(2i)!}\]</span></p>
+<p>它们都是绝对收敛的，具体而言，设<span class="math inline">\(z = ||A||\)</span>，那么，当<span class="math inline">\(i \geq 1\)</span>时，由<span class="math inline">\(||\frac{A^i}{i!}|| \leq z^i *(i!)^{-1}\)</span>，得到<span class="math inline">\(||\sum_{i=0}^{\infty} \frac{A^i}{i!}|| \leq ||I|| + \sum_{i=1}^{\infty} z^i * (i!)^{-1} = e^z - 1 + ||I||\)</span>，因此<span class="math inline">\(\exp(A)\)</span>绝对收敛</p>
+<p><span class="math inline">\(\sin(A), \cos(A)\)</span>的绝对收敛性可以类似地证明</p></li>
 </ul>
-<p>即证<span class="math inline">\(A\)</span>的特征值的模的最大值等于<span class="math inline">\(A\)</span>的最大奇异值，这个由特征值的模与奇异值之间的对应关系可以得到</p>
+<p>即使是基础的矩阵函数，性质也和普通的函数有所不同</p>
 <ul>
-<li><span class="math inline">\(||A||_2 = \sqrt {\rho(AA^H)}\)</span></li>
+<li><p>如果<span class="math inline">\(A, B\)</span>可交换，即<span class="math inline">\(AB = BA\)</span>，则有<span class="math inline">\(e^A * e^B = e^B * e^A = e^{A+B}\)</span></p>
+<p>证明：由于<span class="math inline">\(e^A, e^B\)</span>​绝对收敛，我们可以考虑两者的柯西乘积</p>
+<p><span class="math display">\[\begin{align*}e^A * e^B &amp;= (I + A + \frac{1}{2!}A^2 + ...)(I + B + \frac{1}{2!}B^2 + ...) \\ &amp;= I + (A+B) + \frac{1}{2!}(A+B)^2 + ... \\ &amp;= e^{A+B}\end{align*}\]</span></p></li>
+<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\cos(A+B) = \cos A \cos B - \sin A \sin B\)</span></p>
+<p>证明：对比两式同次数的项，显然奇次数项都为0，我们只需要证明</p>
+<p><span class="math display">\[\begin{align*}RHS &amp;= \sum_{i+j = k} (-1)^{i+j} \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} - \sum_{i+j = k-1} (-1)^{i+j} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}\\ &amp;= (-1)^k [\sum_{i+j = k}  \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} + \sum_{i+j = k-1} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}] \\ &amp;= \frac{(-1)^k}{(2k)!} [\sum_{i} \binom{2k}{2i}A^{2i}B^{2k-2i} + \sum_i \binom{2k}{2i+1}A^{2i+1}B^{2k-2i-1}] \\ &amp;= \frac{(-1)^k}{(2k)!} \sum_i \binom{2k}{i} A^i B^{2k-i} \\ &amp;= \frac{(-1)^k}{(2k)!} (A+B)^{2k} \\ &amp;= LHS\end{align*}\]</span></p></li>
+<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\sin(A+B) = \sin A \cos B + \cos A \sin B\)</span>​</p></li>
 </ul>
-<p>这个是显然的</p>
+<p>当然，也有一些和普通函数相同的性质</p>
+<ul>
+<li><p><span class="math inline">\(\cos(-A) = \cos A, \sin (-A) = -\sin(A)\)</span>​</p></li>
+<li><p>欧拉公式</p>
+<p><span class="math display">\[\exp(iA) = \cos A + i \sin A\]</span></p></li>
+</ul>
+<p>下面给出一些特殊情况下的矩阵函数的求法</p>
+<ul>
+<li>如果矩阵<span class="math inline">\(A\)</span>具有谱分解<span class="math inline">\(\sum \lambda_i x_ix_i^T\)</span>，那么矩阵函数<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></li>
+</ul>
+<p>首先有一个容易验证的引理：对于多项式<span class="math inline">\(f(x)\)</span>，如果<span class="math inline">\(x\)</span>是<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda\)</span>的一个特征向量，那么<span class="math inline">\(x\)</span>也是<span class="math inline">\(f(A)\)</span>的属于<span class="math inline">\(f(\lambda)\)</span>的一个特征向量</p>
+<p>我们设出部分和<span class="math inline">\(f_N(A) = \sum_{i=0}^N c_iA_i\)</span>，那么根据上面的引理，有<span class="math inline">\(f_N(A) = \sum f_N(\lambda_i) x_ix_i^T\)</span></p>
+<p>令<span class="math inline">\(N \to \infty\)</span>，我们就有<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></p>
+<h3 id="矩阵微积分">矩阵微积分</h3>
+<h5 id="矩阵对标量的导数">矩阵对标量的导数</h5>
+<p>对于矩阵<span class="math inline">\(A\)</span>，如果其元素<span class="math inline">\(a_{ij}\)</span>都是变量<span class="math inline">\(x\)</span>的函数<span class="math inline">\(a_{ij}(x)\)</span>，那么我们称矩阵<span class="math inline">\(A\)</span>为变量<span class="math inline">\(x\)</span>的函数矩阵</p>
+<ul>
+<li>函数矩阵的极限：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a^{*}_{ij}\)</span>存在时，我们称<span class="math inline">\(A\)</span>有极限，且极限为<span class="math inline">\(A^* = \{a^{*}_{ij}\}\)</span></li>
+<li>函数矩阵的连续性：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a_{ij}(x_0)\)</span>时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点连续</li>
+<li>函数矩阵的导数：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} \frac{a_{ij}(x) - a_{ij}(x_0)}{x-x_0} = a&#39;_{ij}(x_0)\)</span>存在时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点可导，且导数为<span class="math inline">\(A&#39;(x_0) = \{a&#39;_{ij}(x_0)\}\)</span></li>
+</ul>
+<p>由于可以看成是每个分量函数的一种组合，因此函数矩阵的导数自然地有</p>
+<ul>
+<li><p><span class="math inline">\((aA+bB)&#39;=aA&#39;+bB&#39;\)</span></p></li>
+<li><p><span class="math inline">\((f(x)A(x))&#39; = f&#39;(x)A(x) + f(x)A&#39;(x)\)</span></p></li>
+</ul>
+<p>还有一些并不能自然得到的性质</p>
+<ul>
+<li><span class="math inline">\((A(x)B(x))&#39;=A&#39;(x)B(x)+A(x)B&#39;(x)\)</span></li>
+<li><span class="math inline">\((A^{-1}(x))&#39;=-A^{-1}(x)A&#39;(x)A^{-1}(x)\)</span></li>
+</ul>
+<p>我们对这两个性质作出证明，首先是性质1</p>
+<p><span class="math inline">\((A(x)B(x))_{ij}&#39; = (\sum_k a_{ik}b_{kj})&#39; = \sum_k a&#39;_{ik}b_{kj} + \sum_k a_{ik}b_{kj}&#39; = (A&#39;B+AB&#39;)_{ij}\)</span></p>
+<p>性质2可以视为是对性质1的简单应用</p>
+<p><span class="math inline">\((A(x)A^{-1}(x))&#39; = A&#39;(x)A^{-1}(x)+(A^{-1}(x))&#39;A(x)=O\)</span></p>
+<p>即使是矩阵对标量的导数，一般也没有简单的形式，比如</p>
+<p><span class="math display">\[\frac{\text{d} A^3}{\text{d} x} = A&#39;AA+AA&#39;A+AAA&#39;\]</span></p>
+<p>不过一些初等函数保持了比较好的性质，对于任何常量矩阵<span class="math inline">\(A\)</span>，总有</p>
+<ul>
+<li><span class="math inline">\((e^{Ax})&#39; = A e^{Ax} = e^{Ax}A\)</span></li>
+<li><span class="math inline">\((\cos Ax)&#39; = -A \sin Ax = - \sin Ax *A\)</span></li>
+<li><span class="math inline">\((\sin Ax)&#39; = A \cos Ax = \cos Ax * A\)</span></li>
+<li><span class="math inline">\((\tr A)&#39; = \tr A&#39;\)</span></li>
+</ul>
+<h5 id="数量函数对矩阵的导数">数量函数对矩阵的导数</h5>
+<p>设<span class="math inline">\(f(A)\)</span>是一个将矩阵<span class="math inline">\(A\)</span>映射到标量上的函数，那么我们定义</p>
+<p><span class="math display">\[\frac{\text{d} f(A)}{\text{d} A} = (\frac{\part f(A)}{\part a_{ij}})_{m \times n}\]</span></p>
+<p>为<span class="math inline">\(f(A)\)</span>对矩阵<span class="math inline">\(A\)</span>的导数</p>
+<p>向量时矩阵的一种特例，因此这里也定义出了向量的情况</p>
+<p>一般导数的线性性和乘法法则仍是成立的，我们考察一些特殊的例子</p>
+<ul>
+<li>设<span class="math inline">\(f(x) = x^TAx\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} x^TAx \\ &amp;=\frac{\part}{\part x_k} \sum_{i, j} a_{ij}x_ix_j \\ &amp;= \sum_i a_{ik}x_i + \sum_{j}a_{kj}x_j \\ &amp;= (Ax)_k + (A^Tx)_k\end{align}\]</span></p>
+<p>因此，我们有</p>
+<p><span class="math display">\[\frac{\text{d} f(x)}{\text{d} x} = (A+A^T)x\]</span></p>
+<ul>
+<li>设<span class="math inline">\(f(x) = ||Ax-b||_2^2\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} 
+||Ax-b||^2_2  \\ &amp;= \frac{\part}{\part x_k}  \sum_i (\sum a_{ij}x_j - b_i)^2 \\ &amp;= \sum_i 2a_{ik}(\sum a_{ij}x_j - b_i) \\ &amp;= 2\sum_{i, j} a_{ik}a_{ij}x_j - 2\sum_i a_{ik}b_i \\ &amp;=2 (A^TAx-A^Tb)_{k}\end{align}\]</span></p>
+<p>因此，<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x} = 2(A^TAx-A^Tb)\)</span></p>
+<p>一般来说，当一个函数取到极值时，其导数为0，而这个函数正是我们十分熟悉的最小二乘法的函数，我们令其导数为0，将得到<span class="math inline">\(x = (A^TA)^{-1} Ab\)</span></p>
+<ul>
+<li>设<span class="math inline">\(f(A) = |A|\)</span>，求<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A}\)</span>，这里<span class="math inline">\(|A|\)</span>是矩阵<span class="math inline">\(A\)</span>的行列式</li>
+</ul>
+<p>事实上，要求对<span class="math inline">\(ij\)</span>位置元素的偏导数，我们可以考虑按矩阵<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>行展开</p>
+<p><span class="math inline">\(A = \sum_j a_{ij} A_{ij}\)</span>，那么，不难直接看出，<span class="math inline">\(\frac{\part f(A)}{\part a_{ij}} = A_{ij}\)</span></p>
+<p>因此，<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (A^*)^T\)</span></p>
+<p>当<span class="math inline">\(|A| \neq 0\)</span>时，我们可以用<span class="math inline">\(A^{-1}\)</span>来表示，即<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (|A|A^{-1})^T = |A|(A^{-1})^T\)</span></p>
+<h5 id="矩阵对矩阵的导数">矩阵对矩阵的导数</h5>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -1200,235 +1458,53 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
-    <title>矩阵分析 3</title>
-    <url>/2021/07/28/matrix-analysis-3/</url>
+    <title>problem-2</title>
+    <url>/2021/09/07/problem-2/</url>
     <content><![CDATA[<span id="more"></span>
-<p>这一章的内容十分的有趣</p>
-<h4 id="三角分解">三角分解</h4>
-<p>我们先对三角分解作一个简单的定义</p>
+<h4 id="题面">题面</h4>
+<p>你处于一根数轴上，初始在<span class="math inline">\(0\)</span>号点，当你位于<span class="math inline">\(i\)</span>时，你可以选择前往<span class="math inline">\(i - 1, i, i + 1\)</span>中的任意一个，现在有<span class="math inline">\(T\)</span>次攻击，每次攻击给定参数<span class="math inline">\(D_i, X_i\)</span>，当你处于<span class="math inline">\(p\)</span>时，若<span class="math inline">\(D_i = 0\)</span>，表明攻击从<span class="math inline">\(X_i\)</span>点由右向左射出，你将受到<span class="math inline">\(max(0,X_i - p)\)</span>的伤害，而<span class="math inline">\(D_i = 1\)</span>时，你将受到<span class="math inline">\(max(0, p - X_i)\)</span>的伤害，试求出最小的受到的伤害</p>
+<h3 id="题解">题解</h3>
+<p>确实不太会这种题</p>
+<p>我们先介绍一些概念</p>
+<p>我们称一个函数<span class="math inline">\(f\)</span>在<span class="math inline">\(C\)</span>上是（下）凸的，当且仅当</p>
+<p><span class="math display">\[\forall x_1, x_2 \in C,f(\frac{x_1 + x_2}{2}) \leq \frac{f(x_1) + f(x_2)}{2}\]</span></p>
+<p>为显简便，下文中省略<span class="math inline">\(C\)</span>，凸函数有一些不错的性质</p>
 <ul>
-<li>如果矩阵<span class="math inline">\(A\)</span>可以表示为一个上三角矩阵<span class="math inline">\(L\)</span>和一个下三角矩阵<span class="math inline">\(U\)</span>的乘积，即<span class="math inline">\(A = LU\)</span>，那么这种乘积称为<span class="math inline">\(A\)</span>的<strong>三角分解</strong>或<strong><span class="math inline">\(LU\)</span>分解</strong>，特别的，如果<span class="math inline">\(L\)</span>是单位下三角矩阵（主对角线上的元素为<span class="math inline">\(1\)</span>），那么此时的三角分解称为<strong>Doolittle分解</strong>，如果<span class="math inline">\(U\)</span>是单位上三角矩阵，那么称为<strong>Crout分解</strong></li>
+<li><span class="math inline">\(f, g\)</span> 都是凸的时，对<span class="math inline">\(a, b &gt; 0\)</span>，<span class="math inline">\(af + bg\)</span>是凸的</li>
 </ul>
-<p>在讨论三角分解的存在性之前，我们先对唯一性来作一些描述</p>
-<p>如果<span class="math inline">\(A = LU\)</span>，并且<span class="math inline">\(L, U\)</span>都不是单位三角矩阵，那么对于任意<span class="math inline">\(k \neq 0\)</span>，<span class="math inline">\(A = (kL)(k^{-1}U)\)</span>将是另一种分解方式，而加入了单位三角矩阵的限制后，我们就有了下述结论</p>
+<p><span class="math inline">\(af(\frac{x_1+x_2}{2}) + b g(\frac{x_1+x_2}{2}) \leq \frac{af(x_1)+bg(x_1) + af(x_2) + bg(x_2)}{2}\)</span></p>
 <ul>
-<li><p>对于方阵<span class="math inline">\(A\)</span>，其可以唯一地分解为</p>
-<p><span class="math display">\[A = LDU\]</span></p>
-<p>的充要条件为<span class="math inline">\(A\)</span>的前<span class="math inline">\(n - 1\)</span>个顺序主子式<span class="math inline">\(H_1,H_2,...,H_{n-1}\)</span>都不为<span class="math inline">\(0\)</span>，式中<span class="math inline">\(L, U\)</span>分别为单位下三角矩阵，单位上三角矩阵，<span class="math inline">\(D\)</span>为对角矩阵，并且设<span class="math inline">\(D = diag\{d_1,d_2,...,d_n\}\)</span>，则<span class="math inline">\(d_1 = 1, d_i = H_i/H_{i-1}\)</span></p>
-<ul>
-<li>这个定理的证明按照大小进行归纳即可</li>
-</ul></li>
-<li><p>由于<span class="math inline">\(LDU\)</span>分解是唯一的，因此Doolittle分解和Crout分解也都是唯一的</p></li>
+<li><span class="math inline">\(f, g\)</span>都是凸的时，<span class="math inline">\(\max\{f, g\}\)</span>是凸的</li>
 </ul>
-<p>我们还可以讨论特殊矩阵的<span class="math inline">\(LDU\)</span>分解</p>
+<p><span class="math inline">\(\max \{f(\frac{x_1+x_2}{2}), g(\frac{x_1+x_2}{2})\} \leq \max\{\frac{f(x_1)+f(x_2)}{2}, \frac{g(x_1)+g(x_2)}{2}\} \leq \frac{\max\{f(x_1), g(x_1)\} + \max\{f(x_2), g(x_2)\}}{2}\)</span></p>
 <ul>
-<li><p>对于对称正定矩阵<span class="math inline">\(A\)</span>，存在一个实的可逆下三角矩阵<span class="math inline">\(L\)</span>，使得</p>
-<p><span class="math display">\[A = LL^T\]</span></p>
-<p>在限定<span class="math inline">\(L\)</span>的对角线元素为正时，<span class="math inline">\(L\)</span>是唯一的</p>
-<ul>
-<li><p>存在性：由于<span class="math inline">\(A\)</span>的顺序主子式都大于<span class="math inline">\(0\)</span>，因此<span class="math inline">\(A\)</span>存在<span class="math inline">\(LDU\)</span>分解，不妨设<span class="math inline">\(A = LDU\)</span></p>
-<p>由于<span class="math inline">\(A = A^T\)</span>，那么<span class="math inline">\(LDU = U^TDL^T\)</span>，由<span class="math inline">\(LDU\)</span>分解的唯一性，我们得到<span class="math inline">\(U^T = L\)</span></p>
-<p>即<span class="math inline">\(A = LDL^T\)</span>，由于<span class="math inline">\(|A| \neq 0\)</span>，因此<span class="math inline">\(L, D\)</span>都可逆，那么<span class="math inline">\(D = L^{-1}A(L^{-1})^T\)</span>，如此，<span class="math inline">\(D\)</span>也是正定矩阵，因此<span class="math inline">\(D\)</span>中元素都将大于<span class="math inline">\(0\)</span>，设<span class="math inline">\(D = diag(d_1, d_2, ..., d_n)\)</span>，再设<span class="math inline">\(D&#39; = diag(\sqrt d_1, \sqrt d_2, ..., \sqrt d_n)\)</span>，那么<span class="math inline">\(A = (LD&#39;)(LD&#39;)^T\)</span>，由<span class="math inline">\(|LD&#39;| = |L||D&#39;| \neq 0\)</span>知<span class="math inline">\(LD&#39;\)</span>可逆</p></li>
-<li><p>唯一性：设<span class="math inline">\(A = L_1L_1^T = L_2L_2^T\)</span>，则<span class="math inline">\((L_2^{-1}L_1) = (L_2^{-1}L_1)^T\)</span>，<span class="math inline">\(L_2^{-1}L_1\)</span>是上三角矩阵，因此<span class="math inline">\(L_2^{-1}L_1 = I\)</span>，即<span class="math inline">\(L_1 = L_2\)</span></p></li>
-</ul></li>
+<li><span class="math inline">\(f\)</span>是凸的时，对于一个确定的常数<span class="math inline">\(L\)</span>，记<span class="math inline">\(f_{max}(x) = max_{x-L\leq x_0 \leq x+L} f(x_0)\)</span>，<span class="math inline">\(f_{min}(x) = min_{x-L\leq x_0 \leq x+L} f(x_0)\)</span>，那么<span class="math inline">\(f_{max}(x)\)</span>和<span class="math inline">\(f_{min}(x)\)</span>在定义域内也是凸的</li>
 </ul>
-<h4 id="qr分解"><span class="math inline">\(QR\)</span>分解</h4>
-<ul>
-<li><p>如果实（复）非奇异矩阵<span class="math inline">\(A\)</span>能表示为一个正交（酉）矩阵<span class="math inline">\(Q\)</span>和一个实（复）非奇异上三角矩阵<span class="math inline">\(R\)</span>的乘积，那么</p>
-<p><span class="math display">\[A = QR\]</span></p>
-<p>就称为<span class="math inline">\(A\)</span>的<span class="math inline">\(QR\)</span>分解</p></li>
-<li><p>任何非奇异矩阵<span class="math inline">\(A\)</span>都存在<span class="math inline">\(QR\)</span>分解，并且除了对角线上的元素差一个绝对值为<span class="math inline">\(1\)</span>的因子外，<span class="math inline">\(QR\)</span>分解是唯一的</p>
-<ul>
-<li><p>存在性：设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\((a_1, a_2, ..., a_n)\)</span>，其可以构成一组基，我们对这组基进行Schmidt正交化，得到一组标准正交基<span class="math inline">\((b_1, b_2, ..., b_n)\)</span></p>
-<p>那么，由Schmidt正交化的公式<span class="math inline">\(b_i&#39; = a_i - \sum_{j &lt; i} b_j&#39; * \frac{(a_i, b_j)}{(b_j, b_j)}\)</span>，标准化之后乘一个非零常数，应该存在<span class="math inline">\(R\)</span>为非奇异上三角矩阵，使得<span class="math inline">\((b_1, b_2, ..., b_n) = (a_1, a_2, ..., a_n) R\)</span></p>
-<p>由于<span class="math inline">\(R\)</span>可逆，那么<span class="math inline">\((a_1, a_2, ..., a_n) = (b_1,b_2,...,b_n)R^{-1}\)</span>，取<span class="math inline">\(Q = (b_1,b_2,...,b_n)\)</span>即可</p></li>
-<li><p>唯一性：设<span class="math inline">\(A = Q_1R_1 = Q_2R_2\)</span>，那么<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1}\)</span>，<span class="math inline">\(Q_2^{-1}Q_1\)</span>为正交阵，<span class="math inline">\(R_2R_1^{-1}\)</span>为上三角阵，不难知道，<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1} = I\)</span>，即<span class="math inline">\(Q_1 = Q_2\)</span></p></li>
-</ul></li>
-</ul>
-<h4 id="谱分解">谱分解</h4>
-<h5 id="正规矩阵">正规矩阵</h5>
-<ul>
-<li>如果<span class="math inline">\(AA^H = A^HA\)</span>，则称<span class="math inline">\(A\)</span>为<strong>正规矩阵</strong></li>
-<li>如果对实方阵<span class="math inline">\(A\)</span>，<span class="math inline">\(AA^T=A^TA\)</span>，则称<span class="math inline">\(A\)</span>为<strong>实正规矩阵</strong></li>
-</ul>
-<p>正规矩阵有一些较为简单的性质</p>
-<ul>
-<li><p>如果三角阵<span class="math inline">\(L\)</span>是正规矩阵，那么<span class="math inline">\(L\)</span>是对角阵</p>
-<ul>
-<li><p>由<span class="math inline">\(LL^H = LL^H\)</span>，我们有<span class="math inline">\(\sum_{k} \overline{l_{ki}} * l_{kj} = \sum_{k} \overline{l_{jk}} * l_{ik}\)</span>，而当<span class="math inline">\(i = j\)</span>时，有<span class="math inline">\(\sum_k |l_{ki}|^2 = \sum_k |l_{ik}|^2\)</span></p>
-<p>不妨设<span class="math inline">\(L\)</span>是下三角阵，由于<span class="math inline">\(\sum_k |l_{k1}|^2 = \sum_k |l_{1k}|^2 = |l_{11}|^2\)</span>，我们得到<span class="math inline">\(l_{21} = l_{31} = ... = l_{n1} = 0\)</span>，之后对<span class="math inline">\(i = j = 2\)</span>进行讨论，得到<span class="math inline">\(l_{32} = ... = l_{n2} = 0\)</span>，依次类推，我们可以得到<span class="math inline">\(L\)</span>只在对角线上非零，即<span class="math inline">\(L\)</span>为对角阵</p></li>
-</ul></li>
-</ul>
-<p>埃米尔特矩阵和酉矩阵都是正规矩阵，尝试将埃米尔特矩阵和酉矩阵的性质推导到正规矩阵上，一般来说，我们有下述定理</p>
-<ul>
-<li><p>方阵<span class="math inline">\(A\)</span>酉相似于对角阵的充要条件为<span class="math inline">\(A\)</span>是正规矩阵</p>
-<p>考虑这个定理的证明</p>
-<ul>
-<li>充分性：根据Schur定理，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^HLU\)</span>，其中<span class="math inline">\(L\)</span>为上三角阵，并且对角线上为<span class="math inline">\(A\)</span>的特征值，那么由<span class="math inline">\(A^HA= AA^H\)</span>，得到<span class="math inline">\(L^HL = LL^H\)</span>，由于<span class="math inline">\(L\)</span>同时是三角阵和正规阵，那么<span class="math inline">\(L\)</span>将是对角阵，因而<span class="math inline">\(A\)</span>与对角阵<span class="math inline">\(L\)</span>酉相似</li>
-<li>必要性：设<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(\Lambda\)</span>为对角阵，那么<span class="math inline">\(AA^H = U^H \Lambda \Lambda^H U = U^H \Lambda^H \Lambda U = A^HA\)</span></li>
-</ul></li>
-</ul>
-<p>如果<span class="math inline">\(A\)</span>酉相似于对角阵，即<span class="math inline">\(A = U^H \Lambda U\)</span>，那么矩阵<span class="math inline">\(U\)</span>可以看做是<span class="math inline">\(A\)</span>的特征向量的集合，而<span class="math inline">\(\Lambda\)</span>则为<span class="math inline">\(A\)</span>对应的特征值，因此<span class="math inline">\(A\)</span>将有<span class="math inline">\(n\)</span>个互相正交的单位特征向量</p>
-<h5 id="谱分解-1">谱分解</h5>
-<ul>
-<li><p>对于正规矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^H \Lambda U\)</span></p>
-<p>记<span class="math inline">\(U = (u_1, u_2, ..., u_n)\)</span>，那么</p>
-<p><span class="math display">\[\begin{align*}
- A &amp;= (u_1, u_2, ..., u_n)^H *diag(\lambda_1, \lambda_2,..., \lambda_n)* (u_1, u_2, ..., u_n)\\ 
- &amp;= \lambda_1 u_1^Hu_1 + \lambda_2 u_2^Hu_2 + ... + \lambda_nu_n^Hu_n
-\end{align*}\]</span></p>
-<p>我们称此为<span class="math inline">\(A\)</span>的谱分解或者特征值分解</p></li>
-<li><p>如果我们将谱分解稍微改写形式<span class="math inline">\(A = \lambda_1(u_{11}^Hu_{11} + ...+u_{1s}^Hu_{1s}) + ... + \lambda_r(u_{r1}^Hu_{r1} + ...+u_{rs}^Hu_{rs})\)</span>，其中<span class="math inline">\(\lambda_i\)</span>互不相同</p>
-<p>记<span class="math inline">\(P_1 = u_{11}^Hu_{11} + ...+u_{1s}^Hu_{1s}, ...,P_r = u_{r1}^Hu_{r1} + ...+u_{rs}^Hu_{rs}\)</span></p>
-<p>由于<span class="math inline">\(u_{11}, ..., u_{1s}, ..., u_{r1}, ..., u_{rs}\)</span>两两正交，我们有<span class="math inline">\(P_iP_j = O, P_i^2 = P_i, P_i^H=P_i\)</span>，因此单独取出<span class="math inline">\(P_i\)</span>，其表示为一种正交投影</p></li>
-</ul>
-<h4 id="最大秩分解">最大秩分解</h4>
-<ul>
-<li><p>设<span class="math inline">\(A\)</span>是秩为<span class="math inline">\(r\)</span>的<span class="math inline">\(m * n\)</span>的矩阵，那么存在秩为<span class="math inline">\(r\)</span>的<span class="math inline">\(m * r\)</span>的矩阵<span class="math inline">\(B\)</span>以及<span class="math inline">\(r * n\)</span>的矩阵<span class="math inline">\(C\)</span>，使得</p>
-<p><span class="math display">\[A = BC\]</span></p>
-<p>也就是说，<span class="math inline">\(A\)</span>可以分解为两个满秩矩阵的积</p>
-<ul>
-<li><p>设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\(a_1, a_2, ...,a_n\)</span>，那么<span class="math inline">\(A = (a_1, a_2, ..., a_n)\)</span></p>
-<p>不妨设列向量中的极大线性无关组为<span class="math inline">\((a_1, a_2, ..., a_r)\)</span>，由于<span class="math inline">\(a_1, a_2,..., a_n\)</span>中任意元素可以被<span class="math inline">\(a_1,...a_r\)</span>表出，不妨设<span class="math inline">\(a_i = \sum_{j=1}^r a_j c_{ji}\)</span></p>
-<p>那么</p>
-<p><span class="math display">\[A = (a_1, a_2,..., a_r) \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
-<p>记</p>
-<p><span class="math display">\[B = (a_1, a_2,..., a_r), C = \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
-<p>由于<span class="math inline">\(r = rank(A) \leq \min\{rank(B), rank(C)\} \leq r\)</span>，因此两者秩都为<span class="math inline">\(r\)</span></p></li>
-<li><p>注意到这个证明中，没有对所取的<span class="math inline">\(a_1,...,a_r\)</span>作任何的限制，因此，我们甚至可以限制<span class="math inline">\(a_1,...,a_r\)</span>为一组标准正交基</p></li>
-</ul></li>
-<li><p>example：</p>
-<p>求</p>
-<p><span class="math display">\[A = \begin{pmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 &amp; 0 \\ 1 &amp; 1 &amp; 0 &amp; 0 \\3 &amp; 3 &amp; 2 &amp; 1\end{pmatrix}\]</span></p>
-<p>的最大秩分解</p>
-<p>我们可以利用初等行变化保持线性关系的性质</p>
-<p>将<span class="math inline">\(A\)</span>化作行标准形</p>
-<p><span class="math display">\[A&#39; = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}\]</span></p>
-<p>取<span class="math inline">\(1, 3, 4\)</span>列的列向量作为极大线性无关组，即</p>
-<p><span class="math display">\[B = \begin{pmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0  \\3 &amp; 2 &amp; 1\end{pmatrix}\]</span></p>
-<p>再取<span class="math inline">\(A&#39;\)</span>中的非零行（也即组合系数），令</p>
-<p><span class="math display">\[C = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\]</span></p>
-<p>那么<span class="math inline">\(A = BC\)</span>，且<span class="math inline">\(B, C\)</span>满秩</p></li>
-</ul>
-<h4 id="奇异值分解">奇异值分解</h4>
-<p>矩阵的奇异值分解又称<strong>SVD(Singular Value Decomposition)分解</strong></p>
-<h5 id="奇异值">奇异值</h5>
-<ul>
-<li><p>引理：矩阵<span class="math inline">\(AA^H\)</span>的特征值为非负实数</p>
-<ul>
-<li>矩阵<span class="math inline">\(AA^H\)</span>半正定，并且为埃尔米特矩阵，因此其特征值为非负实数</li>
-</ul></li>
-<li><p>对于矩阵<span class="math inline">\(A\)</span>，我们记<span class="math inline">\(AA^H\)</span>的特征值为<span class="math inline">\(\lambda_1, \lambda_2,...,\lambda_n\)</span>，我们称<span class="math inline">\(\sigma_i = \sqrt \lambda_{i}\)</span>为矩阵<span class="math inline">\(A\)</span>的奇异值</p></li>
-<li><p>若<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>酉相抵（存在酉矩阵<span class="math inline">\(U, V\)</span>，使得<span class="math inline">\(B = UAV\)</span>），则<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</p>
-<ul>
-<li><span class="math inline">\(B^HB = V^HA^HU^HUAV=V^H(A^HA)V = V^{-1}(A^HA)V\)</span>，那么<span class="math inline">\(B^HB\)</span>与<span class="math inline">\(A^HA\)</span>有相同的特征值，因此<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</li>
-</ul></li>
-</ul>
-<h5 id="奇异值分解-1">奇异值分解</h5>
-<ul>
-<li><p>对于任意<span class="math inline">\(n*m\)</span>大小的复矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U, V\)</span>，使得</p>
-<p><span class="math display">\[U^HAV = diag(\sigma_1, \sigma_2, ..., \sigma_r, 0, ..., 0)\]</span></p>
-<p>其中<span class="math inline">\(\sigma_1, \sigma_2, ..., \sigma_r\)</span>为<span class="math inline">\(A\)</span>的非零奇异值</p>
-<ul>
-<li><p>下面的证明不仅给出了证明方法，而且还给出了构造的具体方法</p></li>
-<li><p>由于<span class="math inline">\(AA^H\)</span>为埃尔米特矩阵，并且半正定，因此存在酉矩阵<span class="math inline">\(U\)</span>，使得</p>
-<p><span class="math display">\[U^HAA^HU = diag(\sigma_1^2, \sigma_2^2, ..., \sigma_r^2, 0, ..., 0) \tag{a}\]</span></p>
-<p>如果记<span class="math inline">\(U = (U_1, U_2)\)</span>，其中<span class="math inline">\(U_1\)</span>为<span class="math inline">\(U\)</span>的前<span class="math inline">\(r\)</span>个列向量构成的矩阵，那么我们可以得到<span class="math display">\[U_1^HAA^HU_1 = \Lambda^2 \tag{b}\]</span></p>
-<p><span class="math display">\[U_2^HAA^HU_2 = O \tag{c}\]</span></p>
-<p>由于<span class="math inline">\(AA^H = O\)</span>，当且仅当<span class="math inline">\(A = O\)</span>（考察对角线上的元素），因此<span class="math inline">\(U_2^HA = O\)</span></p>
-<p>现在我们尝试构造<span class="math inline">\(V = (V_1, V_2)\)</span>，其中<span class="math inline">\(V_1\)</span>为<span class="math inline">\(n * r\)</span>的矩阵，使得<span class="math inline">\(U^HAV = \Lambda\)</span></p>
-<p>不难知道</p>
-<p><span class="math display">\[(U_1, U_2)^H A (V_1, V_2) = \begin{pmatrix} U_1^HAV_1 &amp; U_1^HAV_2\\ U_2^HAV_1 &amp; U_2^HAV_2 \end{pmatrix}\]</span></p>
-<p>与<span class="math inline">\(\begin{pmatrix} \Lambda &amp; O\\ O &amp; O \end{pmatrix}\)</span>对比，我们得到<span class="math inline">\(U_1^HAV_1 = \Lambda, U_1^HAV_2 = U_2^HAV_1 =U_2^HAV_2=O\)</span></p>
-<p>由于<span class="math inline">\(U_2^HA=O\)</span>，后面两项的成立是显然的，观察<span class="math inline">\((b)\)</span>式，我们知道取<span class="math inline">\(V_1 = A^HU_1 \Lambda^{-1}\)</span>可以满足要求，暂定<span class="math inline">\(V_1\)</span>，从而<span class="math inline">\(U_1^HAV_2 = \Lambda^{H} V_1^HV_2\)</span>，只需要取<span class="math inline">\(V_2\)</span>时，保证其与<span class="math inline">\(V_1\)</span>正交即可，这个当然是可以满足的</p>
-<p>我们还需要确定<span class="math inline">\(V_1\)</span>满足酉矩阵的要求，代入<span class="math inline">\(V_1\)</span>，我们得到<span class="math inline">\(V_1^HV_1=(\Lambda^{-1})^H(U_1^HA A^HU_1)\Lambda^{-1} = \Lambda^{-1}\Lambda^2\Lambda^{-1} = I\)</span>，这也就证明了<span class="math inline">\(V_1\)</span>确实满足条件</p></li>
-</ul></li>
-</ul>
-<h4 id="极分解">极分解</h4>
-<ul>
-<li><p>对于任意<span class="math inline">\(n*n\)</span>的复阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U\)</span>和唯一的半正定矩阵<span class="math inline">\(G, H\)</span>，使得</p>
-<p><span class="math display">\[A = GU = UH\]</span></p>
-<ul>
-<li><p>存在性：设<span class="math inline">\(A\)</span>的奇异值分解为<span class="math inline">\(A = U^H_0 \Lambda V\)</span></p>
-<p>那么令<span class="math inline">\(G = U^H_0 \Lambda U, H = V^H \Lambda V, U_1 = U^H_0V\)</span>，得到<span class="math inline">\(A = GU_1 = U_1H\)</span></p></li>
-<li><p>唯一性：由于<span class="math inline">\(U\)</span>可逆，唯一性显然</p></li>
-</ul></li>
-</ul>
-<h4 id="可同时对角化">可同时对角化</h4>
-<p>这个知识点感觉还是点一点...</p>
-<p>一般在高等代数中，就会接触到一个结论</p>
-<ul>
-<li><p>设<span class="math inline">\(A, B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(A\)</span>正定，那么存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得</p>
-<p><span class="math display">\[Q^{H}AQ = I, Q^HBQ= diag\{\lambda_1, \lambda_2, ...\lambda_n\}\]</span></p>
-<ul>
-<li><p>一般采取如下方式证明：由于<span class="math inline">\(A\)</span>正定，因此存在非奇异矩阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(P^HAP = I\)</span>，由于<span class="math inline">\(P^HBP\)</span>仍为埃尔米特矩阵，因此存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\((PU)^H B (PU) = diag\{\lambda_1, ..., \lambda_n\}\)</span>，令<span class="math inline">\(Q = PU\)</span>即可</p></li>
-<li><p>我们尝试考察<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>的值，首先，它们是<span class="math inline">\(P^HBP\)</span>的特征值</p>
-<p>注意到<span class="math inline">\(|\lambda I - P^HBP| = |\lambda P^HAP - P^HBP| = |P^H||P||A|*|\lambda I - A^{-1}B|\)</span></p>
-<p>由于<span class="math inline">\(|P| \neq 0, |A| \neq 0\)</span>，因此<span class="math inline">\(\lambda_1, ... \lambda_n\)</span>也是<span class="math inline">\(A^{-1}B\)</span>的特征追</p></li>
-</ul></li>
-</ul>
-<p>现在我们来考虑同时酉对角化的问题，也即</p>
-<ul>
-<li><p>设<span class="math inline">\(A, B\)</span>为正规矩阵，则<span class="math inline">\(A, B\)</span>可同时酉对角化的充要条件为<span class="math inline">\(AB = BA\)</span></p>
-<ul>
-<li><p>“<span class="math inline">\(\Rightarrow\)</span>”：设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，则<span class="math inline">\(AB = BA\)</span>可以由<span class="math inline">\(\Lambda_1, \Lambda_2\)</span>的可交换性得出</p></li>
-<li><p>“<span class="math inline">\(\Leftarrow\)</span>”：设<span class="math inline">\(A\)</span>对应于特征值<span class="math inline">\(a\)</span>的特征子空间为<span class="math inline">\(V_a\)</span>，取<span class="math inline">\(V_a\)</span>的一组标准正交基为<span class="math inline">\(a_1, a_2,...,a_r\)</span></p>
-<p>注意到<span class="math inline">\(AB a_i = BAa_i = Baa_i = a (Ba_i)\)</span>，这说明<span class="math inline">\(Ba_1, Ba_2,...,Ba_r\)</span>也是<span class="math inline">\(V_a\)</span>中的元素，也说明<span class="math inline">\(BV_a \subseteq V_a\)</span></p>
-<p>设从<span class="math inline">\(C^n\)</span>到<span class="math inline">\(V_a\)</span>的投影变换为<span class="math inline">\(P_a\)</span>，考虑线性映射<span class="math inline">\(B_a = P_aBP_a\)</span>，由于<span class="math inline">\(P_aV_a = V_a\)</span>，因此<span class="math inline">\(B_aV_a \subseteq V_a\)</span>，注意到<span class="math inline">\(B_aB_a^H = P_aBB^HP_a = P_aB^HBP_a = B_a^HB_a\)</span>，那么<span class="math inline">\(B_a\)</span>在<span class="math inline">\(V_a\)</span>上是一个正规变换，也就相应的对应于正规矩阵</p>
-<p>设<span class="math inline">\(B_a\)</span>的线性无关的标准正交特征向量组为<span class="math inline">\(b_1,b_2,...,b_k\)</span>，由于<span class="math inline">\(b_i \in V_a\)</span>，因此<span class="math inline">\(b_i\)</span>是<span class="math inline">\(A\)</span>的一个特征向量，又<span class="math inline">\(B b_i = P_a B P_a b_i = B_ab_i\)</span>，这说明<span class="math inline">\(b_i\)</span>也是<span class="math inline">\(B\)</span>的一个特征向量</p>
-<p>由于<span class="math inline">\(B_a\)</span>在<span class="math inline">\(V_a\)</span>上对应于正规矩阵，那么应该有<span class="math inline">\(k = r\)</span>，那么对于每个特征值，我们都能找到相应的公共特征向量，鉴于<span class="math inline">\(A\)</span>是正规矩阵，我们还可以把这些公共特征向量处理为正交的向量，因此得到两者可以同时酉对角化</p></li>
-</ul></li>
-<li><p>如果<span class="math inline">\(AB = BA\)</span>，且<span class="math inline">\(A, B\)</span>为正规矩阵，那么<span class="math inline">\(AB\)</span>也为正规矩阵</p>
-<ul>
-<li><span class="math inline">\(A, B\)</span>可同时酉对角化，设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，那么<span class="math inline">\(AB = U^H \Lambda_1 \Lambda_2 U\)</span>，因此<span class="math inline">\(AB\)</span>酉相似于对角矩阵，如此<span class="math inline">\(AB\)</span>为正规矩阵</li>
-<li>不难发现，<span class="math inline">\(AB\)</span>的特征值和<span class="math inline">\(A, B\)</span>的特征值之间存在关系，也即在按照同时酉对角化矩阵的顺序排列下时，有<span class="math inline">\(\lambda_{AB}^{(i)} = \lambda_{A}^{(i)} * \lambda_{B}^{(i)}\)</span>，且对应的特征向量也是相同的</li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>matrix_analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>牛客多校第五场</title>
-    <url>/2021/08/03/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>Gromah的题...</p>
-<p>有些科技还是太为难老年人了...</p>
-<h4 id="c">C</h4>
-<h5 id="题意">题意</h5>
-<p>给定一个长为<span class="math inline">\(n\)</span>的串，表示两个人打乒乓球，连续打<span class="math inline">\(n\)</span>个球的结果</p>
-<p>对于<span class="math inline">\(i\)</span>，我们定义<span class="math inline">\(i\)</span>赛制表示，双方中有一方得分超过<span class="math inline">\(i\)</span>分，并且分差大于等于<span class="math inline">\(2\)</span>时结果比赛的赛制</p>
-<p>现在询问，对<span class="math inline">\(i = 1, 2, ..., n\)</span>，在<span class="math inline">\(i\)</span>赛制的情况下，Gromah赢了多少场</p>
-<h5 id="题解">题解</h5>
-<p>还挺有意思的</p>
-<p>一个显然的性质是，在<span class="math inline">\(i\)</span>赛制下，比赛最多只有<span class="math inline">\(\lfloor \frac{n}{i} \rfloor\)</span>场</p>
-<p>.....然后考场上就短路了...</p>
-<p>我们可以预处理出<span class="math inline">\(A\)</span>赢了<span class="math inline">\(i\)</span>个球的位置和<span class="math inline">\(B\)</span>赢了<span class="math inline">\(i\)</span>个球的位置，依次，我们可以判断他们是否进入了平局的阶段，如果进入了平局的阶段，说明之后的比赛应该是两者一赢一输，这个段也可以预处理出来</p>
-<p>然后就完事了</p>
-<h4 id="e">E</h4>
-<h5 id="吐槽">吐槽</h5>
-<p>考场上写的脑子有点懵</p>
-<p>C++的右移是坑爹的逻辑右移，对一个负数不断右移会得到一堆<span class="math inline">\(1\)</span>，在利用<span class="math inline">\(\sim\)</span>时被卡了记下...</p>
-<h4 id="g">G</h4>
-<h5 id="吐槽-1">吐槽</h5>
-<p>奇奇怪怪题</p>
-<h5 id="题意-1">题意</h5>
-<p>给定<span class="math inline">\(a, b, \{p_i\}, \{q_i\}\)</span>，定义<span class="math inline">\(c = \prod p_i^{q_i}\)</span>，尝试找到<span class="math inline">\(x, y\)</span>，使得<span class="math inline">\(x + y\)</span>最小，并且<span class="math inline">\(lcm(a+x, b+y) = c\)</span></p>
-<h5 id="题解-1">题解</h5>
-<p>队友的做法我没听...好像是极限数据<span class="math inline">\(2^{27}\)</span>，但能卡卡的做法...（然后就WA了）</p>
-<p>一个简单的想法是，枚举<span class="math inline">\(c\)</span>的约数<span class="math inline">\(d_1\)</span>，假设<span class="math inline">\(a + x = d_1\)</span>，<span class="math inline">\(d_1\)</span>也许会在若干质数上的次数没有卡到<span class="math inline">\(q_i\)</span>，这就需要<span class="math inline">\(b+y\)</span>去调整，也就是说相当于对于某个数<span class="math inline">\(M\)</span>，<span class="math inline">\(b+y\)</span>需要是<span class="math inline">\(M\)</span>的倍数，而系数则应该是剩下卡到<span class="math inline">\(q_i\)</span>的位置上质数次幂乘积的一个因子，难点在于如何寻找这个因子</p>
-<p>利用折半搜索优化一下复杂度就能过了...</p>
+<p>凸函数一定是连续的，因此<span class="math inline">\(max\)</span>和<span class="math inline">\(min\)</span>都可以取到，下面的证明就感性一点吧...</p>
+<p>对于<span class="math inline">\(f_{max}\)</span>，我们有<span class="math inline">\(f_{max}(x) = \max\{f(x-L), f(x+L)\}\)</span>，因而是凸的</p>
+<p>对于<span class="math inline">\(f_{min}\)</span>，考虑凸函数应该是一段降，一段常数，一段升的形状，对于这三段进行变形后，不难发现降的部分左移<span class="math inline">\(L\)</span>，升的部分右移<span class="math inline">\(L\)</span>，因而还是一个凸函数</p>
 ]]></content>
       <categories>
         <category>problems</category>
       </categories>
-      <tags>
-        <tag>ACM</tag>
-      </tags>
+  </entry>
+  <entry>
+    <title>杂记</title>
+    <url>/2021/09/07/%E6%9D%82%E8%AE%B0/</url>
+    <content><![CDATA[<span id="more"></span>
+<h5 id="抽象代数">抽象代数</h5>
+<ul>
+<li>设<span class="math inline">\(H \leqslant G\)</span>且<span class="math inline">\(x \in G\)</span>，证明：<span class="math inline">\(xHx^{-1} \leqslant G, |xHx^{-1}| = |H|, [G:xHx^{-1}] = [G:H]\)</span></li>
+</ul>
+<p>首先，<span class="math inline">\(\forall y_0, y_1 \in xHx^{-1}, \exist h_0, h_1,\)</span>，使得<span class="math inline">\(y_0 = xh_0x^{-1}, y_1 = xh_1x^{-1}\)</span>，那么<span class="math inline">\(y_0y_1^{-1} =xh_0h_1x^{-1} \in xHx^{-1}\)</span></p>
+<p>其次，我们定义映射<span class="math inline">\(H \to xHx^{-1}\)</span>，<span class="math inline">\(f(h) = xhx^{-1}\)</span>，显然这是满射，由消去律，这也是单射，因此这是双射，即<span class="math inline">\(|xHx^{-1}| = |H|\)</span></p>
+<p>最后，对<span class="math inline">\(H\)</span>的配集，我们定义关系<span class="math inline">\(f(aH) = aHx^{-1}\)</span>，这是一个映射，因为如果<span class="math inline">\(aH = bH\)</span>，那么<span class="math inline">\(aHx^{-1} = bHx^{-1}\)</span>；这是一个满射，因为<span class="math inline">\(\forall a \in G, \exists a&#39;, s.t. a&#39;x = a\)</span>，这也是一个单射，因为如果<span class="math inline">\(aHx^{-1} = bHx^{-1}\)</span>，就有<span class="math inline">\(aH = bH\)</span>，因此<span class="math inline">\([G:xHx^{-1}] = [G:H]\)</span></p>
+<ul>
+<li>设<span class="math inline">\(H \lhd G\)</span>且<span class="math inline">\(K \leq G\)</span>，证明：<span class="math inline">\(H \cap K \lhd K\)</span></li>
+</ul>
+<p><span class="math inline">\(H \cap K\)</span>当然是<span class="math inline">\(K\)</span>的一个子群，我们只需验证<span class="math inline">\(\forall k \in K, \forall x \in H \cap K, kxk^{-1} \in H \cap K\)</span></p>
+<p>一方面，<span class="math inline">\(x \in K\)</span>，所以<span class="math inline">\(kxk^{-1} \in K\)</span>，另一方面，由<span class="math inline">\(H \lhd G\)</span>，有<span class="math inline">\(kxk^{-1} \in H\)</span>，所以<span class="math inline">\(kxk^{-1} \in H \cap K\)</span>，证毕</p>
+]]></content>
   </entry>
   <entry>
     <title>牛客多校第二场</title>
@@ -1570,6 +1646,44 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
+    <title>牛客多校第五场</title>
+    <url>/2021/08/03/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>Gromah的题...</p>
+<p>有些科技还是太为难老年人了...</p>
+<h4 id="c">C</h4>
+<h5 id="题意">题意</h5>
+<p>给定一个长为<span class="math inline">\(n\)</span>的串，表示两个人打乒乓球，连续打<span class="math inline">\(n\)</span>个球的结果</p>
+<p>对于<span class="math inline">\(i\)</span>，我们定义<span class="math inline">\(i\)</span>赛制表示，双方中有一方得分超过<span class="math inline">\(i\)</span>分，并且分差大于等于<span class="math inline">\(2\)</span>时结果比赛的赛制</p>
+<p>现在询问，对<span class="math inline">\(i = 1, 2, ..., n\)</span>，在<span class="math inline">\(i\)</span>赛制的情况下，Gromah赢了多少场</p>
+<h5 id="题解">题解</h5>
+<p>还挺有意思的</p>
+<p>一个显然的性质是，在<span class="math inline">\(i\)</span>赛制下，比赛最多只有<span class="math inline">\(\lfloor \frac{n}{i} \rfloor\)</span>场</p>
+<p>.....然后考场上就短路了...</p>
+<p>我们可以预处理出<span class="math inline">\(A\)</span>赢了<span class="math inline">\(i\)</span>个球的位置和<span class="math inline">\(B\)</span>赢了<span class="math inline">\(i\)</span>个球的位置，依次，我们可以判断他们是否进入了平局的阶段，如果进入了平局的阶段，说明之后的比赛应该是两者一赢一输，这个段也可以预处理出来</p>
+<p>然后就完事了</p>
+<h4 id="e">E</h4>
+<h5 id="吐槽">吐槽</h5>
+<p>考场上写的脑子有点懵</p>
+<p>C++的右移是坑爹的逻辑右移，对一个负数不断右移会得到一堆<span class="math inline">\(1\)</span>，在利用<span class="math inline">\(\sim\)</span>时被卡了记下...</p>
+<h4 id="g">G</h4>
+<h5 id="吐槽-1">吐槽</h5>
+<p>奇奇怪怪题</p>
+<h5 id="题意-1">题意</h5>
+<p>给定<span class="math inline">\(a, b, \{p_i\}, \{q_i\}\)</span>，定义<span class="math inline">\(c = \prod p_i^{q_i}\)</span>，尝试找到<span class="math inline">\(x, y\)</span>，使得<span class="math inline">\(x + y\)</span>最小，并且<span class="math inline">\(lcm(a+x, b+y) = c\)</span></p>
+<h5 id="题解-1">题解</h5>
+<p>队友的做法我没听...好像是极限数据<span class="math inline">\(2^{27}\)</span>，但能卡卡的做法...（然后就WA了）</p>
+<p>一个简单的想法是，枚举<span class="math inline">\(c\)</span>的约数<span class="math inline">\(d_1\)</span>，假设<span class="math inline">\(a + x = d_1\)</span>，<span class="math inline">\(d_1\)</span>也许会在若干质数上的次数没有卡到<span class="math inline">\(q_i\)</span>，这就需要<span class="math inline">\(b+y\)</span>去调整，也就是说相当于对于某个数<span class="math inline">\(M\)</span>，<span class="math inline">\(b+y\)</span>需要是<span class="math inline">\(M\)</span>的倍数，而系数则应该是剩下卡到<span class="math inline">\(q_i\)</span>的位置上质数次幂乘积的一个因子，难点在于如何寻找这个因子</p>
+<p>利用折半搜索优化一下复杂度就能过了...</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>信息论</title>
     <url>/2021/08/20/information-theory/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1637,7 +1751,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p><span class="math display">\[\begin{align} V(p, q) = \sum_{x \in X} |p(x) - q(x)|\end{align}\]</span></p>
 <p>Pinsker 不等式：<span class="math inline">\(D(p || q) \geq \frac{1}{2 \ln 2} V^2(p, q)\)</span>​​（不懂，先记着）</p>
 <p>对于<span class="math inline">\(p(x, y), q(x, y)\)</span>，定义条件相对熵为</p>
-<p><span class="math display">\[\begin{align} D( p(y|x) || q(y|x)) &amp;= \sum_{x} p(x) D(p(Y|x)||q(Y|x)) \\ &amp;= \sum_x \sum_y p(x)p(y|x) \log \frac{p(y|x)}{q(y|x)} \\ &amp;= \sum_{x, y} p(x, y) \frac{\log p(y|x)}{ \log q(y|x)}\end{align}\]</span>​</p>
+<p><span class="math display">\[\begin{align} D( p(y|x) || q(y|x)) &amp;= \sum_{x} p(x) D(p(Y|x)||q(Y|x)) \\ &amp;= \sum_x \sum_y p(x)p(y|x) \log \frac{p(y|x)}{q(y|x)} \\ &amp;= \sum_{x, y} p(x, y) \log \frac{ p(y|x)}{q(y|x)}\end{align}\]</span>​</p>
 <p>有了条件相对熵之后，就可以类比的写出链式法则</p>
 <p><span class="math display">\[\begin{align} D(p(x, y) || q(x, y)) = D(p(x) || q(x)) + D(p(y|x) || q(y|x))\end{align}\]</span></p>
 <p>只需注意到<span class="math inline">\(\log \frac{p(x, y)}{q(x, y)} = \log \frac{p(x) p(y|x)}{q(x) q(y|x)} = \log \frac{p(x)}{q(x)} + \log \frac{p(y|x)}{q(y|x)}\)</span></p>
@@ -1845,6 +1959,652 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </categories>
       <tags>
         <tag>information theory</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>abstract_algebra</title>
+    <url>/2021/09/13/abstract-algebra/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>虽然在过去的博客中，对于这一门课的内容也记了很多东西，但还是新开一个博客，方便自己查阅一些定理吧</p>
+<h3 id="week-1">week 1</h3>
+<h5 id="半群">半群</h5>
+<blockquote>
+<p>如果<span class="math inline">\(X\)</span>非空，并且有运算<span class="math inline">\(*\)</span>满足</p>
+<ul>
+<li>封闭性：<span class="math inline">\(\forall x, y \in X, x *y \in X\)</span></li>
+<li>结合律：<span class="math inline">\((x * y) * z = x*(y*z)\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(\langle X, *\rangle\)</span>为半群结构</p>
+</blockquote>
+<h5 id="幺半群">幺半群</h5>
+<blockquote>
+<p>如果<span class="math inline">\(X\)</span>以<span class="math inline">\(*\)</span>构成半群，并且还满足</p>
+<ul>
+<li><span class="math inline">\(\exist e \in X, \forall x \in X, x = ex=xe\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(e\)</span>为单位元，<span class="math inline">\(X\)</span>为幺半群</p>
+</blockquote>
+<ul>
+<li>单位元是唯一的</li>
+</ul>
+<h5 id="逆元">逆元</h5>
+<blockquote>
+<p>如果<span class="math inline">\(ab = ba = e\)</span>，则称<span class="math inline">\(a\)</span>为<span class="math inline">\(b\)</span>的逆元</p>
+</blockquote>
+<ul>
+<li>每个元素的逆元是唯一的</li>
+<li><span class="math inline">\((a^{-1})^{-1} = a\)</span></li>
+<li>如果<span class="math inline">\(a, b\)</span>可逆，那么<span class="math inline">\(ab\)</span>也可逆，并且<span class="math inline">\((ab)^{-1}=b^{-1}a^{-1}\)</span></li>
+</ul>
+<h5 id="群">群</h5>
+<blockquote>
+<p>如果<span class="math inline">\(X\)</span>非空，并且有运算<span class="math inline">\(*\)</span>满足</p>
+<ul>
+<li>封闭性：<span class="math inline">\(\forall x, y \in X, x *y \in X\)</span></li>
+<li>结合律：<span class="math inline">\((x * y) * z = x*(y*z)\)</span></li>
+<li>单位元：<span class="math inline">\(\exists e \in X, \forall x \in X, x=x*e=e*x\)</span></li>
+<li>可逆：<span class="math inline">\(\forall x \in X, \exists y \in X, x * y = y*x=e\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(X\)</span>按<span class="math inline">\(*\)</span>构成群</p>
+</blockquote>
+<h5 id="群的阶">群的阶</h5>
+<blockquote>
+<p>如果群<span class="math inline">\(G\)</span>里面只有有限个元素，那么称<span class="math inline">\(G\)</span>为有限群，并且称<span class="math inline">\(G\)</span>内元素的个数为群<span class="math inline">\(G\)</span>的阶，记做<span class="math inline">\(|G|\)</span></p>
+</blockquote>
+<h5 id="交换群">交换群</h5>
+<blockquote>
+<p>如果<span class="math inline">\(\forall a, b \in G\)</span>，有<span class="math inline">\(ab = ba\)</span>，那么称群<span class="math inline">\(G\)</span>为阿贝尔群或交换群</p>
+</blockquote>
+<ul>
+<li><p>半群<span class="math inline">\(G\)</span>是群，当且仅当：<span class="math inline">\(\forall a, b \in G\)</span>, 方程<span class="math inline">\(ax = b\)</span>和<span class="math inline">\(ya = b\)</span>在<span class="math inline">\(G\)</span>中有解（可除性条件）</p></li>
+<li><p>有限半群<span class="math inline">\(G\)</span>是群，当且仅当：<span class="math inline">\(\forall a, x, y \in G\)</span>，有<span class="math inline">\(ax = ay \Rightarrow x=y\)</span>且<span class="math inline">\(xa=ya \Rightarrow x=y\)</span>（消去律）</p></li>
+</ul>
+<h5 id="常见的群">常见的群</h5>
+<blockquote>
+<p>集合<span class="math inline">\(X\)</span>上的所有置换构成群，称为<strong>对称群</strong>，记为<span class="math inline">\(S(X)\)</span>，特别的，<span class="math inline">\(S([n])\)</span>简记为<span class="math inline">\(S_n\)</span></p>
+<p>所有大小为<span class="math inline">\(n*n\)</span>的可逆实矩阵构成群，称为<strong>一般线性群</strong>，记为<span class="math inline">\(GL_n(R)\)</span></p>
+<p>所有大小为<span class="math inline">\(n*n\)</span>的可逆实对角矩阵构成群，称为<strong>特殊线性群</strong>，记为<span class="math inline">\(SL_n(R)\)</span></p>
+</blockquote>
+<h3 id="week-2">week 2</h3>
+<h5 id="子群">子群</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>按照<span class="math inline">\(*\)</span>构成群，<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的一个非空子集，并且<span class="math inline">\(H\)</span>按照<span class="math inline">\(*\)</span>也构成群，则称<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的子群，并记为<span class="math inline">\(H \leqslant G\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(H\)</span>的单位元<span class="math inline">\(e_H\)</span>就是<span class="math inline">\(G\)</span>的单位元<span class="math inline">\(e\)</span></p></li>
+<li><p><span class="math inline">\(a\)</span>在<span class="math inline">\(H\)</span>中的逆元<span class="math inline">\(a_H^{-1}\)</span>就是<span class="math inline">\(a\)</span>在<span class="math inline">\(G\)</span>中的逆元<span class="math inline">\(a^{-1}\)</span></p></li>
+<li><p>子群的判定</p>
+<ul>
+<li>如果<span class="math inline">\(H\)</span>对乘法，求逆封闭，那么<span class="math inline">\(H\)</span>为子群</li>
+<li>如果<span class="math inline">\(H\)</span>对右除法封闭，即<span class="math inline">\(\forall a, b \in H\)</span>时，有<span class="math inline">\(ab^{-1} \in H\)</span></li>
+</ul></li>
+<li><p>群<span class="math inline">\(G\)</span>的若干个子群的交也是<span class="math inline">\(G\)</span>的子群</p></li>
+</ul>
+<h5 id="群的子集的乘积">群的子集的乘积</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，对于<span class="math inline">\(X, Y \subseteq G\)</span>，定义</p>
+<ul>
+<li><span class="math inline">\(X^{-1} = \{x^{-1}:x\in X\}\)</span></li>
+<li><span class="math inline">\(XY = \{xy : x \in X \cap y \in Y\}\)</span></li>
+</ul>
+</blockquote>
+<p>在上述条件下，我们有</p>
+<ul>
+<li><span class="math inline">\((X^{-1})^{-1} = X\)</span></li>
+<li><span class="math inline">\((XY)Z = X(YZ)\)</span></li>
+<li><span class="math inline">\((X_1X_2...X_n)^{-1} = X_n^{-1}...X_2^{-1}X_1^{-1}\)</span></li>
+</ul>
+<p>特别的，如果<span class="math inline">\(H\)</span>是一个子群，那么</p>
+<ul>
+<li><span class="math inline">\(H^{-1} = H\)</span></li>
+<li><span class="math inline">\(HH = HH^{-1} = H^{-1}H = H\)</span></li>
+</ul>
+<p>接着我们考虑单个元素和子集进行运算的情况，可以认为是集合运算的特例</p>
+<ul>
+<li><span class="math inline">\(Hab = (Ha)b = H(ab)\)</span></li>
+<li><span class="math inline">\((Ha)^{-1} = a^{-1}H^{-1}\)</span></li>
+</ul>
+<h5 id="子群的乘积">子群的乘积</h5>
+<blockquote>
+<p>设<span class="math inline">\(H, K \leq G\)</span>，则<span class="math inline">\(HK \leq G \Leftrightarrow HK=KH\)</span></p>
+</blockquote>
+<h5 id="子群的陪集">子群的陪集</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，<span class="math inline">\(H \leq G\)</span>，对于<span class="math inline">\(a \in G\)</span>，称<span class="math inline">\(aH = \{ah : h \in H\}\)</span>为<span class="math inline">\(a\)</span>所在的<span class="math inline">\(H\)</span>的左陪集</p>
+<p>称<span class="math inline">\(Ha = \{ha:h \in H\}\)</span>为<span class="math inline">\(a\)</span>所在的<span class="math inline">\(H\)</span>的右陪集</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(|Ha|=|aH|=|H|\)</span></p></li>
+<li><p><span class="math inline">\(aH = bH \Leftrightarrow b^{-1}a \in H\)</span>，可以考虑一般情况，<span class="math inline">\(hH = H \Leftrightarrow Hh = H \Leftrightarrow h\in H\)</span></p></li>
+</ul>
+<h5 id="子群的指标">子群的指标</h5>
+<ul>
+<li>设<span class="math inline">\(H\)</span>为群<span class="math inline">\(G\)</span>的子群，则<span class="math inline">\(|\{aH:a\in G\}| = |\{Ha : a \in G\}|\)</span>（即左陪集的个数等于右陪集的个数）</li>
+</ul>
+<blockquote>
+<p>如果<span class="math inline">\(H \leq G\)</span>，我们称<span class="math inline">\(|\{aH : a \in G\}|\)</span>为<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中的指标，记为<span class="math inline">\([G:H]\)</span></p>
+</blockquote>
+<h5 id="lagrange-定理">Lagrange 定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(H\)</span>为有限群<span class="math inline">\(G\)</span>的子群，则<span class="math inline">\([G:H]=|G|/|H|\)</span></p>
+</blockquote>
+<ul>
+<li><p>设<span class="math inline">\(K \leq H \leq G\)</span>，并且<span class="math inline">\([G:H]\)</span>与<span class="math inline">\([H:K]\)</span>有限，那么<span class="math inline">\([G:H][H:K]=[G:K]\)</span></p>
+<p>! 注意，这条定理在证明时一定要通过映射来证明，不要通过Lagrange定理简单证明</p></li>
+<li><p>设<span class="math inline">\(H, K \leq G\)</span>，则<span class="math inline">\(|\{Hg:g\in G \cap Hg \subseteq HK\}| = [K:H \cap K]\)</span></p>
+<p>也即<span class="math inline">\(K\)</span>中，<span class="math inline">\(H \cap K\)</span>的分布和<span class="math inline">\(HK\)</span>中，<span class="math inline">\(H\)</span>的右陪集的分布是相似的</p></li>
+<li><p>Poincare定理：如果<span class="math inline">\(H_1, ..., H_n\)</span>都是群<span class="math inline">\(G\)</span>的指标有限的子群，那么<span class="math inline">\(\bigcap_{i=1}^n H_i\)</span>的指标也有限，并且<span class="math inline">\([G:\bigcap_{i=1}^n H_i] \leq \prod_{i=1}^n [G:H_i]\)</span></p></li>
+<li><p>设<span class="math inline">\(G\)</span>为<span class="math inline">\(n\)</span>阶群，那么<span class="math inline">\(\forall a \in G\)</span>有<span class="math inline">\(a^n = e\)</span></p></li>
+</ul>
+<h5 id="群中元素的阶">群中元素的阶</h5>
+<blockquote>
+<p>设<span class="math inline">\(a\)</span>为群<span class="math inline">\(G\)</span>的元素，如果有正整数<span class="math inline">\(n\)</span>使得<span class="math inline">\(a^n = e\)</span>，那么，我们称最小的这样的正整数为<span class="math inline">\(a\)</span>的阶，记为<span class="math inline">\(o(a)\)</span>，特别的，如果<span class="math inline">\(\forall n \in Z, a^n \neq e\)</span>，那么我们说<span class="math inline">\(a\)</span>的阶为无穷，记为<span class="math inline">\(o(a) = \infty\)</span></p>
+</blockquote>
+<ul>
+<li>设<span class="math inline">\(o(a) = n\)</span>，则<span class="math inline">\(o(a^m) = \frac{n}{(m, n)}\)</span></li>
+</ul>
+<h5 id="有限生成群">有限生成群</h5>
+<blockquote>
+<p>对群<span class="math inline">\(G\)</span>的非空子集<span class="math inline">\(X\)</span>，由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(G\)</span>的子群指</p>
+<p><span class="math inline">\(\langle X \rangle = \bigcap_{x \subseteq H \leq G} H = \{x_1^{m_1}x_2^{m_2}...x_k^{m_k} : k \in Z^{+}, x_i \in X, m_i \in \{1,-1\}\}\)</span></p>
+</blockquote>
+<h5 id="循环群">循环群</h5>
+<blockquote>
+<p>称$a <span class="math inline">\(为\)</span>a<span class="math inline">\(生成的循环群，\)</span>a$称为这个群的一个生成元</p>
+</blockquote>
+<ul>
+<li><p>如果<span class="math inline">\(o(a) = n\)</span>，那么<span class="math inline">\(\langle a \rangle = \{e, a, a^2, ..., a^{n-1}\}\)</span></p></li>
+<li><p>循环群的子群仍然是循环群</p></li>
+<li><p>有限循环群的子群为<span class="math inline">\(\langle a^m \rangle, 0 \leq m \leq n\)</span>，一共有<span class="math inline">\(\varphi(n)\)</span>个</p>
+<p>具体的，对于<span class="math inline">\(d | n\)</span>，有维一的<span class="math inline">\(d\)</span>阶子群<span class="math inline">\(\langle a^{n/d} \rangle\)</span></p></li>
+<li><p>无限循环群的子群为<span class="math inline">\(\langle a^n \rangle\)</span>，当<span class="math inline">\(n\)</span>不同时，这些子群也两两不同</p></li>
+<li><p>设<span class="math inline">\(G\)</span>为<span class="math inline">\(p^n\)</span>阶群，则<span class="math inline">\(G\)</span>中一定含有<span class="math inline">\(p\)</span>阶元</p></li>
+<li><p>素数阶群一定是循环群</p></li>
+</ul>
+<h5 id="共轭子群">共轭子群</h5>
+<blockquote>
+<p>设<span class="math inline">\(H \leq G\)</span>，那么，<span class="math inline">\(\forall g \in G\)</span>，<span class="math inline">\(gHg^{-1} \leq G\)</span>，此时，我们称<span class="math inline">\(gHg^{-1}\)</span>为与<span class="math inline">\(H\)</span>共轭的子群</p>
+</blockquote>
+<p>利用子群的判别条件：<span class="math inline">\(\forall x, y \in gHg^{-1}, \exists h_1, h_2, \;s.t.\; gh_1g^{-1} = x, gh_2g^{-1} = y\)</span>，因此，<span class="math inline">\(xy^{-1} = gh_1g^{-1} * gh_2^{-1}g^{-1} = g(h_1h_2^{-1})g^{-1} \in gHg^{-1}\)</span></p>
+<h5 id="正规子群">正规子群</h5>
+<blockquote>
+<p>设<span class="math inline">\(H \leq G\)</span>，如果<span class="math inline">\(\forall g \in G\)</span>，有<span class="math inline">\(gHg^{-1} = H\)</span>，或者<span class="math inline">\(gH=Hg\)</span>，那么，我们称<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的正规子群，记为<span class="math inline">\(H \lhd G\)</span></p>
+</blockquote>
+<ul>
+<li>正规子群的判定条件
+<ul>
+<li>对任何的<span class="math inline">\(g \in G, h \in H\)</span>，有<span class="math inline">\(ghg^{-1} \in H\)</span>，或者说<span class="math inline">\(\forall g \in G, gHg^{-1} \subseteq H\)</span></li>
+<li>当<span class="math inline">\(a, b \in G\)</span>时，<span class="math inline">\(\exists c, s.t. (aH)(bH) = cH\)</span></li>
+</ul></li>
+</ul>
+<h5 id="正规核">正规核</h5>
+<blockquote>
+<p>设<span class="math inline">\(H \leq G\)</span>，则<span class="math inline">\(H_G = \bigcap_{g \in G} gHg^{-1}\)</span>是被包含在<span class="math inline">\(H\)</span>中的<span class="math inline">\(G\)</span>的最大正规子群，称为<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中的正规核</p>
+</blockquote>
+<h5 id="正规子群的交">正规子群的交</h5>
+<blockquote>
+<p>对集合<span class="math inline">\(I \neq \empty\)</span>，如果<span class="math inline">\(H_i \lhd G (i \in I)\)</span>，那么<span class="math inline">\(H = \bigcap_{i \in I} H_i \lhd G\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(H \leq K \leq G\)</span>时，<span class="math inline">\(H \lhd G \Rightarrow H \lhd K\)</span></p>
+<p>在更小的范围内，正规子群仍然是正规子群</p></li>
+<li><p><span class="math inline">\(H \lhd G\)</span>且<span class="math inline">\(K \leq G\)</span>时，<span class="math inline">\(HK=KH \leq G\)</span></p>
+<p><span class="math inline">\(HK=KH\)</span>可以利用<span class="math inline">\(H\)</span>的正规性得到，而是子群则因为子群的乘积成子群的判定条件</p></li>
+</ul>
+<h5 id="商群">商群</h5>
+<blockquote>
+<p>设<span class="math inline">\(H\)</span>为群<span class="math inline">\(G\)</span>的正规子群，那么</p>
+<p><span class="math display">\[G/H = \{gH:g\in G\}\]</span></p>
+<p>按照陪集的乘法形成群，称为按正规子群<span class="math inline">\(H\)</span>形成的商群</p>
+</blockquote>
+<h5 id="同态">同态</h5>
+<blockquote>
+<p>设<span class="math inline">\(\sigma : G \to \bar{G}\)</span>，并且<span class="math inline">\(\forall a, b \in G\)</span>，有</p>
+<p><span class="math display">\[\sigma(ab) = \sigma(a)\sigma(b)\]</span></p>
+<p>称<span class="math inline">\(\sigma\)</span>是群<span class="math inline">\(G\)</span>到<span class="math inline">\(\bar{G}\)</span>的同态</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(\text{Im} \sigma = \sigma(G) = \{\sigma(a) : a\in G\}\)</span>，称为同态像</p></li>
+<li><p><span class="math inline">\(\text{Ker} \sigma = \sigma^{-1}(\bar{e}) = \{a \in G: \sigma(a) = \bar{e}\}\)</span>，称为同态核</p></li>
+<li><p><span class="math inline">\(\sigma(e) = \bar{e}\)</span></p></li>
+<li><p><span class="math inline">\(\sigma(a^{-1}) = \sigma(a)^{-1}\)</span></p></li>
+</ul>
+<h5 id="自然同态">自然同态</h5>
+<blockquote>
+<p>设<span class="math inline">\(H \lhd G\)</span>，令<span class="math inline">\(\sigma(a) = aH\)</span>，那么<span class="math inline">\(\sigma\)</span>是群<span class="math inline">\(G\)</span>到商群<span class="math inline">\(G/H\)</span>的同态，称为<span class="math inline">\(G\)</span>到<span class="math inline">\(G/H\)</span>的自然同态</p>
+</blockquote>
+<p>自然同态满足</p>
+<ul>
+<li><span class="math inline">\(\text{Im} \sigma = G/H\)</span>，<span class="math inline">\(\text{Ker} \sigma = H\)</span></li>
+</ul>
+<h5 id="同构">同构</h5>
+<blockquote>
+<p>如果同态<span class="math inline">\(\sigma\)</span>是一个满射，那么称为满同态</p>
+<p>如果同态<span class="math inline">\(\sigma\)</span>是一个单射，那么称为单同态</p>
+<p>如果同态<span class="math inline">\(\sigma\)</span>是一个双射，那么我们称为同构，记为<span class="math inline">\(G \cong \bar{G}\)</span></p>
+</blockquote>
+<h3 id="week-3">week 3</h3>
+<h5 id="同态基本定理">同态基本定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(\bar{G}\)</span>的同态，那么</p>
+<ul>
+<li><span class="math inline">\(\text{Ker} \sigma \lhd G\)</span></li>
+<li><span class="math inline">\(\text{Im} \sigma \leq \bar{G}\)</span></li>
+<li><span class="math inline">\(G/\text{Ker} \sigma \cong \text{Im} \sigma\)</span></li>
+</ul>
+</blockquote>
+<h5 id="自同构">自同构</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，<span class="math inline">\(G\)</span>到<span class="math inline">\(G\)</span>的同构称为<span class="math inline">\(G\)</span>的自同构</p>
+<p><span class="math inline">\(G\)</span>的所有自同构的集合构成对称群<span class="math inline">\(S(G)\)</span>的一个子群，称为自同构群<span class="math inline">\(\text{Aut} (G)\)</span></p>
+</blockquote>
+<ul>
+<li><p>自同构群中的单位元是恒等变换<span class="math inline">\(I_G\)</span></p></li>
+<li><p><span class="math inline">\(\sigma_g(x) = gxg^{-1} \in \text{Aut}(G)\)</span>，因此共轭变换一定是一种自同构</p></li>
+</ul>
+<h5 id="内自同构">内自同构</h5>
+<blockquote>
+<p>所有的共轭变换构成群称为内自同构群，记为<span class="math inline">\(\text{Inn}(G)\)</span></p>
+<ul>
+<li><span class="math inline">\(\text{Inn}(G) \lhd \text{Aut}(G)\)</span></li>
+</ul>
+</blockquote>
+<p>自同构群内所有不是自同构的同构，称为外同构</p>
+<h5 id="中心">中心</h5>
+<blockquote>
+<p>称<span class="math inline">\(Z(G) = \{a\in G:\forall x \in G, ax = xa\}\)</span>为群的中心，<span class="math inline">\(Z(G) \lhd G\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(G/Z(G) \cong \text{Inn}(G)\)</span>
+<ul>
+<li>定义映射为<span class="math inline">\(f(a) = \sigma_a\)</span>，这是一个同态，同态核为<span class="math inline">\(Z(G)\)</span>，同态像为<span class="math inline">\(\text{Inn}(G)\)</span></li>
+</ul></li>
+</ul>
+<h5 id="群在集合上的作用">群在集合上的作用</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，<span class="math inline">\(X\)</span>为非空集，如果<span class="math inline">\(\forall g \in G, x \in X\)</span>，存在唯一的<span class="math inline">\(X\)</span>中元与之对应（记为<span class="math inline">\(g * x\)</span>），并且</p>
+<ul>
+<li><span class="math inline">\(\forall x \in X, e*x=x\)</span></li>
+<li><span class="math inline">\(\forall a, b \in G,x\in X, ab * x=a*(b*x)\)</span></li>
+</ul>
+<p>那么说群<span class="math inline">\(G\)</span>（左）作用在集合<span class="math inline">\(X\)</span>上，<span class="math inline">\(*\)</span>为群<span class="math inline">\(G\)</span>在<span class="math inline">\(X\)</span>上的作用</p>
+<p><span class="math inline">\(g*x\)</span>有时可以简写为<span class="math inline">\(gx\)</span></p>
+</blockquote>
+<ul>
+<li>也可以定义右作用，但通过定义左作用<span class="math inline">\(g*x\)</span>为给定右作用运算<span class="math inline">\(x*g^{-1}\)</span>的结果，可以将右作用转化为左作用</li>
+</ul>
+<h5 id="轨道">轨道</h5>
+<blockquote>
+<p>定义关系<span class="math inline">\(x \sim y\)</span>，<span class="math inline">\(\exists g \in G, gx = y\)</span></p>
+<ul>
+<li>关系<span class="math inline">\(x \sim y\)</span>是一个等价关系</li>
+</ul>
+<p>定义<span class="math inline">\(O_x = \{y \in X : x \sim y\} = \{gx:g\in G\}\)</span>，称为<span class="math inline">\(x\)</span>所在的轨道</p>
+<ul>
+<li><span class="math inline">\(O_x\)</span>就是<span class="math inline">\(x\)</span>所在的按照<span class="math inline">\(\sim\)</span>划分的等价类</li>
+</ul>
+</blockquote>
+<h5 id="稳定化子">稳定化子</h5>
+<blockquote>
+<p><span class="math inline">\(\text{Stab}(x) = \{g\in G:gx=x\}\)</span>称为<span class="math inline">\(x\)</span>的稳定化子</p>
+</blockquote>
+<h5 id="作用核">作用核</h5>
+<blockquote>
+<p><span class="math inline">\(\text{Ker}(X) = \{g \in G :\forall x \in X, gx = x\}\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(\text{Ker(X)} = \bigcap_{x \in X} \text{Stab}(x)\)</span></li>
+</ul>
+<h5 id="轨道-稳定化子定理">轨道-稳定化子定理</h5>
+<p>一个被名词堆起来的定理</p>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>作用在非空集<span class="math inline">\(X\)</span>上，那么</p>
+<ul>
+<li><span class="math inline">\(\text{Stab}(x) \leq G\)</span></li>
+<li><span class="math inline">\([G:\text{Stab}(x)] = |O_x|\)</span></li>
+</ul>
+</blockquote>
+<p>证明时，考虑映射<span class="math inline">\(f(gx) = g *\text{Stab}(x)\)</span></p>
+<h5 id="嵌入">嵌入</h5>
+<blockquote>
+<p>如果<span class="math inline">\(G\)</span>和<span class="math inline">\(\bar{G}\)</span>的一个子群同构，那么我们称<span class="math inline">\(G\)</span>可嵌入到<span class="math inline">\(\bar{G}\)</span>中</p>
+</blockquote>
+<ul>
+<li>设群<span class="math inline">\(G\)</span>作用在集合<span class="math inline">\(X\)</span>上，那么<span class="math inline">\(\text{Ker}(X) \lhd G\)</span>，并且<span class="math inline">\(G/\text{Ker}(X)\)</span>可嵌入到对称群<span class="math inline">\(S(X)\)</span>中
+<ul>
+<li>考虑映射<span class="math inline">\(\sigma_g(x) = gx\)</span>，可以证明<span class="math inline">\(\sigma_g(x) \in S(X)\)</span>，考虑映射<span class="math inline">\(f(g) = \sigma_g\)</span>，这就是一个从<span class="math inline">\(G\)</span>到<span class="math inline">\(S(X)\)</span>的同态</li>
+</ul></li>
+</ul>
+<h5 id="cayley定理">Cayley定理</h5>
+<blockquote>
+<p>群<span class="math inline">\(G\)</span>可嵌入到对称群<span class="math inline">\(S(G)\)</span>中</p>
+</blockquote>
+<h3 id="week4">week4</h3>
+<h5 id="共轭">共轭</h5>
+<blockquote>
+<p>所有的共轭变换可以看成是一种<span class="math inline">\(G\)</span>到<span class="math inline">\(G\)</span>的作用，称为<strong>共轭作用</strong></p>
+<p>在共轭作用下，<span class="math inline">\(x\)</span>所在的轨道，称为<span class="math inline">\(x\)</span>所在的共轭类<span class="math inline">\(C(x) = \{gxg^{-1}:g\in G\}\)</span></p>
+</blockquote>
+<h5 id="中心化子">中心化子</h5>
+<blockquote>
+<p>称<span class="math inline">\(C_G(x) = \{g \in G : gx = xg\}\)</span>为<span class="math inline">\(x\)</span>的中心化子</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(C_G(x) \leq G\)</span>（共轭作 用 下<span class="math inline">\(x\)</span>的稳定化子）</li>
+<li><span class="math inline">\([G:C_G(x)] = |C(x)|\)</span>（<span class="math inline">\(C(x)\)</span>即轨道的大小）</li>
+</ul>
+<h5 id="陪集的群作用">陪集的群作用</h5>
+<blockquote>
+<p>对<span class="math inline">\(H \leqslant G\)</span>，记<span class="math inline">\(X = \{xH:x\in G\}\)</span>，定义<span class="math inline">\(G\)</span>在<span class="math inline">\(X\)</span>上的作用<span class="math inline">\(g * xH = gxH\)</span></p>
+</blockquote>
+<ul>
+<li>此时，<span class="math inline">\(Ker(X) = H_G = \bigcap xHx^{-1}\)</span></li>
+<li>因此<span class="math inline">\(G / H_G\)</span>可嵌入到<span class="math inline">\(S(X)\)</span>中</li>
+</ul>
+<h5 id="p相关的定理">p相关的定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(H \leqslant G\)</span>，且<span class="math inline">\([G:H]\)</span>是<span class="math inline">\(|G|\)</span>的最小素因子<span class="math inline">\(p\)</span>，那么<span class="math inline">\(H \lhd G\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(G/H_G\)</span>可嵌入到<span class="math inline">\(S(X)\)</span>中，而<span class="math inline">\(|S(X)| = [G:H]!\)</span>，因此<span class="math inline">\(|G/H_G| \mid [G:H]!\)</span>，又<span class="math inline">\([G/H_G] = [G/H] * [H/H_G]\)</span>，因此<span class="math inline">\([H/H_G] \mid ([G:H]-1)! = (p-1)!\)</span>，又<span class="math inline">\(|H/H_G| \mid |H|\)</span>，从而<span class="math inline">\(|H/H_G| \mid |G|\)</span>，从而证明<span class="math inline">\(|H/H_G| = 1\)</span></li>
+<li>证明正规，可以尝试证明<span class="math inline">\(|H/H_G| = 1\)</span></li>
+</ul>
+<h5 id="不动点">不动点</h5>
+<blockquote>
+<p>记<span class="math inline">\(Fix(g) = \{x\in X:gx=x\}\)</span>，称为<span class="math inline">\(g-\)</span>不动点</p>
+<p>再记<span class="math inline">\(Fix(G) = \bigcap_{g \in G} Fix(g)\)</span>，称为其中的元素为不动点</p>
+</blockquote>
+<h5 id="burnside引理">Burnside引理</h5>
+<blockquote>
+<p>设有限群<span class="math inline">\(G\)</span>作用在有限非空集<span class="math inline">\(X\)</span>上有<span class="math inline">\(N\)</span>个不同的轨道，那么</p>
+<p><span class="math display">\[N = \frac{1}{|G|} \sum_{g\in G} |Fix(g)|\]</span></p>
+</blockquote>
+<ul>
+<li>双计数，计算<span class="math inline">\(\{(g, x):g\in G, x \in X, gx = x\}\)</span>的个数</li>
+</ul>
+<h5 id="不动点定理">不动点定理</h5>
+<blockquote>
+<p>设有限群<span class="math inline">\(G\)</span>作用在有限非空集<span class="math inline">\(X\)</span>上，则<span class="math inline">\(X\)</span>中非不动点个数可以表示为<span class="math inline">\(|G|\)</span>的一些大于<span class="math inline">\(1\)</span>的因子之和</p>
+</blockquote>
+<ul>
+<li>考虑类方程<span class="math inline">\(|X| = \sum |O_x|\)</span>，而<span class="math inline">\(|O_x| = [G:\text{Stab}(x)]\)</span></li>
+</ul>
+<h5 id="p-群">p-群</h5>
+<blockquote>
+<p>对于素数<span class="math inline">\(p\)</span>及自然数<span class="math inline">\(n\)</span>，阶为<span class="math inline">\(p^n\)</span>的群称为<span class="math inline">\(p-\)</span>群</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(p-\)</span>群<span class="math inline">\(G\)</span>作用在<span class="math inline">\(X\)</span>上时，那么<span class="math inline">\(|X| \equiv |Fix(G)|(mod\;p)\)</span>，特别的，当<span class="math inline">\(p \nmid |X|\)</span>时，<span class="math inline">\(X\)</span>中一定存在不动点</p></li>
+<li><p><span class="math inline">\(p-\)</span>群<span class="math inline">\(G\)</span>一定有非平凡的中心，也即<span class="math inline">\(Z(G)\)</span>中一定有非单位元</p></li>
+<li><p><span class="math inline">\(p^2\)</span>阶群<span class="math inline">\(G\)</span>一定是Abel群</p>
+<ul>
+<li>尝试证明<span class="math inline">\(Z(G) = G\)</span>，由上，只需证明<span class="math inline">\(Z(G) \neq p\)</span>即可，而<span class="math inline">\(Z(G)=p\)</span>时，<span class="math inline">\(G/Z(G)\)</span>中将有生成元<span class="math inline">\(aZ(G)\)</span>，用<span class="math inline">\(aZ(G)\)</span>表示<span class="math inline">\(G\)</span>中的元素，来证明他们可交换吧!</li>
+</ul></li>
+</ul>
+<h5 id="正规化子">正规化子</h5>
+<blockquote>
+<p>设<span class="math inline">\(H \leqslant G\)</span>，那么<span class="math inline">\(N_G(H) = \{g \in G : gH = Hg\}\)</span>称为<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中的正规化子</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(N_G(H)\)</span>是使得<span class="math inline">\(H\)</span>在其中正规的<span class="math inline">\(G\)</span>的最大子群（若<span class="math inline">\(H \lhd K\)</span>，那么<span class="math inline">\(K \leqslant N_G(H)\)</span>）</p></li>
+<li><p><span class="math inline">\([G:N_G(H)] = |\{gHg^{-1} : g\in G\}|\)</span></p>
+<ul>
+<li>定义群作用<span class="math inline">\(G\)</span>作用在<span class="math inline">\(\{aHa^{-1}:a\in G\}\)</span>上，<span class="math inline">\(g*aHa^{-1} = (ga)H(ga)^{-1}\)</span>，右边是<span class="math inline">\(O_H\)</span>，<span class="math inline">\(N_G(H)\)</span>是<span class="math inline">\(\text{Stab}(H)\)</span></li>
+</ul></li>
+</ul>
+<h3 id="week5">week5</h3>
+<h5 id="西罗p-子群">西罗p-子群</h5>
+<blockquote>
+<p>对于有限群<span class="math inline">\(G\)</span>和素数<span class="math inline">\(p\)</span>，如果<span class="math inline">\(G=p^a * m\)</span>，其中<span class="math inline">\(p\nmid m\)</span>，那么大小为<span class="math inline">\(p^a\)</span>的<span class="math inline">\(G\)</span>的子群称为西罗p-子群</p>
+</blockquote>
+<ul>
+<li>如果<span class="math inline">\(P \leqslant H \leqslant G\)</span>，且<span class="math inline">\(P\)</span>是<span class="math inline">\(G\)</span>的西罗p-子群，那么<span class="math inline">\(P\)</span>也是<span class="math inline">\(H\)</span>的西罗p-子群</li>
+</ul>
+<h5 id="西罗第一定理">西罗第一定理</h5>
+<blockquote>
+<p>有限群<span class="math inline">\(G\)</span>一定存在西罗p-子群</p>
+</blockquote>
+<p>设<span class="math inline">\(n = p^a * b\)</span>，证明时，考虑群<span class="math inline">\(G\)</span>作用在集合<span class="math inline">\(X = \{S \subseteq G : |S| = p^a\}\)</span></p>
+<p>首先，注意到<span class="math inline">\(p \nmid |X|\)</span>；其次，注意到<span class="math inline">\(|X| = \sum |O_x|\)</span>，因此存在<span class="math inline">\(x\)</span>，使<span class="math inline">\(p \nmid O_x\)</span></p>
+<p>任取<span class="math inline">\(S \in O_x\)</span>，那么<span class="math inline">\(H=\text{Stab} (S) \leqslant G\)</span>，并且<span class="math inline">\([G:H] = |O_x|\)</span>，因此<span class="math inline">\(p \nmid [G:H]\)</span></p>
+<p>由于<span class="math inline">\(|G|=[G:H]*|H|\)</span>，因此<span class="math inline">\(p^a | \;|H|\)</span>，故<span class="math inline">\(|H| \geq p^a\)</span></p>
+<p>同时，取<span class="math inline">\(s \in S, h \in H\)</span>，有<span class="math inline">\(hs \in hS=S\)</span>，从而<span class="math inline">\(Hs \subseteq S\)</span>，那么<span class="math inline">\(|H|=|Hs| \leqslant |S| = p^a\)</span></p>
+<h5 id="西罗第二定理">西罗第二定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(P\)</span>为有限群<span class="math inline">\(G\)</span>的任意一个西罗p-子群，那么<span class="math inline">\(G\)</span>的任意一个西罗p-子群<span class="math inline">\(P&#39;\)</span>都被包含在<span class="math inline">\(G\)</span>的某个与<span class="math inline">\(P\)</span>的共轭的子群中。特别的，<span class="math inline">\(G\)</span>的所有西罗p-子群形成一个子群共轭类。</p>
+</blockquote>
+<p>考虑将<span class="math inline">\(P&#39;\)</span>作用在集合<span class="math inline">\(X = \{gP:g \in G\}\)</span>上，由于此时是p-群作用，并且<span class="math inline">\(p\nmid|X|=|G|/|P|\)</span>，那么存在着不动点<span class="math inline">\(gP\)</span></p>
+<p>对这个不动点进行考虑，<span class="math inline">\(\forall x \in P&#39;, xgP = gP\)</span>，因此<span class="math inline">\(x \in gPg^{-1}\)</span>，因此<span class="math inline">\(P&#39; \subseteq gPg^{-1}\)</span></p>
+<p>注意到大小的限制，因此对于任意的西罗p-子群<span class="math inline">\(P, P&#39;\)</span>，存在<span class="math inline">\(g \in G\)</span>，使得<span class="math inline">\(P&#39;=gPg^{-1}\)</span></p>
+<ul>
+<li>推论：设西罗p-子群<span class="math inline">\(P\)</span>，那么<span class="math inline">\(P \lhd G\)</span>的充要条件是<span class="math inline">\(P\)</span>是<span class="math inline">\(G\)</span>中唯一的西罗p-子群</li>
+</ul>
+<h5 id="西罗第三定理">西罗第三定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(n = p^a * b(p \nmid b)\)</span>，设<span class="math inline">\(n_p\)</span>表示西罗p-子群的个数，那么</p>
+<ul>
+<li><span class="math inline">\(n_p \mid b\)</span></li>
+<li><span class="math inline">\(n_p \equiv 1(\text{mod} \;p)\)</span></li>
+<li>设<span class="math inline">\(P\)</span>为任一个西罗p-子群，那么<span class="math inline">\(n_p = [G:N_G(P)]\)</span></li>
+</ul>
+</blockquote>
+<p>首先是第三条和第二条，由西罗第二定理和前文的结论，<span class="math inline">\(n_p = |\{gPg^{-1} : g \in G\}| = [G:N_G(P)]\)</span></p>
+<p>由于<span class="math inline">\(P \leqslant N_G(P) \leqslant G\)</span>，那么<span class="math inline">\([G:P]=[G:N_G(P)]*[N_G(P):P]\)</span>，因此<span class="math inline">\(n_p \mid [G:P]=b\)</span></p>
+<p>将群<span class="math inline">\(P\)</span>作用在集合<span class="math inline">\(X = \{gPg^{-1}:g\in G\}\)</span>（所有的西罗p-子群）上，<span class="math inline">\(x*gPg^{-1} = (xg)P(xg)^{-1}\)</span></p>
+<p>考虑不动点，如果<span class="math inline">\(x \in P, g \in G\)</span>满足<span class="math inline">\(x * gPg^{-1} = gPg^{-1}\)</span>，那么<span class="math inline">\((g^{-1}xg)P = P(g^{-1}xg)\)</span></p>
+<p>因此如果<span class="math inline">\(gPg^{-1} \in X\)</span>构成不动点，那么<span class="math inline">\(g^{-1}Pg \leqslant N_G(P)\)</span></p>
+<p>由于<span class="math inline">\(P \leqslant N_G(P) \leqslant G\)</span>，因此<span class="math inline">\(P\)</span>也是<span class="math inline">\(N_G(P)\)</span>的西罗p-子群，并且由正规化子的性质<span class="math inline">\(P \lhd N_G(P)\)</span></p>
+<p>那么根据西罗第二定理的推论，<span class="math inline">\(P\)</span>是唯一的不动点，那么<span class="math inline">\(n_p \equiv |X| \equiv |Fix(P)| \equiv 1(\text{mod}\;p)\)</span></p>
+<h5 id="frattini引理">Frattini引理</h5>
+<blockquote>
+<p>设<span class="math inline">\(H\)</span>为群<span class="math inline">\(G\)</span>的有限正规子群，<span class="math inline">\(P\)</span>是<span class="math inline">\(H\)</span>的西罗p-子群，那么<span class="math inline">\(G=HN_G(P)\)</span></p>
+</blockquote>
+<p>也就是说，一个群可以由正规子群和其西罗p-子群的正规化子相乘来生成</p>
+<ul>
+<li><blockquote>
+<p>设<span class="math inline">\(P\)</span>为<span class="math inline">\(G\)</span>的西罗p-子群，那么<span class="math inline">\(N_G(N_G(P))=N_G(P)\)</span></p>
+<p>更一般地，<span class="math inline">\(N_G(P) \leqslant H \leqslant G\)</span>时，<span class="math inline">\(N_G(H)=H\)</span></p>
+</blockquote></li>
+</ul>
+<h5 id="西罗定理的应用">西罗定理的应用</h5>
+<ul>
+<li>设<span class="math inline">\(p, q\)</span>为不同素数，并且<span class="math inline">\(p \not \equiv 1 (mod\;q), q \not\equiv 1(mod\;p)\)</span>，那么<span class="math inline">\(pq\)</span>阶群为循环群</li>
+<li>设<span class="math inline">\(p,q\)</span>为不同素数，<span class="math inline">\(G\)</span>为<span class="math inline">\(p^2q\)</span>阶群，那么<span class="math inline">\(G\)</span>有<span class="math inline">\(p^2\)</span>阶或<span class="math inline">\(q\)</span>阶正规子群</li>
+<li>设<span class="math inline">\(p,q,r\)</span>为不同素数，对<span class="math inline">\(pqr\)</span>阶群<span class="math inline">\(G\)</span>，满足<span class="math inline">\(G\)</span>有<span class="math inline">\(p\)</span>阶或<span class="math inline">\(q\)</span>阶或<span class="math inline">\(r\)</span>阶的正规子群</li>
+</ul>
+<h5 id="单群">单群</h5>
+<blockquote>
+<p>对不平凡的群<span class="math inline">\(G(G \neq \{e\})\)</span>，如果<span class="math inline">\(G\)</span>中没有异于<span class="math inline">\(\{e\}\)</span>和<span class="math inline">\(G\)</span>的正规子群，那么我们称<span class="math inline">\(G\)</span>为单群</p>
+</blockquote>
+<ul>
+<li>Abel单群一定是素数阶循环群</li>
+</ul>
+<h5 id="同构定理-第一同构定理">同构定理 / 第一同构定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>为群<span class="math inline">\(G\)</span>到<span class="math inline">\(G^*\)</span>的同态，那么</p>
+<ul>
+<li><p><span class="math inline">\(G\)</span>中包含<span class="math inline">\(\ker \sigma\)</span>的子群和<span class="math inline">\(\sigma(G)\)</span>的子群之间存在一一对应关系<span class="math inline">\(H \to \sigma(H)\)</span></p>
+<p><span class="math inline">\(\{H \leq G:\ker \sigma \subseteq H\}\)</span>和<span class="math inline">\(\{M:M\leq \sigma(G)\}\)</span>之间存在一一对应</p></li>
+<li><p>如果<span class="math inline">\(\ker \sigma \subseteq H\)</span>，<span class="math inline">\(H \leq G \Rightarrow \sigma(H) \leq \sigma(G)\)</span></p></li>
+<li><p>如果<span class="math inline">\(\ker \sigma \subseteq H, H \leq G\)</span>，那么<span class="math inline">\(H \lhd G \Leftrightarrow \sigma(H) \lhd \sigma(G)\)</span></p></li>
+<li><p>如果<span class="math inline">\(\ker \sigma \subseteq H\)</span>，<span class="math inline">\(H \lhd G\)</span>，那么<span class="math inline">\(G/H \cong \sigma(G)/\sigma(H)\)</span></p></li>
+</ul>
+</blockquote>
+<p>证明的一些简略提示：<span class="math inline">\(\sigma(a) \in \sigma(H) \Leftrightarrow a \in H\)</span></p>
+<p>那么<span class="math inline">\(H = \{a:a \in H\} = \{a:\sigma(a) \in \sigma(H)\}\)</span>，利用该性质，可以推出映射为单射，满射容易验证</p>
+<p>对于第二条，<span class="math inline">\(\sigma(a)\sigma(b)^{-1} = \sigma(ab^{-1}) \in \sigma(H)\)</span>可以验证</p>
+<p>对于第三条，<span class="math inline">\(ghg^{-1} \in H \Leftrightarrow \sigma(g)\sigma(h)\sigma(g^{-1}) \in \sigma(H)\)</span></p>
+<p>最后一条，考虑映射<span class="math inline">\(f(aH) = \sigma(a)\sigma(H)\)</span>即可</p>
+<h5 id="同构定理补充">同构定理补充</h5>
+<p>这里上课没讲，但我感觉很有用</p>
+<blockquote>
+<p>我们不妨定义<span class="math inline">\(\sigma^{-1}(H^*) =\{g \in G: \sigma(g) \in H^*\}\)</span></p>
+</blockquote>
+<ul>
+<li><p>如果<span class="math inline">\(\ker \sigma \subseteq H\)</span>，那么<span class="math inline">\(\sigma^{-1}(\sigma(H)) = H\)</span></p>
+<p><span class="math inline">\(H \subseteq \sigma^{-1}(\sigma(H))\)</span>易证，考虑证明另一个方向</p>
+<p><span class="math inline">\(x \in \sigma^{-1}(\sigma(H)) \Leftrightarrow \exists h \in H, \sigma(x)=\sigma(h) \Leftrightarrow \exists h \in H,\sigma(xh^{-1}) = e^* \Leftrightarrow x \in (\ker \sigma) H=H\)</span></p></li>
+<li><p>根据第一同构定理，上面的定理还可以写为，如果<span class="math inline">\(H^* \leq G^*\)</span>，那么<span class="math inline">\(\ker \sigma \leq \sigma^{-1}(H^*) \leq G\)</span></p></li>
+<li><p>如果<span class="math inline">\(H^* \leq K^* \leq G^*\)</span>，那么<span class="math inline">\(\sigma^{-1}(H^*) \leq \sigma^{-1}(K^*) \leq \sigma^{-1}(G^*) = G\)</span></p></li>
+</ul>
+<h5 id="第一同构定理-第二同构定理-第三同构定理">第一同构定理 / 第二同构定理 / 第三同构定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(K \lhd G\)</span>，那么</p>
+<ul>
+<li><span class="math inline">\(G\)</span>中包含<span class="math inline">\(K\)</span>的子群和<span class="math inline">\(G/K\)</span>的子群之间存在一一对应关系<span class="math inline">\(H \to H/K\)</span></li>
+<li>如果<span class="math inline">\(K\subseteq H\)</span>，<span class="math inline">\(H \leq G \Rightarrow H/K \leq G/K\)</span></li>
+<li>如果<span class="math inline">\(K \subseteq H, H \leq G\)</span>，那么<span class="math inline">\(H \lhd G \Leftrightarrow H/K \lhd G/K\)</span></li>
+<li>如果<span class="math inline">\(K\subseteq H\)</span>，<span class="math inline">\(H \lhd G\)</span>，那么<span class="math inline">\(G/H \cong (G/K)/(H/K)\)</span></li>
+</ul>
+</blockquote>
+<p>我们考虑从<span class="math inline">\(G\)</span>到<span class="math inline">\(G/K\)</span>的自然同态<span class="math inline">\(\sigma\)</span>，只需要证明<span class="math inline">\(\ker \sigma = K, \sigma(G)=G/K, \sigma(H)=H/K\)</span>即可</p>
+<p>我们只考虑最后一个，即<span class="math inline">\(\sigma(H)=\{hK:h\in H\} = H/K\)</span></p>
+<h3 id="week6">week6</h3>
+<p>有些地方会指明<span class="math inline">\(\lhd\)</span>不含相等的情况，但本文中默认可以相等，如果需要指代不相等时，作特殊说明</p>
+<h5 id="galois定理">Galois定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(p\)</span>为素数，那么对p-群<span class="math inline">\(G\)</span>，对于<span class="math inline">\(i = 0,...,n\)</span>，存在<span class="math inline">\(G\)</span>的<span class="math inline">\(p^i\)</span>阶的正规子群<span class="math inline">\(H_i\)</span>，使得</p>
+<p><span class="math display">\[\{e\} = H_0 \lhd H_1 ... \lhd H_n = G\]</span></p>
+</blockquote>
+<p>证明时，注意到条件等价于<span class="math inline">\(H_0 \subseteq H_1 ... \subseteq H_n = G\)</span></p>
+<p>之后归纳，对阶为<span class="math inline">\(p\)</span>的群<span class="math inline">\(H\)</span>，考虑其商群<span class="math inline">\(G^* = G/H\)</span>形成的正规子群列<span class="math inline">\(G_0^*, G_1^*,...,G^*\)</span>，按照之前的同构定理的结论，如果<span class="math inline">\(G_i^* \subset G_{i+1}^*\)</span>，那么<span class="math inline">\(\sigma^{-1}(G_i^*)\subset \sigma^{-1}(G_{i+1}^*)\)</span>，设出<span class="math inline">\(\sigma^{-1}(G_i^*)\)</span>就差不多证完了</p>
+<h5 id="第二同构定理-第三同构定理-第四同构定理">第二同构定理 / 第三同构定理 / 第四同构定理</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，<span class="math inline">\(H \lhd G\)</span>且<span class="math inline">\(K \leq G\)</span>，那么<span class="math inline">\(H\cap K \lhd K\)</span>，并且<span class="math inline">\(K/(H \cap K) \cong HK/H\)</span></p>
+</blockquote>
+<p>设出同构<span class="math inline">\(\sigma(k) = kH(K \to G/H)\)</span>，然后证明<span class="math inline">\(\ker \sigma = H \cap K\)</span>，<span class="math inline">\(\Im \sigma = HK/H\)</span></p>
+<ul>
+<li><p>设<span class="math inline">\(H\lhd G\)</span>，且<span class="math inline">\([G:H]\)</span>有限，那么对<span class="math inline">\(K \leq G\)</span>，有<span class="math inline">\([K:H\cap K] \mid [G:H]\)</span></p>
+<p>这个定理是老师的私货...</p>
+<p>由第二同态定理，<span class="math inline">\(K/(H\cap K) = HK / H\)</span>，因此<span class="math inline">\([K:H \cap K] = |HK/H|\)</span></p>
+<p>此时，<span class="math inline">\(HK=KH\)</span>构成一个子群，且<span class="math inline">\(H \subseteq HK\)</span>，由第一同态定理和Lagrange定理，因此<span class="math inline">\([HK/H] \mid [G/H]\)</span></p></li>
+</ul>
+<h5 id="次正规子群">次正规子群</h5>
+<p>由于正规性并不满足传递性，因此我们考虑研究一种和正规性差不多，但具有传递性的玩意</p>
+<blockquote>
+<p>设<span class="math inline">\(H \leq G\)</span>，那么称<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中次正规，当且仅当存在有限个子群<span class="math inline">\(H_0,...,H_n\)</span>，使得</p>
+<p><span class="math display">\[H=H_0 \lhd H_1 \lhd H_2 ... \lhd H_n = G\]</span></p>
+</blockquote>
+<ul>
+<li><p>如果<span class="math inline">\(H\)</span>在<span class="math inline">\(K\)</span>中次正规，<span class="math inline">\(K\)</span>在<span class="math inline">\(G\)</span>中次正规，那么<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中次正规</p></li>
+<li><blockquote>
+<p>设<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中次正规，那么</p>
+<ul>
+<li>对<span class="math inline">\(K \leq G\)</span>，<span class="math inline">\(H \cap K\)</span>在<span class="math inline">\(K\)</span>中次正规</li>
+<li>对<span class="math inline">\(K \leq G\)</span>，如果<span class="math inline">\([G:H]\)</span>有限，有<span class="math inline">\([K:H\cap K] \mid [G:H]\)</span></li>
+</ul>
+</blockquote>
+<p>不难看出，这个性质是上面性质的一个加强</p>
+<p>在次正规的情况下进行证明，可以利用性质<span class="math inline">\([H_{i+1} \cap K: H_i \cap K] \mid [H_{i+1} : H_i]\)</span>（在第二同态定理中，令<span class="math inline">\(G = H_{i+1}, H = H_i, K = H_{i+1} \cap K\)</span>）</p></li>
+<li><blockquote>
+<p>设<span class="math inline">\(H_1,...,H_k\)</span>为群<span class="math inline">\(G\)</span>的次正规子群，那么<span class="math inline">\(\bigcap_{i=1}^k H_i\)</span>也是<span class="math inline">\(G\)</span>的次正规子群</p>
+<p>如果<span class="math inline">\(\forall 1 \leq i \leq k, [G:H_i]\)</span>有限，那么<span class="math inline">\([G:\bigcap_{i=1}^k H_i] \mid \prod_{i=1}^k [G:H_i]\)</span></p>
+</blockquote>
+<p>利用上一条性质，归纳证明</p></li>
+</ul>
+<h5 id="正规群列">正规群列</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，称满足<span class="math inline">\(\{e\} = G_0 \lhd G_1 \lhd ... \lhd G_n=G\)</span>，并且<span class="math inline">\(G_i\)</span>两两不同的子群列为<strong>正规群列</strong></p>
+<p><span class="math inline">\(n\)</span>称为正规群列的长度</p>
+<p>称<span class="math inline">\(G_1/G_0, G_2/G_1..., G_n/G_{n-1}\)</span>为该正规群列相应的<strong>商群列</strong></p>
+</blockquote>
+<h5 id="正规群列的等价">正规群列的等价</h5>
+<blockquote>
+<p>称<span class="math inline">\(G\)</span>的两个正规群列<span class="math inline">\(G_0 \lhd G_1 ... \lhd G_n\)</span>和<span class="math inline">\(H_0 \lhd H_1 ... \lhd H_m\)</span>等价，当且仅当</p>
+<ul>
+<li><span class="math inline">\(n = m\)</span></li>
+<li>存在长为<span class="math inline">\(n\)</span>的置换<span class="math inline">\(\sigma\)</span>，使得<span class="math inline">\(\forall i, G_i / G_{i-1} \cong H_{\sigma(i)} / H_{\sigma(i-1)}\)</span></li>
+</ul>
+</blockquote>
+<p>注意定义中的商群列需要调顺序，这个道理跟<span class="math inline">\(6=2*3=3*2\)</span>这两种分解等价差不多</p>
+<h5 id="正规群列的加细合成群列">正规群列的加细，合成群列</h5>
+<blockquote>
+<p>对正规群列<span class="math inline">\(G_0 \lhd G_1 ... \lhd G_n(1)\)</span>和<span class="math inline">\(H_0 \lhd H_1 ... \lhd H_m(2)\)</span>，如果<span class="math inline">\(\{G_0,G_1,...,G_n\} \subseteq \{H_0,H_1,...,H_m\}\)</span>，那么称<span class="math inline">\((2)\)</span>是<span class="math inline">\((1)\)</span>的<strong>加细（细分）</strong></p>
+<p>如果一个正规群列没有除了自己以外的加细，则称其为一个<strong>合成群列</strong></p>
+</blockquote>
+<ul>
+<li><p>设<span class="math inline">\(H \lhd G\)</span>，那么<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的极大正规子群，当且仅当<span class="math inline">\(G/H\)</span>为单群</p>
+<p>由第一同构定理，<span class="math inline">\(H \leq K \lhd G\)</span>，当且仅当<span class="math inline">\(K/H \lhd G/H\)</span></p></li>
+<li><p>正规群列<span class="math inline">\(G_0 \lhd G_1 ... \lhd G_n\)</span>为合成群列，当且仅当<span class="math inline">\(G_1/G_0,...,G_n/G_{n-1}\)</span>为单群</p></li>
+<li><p>有限群<span class="math inline">\(G\)</span>一定有合成群列</p></li>
+</ul>
+<h5 id="jordan-holder定理">Jordan-Holder定理</h5>
+<blockquote>
+<p>设群<span class="math inline">\(G\)</span>有合成群列，那么</p>
+<ul>
+<li><span class="math inline">\(G\)</span>中的每个正规群列可以加细成合成群列</li>
+<li><span class="math inline">\(G\)</span>中任意两个合成群列等价</li>
+</ul>
+</blockquote>
+<h5 id="换位子">换位子</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，对<span class="math inline">\(x, y \in G\)</span>称<span class="math inline">\([x, y] = (yx)^{-1}xy =x^{-1}y^{-1}xy\)</span>为<span class="math inline">\(x\)</span>与<span class="math inline">\(y\)</span>的换位子</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\([x, y] = e \Leftrightarrow xy = yx\)</span></li>
+<li><span class="math inline">\([x,y]^{-1} = [y,x]\)</span></li>
+</ul>
+<h5 id="导群-换位子群">导群 / 换位子群</h5>
+<blockquote>
+<p>称所有换位子生成的子群，<span class="math inline">\(\langle [x, y]:x, y \in G \rangle\)</span>，为群<span class="math inline">\(G\)</span>的导群，记为<span class="math inline">\(G&#39;\)</span>，也称为换位子群</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(G&#39; = \{e\} \Leftrightarrow G\)</span>是Abel群</li>
+<li>设<span class="math inline">\(H \lhd G\)</span>，则<span class="math inline">\(H&#39; \lhd G\)</span>
+<ul>
+<li>只需要证明<span class="math inline">\(gH&#39;g^{-1} \subseteq H&#39;\)</span>，注意到<span class="math inline">\(g[h,k]g^{-1} = [ghg^{-1}, gkg^{-1}] \in H&#39;\)</span>，以及若<span class="math inline">\(x=\prod[h_i, k_i]\)</span>，则<span class="math inline">\(gxg^{-1} = \prod g[h_i, k_i]g^{-1} \in H&#39;\)</span></li>
+<li>特别的，如果<span class="math inline">\(H=G\)</span>，那么<span class="math inline">\(G&#39; \lhd G\)</span></li>
+</ul></li>
+</ul>
+<h5 id="最小正规子群">最小正规子群</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，则导群<span class="math inline">\(G&#39;\)</span>是使得<span class="math inline">\(G/H\)</span>为Abel群的<span class="math inline">\(G\)</span>的最小正规子群</p>
+</blockquote>
+<p>即证明，如果<span class="math inline">\(H \lhd G\)</span>且<span class="math inline">\(G/H\)</span>为Abel群，那么<span class="math inline">\(G&#39; \leq H\)</span></p>
+<ul>
+<li>这个定理也可以表明，如果<span class="math inline">\(H \lhd G\)</span>满足<span class="math inline">\(G&#39; \leq H\)</span>，则<span class="math inline">\(G/H\)</span>为Abel群</li>
+<li>特别的，如果<span class="math inline">\(H=G&#39;\)</span>，那么<span class="math inline">\(G/G&#39;\)</span>为Abel群</li>
+</ul>
+<h5 id="高阶导群">高阶导群</h5>
+<blockquote>
+<p>设<span class="math inline">\(G\)</span>为群，记<span class="math inline">\(G^{(0)}=G, G^{(1)}=G&#39;, ..., G^{(n+1)}=(G^{(n)})&#39;\)</span></p>
+<p>称<span class="math inline">\(G^{(n)}\)</span>为<span class="math inline">\(G\)</span>的<span class="math inline">\(n\)</span>阶导群</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(G^{(n)} \lhd G\)</span>，且<span class="math inline">\(H \lhd G\)</span>时，<span class="math inline">\((G/H)^{(n)} = G^{(n)}H/H\)</span>
+<ul>
+<li>注意到<span class="math inline">\(G^{(n)}H=HG^{(n)}\)</span>，因此<span class="math inline">\(G^{(n)}H\)</span>构成子群，且<span class="math inline">\(H\)</span>在其中正规</li>
+<li>证明时，利用归纳法，可以利用<span class="math inline">\(\langle [x,y]H:x, y \in G^{(n)}\rangle = \langle gH:g\in (G^{(n)})&#39;\rangle\)</span></li>
+</ul></li>
+</ul>
+<h5 id="导列">导列</h5>
+<blockquote>
+<p>称<span class="math inline">\(G = G^{(0)} \rhd G^{(1)} ... \rhd G^{(n)} \rhd ...\)</span>为群<span class="math inline">\(G\)</span>的导列</p>
+<p>使得<span class="math inline">\(G^{(n)}=G^{(n+1)}\)</span>的最小自然数<span class="math inline">\(n\)</span>称为<span class="math inline">\(G\)</span>导列的长度</p>
+</blockquote>
+<h5 id="可解群与abel列">可解群与Abel列</h5>
+<blockquote>
+<p>如果群<span class="math inline">\(G\)</span>有子群列，使得<span class="math inline">\(G=G_0 \rhd G_1 \rhd ... \rhd G_n = \{e\}\)</span>，且<span class="math inline">\(G_0/G_1, G_1/G_2, ..., G_{n-1}/G_n\)</span>为Abel群，则称<span class="math inline">\(G\)</span>为可解群，并称这样的子群列为Abel列</p>
+</blockquote>
+<ul>
+<li>设<span class="math inline">\(G\)</span>为群，则<span class="math inline">\(G\)</span>为可解群，当且仅当存在<span class="math inline">\(n \in N\)</span>，使得<span class="math inline">\(G^{(n)} = \{e\}\)</span>
+<ul>
+<li>利用<span class="math inline">\(G/G&#39;\)</span>为Abel群，可以证明一个方向</li>
+<li>对于另一个方向，我们证明<span class="math inline">\(G^{(i)} \leq G_i\)</span>，归纳，利用导群的性质即可</li>
+</ul></li>
+<li>Abel群是可解群</li>
+</ul>
+<h5 id="可解单群">可解单群</h5>
+<blockquote>
+<p>可解单群就是素数阶循环群</p>
+</blockquote>
+<p>注意到<span class="math inline">\(G&#39; \lhd G\)</span>，且<span class="math inline">\(G&#39; \neq G\)</span>，有单群的性质<span class="math inline">\(G&#39;=\{e\}\)</span>，因此<span class="math inline">\(G\)</span>为Abel单群，从而是素数阶循环群</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>abstract_algebra</tag>
       </tags>
   </entry>
 </search>
