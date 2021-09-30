@@ -1950,7 +1950,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>虽然在过去的博客中，对于这一门课的内容也记了很多东西，但还是新开一个博客，方便自己查阅一些定理吧</p>
 <h1 id="近世代数">近世代数</h1>
 <h2 id="群">群</h2>
-<h3 id="week-1">week 1</h3>
+<h3 id="week1">week1</h3>
 <h4 id="半群">半群</h4>
 <blockquote>
 <p>如果<span class="math inline">\(X\)</span>非空，并且有运算<span class="math inline">\(*\)</span>满足</p>
@@ -2009,7 +2009,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>所有大小为<span class="math inline">\(n*n\)</span>的可逆实矩阵构成群，称为<strong>一般线性群</strong>，记为<span class="math inline">\(GL_n(R)\)</span></p>
 <p>所有大小为<span class="math inline">\(n*n\)</span>的可逆实对角矩阵构成群，称为<strong>特殊线性群</strong>，记为<span class="math inline">\(SL_n(R)\)</span></p>
 </blockquote>
-<h3 id="week-2">week 2</h3>
+<h3 id="week2">week2</h3>
 <h4 id="子群">子群</h4>
 <blockquote>
 <p>设<span class="math inline">\(G\)</span>按照<span class="math inline">\(*\)</span>构成群，<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的一个非空子集，并且<span class="math inline">\(H\)</span>按照<span class="math inline">\(*\)</span>也构成群，则称<span class="math inline">\(H\)</span>为<span class="math inline">\(G\)</span>的子群，并记为<span class="math inline">\(H \leqslant G\)</span></p>
@@ -2167,7 +2167,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>如果同态<span class="math inline">\(\sigma\)</span>是一个单射，那么称为单同态</p>
 <p>如果同态<span class="math inline">\(\sigma\)</span>是一个双射，那么我们称为同构，记为<span class="math inline">\(G \cong \bar{G}\)</span></p>
 </blockquote>
-<h3 id="week-3">week 3</h3>
+<h3 id="week3">week3</h3>
 <h4 id="同态基本定理">同态基本定理</h4>
 <blockquote>
 <p>设<span class="math inline">\(\sigma\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(\bar{G}\)</span>的同态，那么</p>
@@ -2616,7 +2616,6 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </blockquote>
 <p>"<span class="math inline">\(\Leftarrow\)</span>"：证明<span class="math inline">\(G/H\cong (G/(H \cap K)) / (H/(H \cap K))\)</span></p>
 <p>"<span class="math inline">\(\Rightarrow\)</span>"：证明<span class="math inline">\((G/(H \cap K))/(H/(H\cap K)) \cong G/H\)</span>，且<span class="math inline">\(H/(H\cap K) \cong HK/K\)</span></p>
-<h4 id="可解群的合成群列">可解群的合成群列</h4>
 <blockquote>
 <p>设<span class="math inline">\(G\)</span>为可解群，有合成群列<span class="math inline">\(G=G_0 \rhd G_1 \rhd ... \rhd G_n = \{e\}\)</span>，那么商群<span class="math inline">\(G_i/G_{i+1}\)</span>都是素数阶循环群</p>
 </blockquote>
