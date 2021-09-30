@@ -2616,7 +2616,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </blockquote>
 <p>"<span class="math inline">\(\Leftarrow\)</span>"：证明<span class="math inline">\(G/H\cong (G/(H \cap K)) / (H/(H \cap K))\)</span></p>
 <p>"<span class="math inline">\(\Rightarrow\)</span>"：证明<span class="math inline">\((G/(H \cap K))/(H/(H\cap K)) \cong G/H\)</span>，且<span class="math inline">\(H/(H\cap K) \cong HK/K\)</span></p>
-<p>#### 可解群的合成群列</p>
+<h4 id="可解群的合成群列">可解群的合成群列</h4>
 <blockquote>
 <p>设<span class="math inline">\(G\)</span>为可解群，有合成群列<span class="math inline">\(G=G_0 \rhd G_1 \rhd ... \rhd G_n = \{e\}\)</span>，那么商群<span class="math inline">\(G_i/G_{i+1}\)</span>都是素数阶循环群</p>
 </blockquote>
