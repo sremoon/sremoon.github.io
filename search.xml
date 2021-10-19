@@ -2527,6 +2527,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <ul>
 <li><span class="math inline">\([x, y] = e \Leftrightarrow xy = yx\)</span></li>
 <li><span class="math inline">\([x,y]^{-1} = [y,x]\)</span></li>
+<li><span class="math inline">\(g[x,y]g^{-1} = [gxg^{-1}, gyg^{-1}] = [xg^{-1},y][y,g^{-1}]\)</span></li>
 </ul>
 <h4 id="导群-换位子群">导群 / 换位子群</h4>
 <blockquote>
@@ -2629,6 +2630,99 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <li><p>不相交的轮换可以交换</p></li>
 <li><p>每一个置换可以写为若干不相交轮换的乘积</p></li>
 <li><p>长为<span class="math inline">\(n\)</span>的轮换可以表为<span class="math inline">\(n-1\)</span>个对换的乘积，具体而言<span class="math inline">\((a_1,a_2, ..., a_n)=(a_1a_n)(a_1a_{n-1})...(a_1a_2)\)</span></p></li>
+</ul>
+<h3 id="week7">week7</h3>
+<h4 id="置换的奇偶">置换的奇偶</h4>
+<blockquote>
+<p>对于置换<span class="math inline">\(\sigma\)</span>，定义<span class="math inline">\(N(\sigma) = \sum_{1\leq i&lt;j \leq n} [\sigma(i) &gt;\sigma(j)]\)</span></p>
+<p>定义<span class="math inline">\(\text{sgn}(\sigma) = (-1)^{N(\sigma)}\)</span></p>
+<p>如果<span class="math inline">\(\text{sgn}(\sigma) = 1\)</span>，则成为偶置换，如果<span class="math inline">\(\text{sgn}(\sigma) = -1\)</span>，则称为奇置换</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(\prod_{1 \leq i &lt; j \leq n} \text{sgn}(\sigma(j) - \sigma(i)) = (-1)^{N(\sigma)} = \text{sgn} (\sigma)\)</span></li>
+</ul>
+<blockquote>
+<p>一个置换称为奇（偶）排列，当且仅当其能写为奇（偶）个对换的乘积</p>
+</blockquote>
+<ul>
+<li><p>右乘一个对换<span class="math inline">\((k, l) (k &lt; l)\)</span>，讨论<span class="math inline">\(i, j\)</span>和<span class="math inline">\(k, l\)</span>的大小关系，可以知道<span class="math inline">\(\text{sgn}(\sigma)\)</span>变号</p></li>
+<li><p><span class="math inline">\(\text{sgn}(\sigma_1 \sigma_2) = \text{sgn}(\sigma_1) \text{sgn}(\sigma_2)\)</span></p></li>
+</ul>
+<h4 id="交错群">交错群</h4>
+<blockquote>
+<p>记<span class="math inline">\(A_n = \{\sigma \in S_n : \text{sgn}(\sigma) = 1\}\)</span>，那么</p>
+<ul>
+<li><span class="math inline">\(A_n \lhd S_n\)</span></li>
+<li><span class="math inline">\(S_n / A_n \cong \{\pm1\}\)</span></li>
+</ul>
+</blockquote>
+<p>考虑同态<span class="math inline">\(\phi(\sigma) = \text{sgn}(\sigma)\)</span>，那么<span class="math inline">\(\ker \phi = A_n\)</span>, <span class="math inline">\(\text{Im} \phi = \{\pm1\}\)</span></p>
+<h4 id="置换群的生成元">置换群的生成元</h4>
+<blockquote>
+<p><span class="math inline">\(S_n = \langle (1, 2), (1, 2, 3, ..., n)\rangle\)</span></p>
+</blockquote>
+<ul>
+<li>我们按照下面的步骤来证明
+<ul>
+<li><span class="math inline">\((1, 2)\)</span>和<span class="math inline">\((1, 2, 3, .., n)\)</span>可以生成所有的<span class="math inline">\((i, i + 1)\)</span></li>
+<li><span class="math inline">\((i, i+1)\)</span>可以生成所有的<span class="math inline">\((1, i)\)</span></li>
+<li><span class="math inline">\((1, i)\)</span>可以生成所有的轮换（<span class="math inline">\((i_1, ..., i_m) = (1, i_m)(1, i_{m-1}, ..., (1, i_1)(1, i_m))\)</span>），而轮换可以生成所有的置换</li>
+</ul></li>
+</ul>
+<blockquote>
+<p>当<span class="math inline">\(n \geq 5\)</span>时，<span class="math inline">\(A_n = \langle (1, 2, 3), ..., (1, 2, n)\rangle\)</span></p>
+</blockquote>
+<ul>
+<li>所有的<span class="math inline">\((1, i)(1, j)\)</span>可以被上述元素生成，如<span class="math inline">\(i, j &gt; 2\)</span>时，<span class="math inline">\((1, i)(1, j)=(1, 2, i)^{-1}(1, 2, j)(1, 2, i)\)</span></li>
+<li><span class="math inline">\(A_n\)</span>中的元素可以表为偶数个含<span class="math inline">\(1\)</span>对换的乘积</li>
+</ul>
+<h4 id="置换群的可解性">置换群的可解性</h4>
+<blockquote>
+<p><span class="math inline">\(S_n&#39; = A_n\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(S_n / A_n \cong \{\pm1\}\)</span>为阿贝尔群，故<span class="math inline">\(S_n&#39; \leq A_n\)</span></p>
+<p>任何一个<span class="math inline">\((1, 2, i) = [(1,2),(1,i)] \in S_n&#39;\)</span>，从而<span class="math inline">\(A_n \leq S_n&#39;\)</span></p></li>
+</ul>
+<blockquote>
+<p>当<span class="math inline">\(n \leq 3\)</span>时，<span class="math inline">\(S_n&#39;&#39; = A_n&#39; = \{1\}\)</span></p>
+<p>当<span class="math inline">\(n = 4\)</span>时，<span class="math inline">\(S_n&#39;&#39;&#39; = A_n&#39;&#39; = K&#39; = \{1\}\)</span></p>
+<p>从而<span class="math inline">\(n \leq 4\)</span>时，<span class="math inline">\(S_n\)</span>都是可解群</p>
+</blockquote>
+<p>直接验证即可</p>
+<blockquote>
+<p>(<strong>Galois</strong>) 当<span class="math inline">\(n \geq 5\)</span>时，<span class="math inline">\(S_n\)</span>及<span class="math inline">\(A_n\)</span>不是可解群，并且<span class="math inline">\(A_n\)</span>是一个单群</p>
+</blockquote>
+<ul>
+<li><p>对于前一部分，我们证明<span class="math inline">\(A_n&#39; = A_n\)</span>，而这又只需要注意到任何一个<span class="math inline">\((1, 2, i) = [(1,k,2),(1,j,i)](j, k \neq 1,2,i)\in A_n&#39;\)</span>即可</p></li>
+<li><p>单群的证明比较复杂，跳过算了</p></li>
+</ul>
+<h3 id="week8">week8</h3>
+<h4 id="第三同构定理第四同构定理蝴蝶引理">第三同构定理/第四同构定理/蝴蝶引理</h4>
+<blockquote>
+<p>设<span class="math inline">\(L_1 \lhd H_1 \leq G, L_2 \lhd H_2 \leq G\)</span>，则</p>
+<ul>
+<li><span class="math inline">\((H_1 \cap L_2)L_1 \lhd (H_1\cap H_2)L_1\)</span></li>
+<li><span class="math inline">\((H_2\cap L_1)L_2 \lhd (H_1\cap H_2)L_2\)</span></li>
+<li><span class="math inline">\((H_1\cap H_2) L_1 / (H_1\cap L_2)L_1 \cong (H_1\cap H_2) L_2 / (H_2\cap L_1)L_2\)</span></li>
+</ul>
+</blockquote>
+<p>证明比较复杂，这里就列举两个比较关键的引理</p>
+<ul>
+<li>设<span class="math inline">\(K \leq H \leq G\)</span>，<span class="math inline">\(L \leq G\)</span>，则<span class="math inline">\(H \cap KL = K(H \cap L)\)</span></li>
+<li>设<span class="math inline">\(K \lhd H \leq G, L \leq G\)</span>，则
+<ul>
+<li><span class="math inline">\(K \cap L \lhd H \cap L\)</span>，且<span class="math inline">\((H \cap L) / (K \cap L) \cong K(H\cap L)/K\)</span></li>
+<li>若<span class="math inline">\(L \lhd G\)</span>，那么<span class="math inline">\(KL \lhd HL\)</span>，<span class="math inline">\(K(H \cap L) \lhd H\)</span>，并且<span class="math inline">\(HL/KL \cong H/K(H \cap L)\)</span></li>
+</ul></li>
+</ul>
+<h4 id="schereier定理">Schereier定理</h4>
+<blockquote>
+<p>群<span class="math inline">\(G\)</span>的人任意两个正规群列存在等价的加细</p>
+</blockquote>
+<ul>
+<li>证明的思路是假设有两个长为<span class="math inline">\(n, m\)</span>的，凑一个长为<span class="math inline">\(nm\)</span>的来证明，但比较复杂</li>
+<li>这个定理可以方便的证明Jordan-Holder定理</li>
 </ul>
 ]]></content>
       <categories>
