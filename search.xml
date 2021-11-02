@@ -1397,8 +1397,83 @@ int main() &#123;
 </blockquote>
 <h4 id="例子">例子</h4>
 <ul>
-<li><span class="math inline">\(Z\)</span>按整数加法，整数乘法构成整环</li>
-<li><span class="math inline">\(Z/mZ\)</span>按取模加法，取模乘法构成交换幺环</li>
+<li><p><span class="math inline">\(Z\)</span>按整数加法，整数乘法构成整环</p></li>
+<li><p><span class="math inline">\(Z/mZ\)</span>按取模加法，取模乘法构成交换幺环</p></li>
+<li><p>记<span class="math inline">\(R[x]=\{a_0 + a_1x + ...+a_nx^n : a_0,a_1, ..., a_n \in R, n \in N\}\)</span>，</p>
+<p>在其上定义加法：<span class="math inline">\(\sum_i a_ix^i + \sum_i b_i x^i = \sum_i (a_i + b_i)x^i\)</span></p>
+<p>在其上定义乘法：<span class="math inline">\((\sum_i a_ix^i)(\sum_j b_jx^j) = \sum_k (\sum_{i+j=k} a_ib_j) x^k\)</span></p>
+<p>那么，<span class="math inline">\(R[x]\)</span>构成环（成为环<span class="math inline">\(R\)</span>上的一元多项式环），<span class="math inline">\(x\)</span>称为未定元</p>
+<ul>
+<li><span class="math inline">\(R\)</span>为交换环时，<span class="math inline">\(R[x]\)</span>也构成交换环</li>
+<li><span class="math inline">\(R\)</span>无零因子时，<span class="math inline">\(R[x]\)</span>也没有零因子</li>
+<li><span class="math inline">\(R\)</span>为幺环时，<span class="math inline">\(R[x]\)</span>也为幺环</li>
+</ul></li>
+<li><p>记<span class="math inline">\(M_n(R) = \{(a_{ij})_{n \times n} : a_{ij} \in R\}\)</span>，称为<span class="math inline">\(R\)</span>上的<span class="math inline">\(n \times n\)</span>的矩阵环</p>
+<ul>
+<li><span class="math inline">\(R\)</span>为交换环时，<span class="math inline">\(M_n(R)\)</span>不一定为交换环</li>
+<li><span class="math inline">\(R\)</span>没有零因子时，<span class="math inline">\(M_n(R)\)</span>也不一定没有零因子</li>
+</ul></li>
+</ul>
+<h3 id="week10">week10</h3>
+<h4 id="环的性质">环的性质</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(a_1, a_2,..., a_n \in R, b_1, ..., b_n \in R\)</span>，那么<span class="math inline">\((\sum_{i=1}^n a_i)(\sum_{j=1}^m b_j) = \sum_{i=1}^n \sum_{j=1}^m a_ib_j\)</span></p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，那么<span class="math inline">\(\forall a \in R, a * 0 = 0*a = 0\)</span></p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(R\)</span>中有零因子当且仅当<span class="math inline">\(R\)</span>中有消去律（即<span class="math inline">\(a \neq 0\)</span>时，<span class="math inline">\(ab=ac \Leftrightarrow b=c\)</span>, <span class="math inline">\(ba=ca \Leftrightarrow b=c\)</span>）</p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，对<span class="math inline">\(a \in R, n \in Z^+\)</span>，定义<span class="math inline">\(na = \overbrace{a + a +... +a}^{n个}\)</span></p>
+<p>对<span class="math inline">\(n=0\)</span>，定义<span class="math inline">\(na = 0\)</span></p>
+<p>对<span class="math inline">\(n &lt; 0\)</span>，定义<span class="math inline">\(na = (-n)(-a) = \overbrace{-a + (-a) +... +(-a)}^{-n个}\)</span></p>
+<p>那么，对<span class="math inline">\(m \in Z, a, b\in R\)</span>，有<span class="math inline">\((ma)b=m(ab)=a(mb)\)</span></p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换环，那么<span class="math inline">\((a+b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}\)</span></p>
+</blockquote>
+<h4 id="子环">子环</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(S \subseteq R\)</span>且<span class="math inline">\(S \neq \empty\)</span>，如果<span class="math inline">\(S\)</span>按<span class="math inline">\(R\)</span>中的加法和乘法构成环，那么称<span class="math inline">\(S\)</span>为<span class="math inline">\(R\)</span>的子环，记为<span class="math inline">\(S \leq R\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(S \leq R\)</span>等价于<span class="math inline">\(S\)</span>对加法，减法，乘法封闭</li>
+<li><span class="math inline">\(O = \{0\}\)</span>时最小子环，称为零环</li>
+<li>对<span class="math inline">\(O \neq S \subseteq R\)</span>，有<span class="math inline">\(S\)</span>中的单位元<span class="math inline">\(1 \neq 0\)</span></li>
+</ul>
+<h4 id="理想">理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(\empty \neq I \subseteq R\)</span>，如果</p>
+<ul>
+<li>若<span class="math inline">\(a, b\in I\)</span>，那么<span class="math inline">\(a \pm b \in I\)</span></li>
+<li>若<span class="math inline">\(a \in I, r \in R\)</span>，那么<span class="math inline">\(a*r, r*a \in I\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(I\)</span>为环<span class="math inline">\(R\)</span>的理想</p>
+</blockquote>
+<p>理想相当于正规子环</p>
+<h4 id="剩余类">剩余类</h4>
+<blockquote>
+<p>设<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的理想，对<span class="math inline">\(a, b \in R\)</span>，如果<span class="math inline">\(a - b \in I\)</span>，则称<span class="math inline">\(a \equiv b(mod\;I)\)</span>，称为<span class="math inline">\(a, b\)</span>模<span class="math inline">\(I\)</span>同余</p>
+</blockquote>
+<ul>
+<li>这是一个等价关系</li>
+</ul>
+<blockquote>
+<p>按模<span class="math inline">\(I\)</span>同余关系形成的等价类，即<span class="math inline">\(\bar{a} = a + I\)</span>，称为<span class="math inline">\(a\)</span>在模<span class="math inline">\(I\)</span>下的<strong>剩余类</strong></p>
+<p>对剩余类，我们定义加法和乘法</p>
+<ul>
+<li><span class="math inline">\(\bar{a} + \bar{b} = \overline{a+b}\)</span></li>
+<li><span class="math inline">\(\bar{a} * \bar{b} = \overline{a*b}\)</span></li>
+</ul>
+</blockquote>
+<h4 id="商环">商环</h4>
+<blockquote>
+<p>设<span class="math inline">\(I\)</span>为环<span class="math inline">\(R\)</span>的理想，那么<span class="math inline">\(I\)</span>的剩余类按照剩余类的加法和乘法构成环，称为商环</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(mZ\)</span>为<span class="math inline">\(Z\)</span>的理想，<span class="math inline">\(a \equiv b (mod\;mZ)\)</span>相当于<span class="math inline">\(a \equiv b(mod\;m)\)</span></li>
 </ul>
 ]]></content>
       <categories>
