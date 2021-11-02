@@ -1793,7 +1793,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </blockquote>
 <h4 id="子环">子环</h4>
 <blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(S \subseteq R\)</span>且<span class="math inline">\(S \neq \empty\)</span>，如果<span class="math inline">\(S\)</span>按<span class="math inline">\(R\)</span>中的加法和乘法构成环，那么称<span class="math inline">\(S\)</span>为<span class="math inline">\(R\)</span>的子环，记为<span class="math inline">\(S \leq R\)</span></p>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(S \subseteq R\)</span>且<span class="math inline">\(S \neq \emptyset\)</span>，如果<span class="math inline">\(S\)</span>按<span class="math inline">\(R\)</span>中的加法和乘法构成环，那么称<span class="math inline">\(S\)</span>为<span class="math inline">\(R\)</span>的子环，记为<span class="math inline">\(S \leq R\)</span></p>
 </blockquote>
 <ul>
 <li><span class="math inline">\(S \leq R\)</span>等价于<span class="math inline">\(S\)</span>对加法，减法，乘法封闭</li>
@@ -1802,7 +1802,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </ul>
 <h4 id="理想">理想</h4>
 <blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(\empty \neq I \subseteq R\)</span>，如果</p>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(\emptyset \neq I \subseteq R\)</span>，如果</p>
 <ul>
 <li>若<span class="math inline">\(a, b\in I\)</span>，那么<span class="math inline">\(a \pm b \in I\)</span></li>
 <li>若<span class="math inline">\(a \in I, r \in R\)</span>，那么<span class="math inline">\(a*r, r*a \in I\)</span></li>
