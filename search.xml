@@ -1832,6 +1832,48 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <ul>
 <li><span class="math inline">\(mZ\)</span>为<span class="math inline">\(Z\)</span>的理想，<span class="math inline">\(a \equiv b (mod\;mZ)\)</span>相当于<span class="math inline">\(a \equiv b(mod\;m)\)</span></li>
 </ul>
+<h4 id="同构-1">同构</h4>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>为环<span class="math inline">\(R\)</span>到环<span class="math inline">\(R&#39;\)</span>的映射，若<span class="math inline">\(\forall a, b, \in R\)</span>，有</p>
+<ul>
+<li><span class="math inline">\(\sigma(a+b)=\sigma(a)+\sigma(b)\)</span></li>
+<li><span class="math inline">\(\sigma(ab)=\sigma(a)\sigma(b)\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(\sigma\)</span>为<span class="math inline">\(R\)</span>到<span class="math inline">\(R&#39;\)</span>的同态</p>
+</blockquote>
+<ul>
+<li>类似于群，我们定义满同态，单同态和同构，特别的，同构记为<span class="math inline">\(R \cong R&#39;\)</span></li>
+</ul>
+<h4 id="环同态基本定理">环同态基本定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>为<span class="math inline">\(R \to \bar{R}\)</span>的同态，则<span class="math inline">\(\ker(\sigma) := \{a \in R : \sigma(a) = \bar{0}\}\)</span>称为同态核，则</p>
+<ul>
+<li><span class="math inline">\(\ker(\sigma) \lhd R\)</span></li>
+<li><span class="math inline">\(\text{Im}(\sigma) = \sigma(R) = \{\sigma(r):r\in R\} \leq \bar{R}\)</span></li>
+<li><span class="math inline">\(R/\ker(\sigma) \cong \text{Im}(\sigma)\)</span></li>
+</ul>
+</blockquote>
+<h4 id="环同态第一定理">环同态第一定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(I \lhd R\)</span>，那么</p>
+<ul>
+<li><span class="math inline">\(R\)</span>中包含<span class="math inline">\(I\)</span>的子群和<span class="math inline">\(R/I\)</span>的子群之间存在一一对应关系<span class="math inline">\(S \to S/I\)</span></li>
+<li>如果<span class="math inline">\(I\subseteq S\)</span>，<span class="math inline">\(S \leq R \Rightarrow S/I \leq R/I\)</span></li>
+<li>如果<span class="math inline">\(I \subseteq S, S \leq R\)</span>，那么<span class="math inline">\(S \lhd R \Leftrightarrow S/I \lhd R/I\)</span></li>
+<li>如果<span class="math inline">\(I\subseteq S\)</span>，<span class="math inline">\(S \lhd R\)</span>，那么<span class="math inline">\(R/S \cong (R/I)/(S/I)\)</span></li>
+</ul>
+</blockquote>
+<h4 id="环同态第二定理">环同态第二定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(I \lhd R\)</span>且<span class="math inline">\(S \leq R\)</span>，那么<span class="math inline">\(I\cap S \lhd S\)</span>，并且<span class="math inline">\(S/(I \cap S) \cong (I+S)/I\)</span></p>
+</blockquote>
+<h4 id="环的外直和">环的外直和</h4>
+<blockquote>
+<p>设<span class="math inline">\(R_1, R_2,...,R_n\)</span>为环，令<span class="math inline">\(R = R_1 \times ... R_n\)</span></p>
+<p>在其上定义加法：<span class="math inline">\((r_1,...,r_n)+(r_1&#39;,...r_n&#39;) = (r_1+r_1&#39;,...,r_n+r_n&#39;)\)</span></p>
+<p>定义乘法<span class="math inline">\((r_1,...,r_n)*(r_1&#39;,...r_n&#39;)=(r_1r_1&#39;,...,r_nr_n&#39;)\)</span></p>
+<p>那么<span class="math inline">\(R\)</span>按上述运算构成环，称为环<span class="math inline">\(R_1, ..., R_n\)</span>的（外）直和</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>notes</category>
