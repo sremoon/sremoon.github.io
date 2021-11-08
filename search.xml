@@ -1437,6 +1437,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>设<span class="math inline">\(G\)</span>为群，则导群<span class="math inline">\(G&#39;\)</span>是使得<span class="math inline">\(G/H\)</span>为Abel群的<span class="math inline">\(G\)</span>的最小正规子群</p>
 </blockquote>
 <p>即证明，如果<span class="math inline">\(H \lhd G\)</span>且<span class="math inline">\(G/H\)</span>为Abel群，那么<span class="math inline">\(G&#39; \leq H\)</span></p>
+<p>考虑<span class="math inline">\(\sigma:G\to G/H\)</span>，群为Abel群，当且仅当<span class="math inline">\(G&#39; \leq \ker \sigma\)</span></p>
 <ul>
 <li>这个定理也可以表明，如果<span class="math inline">\(H \lhd G\)</span>满足<span class="math inline">\(G&#39; \leq H\)</span>，则<span class="math inline">\(G/H\)</span>为Abel群</li>
 <li>特别的，如果<span class="math inline">\(H=G&#39;\)</span>，那么<span class="math inline">\(G/G&#39;\)</span>为Abel群</li>
