@@ -462,378 +462,6 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
-    <title>信息论</title>
-    <url>/2021/08/20/information-theory/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>临时补一下...</p>
-<h2 id="information-theory">Information theory</h2>
-<h3 id="entropy">Entropy</h3>
-<p>对于离散型随机变量<span class="math inline">\(X\)</span>，出于方便，我们用<span class="math inline">\(|X|\)</span>来表示其样本空间的大小，那么，我们定义随机变量<span class="math inline">\(X\)</span>的熵（entropy）</p>
-<p><span class="math display">\[\begin{align}H(X) = \sum_{x \in X} -p(x) \log p(x)  = \sum_{x \in X} p(x) \log \frac{1}{p(x)} \end{align}\]</span></p>
-<p>（特别的，如果<span class="math inline">\(p(x) = 0\)</span>，认为<span class="math inline">\(p(x) \log \frac{1}{p(x)} = 0\)</span>）</p>
-<p>熵有下列的性质</p>
-<ul>
-<li><p>如果<span class="math inline">\(X\)</span>均匀随机，那么<span class="math inline">\(H(X) = |X| * \frac{1}{|X|} * \log |X| = \log |X|\)</span></p></li>
-<li><p><span class="math inline">\(0 \leq H(X) \leq \log |X|\)</span></p>
-<ul>
-<li><p>不等式左边成立当且仅当<span class="math inline">\(X\)</span>只在一个地方取得概率<span class="math inline">\(1\)</span>，其余地方取得概率<span class="math inline">\(0\)</span></p></li>
-<li><p>不等式右边成立当且仅当<span class="math inline">\(X\)</span>​均匀分布</p></li>
-<li><p>不等式的左边是显然的，右边则考虑函数<span class="math inline">\(x \log x\)</span>的凸性</p></li>
-</ul></li>
-</ul>
-<p>对于服从二项分布的<span class="math inline">\(X\)</span>，有特殊的一种熵（Binary entropy function）</p>
-<p><span class="math display">\[\begin{align}H(p) = H(X) = p \log \frac{1}{p}  + (1-p) \log \frac{1}{1-p} \end{align}\]</span></p>
-<p>熵的定义只依赖于概率分布，只要确定了概率分布，我们就可以定义出熵，因此，在二元情况下，我们可以定义</p>
-<p><span class="math display">\[\begin{align}H(X, Y) = \sum_{x \in X, y \in Y} p(x, y) \log \frac{1}{p(x, y)} \end{align}\]</span></p>
-<p>为联合熵（joint entropy）</p>
-<ul>
-<li><span class="math inline">\(H(X, X) = H(X)\)</span>​</li>
-<li><span class="math inline">\(H(X, Y) = H(Y, X)\)</span>​</li>
-</ul>
-<p>定义</p>
-<p><span class="math display">\[\begin{align} H(X | Y = y) = \sum_x p(x | Y = y) \log \frac{1}{p(x|Y=y)} \end{align}\]</span></p>
-<p><span class="math display">\[\begin{align}H(X|Y) &amp;= \sum_{y \in Y} p(y) H(X | Y = y) \\ &amp;= \sum_{y \in Y} p(y) \sum_{x \in X} p(x | y) \log \frac{1}{p(x | y)} \\ &amp;= \sum_{x \in X, y \in Y} p(x, y) \log \frac{1}{p(x|y)}\end{align}\]</span>​</p>
-<p>其中第二项称为条件熵（conditional entropy）</p>
-<p>注意到</p>
-<p><span class="math display">\[\begin{align} \log p(x|y) = \log \frac{p(x, y)}{p(y)} = \log p(x, y) - \log p(y)\end{align}\]</span>​</p>
-<p>（式中的<span class="math inline">\(p(y)\)</span>为对应的边缘分布函数）</p>
-<p>我们有</p>
-<p><span class="math display">\[\begin{align} H(X|Y) = H(X, Y) - H(Y)\end{align}\]</span></p>
-<p>由对称性，得到</p>
-<p><span class="math display">\[\begin{align} H(X,Y) = H(Y) + H(X|Y) = H(X) + H(Y | X)\end{align}\]</span></p>
-<p>我们可以得到链式法则</p>
-<p><span class="math display">\[\begin{align} H(X_1, X_2, ..., X_n) &amp;= H(X_1) + H(X_2, ..., X_n|X_1) \\ &amp;= H(X_1) +H(X_2 | X_1) + H(X_3,...,X_n | X_1, X_2) \\ &amp;= \sum_{i=1}^n H(X_i | X_{1}, ..., X_{i-1})\end{align}\]</span>​</p>
-<ul>
-<li>当<span class="math inline">\(X, Y\)</span>独立时，<span class="math inline">\(H(X, Y) = H(X) + H(Y)\)</span></li>
-<li>贝叶斯公式：<span class="math inline">\(H(X, Y | Z) = H(X|Z) + H(Y | X, Z)\)</span>
-<ul>
-<li>注意到<span class="math inline">\(p(x, y | z) = \frac{p(x, y, z)}{p(z)} = \frac{p(x, y, z)}{p(x, z)} * \frac{p(x, z)}{p(z)} = p(y|x, z) * p(x|z)\)</span></li>
-</ul></li>
-<li>当且仅当<span class="math inline">\(Y\)</span>是<span class="math inline">\(X\)</span>的一个函数时，<span class="math inline">\(H(Y|X) = 0\)</span>，也即<span class="math inline">\(H(X, Y) = H(X)\)</span></li>
-</ul>
-<h3 id="relative-entropy">Relative entropy</h3>
-<p>对于概率函数<span class="math inline">\(p(x), q(x)\)</span>，定义</p>
-<p><span class="math display">\[\begin{align} D(p || q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}\end{align}\]</span></p>
-<p>为相对熵（relative entropy），也称KL距离，用于衡量两个概率函数之间的“距离”</p>
-<p>但是KL距离并不是一种度量（metric）</p>
-<ul>
-<li><p>当<span class="math inline">\(p(x) = 0\)</span>时，<span class="math inline">\(0 \log \frac{0}{q(x)} = 0\)</span>，反之若<span class="math inline">\(p(x) \neq 0, q(x) = 0\)</span>时，<span class="math inline">\(p(x) \log \frac{p(x)}{0} = \infty\)</span></p></li>
-<li><p><span class="math inline">\(D(p || q) \geq 0\)</span>​，当且仅当<span class="math inline">\(p = q\)</span>时取等​</p>
-<ul>
-<li><p><span class="math inline">\(-D(p || q) = \sum_{x\in X} - p(x) \log \frac{q(x)}{p(x)} \leq \log \sum q(x) \leq \log 1 = 0\)</span></p>
-<p>其中第一步为琴生不等式</p>
-<p>当且仅当<span class="math inline">\(q(x)/p(x) \equiv C\)</span>，并且<span class="math inline">\(\sum q(x) = 1\)</span>时取等，从而<span class="math inline">\(1 = \sum p(x) = \frac{1}{C} \sum q(x) = \frac {1}{C}\)</span>，于是<span class="math inline">\(C = 1\)</span>，进而<span class="math inline">\(p(x) = q(x)\)</span>，对于<span class="math inline">\(0\)</span>的讨论这里略去</p></li>
-</ul></li>
-</ul>
-<p>定义差分距离（也即向量的1-范数）</p>
-<p><span class="math display">\[\begin{align} V(p, q) = \sum_{x \in X} |p(x) - q(x)|\end{align}\]</span></p>
-<p>Pinsker 不等式：<span class="math inline">\(D(p || q) \geq \frac{1}{2 \ln 2} V^2(p, q)\)</span>​​（不懂，先记着）</p>
-<p>对于<span class="math inline">\(p(x, y), q(x, y)\)</span>，定义条件相对熵为</p>
-<p><span class="math display">\[\begin{align} D( p(y|x) || q(y|x)) &amp;= \sum_{x} p(x) D(p(Y|x)||q(Y|x)) \\ &amp;= \sum_x \sum_y p(x)p(y|x) \log \frac{p(y|x)}{q(y|x)} \\ &amp;= \sum_{x, y} p(x, y) \log \frac{ p(y|x)}{q(y|x)}\end{align}\]</span>​</p>
-<p>有了条件相对熵之后，就可以类比的写出链式法则</p>
-<p><span class="math display">\[\begin{align} D(p(x, y) || q(x, y)) = D(p(x) || q(x)) + D(p(y|x) || q(y|x))\end{align}\]</span></p>
-<p>只需注意到<span class="math inline">\(\log \frac{p(x, y)}{q(x, y)} = \log \frac{p(x) p(y|x)}{q(x) q(y|x)} = \log \frac{p(x)}{q(x)} + \log \frac{p(y|x)}{q(y|x)}\)</span></p>
-<h3 id="mutual-information">Mutual information</h3>
-<p>定义</p>
-<p><span class="math display">\[\begin{align} I(X;Y) &amp;= D(p(x, y) || p(x)p(y)) \\ &amp;= \sum_{x \in X, y \in Y} p(x, y) \log \frac{p(x, y)}{p(x)p(y)}\end{align}\]</span></p>
-<p>为<span class="math inline">\(X, Y\)</span>的互信息（mutual information）</p>
-<ul>
-<li><span class="math inline">\(I(X;Y) = I(Y;X)\)</span></li>
-<li><span class="math inline">\(I(X;X) = H(X)\)</span>​</li>
-<li>既然<span class="math inline">\(I(X;Y)\)</span>是一个KL距离，那么<span class="math inline">\(I(X;Y) \geq 0\)</span>​，等号成立当且仅当<span class="math inline">\(p(x, y) = p(x)p(y)\)</span>，即<span class="math inline">\(X, Y\)</span>独立</li>
-</ul>
-<p>由于<span class="math inline">\(\log \frac{p(x, y)}{p(x)p(y)} = \log p(x, y) - \log p(x) - \log p(y)\)</span></p>
-<p>因此</p>
-<p><span class="math display">\[\begin{align} I(X;Y) &amp;= H(X) + H(Y) - H(X, Y) \\ &amp;= H(X) - H(X | Y)\\ &amp;= H(Y) - H(Y|X)\end{align}\]</span>​</p>
-<ul>
-<li>由<span class="math inline">\(I(X;Y) = H(X) - H(X|Y) \geq 0\)</span>​，那么<span class="math inline">\(H(X|Y) \leq H(X)\)</span>​​，当<span class="math inline">\(X, Y\)</span>​独立时取等</li>
-<li><span class="math inline">\(I(X;Y) \leq H(X)\)</span></li>
-</ul>
-<p>定义</p>
-<p><span class="math display">\[\begin{align} I(X;Y | Z) &amp;= \sum_{x, y, z} p(x ,y, z) \log \frac{p(x, y | z)}{p(x|z) p(y|z) } \\ &amp;= H(X|Z) - H(X|Y,Z)\end{align}\]</span>​</p>
-<p>当且仅当在给定<span class="math inline">\(Z\)</span>的情况下，<span class="math inline">\(X, Y\)</span>独立时取等</p>
-<p>计算条件互信息时，有链式法则</p>
-<p><span class="math display">\[\begin{align} I(X_1, X_2, ..., X_n ; Y) = \sum_{i=1}^n I(X_i ; Y|X_1, X_2, ..., X_{i-1})\end{align}\]</span></p>
-<h3 id="entropy-bound">Entropy Bound</h3>
-<p><span class="math display">\[H(X_1, X_2, ..., X_n) \leq \sum_{i=1}^n H(X_i)\]</span></p>
-<p>取等当且仅当<span class="math inline">\(X_1, ..., X_n\)</span>独立（用链式法则证明）</p>
-<p>接下来要引入马尔科夫链，称<span class="math inline">\(X, Y, Z\)</span>形成马尔科夫链，当且仅当</p>
-<p><span class="math display">\[\begin{align} p(x, y, z) = p(x)p(y|x)p(z|y)\end{align}\]</span></p>
-<p>（也就是<span class="math inline">\(p(z|y) = p(z|x, y)\)</span>），写作<span class="math inline">\(X \to Y \to Z\)</span></p>
-<ul>
-<li><p>如果<span class="math inline">\(X\to Y \to Z\)</span>，那么<span class="math inline">\(I(X;Z|Y) = 0\)</span></p></li>
-<li><p>如果<span class="math inline">\(X \to Y \to Z\)</span>，那么<span class="math inline">\(I(X;Y) \geq I(X;Z)\)</span></p>
-<ul>
-<li><span class="math inline">\(I(X;Y) - I(X;Z) = I(X;Y,Z) - I(X;Z|Y) - (I(X;Y,Z) - I(X;Y|Z)) = I(X;Y|Z) \geq 0\)</span></li>
-<li>由上述等式，还能观察到<span class="math inline">\(I(X;Y) \geq I(X;Y|Z)\)</span></li>
-<li>但是，一般情况下，<span class="math inline">\(I(X;Y) \geq I(X;Y|Z)\)</span>不一定成立</li>
-</ul></li>
-<li><p>如果<span class="math inline">\(X \to Y \to Z\)</span>，那么<span class="math inline">\(H(X|Z) \geq H(X|Y)\)</span></p></li>
-<li><p>$ H(X|Z) - H(X|Y,Z) = I(X;Y|Z)I(X;Z|Y) = H(X|Y) - H(X|Y,Z)$</p></li>
-</ul>
-<h3 id="entropy-rate">Entropy rate</h3>
-<p>稳态过程，一个随机过程称为稳态，如果其任意子集的联合分布具有时间不变性，</p>
-<p><span class="math display">\[\begin{align} \forall n, l, x_1, x_2,..., x_n \in X, P(X_1 = x_1, X_2 = x_2, ..., X_n = x_n) = P(X_{1+l} = x_1, ..., X_{n+l} = x_n)\end{align}\]</span></p>
-<p>稳态过程具有时间可逆性，即</p>
-<p><span class="math display">\[\begin{align} H(X_0 | X_{-1},X_{-2},..X_{-n}) = H(X_0 | X_1, X_2, ..., X_n)\end{align}\]</span></p>
-<p>而对于马尔科夫链，其为稳态充要条件为<span class="math inline">\(p(X_{n+1}) = p(X_n)\)</span></p>
-<p>或者说<span class="math inline">\(P(x_1,x_2,...,x_n)^T = (x_1, ..., x_n)^T\)</span>，其中<span class="math inline">\(P\)</span>为转移矩阵</p>
-<hr />
-<p>对于随机过程，定义熵率</p>
-<p><span class="math display">\[\begin{align} H(X) = \lim_{n \to \infty} \frac{1}{n} H(X_1, X_2, ..., X_n)\end{align}\]</span></p>
-<p>熵率不一定存在，但对于稳态而言，熵率是存在的</p>
-<p>我们先考虑<span class="math inline">\(A_n = H(X_n | X_{n-1}, ..., X_1)\)</span></p>
-<p>注意到<span class="math inline">\(0 \leq A_{n+1} = H(X_{n+1} | X_{n},...,X_1) \leq H(X_{n+1} | X_n,...,X_2) = H(X_n | X_{n-1},...,X_1) = A_n\)</span>，<span class="math inline">\(A_n\)</span>单调递减有下限，因此<span class="math inline">\(A_n\)</span>有极限</p>
-<p>那么</p>
-<p><span class="math display">\[\begin{align} H&#39;(X) = \lim_{n \to \infty} H(X_n | X_{n-1},...,X_1)\end{align}\]</span></p>
-<p>存在，根据数学分析中的结论，我们有</p>
-<p><span class="math display">\[\begin{align} H(X) = H&#39;(X)\end{align}\]</span></p>
-<p>存在</p>
-<p>特别的，对于稳态马尔科夫链，将有<span class="math inline">\(H(X) = H&#39;(X) = H(X_2 | X_1)\)</span></p>
-<p>如果设出马尔科夫链的极限分布<span class="math inline">\(\pi\)</span>和转移矩阵<span class="math inline">\(P\)</span>，那么我们将得到</p>
-<p><span class="math display">\[\begin{align} H(X) = \sum_{ij} \pi_i P_{ij} \log \frac{1}{P_{ij}}\end{align}\]</span></p>
-<hr />
-<p>设<span class="math inline">\(Y = f(X)\)</span>，如果<span class="math inline">\(\{X\}\)</span>构成稳态的马尔科夫链，那么<span class="math inline">\(\{Y\}\)</span>也构成稳态的马尔科夫链</p>
-<ul>
-<li><span class="math inline">\(p(X_{n+1}) = p(X_n) \Rightarrow p(Y_{n+1}) = p(Y_n)\)</span></li>
-</ul>
-<p>那么，<span class="math inline">\(H(Y) = \lim_{n \to \infty} H(Y_n | Y_{n-1}, ..., Y_1)\)</span></p>
-<p>通过一些（奇怪的）技巧，我们可以对<span class="math inline">\(H(Y)\)</span>进行更好的估值，这依赖于以下定理</p>
-<p><span class="math display">\[\begin{align} H(Y_n | Y_{n-1},...,Y_1, X_1) \leq H(y) \leq H(Y_n | Y_{n-1},...,Y_1)\end{align}\]</span></p>
-<p><span class="math display">\[\begin{align} \lim_{n \to \infty} H(Y_n | Y_{n-1},...,Y_1,X_1) = \lim_{n \to \infty} H(Y_n|Y_{n-2},...,Y_1) = H(y)\end{align}\]</span>​</p>
-<ul>
-<li>注意到<span class="math inline">\(Y\)</span>是<span class="math inline">\(X\)</span>的函数，尝试在熵的已知中添加<span class="math inline">\(Y\)</span></li>
-</ul>
-<h3 id="data-compression">Data Compression</h3>
-<p>大概到了新的阶段</p>
-<p>对于一个随机变量<span class="math inline">\(X\)</span>的信源编码（source code），是一个从随机变量<span class="math inline">\(X\)</span>的样本空间到一个有限长度的字符串的映射（不妨设字母表为<span class="math inline">\(D\)</span>，记所有的有限长度的字符串的集合为<span class="math inline">\(D^*\)</span>），让<span class="math inline">\(C(x)\)</span>表示对应于<span class="math inline">\(x\)</span>的编码，而<span class="math inline">\(l(x)\)</span>表示<span class="math inline">\(C(x)\)</span>的长度</p>
-<p>记<span class="math inline">\(L(C) = E_{p(x)}[l(x)] = \sum_{x} p(x) l(x)\)</span>，一般的，我们希望一个编码方式能够最小化<span class="math inline">\(L(C)\)</span></p>
-<p>对于一种编码，称其扩展<span class="math inline">\(C^*\)</span>为以<span class="math inline">\(X\)</span>的样本空间为字符集构成的有限字符串映射到有限长度的字符串的映射，满足<span class="math inline">\(C(x_1 + x_2 + ... + x_n) = C(x_1) + C(x_2) + ... + C(x_n)\)</span>，这里的"+"表示字符串的拼接</p>
-<ul>
-<li>当一种编码的<strong>扩展</strong>是一个单射时，称这种编码是唯一可解码的</li>
-<li>一种编码称为前缀码，或者即时码，如果任意两个码都没有互为前缀，类似的定义后缀码</li>
-</ul>
-<h5 id="kraft-inequality">Kraft inequality</h5>
-<p>Kraft 不等式：对于一种前缀码，设其字母表大小为<span class="math inline">\(D\)</span>​​，那么编码长度<span class="math inline">\(l_1, ..., l_m (m = |X|)\)</span>​​将满足</p>
-<p><span class="math display">\[\begin{align} \sum_{i=1}^m D^{-l_i} \leq 1\end{align}\]</span></p>
-<p>并且，给定一组满足该不等式的编码长度，那么一定存在一种前缀码以这些长度编码</p>
-<ul>
-<li>考虑用Trie树表示前缀码，反过来则用归纳法证明</li>
-<li>这个结论在编码长度有可数无穷的情况下也是对的，可以考虑用<span class="math inline">\([0,1)\)</span>中的<span class="math inline">\(D\)</span>进制小数来证明</li>
-</ul>
-<p>利用拉格朗日乘数法，得到最优情况下，我们应该控制编码长度为<span class="math inline">\(l_i = -\log_D p_i(p_i = D^{-l_i})\)</span>，此时<span class="math inline">\(L(C) = H_D(X)\)</span></p>
-<p>但是一般的，这个长度不是整数，因此一般的有<span class="math inline">\(L(C) \geq H_D(X)\)</span>​，但是我们有<span class="math inline">\(H_D(X) \leq L(C) &lt; H_D(X) + 1\)</span>​</p>
-<h5 id="shannon-codes">Shannon codes</h5>
-<p>我们直接取<span class="math inline">\(l_i = \lceil -\log_D p_i \rceil\)</span>，就有<span class="math inline">\(-\log_D p_i \leq l_i &lt; -\log_D p_i + 1\)</span>，于是<span class="math inline">\(H_D(X) \leq L(C) &lt; H_D(X) + 1\)</span>，这种编码称为Shannon codes</p>
-<p>进一步，如果我们对<span class="math inline">\(X_1, X_2,...,X_n\)</span>​（样本空间相同）一起编码，运用刚刚的结论，得到</p>
-<p><span class="math display">\[H(X_1, ..., X_n) \leq E [l(X_1, ..., X_n)] &lt; H(X_1,...,X_n) + 1\]</span></p>
-<blockquote>
-<p>将<span class="math inline">\(L(C)\)</span>记为编码一个随机变量所用的期望长度，那么<span class="math inline">\(L(C) = \frac{1}{n} E [l(X_1, ..., X_n)]\)</span>，代入上式，得到 <span class="math display">\[\frac{H(X_1, ..., X_n)}{n} \leq L(C)&lt; \frac{H(X_1,...,X_n) + 1}{n}\]</span></p>
-<p>如果<span class="math inline">\(X_1,...,X_n,...\)</span>构成一个稳态的话，根据前文的结论，我们有<span class="math inline">\(L(C) \to H(X)\)</span>（这里为熵率）</p>
-</blockquote>
-<p>这种编码方式称为区块编码，而上述结论称为香农第一定理</p>
-<hr />
-<p>如果我们运用<span class="math inline">\(\{q(x)\}\)</span>来给一个概率为<span class="math inline">\(\{p(x)\}\)</span>的随机变量编码，那么我们将有</p>
-<p><span class="math display">\[\begin{align} H(p) + D(p||q) \leq E_p \; \lceil\log \frac{1}{q(x)} \rceil &lt; H(p) + D(p || q) + 1\end{align}\]</span>​</p>
-<p>当然，这里的<span class="math inline">\(\lceil\log \frac{1}{q(x)} \rceil\)</span>表示编码长度</p>
-<p>这个式子只需要对取整号进行简单放缩后，运用定义就可以得到</p>
-<hr />
-<p>Kraft不等式的约束范围非常非常广，事实上，我们只考虑前缀码就足够了</p>
-<p>对于一种唯一可解码，设其字母表大小为<span class="math inline">\(D\)</span>​，那么编码长度<span class="math inline">\(l_1, ..., l_m (m = |X|)\)</span>​将满足</p>
-<p><span class="math display">\[\begin{align} \sum_{i=1}^m D^{-l_i} \leq 1\end{align}\]</span></p>
-<p>并且，给定一组满足该不等式的编码长度，那么一定存在一种唯一可解码以这些长度编码</p>
-<h5 id="huffman-codes">Huffman codes</h5>
-<p>哈夫曼编码可以使得<span class="math inline">\(L(C)\)</span>最小，并且哈夫曼编码是一种前缀码</p>
-<p>这玩意初中生都会了....就不写了</p>
-<p>有个扩展叫canonical codes，就先不学了..。</p>
-<h5 id="shannon-fano-elias-coding">Shannon-Fano-Elias coding</h5>
-<p>考虑<span class="math inline">\(X\)</span>的分布函数<span class="math inline">\(F(x)\)</span>，定义其MCDF为<span class="math inline">\(F^*(x) = F(x) - \frac{1}{2} p(x)\)</span></p>
-<p>不难发现，<span class="math inline">\(F^*(x)\)</span>和<span class="math inline">\(p(x) &gt; 0\)</span>的<span class="math inline">\(x\)</span>​之间存在着对应关系，从而可以用于编码</p>
-<p>考虑截取<span class="math inline">\(F^*(x)\)</span>的前<span class="math inline">\(l(x) = \lceil \log \frac{1}{p(x)}\rceil + 1\)</span>位（二进制），那么有<span class="math inline">\(F^*(x) - C(x) \leq \frac{1}{2^{l(x)}} \leq \frac{p(x)}{2} = F^*(x) - F^*(x-1)\)</span></p>
-<p>因此这种编码方式也构成一种前缀码，由于多用了1个bit来避免重复，因此此时<span class="math inline">\(L &lt; H(x) + 2\)</span>​</p>
-<h3 id="channel">Channel</h3>
-<p>一个信道的模型，大概就是对信息进行编码，通过信道（可能有噪声，以一个概率来描述），之后解码</p>
-<p>我们假设发送了<span class="math inline">\(w = x_1x_2...x_k\)</span>，经过信道后得到<span class="math inline">\(y_1y_2...y_k\)</span></p>
-<p>这些数字的生成是有先后顺序的，<span class="math inline">\(w \to x_1 \to y_1 \to x_2 \to y_2 ... \to x_k \to y_k\)</span></p>
-<p>为了表示方便，记<span class="math inline">\(x^i = x_1,x_2...,x_i, y^i = y_1, y_2, ..., y_i\)</span></p>
-<p>对于一个好的信道，我们希望它能发送更多的信息，也即熵尽可能大</p>
-<h5 id="discrete-memoryless-channel">Discrete memoryless channel</h5>
-<p>离散无记忆信道（DMC），满足</p>
-<p><span class="math display">\[\begin{align} p(y_k | x^k, y^{k-1}) = p(y_k | x_k) \end{align}\]</span></p>
-<p>其中<span class="math inline">\(x_k\)</span>是第<span class="math inline">\(k\)</span>个发送的信息，而<span class="math inline">\(x^k\)</span>为前<span class="math inline">\(k\)</span>次发送的信息，<span class="math inline">\(y^{k-1}\)</span>为前<span class="math inline">\(k-1\)</span>​个发送后的信息</p>
-<p>而一个无反馈（feedback）的信道，满足</p>
-<p><span class="math display">\[\begin{align} p(x_k | x^{k-1}, y^{k-1}) = p(x_k | x^{k-1})\end{align}\]</span></p>
-<p>也就是前<span class="math inline">\(k-1\)</span>次经过信道后的信息对于第<span class="math inline">\(k\)</span>次发送的信息没有影响</p>
-<p>结合这两个概率，一般默认DMC是没有反馈的</p>
-<p>对于DMC而言，有</p>
-<p><span class="math display">\[\begin{align} p(y^n |x^n) =  \prod_{i=1}^n p(y_i | x_i)\end{align}\]</span>​</p>
-<p>用熵来表示，就是</p>
-<p><span class="math display">\[\begin{align} H(Y^n | X^n) = \sum_{i=1}^n H(Y_i | X_i) \end{align}\]</span>​</p>
-<p>运用上式，有</p>
-<p><span class="math display">\[H(Y^n) - H(Y^n|X^n)= H(Y^n) - \sum_{i=1}^n H(Y_i | X_i) \leq \sum_{i=1}^n (H(Y_i) - H(Y_i | X_i))\]</span></p>
-<p><span class="math display">\[\begin{align} I(X^n ; Y^n) \leq \sum_{i=1}^n I(X_i ; Y_i) \end{align}\]</span></p>
-<p>在DMC中，<span class="math inline">\(w \to X^n \to Y^n \to w&#39;\)</span>构成一个马尔科夫链，其中<span class="math inline">\(w&#39;\)</span>​为解码后的信息</p>
-<h5 id="channel-coding">Channel coding</h5>
-<p>编码器（encoder），是一个将信息映射到<span class="math inline">\(X^n\)</span>的映射，并且要求是单射，类似的有解码器</p>
-<p>码本（codebook），记录了编码器的映射规则，码本为发送者和接收者共有</p>
-<p>码字（codewords），用<span class="math inline">\(x^n(i)\)</span>表示编码<span class="math inline">\(i\)</span>的字符串</p>
-<p>对于一个信道<span class="math inline">\((X, p(y|x), Y)\)</span>​​​而言，其一个编码<span class="math inline">\((M, n)\)</span>包括发送信息的集合（<span class="math inline">\(M\)</span>​），编码器（引申出码本和码字），解码器</p>
-<p>为了衡量信道发送的信息是否有误，定义</p>
-<p><span class="math display">\[\begin{align}\lambda_i = p( g(Y^n) \neq i | X^n = x^n(i)) = \sum_{y^n} p(y^n | x^n(i))* [g(y^n) \neq i] \end{align}\]</span></p>
-<p>定义最大错误概率为</p>
-<p><span class="math display">\[\begin{align} \lambda^{(n)} = \max_{i \in [M]} \lambda_i\end{align}\]</span></p>
-<p>定义平均错误概率为</p>
-<p><span class="math display">\[\begin{align} P_e^{(n)} = \frac{1}{M} \sum_{i=1}^M \lambda_i\end{align}\]</span></p>
-<p>对于一个信道编码<span class="math inline">\((M, n)\)</span>​，定义码率为</p>
-<p><span class="math display">\[\begin{align} R = \frac{\log M}{n} \end{align}\]</span>​</p>
-<p>如果存在一系列的编码<span class="math inline">\((2^{nR}, n)\)</span>，使得当<span class="math inline">\(n \to \infty\)</span>时，<span class="math inline">\(\lambda^{(n)} \to 0\)</span>，就称码率<span class="math inline">\(R\)</span>​是可取的</p>
-<p>定义信道容量<span class="math inline">\(C\)</span>为所有可取码率的上确界</p>
-<ul>
-<li><p>信道编码定理</p>
-<p><strong>对于DMC而言，一切小于信道容量<span class="math inline">\(C\)</span>​的码率是可取的</strong></p></li>
-<li><p>特别的，对于默认的DMC，<span class="math inline">\(C = \max_{p(x)} I(X;Y)\)</span></p>
-<p>而对于有反馈的DMC而言，信道容量并不能得到提高</p></li>
-</ul>
-<h5 id="typical-set">Typical set</h5>
-<p>接下来是一点关于典型集的内容...</p>
-<blockquote>
-<p>如果<span class="math inline">\(X_1,...,X_n,...\)</span>是i.i.d.的，那么</p>
-<p><span class="math display">\[\begin{align} -\frac{1}{n} \log p(X_1,...,X_n) \to H(X) (n \to \infty)\end{align}\]</span>​</p>
-</blockquote>
-<p>这个性质称为AEP（渐进均分性），根据大数定理，我们知道满足上述条件的<span class="math inline">\(X\)</span>序列的概率和几乎是<span class="math inline">\(1\)</span>​</p>
-<p>我们把满足上述条件的序列弄成一个集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>​，称为典型集（typical set），形式化的讲就是，如果<span class="math inline">\((x_1,...,x_n) \in X^n\)</span>在集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>中，那么</p>
-<p><span class="math display">\[\begin{align}2^{-n(H(X) + \epsilon)} \leq p(x_1,...,x_n)  \leq 2^{-n(H(X) - \epsilon)}\end{align}\]</span></p>
-<ul>
-<li>上述式子等价于：<span class="math inline">\(|\frac{1}{n} \log p(x_1,...,x_n) + H(X)| \leq \epsilon\)</span></li>
-<li>根据之前的讨论，当<span class="math inline">\(n\)</span>足够大时，典型集中的序列的概率之和趋近于<span class="math inline">\(1\)</span></li>
-<li><span class="math inline">\((1 - \epsilon) 2^{n(H(X) - \epsilon)} \leq |A_{\epsilon}^{(n)}| \leq 2^{n(H(X) - \epsilon)}\)</span>，也就是其大小趋近于<span class="math inline">\(2^{nH(X)}\)</span>​
-<ul>
-<li>注意到<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>的概率和有上界<span class="math inline">\(1\)</span>，有下界<span class="math inline">\(1- \epsilon\)</span>​</li>
-</ul></li>
-</ul>
-<p>对于两个随机过程，我们可以定义联合典型集</p>
-<p>如果<span class="math inline">\((x^n , y^n) \in X^n \times Y^n\)</span>在集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>中，那么</p>
-<p><span class="math inline">\(2^{-n(H(X) + \epsilon)} \leq p(x^n) \leq 2^{-n(H(X) - \epsilon)}\)</span>​</p>
-<p><span class="math inline">\(2^{-n(H(X) + \epsilon)} \leq p(y^n) \leq 2^{-n(H(X) - \epsilon)}\)</span>​</p>
-<p><span class="math inline">\(2^{-n(H(X,Y) + \epsilon)} \leq p(x^n, y^n) \leq 2^{-n(H(X, Y) - \epsilon)}\)</span>​</p>
-<ul>
-<li><p><span class="math inline">\(|A_{\epsilon}^{(n)}| \to 2^{nH(X,Y)}\)</span></p></li>
-<li><p>如果<span class="math inline">\((X&#39;, Y&#39;) \sim p(x^n)p(y^n)\)</span>，那么<span class="math inline">\(p((X&#39;, Y&#39;) \in A_{\epsilon}^{(n)}) \to 2^{-nI(X;Y)}\)</span>​</p>
-<ul>
-<li><p><span class="math inline">\(p((X&#39;, Y&#39;) \in A_{\epsilon}^{(n)}) = \sum_{(x^n, y^n)} p(x^n) p(y^n) \to 2^{nH(X, Y)} * 2^{-nH(X)} * 2^{-nH(Y)} = 2^{-nI(X;Y)}\)</span></p>
-<p>式中为集合的大小乘上相应的概率，具体的写法就分两个方向放缩</p></li>
-</ul></li>
-</ul>
-<h5 id="source-channel-coding-theorem">Source-channel coding theorem</h5>
-<ul>
-<li><p>信源信道联合编码定理</p>
-<p>如果<span class="math inline">\(X_1, ..., X_n\)</span>是一个满足渐进均分性，并且<span class="math inline">\(H(X) &lt; C\)</span>，那么存在一种信源信道的联合编码方案，使得<span class="math inline">\(p(X^n \neq (X^n)&#39;) \to 0\)</span></p>
-<p>反之，对于任何稳态随机过程，如果<span class="math inline">\(H(X) &gt; C\)</span>，那么不存在使得<span class="math inline">\(p(X^n \neq (X^n)&#39;) \to 0\)</span>的一种联合编码方案</p></li>
-</ul>
-<p>感觉该知道的都差不多了....先记到这里...</p>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>information theory</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>矩阵分析 2</title>
-    <url>/2021/07/23/matrix-analysis-2/</url>
-    <content><![CDATA[<span id="more"></span>
-<h4 id="lambda矩阵"><span class="math inline">\(\lambda\)</span>矩阵</h4>
-<ul>
-<li><span class="math inline">\(\lambda\)</span>矩阵：矩阵中的每一项都是关于<span class="math inline">\(\lambda\)</span>的多项式的矩阵称为<span class="math inline">\(\lambda\)</span>矩阵</li>
-<li><span class="math inline">\(\lambda\)</span>矩阵的秩：若<span class="math inline">\(A(\lambda)\)</span>至少有一个<span class="math inline">\(r\)</span>阶子式不是零多项式，并且所有的<span class="math inline">\(r+1\)</span>阶子式都是零多项式，则称<span class="math inline">\(A(\lambda)\)</span>的秩为<span class="math inline">\(r\)</span>，记作<span class="math inline">\(\text{rank} A(\lambda)\)</span></li>
-<li>可逆矩阵：<span class="math inline">\(A(\lambda)\)</span>称作可逆矩阵，当且仅当存在<span class="math inline">\(B(\lambda)\)</span>，使得<span class="math inline">\(A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I\)</span>，并且，记<span class="math inline">\(B(\lambda) = A(\lambda)^{-1}\)</span></li>
-<li>可逆矩阵的充要条件：<span class="math inline">\(A(\lambda)\)</span>可逆，当且仅当<span class="math inline">\(|A(\lambda)|\)</span>是一个非零常数</li>
-<li>如果存在可逆矩阵<span class="math inline">\(P(\lambda), Q(\lambda)\)</span>，使得<span class="math inline">\(B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)\)</span>，则称<span class="math inline">\(B(\lambda)\)</span>与<span class="math inline">\(A(\lambda)\)</span>相抵，记作<span class="math inline">\(A(\lambda) \simeq B(\lambda)\)</span></li>
-</ul>
-<h4 id="lambda矩阵的标准形"><span class="math inline">\(\lambda\)</span>矩阵的标准形</h4>
-<ul>
-<li><p>每个<span class="math inline">\(A(\lambda)\)</span>都相抵与一个Smith标准形，即</p>
-<p><span class="math display">\[A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), ..., d_r(\lambda),0...0 \}\]</span></p>
-<p>其中<span class="math inline">\(d_i(\lambda)\)</span>的首项系数为<span class="math inline">\(1\)</span>，并且<span class="math inline">\(d_{i - 1}(\lambda) \mid d_i(\lambda)\)</span></p>
-<ul>
-<li>考虑多项式的辗转相除，并利用归纳法</li>
-</ul></li>
-</ul>
-<h4 id="不变因子行列式因子初等因子">不变因子，行列式因子，初等因子</h4>
-<ul>
-<li><p>不变因子：Smith标准形中的<span class="math inline">\(d_1(\lambda)\)</span>, <span class="math inline">\(d_2(\lambda)\)</span>, ..., <span class="math inline">\(d_r(\lambda)\)</span>称为<span class="math inline">\(A(\lambda)\)</span>的不变因子</p></li>
-<li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
-<li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
-<li><p>example</p>
-<p><span class="math display">\[A(x) = \begin{pmatrix}
--x+1 &amp;x^2  &amp; x \\
- x&amp; x &amp;-x \\
- x^2+1 &amp; x^2 &amp; -x^2
-\end{pmatrix}\]</span></p>
-<p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
-<p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
-<p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
-<li><p>相抵的矩阵有相同的秩和行列式因子</p>
-<ul>
-<li>只需要子式之间的整除关系即可</li>
-</ul></li>
-<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：<span class="math inline">\(D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)\)</span>，由此，我们得到结论：</p>
-<ul>
-<li>相抵的矩阵有相同的不变因子</li>
-<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
-<li>一个矩阵的Smith标准形是唯一的</li>
-</ul></li>
-<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
-<ul>
-<li>如果用初等因子来描述相抵，那么将是：两个有相同的初等因子和秩的矩阵相抵</li>
-</ul></li>
-<li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
-<ul>
-<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
-</ul></li>
-</ul>
-<h4 id="若尔当标准形">若尔当标准形</h4>
-<ul>
-<li><p>若尔当块</p>
-<p><span class="math display">\[J(x, k) = \begin{pmatrix}
-x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
- 0&amp; x &amp;1 &amp; 0 &amp; ... &amp; 0 \\
-... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;x\end{pmatrix}\]</span></p>
-<p>考虑<span class="math inline">\(J(x, k)\)</span>的特征矩阵</p>
-<p><span class="math display">\[\lambda I - J = \begin{pmatrix}
-\lambda - x &amp; - 1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
- 0&amp; \lambda - x &amp; -1 &amp; 0 &amp; ... &amp; 0 \\
-... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;-1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;\lambda - x\end{pmatrix}\]</span></p>
-<p>由于去掉左边<span class="math inline">\(k\)</span>列和右边<span class="math inline">\(k\)</span>列的主子式的绝对值为<span class="math inline">\(1\)</span>，而<span class="math inline">\(|\lambda I - J| = (\lambda - x)^k\)</span></p>
-<p>因此，其行列式因子为<span class="math inline">\(D_1(\lambda) = ... = D_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(D_k(\lambda) = (\lambda - x)^k\)</span></p>
-<p>那么，其不变因子为<span class="math inline">\(d_1(\lambda) = ... = d_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(d_k(\lambda) = (\lambda - x)^k\)</span></p>
-<p>初等因子则只有<span class="math inline">\((\lambda - x)^k\)</span></p></li>
-<li><p>若尔当标准形</p>
-<p>形如</p>
-<p><span class="math display">\[J = \begin{pmatrix} J_1 &amp;&amp;&amp;\\ &amp;J_2&amp;&amp; \\&amp;&amp;...&amp; \\&amp;&amp;&amp;J_n \end{pmatrix}\]</span></p>
-<p>的矩阵称为若尔当标准形，其中<span class="math inline">\(J_i\)</span>为若尔当块</p>
-<p>由于<span class="math inline">\(J_i\)</span>的初等因子只有<span class="math inline">\((\lambda - \lambda_i)^{k_i}\)</span>，因此<span class="math inline">\(J\)</span>的初等因子为<span class="math inline">\((\lambda- \lambda_i)^{k_i}\)</span>的全体，并且<span class="math inline">\(\sum k_i = n\)</span></p></li>
-<li><p>定理：矩阵<span class="math inline">\(A \sim B\)</span>的充要条件是<span class="math inline">\(\lambda I - A \cong \lambda I - B\)</span></p>
-<p>这个定理的证明比较复杂，我们省去，关键在于利用<span class="math inline">\(\lambda I - A\)</span>是关于<span class="math inline">\(\lambda\)</span>的一次式进行次数限制</p></li>
-<li><p>定理：每个<span class="math inline">\(A\)</span>都与一个若尔当标准形<span class="math inline">\(J\)</span>相似，并且这个若尔当标准形除了<span class="math inline">\(J\)</span>中若尔当块的排列顺序外，被<span class="math inline">\(A\)</span>所唯一决定</p>
-<ul>
-<li><p>由于<span class="math inline">\(|\lambda I - A|\)</span>的次数为<span class="math inline">\(n\)</span>，因此<span class="math inline">\(D_n(\lambda) = \prod (\lambda - \lambda_i)^{m_i}\)</span>，其中<span class="math inline">\(\sum m_i = n\)</span></p>
-<p>由于<span class="math inline">\(D_n(\lambda) = \prod d_i(\lambda)\)</span>，因此初等因子的次数的和应该等于<span class="math inline">\(D_n(\lambda)\)</span>，也就是<span class="math inline">\(\lambda I - A\)</span>的初等因子的次数的和为<span class="math inline">\(n\)</span></p>
-<p>不妨设<span class="math inline">\(\lambda I - A\)</span>的初等因子为<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;} (\sum m_i&#39; = n)\)</span>，对于每个<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>，存在若尔当块<span class="math inline">\(J_i\)</span>，使得<span class="math inline">\(\lambda I - J_i\)</span>以<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>作为初等因子</p>
-<p>将这些<span class="math inline">\(J_i\)</span>组合在一起，得到一个若尔当标准形<span class="math inline">\(J\)</span></p>
-<p><span class="math inline">\(\lambda I - J\)</span>与<span class="math inline">\(\lambda I - A\)</span>有相同的初等因子，并且秩相等，因此<span class="math inline">\(\lambda I - J \cong \lambda I - A\)</span>，而且<span class="math inline">\(J\)</span>是唯一确定的，由上一条定理知，<span class="math inline">\(A \sim J\)</span></p></li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>matrix_analysis</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>抽象代数</title>
     <url>/2021/09/13/abstract-algebra/</url>
     <content><![CDATA[<span id="more"></span>
@@ -1870,17 +1498,667 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </blockquote>
 <h4 id="环的外直和">环的外直和</h4>
 <blockquote>
-<p>设<span class="math inline">\(R_1, R_2,...,R_n\)</span>为环，令<span class="math inline">\(R = R_1 \times ... R_n\)</span></p>
+<p>设<span class="math inline">\(R_1, R_2,...,R_n\)</span>为环，令<span class="math inline">\(R = R_1 \oplus ... \oplus R_n\)</span></p>
 <p>在其上定义加法：<span class="math inline">\((r_1,...,r_n)+(r_1&#39;,...r_n&#39;) = (r_1+r_1&#39;,...,r_n+r_n&#39;)\)</span></p>
 <p>定义乘法<span class="math inline">\((r_1,...,r_n)*(r_1&#39;,...r_n&#39;)=(r_1r_1&#39;,...,r_nr_n&#39;)\)</span></p>
 <p>那么<span class="math inline">\(R\)</span>按上述运算构成环，称为环<span class="math inline">\(R_1, ..., R_n\)</span>的（外）直和</p>
 </blockquote>
+<hr />
+<h3 id="week-11">week 11</h3>
+<h4 id="理想的交">理想的交</h4>
+<blockquote>
+<p>设<span class="math inline">\(I_1, I_2, ..., I_n\)</span>为理想，那么<span class="math inline">\(I = \bigcap_{j=1}^i I_j\)</span>也是理想</p>
+</blockquote>
+<h4 id="生成的理想">生成的理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(X \subseteq R\)</span>，那么称由<span class="math inline">\(X\)</span>生成的理想为<span class="math inline">\(\langle X \rangle = \bigcap_{X \subseteq I \lhd R} I\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(\langle X \rangle\)</span>是包含<span class="math inline">\(X\)</span>的最小的理想</li>
+<li><span class="math inline">\(\langle X \rangle = \{\sum_{i=1}^n r_i x_is_i:x_i\in X, r_i, s_i \in R, n \in Z^+\}\)</span>（考虑包含<span class="math inline">\(X\)</span>的理想应该含有什么数字，以及这个集合确实构成理想）</li>
+<li>当<span class="math inline">\(R\)</span>为交换幺环时，<span class="math inline">\(\langle X \rangle = \{\sum_{i=1}^n r_i x_i:x_i\in X, r_i\in R, n \in Z^+\}\)</span>，此时，如果<span class="math inline">\(X=\{x_1,...,x_k\}\)</span>，那么我们也记<span class="math inline">\(\langle X\rangle = (x_1,...,x_k)\)</span></li>
+<li>当<span class="math inline">\(R\)</span>为交换幺环时，称<span class="math inline">\((a) = \{ra:r\in R\}\)</span>为<span class="math inline">\(a\)</span>生成的<strong>主理想</strong></li>
+</ul>
+<h4 id="理想的和">理想的和</h4>
+<blockquote>
+<p>设<span class="math inline">\(I_1,I_2,...,I_n\)</span>为理想，那么<span class="math inline">\(\sum_{i=1}^n I_i\)</span>也为理想，称为理想的和</p>
+</blockquote>
+<h4 id="理想的积">理想的积</h4>
+<blockquote>
+<p>设<span class="math inline">\(I_1,I_2,...,I_n\)</span>为理想，那么称<span class="math inline">\(I_1 \cdot I_2 ... \cdot I_n = \langle I_1I_2...I_n \rangle = \{\sum_{j=1}^m \prod_{k=1}^n i_k : i_k \in I_k, m \in Z^+\}\)</span>为理想的积</p>
+</blockquote>
+<p>一般用<span class="math inline">\(I_1I_2...I_n\)</span>直接来代指<span class="math inline">\(I_1 \cdot I_2 ... \cdot I_n\)</span></p>
+<p>理想的积对理想的和有分配率</p>
+<ul>
+<li><span class="math inline">\(I_1 \cdot (I_2 + I_3) = I_1 \cdot I_2 + I_1 \cdot I_3\)</span></li>
+<li><span class="math inline">\((I_2 + I_3) \cdot I_1= I_2 \cdot I_1 + I_3 \cdot I_1\)</span></li>
+</ul>
+<h4 id="环的外直和-1">环的外直和</h4>
+<p>设<span class="math inline">\(R = R_1 \oplus R_2 ... \oplus R_n\)</span>，设<span class="math inline">\(R_i^* = \{(0,0,...0,r_i,0,...,0):r_i \in R_i\}\)</span></p>
+<p>那么和群一致的有：</p>
+<ul>
+<li><span class="math inline">\(R_1^* \oplus ... \oplus R_n^* = R\)</span></li>
+<li><span class="math inline">\(R_i^* \lhd R\)</span></li>
+<li><span class="math inline">\(R_i^* \cap \sum_{j \neq i} R_j^* = (0) = O\)</span></li>
+</ul>
+<h4 id="环的内直和">环的内直和</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(R_1,R_2,...,R_n\)</span>为理想，如果</p>
+<ul>
+<li><span class="math inline">\(R_1 \oplus ... \oplus R_n = R\)</span></li>
+<li><span class="math inline">\(R_i \cap \sum_{j \neq i} R_j = O\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(R\)</span>为<span class="math inline">\(R_1,R_2,...,R_n\)</span>的内直和</p>
+</blockquote>
+<p>第二个条件和群一样，可以等价为<span class="math inline">\(R\)</span>中的元素可以唯一的表为<span class="math inline">\(r_1+...+r_n\)</span>的形式</p>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环<span class="math inline">\(R_1,...,R_n\)</span>的内直和，那么<span class="math inline">\(R \cong R_1 \oplus ... \oplus R_n\)</span></p>
+</blockquote>
+<h4 id="互素">互素</h4>
+<blockquote>
+<p>如果幺环<span class="math inline">\(R\)</span>的理想<span class="math inline">\(I,J\)</span>满足<span class="math inline">\(I+J=R\)</span>，则称<span class="math inline">\(I,J\)</span>互素</p>
+</blockquote>
+<ul>
+<li>互素的充要条件为<span class="math inline">\(\exists i \in I, j \in J\)</span>使<span class="math inline">\(i+j=1\)</span></li>
+</ul>
+<h3 id="week12">week12</h3>
+<h4 id="中国剩余定理">中国剩余定理</h4>
+<blockquote>
+<p>设幺环<span class="math inline">\(R\)</span>上的理想<span class="math inline">\(A_1, A_2, ..., A_n\)</span>两两互素，那么</p>
+<p><span class="math display">\[R/\bigcap_{i=1}^n A_i \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
+<p>特别的，当<span class="math inline">\(R\)</span>为交换幺环时，<span class="math inline">\(\bigcap_{i=1}^n A_i = A_1A_2...A_n\)</span>，从而</p>
+<p><span class="math display">\[R/ A_1A_2...A_n \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
+</blockquote>
+<p>要证明这个定理，我们先证明一个引理</p>
+<blockquote>
+<p>设<span class="math inline">\(I, J, K\)</span>为幺环<span class="math inline">\(R\)</span>的理想，那么</p>
+<ol type="i">
+<li><p>当<span class="math inline">\(I\)</span>与<span class="math inline">\(J, K\)</span>都互素时，<span class="math inline">\(I\)</span>与<span class="math inline">\(JK\)</span>互素</p></li>
+<li><p><span class="math inline">\(I, J\)</span>互素时，<span class="math inline">\(I \cap J = IJ+JI\)</span>，特别的，如果<span class="math inline">\(R\)</span>为交换幺环，那么<span class="math inline">\(I\cap J = IJ+JI=IJ\)</span></p></li>
+</ol>
+</blockquote>
+<p>(i)的证明，由于<span class="math inline">\(I\)</span>与<span class="math inline">\(J, K\)</span>互素，因此存在<span class="math inline">\(i_1, i_2 \in I, j \in J, k \in K\)</span>，使得<span class="math inline">\(i_1 + j = 1, i_2+k = 1\)</span>，因此<span class="math inline">\(1 = (i_1+j)(i_2+k)=(i_1i_2+ji_2+i_1k)+jk \in I+JK\)</span>，从而<span class="math inline">\(I\)</span>与<span class="math inline">\(JK\)</span>互素</p>
+<p>(ii)的证明类似，由于<span class="math inline">\(I, J\)</span>为理想，因此<span class="math inline">\(IJ \subseteq I, J\)</span>，类似<span class="math inline">\(JI \subseteq I \cap J\)</span>，从而<span class="math inline">\(IJ+JI \subseteq I \cap J\)</span></p>
+<p>由于<span class="math inline">\(I, J\)</span>互素，取<span class="math inline">\(i+j=1\)</span>，那么<span class="math inline">\(\forall x \in I \cap J, x=1x=ix+jx\in IJ+JI\)</span>，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>下面我们正式开始证明中国剩余定理</p>
+<p>构造<span class="math inline">\(R\)</span>到<span class="math inline">\(R/A_1 \oplus R/A_2 \oplus ... \oplus R/A_n\)</span>的映射<span class="math inline">\(\sigma\)</span>：<span class="math inline">\(\sigma(x) = (x+A_1, x+A_2, ..., x+A_n)\)</span></p>
+<p>不难证明这是一个同态，考虑同态核：将有<span class="math inline">\(x+A_1 = A_1, ..., x+A_n=A_n\)</span>，也即<span class="math inline">\(x\in \bigcap_{i=1}^n A_i\)</span></p>
+<p>再考虑同态像，我们依赖于下面的定理，事实上，下面的定理和数论形式的中国剩余定理更为接近</p>
+<blockquote>
+<p>任给<span class="math inline">\(a_1, a_2, ..., a_n \in R\)</span>，那么方程组</p>
+<p><span class="math display">\[\begin{cases} x \equiv a_1(mod\;A_1) \\ x \equiv a_2(mod\;A_2) \\ ... \\x \equiv a_n(mod\;A_n)\end{cases}\]</span>在<span class="math inline">\(R\)</span>中有解，并且在模<span class="math inline">\(\bigcap_{i=1}^n A_i\)</span>的意义下唯一确定</p>
+</blockquote>
+<p>令<span class="math inline">\(B_i = \prod_{j \neq i} A_j\)</span>，根据引理(i)，<span class="math inline">\(B_i\)</span>与<span class="math inline">\(A_i\)</span>互素，因此存在<span class="math inline">\(a_i&#39; \in A_i, b_i \in B_i\)</span>使得<span class="math inline">\(a_i&#39; + b_i = 1\)</span></p>
+<p>此时，对<span class="math inline">\(j \neq i\)</span>，根据<span class="math inline">\(A_j\)</span>是一个理想，将有<span class="math inline">\(b_i \in A_j\)</span>，即<span class="math inline">\(b_i \equiv 0(mod\;A_j)\)</span>，而<span class="math inline">\(b_i \equiv 1(mod\;A_i)\)</span></p>
+<p>那么，令<span class="math inline">\(x_0 = \sum_{i=1}^n a_ib_i\)</span>，这就是原方程组的一个解</p>
+<p>不妨设方程还有另一个<span class="math inline">\(x\)</span>，那么由<span class="math inline">\((x-x_0) \in A_1, ..., (x-x_0)\in A_n\)</span>，得到<span class="math inline">\(x-x_0 \in \bigcap_{i=1}^n A_i\)</span>，也即<span class="math inline">\(x \equiv x_0(mod\;\bigcap_{i=1}^n A_i)\)</span></p>
+<p>根据上面的定理，我们可以知道<span class="math inline">\(\sigma\)</span>实际上是一个满同态，因此由环的同态基本定理</p>
+<p><span class="math display">\[R/\bigcap_{i=1}^n A_i \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
+<p>当<span class="math inline">\(R\)</span>是交换幺环时，运用引理(ii)即可归纳证明其形式</p>
+<h4 id="单位群">单位群</h4>
+<blockquote>
+<p>对幺环<span class="math inline">\(R\)</span>，称<span class="math inline">\(u\)</span>为单位，当且仅当<span class="math inline">\(u\)</span>为乘法可逆元，也即存在<span class="math inline">\(u&#39; \in R\)</span>使得<span class="math inline">\(uu&#39; = 1\)</span></p>
+</blockquote>
+<p>注意到，如果<span class="math inline">\(u, v\)</span>为单位，那么<span class="math inline">\(u^{-1}, uv\)</span>也为单位，这告诉我们<span class="math inline">\(U(R) = \{u:u\in R, u\text{是单位}\}\)</span>按乘法构成一个群</p>
+<ul>
+<li><span class="math inline">\(U(Z) = \{\pm 1\}\)</span></li>
+<li>称<span class="math inline">\(Z[i] = \{a+bi:a, b \in Z\}\)</span>为Gauss复整数环，则<span class="math inline">\(U(Z[i]) = \{\pm1, \pm i\}\)</span></li>
+<li>称<span class="math inline">\(Z[w] = \{a+bw : a, b\in Z\}\)</span>为Eisenstein环，其中<span class="math inline">\(w\)</span>为非<span class="math inline">\(1\)</span>的三次单位根，并且<span class="math inline">\(U(Z[w]) = \{\pm 1, \pm w, \pm w^2 \}\)</span></li>
+<li>设<span class="math inline">\(R_1, R_2, ..., R_n\)</span>为幺环，那么<span class="math inline">\(U(R_1 \oplus R_2 \oplus ...\oplus R_n) = U(R_1) \times U(R_2) ... \times U(R_n)\)</span></li>
+</ul>
+<h4 id="素理想">素理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，如果<span class="math inline">\(\forall a, b \in R, ab \in I\)</span>可以推出<span class="math inline">\(a \in I\)</span>或者<span class="math inline">\(b \in I\)</span>，那么称<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的素理想</p>
+</blockquote>
+<h4 id="极大理想">极大理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，如果<span class="math inline">\(J \lhd R, I \subseteq J \subseteq R\)</span>可以推出<span class="math inline">\(J = I\)</span>或者<span class="math inline">\(J=R\)</span>，那么称<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的极大理想</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\((0)\)</span>是<span class="math inline">\(Z\)</span>的素理想，但不是极大理想</p>
+<p>对于素数<span class="math inline">\(p\)</span>，<span class="math inline">\((p)\)</span>是<span class="math inline">\(Z\)</span>的素理想，也是极大理想</p>
+<p>其余的<span class="math inline">\((n)\)</span>既不是<span class="math inline">\(Z\)</span>的素理想，也不是极大理想</p></li>
+</ul>
+<h4 id="域">域</h4>
+<blockquote>
+<p>若<span class="math inline">\(F\)</span>为环，<span class="math inline">\(F/\{0\}\)</span>构成Abel群，那么，称<span class="math inline">\(F\)</span>构成域</p>
+</blockquote>
+<ul>
+<li><p>域一定是整环</p>
+<p><span class="math inline">\(a \neq 0\)</span>时，<span class="math inline">\(ab=0\Rightarrow a^{-1}ab = 0 \Rightarrow b=0\)</span></p></li>
+</ul>
+<h4 id="素理想与整环极大理想与域">素理想与整环，极大理想与域</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，则</p>
+<ol type="i">
+<li><p><span class="math inline">\(R\)</span>为整环，当且仅当<span class="math inline">\(O\)</span>为<span class="math inline">\(R\)</span>的素理想</p></li>
+<li><p><span class="math inline">\(R\)</span>为域，当且仅当<span class="math inline">\(O\)</span>为<span class="math inline">\(R\)</span>的极大理想</p></li>
+</ol>
+</blockquote>
+<p>(i)是平凡的，考虑(ii)，<span class="math inline">\(R\)</span>为域等价于对任意<span class="math inline">\(a \neq 0\)</span>存在逆元，</p>
+<p>如果存在<span class="math inline">\(I \lhd R\)</span>，使得<span class="math inline">\(O \subseteq I \subseteq R\)</span>，当<span class="math inline">\(I \neq O\)</span>，任取<span class="math inline">\(i \in I - O\)</span>，那么<span class="math inline">\(1 \in i^{-1}I=I\)</span>，从而<span class="math inline">\(I=R\)</span></p>
+<p>反之，考虑<span class="math inline">\(O \subseteq \langle a\rangle \subseteq R\)</span>，当<span class="math inline">\(a \neq 0\)</span>时，有<span class="math inline">\(\langle a \rangle =R\)</span>，于是<span class="math inline">\(a\)</span>存在逆元</p>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(P \neq R\)</span>为<span class="math inline">\(R\)</span>的理想则</p>
+<ol type="i">
+<li><p><span class="math inline">\(P\)</span>为素理想当且仅当<span class="math inline">\(R/P\)</span>为整环</p></li>
+<li><p><span class="math inline">\(P\)</span>为极大理想当且仅当<span class="math inline">\(R/P\)</span>为域</p></li>
+</ol>
+</blockquote>
+<p>运用上面的引理和定义证明即可</p>
+<ul>
+<li>极大理想一定时素理想</li>
+</ul>
 ]]></content>
       <categories>
         <category>notes</category>
       </categories>
       <tags>
         <tag>abstract_algebra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>信息论</title>
+    <url>/2021/08/20/information-theory/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>临时补一下...</p>
+<h2 id="information-theory">Information theory</h2>
+<h3 id="entropy">Entropy</h3>
+<p>对于离散型随机变量<span class="math inline">\(X\)</span>，出于方便，我们用<span class="math inline">\(|X|\)</span>来表示其样本空间的大小，那么，我们定义随机变量<span class="math inline">\(X\)</span>的熵（entropy）</p>
+<p><span class="math display">\[\begin{align}H(X) = \sum_{x \in X} -p(x) \log p(x)  = \sum_{x \in X} p(x) \log \frac{1}{p(x)} \end{align}\]</span></p>
+<p>（特别的，如果<span class="math inline">\(p(x) = 0\)</span>，认为<span class="math inline">\(p(x) \log \frac{1}{p(x)} = 0\)</span>）</p>
+<p>熵有下列的性质</p>
+<ul>
+<li><p>如果<span class="math inline">\(X\)</span>均匀随机，那么<span class="math inline">\(H(X) = |X| * \frac{1}{|X|} * \log |X| = \log |X|\)</span></p></li>
+<li><p><span class="math inline">\(0 \leq H(X) \leq \log |X|\)</span></p>
+<ul>
+<li><p>不等式左边成立当且仅当<span class="math inline">\(X\)</span>只在一个地方取得概率<span class="math inline">\(1\)</span>，其余地方取得概率<span class="math inline">\(0\)</span></p></li>
+<li><p>不等式右边成立当且仅当<span class="math inline">\(X\)</span>​均匀分布</p></li>
+<li><p>不等式的左边是显然的，右边则考虑函数<span class="math inline">\(x \log x\)</span>的凸性</p></li>
+</ul></li>
+</ul>
+<p>对于服从二项分布的<span class="math inline">\(X\)</span>，有特殊的一种熵（Binary entropy function）</p>
+<p><span class="math display">\[\begin{align}H(p) = H(X) = p \log \frac{1}{p}  + (1-p) \log \frac{1}{1-p} \end{align}\]</span></p>
+<p>熵的定义只依赖于概率分布，只要确定了概率分布，我们就可以定义出熵，因此，在二元情况下，我们可以定义</p>
+<p><span class="math display">\[\begin{align}H(X, Y) = \sum_{x \in X, y \in Y} p(x, y) \log \frac{1}{p(x, y)} \end{align}\]</span></p>
+<p>为联合熵（joint entropy）</p>
+<ul>
+<li><span class="math inline">\(H(X, X) = H(X)\)</span>​</li>
+<li><span class="math inline">\(H(X, Y) = H(Y, X)\)</span>​</li>
+</ul>
+<p>定义</p>
+<p><span class="math display">\[\begin{align} H(X | Y = y) = \sum_x p(x | Y = y) \log \frac{1}{p(x|Y=y)} \end{align}\]</span></p>
+<p><span class="math display">\[\begin{align}H(X|Y) &amp;= \sum_{y \in Y} p(y) H(X | Y = y) \\ &amp;= \sum_{y \in Y} p(y) \sum_{x \in X} p(x | y) \log \frac{1}{p(x | y)} \\ &amp;= \sum_{x \in X, y \in Y} p(x, y) \log \frac{1}{p(x|y)}\end{align}\]</span>​</p>
+<p>其中第二项称为条件熵（conditional entropy）</p>
+<p>注意到</p>
+<p><span class="math display">\[\begin{align} \log p(x|y) = \log \frac{p(x, y)}{p(y)} = \log p(x, y) - \log p(y)\end{align}\]</span>​</p>
+<p>（式中的<span class="math inline">\(p(y)\)</span>为对应的边缘分布函数）</p>
+<p>我们有</p>
+<p><span class="math display">\[\begin{align} H(X|Y) = H(X, Y) - H(Y)\end{align}\]</span></p>
+<p>由对称性，得到</p>
+<p><span class="math display">\[\begin{align} H(X,Y) = H(Y) + H(X|Y) = H(X) + H(Y | X)\end{align}\]</span></p>
+<p>我们可以得到链式法则</p>
+<p><span class="math display">\[\begin{align} H(X_1, X_2, ..., X_n) &amp;= H(X_1) + H(X_2, ..., X_n|X_1) \\ &amp;= H(X_1) +H(X_2 | X_1) + H(X_3,...,X_n | X_1, X_2) \\ &amp;= \sum_{i=1}^n H(X_i | X_{1}, ..., X_{i-1})\end{align}\]</span>​</p>
+<ul>
+<li>当<span class="math inline">\(X, Y\)</span>独立时，<span class="math inline">\(H(X, Y) = H(X) + H(Y)\)</span></li>
+<li>贝叶斯公式：<span class="math inline">\(H(X, Y | Z) = H(X|Z) + H(Y | X, Z)\)</span>
+<ul>
+<li>注意到<span class="math inline">\(p(x, y | z) = \frac{p(x, y, z)}{p(z)} = \frac{p(x, y, z)}{p(x, z)} * \frac{p(x, z)}{p(z)} = p(y|x, z) * p(x|z)\)</span></li>
+</ul></li>
+<li>当且仅当<span class="math inline">\(Y\)</span>是<span class="math inline">\(X\)</span>的一个函数时，<span class="math inline">\(H(Y|X) = 0\)</span>，也即<span class="math inline">\(H(X, Y) = H(X)\)</span></li>
+</ul>
+<h3 id="relative-entropy">Relative entropy</h3>
+<p>对于概率函数<span class="math inline">\(p(x), q(x)\)</span>，定义</p>
+<p><span class="math display">\[\begin{align} D(p || q) = \sum_{x \in X} p(x) \log \frac{p(x)}{q(x)}\end{align}\]</span></p>
+<p>为相对熵（relative entropy），也称KL距离，用于衡量两个概率函数之间的“距离”</p>
+<p>但是KL距离并不是一种度量（metric）</p>
+<ul>
+<li><p>当<span class="math inline">\(p(x) = 0\)</span>时，<span class="math inline">\(0 \log \frac{0}{q(x)} = 0\)</span>，反之若<span class="math inline">\(p(x) \neq 0, q(x) = 0\)</span>时，<span class="math inline">\(p(x) \log \frac{p(x)}{0} = \infty\)</span></p></li>
+<li><p><span class="math inline">\(D(p || q) \geq 0\)</span>​，当且仅当<span class="math inline">\(p = q\)</span>时取等​</p>
+<ul>
+<li><p><span class="math inline">\(-D(p || q) = \sum_{x\in X} - p(x) \log \frac{q(x)}{p(x)} \leq \log \sum q(x) \leq \log 1 = 0\)</span></p>
+<p>其中第一步为琴生不等式</p>
+<p>当且仅当<span class="math inline">\(q(x)/p(x) \equiv C\)</span>，并且<span class="math inline">\(\sum q(x) = 1\)</span>时取等，从而<span class="math inline">\(1 = \sum p(x) = \frac{1}{C} \sum q(x) = \frac {1}{C}\)</span>，于是<span class="math inline">\(C = 1\)</span>，进而<span class="math inline">\(p(x) = q(x)\)</span>，对于<span class="math inline">\(0\)</span>的讨论这里略去</p></li>
+</ul></li>
+</ul>
+<p>定义差分距离（也即向量的1-范数）</p>
+<p><span class="math display">\[\begin{align} V(p, q) = \sum_{x \in X} |p(x) - q(x)|\end{align}\]</span></p>
+<p>Pinsker 不等式：<span class="math inline">\(D(p || q) \geq \frac{1}{2 \ln 2} V^2(p, q)\)</span>​​（不懂，先记着）</p>
+<p>对于<span class="math inline">\(p(x, y), q(x, y)\)</span>，定义条件相对熵为</p>
+<p><span class="math display">\[\begin{align} D( p(y|x) || q(y|x)) &amp;= \sum_{x} p(x) D(p(Y|x)||q(Y|x)) \\ &amp;= \sum_x \sum_y p(x)p(y|x) \log \frac{p(y|x)}{q(y|x)} \\ &amp;= \sum_{x, y} p(x, y) \log \frac{ p(y|x)}{q(y|x)}\end{align}\]</span>​</p>
+<p>有了条件相对熵之后，就可以类比的写出链式法则</p>
+<p><span class="math display">\[\begin{align} D(p(x, y) || q(x, y)) = D(p(x) || q(x)) + D(p(y|x) || q(y|x))\end{align}\]</span></p>
+<p>只需注意到<span class="math inline">\(\log \frac{p(x, y)}{q(x, y)} = \log \frac{p(x) p(y|x)}{q(x) q(y|x)} = \log \frac{p(x)}{q(x)} + \log \frac{p(y|x)}{q(y|x)}\)</span></p>
+<h3 id="mutual-information">Mutual information</h3>
+<p>定义</p>
+<p><span class="math display">\[\begin{align} I(X;Y) &amp;= D(p(x, y) || p(x)p(y)) \\ &amp;= \sum_{x \in X, y \in Y} p(x, y) \log \frac{p(x, y)}{p(x)p(y)}\end{align}\]</span></p>
+<p>为<span class="math inline">\(X, Y\)</span>的互信息（mutual information）</p>
+<ul>
+<li><span class="math inline">\(I(X;Y) = I(Y;X)\)</span></li>
+<li><span class="math inline">\(I(X;X) = H(X)\)</span>​</li>
+<li>既然<span class="math inline">\(I(X;Y)\)</span>是一个KL距离，那么<span class="math inline">\(I(X;Y) \geq 0\)</span>​，等号成立当且仅当<span class="math inline">\(p(x, y) = p(x)p(y)\)</span>，即<span class="math inline">\(X, Y\)</span>独立</li>
+</ul>
+<p>由于<span class="math inline">\(\log \frac{p(x, y)}{p(x)p(y)} = \log p(x, y) - \log p(x) - \log p(y)\)</span></p>
+<p>因此</p>
+<p><span class="math display">\[\begin{align} I(X;Y) &amp;= H(X) + H(Y) - H(X, Y) \\ &amp;= H(X) - H(X | Y)\\ &amp;= H(Y) - H(Y|X)\end{align}\]</span>​</p>
+<ul>
+<li>由<span class="math inline">\(I(X;Y) = H(X) - H(X|Y) \geq 0\)</span>​，那么<span class="math inline">\(H(X|Y) \leq H(X)\)</span>​​，当<span class="math inline">\(X, Y\)</span>​独立时取等</li>
+<li><span class="math inline">\(I(X;Y) \leq H(X)\)</span></li>
+</ul>
+<p>定义</p>
+<p><span class="math display">\[\begin{align} I(X;Y | Z) &amp;= \sum_{x, y, z} p(x ,y, z) \log \frac{p(x, y | z)}{p(x|z) p(y|z) } \\ &amp;= H(X|Z) - H(X|Y,Z)\end{align}\]</span>​</p>
+<p>当且仅当在给定<span class="math inline">\(Z\)</span>的情况下，<span class="math inline">\(X, Y\)</span>独立时取等</p>
+<p>计算条件互信息时，有链式法则</p>
+<p><span class="math display">\[\begin{align} I(X_1, X_2, ..., X_n ; Y) = \sum_{i=1}^n I(X_i ; Y|X_1, X_2, ..., X_{i-1})\end{align}\]</span></p>
+<h3 id="entropy-bound">Entropy Bound</h3>
+<p><span class="math display">\[H(X_1, X_2, ..., X_n) \leq \sum_{i=1}^n H(X_i)\]</span></p>
+<p>取等当且仅当<span class="math inline">\(X_1, ..., X_n\)</span>独立（用链式法则证明）</p>
+<p>接下来要引入马尔科夫链，称<span class="math inline">\(X, Y, Z\)</span>形成马尔科夫链，当且仅当</p>
+<p><span class="math display">\[\begin{align} p(x, y, z) = p(x)p(y|x)p(z|y)\end{align}\]</span></p>
+<p>（也就是<span class="math inline">\(p(z|y) = p(z|x, y)\)</span>），写作<span class="math inline">\(X \to Y \to Z\)</span></p>
+<ul>
+<li><p>如果<span class="math inline">\(X\to Y \to Z\)</span>，那么<span class="math inline">\(I(X;Z|Y) = 0\)</span></p></li>
+<li><p>如果<span class="math inline">\(X \to Y \to Z\)</span>，那么<span class="math inline">\(I(X;Y) \geq I(X;Z)\)</span></p>
+<ul>
+<li><span class="math inline">\(I(X;Y) - I(X;Z) = I(X;Y,Z) - I(X;Z|Y) - (I(X;Y,Z) - I(X;Y|Z)) = I(X;Y|Z) \geq 0\)</span></li>
+<li>由上述等式，还能观察到<span class="math inline">\(I(X;Y) \geq I(X;Y|Z)\)</span></li>
+<li>但是，一般情况下，<span class="math inline">\(I(X;Y) \geq I(X;Y|Z)\)</span>不一定成立</li>
+</ul></li>
+<li><p>如果<span class="math inline">\(X \to Y \to Z\)</span>，那么<span class="math inline">\(H(X|Z) \geq H(X|Y)\)</span></p></li>
+<li><p>$ H(X|Z) - H(X|Y,Z) = I(X;Y|Z)I(X;Z|Y) = H(X|Y) - H(X|Y,Z)$</p></li>
+</ul>
+<h3 id="entropy-rate">Entropy rate</h3>
+<p>稳态过程，一个随机过程称为稳态，如果其任意子集的联合分布具有时间不变性，</p>
+<p><span class="math display">\[\begin{align} \forall n, l, x_1, x_2,..., x_n \in X, P(X_1 = x_1, X_2 = x_2, ..., X_n = x_n) = P(X_{1+l} = x_1, ..., X_{n+l} = x_n)\end{align}\]</span></p>
+<p>稳态过程具有时间可逆性，即</p>
+<p><span class="math display">\[\begin{align} H(X_0 | X_{-1},X_{-2},..X_{-n}) = H(X_0 | X_1, X_2, ..., X_n)\end{align}\]</span></p>
+<p>而对于马尔科夫链，其为稳态充要条件为<span class="math inline">\(p(X_{n+1}) = p(X_n)\)</span></p>
+<p>或者说<span class="math inline">\(P(x_1,x_2,...,x_n)^T = (x_1, ..., x_n)^T\)</span>，其中<span class="math inline">\(P\)</span>为转移矩阵</p>
+<hr />
+<p>对于随机过程，定义熵率</p>
+<p><span class="math display">\[\begin{align} H(X) = \lim_{n \to \infty} \frac{1}{n} H(X_1, X_2, ..., X_n)\end{align}\]</span></p>
+<p>熵率不一定存在，但对于稳态而言，熵率是存在的</p>
+<p>我们先考虑<span class="math inline">\(A_n = H(X_n | X_{n-1}, ..., X_1)\)</span></p>
+<p>注意到<span class="math inline">\(0 \leq A_{n+1} = H(X_{n+1} | X_{n},...,X_1) \leq H(X_{n+1} | X_n,...,X_2) = H(X_n | X_{n-1},...,X_1) = A_n\)</span>，<span class="math inline">\(A_n\)</span>单调递减有下限，因此<span class="math inline">\(A_n\)</span>有极限</p>
+<p>那么</p>
+<p><span class="math display">\[\begin{align} H&#39;(X) = \lim_{n \to \infty} H(X_n | X_{n-1},...,X_1)\end{align}\]</span></p>
+<p>存在，根据数学分析中的结论，我们有</p>
+<p><span class="math display">\[\begin{align} H(X) = H&#39;(X)\end{align}\]</span></p>
+<p>存在</p>
+<p>特别的，对于稳态马尔科夫链，将有<span class="math inline">\(H(X) = H&#39;(X) = H(X_2 | X_1)\)</span></p>
+<p>如果设出马尔科夫链的极限分布<span class="math inline">\(\pi\)</span>和转移矩阵<span class="math inline">\(P\)</span>，那么我们将得到</p>
+<p><span class="math display">\[\begin{align} H(X) = \sum_{ij} \pi_i P_{ij} \log \frac{1}{P_{ij}}\end{align}\]</span></p>
+<hr />
+<p>设<span class="math inline">\(Y = f(X)\)</span>，如果<span class="math inline">\(\{X\}\)</span>构成稳态的马尔科夫链，那么<span class="math inline">\(\{Y\}\)</span>也构成稳态的马尔科夫链</p>
+<ul>
+<li><span class="math inline">\(p(X_{n+1}) = p(X_n) \Rightarrow p(Y_{n+1}) = p(Y_n)\)</span></li>
+</ul>
+<p>那么，<span class="math inline">\(H(Y) = \lim_{n \to \infty} H(Y_n | Y_{n-1}, ..., Y_1)\)</span></p>
+<p>通过一些（奇怪的）技巧，我们可以对<span class="math inline">\(H(Y)\)</span>进行更好的估值，这依赖于以下定理</p>
+<p><span class="math display">\[\begin{align} H(Y_n | Y_{n-1},...,Y_1, X_1) \leq H(y) \leq H(Y_n | Y_{n-1},...,Y_1)\end{align}\]</span></p>
+<p><span class="math display">\[\begin{align} \lim_{n \to \infty} H(Y_n | Y_{n-1},...,Y_1,X_1) = \lim_{n \to \infty} H(Y_n|Y_{n-2},...,Y_1) = H(y)\end{align}\]</span>​</p>
+<ul>
+<li>注意到<span class="math inline">\(Y\)</span>是<span class="math inline">\(X\)</span>的函数，尝试在熵的已知中添加<span class="math inline">\(Y\)</span></li>
+</ul>
+<h3 id="data-compression">Data Compression</h3>
+<p>大概到了新的阶段</p>
+<p>对于一个随机变量<span class="math inline">\(X\)</span>的信源编码（source code），是一个从随机变量<span class="math inline">\(X\)</span>的样本空间到一个有限长度的字符串的映射（不妨设字母表为<span class="math inline">\(D\)</span>，记所有的有限长度的字符串的集合为<span class="math inline">\(D^*\)</span>），让<span class="math inline">\(C(x)\)</span>表示对应于<span class="math inline">\(x\)</span>的编码，而<span class="math inline">\(l(x)\)</span>表示<span class="math inline">\(C(x)\)</span>的长度</p>
+<p>记<span class="math inline">\(L(C) = E_{p(x)}[l(x)] = \sum_{x} p(x) l(x)\)</span>，一般的，我们希望一个编码方式能够最小化<span class="math inline">\(L(C)\)</span></p>
+<p>对于一种编码，称其扩展<span class="math inline">\(C^*\)</span>为以<span class="math inline">\(X\)</span>的样本空间为字符集构成的有限字符串映射到有限长度的字符串的映射，满足<span class="math inline">\(C(x_1 + x_2 + ... + x_n) = C(x_1) + C(x_2) + ... + C(x_n)\)</span>，这里的"+"表示字符串的拼接</p>
+<ul>
+<li>当一种编码的<strong>扩展</strong>是一个单射时，称这种编码是唯一可解码的</li>
+<li>一种编码称为前缀码，或者即时码，如果任意两个码都没有互为前缀，类似的定义后缀码</li>
+</ul>
+<h5 id="kraft-inequality">Kraft inequality</h5>
+<p>Kraft 不等式：对于一种前缀码，设其字母表大小为<span class="math inline">\(D\)</span>​​，那么编码长度<span class="math inline">\(l_1, ..., l_m (m = |X|)\)</span>​​将满足</p>
+<p><span class="math display">\[\begin{align} \sum_{i=1}^m D^{-l_i} \leq 1\end{align}\]</span></p>
+<p>并且，给定一组满足该不等式的编码长度，那么一定存在一种前缀码以这些长度编码</p>
+<ul>
+<li>考虑用Trie树表示前缀码，反过来则用归纳法证明</li>
+<li>这个结论在编码长度有可数无穷的情况下也是对的，可以考虑用<span class="math inline">\([0,1)\)</span>中的<span class="math inline">\(D\)</span>进制小数来证明</li>
+</ul>
+<p>利用拉格朗日乘数法，得到最优情况下，我们应该控制编码长度为<span class="math inline">\(l_i = -\log_D p_i(p_i = D^{-l_i})\)</span>，此时<span class="math inline">\(L(C) = H_D(X)\)</span></p>
+<p>但是一般的，这个长度不是整数，因此一般的有<span class="math inline">\(L(C) \geq H_D(X)\)</span>​，但是我们有<span class="math inline">\(H_D(X) \leq L(C) &lt; H_D(X) + 1\)</span>​</p>
+<h5 id="shannon-codes">Shannon codes</h5>
+<p>我们直接取<span class="math inline">\(l_i = \lceil -\log_D p_i \rceil\)</span>，就有<span class="math inline">\(-\log_D p_i \leq l_i &lt; -\log_D p_i + 1\)</span>，于是<span class="math inline">\(H_D(X) \leq L(C) &lt; H_D(X) + 1\)</span>，这种编码称为Shannon codes</p>
+<p>进一步，如果我们对<span class="math inline">\(X_1, X_2,...,X_n\)</span>​（样本空间相同）一起编码，运用刚刚的结论，得到</p>
+<p><span class="math display">\[H(X_1, ..., X_n) \leq E [l(X_1, ..., X_n)] &lt; H(X_1,...,X_n) + 1\]</span></p>
+<blockquote>
+<p>将<span class="math inline">\(L(C)\)</span>记为编码一个随机变量所用的期望长度，那么<span class="math inline">\(L(C) = \frac{1}{n} E [l(X_1, ..., X_n)]\)</span>，代入上式，得到 <span class="math display">\[\frac{H(X_1, ..., X_n)}{n} \leq L(C)&lt; \frac{H(X_1,...,X_n) + 1}{n}\]</span></p>
+<p>如果<span class="math inline">\(X_1,...,X_n,...\)</span>构成一个稳态的话，根据前文的结论，我们有<span class="math inline">\(L(C) \to H(X)\)</span>（这里为熵率）</p>
+</blockquote>
+<p>这种编码方式称为区块编码，而上述结论称为香农第一定理</p>
+<hr />
+<p>如果我们运用<span class="math inline">\(\{q(x)\}\)</span>来给一个概率为<span class="math inline">\(\{p(x)\}\)</span>的随机变量编码，那么我们将有</p>
+<p><span class="math display">\[\begin{align} H(p) + D(p||q) \leq E_p \; \lceil\log \frac{1}{q(x)} \rceil &lt; H(p) + D(p || q) + 1\end{align}\]</span>​</p>
+<p>当然，这里的<span class="math inline">\(\lceil\log \frac{1}{q(x)} \rceil\)</span>表示编码长度</p>
+<p>这个式子只需要对取整号进行简单放缩后，运用定义就可以得到</p>
+<hr />
+<p>Kraft不等式的约束范围非常非常广，事实上，我们只考虑前缀码就足够了</p>
+<p>对于一种唯一可解码，设其字母表大小为<span class="math inline">\(D\)</span>​，那么编码长度<span class="math inline">\(l_1, ..., l_m (m = |X|)\)</span>​将满足</p>
+<p><span class="math display">\[\begin{align} \sum_{i=1}^m D^{-l_i} \leq 1\end{align}\]</span></p>
+<p>并且，给定一组满足该不等式的编码长度，那么一定存在一种唯一可解码以这些长度编码</p>
+<h5 id="huffman-codes">Huffman codes</h5>
+<p>哈夫曼编码可以使得<span class="math inline">\(L(C)\)</span>最小，并且哈夫曼编码是一种前缀码</p>
+<p>这玩意初中生都会了....就不写了</p>
+<p>有个扩展叫canonical codes，就先不学了..。</p>
+<h5 id="shannon-fano-elias-coding">Shannon-Fano-Elias coding</h5>
+<p>考虑<span class="math inline">\(X\)</span>的分布函数<span class="math inline">\(F(x)\)</span>，定义其MCDF为<span class="math inline">\(F^*(x) = F(x) - \frac{1}{2} p(x)\)</span></p>
+<p>不难发现，<span class="math inline">\(F^*(x)\)</span>和<span class="math inline">\(p(x) &gt; 0\)</span>的<span class="math inline">\(x\)</span>​之间存在着对应关系，从而可以用于编码</p>
+<p>考虑截取<span class="math inline">\(F^*(x)\)</span>的前<span class="math inline">\(l(x) = \lceil \log \frac{1}{p(x)}\rceil + 1\)</span>位（二进制），那么有<span class="math inline">\(F^*(x) - C(x) \leq \frac{1}{2^{l(x)}} \leq \frac{p(x)}{2} = F^*(x) - F^*(x-1)\)</span></p>
+<p>因此这种编码方式也构成一种前缀码，由于多用了1个bit来避免重复，因此此时<span class="math inline">\(L &lt; H(x) + 2\)</span>​</p>
+<h3 id="channel">Channel</h3>
+<p>一个信道的模型，大概就是对信息进行编码，通过信道（可能有噪声，以一个概率来描述），之后解码</p>
+<p>我们假设发送了<span class="math inline">\(w = x_1x_2...x_k\)</span>，经过信道后得到<span class="math inline">\(y_1y_2...y_k\)</span></p>
+<p>这些数字的生成是有先后顺序的，<span class="math inline">\(w \to x_1 \to y_1 \to x_2 \to y_2 ... \to x_k \to y_k\)</span></p>
+<p>为了表示方便，记<span class="math inline">\(x^i = x_1,x_2...,x_i, y^i = y_1, y_2, ..., y_i\)</span></p>
+<p>对于一个好的信道，我们希望它能发送更多的信息，也即熵尽可能大</p>
+<h5 id="discrete-memoryless-channel">Discrete memoryless channel</h5>
+<p>离散无记忆信道（DMC），满足</p>
+<p><span class="math display">\[\begin{align} p(y_k | x^k, y^{k-1}) = p(y_k | x_k) \end{align}\]</span></p>
+<p>其中<span class="math inline">\(x_k\)</span>是第<span class="math inline">\(k\)</span>个发送的信息，而<span class="math inline">\(x^k\)</span>为前<span class="math inline">\(k\)</span>次发送的信息，<span class="math inline">\(y^{k-1}\)</span>为前<span class="math inline">\(k-1\)</span>​个发送后的信息</p>
+<p>而一个无反馈（feedback）的信道，满足</p>
+<p><span class="math display">\[\begin{align} p(x_k | x^{k-1}, y^{k-1}) = p(x_k | x^{k-1})\end{align}\]</span></p>
+<p>也就是前<span class="math inline">\(k-1\)</span>次经过信道后的信息对于第<span class="math inline">\(k\)</span>次发送的信息没有影响</p>
+<p>结合这两个概率，一般默认DMC是没有反馈的</p>
+<p>对于DMC而言，有</p>
+<p><span class="math display">\[\begin{align} p(y^n |x^n) =  \prod_{i=1}^n p(y_i | x_i)\end{align}\]</span>​</p>
+<p>用熵来表示，就是</p>
+<p><span class="math display">\[\begin{align} H(Y^n | X^n) = \sum_{i=1}^n H(Y_i | X_i) \end{align}\]</span>​</p>
+<p>运用上式，有</p>
+<p><span class="math display">\[H(Y^n) - H(Y^n|X^n)= H(Y^n) - \sum_{i=1}^n H(Y_i | X_i) \leq \sum_{i=1}^n (H(Y_i) - H(Y_i | X_i))\]</span></p>
+<p><span class="math display">\[\begin{align} I(X^n ; Y^n) \leq \sum_{i=1}^n I(X_i ; Y_i) \end{align}\]</span></p>
+<p>在DMC中，<span class="math inline">\(w \to X^n \to Y^n \to w&#39;\)</span>构成一个马尔科夫链，其中<span class="math inline">\(w&#39;\)</span>​为解码后的信息</p>
+<h5 id="channel-coding">Channel coding</h5>
+<p>编码器（encoder），是一个将信息映射到<span class="math inline">\(X^n\)</span>的映射，并且要求是单射，类似的有解码器</p>
+<p>码本（codebook），记录了编码器的映射规则，码本为发送者和接收者共有</p>
+<p>码字（codewords），用<span class="math inline">\(x^n(i)\)</span>表示编码<span class="math inline">\(i\)</span>的字符串</p>
+<p>对于一个信道<span class="math inline">\((X, p(y|x), Y)\)</span>​​​而言，其一个编码<span class="math inline">\((M, n)\)</span>包括发送信息的集合（<span class="math inline">\(M\)</span>​），编码器（引申出码本和码字），解码器</p>
+<p>为了衡量信道发送的信息是否有误，定义</p>
+<p><span class="math display">\[\begin{align}\lambda_i = p( g(Y^n) \neq i | X^n = x^n(i)) = \sum_{y^n} p(y^n | x^n(i))* [g(y^n) \neq i] \end{align}\]</span></p>
+<p>定义最大错误概率为</p>
+<p><span class="math display">\[\begin{align} \lambda^{(n)} = \max_{i \in [M]} \lambda_i\end{align}\]</span></p>
+<p>定义平均错误概率为</p>
+<p><span class="math display">\[\begin{align} P_e^{(n)} = \frac{1}{M} \sum_{i=1}^M \lambda_i\end{align}\]</span></p>
+<p>对于一个信道编码<span class="math inline">\((M, n)\)</span>​，定义码率为</p>
+<p><span class="math display">\[\begin{align} R = \frac{\log M}{n} \end{align}\]</span>​</p>
+<p>如果存在一系列的编码<span class="math inline">\((2^{nR}, n)\)</span>，使得当<span class="math inline">\(n \to \infty\)</span>时，<span class="math inline">\(\lambda^{(n)} \to 0\)</span>，就称码率<span class="math inline">\(R\)</span>​是可取的</p>
+<p>定义信道容量<span class="math inline">\(C\)</span>为所有可取码率的上确界</p>
+<ul>
+<li><p>信道编码定理</p>
+<p><strong>对于DMC而言，一切小于信道容量<span class="math inline">\(C\)</span>​的码率是可取的</strong></p></li>
+<li><p>特别的，对于默认的DMC，<span class="math inline">\(C = \max_{p(x)} I(X;Y)\)</span></p>
+<p>而对于有反馈的DMC而言，信道容量并不能得到提高</p></li>
+</ul>
+<h5 id="typical-set">Typical set</h5>
+<p>接下来是一点关于典型集的内容...</p>
+<blockquote>
+<p>如果<span class="math inline">\(X_1,...,X_n,...\)</span>是i.i.d.的，那么</p>
+<p><span class="math display">\[\begin{align} -\frac{1}{n} \log p(X_1,...,X_n) \to H(X) (n \to \infty)\end{align}\]</span>​</p>
+</blockquote>
+<p>这个性质称为AEP（渐进均分性），根据大数定理，我们知道满足上述条件的<span class="math inline">\(X\)</span>序列的概率和几乎是<span class="math inline">\(1\)</span>​</p>
+<p>我们把满足上述条件的序列弄成一个集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>​，称为典型集（typical set），形式化的讲就是，如果<span class="math inline">\((x_1,...,x_n) \in X^n\)</span>在集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>中，那么</p>
+<p><span class="math display">\[\begin{align}2^{-n(H(X) + \epsilon)} \leq p(x_1,...,x_n)  \leq 2^{-n(H(X) - \epsilon)}\end{align}\]</span></p>
+<ul>
+<li>上述式子等价于：<span class="math inline">\(|\frac{1}{n} \log p(x_1,...,x_n) + H(X)| \leq \epsilon\)</span></li>
+<li>根据之前的讨论，当<span class="math inline">\(n\)</span>足够大时，典型集中的序列的概率之和趋近于<span class="math inline">\(1\)</span></li>
+<li><span class="math inline">\((1 - \epsilon) 2^{n(H(X) - \epsilon)} \leq |A_{\epsilon}^{(n)}| \leq 2^{n(H(X) - \epsilon)}\)</span>，也就是其大小趋近于<span class="math inline">\(2^{nH(X)}\)</span>​
+<ul>
+<li>注意到<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>的概率和有上界<span class="math inline">\(1\)</span>，有下界<span class="math inline">\(1- \epsilon\)</span>​</li>
+</ul></li>
+</ul>
+<p>对于两个随机过程，我们可以定义联合典型集</p>
+<p>如果<span class="math inline">\((x^n , y^n) \in X^n \times Y^n\)</span>在集合<span class="math inline">\(A_{\epsilon}^{(n)}\)</span>中，那么</p>
+<p><span class="math inline">\(2^{-n(H(X) + \epsilon)} \leq p(x^n) \leq 2^{-n(H(X) - \epsilon)}\)</span>​</p>
+<p><span class="math inline">\(2^{-n(H(X) + \epsilon)} \leq p(y^n) \leq 2^{-n(H(X) - \epsilon)}\)</span>​</p>
+<p><span class="math inline">\(2^{-n(H(X,Y) + \epsilon)} \leq p(x^n, y^n) \leq 2^{-n(H(X, Y) - \epsilon)}\)</span>​</p>
+<ul>
+<li><p><span class="math inline">\(|A_{\epsilon}^{(n)}| \to 2^{nH(X,Y)}\)</span></p></li>
+<li><p>如果<span class="math inline">\((X&#39;, Y&#39;) \sim p(x^n)p(y^n)\)</span>，那么<span class="math inline">\(p((X&#39;, Y&#39;) \in A_{\epsilon}^{(n)}) \to 2^{-nI(X;Y)}\)</span>​</p>
+<ul>
+<li><p><span class="math inline">\(p((X&#39;, Y&#39;) \in A_{\epsilon}^{(n)}) = \sum_{(x^n, y^n)} p(x^n) p(y^n) \to 2^{nH(X, Y)} * 2^{-nH(X)} * 2^{-nH(Y)} = 2^{-nI(X;Y)}\)</span></p>
+<p>式中为集合的大小乘上相应的概率，具体的写法就分两个方向放缩</p></li>
+</ul></li>
+</ul>
+<h5 id="source-channel-coding-theorem">Source-channel coding theorem</h5>
+<ul>
+<li><p>信源信道联合编码定理</p>
+<p>如果<span class="math inline">\(X_1, ..., X_n\)</span>是一个满足渐进均分性，并且<span class="math inline">\(H(X) &lt; C\)</span>，那么存在一种信源信道的联合编码方案，使得<span class="math inline">\(p(X^n \neq (X^n)&#39;) \to 0\)</span></p>
+<p>反之，对于任何稳态随机过程，如果<span class="math inline">\(H(X) &gt; C\)</span>，那么不存在使得<span class="math inline">\(p(X^n \neq (X^n)&#39;) \to 0\)</span>的一种联合编码方案</p></li>
+</ul>
+<p>感觉该知道的都差不多了....先记到这里...</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>information theory</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矩阵分析 1</title>
+    <url>/2021/07/23/matrix-analysis-1/</url>
+    <content><![CDATA[<span id="more"></span>
+<h4 id="矩阵之间的关系">矩阵之间的关系</h4>
+<ul>
+<li><strong>相抵</strong>：存在非奇异矩阵<span class="math inline">\(P, Q\)</span>，使得<span class="math inline">\(B = PAQ\)</span>时，则称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相抵</li>
+<li><strong>相似</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^{-1}AP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相似</li>
+<li><strong>合同</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^TAP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>合同</li>
+</ul>
+<h4 id="特征值">特征值</h4>
+<ul>
+<li><p>对于方阵<span class="math inline">\(A\)</span>，如果存在<span class="math inline">\(\lambda \in P\)</span>以及非零向量<span class="math inline">\(x \in V^n\)</span>，使得<span class="math inline">\(Ax = \lambda x\)</span>，则称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的<strong>特征值</strong>，<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>特征向量</strong></p></li>
+<li><p><span class="math inline">\(Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0\)</span>，因此非零向量<span class="math inline">\(x\)</span>存在，要求<span class="math inline">\(|\lambda I - A| = 0\)</span>，称<span class="math inline">\(f(\lambda) = |\lambda I - A|\)</span>为矩阵<span class="math inline">\(A\)</span>的<strong>特征多项式</strong></p>
+<ul>
+<li><span class="math inline">\(|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)\)</span>，其中<span class="math inline">\(A_k\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有<span class="math inline">\(k\)</span>阶主子式的和，<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有特征值</li>
+<li>对于上式中的<span class="math inline">\(A_1\)</span>，即<span class="math inline">\(a_{11} + a_{22} + ... + a_{nn}\)</span>，我们称其为矩阵的迹，记做<span class="math inline">\(tr(A)\)</span>，由根与系数的关系，我们知道<span class="math inline">\(A_1 = tr(A) = \sum \lambda_i\)</span>，<span class="math inline">\(A_n = |A| = \prod\lambda_i\)</span></li>
+</ul></li>
+<li><p>example</p>
+<p>矩阵</p>
+<p><span class="math display">\[A = \begin{pmatrix}
+0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\
+1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\ 
+0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\ 
+\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\\
+0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1 
+\end{pmatrix}\]</span></p>
+<p>的特征多项式为<span class="math inline">\(f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + ... + a_n\)</span></p></li>
+<li><p>对可逆矩阵<span class="math inline">\(A, B \in C^{n*n}\)</span>，由<span class="math inline">\(|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|\)</span>，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p></li>
+<li><p>对<span class="math inline">\(A \in C^{m \times n}, B \in C^{n \times m}\)</span>，由<span class="math inline">\(\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|\)</span>，我们可以知道<span class="math inline">\(AB\)</span>与<span class="math inline">\(BA\)</span>有相同的非零特征值</p></li>
+<li><p>设<span class="math inline">\(\lambda_i\)</span>是<span class="math inline">\(|\lambda I - A|\)</span>的<span class="math inline">\(m_i\)</span>重根，则称<span class="math inline">\(m_i\)</span>是<span class="math inline">\(\lambda_i\)</span>的<strong>代数重复度</strong>，注意到<span class="math inline">\(\sum m_i = n\)</span></p></li>
+<li><p>记<span class="math inline">\(V_{\lambda_i} = \{x:(\lambda_i I - A)x = 0\}\)</span>为<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda_i\)</span>的<strong>特征子空间</strong>，并称<span class="math inline">\(\dim (V_{\lambda_i})\)</span>为<span class="math inline">\(\lambda_i\)</span>的<strong>几何重复度</strong></p></li>
+<li><p><strong>几何重复度</strong>不大于<strong>代数重复度</strong></p>
+<ul>
+<li>通过代数重复度构造出一组包含<span class="math inline">\((\lambda_i I - A)x = 0\)</span>的基础解系的基，记这组基的坐标为<span class="math inline">\(C\)</span>，考虑<span class="math inline">\(C^{-1}AC\)</span>的特征多项式</li>
+</ul></li>
+<li><p>设<span class="math inline">\(\lambda_1, ..., \lambda_r\)</span>是矩阵<span class="math inline">\(A\)</span>的不同的特征值，<span class="math inline">\(x_{1}^{(i)}, ..., x_{s_i}^{(i)}\)</span>是属于<span class="math inline">\(\lambda_i\)</span>的线性无关的特征向量，那么<span class="math inline">\(x_1^{(1)}, ..., x_{s_1}^{(1)}, ..., x_1^{(r)}, ..., x_{s_r}^{(r)}\)</span>也是线性无关的</p>
+<ul>
+<li>利用线性无关的充要条件为零向量的组合系数仅有<span class="math inline">\(0\)</span>，对于<span class="math inline">\(kx^{(i)}\)</span>，注意到乘以<span class="math inline">\(\lambda_j\)</span>和<span class="math inline">\(Ax^{(i)} = \lambda_i x^{(i)}\)</span>将是两种不一样的变化即可</li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>可对角化（和对角矩阵相似）的充要条件为<span class="math inline">\(A\)</span>为<span class="math inline">\(n\)</span>个线性无关的特征向量</p>
+<ul>
+<li><p>注意到以这<span class="math inline">\(n\)</span>个特征向量为基即可，也因此，相似中的转移矩阵即为这<span class="math inline">\(n\)</span>个特征向量的坐标</p></li>
+<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>有<span class="math inline">\(n\)</span>个线性无关的特征向量，则称<span class="math inline">\(A\)</span>有完备的特征向量系</p>
+<p>否则，称<span class="math inline">\(A\)</span>为<strong>亏损矩阵</strong></p></li>
+<li><p>如果每个代数重复度和几何重复度相等，则称<span class="math inline">\(A\)</span>为<strong>单纯矩阵</strong></p></li>
+<li><p><span class="math inline">\(A\)</span>可对角化的充要条件有其他不同的表述，比如<span class="math inline">\(V^n = V_{\lambda_1} \oplus ... \oplus V_{\lambda_r}\)</span></p></li>
+</ul></li>
+</ul>
+<h4 id="不变子空间">不变子空间</h4>
+<ul>
+<li>对于线性变换<span class="math inline">\(\mathscr{A}\)</span>，如果<span class="math inline">\(\mathscr{A}W \subseteq W\)</span>，则称<span class="math inline">\(W\)</span>为<span class="math inline">\(\mathscr{A}\)</span>的<strong>不变子空间</strong></li>
+<li>有两类较为容易发现的子空间
+<ul>
+<li><span class="math inline">\(\ker \mathscr{A} = \mathscr{A}^{-1}(0) = \{x:\mathscr{A}x = 0\}\)</span>，核空间</li>
+<li><span class="math inline">\(\text{Im} \mathscr{A} = \mathscr{A}V\)</span>，值域</li>
+<li>联系方程组，我们可以知道，若线性变换<span class="math inline">\(\mathscr{A}\)</span>对应于矩阵<span class="math inline">\(A\)</span>，核空间实际上对应于<span class="math inline">\(A\)</span>的解空间，我们记<span class="math inline">\(\dim \ker \mathscr{A} = \text{null } A\)</span>，而值域实际上是<span class="math inline">\(A\)</span>的列向量张成的空间，因此其维数应该是<span class="math inline">\(\text{rank} A\)</span></li>
+<li><strong>维数公式</strong>：$ A + A = n $</li>
+</ul></li>
+</ul>
+<h4 id="schur-th">Schur TH</h4>
+<ul>
+<li><p>任何<span class="math inline">\(n\)</span>阶矩阵都酉相似于一个上三角阵，即存在一个<span class="math inline">\(n\)</span>阶酉矩阵<span class="math inline">\(U\)</span>和一个上三角阵<span class="math inline">\(T\)</span>，使得</p>
+<p><span class="math display">\[A = UTU^H\]</span></p>
+<p>式中<span class="math inline">\(T\)</span>的主对角元为<span class="math inline">\(A\)</span>的特征值</p>
+<ul>
+<li>每一次选择一个特征向量后进行归纳</li>
+</ul></li>
+<li><p>如果<span class="math inline">\(A^H = A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>埃米尔特矩阵</strong></p>
+<ul>
+<li>对埃米尔特矩阵运用Schur TH：<span class="math inline">\(A = UTU^H\)</span>，从而<span class="math inline">\(A^H = UT^HU^H\)</span>，由<span class="math inline">\(A=A^H\)</span>，我们得到<span class="math inline">\(T = T^H\)</span>，也就是说，<span class="math inline">\(T\)</span>是对角矩阵，并且<span class="math inline">\(A\)</span>的特征值都是实数</li>
+</ul></li>
+</ul>
+<h4 id="正定矩阵">正定矩阵</h4>
+<ul>
+<li><p>对于埃米尔特矩阵<span class="math inline">\(A\)</span>，如果<span class="math inline">\(x^HAx\geq 0\)</span>，则称<span class="math inline">\(A\)</span>为半正定矩阵，记作<span class="math inline">\(A\geq 0\)</span>；类似的，如果<span class="math inline">\(x^HAx &gt; 0\)</span>，则称<span class="math inline">\(A\)</span>为正定矩阵，记作<span class="math inline">\(A&gt;0\)</span></p>
+<ul>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A \geq 0, B \geq 0\)</span>，那么<span class="math inline">\(A+B\geq 0\)</span></li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
+<ul>
+<li>神奇恒等式：设<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的特征值，<span class="math inline">\(\xi\)</span>为对应的单位特征向量，那么<span class="math inline">\(\lambda = \xi^HA\xi\)</span></li>
+</ul></li>
+<li><p>矩阵<span class="math inline">\(A\)</span>为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）<span class="math inline">\(P\)</span>，使得<span class="math inline">\(A=P^HP\)</span></p>
+<ul>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，那么<span class="math inline">\(A^{-1}&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A&gt;0\)</span>，且<span class="math inline">\(C\)</span>非奇异，则<span class="math inline">\(C^HAC&gt;0\)</span></li>
+<li>如果<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(C^HAC \geq 0\)</span></li>
+</ul></li>
+<li><p>设<span class="math inline">\(A,B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(B&gt;0\)</span>，则存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得<span class="math inline">\(Q^HBQ=I, Q^HAQ=\text{diag}\{\lambda_1, ..., \lambda_n\}\)</span>（可同时对角化），且<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>为<span class="math inline">\(AB^{-1}\)</span>的特征值</p></li>
+<li><p>如果<span class="math inline">\(A-B\geq 0\)</span>，那么称<span class="math inline">\(A\)</span>大于等于<span class="math inline">\(B\)</span>，记做<span class="math inline">\(A\geq B\)</span></p>
+<ul>
+<li><p>这不是一个well order...</p></li>
+<li><p><span class="math inline">\(A \geq B\)</span>等价于<span class="math inline">\(x^HAx\geq x^HBx\)</span>恒成立</p>
+<p>以下性质几乎是显然的</p>
+<ul>
+<li><p>如果<span class="math inline">\(A, B\)</span>是对角阵，那么条件也等价于<span class="math inline">\(a_{ii} \geq b_{ii}\)</span></p></li>
+<li><p><span class="math inline">\(A \geq B, B \geq C\)</span>可得<span class="math inline">\(A \geq C\)</span></p></li>
+<li><p><span class="math inline">\(A \geq B\)</span>，且<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA \geq kB\)</span></p></li>
+<li><p>若<span class="math inline">\(A_1 \geq B_1, A_2 \geq B_2\)</span>，那么<span class="math inline">\(A_1 + A_2 \geq B_1 + B_2\)</span></p></li>
+<li><p>若<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(P^HAP\geq P^HBP\)</span></p></li>
+</ul></li>
+<li><p>若<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(A \leq tr(A)I\)</span>（利用<span class="math inline">\(tr(A)\geq \lambda_i\)</span>）</p></li>
+<li><p>若<span class="math inline">\(A\geq B\)</span>，则<span class="math inline">\(B^{-1} \geq A^{-1}\)</span></p></li>
+<li><p>若<span class="math inline">\(A, B\)</span>可交换，且<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(A^2 \geq B^2\)</span></p></li>
+<li><p><span class="math inline">\(Schwartz\)</span>不等式：若<span class="math inline">\(A,B\)</span>分别为<span class="math inline">\(n\times m, m \times l\)</span>的矩阵，且<span class="math inline">\(AA^H\)</span>非奇异，则<span class="math inline">\(B^HB \geq (AB)^H(AA^H)^{-1}(AB)\)</span>，等号成立当且仅当存在<span class="math inline">\(n \times l\)</span>的矩阵<span class="math inline">\(C\)</span>，使<span class="math inline">\(B=A^HC\)</span></p></li>
+</ul></li>
+<li><p>对埃尔米特矩阵<span class="math inline">\(A\)</span>，有<span class="math inline">\(\lambda_{min} I \leq A \leq \lambda_{max} I\)</span></p></li>
+<li><p>定义：记<span class="math inline">\(R(x) = \frac{x^HAx}{x^Hx}\)</span>，称其为<strong>诶尔米特矩阵</strong><span class="math inline">\(A\)</span>的瑞利商</p>
+<ul>
+<li>瑞利商是实数（注意到<span class="math inline">\(R(x) = R(x)^H\)</span>）</li>
+<li><span class="math inline">\(\forall k \neq 0, R(kx) = R(x)\)</span></li>
+<li><span class="math inline">\(\lambda_{min} \leq R(x) \leq \lambda_{max}\)</span>，并且可以取得等号</li>
+</ul></li>
+<li><p><strong>极大极小定理</strong>：设<span class="math inline">\(A\)</span>是<span class="math inline">\(n\)</span>阶埃尔米特矩阵，其特征值为<span class="math inline">\(\lambda_1 \geq \lambda_2 ... \geq \lambda_n\)</span>，<span class="math inline">\(V_i\)</span>是<span class="math inline">\(C^n\)</span>中<span class="math inline">\(i\)</span>维子空间，那么</p>
+<p><span class="math display">\[\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)\]</span></p>
+<p><span class="math display">\[\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)\]</span></p>
+<ul>
+<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取<span class="math inline">\(x_1, x_2, ..., x_n\)</span>为分别属于<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>的特征向量，并且其构成标准正交向量基，那么对于<span class="math inline">\(\lambda_i\)</span>而言，当我们考虑<span class="math inline">\(Span(x_1, ..., x_i)\)</span>时，这个空间中的最小值恰好就是<span class="math inline">\(\lambda_i\)</span>，而对于其他的<span class="math inline">\(i\)</span>维空间，必然跟<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>有交，此时<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>中向量的存在将使最小值比<span class="math inline">\(\lambda_i\)</span>小，从而取到等号</li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>matrix_analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>矩阵分析 2</title>
+    <url>/2021/07/23/matrix-analysis-2/</url>
+    <content><![CDATA[<span id="more"></span>
+<h4 id="lambda矩阵"><span class="math inline">\(\lambda\)</span>矩阵</h4>
+<ul>
+<li><span class="math inline">\(\lambda\)</span>矩阵：矩阵中的每一项都是关于<span class="math inline">\(\lambda\)</span>的多项式的矩阵称为<span class="math inline">\(\lambda\)</span>矩阵</li>
+<li><span class="math inline">\(\lambda\)</span>矩阵的秩：若<span class="math inline">\(A(\lambda)\)</span>至少有一个<span class="math inline">\(r\)</span>阶子式不是零多项式，并且所有的<span class="math inline">\(r+1\)</span>阶子式都是零多项式，则称<span class="math inline">\(A(\lambda)\)</span>的秩为<span class="math inline">\(r\)</span>，记作<span class="math inline">\(\text{rank} A(\lambda)\)</span></li>
+<li>可逆矩阵：<span class="math inline">\(A(\lambda)\)</span>称作可逆矩阵，当且仅当存在<span class="math inline">\(B(\lambda)\)</span>，使得<span class="math inline">\(A(\lambda) B(\lambda) = B(\lambda)A(\lambda) = I\)</span>，并且，记<span class="math inline">\(B(\lambda) = A(\lambda)^{-1}\)</span></li>
+<li>可逆矩阵的充要条件：<span class="math inline">\(A(\lambda)\)</span>可逆，当且仅当<span class="math inline">\(|A(\lambda)|\)</span>是一个非零常数</li>
+<li>如果存在可逆矩阵<span class="math inline">\(P(\lambda), Q(\lambda)\)</span>，使得<span class="math inline">\(B(\lambda) = P(\lambda) A(\lambda) Q(\lambda)\)</span>，则称<span class="math inline">\(B(\lambda)\)</span>与<span class="math inline">\(A(\lambda)\)</span>相抵，记作<span class="math inline">\(A(\lambda) \simeq B(\lambda)\)</span></li>
+</ul>
+<h4 id="lambda矩阵的标准形"><span class="math inline">\(\lambda\)</span>矩阵的标准形</h4>
+<ul>
+<li><p>每个<span class="math inline">\(A(\lambda)\)</span>都相抵与一个Smith标准形，即</p>
+<p><span class="math display">\[A(\lambda) \simeq \text{diag} \{ d_1(\lambda), d_2(\lambda), ..., d_r(\lambda),0...0 \}\]</span></p>
+<p>其中<span class="math inline">\(d_i(\lambda)\)</span>的首项系数为<span class="math inline">\(1\)</span>，并且<span class="math inline">\(d_{i - 1}(\lambda) \mid d_i(\lambda)\)</span></p>
+<ul>
+<li>考虑多项式的辗转相除，并利用归纳法</li>
+</ul></li>
+</ul>
+<h4 id="不变因子行列式因子初等因子">不变因子，行列式因子，初等因子</h4>
+<ul>
+<li><p>不变因子：Smith标准形中的<span class="math inline">\(d_1(\lambda)\)</span>, <span class="math inline">\(d_2(\lambda)\)</span>, ..., <span class="math inline">\(d_r(\lambda)\)</span>称为<span class="math inline">\(A(\lambda)\)</span>的不变因子</p></li>
+<li><p>行列式因子：<span class="math inline">\(A(\lambda)\)</span>的所有<span class="math inline">\(k\)</span>阶子式的最大公因式称为<span class="math inline">\(A(\lambda)\)</span>的<span class="math inline">\(k\)</span>阶行列式因子，记作<span class="math inline">\(D_k(\lambda)\)</span></p></li>
+<li><p>初等因子：对于不变因子，不妨设<span class="math inline">\(d_i(\lambda) = \prod(\lambda - \lambda_j)^{r_{ij}}\)</span>，那么<span class="math inline">\((\lambda- \lambda_j)^{r_{ij}}\)</span>的全体称为初等因子</p></li>
+<li><p>example</p>
+<p><span class="math display">\[A(x) = \begin{pmatrix}
+-x+1 &amp;x^2  &amp; x \\
+ x&amp; x &amp;-x \\
+ x^2+1 &amp; x^2 &amp; -x^2
+\end{pmatrix}\]</span></p>
+<p>的行列式因子为<span class="math inline">\(D_1(x) = 1, D_2(x) = x, D_3(x) = x^3+x^2\)</span></p>
+<p>而其不变因子为<span class="math inline">\(d_1(x) = 1, d_2(x) = x, d_3(x) = x^2(x+1)\)</span></p>
+<p>其初等因子则为<span class="math inline">\(x, x^2, (x+1)\)</span></p></li>
+<li><p>相抵的矩阵有相同的秩和行列式因子</p>
+<ul>
+<li>只需要子式之间的整除关系即可</li>
+</ul></li>
+<li><p>在Smith标准形下，行列式因子和不变因子之间的关系是容易得出的：<span class="math inline">\(D_i(\lambda) = D_{i-1}(\lambda)d_i(\lambda)\)</span>，由此，我们得到结论：</p>
+<ul>
+<li>相抵的矩阵有相同的不变因子</li>
+<li>相抵的矩阵有相同的Smith标准形，有相同的Smith标准形的矩阵相抵</li>
+<li>一个矩阵的Smith标准形是唯一的</li>
+</ul></li>
+<li><p>初等因子和不变因子之间，在知晓秩的情况下，存在一一对应，因此在相抵变换下，初等因子也是不变的</p>
+<ul>
+<li>如果用初等因子来描述相抵，那么将是：两个有相同的初等因子和秩的矩阵相抵</li>
+</ul></li>
+<li><p>分块矩阵的初等因子是好求的：设<span class="math inline">\(A(\lambda) = \text{diag} \{ A_1(\lambda), A_2(\lambda), ..., A_m(\lambda)\}\)</span>，则<span class="math inline">\(A_i(\lambda)\)</span>的初等因子的全体的集合为<span class="math inline">\(A(\lambda)\)</span>的初等因子</p>
+<ul>
+<li>考虑两个分块子矩阵的Smith标准形和原矩阵的Smith标准形之间的系数关系</li>
+</ul></li>
+</ul>
+<h4 id="若尔当标准形">若尔当标准形</h4>
+<ul>
+<li><p>若尔当块</p>
+<p><span class="math display">\[J(x, k) = \begin{pmatrix}
+x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; x &amp;1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;x\end{pmatrix}\]</span></p>
+<p>考虑<span class="math inline">\(J(x, k)\)</span>的特征矩阵</p>
+<p><span class="math display">\[\lambda I - J = \begin{pmatrix}
+\lambda - x &amp; - 1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
+ 0&amp; \lambda - x &amp; -1 &amp; 0 &amp; ... &amp; 0 \\
+... &amp; ... &amp; ... &amp; ... &amp; ... &amp; ...\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;-1\\ 0 &amp; 0&amp;0&amp;0&amp;...&amp;\lambda - x\end{pmatrix}\]</span></p>
+<p>由于去掉左边<span class="math inline">\(k\)</span>列和右边<span class="math inline">\(k\)</span>列的主子式的绝对值为<span class="math inline">\(1\)</span>，而<span class="math inline">\(|\lambda I - J| = (\lambda - x)^k\)</span></p>
+<p>因此，其行列式因子为<span class="math inline">\(D_1(\lambda) = ... = D_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(D_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>那么，其不变因子为<span class="math inline">\(d_1(\lambda) = ... = d_{k-1}(\lambda) = 1\)</span>，而<span class="math inline">\(d_k(\lambda) = (\lambda - x)^k\)</span></p>
+<p>初等因子则只有<span class="math inline">\((\lambda - x)^k\)</span></p></li>
+<li><p>若尔当标准形</p>
+<p>形如</p>
+<p><span class="math display">\[J = \begin{pmatrix} J_1 &amp;&amp;&amp;\\ &amp;J_2&amp;&amp; \\&amp;&amp;...&amp; \\&amp;&amp;&amp;J_n \end{pmatrix}\]</span></p>
+<p>的矩阵称为若尔当标准形，其中<span class="math inline">\(J_i\)</span>为若尔当块</p>
+<p>由于<span class="math inline">\(J_i\)</span>的初等因子只有<span class="math inline">\((\lambda - \lambda_i)^{k_i}\)</span>，因此<span class="math inline">\(J\)</span>的初等因子为<span class="math inline">\((\lambda- \lambda_i)^{k_i}\)</span>的全体，并且<span class="math inline">\(\sum k_i = n\)</span></p></li>
+<li><p>定理：矩阵<span class="math inline">\(A \sim B\)</span>的充要条件是<span class="math inline">\(\lambda I - A \cong \lambda I - B\)</span></p>
+<p>这个定理的证明比较复杂，我们省去，关键在于利用<span class="math inline">\(\lambda I - A\)</span>是关于<span class="math inline">\(\lambda\)</span>的一次式进行次数限制</p></li>
+<li><p>定理：每个<span class="math inline">\(A\)</span>都与一个若尔当标准形<span class="math inline">\(J\)</span>相似，并且这个若尔当标准形除了<span class="math inline">\(J\)</span>中若尔当块的排列顺序外，被<span class="math inline">\(A\)</span>所唯一决定</p>
+<ul>
+<li><p>由于<span class="math inline">\(|\lambda I - A|\)</span>的次数为<span class="math inline">\(n\)</span>，因此<span class="math inline">\(D_n(\lambda) = \prod (\lambda - \lambda_i)^{m_i}\)</span>，其中<span class="math inline">\(\sum m_i = n\)</span></p>
+<p>由于<span class="math inline">\(D_n(\lambda) = \prod d_i(\lambda)\)</span>，因此初等因子的次数的和应该等于<span class="math inline">\(D_n(\lambda)\)</span>，也就是<span class="math inline">\(\lambda I - A\)</span>的初等因子的次数的和为<span class="math inline">\(n\)</span></p>
+<p>不妨设<span class="math inline">\(\lambda I - A\)</span>的初等因子为<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;} (\sum m_i&#39; = n)\)</span>，对于每个<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>，存在若尔当块<span class="math inline">\(J_i\)</span>，使得<span class="math inline">\(\lambda I - J_i\)</span>以<span class="math inline">\((\lambda - \lambda_i&#39;)^{m_i&#39;}\)</span>作为初等因子</p>
+<p>将这些<span class="math inline">\(J_i\)</span>组合在一起，得到一个若尔当标准形<span class="math inline">\(J\)</span></p>
+<p><span class="math inline">\(\lambda I - J\)</span>与<span class="math inline">\(\lambda I - A\)</span>有相同的初等因子，并且秩相等，因此<span class="math inline">\(\lambda I - J \cong \lambda I - A\)</span>，而且<span class="math inline">\(J\)</span>是唯一确定的，由上一条定理知，<span class="math inline">\(A \sim J\)</span></p></li>
+</ul></li>
+</ul>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>matrix_analysis</tag>
       </tags>
   </entry>
   <entry>
@@ -2066,137 +2344,6 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <ul>
 <li><span class="math inline">\(A, B\)</span>可同时酉对角化，设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，那么<span class="math inline">\(AB = U^H \Lambda_1 \Lambda_2 U\)</span>，因此<span class="math inline">\(AB\)</span>酉相似于对角矩阵，如此<span class="math inline">\(AB\)</span>为正规矩阵</li>
 <li>不难发现，<span class="math inline">\(AB\)</span>的特征值和<span class="math inline">\(A, B\)</span>的特征值之间存在关系，也即在按照同时酉对角化矩阵的顺序排列下时，有<span class="math inline">\(\lambda_{AB}^{(i)} = \lambda_{A}^{(i)} * \lambda_{B}^{(i)}\)</span>，且对应的特征向量也是相同的</li>
-</ul></li>
-</ul>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>matrix_analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>矩阵分析 1</title>
-    <url>/2021/07/23/matrix-analysis-1/</url>
-    <content><![CDATA[<span id="more"></span>
-<h4 id="矩阵之间的关系">矩阵之间的关系</h4>
-<ul>
-<li><strong>相抵</strong>：存在非奇异矩阵<span class="math inline">\(P, Q\)</span>，使得<span class="math inline">\(B = PAQ\)</span>时，则称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相抵</li>
-<li><strong>相似</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^{-1}AP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>相似</li>
-<li><strong>合同</strong>：存在非奇异方阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(B = P^TAP\)</span>时，称<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>合同</li>
-</ul>
-<h4 id="特征值">特征值</h4>
-<ul>
-<li><p>对于方阵<span class="math inline">\(A\)</span>，如果存在<span class="math inline">\(\lambda \in P\)</span>以及非零向量<span class="math inline">\(x \in V^n\)</span>，使得<span class="math inline">\(Ax = \lambda x\)</span>，则称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的<strong>特征值</strong>，<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>特征向量</strong></p></li>
-<li><p><span class="math inline">\(Ax = \lambda x \Leftrightarrow (\lambda I - A)x = 0\)</span>，因此非零向量<span class="math inline">\(x\)</span>存在，要求<span class="math inline">\(|\lambda I - A| = 0\)</span>，称<span class="math inline">\(f(\lambda) = |\lambda I - A|\)</span>为矩阵<span class="math inline">\(A\)</span>的<strong>特征多项式</strong></p>
-<ul>
-<li><span class="math inline">\(|\lambda I - A| = \lambda^n + \sum_{k=1}^n (-1)^k A_k \lambda^{n-k} = \prod(\lambda - \lambda_i)\)</span>，其中<span class="math inline">\(A_k\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有<span class="math inline">\(k\)</span>阶主子式的和，<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>表示矩阵<span class="math inline">\(A\)</span>的所有特征值</li>
-<li>对于上式中的<span class="math inline">\(A_1\)</span>，即<span class="math inline">\(a_{11} + a_{22} + ... + a_{nn}\)</span>，我们称其为矩阵的迹，记做<span class="math inline">\(tr(A)\)</span>，由根与系数的关系，我们知道<span class="math inline">\(A_1 = tr(A) = \sum \lambda_i\)</span>，<span class="math inline">\(A_n = |A| = \prod\lambda_i\)</span></li>
-</ul></li>
-<li><p>example</p>
-<p>矩阵</p>
-<p><span class="math display">\[A = \begin{pmatrix}
-0 &amp;  0&amp; 0 &amp; \dots &amp; 0 &amp;-a_{n} \\
-1&amp; 0 &amp; 0 &amp; \dots &amp; 0 &amp; -a_{n-1}\\ 
-0 &amp; 1 &amp; 0 &amp; \dots &amp;  0&amp; -a_{n-2}\\ 
-\dots &amp;\dots  &amp; \dots &amp; \dots &amp;  \dots&amp; \dots \\\
-0&amp; 0 &amp;0  &amp; \dots &amp; 1&amp;-a_1 
-\end{pmatrix}\]</span></p>
-<p>的特征多项式为<span class="math inline">\(f(\lambda) = \lambda^n + a_1 \lambda^{n-1} + ... + a_n\)</span></p></li>
-<li><p>对可逆矩阵<span class="math inline">\(A, B \in C^{n*n}\)</span>，由<span class="math inline">\(|\lambda I - B| = |A^{-1}| |\lambda I - B| |A| = |\lambda I - A^{-1}BA|\)</span>，可以知道相似矩阵之间有相同的特征的多项式，从而由相同的特征值，相同的迹</p></li>
-<li><p>对<span class="math inline">\(A \in C^{m \times n}, B \in C^{n \times m}\)</span>，由<span class="math inline">\(\lambda^n | \lambda I_m - AB| = \lambda^m |\lambda I_n - BA|\)</span>，我们可以知道<span class="math inline">\(AB\)</span>与<span class="math inline">\(BA\)</span>有相同的非零特征值</p></li>
-<li><p>设<span class="math inline">\(\lambda_i\)</span>是<span class="math inline">\(|\lambda I - A|\)</span>的<span class="math inline">\(m_i\)</span>重根，则称<span class="math inline">\(m_i\)</span>是<span class="math inline">\(\lambda_i\)</span>的<strong>代数重复度</strong>，注意到<span class="math inline">\(\sum m_i = n\)</span></p></li>
-<li><p>记<span class="math inline">\(V_{\lambda_i} = \{x:(\lambda_i I - A)x = 0\}\)</span>为<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda_i\)</span>的<strong>特征子空间</strong>，并称<span class="math inline">\(\dim (V_{\lambda_i})\)</span>为<span class="math inline">\(\lambda_i\)</span>的<strong>几何重复度</strong></p></li>
-<li><p><strong>几何重复度</strong>不大于<strong>代数重复度</strong></p>
-<ul>
-<li>通过代数重复度构造出一组包含<span class="math inline">\((\lambda_i I - A)x = 0\)</span>的基础解系的基，记这组基的坐标为<span class="math inline">\(C\)</span>，考虑<span class="math inline">\(C^{-1}AC\)</span>的特征多项式</li>
-</ul></li>
-<li><p>设<span class="math inline">\(\lambda_1, ..., \lambda_r\)</span>是矩阵<span class="math inline">\(A\)</span>的不同的特征值，<span class="math inline">\(x_{1}^{(i)}, ..., x_{s_i}^{(i)}\)</span>是属于<span class="math inline">\(\lambda_i\)</span>的线性无关的特征向量，那么<span class="math inline">\(x_1^{(1)}, ..., x_{s_1}^{(1)}, ..., x_1^{(r)}, ..., x_{s_r}^{(r)}\)</span>也是线性无关的</p>
-<ul>
-<li>利用线性无关的充要条件为零向量的组合系数仅有<span class="math inline">\(0\)</span>，对于<span class="math inline">\(kx^{(i)}\)</span>，注意到乘以<span class="math inline">\(\lambda_j\)</span>和<span class="math inline">\(Ax^{(i)} = \lambda_i x^{(i)}\)</span>将是两种不一样的变化即可</li>
-</ul></li>
-<li><p>矩阵<span class="math inline">\(A\)</span>可对角化（和对角矩阵相似）的充要条件为<span class="math inline">\(A\)</span>为<span class="math inline">\(n\)</span>个线性无关的特征向量</p>
-<ul>
-<li><p>注意到以这<span class="math inline">\(n\)</span>个特征向量为基即可，也因此，相似中的转移矩阵即为这<span class="math inline">\(n\)</span>个特征向量的坐标</p></li>
-<li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p></li>
-<li><p>如果<span class="math inline">\(A\)</span>有<span class="math inline">\(n\)</span>个线性无关的特征向量，则称<span class="math inline">\(A\)</span>有完备的特征向量系</p>
-<p>否则，称<span class="math inline">\(A\)</span>为<strong>亏损矩阵</strong></p></li>
-<li><p>如果每个代数重复度和几何重复度相等，则称<span class="math inline">\(A\)</span>为<strong>单纯矩阵</strong></p></li>
-<li><p><span class="math inline">\(A\)</span>可对角化的充要条件有其他不同的表述，比如<span class="math inline">\(V^n = V_{\lambda_1} \oplus ... \oplus V_{\lambda_r}\)</span></p></li>
-</ul></li>
-</ul>
-<h4 id="不变子空间">不变子空间</h4>
-<ul>
-<li>对于线性变换<span class="math inline">\(\mathscr{A}\)</span>，如果<span class="math inline">\(\mathscr{A}W \subseteq W\)</span>，则称<span class="math inline">\(W\)</span>为<span class="math inline">\(\mathscr{A}\)</span>的<strong>不变子空间</strong></li>
-<li>有两类较为容易发现的子空间
-<ul>
-<li><span class="math inline">\(\ker \mathscr{A} = \mathscr{A}^{-1}(0) = \{x:\mathscr{A}x = 0\}\)</span>，核空间</li>
-<li><span class="math inline">\(\text{Im} \mathscr{A} = \mathscr{A}V\)</span>，值域</li>
-<li>联系方程组，我们可以知道，若线性变换<span class="math inline">\(\mathscr{A}\)</span>对应于矩阵<span class="math inline">\(A\)</span>，核空间实际上对应于<span class="math inline">\(A\)</span>的解空间，我们记<span class="math inline">\(\dim \ker \mathscr{A} = \text{null } A\)</span>，而值域实际上是<span class="math inline">\(A\)</span>的列向量张成的空间，因此其维数应该是<span class="math inline">\(\text{rank} A\)</span></li>
-<li><strong>维数公式</strong>：$ A + A = n $</li>
-</ul></li>
-</ul>
-<h4 id="schur-th">Schur TH</h4>
-<ul>
-<li><p>任何<span class="math inline">\(n\)</span>阶矩阵都酉相似于一个上三角阵，即存在一个<span class="math inline">\(n\)</span>阶酉矩阵<span class="math inline">\(U\)</span>和一个上三角阵<span class="math inline">\(T\)</span>，使得</p>
-<p><span class="math display">\[A = UTU^H\]</span></p>
-<p>式中<span class="math inline">\(T\)</span>的主对角元为<span class="math inline">\(A\)</span>的特征值</p>
-<ul>
-<li>每一次选择一个特征向量后进行归纳</li>
-</ul></li>
-<li><p>如果<span class="math inline">\(A^H = A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>埃米尔特矩阵</strong></p>
-<ul>
-<li>对埃米尔特矩阵运用Schur TH：<span class="math inline">\(A = UTU^H\)</span>，从而<span class="math inline">\(A^H = UT^HU^H\)</span>，由<span class="math inline">\(A=A^H\)</span>，我们得到<span class="math inline">\(T = T^H\)</span>，也就是说，<span class="math inline">\(T\)</span>是对角矩阵，并且<span class="math inline">\(A\)</span>的特征值都是实数</li>
-</ul></li>
-</ul>
-<h4 id="正定矩阵">正定矩阵</h4>
-<ul>
-<li><p>对于埃米尔特矩阵<span class="math inline">\(A\)</span>，如果<span class="math inline">\(x^HAx\geq 0\)</span>，则称<span class="math inline">\(A\)</span>为半正定矩阵，记作<span class="math inline">\(A\geq 0\)</span>；类似的，如果<span class="math inline">\(x^HAx &gt; 0\)</span>，则称<span class="math inline">\(A\)</span>为正定矩阵，记作<span class="math inline">\(A&gt;0\)</span></p>
-<ul>
-<li>如果<span class="math inline">\(A&gt;0\)</span>，<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA&gt;0\)</span></li>
-<li>如果<span class="math inline">\(A \geq 0, B \geq 0\)</span>，那么<span class="math inline">\(A+B\geq 0\)</span></li>
-</ul></li>
-<li><p>矩阵<span class="math inline">\(A\)</span>正定（半正定）的充要条件是其特征值都是正数（非负数）</p>
-<ul>
-<li>神奇恒等式：设<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(A\)</span>的特征值，<span class="math inline">\(\xi\)</span>为对应的单位特征向量，那么<span class="math inline">\(\lambda = \xi^HA\xi\)</span></li>
-</ul></li>
-<li><p>矩阵<span class="math inline">\(A\)</span>为正定（半正定）矩阵的充要条件为存在非奇异矩阵（矩阵）<span class="math inline">\(P\)</span>，使得<span class="math inline">\(A=P^HP\)</span></p>
-<ul>
-<li>如果<span class="math inline">\(A&gt;0\)</span>，那么<span class="math inline">\(A^{-1}&gt;0\)</span></li>
-<li>如果<span class="math inline">\(A&gt;0\)</span>，且<span class="math inline">\(C\)</span>非奇异，则<span class="math inline">\(C^HAC&gt;0\)</span></li>
-<li>如果<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(C^HAC \geq 0\)</span></li>
-</ul></li>
-<li><p>设<span class="math inline">\(A,B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(B&gt;0\)</span>，则存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得<span class="math inline">\(Q^HBQ=I, Q^HAQ=\text{diag}\{\lambda_1, ..., \lambda_n\}\)</span>（可同时对角化），且<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>为<span class="math inline">\(AB^{-1}\)</span>的特征值</p></li>
-<li><p>如果<span class="math inline">\(A-B\geq 0\)</span>，那么称<span class="math inline">\(A\)</span>大于等于<span class="math inline">\(B\)</span>，记做<span class="math inline">\(A\geq B\)</span></p>
-<ul>
-<li><p>这不是一个well order...</p></li>
-<li><p><span class="math inline">\(A \geq B\)</span>等价于<span class="math inline">\(x^HAx\geq x^HBx\)</span>恒成立</p>
-<p>以下性质几乎是显然的</p>
-<ul>
-<li><p>如果<span class="math inline">\(A, B\)</span>是对角阵，那么条件也等价于<span class="math inline">\(a_{ii} \geq b_{ii}\)</span></p></li>
-<li><p><span class="math inline">\(A \geq B, B \geq C\)</span>可得<span class="math inline">\(A \geq C\)</span></p></li>
-<li><p><span class="math inline">\(A \geq B\)</span>，且<span class="math inline">\(k&gt;0\)</span>，那么<span class="math inline">\(kA \geq kB\)</span></p></li>
-<li><p>若<span class="math inline">\(A_1 \geq B_1, A_2 \geq B_2\)</span>，那么<span class="math inline">\(A_1 + A_2 \geq B_1 + B_2\)</span></p></li>
-<li><p>若<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(P^HAP\geq P^HBP\)</span></p></li>
-</ul></li>
-<li><p>若<span class="math inline">\(A \geq 0\)</span>，则<span class="math inline">\(A \leq tr(A)I\)</span>（利用<span class="math inline">\(tr(A)\geq \lambda_i\)</span>）</p></li>
-<li><p>若<span class="math inline">\(A\geq B\)</span>，则<span class="math inline">\(B^{-1} \geq A^{-1}\)</span></p></li>
-<li><p>若<span class="math inline">\(A, B\)</span>可交换，且<span class="math inline">\(A \geq B\)</span>，那么<span class="math inline">\(A^2 \geq B^2\)</span></p></li>
-<li><p><span class="math inline">\(Schwartz\)</span>不等式：若<span class="math inline">\(A,B\)</span>分别为<span class="math inline">\(n\times m, m \times l\)</span>的矩阵，且<span class="math inline">\(AA^H\)</span>非奇异，则<span class="math inline">\(B^HB \geq (AB)^H(AA^H)^{-1}(AB)\)</span>，等号成立当且仅当存在<span class="math inline">\(n \times l\)</span>的矩阵<span class="math inline">\(C\)</span>，使<span class="math inline">\(B=A^HC\)</span></p></li>
-</ul></li>
-<li><p>对埃尔米特矩阵<span class="math inline">\(A\)</span>，有<span class="math inline">\(\lambda_{min} I \leq A \leq \lambda_{max} I\)</span></p></li>
-<li><p>定义：记<span class="math inline">\(R(x) = \frac{x^HAx}{x^Hx}\)</span>，称其为<strong>诶尔米特矩阵</strong><span class="math inline">\(A\)</span>的瑞利商</p>
-<ul>
-<li>瑞利商是实数（注意到<span class="math inline">\(R(x) = R(x)^H\)</span>）</li>
-<li><span class="math inline">\(\forall k \neq 0, R(kx) = R(x)\)</span></li>
-<li><span class="math inline">\(\lambda_{min} \leq R(x) \leq \lambda_{max}\)</span>，并且可以取得等号</li>
-</ul></li>
-<li><p><strong>极大极小定理</strong>：设<span class="math inline">\(A\)</span>是<span class="math inline">\(n\)</span>阶埃尔米特矩阵，其特征值为<span class="math inline">\(\lambda_1 \geq \lambda_2 ... \geq \lambda_n\)</span>，<span class="math inline">\(V_i\)</span>是<span class="math inline">\(C^n\)</span>中<span class="math inline">\(i\)</span>维子空间，那么</p>
-<p><span class="math display">\[\lambda_i = \max_{V_i} \min_{x \in V_i, x \neq 0} R(x)\]</span></p>
-<p><span class="math display">\[\lambda_{n-i+1} = \min_{V_i} \max_{x \in V_i, x \neq 0} R(x)\]</span></p>
-<ul>
-<li>这个定理初看可能相当地令人疑惑，我们可以这么考虑，取<span class="math inline">\(x_1, x_2, ..., x_n\)</span>为分别属于<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>的特征向量，并且其构成标准正交向量基，那么对于<span class="math inline">\(\lambda_i\)</span>而言，当我们考虑<span class="math inline">\(Span(x_1, ..., x_i)\)</span>时，这个空间中的最小值恰好就是<span class="math inline">\(\lambda_i\)</span>，而对于其他的<span class="math inline">\(i\)</span>维空间，必然跟<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>有交，此时<span class="math inline">\(Span(x_{i+1}, ..., x_n)\)</span>中向量的存在将使最小值比<span class="math inline">\(\lambda_i\)</span>小，从而取到等号</li>
 </ul></li>
 </ul>
 ]]></content>
@@ -2448,6 +2595,154 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
+    <title>2021杭电多校第二场T9</title>
+    <url>/2021/07/23/problem-1/</url>
+    <content><![CDATA[<span id="more"></span>
+<h4 id="吐槽">吐槽</h4>
+<p>杭电多校的好题太少了，出题人要么是水平问题，要么是态度问题...</p>
+<h4 id="题面">题面</h4>
+<p>给定<span class="math inline">\(n\)</span>个数<span class="math inline">\(a_1, ..., a_n\)</span>，询问有多少个三元有序对<span class="math inline">\((i, j, k)\)</span>满足<span class="math inline">\(i &lt; j &lt; k\)</span>，并且<span class="math inline">\(a_i a_j a_k\)</span>是一个完全平方数</p>
+<p><span class="math inline">\(n \leq 10^5, \max a_i \leq 10^5\)</span></p>
+<h4 id="题解">题解</h4>
+<p>首先，我们将<span class="math inline">\(a_i\)</span>质因数分解为<span class="math inline">\(p_1^{r_1}...p_k^{r_k}\)</span>，不难发现只有<span class="math inline">\(r_1\)</span>的奇偶影响答案的统计，因此我们只需要考虑形如<span class="math inline">\(p_1...p_k\)</span>的数即可</p>
+<p>记<span class="math inline">\(M = 10^5\)</span>，分最大质因子<span class="math inline">\(&gt; \sqrt M\)</span>的数和最大质因子<span class="math inline">\(\leq \sqrt M\)</span>的数考虑</p>
+<p>三元组只可能是下列两种情况之一：</p>
+<ul>
+<li>三个数的最大质因子都<span class="math inline">\(\leq \sqrt M\)</span>，形如这样的数可以爆搜，大概有1600000组</li>
+<li>三个数中有两个数的最大质因子<span class="math inline">\(&gt; \sqrt M\)</span>，我们可以枚举最大质因子<span class="math inline">\(p\)</span>，如果最大质因子为<span class="math inline">\(p\)</span>的数有<span class="math inline">\(&lt; \sqrt M\)</span>个，那么我们直接暴力枚举，否则，最大质因子为<span class="math inline">\(p\)</span>的数对应的值只会有<span class="math inline">\(&lt; \sqrt M\)</span>个，我们按照权值来暴力，此时，由于每个最大质因子<span class="math inline">\(p\)</span>的平均复杂度<span class="math inline">\(&lt; \sqrt M\)</span>，因此总复杂度小于<span class="math inline">\(M \sqrt M\)</span></li>
+</ul>
+<p>做法挺明显的....码的时候有一点点细节</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ll </span><span class="dt">long</span><span class="pp"> </span><span class="dt">long</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define gc </span>getchar</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">int</span> read<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> p <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> w <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="dt">char</span> c <span class="op">=</span> gc<span class="op">();</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c <span class="op">&gt;</span> <span class="ch">&#39;9&#39;</span> <span class="op">||</span> c <span class="op">&lt;</span> <span class="ch">&#39;0&#39;</span><span class="op">)</span> <span class="op">&#123;</span> <span class="cf">if</span><span class="op">(</span>c <span class="op">==</span> <span class="ch">&#39;-&#39;</span><span class="op">)</span> w <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> c <span class="op">=</span> gc<span class="op">();</span> <span class="op">&#125;</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">&#39;0&#39;</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">&#39;9&#39;</span><span class="op">)</span> p <span class="op">=</span> p <span class="op">*</span> <span class="dv">10</span> <span class="op">+</span> c <span class="op">-</span> <span class="ch">&#39;0&#39;</span><span class="op">,</span> c <span class="op">=</span> gc<span class="op">();</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p <span class="op">*</span> w<span class="op">;</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#define rep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>st<span class="op">,</span><span class="pp"> </span>ed<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&lt;=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">++)</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#define drep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>ed<span class="op">,</span><span class="pp"> </span>st<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&gt;=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">--)</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> sid <span class="op">=</span> <span class="fl">1e5</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n<span class="op">,</span> M <span class="op">=</span> <span class="fl">1e5</span><span class="op">;</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vector <span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> arr<span class="op">[</span>sid<span class="op">];</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> _gcd<span class="op">[</span><span class="dv">500</span><span class="op">][</span><span class="dv">500</span><span class="op">],</span> mul<span class="op">[</span><span class="dv">500</span><span class="op">][</span><span class="dv">500</span><span class="op">];</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> maxfac<span class="op">[</span>sid<span class="op">],</span> <span class="fu">tr</span><span class="op">[</span>sid<span class="op">],</span> pr<span class="op">[</span>sid<span class="op">],</span> nop<span class="op">[</span>sid<span class="op">],</span> cnt<span class="op">;</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> num<span class="op">[</span>sid<span class="op">],</span> tnum<span class="op">[</span>sid<span class="op">];</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> gcd<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b <span class="op">?</span> gcd<span class="op">(</span>b<span class="op">,</span> a <span class="op">%</span> b<span class="op">)</span> <span class="op">:</span> a<span class="op">;</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> init<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> M<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>nop<span class="op">[</span>i<span class="op">])</span> pr<span class="op">[++</span> cnt<span class="op">]</span> <span class="op">=</span> i<span class="op">;</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;=</span> cnt<span class="op">;</span> j <span class="op">++)</span> <span class="op">&#123;</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> p <span class="op">=</span> i <span class="op">*</span> pr<span class="op">[</span>j<span class="op">];</span></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>p <span class="op">&gt;</span> M<span class="op">)</span> <span class="cf">break</span><span class="op">;</span> nop<span class="op">[</span>p<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>i <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sqrt_M <span class="op">=</span> sqrt<span class="op">(</span>M<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> gcd<span class="op">(</span>i<span class="op">,</span> j<span class="op">);</span></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> </span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>i <span class="op">||</span> j<span class="op">)</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> i <span class="op">*</span> j <span class="op">/</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">/</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">];</span></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> M<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> t <span class="op">=</span> i<span class="op">;</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">*</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">&lt;=</span> t<span class="op">;</span> j <span class="op">++)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>t <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="dt">int</span> num <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                <span class="cf">while</span><span class="op">(</span>t <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> t <span class="op">/=</span> pr<span class="op">[</span>j<span class="op">],</span> num <span class="op">++;</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>num <span class="op">&amp;</span> <span class="dv">1</span><span class="op">)</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">*=</span> pr<span class="op">[</span>j<span class="op">];</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>t <span class="op">&gt;</span> sqrt_M<span class="op">)</span> maxfac<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> t<span class="op">;</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">*=</span> t<span class="op">;</span></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="dt">long</span> <span class="dt">long</span> ans<span class="op">;</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> dfs<span class="op">(</span><span class="dt">int</span> dep<span class="op">,</span> <span class="dt">int</span> v1<span class="op">,</span> <span class="dt">int</span> v2<span class="op">,</span> <span class="dt">int</span> v3<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>dep <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2 <span class="op">&amp;&amp;</span> v1 <span class="op">==</span> v3<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">2</span><span class="op">)</span> <span class="op">/</span> <span class="dv">6</span><span class="op">;</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> num<span class="op">[</span>v3<span class="op">];</span></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span>v2<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span>v3<span class="op">];</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        </span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> v2<span class="op">,</span> v3<span class="op">);</span></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2 <span class="op">&amp;&amp;</span> v1 <span class="op">==</span> v3<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v1<span class="op">);</span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v3_</span> <span class="op">=</span> v3 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v3<span class="op">);</span></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v2_</span> <span class="op">=</span> v2 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v3_</span> <span class="op">=</span> v3 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v2_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v2_</span><span class="op">,</span> v3<span class="op">);</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v2<span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v2_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> <span class="va">v2_</span><span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solve<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> read<span class="op">();</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> M<span class="op">)</span> num<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> n<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> x <span class="op">=</span> read<span class="op">();</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>maxfac<span class="op">[</span>x<span class="op">])</span> num<span class="op">[</span> <span class="fu">tr</span><span class="op">[</span>x<span class="op">]</span> <span class="op">]</span> <span class="op">++;</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> arr<span class="op">[</span> maxfac<span class="op">[</span>x<span class="op">]</span> <span class="op">].</span>push_back<span class="op">(</span><span class="fu">tr</span><span class="op">[</span>x<span class="op">]);</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sqrt_M <span class="op">=</span> sqrt<span class="op">(</span>M<span class="op">),</span> lim <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>pr<span class="op">[</span>lim<span class="op">]</span> <span class="op">&lt;=</span> sqrt_M<span class="op">)</span> lim <span class="op">++;</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    dfs<span class="op">(</span>lim<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> lim <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> cnt<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> p <span class="op">=</span> pr<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>arr<span class="op">[</span>p<span class="op">].</span>size<span class="op">()</span> <span class="op">&lt;</span> sqrt_M<span class="op">)</span> <span class="op">&#123;</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span>arr<span class="op">[</span>p<span class="op">].</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> i <span class="op">-</span> <span class="dv">1</span><span class="op">)</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>                ans <span class="op">+=</span> num<span class="op">[</span> mul<span class="op">[</span> arr<span class="op">[</span>p<span class="op">][</span>i<span class="op">]</span> <span class="op">][</span> arr<span class="op">[</span>p<span class="op">][</span>j<span class="op">]</span> <span class="op">]</span> <span class="op">];</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">&#123;</span></span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> Lim <span class="op">=</span> M <span class="op">/</span> pr<span class="op">[</span>i<span class="op">];</span></span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> Lim<span class="op">)</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="kw">auto</span> x <span class="op">:</span> arr<span class="op">[</span>p<span class="op">])</span> tnum<span class="op">[</span>x<span class="op">]</span> <span class="op">++;</span></span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> Lim<span class="op">)</span> <span class="cf">if</span><span class="op">(</span>tnum<span class="op">[</span>i<span class="op">])</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> i<span class="op">)</span> <span class="cf">if</span><span class="op">(</span>tnum<span class="op">[</span>j<span class="op">])</span> <span class="op">&#123;</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>i <span class="op">==</span> j<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> num<span class="op">[</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">];</span></span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> tnum<span class="op">[</span>j<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">];</span></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>        arr<span class="op">[</span>p<span class="op">].</span>clear<span class="op">();</span></span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span><span class="op">,</span> ans<span class="op">);</span></span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">&#123;</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    init<span class="op">();</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> T <span class="op">=</span> read<span class="op">();</span></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>T <span class="op">--)</span> solve<span class="op">();</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span></code></pre></div>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>number_theory</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>矩阵分析 6</title>
     <url>/2021/08/05/matrix-analysis-6/</url>
     <content><![CDATA[<span id="more"></span>
@@ -2667,154 +2962,6 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       <categories>
         <category>problems</category>
       </categories>
-  </entry>
-  <entry>
-    <title>2021杭电多校第二场T9</title>
-    <url>/2021/07/23/problem-1/</url>
-    <content><![CDATA[<span id="more"></span>
-<h4 id="吐槽">吐槽</h4>
-<p>杭电多校的好题太少了，出题人要么是水平问题，要么是态度问题...</p>
-<h4 id="题面">题面</h4>
-<p>给定<span class="math inline">\(n\)</span>个数<span class="math inline">\(a_1, ..., a_n\)</span>，询问有多少个三元有序对<span class="math inline">\((i, j, k)\)</span>满足<span class="math inline">\(i &lt; j &lt; k\)</span>，并且<span class="math inline">\(a_i a_j a_k\)</span>是一个完全平方数</p>
-<p><span class="math inline">\(n \leq 10^5, \max a_i \leq 10^5\)</span></p>
-<h4 id="题解">题解</h4>
-<p>首先，我们将<span class="math inline">\(a_i\)</span>质因数分解为<span class="math inline">\(p_1^{r_1}...p_k^{r_k}\)</span>，不难发现只有<span class="math inline">\(r_1\)</span>的奇偶影响答案的统计，因此我们只需要考虑形如<span class="math inline">\(p_1...p_k\)</span>的数即可</p>
-<p>记<span class="math inline">\(M = 10^5\)</span>，分最大质因子<span class="math inline">\(&gt; \sqrt M\)</span>的数和最大质因子<span class="math inline">\(\leq \sqrt M\)</span>的数考虑</p>
-<p>三元组只可能是下列两种情况之一：</p>
-<ul>
-<li>三个数的最大质因子都<span class="math inline">\(\leq \sqrt M\)</span>，形如这样的数可以爆搜，大概有1600000组</li>
-<li>三个数中有两个数的最大质因子<span class="math inline">\(&gt; \sqrt M\)</span>，我们可以枚举最大质因子<span class="math inline">\(p\)</span>，如果最大质因子为<span class="math inline">\(p\)</span>的数有<span class="math inline">\(&lt; \sqrt M\)</span>个，那么我们直接暴力枚举，否则，最大质因子为<span class="math inline">\(p\)</span>的数对应的值只会有<span class="math inline">\(&lt; \sqrt M\)</span>个，我们按照权值来暴力，此时，由于每个最大质因子<span class="math inline">\(p\)</span>的平均复杂度<span class="math inline">\(&lt; \sqrt M\)</span>，因此总复杂度小于<span class="math inline">\(M \sqrt M\)</span></li>
-</ul>
-<p>做法挺明显的....码的时候有一点点细节</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode c++"><code class="sourceCode cpp"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="pp">#include </span><span class="im">&lt;bits/stdc++.h&gt;</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="kw">using</span> <span class="kw">namespace</span> std<span class="op">;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="pp">#define ll </span><span class="dt">long</span><span class="pp"> </span><span class="dt">long</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="pp">#define gc </span>getchar</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="kw">inline</span> <span class="dt">int</span> read<span class="op">()</span> <span class="op">&#123;</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> p <span class="op">=</span> <span class="dv">0</span><span class="op">,</span> w <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> <span class="dt">char</span> c <span class="op">=</span> gc<span class="op">();</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c <span class="op">&gt;</span> <span class="ch">&#39;9&#39;</span> <span class="op">||</span> c <span class="op">&lt;</span> <span class="ch">&#39;0&#39;</span><span class="op">)</span> <span class="op">&#123;</span> <span class="cf">if</span><span class="op">(</span>c <span class="op">==</span> <span class="ch">&#39;-&#39;</span><span class="op">)</span> w <span class="op">=</span> <span class="op">-</span><span class="dv">1</span><span class="op">;</span> c <span class="op">=</span> gc<span class="op">();</span> <span class="op">&#125;</span></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>c <span class="op">&gt;=</span> <span class="ch">&#39;0&#39;</span> <span class="op">&amp;&amp;</span> c <span class="op">&lt;=</span> <span class="ch">&#39;9&#39;</span><span class="op">)</span> p <span class="op">=</span> p <span class="op">*</span> <span class="dv">10</span> <span class="op">+</span> c <span class="op">-</span> <span class="ch">&#39;0&#39;</span><span class="op">,</span> c <span class="op">=</span> gc<span class="op">();</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> p <span class="op">*</span> w<span class="op">;</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">#define rep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>st<span class="op">,</span><span class="pp"> </span>ed<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&lt;=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">++)</span></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">#define drep</span><span class="op">(</span>io<span class="op">,</span><span class="pp"> </span>ed<span class="op">,</span><span class="pp"> </span>st<span class="op">)</span><span class="pp"> </span><span class="cf">for</span><span class="op">(</span><span class="dt">int</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">=</span><span class="pp"> </span>ed<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">&gt;=</span><span class="pp"> </span>st<span class="op">;</span><span class="pp"> </span>io<span class="pp"> </span><span class="op">--)</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="at">const</span> <span class="dt">int</span> sid <span class="op">=</span> <span class="fl">1e5</span> <span class="op">+</span> <span class="dv">5</span><span class="op">;</span></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> n<span class="op">,</span> M <span class="op">=</span> <span class="fl">1e5</span><span class="op">;</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vector <span class="op">&lt;</span><span class="dt">int</span><span class="op">&gt;</span> arr<span class="op">[</span>sid<span class="op">];</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> _gcd<span class="op">[</span><span class="dv">500</span><span class="op">][</span><span class="dv">500</span><span class="op">],</span> mul<span class="op">[</span><span class="dv">500</span><span class="op">][</span><span class="dv">500</span><span class="op">];</span></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> maxfac<span class="op">[</span>sid<span class="op">],</span> <span class="fu">tr</span><span class="op">[</span>sid<span class="op">],</span> pr<span class="op">[</span>sid<span class="op">],</span> nop<span class="op">[</span>sid<span class="op">],</span> cnt<span class="op">;</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> num<span class="op">[</span>sid<span class="op">],</span> tnum<span class="op">[</span>sid<span class="op">];</span></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> gcd<span class="op">(</span><span class="dt">int</span> a<span class="op">,</span> <span class="dt">int</span> b<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> b <span class="op">?</span> gcd<span class="op">(</span>b<span class="op">,</span> a <span class="op">%</span> b<span class="op">)</span> <span class="op">:</span> a<span class="op">;</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> init<span class="op">()</span> <span class="op">&#123;</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">2</span><span class="op">,</span> M<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>nop<span class="op">[</span>i<span class="op">])</span> pr<span class="op">[++</span> cnt<span class="op">]</span> <span class="op">=</span> i<span class="op">;</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> j <span class="op">&lt;=</span> cnt<span class="op">;</span> j <span class="op">++)</span> <span class="op">&#123;</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> p <span class="op">=</span> i <span class="op">*</span> pr<span class="op">[</span>j<span class="op">];</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>p <span class="op">&gt;</span> M<span class="op">)</span> <span class="cf">break</span><span class="op">;</span> nop<span class="op">[</span>p<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>i <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="cf">break</span><span class="op">;</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sqrt_M <span class="op">=</span> sqrt<span class="op">(</span>M<span class="op">)</span> <span class="op">+</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> gcd<span class="op">(</span>i<span class="op">,</span> j<span class="op">);</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> sqrt_M<span class="op">)</span> </span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>i <span class="op">||</span> j<span class="op">)</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> i <span class="op">*</span> j <span class="op">/</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">/</span> _gcd<span class="op">[</span>i<span class="op">][</span>j<span class="op">];</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> M<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> t <span class="op">=</span> i<span class="op">;</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">1</span><span class="op">;</span></span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span><span class="op">(</span><span class="dt">int</span> j <span class="op">=</span> <span class="dv">1</span><span class="op">;</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">*</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">&lt;=</span> t<span class="op">;</span> j <span class="op">++)</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span><span class="op">(</span>t <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>                <span class="dt">int</span> num <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>                <span class="cf">while</span><span class="op">(</span>t <span class="op">%</span> pr<span class="op">[</span>j<span class="op">]</span> <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> t <span class="op">/=</span> pr<span class="op">[</span>j<span class="op">],</span> num <span class="op">++;</span></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>num <span class="op">&amp;</span> <span class="dv">1</span><span class="op">)</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">*=</span> pr<span class="op">[</span>j<span class="op">];</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>t <span class="op">&gt;</span> sqrt_M<span class="op">)</span> maxfac<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> t<span class="op">;</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="fu">tr</span><span class="op">[</span>i<span class="op">]</span> <span class="op">*=</span> t<span class="op">;</span></span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="dt">long</span> <span class="dt">long</span> ans<span class="op">;</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> dfs<span class="op">(</span><span class="dt">int</span> dep<span class="op">,</span> <span class="dt">int</span> v1<span class="op">,</span> <span class="dt">int</span> v2<span class="op">,</span> <span class="dt">int</span> v3<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>dep <span class="op">==</span> <span class="dv">0</span><span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2 <span class="op">&amp;&amp;</span> v1 <span class="op">==</span> v3<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">2</span><span class="op">)</span> <span class="op">/</span> <span class="dv">6</span><span class="op">;</span></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>num<span class="op">[</span>v1<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> num<span class="op">[</span>v3<span class="op">];</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> num<span class="op">[</span>v1<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span>v2<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span>v3<span class="op">];</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>        </span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>    dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> v2<span class="op">,</span> v3<span class="op">);</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2 <span class="op">&amp;&amp;</span> v1 <span class="op">==</span> v3<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v1<span class="op">);</span></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span>v1 <span class="op">==</span> v2<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v3_</span> <span class="op">=</span> v3 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v3<span class="op">);</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span><span class="op">;</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> <span class="va">v1_</span> <span class="op">=</span> v1 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v2_</span> <span class="op">=</span> v2 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">],</span> <span class="va">v3_</span> <span class="op">=</span> v3 <span class="op">*</span> pr<span class="op">[</span>dep<span class="op">];</span></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v2_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> <span class="va">v2_</span><span class="op">,</span> v3<span class="op">);</span></span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v1_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> <span class="va">v1_</span><span class="op">,</span> v2<span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span><span class="op">(</span><span class="va">v2_</span> <span class="op">&lt;=</span> M <span class="op">&amp;&amp;</span> <span class="va">v3_</span> <span class="op">&lt;=</span> M<span class="op">)</span> dfs<span class="op">(</span>dep <span class="op">-</span> <span class="dv">1</span><span class="op">,</span> v1<span class="op">,</span> <span class="va">v2_</span><span class="op">,</span> <span class="va">v3_</span><span class="op">);</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="dt">void</span> solve<span class="op">()</span> <span class="op">&#123;</span></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    n <span class="op">=</span> read<span class="op">();</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    ans <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> M<span class="op">)</span> num<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> n<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> x <span class="op">=</span> read<span class="op">();</span></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(!</span>maxfac<span class="op">[</span>x<span class="op">])</span> num<span class="op">[</span> <span class="fu">tr</span><span class="op">[</span>x<span class="op">]</span> <span class="op">]</span> <span class="op">++;</span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> arr<span class="op">[</span> maxfac<span class="op">[</span>x<span class="op">]</span> <span class="op">].</span>push_back<span class="op">(</span><span class="fu">tr</span><span class="op">[</span>x<span class="op">]);</span></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> sqrt_M <span class="op">=</span> sqrt<span class="op">(</span>M<span class="op">),</span> lim <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>pr<span class="op">[</span>lim<span class="op">]</span> <span class="op">&lt;=</span> sqrt_M<span class="op">)</span> lim <span class="op">++;</span></span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>    dfs<span class="op">(</span>lim<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">,</span> <span class="dv">1</span><span class="op">);</span></span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>    rep<span class="op">(</span>i<span class="op">,</span> lim <span class="op">+</span> <span class="dv">1</span><span class="op">,</span> cnt<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a>        <span class="dt">int</span> p <span class="op">=</span> pr<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span><span class="op">(</span>arr<span class="op">[</span>p<span class="op">].</span>size<span class="op">()</span> <span class="op">&lt;</span> sqrt_M<span class="op">)</span> <span class="op">&#123;</span></span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> <span class="op">(</span><span class="dt">int</span><span class="op">)</span>arr<span class="op">[</span>p<span class="op">].</span>size<span class="op">()</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">0</span><span class="op">,</span> i <span class="op">-</span> <span class="dv">1</span><span class="op">)</span></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>                ans <span class="op">+=</span> num<span class="op">[</span> mul<span class="op">[</span> arr<span class="op">[</span>p<span class="op">][</span>i<span class="op">]</span> <span class="op">][</span> arr<span class="op">[</span>p<span class="op">][</span>j<span class="op">]</span> <span class="op">]</span> <span class="op">];</span></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>        <span class="cf">else</span> <span class="op">&#123;</span></span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>            <span class="dt">int</span> Lim <span class="op">=</span> M <span class="op">/</span> pr<span class="op">[</span>i<span class="op">];</span></span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> Lim<span class="op">)</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">=</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>            <span class="cf">for</span><span class="op">(</span><span class="kw">auto</span> x <span class="op">:</span> arr<span class="op">[</span>p<span class="op">])</span> tnum<span class="op">[</span>x<span class="op">]</span> <span class="op">++;</span></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>            rep<span class="op">(</span>i<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> Lim<span class="op">)</span> <span class="cf">if</span><span class="op">(</span>tnum<span class="op">[</span>i<span class="op">])</span> rep<span class="op">(</span>j<span class="op">,</span> <span class="dv">1</span><span class="op">,</span> i<span class="op">)</span> <span class="cf">if</span><span class="op">(</span>tnum<span class="op">[</span>j<span class="op">])</span> <span class="op">&#123;</span></span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>                <span class="cf">if</span><span class="op">(</span>i <span class="op">==</span> j<span class="op">)</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> <span class="op">(</span>tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">-</span> <span class="dv">1</span><span class="op">)</span> <span class="op">/</span> <span class="dv">2</span> <span class="op">*</span> num<span class="op">[</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">];</span></span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>                <span class="cf">else</span> ans <span class="op">+=</span> <span class="dv">1</span><span class="bu">ll</span> <span class="op">*</span> tnum<span class="op">[</span>i<span class="op">]</span> <span class="op">*</span> tnum<span class="op">[</span>j<span class="op">]</span> <span class="op">*</span> num<span class="op">[</span> mul<span class="op">[</span>i<span class="op">][</span>j<span class="op">]</span> <span class="op">];</span></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>            <span class="op">&#125;</span></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>        <span class="op">&#125;</span></span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>        arr<span class="op">[</span>p<span class="op">].</span>clear<span class="op">();</span></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>    <span class="op">&#125;</span></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>    printf<span class="op">(</span><span class="st">&quot;</span><span class="sc">%lld\n</span><span class="st">&quot;</span><span class="op">,</span> ans<span class="op">);</span></span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="dt">int</span> main<span class="op">()</span> <span class="op">&#123;</span></span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>    init<span class="op">();</span></span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>    <span class="dt">int</span> T <span class="op">=</span> read<span class="op">();</span></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">while</span><span class="op">(</span>T <span class="op">--)</span> solve<span class="op">();</span></span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="dv">0</span><span class="op">;</span></span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="op">&#125;</span></span></code></pre></div>
-]]></content>
-      <categories>
-        <category>problems</category>
-      </categories>
-      <tags>
-        <tag>number_theory</tag>
-      </tags>
   </entry>
   <entry>
     <title>牛客多校第二场</title>
