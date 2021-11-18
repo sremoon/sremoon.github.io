@@ -1640,7 +1640,7 @@ int main() &#123;
 <p>如果存在<span class="math inline">\(I \lhd R\)</span>，使得<span class="math inline">\(O \subseteq I \subseteq R\)</span>，当<span class="math inline">\(I \neq O\)</span>，任取<span class="math inline">\(i \in I - O\)</span>，那么<span class="math inline">\(1 \in i^{-1}I=I\)</span>，从而<span class="math inline">\(I=R\)</span></p>
 <p>反之，考虑<span class="math inline">\(O \subseteq \langle a\rangle \subseteq R\)</span>，当<span class="math inline">\(a \neq 0\)</span>时，有<span class="math inline">\(\langle a \rangle =R\)</span>，于是<span class="math inline">\(a\)</span>存在逆元</p>
 <blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(P \neq R\)</span>为<span class="math inline">\(R\)</span>的理想则</p>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(P \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，则</p>
 <ol type="i">
 <li><p><span class="math inline">\(P\)</span>为素理想当且仅当<span class="math inline">\(R/P\)</span>为整环</p></li>
 <li><p><span class="math inline">\(P\)</span>为极大理想当且仅当<span class="math inline">\(R/P\)</span>为域</p></li>
@@ -1648,7 +1648,37 @@ int main() &#123;
 </blockquote>
 <p>运用上面的引理和定义证明即可</p>
 <ul>
-<li>极大理想一定时素理想</li>
+<li>极大理想一定是素理想</li>
+</ul>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>是环<span class="math inline">\(R\)</span>到<span class="math inline">\(R&#39;\)</span>的同态，那么</p>
+<ul>
+<li>对<span class="math inline">\(\ker \sigma \subseteq M\)</span>，<span class="math inline">\(M\)</span>为素理想当且仅当<span class="math inline">\(\sigma(M)\)</span>为素理想</li>
+<li>对<span class="math inline">\(\ker \sigma \subseteq M\)</span>，<span class="math inline">\(M\)</span>为极大理想当且仅当<span class="math inline">\(\sigma(M)\)</span>为极大理想</li>
+</ul>
+</blockquote>
+<p>上述定理实际上可以表明，包括核的素/极大理想和像的素/极大理想存在一一对应</p>
+<p>证明：<span class="math inline">\(M\)</span>为<span class="math inline">\(R\)</span>的素理想，当且仅当<span class="math inline">\(R/M\)</span>为整环，当且仅当<span class="math inline">\(\sigma(R)/\sigma(M)\)</span>为整环（第一同构定理），当且仅当<span class="math inline">\(\sigma(M)\)</span>为素理想，极大理想类似</p>
+<h4 id="素理想的存在性">素理想的存在性</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \lhd R\)</span>且存在<span class="math inline">\(a \in R\)</span>，使得<span class="math inline">\(I \cap \{a^n:n\in Z\} = \emptyset\)</span>，那么必然存在包含<span class="math inline">\(I\)</span>的素理想<span class="math inline">\(P\)</span>，使得<span class="math inline">\(P \cap \{a^n:n\in Z\} = \emptyset\)</span></p>
+</blockquote>
+<p>证明较为复杂，略过</p>
+<ul>
+<li>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，那么存在包含<span class="math inline">\(I\)</span>的极大理想</li>
+</ul>
+<h4 id="诣零根">诣零根</h4>
+<blockquote>
+<p>设环<span class="math inline">\(R\)</span>为非零元，则称<span class="math inline">\(r(R)=\bigcap_{P\text{为$R$的素理想}} P\)</span>为<span class="math inline">\(R\)</span>的诣零根</p>
+</blockquote>
+<p>这个结构的名字可能比较奇怪，需要从另一个角度来理解</p>
+<blockquote>
+<p><span class="math inline">\(r(R)\)</span>恰为<span class="math inline">\(A\)</span>中所有的幂零元构成</p>
+</blockquote>
+<p>如果<span class="math inline">\(a^n = 0\in P\)</span>，那么由素理想的性质，不难推出<span class="math inline">\(a \in P\)</span></p>
+<p>如果<span class="math inline">\(a^n \neq 0\)</span>，那么<span class="math inline">\(\{a^n\} \cap O = \emptyset\)</span>，根据上一个定理，存在<span class="math inline">\(P\)</span>，使得<span class="math inline">\(a \notin P\)</span></p>
+<ul>
+<li><span class="math inline">\(r(Z)=O\)</span></li>
 </ul>
 ]]></content>
       <categories>
