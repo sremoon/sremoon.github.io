@@ -2052,7 +2052,9 @@ int main() &#123;
 </blockquote>
 <ul>
 <li><p>Euclid整环一定是主理想整环</p>
-<p>待补证明</p></li>
+<p>不妨设<span class="math inline">\(I\)</span>为Euclid整环中的非零理想，那么在<span class="math inline">\(I/\{0\}\)</span>中存在一个<span class="math inline">\(N(\cdot)\)</span>最小的元素<span class="math inline">\(a\)</span></p>
+<p>现在对任意的元素<span class="math inline">\(b\)</span>，根据Euclid整环的定义，存在<span class="math inline">\(I\)</span>中的元素<span class="math inline">\(c, d\)</span>，使得<span class="math inline">\(a=bc+d\)</span>，并且<span class="math inline">\(d=0\)</span>或<span class="math inline">\(N(d)&lt;N(a)\)</span></p>
+<p>由于<span class="math inline">\(a\)</span>是<span class="math inline">\(N(\cdot)\)</span>最小的元素，因此只有<span class="math inline">\(d=0\)</span>，从而<span class="math inline">\(a=bc\)</span>，这也就是说<span class="math inline">\(I=(a)\)</span></p></li>
 <li><p>在整环中，一般有下面的定理成立：</p>
 <ul>
 <li><span class="math inline">\(b \mid a \Leftrightarrow (a) \subseteq (b)\)</span></li>
