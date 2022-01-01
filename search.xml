@@ -537,7 +537,7 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
-    <title>abstract-algebra-2</title>
+    <title>抽象代数2</title>
     <url>/2021/11/30/abstract-algebra-2/</url>
     <content><![CDATA[<span id="more"></span>
 <h2 id="域">域</h2>
@@ -3668,37 +3668,6 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       <tags>
         <tag>ACM</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>problem-2</title>
-    <url>/2021/09/07/problem-2/</url>
-    <content><![CDATA[<span id="more"></span>
-<h4 id="题面">题面</h4>
-<p>你处于一根数轴上，初始在<span class="math inline">\(0\)</span>号点，当你位于<span class="math inline">\(i\)</span>时，你可以选择前往<span class="math inline">\(i - 1, i, i + 1\)</span>中的任意一个，现在有<span class="math inline">\(T\)</span>次攻击，每次攻击给定参数<span class="math inline">\(D_i, X_i\)</span>，当你处于<span class="math inline">\(p\)</span>时，若<span class="math inline">\(D_i = 0\)</span>，表明攻击从<span class="math inline">\(X_i\)</span>点由右向左射出，你将受到<span class="math inline">\(max(0,X_i - p)\)</span>的伤害，而<span class="math inline">\(D_i = 1\)</span>时，你将受到<span class="math inline">\(max(0, p - X_i)\)</span>的伤害，试求出最小的受到的伤害</p>
-<h3 id="题解">题解</h3>
-<p>确实不太会这种题</p>
-<p>我们先介绍一些概念</p>
-<p>我们称一个函数<span class="math inline">\(f\)</span>在<span class="math inline">\(C\)</span>上是（下）凸的，当且仅当</p>
-<p><span class="math display">\[\forall x_1, x_2 \in C,f(\frac{x_1 + x_2}{2}) \leq \frac{f(x_1) + f(x_2)}{2}\]</span></p>
-<p>为显简便，下文中省略<span class="math inline">\(C\)</span>，凸函数有一些不错的性质</p>
-<ul>
-<li><span class="math inline">\(f, g\)</span> 都是凸的时，对<span class="math inline">\(a, b &gt; 0\)</span>，<span class="math inline">\(af + bg\)</span>是凸的</li>
-</ul>
-<p><span class="math inline">\(af(\frac{x_1+x_2}{2}) + b g(\frac{x_1+x_2}{2}) \leq \frac{af(x_1)+bg(x_1) + af(x_2) + bg(x_2)}{2}\)</span></p>
-<ul>
-<li><span class="math inline">\(f, g\)</span>都是凸的时，<span class="math inline">\(\max\{f, g\}\)</span>是凸的</li>
-</ul>
-<p><span class="math inline">\(\max \{f(\frac{x_1+x_2}{2}), g(\frac{x_1+x_2}{2})\} \leq \max\{\frac{f(x_1)+f(x_2)}{2}, \frac{g(x_1)+g(x_2)}{2}\} \leq \frac{\max\{f(x_1), g(x_1)\} + \max\{f(x_2), g(x_2)\}}{2}\)</span></p>
-<ul>
-<li><span class="math inline">\(f\)</span>是凸的时，对于一个确定的常数<span class="math inline">\(L\)</span>，记<span class="math inline">\(f_{max}(x) = max_{x-L\leq x_0 \leq x+L} f(x_0)\)</span>，<span class="math inline">\(f_{min}(x) = min_{x-L\leq x_0 \leq x+L} f(x_0)\)</span>，那么<span class="math inline">\(f_{max}(x)\)</span>和<span class="math inline">\(f_{min}(x)\)</span>在定义域内也是凸的</li>
-</ul>
-<p>凸函数一定是连续的，因此<span class="math inline">\(max\)</span>和<span class="math inline">\(min\)</span>都可以取到，下面的证明就感性一点吧...</p>
-<p>对于<span class="math inline">\(f_{max}\)</span>，我们有<span class="math inline">\(f_{max}(x) = \max\{f(x-L), f(x+L)\}\)</span>，因而是凸的</p>
-<p>对于<span class="math inline">\(f_{min}\)</span>，考虑凸函数应该是一段降，一段常数，一段升的形状，对于这三段进行变形后，不难发现降的部分左移<span class="math inline">\(L\)</span>，升的部分右移<span class="math inline">\(L\)</span>，因而还是一个凸函数</p>
-]]></content>
-      <categories>
-        <category>problems</category>
-      </categories>
   </entry>
   <entry>
     <title>牛客多校第五场</title>
