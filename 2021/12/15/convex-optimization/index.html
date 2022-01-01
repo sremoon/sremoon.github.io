@@ -20,28 +20,28 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
-<meta name="description" content="https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;11256">
+<meta name="description" content="学着玩一玩">
 <meta property="og:type" content="article">
-<meta property="og:title" content="牛客多校第五场">
-<meta property="og:url" content="http://sremoon.github.io/2021/08/03/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/index.html">
+<meta property="og:title" content="凸优化">
+<meta property="og:url" content="http://sremoon.github.io/2021/12/15/convex-optimization/index.html">
 <meta property="og:site_name" content="SreMoon&#39;s Lake">
-<meta property="og:description" content="https:&#x2F;&#x2F;ac.nowcoder.com&#x2F;acm&#x2F;contest&#x2F;11256">
+<meta property="og:description" content="学着玩一玩">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2021-08-03T12:23:07.000Z">
-<meta property="article:modified_time" content="2021-08-03T12:42:58.000Z">
+<meta property="article:published_time" content="2021-12-15T02:42:38.000Z">
+<meta property="article:modified_time" content="2022-01-01T09:12:36.846Z">
 <meta property="article:author" content="remoon">
-<meta property="article:tag" content="ACM">
+<meta property="article:tag" content="convex_optimization">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://sremoon.github.io/2021/08/03/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/">
+<link rel="canonical" href="http://sremoon.github.io/2021/12/15/convex-optimization/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2021/08/03/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/","path":"2021/08/03/牛客多校第五场/","title":"牛客多校第五场"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2021/12/15/convex-optimization/","path":"2021/12/15/convex-optimization/","title":"凸优化"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>牛客多校第五场 | SreMoon's Lake</title>
+<title>凸优化 | SreMoon's Lake</title>
   
 
 
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#c"><span class="nav-text">C</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E6%84%8F"><span class="nav-text">题意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3"><span class="nav-text">题解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#e"><span class="nav-text">E</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%90%E6%A7%BD"><span class="nav-text">吐槽</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#g"><span class="nav-text">G</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%90%90%E6%A7%BD-1"><span class="nav-text">吐槽</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E6%84%8F-1"><span class="nav-text">题意</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A2%98%E8%A7%A3-1"><span class="nav-text">题解</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%AE%9A%E4%B9%89"><span class="nav-text">基础定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%9D%E5%87%B8%E9%9B%86%E5%87%B8%E6%80%A7"><span class="nav-text">保凸集凸性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%86%E7%A6%BB%E8%B6%85%E5%B9%B3%E9%9D%A2%E5%AE%9A%E7%90%86"><span class="nav-text">分离超平面定理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%87%B8%E5%87%BD%E6%95%B0"><span class="nav-text">凸函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kkt%E6%9D%A1%E4%BB%B6"><span class="nav-text">KKT条件</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -189,7 +189,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/08/03/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/12/15/convex-optimization/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/lalala.jpg">
@@ -202,7 +202,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          牛客多校第五场
+          凸优化
         </h1>
 
         <div class="post-meta-container">
@@ -212,17 +212,23 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2021-08-03 20:23:07 / Modified: 20:42:58" itemprop="dateCreated datePublished" datetime="2021-08-03T20:23:07+08:00">2021-08-03</time>
+      <time title="Created: 2021-12-15 10:42:38" itemprop="dateCreated datePublished" datetime="2021-12-15T10:42:38+08:00">2021-12-15</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-01-01 17:12:36" itemprop="dateModified" datetime="2022-01-01T17:12:36+08:00">2022-01-01</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
       </span>
       <span class="post-meta-item-text">In</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/problems/" itemprop="url" rel="index"><span itemprop="name">problems</span></a>
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
         </span>
     </span>
 
@@ -234,18 +240,18 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>774</span>
+      <span>1.8k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
-            <div class="post-description">https://ac.nowcoder.com/acm/contest/11256</div>
+            <div class="post-description">学着玩一玩</div>
         </div>
       </header>
 
@@ -254,32 +260,69 @@
     
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
-<p>Gromah的题...</p>
-<p>有些科技还是太为难老年人了...</p>
-<h4 id="c">C</h4>
-<h5 id="题意">题意</h5>
-<p>给定一个长为<span class="math inline">\(n\)</span>的串，表示两个人打乒乓球，连续打<span class="math inline">\(n\)</span>个球的结果</p>
-<p>对于<span class="math inline">\(i\)</span>，我们定义<span class="math inline">\(i\)</span>赛制表示，双方中有一方得分超过<span class="math inline">\(i\)</span>分，并且分差大于等于<span class="math inline">\(2\)</span>时结果比赛的赛制</p>
-<p>现在询问，对<span class="math inline">\(i = 1, 2, ..., n\)</span>，在<span class="math inline">\(i\)</span>赛制的情况下，Gromah赢了多少场</p>
-<h5 id="题解">题解</h5>
-<p>还挺有意思的</p>
-<p>一个显然的性质是，在<span class="math inline">\(i\)</span>赛制下，比赛最多只有<span class="math inline">\(\lfloor \frac{n}{i} \rfloor\)</span>场</p>
-<p>.....然后考场上就短路了...</p>
-<p>我们可以预处理出<span class="math inline">\(A\)</span>赢了<span class="math inline">\(i\)</span>个球的位置和<span class="math inline">\(B\)</span>赢了<span class="math inline">\(i\)</span>个球的位置，依次，我们可以判断他们是否进入了平局的阶段，如果进入了平局的阶段，说明之后的比赛应该是两者一赢一输，这个段也可以预处理出来</p>
-<p>然后就完事了</p>
-<h4 id="e">E</h4>
-<h5 id="吐槽">吐槽</h5>
-<p>考场上写的脑子有点懵</p>
-<p>C++的右移是坑爹的逻辑右移，对一个负数不断右移会得到一堆<span class="math inline">\(1\)</span>，在利用<span class="math inline">\(\sim\)</span>时被卡了记下...</p>
-<h4 id="g">G</h4>
-<h5 id="吐槽-1">吐槽</h5>
-<p>奇奇怪怪题</p>
-<h5 id="题意-1">题意</h5>
-<p>给定<span class="math inline">\(a, b, \{p_i\}, \{q_i\}\)</span>，定义<span class="math inline">\(c = \prod p_i^{q_i}\)</span>，尝试找到<span class="math inline">\(x, y\)</span>，使得<span class="math inline">\(x + y\)</span>最小，并且<span class="math inline">\(lcm(a+x, b+y) = c\)</span></p>
-<h5 id="题解-1">题解</h5>
-<p>队友的做法我没听...好像是极限数据<span class="math inline">\(2^{27}\)</span>，但能卡卡的做法...（然后就WA了）</p>
-<p>一个简单的想法是，枚举<span class="math inline">\(c\)</span>的约数<span class="math inline">\(d_1\)</span>，假设<span class="math inline">\(a + x = d_1\)</span>，<span class="math inline">\(d_1\)</span>也许会在若干质数上的次数没有卡到<span class="math inline">\(q_i\)</span>，这就需要<span class="math inline">\(b+y\)</span>去调整，也就是说相当于对于某个数<span class="math inline">\(M\)</span>，<span class="math inline">\(b+y\)</span>需要是<span class="math inline">\(M\)</span>的倍数，而系数则应该是剩下卡到<span class="math inline">\(q_i\)</span>的位置上质数次幂乘积的一个因子，难点在于如何寻找这个因子</p>
-<p>利用折半搜索优化一下复杂度就能过了...</p>
+<h3 id="基础定义">基础定义</h3>
+<ul>
+<li><p>affine set ：包含所有元素的线性组合（<span class="math inline">\(\theta x_1 + (1-\theta)x_2 \in C, \forall \theta \in R\)</span>）</p>
+<ul>
+<li>对于任意集合<span class="math inline">\(S\)</span>，其所有元素的线性组合为包含<span class="math inline">\(S\)</span>的最小仿射集，记为<span class="math inline">\(\text{aff} S\)</span></li>
+</ul></li>
+<li><p>convex set ：包含所有元素的凸组合（<span class="math inline">\(\theta x_1 + (1-\theta)x_2 \in C, \forall \theta \in [0,1]\)</span>）</p>
+<ul>
+<li>对于任意集合<span class="math inline">\(S\)</span>，其所有元素的线性组合为包含<span class="math inline">\(S\)</span>的最小仿射集，记为<span class="math inline">\(\text{conv} S\)</span></li>
+</ul></li>
+<li><p>cone：包含所有元素的非负组合（<span class="math inline">\(\theta_1 x_1 + \theta_2 x_2 \in C, \forall \theta_1, \theta_2 \geq 0\)</span>）</p></li>
+<li><p>hyperplane：<span class="math inline">\(\{x | a^Tx = b\}\)</span>，halfspaces：<span class="math inline">\(\{x|a^Tx \leq b\}\)</span></p></li>
+<li><p>球体（包括范数球），椭球体，锥（含范数锥）都是凸集</p></li>
+</ul>
+<h3 id="保凸集凸性">保凸集凸性</h3>
+<ul>
+<li><p>相交：如果<span class="math inline">\(C_1, C_2\)</span>为凸集，那么<span class="math inline">\(C_1 \cap C_2\)</span>为凸集</p></li>
+<li><p>仿射变换及其逆变换：如果<span class="math inline">\(C\)</span>为凸集，<span class="math inline">\(f(x)=Ax+b\)</span>为仿射变换</p>
+<p>那么<span class="math inline">\(f(C) = \{f(x) | x \in C\}\)</span>和<span class="math inline">\(f^{-1}(C) = \{x|f(x) \in C\}\)</span>构成凸集</p>
+<ul>
+<li>注意到<span class="math inline">\(\theta f( x_1) + (1-\theta) f(x_2) = f(\theta x_1 + (1-\theta)x_2)\)</span>，因此<span class="math inline">\(f(C)\)</span>构成凸集</li>
+<li>对于<span class="math inline">\(f^{-1}\)</span>，等价于证明<span class="math inline">\(f(x_1) \in C, f(x_2) \in C \Rightarrow f(\theta x_1 + (1-\theta)x_2) \in C\)</span>，由上面的式子是显然的</li>
+</ul></li>
+<li><p>透视变换：记<span class="math inline">\(P : R^n \times R_{++} \to R^n\)</span>为<span class="math inline">\(P(x, t) = x/t\)</span></p>
+<p>那么，当<span class="math inline">\(C\)</span>为凸集时，<span class="math inline">\(P(C)\)</span>和<span class="math inline">\(P^{-1}(C)\)</span>为凸集</p>
+<ul>
+<li>按照定义去配凑即可，由于这并不是一个线性函数，因此在理解时可能由大问题</li>
+</ul></li>
+<li><p>线性分式函数：对于<span class="math inline">\(x\)</span>，定义<span class="math inline">\(f(x) = \frac{Ax + b}{c^T x + d}\)</span>，则对于凸集<span class="math inline">\(C\)</span>，<span class="math inline">\(f(C)\)</span>和<span class="math inline">\(f^{-1}(C)\)</span>都是凸集</p>
+<ul>
+<li>线性分式函数可以视为仿射变换和透视变换的复合</li>
+</ul></li>
+</ul>
+<h3 id="分离超平面定理">分离超平面定理</h3>
+<ul>
+<li>对于凸集<span class="math inline">\(C\)</span>和<span class="math inline">\(D\)</span>，如果<span class="math inline">\(C \cap D = \emptyset\)</span>，那么存在超平面<span class="math inline">\(\{x|a^Tx = b\}\)</span>，使得<span class="math inline">\(\forall x \in C, a^Tx \leq b\)</span>并且<span class="math inline">\(\forall x \in D, a^Tx \geq b\)</span>
+<ul>
+<li>证明的思路是构造性的，取<span class="math inline">\(C, D\)</span>上距离最小的两点<span class="math inline">\(c, d\)</span>，作垂直于直线<span class="math inline">\(cd\)</span>，过<span class="math inline">\(c, d\)</span>中点的平面</li>
+</ul></li>
+<li>对于凸集<span class="math inline">\(C\)</span>边界上的每一点<span class="math inline">\(x_0\)</span>，存在超平面，使得<span class="math inline">\(\forall x \in C, a^Tx \leq b\)</span>并且<span class="math inline">\(a^Tx_0 = b\)</span>成立
+<ul>
+<li>这个称为支撑超平面定理</li>
+<li>取凸集的内部<span class="math inline">\(\text{int} C\)</span>和<span class="math inline">\(\{x_0\}\)</span>，对他们运用分离超平面定理</li>
+</ul></li>
+</ul>
+<h3 id="凸函数">凸函数</h3>
+<ul>
+<li><p>设<span class="math inline">\(f : R^n \to R\)</span>为凸，当且仅当<span class="math inline">\(\text{dom} f\)</span>为凸，并且<span class="math inline">\(\forall x, y \in dom\;f, 0 \leq \theta \leq 1\)</span>，有<span class="math inline">\(f(\theta x + (1-\theta) y) \leq \theta f(x) + (1-\theta) f(y)\)</span></p></li>
+<li><p>第二定义：对于任意<span class="math inline">\(x \in dom\;f, v \in R^n\)</span>，<span class="math inline">\(g(t) = f(x + tv)\)</span>为凸函数</p>
+<p>（注意<span class="math inline">\(g\)</span>是一维的函数）</p></li>
+</ul>
+<p>根据上述两个定义，在研究高维时，先对一维情况入手，再使用第二定义将是不错的方法</p>
+<ul>
+<li><p>一阶条件：<span class="math inline">\(f\)</span>可微时，<span class="math inline">\(f\)</span>为凸函数当且仅当<span class="math inline">\(\forall x, y \in dom\;f\)</span>，有<span class="math inline">\(f(y) \geq f(x) + \nabla f(x)^T(y-x)\)</span></p>
+<p>一维情况下，左边推右边的证明是构造性的，右边推左边则是进行逼近</p>
+<p>多维证明一维就使用第二定义</p>
+<ul>
+<li>如果<span class="math inline">\(\nabla f(x_0) = 0\)</span>，那么根据一阶条件，有<span class="math inline">\(\forall y \in dom\;f, f(y) \geq f(x_0)\)</span></li>
+</ul></li>
+<li><p>二阶条件：<span class="math inline">\(f\)</span>二阶可微时，<span class="math inline">\(f\)</span>为凸函数当且仅当<span class="math inline">\(\nabla^2f(x) \geq 0\)</span></p></li>
+</ul>
+<h3 id="kkt条件">KKT条件</h3>
+<p>...前面的所有的知识都是为了推导这个条件，我先在这里给咕咕咕了</p>
 
     </div>
 
@@ -289,21 +332,18 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/ACM/" rel="tag"># ACM</a>
+              <a href="/tags/convex-optimization/" rel="tag"># convex_optimization</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2021/08/02/matrix-analysis-5/" rel="prev" title="矩阵分析 5">
-                  <i class="fa fa-chevron-left"></i> 矩阵分析 5
+                <a href="/2021/11/30/abstract-algebra-2/" rel="prev" title="abstract-algebra-2">
+                  <i class="fa fa-chevron-left"></i> abstract-algebra-2
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/08/05/matrix-analysis-6/" rel="next" title="矩阵分析 6">
-                  矩阵分析 6 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>
