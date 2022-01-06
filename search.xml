@@ -465,318 +465,500 @@ int main() &#123;
     <title>抽象代数2</title>
     <url>/2021/11/30/abstract-algebra-2/</url>
     <content><![CDATA[<span id="more"></span>
-<h2 id="域">域</h2>
-<h3 id="week14">week14</h3>
-<h4 id="特征">特征</h4>
+<h2 id="环">环</h2>
+<h3 id="week9">week9</h3>
+<h4 id="环-1">环</h4>
 <blockquote>
-<p>记<span class="math inline">\(1\)</span>为域<span class="math inline">\(F\)</span>中的乘法单位元，考虑其在<span class="math inline">\(F\)</span>作为加法群的阶<span class="math inline">\(n\)</span></p>
-<p>如果<span class="math inline">\(n\)</span>有限，那么记<span class="math inline">\(ch(F) = n\)</span>，称为域<span class="math inline">\(F\)</span>的特征</p>
-<p>如果<span class="math inline">\(n = \infty\)</span>，那么记<span class="math inline">\(ch(F)=0\)</span></p>
+<p>设<span class="math inline">\(R\)</span>为一个非空集，在其上定义了<span class="math inline">\(+, *\)</span>两种运算</p>
+<p>如果<span class="math inline">\(R\)</span>按<span class="math inline">\(+\)</span>构成Abel群，按<span class="math inline">\(*\)</span>构成半群</p>
+<p>并且<span class="math inline">\(*\)</span>对<span class="math inline">\(+\)</span>有分配律（<span class="math inline">\(a*(b+c)=a*b+a*c, \;(b+c)*a=b*a+c*a\)</span>）</p>
+<p>则称<span class="math inline">\(R\)</span>按<span class="math inline">\(+, *\)</span>构成<strong>环</strong></p>
+<p>而<span class="math inline">\(\langle R, +, *\rangle\)</span>称为环的结构</p>
 </blockquote>
-<ul>
-<li><span class="math inline">\(ch(Q)=ch(C)=0\)</span></li>
-<li>对于素数<span class="math inline">\(p\)</span>，有<span class="math inline">\(ch(Z/pZ)=p\)</span></li>
-</ul>
-<p>对于域中的非零元<span class="math inline">\(a\)</span>，当且仅当<span class="math inline">\(n1 = 0\)</span>时，有<span class="math inline">\(na = 0\)</span>（这里都是数乘，不是乘法），因此<span class="math inline">\(a\)</span>和<span class="math inline">\(1\)</span>在加法群中的阶数相同</p>
-<p>根据上面这一条中，再注意到<span class="math inline">\(1 \neq 0\)</span>，因此<span class="math inline">\(ch(F)&gt;1\)</span>，我们可以知道</p>
-<ul>
-<li>当<span class="math inline">\(ch(F) \neq 0\)</span>时，<span class="math inline">\(ch(F)\)</span>将是一个素数</li>
-</ul>
-<h4 id="子域">子域</h4>
+<p><span class="math inline">\(R\)</span>的加法单位元，记为<span class="math inline">\(0\)</span>，称为零元</p>
+<h4 id="特殊的环">特殊的环</h4>
 <blockquote>
-<p>如果<span class="math inline">\(E \subseteq F\)</span>按<span class="math inline">\(F\)</span>中的<span class="math inline">\(+\)</span>，<span class="math inline">\(*\)</span>构成域，那么，</p>
-<p>称<span class="math inline">\(E\)</span>为<span class="math inline">\(F\)</span>的<strong>子域</strong>，<span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>的<strong>扩域</strong>，用<span class="math inline">\(F/E\)</span>表示这样的域扩张</p>
+<p>设<span class="math inline">\(R\)</span>为环，如果<span class="math inline">\(R\)</span>对乘法交换，则称<span class="math inline">\(R\)</span>为交换环</p>
 </blockquote>
-<h4 id="最小子域">最小子域</h4>
 <blockquote>
-<p>设<span class="math inline">\(F\)</span>为域，<span class="math inline">\(ch(F)\)</span>为素数</p>
-<p>则<span class="math inline">\(E=\{me:m\in Z\} = \{0,e,2e,...,(p-1)e\}\)</span>为最小子域，且<span class="math inline">\(E \cong Z/pZ\)</span></p>
+<p>若环<span class="math inline">\(R\)</span>对乘法构成幺半群，则称<span class="math inline">\(R\)</span>为幺环</p>
 </blockquote>
-<ul>
-<li>提醒：域<span class="math inline">\(F\)</span>的乘法群<span class="math inline">\(F/\{0\}\)</span>的有限子群为循环群</li>
-</ul>
-<h4 id="域中的恒等式">域中的恒等式</h4>
-<p>如果域<span class="math inline">\(F\)</span>中恰好有<span class="math inline">\(q\)</span>个元，则称<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域</p>
+<p>为了引入整环，我们先定义零因子</p>
 <blockquote>
-<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，那么</p>
-<p><span class="math display">\[\prod_{a \in F^* = F/\{0\}} (x-a) = x^{q-1}-1\]</span></p>
+<p>如果存在<span class="math inline">\(a, b \in R\)</span>，如果<span class="math inline">\(a\neq 0, b \neq 0\)</span>，但<span class="math inline">\(ab=0\)</span>，则称<span class="math inline">\(a\)</span>为（左）零因子，<span class="math inline">\(b\)</span>为（右）零因子</p>
 </blockquote>
-<p>两边作差后为至多<span class="math inline">\(q-2\)</span>次多项式，但是有<span class="math inline">\(q-1\)</span>个根（域中的非零元），因此作差后应该为0</p>
 <blockquote>
-<p>设<span class="math inline">\(ch(F)=p\)</span>，那么对<span class="math inline">\(a_1,...,a_n \in F, m \in N\)</span>，有</p>
-<p><span class="math display">\[(a_1+...+a_n)^{p^m} = a_1^{p^m} + ... + a_n^{p^m}\]</span></p>
+<p>无零因子的交换幺环称为整环</p>
 </blockquote>
-<p>先证明<span class="math inline">\((a+b)^p = a^p+b^p\)</span>，这一点利用二项式定理以及<span class="math inline">\(px=0, \forall x \in F\)</span>，然后对<span class="math inline">\(n,m\)</span>依次归纳</p>
-<h4 id="线性空间">线性空间</h4>
-<blockquote>
-<p>称<span class="math inline">\(V\)</span>为域<span class="math inline">\(F\)</span>上的线性空间，如果</p>
-<ol type="1">
-<li><p><span class="math inline">\(V\)</span>按照加法构成Abel群</p></li>
-<li><p>有数乘运算，即<span class="math inline">\(\forall a \in F, x \in V\)</span>，定义<span class="math inline">\(ax\)</span>为数乘，要求</p></li>
-</ol>
+<h4 id="例子">例子</h4>
 <ul>
-<li><span class="math inline">\(ax\in V\)</span>，<span class="math inline">\(1x = x\)</span>，<span class="math inline">\(abx=(ab)x\)</span>，<span class="math inline">\(a(x+y)=ax+ay\)</span>，<span class="math inline">\((a+b)x=ax+bx\)</span></li>
-</ul>
-</blockquote>
-<h4 id="域扩张">域扩张</h4>
-<p>当<span class="math inline">\(F/E\)</span>为域扩张时，定义数乘为<span class="math inline">\(F\)</span>中的乘法，那么<span class="math inline">\(F\)</span>形成<span class="math inline">\(E\)</span>上的线性空间</p>
-<p>该线性空间的维数，称为域扩张的次数，记为<span class="math inline">\([F:E]\)</span></p>
+<li><p><span class="math inline">\(Z\)</span>按整数加法，整数乘法构成整环</p></li>
+<li><p><span class="math inline">\(Z/mZ\)</span>按取模加法，取模乘法构成交换幺环</p></li>
+<li><p>记<span class="math inline">\(R[x]=\{a_0 + a_1x + ...+a_nx^n : a_0,a_1, ..., a_n \in R, n \in N\}\)</span>，</p>
+<p>在其上定义加法：<span class="math inline">\(\sum_i a_ix^i + \sum_i b_i x^i = \sum_i (a_i + b_i)x^i\)</span></p>
+<p>在其上定义乘法：<span class="math inline">\((\sum_i a_ix^i)(\sum_j b_jx^j) = \sum_k (\sum_{i+j=k} a_ib_j) x^k\)</span></p>
+<p>那么，<span class="math inline">\(R[x]\)</span>构成环（成为环<span class="math inline">\(R\)</span>上的一元多项式环），<span class="math inline">\(x\)</span>称为未定元</p>
 <ul>
-<li><p>设<span class="math inline">\(L/M\)</span>,<span class="math inline">\(M/K\)</span>为域扩张，并且<span class="math inline">\([L:M], [M:K]\)</span>有限，那么<span class="math inline">\([L:K]=[L:M][M:K]\)</span></p>
-<ul>
-<li>要证明这一点，取<span class="math inline">\(L/M, M/K\)</span>的一组基<span class="math inline">\(\{\alpha\}, \{\beta\}\)</span>，证明<span class="math inline">\(\{\alpha \beta\}\)</span>为<span class="math inline">\(L/K\)</span>的一组基</li>
+<li><span class="math inline">\(R\)</span>为交换环时，<span class="math inline">\(R[x]\)</span>也构成交换环</li>
+<li><span class="math inline">\(R\)</span>无零因子时，<span class="math inline">\(R[x]\)</span>也没有零因子</li>
+<li><span class="math inline">\(R\)</span>为幺环时，<span class="math inline">\(R[x]\)</span>也为幺环</li>
 </ul></li>
-<li><p>一些例子：<span class="math inline">\([C:Q]=2\)</span></p>
-<p>设<span class="math inline">\(F=\{a+b\sqrt{d}:a, b\in Q\}\)</span>，则<span class="math inline">\([F:Q]=2\)</span>，称为二次域</p></li>
+<li><p>记<span class="math inline">\(M_n(R) = \{(a_{ij})_{n \times n} : a_{ij} \in R\}\)</span>，称为<span class="math inline">\(R\)</span>上的<span class="math inline">\(n \times n\)</span>的矩阵环</p>
+<ul>
+<li><span class="math inline">\(R\)</span>为交换环时，<span class="math inline">\(M_n(R)\)</span>不一定为交换环</li>
+<li><span class="math inline">\(R\)</span>没有零因子时，<span class="math inline">\(M_n(R)\)</span>也不一定没有零因子</li>
+</ul></li>
 </ul>
-<h4 id="最小生成的子环子域">最小生成的子环/子域</h4>
+<h3 id="week10">week10</h3>
+<h4 id="环的性质">环的性质</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\emptyset \neq X \subseteq L\)</span>，那么</p>
-<p><span class="math inline">\(K[X] = \bigcap_{R \leq L, R \subseteq K\cup X} R\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子环，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子环，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩环</p>
-<p><span class="math inline">\(K(X)=\bigcap_{K \leq F \leq L, F \subseteq X}F\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子域，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子域，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩域</p>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(a_1, a_2,..., a_n \in R, b_1, ..., b_n \in R\)</span>，那么<span class="math inline">\((\sum_{i=1}^n a_i)(\sum_{j=1}^m b_j) = \sum_{i=1}^n \sum_{j=1}^m a_ib_j\)</span></p>
 </blockquote>
-<p>当<span class="math inline">\(X=\{a_1,...,a_n\}\)</span>时，也写<span class="math inline">\(K[X]=K[a_1,...,a_n]\)</span>，<span class="math inline">\(K(X)=K(a_1,...,a_n)\)</span></p>
-<p>特别的，<span class="math inline">\(K[a_1,...,a_n]\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式，<span class="math inline">\(K(a_1,...,a_n)\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式的分式，称为有理函数</p>
-<h4 id="单扩张">单扩张</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，如果存在<span class="math inline">\(a \in L\)</span>，使得<span class="math inline">\(K(a) = L\)</span>，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(K\)</span>的单扩张</p>
+<p>设<span class="math inline">\(R\)</span>为环，那么<span class="math inline">\(\forall a \in R, a * 0 = 0*a = 0\)</span></p>
 </blockquote>
-<h3 id="week15">week15</h3>
-<h4 id="代数元">代数元</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，如果有非零多项式<span class="math inline">\(f(x) \in K[x]\)</span>，使得<span class="math inline">\(f(\alpha) = 0\)</span>，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元，否则称<span class="math inline">\(\alpha\)</span>为超越元</p>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(R\)</span>中有零因子当且仅当<span class="math inline">\(R\)</span>中有消去律（即<span class="math inline">\(a \neq 0\)</span>时，<span class="math inline">\(ab=ac \Leftrightarrow b=c\)</span>, <span class="math inline">\(ba=ca \Leftrightarrow b=c\)</span>）</p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，对<span class="math inline">\(a \in R, n \in Z^+\)</span>，定义<span class="math inline">\(na = \overbrace{a + a +... +a}^{n个}\)</span></p>
+<p>对<span class="math inline">\(n=0\)</span>，定义<span class="math inline">\(na = 0\)</span></p>
+<p>对<span class="math inline">\(n &lt; 0\)</span>，定义<span class="math inline">\(na = (-n)(-a) = \overbrace{-a + (-a) +... +(-a)}^{-n个}\)</span></p>
+<p>那么，对<span class="math inline">\(m \in Z, a, b\in R\)</span>，有<span class="math inline">\((ma)b=m(ab)=a(mb)\)</span></p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换环，那么<span class="math inline">\((a+b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}\)</span></p>
+</blockquote>
+<h4 id="子环">子环</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(S \subseteq R\)</span>且<span class="math inline">\(S \neq \emptyset\)</span>，如果<span class="math inline">\(S\)</span>按<span class="math inline">\(R\)</span>中的加法和乘法构成环，那么称<span class="math inline">\(S\)</span>为<span class="math inline">\(R\)</span>的子环，记为<span class="math inline">\(S \leq R\)</span></p>
 </blockquote>
 <ul>
-<li>如果<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(Q\)</span>上的代数元，则称其为代数数，否则，称其为超越数</li>
-<li>如果<span class="math inline">\(\alpha\)</span>是首一的<span class="math inline">\(f(x) \in Z[x]\)</span>的根，则称<span class="math inline">\(\alpha\)</span>为代数整数（比如<span class="math inline">\(x^2 = 3\)</span>的根）</li>
-<li>有理数一定是代数数</li>
+<li><span class="math inline">\(S \leq R\)</span>等价于<span class="math inline">\(S\)</span>对加法，减法，乘法封闭</li>
+<li><span class="math inline">\(O = \{0\}\)</span>是最小子环，称为零环</li>
+<li>对<span class="math inline">\(O \neq S \subseteq R\)</span>，有<span class="math inline">\(S\)</span>中的单位元<span class="math inline">\(1 \neq 0\)</span></li>
 </ul>
-<p>当把代数整数限制在有理数上时，我们有</p>
+<h4 id="理想">理想</h4>
 <blockquote>
-<p>有理数中的代数整数只有整数</p>
-</blockquote>
-<p>“<span class="math inline">\(\Leftarrow\)</span>”：显然</p>
-<p>"<span class="math inline">\(\Rightarrow\)</span>"：如果<span class="math inline">\(r = \frac{a}{b}, (a, b) = 1\)</span>，满足<span class="math inline">\(f(r) = \frac{a^n}{b^n} + a_1 \frac{a^{n-1}}{b^{n-1}} + ... + a_n = 0\)</span></p>
-<p>那么<span class="math inline">\(a^n + a_1ba^{n-1} + ... + b^n a_b = 0\)</span>，因此<span class="math inline">\(b \mid a^n\)</span>，但是<span class="math inline">\((a, b) = 1\)</span>，于是<span class="math inline">\(b = 1\)</span></p>
-<h4 id="极小多项式">极小多项式</h4>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的代数元，那么<span class="math inline">\(I = \{g(x) \in K[x] \mid g(\alpha) = 0\}\)</span>是<span class="math inline">\(K[x]\)</span>的理想</p>
-<p>注意到<span class="math inline">\(K\)</span>是一个域，因此<span class="math inline">\(K[x]\)</span>是一个Euclid整环，这也就是说存在<span class="math inline">\(f(x)\)</span>使得<span class="math inline">\(I = (f(x))\)</span></p>
-<p>我们称<span class="math inline">\(f(x)\)</span>为<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式</p>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(\emptyset \neq I \subseteq R\)</span>，如果</p>
 <ul>
-<li><span class="math inline">\(f(x)\)</span>是<span class="math inline">\(K[x]\)</span>的不可约元</li>
+<li>若<span class="math inline">\(a, b\in I\)</span>，那么<span class="math inline">\(a \pm b \in I\)</span></li>
+<li>若<span class="math inline">\(a \in I, r \in R\)</span>，那么<span class="math inline">\(a*r, r*a \in I\)</span></li>
 </ul>
-<h4 id="域扩张的次数">域扩张的次数</h4>
+<p>则称<span class="math inline">\(I\)</span>为环<span class="math inline">\(R\)</span>的理想</p>
+</blockquote>
+<p>理想相当于正规子环</p>
+<h4 id="剩余类">剩余类</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的<span class="math inline">\(n\)</span>次代数元（这个次数是指极小多项式的次数），那么</p>
-<ol type="1">
-<li><p><span class="math inline">\(K(\alpha) = K[\alpha]\)</span>，并且<span class="math inline">\([K(\alpha) : K] = n\)</span>，对应的线性空间的一组基为<span class="math inline">\(\alpha^0, \alpha^1, ..., \alpha^{n-1}\)</span></p></li>
-<li><p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span>，那么<span class="math inline">\(K(\alpha) \cong K[x] / (f(x))\)</span></p></li>
+<p>设<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的理想，对<span class="math inline">\(a, b \in R\)</span>，如果<span class="math inline">\(a - b \in I\)</span>，则称<span class="math inline">\(a \equiv b(mod\;I)\)</span>，称为<span class="math inline">\(a, b\)</span>模<span class="math inline">\(I\)</span>同余</p>
+</blockquote>
+<ul>
+<li>这是一个等价关系</li>
+</ul>
+<blockquote>
+<p>按模<span class="math inline">\(I\)</span>同余关系形成的等价类，即<span class="math inline">\(\bar{a} = a + I\)</span>，称为<span class="math inline">\(a\)</span>在模<span class="math inline">\(I\)</span>下的<strong>剩余类</strong></p>
+<p>对剩余类，我们定义加法和乘法</p>
+<ul>
+<li><span class="math inline">\(\bar{a} + \bar{b} = \overline{a+b}\)</span></li>
+<li><span class="math inline">\(\bar{a} * \bar{b} = \overline{a*b}\)</span></li>
+</ul>
+</blockquote>
+<h4 id="商环">商环</h4>
+<blockquote>
+<p>设<span class="math inline">\(I\)</span>为环<span class="math inline">\(R\)</span>的理想，那么<span class="math inline">\(I\)</span>的剩余类按照剩余类的加法和乘法构成环，称为商环</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(mZ\)</span>为<span class="math inline">\(Z\)</span>的理想，<span class="math inline">\(a \equiv b (mod\;mZ)\)</span>相当于<span class="math inline">\(a \equiv b(mod\;m)\)</span></li>
+</ul>
+<h4 id="同构">同构</h4>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>为环<span class="math inline">\(R\)</span>到环<span class="math inline">\(R&#39;\)</span>的映射，若<span class="math inline">\(\forall a, b, \in R\)</span>，有</p>
+<ul>
+<li><span class="math inline">\(\sigma(a+b)=\sigma(a)+\sigma(b)\)</span></li>
+<li><span class="math inline">\(\sigma(ab)=\sigma(a)\sigma(b)\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(\sigma\)</span>为<span class="math inline">\(R\)</span>到<span class="math inline">\(R&#39;\)</span>的同态</p>
+</blockquote>
+<ul>
+<li>类似于群，我们定义满同态，单同态和同构，特别的，同构记为<span class="math inline">\(R \cong R&#39;\)</span></li>
+</ul>
+<h4 id="环同态基本定理">环同态基本定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>为<span class="math inline">\(R \to \bar{R}\)</span>的同态，则<span class="math inline">\(\ker(\sigma) := \{a \in R : \sigma(a) = \bar{0}\}\)</span>称为同态核，则</p>
+<ul>
+<li><span class="math inline">\(\ker(\sigma) \lhd R\)</span></li>
+<li><span class="math inline">\(\text{Im}(\sigma) = \sigma(R) = \{\sigma(r):r\in R\} \leq \bar{R}\)</span></li>
+<li><span class="math inline">\(R/\ker(\sigma) \cong \text{Im}(\sigma)\)</span></li>
+</ul>
+</blockquote>
+<h4 id="环同态第一定理">环同态第一定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(I \lhd R\)</span>，那么</p>
+<ul>
+<li><span class="math inline">\(R\)</span>中包含<span class="math inline">\(I\)</span>的子环和<span class="math inline">\(R/I\)</span>的子环之间存在一一对应关系<span class="math inline">\(S \to S/I\)</span></li>
+<li>如果<span class="math inline">\(I\subseteq S\)</span>，<span class="math inline">\(S \leq R \Rightarrow S/I \leq R/I\)</span></li>
+<li>如果<span class="math inline">\(I \subseteq S, S \leq R\)</span>，那么<span class="math inline">\(S \lhd R \Leftrightarrow S/I \lhd R/I\)</span></li>
+<li>如果<span class="math inline">\(I\subseteq S\)</span>，<span class="math inline">\(S \lhd R\)</span>，那么<span class="math inline">\(R/S \cong (R/I)/(S/I)\)</span></li>
+</ul>
+</blockquote>
+<h4 id="环同态第二定理">环同态第二定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(I \lhd R\)</span>且<span class="math inline">\(S \leq R\)</span>，那么<span class="math inline">\(I\cap S \lhd S\)</span>，并且<span class="math inline">\(S/(I \cap S) \cong (I+S)/I\)</span></p>
+</blockquote>
+<h4 id="环的外直和">环的外直和</h4>
+<blockquote>
+<p>设<span class="math inline">\(R_1, R_2,...,R_n\)</span>为环，令<span class="math inline">\(R = R_1 \oplus ... \oplus R_n\)</span></p>
+<p>在其上定义加法：<span class="math inline">\((r_1,...,r_n)+(r_1&#39;,...r_n&#39;) = (r_1+r_1&#39;,...,r_n+r_n&#39;)\)</span></p>
+<p>定义乘法<span class="math inline">\((r_1,...,r_n)*(r_1&#39;,...r_n&#39;)=(r_1r_1&#39;,...,r_nr_n&#39;)\)</span></p>
+<p>那么<span class="math inline">\(R\)</span>按上述运算构成环，称为环<span class="math inline">\(R_1, ..., R_n\)</span>的（外）直和</p>
+</blockquote>
+<hr />
+<h3 id="week-11">week 11</h3>
+<h4 id="理想的交">理想的交</h4>
+<blockquote>
+<p>设<span class="math inline">\(I_1, I_2, ..., I_n\)</span>为理想，那么<span class="math inline">\(I = \bigcap_{j=1}^i I_j\)</span>也是理想</p>
+</blockquote>
+<h4 id="生成的理想">生成的理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(X \subseteq R\)</span>，那么称由<span class="math inline">\(X\)</span>生成的理想为<span class="math inline">\(\langle X \rangle = \bigcap_{X \subseteq I \lhd R} I\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(\langle X \rangle\)</span>是包含<span class="math inline">\(X\)</span>的最小的理想</li>
+<li><span class="math inline">\(\langle X \rangle = \{\sum_{i=1}^n r_i x_is_i:x_i\in X, r_i, s_i \in R, n \in Z^+\}\)</span>（考虑包含<span class="math inline">\(X\)</span>的理想应该含有什么数字，以及这个集合确实构成理想）</li>
+<li>当<span class="math inline">\(R\)</span>为交换幺环时，<span class="math inline">\(\langle X \rangle = \{\sum_{i=1}^n r_i x_i:x_i\in X, r_i\in R, n \in Z^+\}\)</span>，此时，如果<span class="math inline">\(X=\{x_1,...,x_k\}\)</span>，那么我们也记<span class="math inline">\(\langle X\rangle = (x_1,...,x_k)\)</span></li>
+<li>当<span class="math inline">\(R\)</span>为交换幺环时，称<span class="math inline">\((a) = \{ra:r\in R\}\)</span>为<span class="math inline">\(a\)</span>生成的<strong>主理想</strong></li>
+</ul>
+<h4 id="理想的和">理想的和</h4>
+<blockquote>
+<p>设<span class="math inline">\(I_1,I_2,...,I_n\)</span>为理想，那么<span class="math inline">\(\sum_{i=1}^n I_i\)</span>也为理想，称为理想的和</p>
+</blockquote>
+<h4 id="理想的积">理想的积</h4>
+<blockquote>
+<p>设<span class="math inline">\(I_1,I_2,...,I_n\)</span>为理想，那么称<span class="math inline">\(I_1 \cdot I_2 ... \cdot I_n = \langle I_1I_2...I_n \rangle = \{\sum_{j=1}^m \prod_{k=1}^n i_k : i_k \in I_k, m \in Z^+\}\)</span>为理想的积</p>
+</blockquote>
+<p>一般用<span class="math inline">\(I_1I_2...I_n\)</span>直接来代指<span class="math inline">\(I_1 \cdot I_2 ... \cdot I_n\)</span></p>
+<p>理想的积对理想的和有分配率</p>
+<ul>
+<li><span class="math inline">\(I_1 \cdot (I_2 + I_3) = I_1 \cdot I_2 + I_1 \cdot I_3\)</span></li>
+<li><span class="math inline">\((I_2 + I_3) \cdot I_1= I_2 \cdot I_1 + I_3 \cdot I_1\)</span></li>
+</ul>
+<h4 id="环的外直和-1">环的外直和</h4>
+<p>设<span class="math inline">\(R = R_1 \oplus R_2 ... \oplus R_n\)</span>，设<span class="math inline">\(R_i^* = \{(0,0,...0,r_i,0,...,0):r_i \in R_i\}\)</span></p>
+<p>那么和群一致的有：</p>
+<ul>
+<li><span class="math inline">\(R_1^* \oplus ... \oplus R_n^* = R\)</span></li>
+<li><span class="math inline">\(R_i^* \lhd R\)</span></li>
+<li><span class="math inline">\(R_i^* \cap \sum_{j \neq i} R_j^* = (0) = O\)</span></li>
+</ul>
+<h4 id="环的内直和">环的内直和</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(R_1,R_2,...,R_n\)</span>为理想，如果</p>
+<ul>
+<li><span class="math inline">\(R_1 \oplus ... \oplus R_n = R\)</span></li>
+<li><span class="math inline">\(R_i \cap \sum_{j \neq i} R_j = O\)</span></li>
+</ul>
+<p>则称<span class="math inline">\(R\)</span>为<span class="math inline">\(R_1,R_2,...,R_n\)</span>的内直和</p>
+</blockquote>
+<p>第二个条件和群一样，可以等价为<span class="math inline">\(R\)</span>中的元素可以唯一的表为<span class="math inline">\(r_1+...+r_n\)</span>的形式</p>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为环<span class="math inline">\(R_1,...,R_n\)</span>的内直和，那么<span class="math inline">\(R \cong R_1 \oplus ... \oplus R_n\)</span></p>
+</blockquote>
+<h4 id="互素">互素</h4>
+<blockquote>
+<p>如果幺环<span class="math inline">\(R\)</span>的理想<span class="math inline">\(I,J\)</span>满足<span class="math inline">\(I+J=R\)</span>，则称<span class="math inline">\(I,J\)</span>互素</p>
+</blockquote>
+<ul>
+<li>互素的充要条件为<span class="math inline">\(\exists i \in I, j \in J\)</span>使<span class="math inline">\(i+j=1\)</span></li>
+</ul>
+<h3 id="week12">week12</h3>
+<h4 id="中国剩余定理">中国剩余定理</h4>
+<blockquote>
+<p>设幺环<span class="math inline">\(R\)</span>上的理想<span class="math inline">\(A_1, A_2, ..., A_n\)</span>两两互素，那么</p>
+<p><span class="math display">\[R/\bigcap_{i=1}^n A_i \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
+<p>特别的，当<span class="math inline">\(R\)</span>为交换幺环时，<span class="math inline">\(\bigcap_{i=1}^n A_i = A_1A_2...A_n\)</span>，从而</p>
+<p><span class="math display">\[R/ A_1A_2...A_n \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
+</blockquote>
+<p>要证明这个定理，我们先证明一个引理</p>
+<blockquote>
+<p>设<span class="math inline">\(I, J, K\)</span>为幺环<span class="math inline">\(R\)</span>的理想，那么</p>
+<ol type="i">
+<li><p>当<span class="math inline">\(I\)</span>与<span class="math inline">\(J, K\)</span>都互素时，<span class="math inline">\(I\)</span>与<span class="math inline">\(JK\)</span>互素</p></li>
+<li><p><span class="math inline">\(I, J\)</span>互素时，<span class="math inline">\(I \cap J = IJ+JI\)</span>，特别的，如果<span class="math inline">\(R\)</span>为交换幺环，那么<span class="math inline">\(I\cap J = IJ+JI=IJ\)</span></p></li>
 </ol>
 </blockquote>
-<ol type="1">
-<li>设<span class="math inline">\(g(x) \in K[x]\)</span>，且<span class="math inline">\(g(\alpha) \neq 0\)</span>，我们证明<span class="math inline">\(g(\alpha)\)</span>存在逆元</li>
+<p>(i)的证明，由于<span class="math inline">\(I\)</span>与<span class="math inline">\(J, K\)</span>互素，因此存在<span class="math inline">\(i_1, i_2 \in I, j \in J, k \in K\)</span>，使得<span class="math inline">\(i_1 + j = 1, i_2+k = 1\)</span>，因此<span class="math inline">\(1 = (i_1+j)(i_2+k)=(i_1i_2+ji_2+i_1k)+jk \in I+JK\)</span>，从而<span class="math inline">\(I\)</span>与<span class="math inline">\(JK\)</span>互素</p>
+<p>(ii)的证明类似，由于<span class="math inline">\(I, J\)</span>为理想，因此<span class="math inline">\(IJ \subseteq I, J\)</span>，类似<span class="math inline">\(JI \subseteq I \cap J\)</span>，从而<span class="math inline">\(IJ+JI \subseteq I \cap J\)</span></p>
+<p>由于<span class="math inline">\(I, J\)</span>互素，取<span class="math inline">\(i+j=1\)</span>，那么<span class="math inline">\(\forall x \in I \cap J, x=1x=ix+jx\in IJ+JI\)</span>，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>下面我们正式开始证明中国剩余定理</p>
+<p>构造<span class="math inline">\(R\)</span>到<span class="math inline">\(R/A_1 \oplus R/A_2 \oplus ... \oplus R/A_n\)</span>的映射<span class="math inline">\(\sigma\)</span>：<span class="math inline">\(\sigma(x) = (x+A_1, x+A_2, ..., x+A_n)\)</span></p>
+<p>不难证明这是一个同态，考虑同态核：将有<span class="math inline">\(x+A_1 = A_1, ..., x+A_n=A_n\)</span>，也即<span class="math inline">\(x\in \bigcap_{i=1}^n A_i\)</span></p>
+<p>再考虑同态像，我们依赖于下面的定理，事实上，下面的定理和数论形式的中国剩余定理更为接近</p>
+<blockquote>
+<p>任给<span class="math inline">\(a_1, a_2, ..., a_n \in R\)</span>，那么方程组</p>
+<p><span class="math display">\[\begin{cases} x \equiv a_1(mod\;A_1) \\ x \equiv a_2(mod\;A_2) \\ ... \\x \equiv a_n(mod\;A_n)\end{cases}\]</span>在<span class="math inline">\(R\)</span>中有解，并且在模<span class="math inline">\(\bigcap_{i=1}^n A_i\)</span>的意义下唯一确定</p>
+</blockquote>
+<p>令<span class="math inline">\(B_i = \prod_{j \neq i} A_j\)</span>，根据引理(i)，<span class="math inline">\(B_i\)</span>与<span class="math inline">\(A_i\)</span>互素，因此存在<span class="math inline">\(a_i&#39; \in A_i, b_i \in B_i\)</span>使得<span class="math inline">\(a_i&#39; + b_i = 1\)</span></p>
+<p>此时，对<span class="math inline">\(j \neq i\)</span>，根据<span class="math inline">\(A_j\)</span>是一个理想，将有<span class="math inline">\(b_i \in A_j\)</span>，即<span class="math inline">\(b_i \equiv 0(mod\;A_j)\)</span>，而<span class="math inline">\(b_i \equiv 1(mod\;A_i)\)</span></p>
+<p>那么，令<span class="math inline">\(x_0 = \sum_{i=1}^n a_ib_i\)</span>，这就是原方程组的一个解</p>
+<p>不妨设方程还有另一个<span class="math inline">\(x\)</span>，那么由<span class="math inline">\((x-x_0) \in A_1, ..., (x-x_0)\in A_n\)</span>，得到<span class="math inline">\(x-x_0 \in \bigcap_{i=1}^n A_i\)</span>，也即<span class="math inline">\(x \equiv x_0(mod\;\bigcap_{i=1}^n A_i)\)</span></p>
+<p>根据上面的定理，我们可以知道<span class="math inline">\(\sigma\)</span>实际上是一个满同态，因此由环的同态基本定理</p>
+<p><span class="math display">\[R/\bigcap_{i=1}^n A_i \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
+<p>当<span class="math inline">\(R\)</span>是交换幺环时，运用引理(ii)即可归纳证明其形式</p>
+<h4 id="单位群">单位群</h4>
+<blockquote>
+<p>对幺环<span class="math inline">\(R\)</span>，称<span class="math inline">\(u\)</span>为单位，当且仅当<span class="math inline">\(u\)</span>为乘法可逆元，也即存在<span class="math inline">\(u&#39; \in R\)</span>使得<span class="math inline">\(uu&#39; = 1\)</span></p>
+</blockquote>
+<p>注意到，如果<span class="math inline">\(u, v\)</span>为单位，那么<span class="math inline">\(u^{-1}, uv\)</span>也为单位，这告诉我们<span class="math inline">\(U(R) = \{u:u\in R, u\text{是单位}\}\)</span>按乘法构成一个群</p>
+<ul>
+<li><span class="math inline">\(U(Z) = \{\pm 1\}\)</span></li>
+<li>称<span class="math inline">\(Z[i] = \{a+bi:a, b \in Z\}\)</span>为Gauss复整数环，则<span class="math inline">\(U(Z[i]) = \{\pm1, \pm i\}\)</span></li>
+<li>称<span class="math inline">\(Z[w] = \{a+bw : a, b\in Z\}\)</span>为Eisenstein环，其中<span class="math inline">\(w\)</span>为非<span class="math inline">\(1\)</span>的三次单位根，并且<span class="math inline">\(U(Z[w]) = \{\pm 1, \pm w, \pm w^2 \}\)</span></li>
+<li>设<span class="math inline">\(R_1, R_2, ..., R_n\)</span>为幺环，那么<span class="math inline">\(U(R_1 \oplus R_2 \oplus ...\oplus R_n) = U(R_1) \times U(R_2) ... \times U(R_n)\)</span></li>
+</ul>
+<h4 id="素理想">素理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，如果<span class="math inline">\(\forall a, b \in R, ab \in I\)</span>可以推出<span class="math inline">\(a \in I\)</span>或者<span class="math inline">\(b \in I\)</span>，那么称<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的素理想</p>
+</blockquote>
+<h4 id="极大理想">极大理想</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，如果<span class="math inline">\(J \lhd R, I \subseteq J \subseteq R\)</span>可以推出<span class="math inline">\(J = I\)</span>或者<span class="math inline">\(J=R\)</span>，那么称<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的极大理想</p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\((0)\)</span>是<span class="math inline">\(Z\)</span>的素理想，但不是极大理想</p>
+<p>对于素数<span class="math inline">\(p\)</span>，<span class="math inline">\((p)\)</span>是<span class="math inline">\(Z\)</span>的素理想，也是极大理想</p>
+<p>其余的<span class="math inline">\((n)\)</span>既不是<span class="math inline">\(Z\)</span>的素理想，也不是极大理想</p></li>
+</ul>
+<h4 id="域">域</h4>
+<blockquote>
+<p>若<span class="math inline">\(F\)</span>为环，<span class="math inline">\(F/\{0\}\)</span>构成Abel群，那么，称<span class="math inline">\(F\)</span>构成域</p>
+</blockquote>
+<ul>
+<li><p>域一定是整环</p>
+<p><span class="math inline">\(a \neq 0\)</span>时，<span class="math inline">\(ab=0\Rightarrow a^{-1}ab = 0 \Rightarrow b=0\)</span></p></li>
+</ul>
+<h4 id="素理想与整环极大理想与域">素理想与整环，极大理想与域</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，则</p>
+<ol type="i">
+<li><p><span class="math inline">\(R\)</span>为整环，当且仅当<span class="math inline">\(O\)</span>为<span class="math inline">\(R\)</span>的素理想</p></li>
+<li><p><span class="math inline">\(R\)</span>为域，当且仅当<span class="math inline">\(O\)</span>为<span class="math inline">\(R\)</span>的极大理想</p></li>
 </ol>
-<p>由于<span class="math inline">\(f(\alpha)\)</span>是极小多项式（为不可约元），因此<span class="math inline">\((f(x), g(x))=1\)</span>，那么存在<span class="math inline">\(u, v\)</span>使得<span class="math inline">\(uf + gv=1\)</span>，代入<span class="math inline">\(\alpha\)</span>，得到<span class="math inline">\(g(\alpha) v(\alpha) = 1\)</span>，这可以说明<span class="math inline">\(K(\alpha) = K[\alpha]\)</span></p>
-<p>下面，我们考虑证明<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>是一组基，通过取模的方式，其足够表出<span class="math inline">\(K(\alpha)\)</span>中的所有元素，线性无关则可以根据极小多项式的性质来证明</p>
-<ol start="2" type="1">
-<li>设<span class="math inline">\(\sigma : K[x] \to K(\alpha)\)</span>，<span class="math inline">\(\sigma(f(x)) = f(\alpha)\)</span>，这是一个满同态，同态核为<span class="math inline">\((f(x))\)</span></li>
+</blockquote>
+<p>(i)是平凡的，考虑(ii)，<span class="math inline">\(R\)</span>为域等价于对任意<span class="math inline">\(a \neq 0\)</span>存在逆元，</p>
+<p>如果存在<span class="math inline">\(I \lhd R\)</span>，使得<span class="math inline">\(O \subseteq I \subseteq R\)</span>，当<span class="math inline">\(I \neq O\)</span>，任取<span class="math inline">\(i \in I - O\)</span>，那么<span class="math inline">\(1 \in i^{-1}I=I\)</span>，从而<span class="math inline">\(I=R\)</span></p>
+<p>反之，考虑<span class="math inline">\(O \subseteq \langle a\rangle \subseteq R\)</span>，当<span class="math inline">\(a \neq 0\)</span>时，有<span class="math inline">\(\langle a \rangle =R\)</span>，于是<span class="math inline">\(a\)</span>存在逆元</p>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(P \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，则</p>
+<ol type="i">
+<li><p><span class="math inline">\(P\)</span>为素理想当且仅当<span class="math inline">\(R/P\)</span>为整环</p></li>
+<li><p><span class="math inline">\(P\)</span>为极大理想当且仅当<span class="math inline">\(R/P\)</span>为域</p></li>
 </ol>
+</blockquote>
+<p>运用上面的引理和定义证明即可</p>
 <ul>
-<li><span class="math inline">\(R[i] = C \cong R[x]/(x^2 + 1)\)</span>，此时<span class="math inline">\(i\)</span>可以看作是取模之后的<span class="math inline">\(x\)</span></li>
+<li>极大理想一定是素理想</li>
 </ul>
-<p>考虑上述定理的“反面”</p>
 <blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>不可约，那么存在<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，使得存在<span class="math inline">\(\alpha \in L\)</span>有<span class="math inline">\(K(\alpha) = L\)</span>，并且<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span></p>
-</blockquote>
+<p>设<span class="math inline">\(\sigma\)</span>是环<span class="math inline">\(R\)</span>到<span class="math inline">\(R&#39;\)</span>的同态，那么</p>
 <ul>
-<li><p><span class="math inline">\(F = K[x] / (f(x))\)</span>构成一个域（不可约元的理想为极大理想），在这个域中，把<span class="math inline">\(\bar{x}=x + r(x)f(x), r(x) \in K[x]\)</span>“看作”<span class="math inline">\(\alpha\)</span>，那么<span class="math inline">\(\alpha\)</span>对应的极小多项式自然为<span class="math inline">\(f(x)\)</span></p>
-<p>这里的“看作”实际上就是一堆代换，不难感性理解</p></li>
+<li>对<span class="math inline">\(\ker \sigma \subseteq M\)</span>，<span class="math inline">\(M\)</span>为素理想当且仅当<span class="math inline">\(\sigma(M)\)</span>为素理想</li>
+<li>对<span class="math inline">\(\ker \sigma \subseteq M\)</span>，<span class="math inline">\(M\)</span>为极大理想当且仅当<span class="math inline">\(\sigma(M)\)</span>为极大理想</li>
 </ul>
-<h4 id="有限扩张">有限扩张</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\([L:K]\)</span>有穷当且仅当存在有限个<span class="math inline">\(K\)</span>上的代数元<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得<span class="math inline">\(K(\alpha_1, ..., \alpha_n) = L\)</span></p>
 </blockquote>
-<p>必要性：取<span class="math inline">\(L/K\)</span>的一组基<span class="math inline">\(\alpha_1, ..., \alpha_n\)</span>，那么<span class="math inline">\(L \subseteq K(\alpha_1, ..., \alpha_n) \subseteq L\)</span>，于是<span class="math inline">\(L=K(\alpha_1,...,\alpha_n)\)</span>，因为<span class="math inline">\([L:K]\)</span>有限，因此每个<span class="math inline">\(\alpha_i\)</span>都存在一个极小多项式</p>
-<p>充分性：设<span class="math inline">\(K_0 = K, K_i = K_{i-1}(\alpha_i)\)</span>，所有的<span class="math inline">\(\alpha_i\)</span>作为<span class="math inline">\(K\)</span>上的代数元，一定也是<span class="math inline">\(K_{i-1}\)</span>上的代数元，从而<span class="math inline">\([L:K] = \prod_{i=1}^n [K_i : K_{i-1}] &lt; \infty\)</span></p>
-<h4 id="代数扩张">代数扩张</h4>
+<p>上述定理实际上可以表明，包括核的素/极大理想和像的素/极大理想存在一一对应</p>
+<p>证明：<span class="math inline">\(M\)</span>为<span class="math inline">\(R\)</span>的素理想，当且仅当<span class="math inline">\(R/M\)</span>为整环，当且仅当<span class="math inline">\(\sigma(R)/\sigma(M)\)</span>为整环（第一同构定理），当且仅当<span class="math inline">\(\sigma(M)\)</span>为素理想，极大理想类似</p>
+<h4 id="素理想的存在性">素理想的存在性</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/M, M/K\)</span>为域的代数扩张，那么<span class="math inline">\(L/K\)</span>为域的代数扩张</p>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \lhd R\)</span>且存在<span class="math inline">\(a \in R\)</span>，使得<span class="math inline">\(I \cap \{a^n:n\in Z\} = \emptyset\)</span>，那么必然存在包含<span class="math inline">\(I\)</span>的素理想<span class="math inline">\(P\)</span>，使得<span class="math inline">\(P \cap \{a^n:n\in Z\} = \emptyset\)</span></p>
 </blockquote>
-<p>证明任给<span class="math inline">\(\alpha \in L\)</span>，证明<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
-<p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(M\)</span>中的极小多项式为<span class="math inline">\(f(x)=x^n + a_1x^{n-1} + ... + a_n\)</span>，注意到<span class="math inline">\(a_1,...,a_n\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
-<p>那么<span class="math inline">\([K(a_1, ..., a_n, \alpha) : K] = [K(a_1,...,\alpha):K(a_1,...,a_n)]*[K(a_1,...,a_n):K] &lt; \infty\)</span></p>
-<p>注意到<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K(a_1, ..., a_n)\)</span>上的代数元，上式成立，由于<span class="math inline">\(\alpha\)</span>在扩张后的域中，因此<span class="math inline">\(\alpha\)</span>为代数元</p>
-<h4 id="代数闭包">代数闭包</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\(\overline{K} = \{a \in L : \alpha \text{为K的代数元}\}\)</span>为<span class="math inline">\(L\)</span>的子域，并且<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span></p>
-</blockquote>
+<p>证明较为复杂，略过</p>
 <ul>
-<li><p>我们给出一个引理：设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，则<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元的充要条件为存在不全为<span class="math inline">\(0\)</span>的<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得令<span class="math inline">\(V = \sum K\alpha_i\)</span>时，有<span class="math inline">\(\alpha V \subseteq V\)</span></p>
-<p>充分性：取<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>为系数即可</p>
-<p>必要性：不妨设<span class="math inline">\(\alpha \alpha_i = \sum_{j=1}^n a_{ij} \alpha_j\)</span>，那么<span class="math inline">\(\alpha\)</span>时特征多项式<span class="math inline">\(|\lambda I - A| = 0\)</span>的根，其中<span class="math inline">\(A = (a_{ij})\)</span></p></li>
+<li>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，那么存在包含<span class="math inline">\(I\)</span>的极大理想</li>
 </ul>
-<p>利用引理，证明对加法和乘法封闭时，取<span class="math inline">\(\alpha, \beta\)</span>的极小多项式<span class="math inline">\(f, g\)</span>的次数为<span class="math inline">\(n, m\)</span>，令<span class="math inline">\(V=\sum k_{ij}\alpha^i \beta^j\)</span></p>
-<p>证明<span class="math inline">\((\alpha \pm \beta) V \subseteq V\)</span>，<span class="math inline">\(\alpha \beta V \subseteq V\)</span>即可，逆元的证明是平凡的</p>
-<p>下面考虑证明<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span>，设<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(\overline{K}\)</span>上的代数元，设其极小多项式为<span class="math inline">\(f(x)=x^n+a_1x^{n-1}+...+a_n\)</span></p>
-<p>由于系数都在<span class="math inline">\(K(a_1,...,a_n)\)</span>中，因此<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(K(a_1,...,a_n)\)</span>上的代数元，那么类似前面的分析，有<span class="math inline">\([K(a_1,...,a_n, \alpha):K]&lt;\infty\)</span>，从而<span class="math inline">\(\alpha \in \overline{K}\)</span></p>
-<h4 id="代数闭域">代数闭域</h4>
+<p>注意到<span class="math inline">\(I \cap \{1\} = \emptyset\)</span>，说明极大的满足<span class="math inline">\(P \cap \{1\} = \emptyset\)</span>的理想为极大理想即可</p>
+<h4 id="诣零根">诣零根</h4>
 <blockquote>
-<p>如果<span class="math inline">\(F = \overline{F}\)</span>，那么称<span class="math inline">\(F\)</span>为代数闭域</p>
+<p>设环<span class="math inline">\(R\)</span>为非零元，则称<span class="math inline">\(r(R)=\bigcap_{P\text{为$R$的素理想}} P\)</span>为<span class="math inline">\(R\)</span>的诣零根</p>
 </blockquote>
-<p>代数闭域中任何非常数多项式可以分解为一次多项式的乘积</p>
+<p>这个结构的名字可能比较奇怪，需要从另一个角度来理解</p>
+<blockquote>
+<p><span class="math inline">\(r(R)\)</span>恰为<span class="math inline">\(A\)</span>中所有的幂零元构成</p>
+</blockquote>
+<p>如果<span class="math inline">\(a^n = 0\in P\)</span>，那么由素理想的性质，不难推出<span class="math inline">\(a \in P\)</span></p>
+<p>如果<span class="math inline">\(a^n \neq 0\)</span>，那么<span class="math inline">\(\{a^n\} \cap O = \emptyset\)</span>，根据上一个定理，存在<span class="math inline">\(P\)</span>，使得<span class="math inline">\(a \notin P\)</span></p>
 <ul>
-<li>复数域<span class="math inline">\(C\)</span>，全体代数数构成的域<span class="math inline">\(\overline{Q}\)</span>都是代数闭域</li>
+<li><span class="math inline">\(r(Z)=O\)</span></li>
 </ul>
-<h4 id="有限域">有限域</h4>
+<h3 id="week13">week13</h3>
+<h4 id="形式幂级数环">形式幂级数环</h4>
 <blockquote>
-<p>设<span class="math inline">\(F\)</span>为有限域，则<span class="math inline">\(|F|\)</span>为素数幂次</p>
-</blockquote>
-<p>设<span class="math inline">\(F\)</span>为有限域，不难知道<span class="math inline">\(ch(F)\)</span>为素数，设<span class="math inline">\(E = \{0, e, ..., (p-1)e\}\)</span>为<span class="math inline">\(p\)</span>元域，而<span class="math inline">\([F:E]\)</span>为有限扩张，设其为<span class="math inline">\(n\)</span>，那么有<span class="math inline">\(|F|=|E|^n = p^n\)</span></p>
-<h4 id="形式导数">形式导数</h4>
-<blockquote>
-<p>设<span class="math inline">\(F\)</span>为域，对于<span class="math inline">\(P(x) = \sum_{i=0}^k a_i x^i \in F[x]\)</span>，定义其形式导数为$P'(x) = _{i=1}^k ia_ix^{i-1} $</p>
-</blockquote>
+<p>令<span class="math inline">\(R[[X]] = \{(a_n)_{n \geq 0}, a_n \in R\}\)</span>，其中<span class="math inline">\((a_n) = (a_0,a_1,...)\)</span>为无穷序列，在其上定义加，乘法：</p>
 <ul>
-<li><span class="math inline">\((P(x)Q(x))&#39;=P(x)Q&#39;(x)+P&#39;(x)Q(x)\)</span></li>
+<li><span class="math inline">\((a_n) + (b_n) = (a_n+b_n)\)</span></li>
+<li><span class="math inline">\((a_n) * (b_n) = (\sum_{i+j=n} a_ib_j)\)</span></li>
 </ul>
-<p>我们将通过这个玩意来寻找有限域</p>
+<p>那么<span class="math inline">\(R[[x]]\)</span>按上述加法和乘法构成环，称为<strong>形式幂级数环</strong></p>
+</blockquote>
+<p>这个定义和形式幂级数看起来没什么关系，实则不然</p>
 <ul>
-<li><p>引理：设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则没有非常数多项式<span class="math inline">\(f(x) \in F[x]\)</span>，使得<span class="math inline">\(f(x)^2 \mid x^{nq}-x\)</span></p>
-<p>如果<span class="math inline">\(x^{nq}-x=f(x)^2g(x)\)</span>，求导之后有<span class="math inline">\((nqe)x^{nq-1}-e=f(x)^2g&#39;(x)+2f(x)f&#39;(x)g(x)\)</span></p>
-<p>注意到特征为<span class="math inline">\(q\)</span>的因子，因此<span class="math inline">\((nqe)x^{nq-1} = 0\)</span>，那么<span class="math inline">\(f(x)\)</span>整除右边，自然整除左边，得到<span class="math inline">\(f(x) \mid e\)</span></p></li>
+<li>我们考虑将<span class="math inline">\((0,1,0,...)\)</span>看作<span class="math inline">\(x\)</span>，那么<span class="math inline">\(x^n = (0,0,...,0,1,0,0,...)\)</span>，其中第<span class="math inline">\(n\)</span>位为<span class="math inline">\(1\)</span>，那么<span class="math inline">\((a_n) = a_0 + a_1x + a_2x^2 + ...\)</span>，这样就与平时认知的幂级数有了联系</li>
+<li><span class="math inline">\(R\)</span>可以“看作”是<span class="math inline">\(R[[x]]\)</span>的一个子环（考虑无穷序列到常数项的映射）</li>
+<li><span class="math inline">\(x\)</span>在<span class="math inline">\(R[[x]]\)</span>上生成的子环为<span class="math inline">\(R[x]\)</span>（<span class="math inline">\(R\)</span>上的一元多项式环）</li>
 </ul>
-<h3 id="week16">week16</h3>
-<h4 id="有限域的构造">有限域的构造</h4>
+<h4 id="多元多项式环">多元多项式环</h4>
 <blockquote>
-<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则<span class="math inline">\(x^{q^n} - x\)</span>是<span class="math inline">\(F[x]\)</span>中次数整除<span class="math inline">\(n\)</span>的所有首一不可约多项式的乘积</p>
-</blockquote>
-<p>要证明这个引理，我们证明下面三个性质，不过每个证明都比较繁琐...</p>
-<ul>
-<li><span class="math inline">\(x^{q^n} - x\)</span>可以分解为首一不可约多项式</li>
-<li>首一不可约多项式不可能在<span class="math inline">\(x^{q^n} - x\)</span>中出现两次（使用上周用形式导数相关的引理）</li>
-<li>所有的不可约多项式是其因子</li>
-</ul>
-<p>让我们举一些例子：<span class="math inline">\(x^{2^2} - x = x(x-1)(x^2 + x + 1)\)</span></p>
-<p><span class="math inline">\(x^{3^2} - x = x(x-1)(x+1)(x^2 - 1)(x^2 + x + 2)(x^2 + x - 2)\)</span></p>
-<p>通过上述引理，我们可以证明</p>
-<blockquote>
-<p>设<span class="math inline">\(E\)</span>为有限域，则<span class="math inline">\(E[x]\)</span>中一定存在首一<span class="math inline">\(n\)</span>次不可约多项式</p>
-</blockquote>
-<p>对比上一个定理中的系数，设<span class="math inline">\(N_d\)</span>为首一<span class="math inline">\(d\)</span>次不可约多项式，那么有<span class="math inline">\(q^n = \sum_{d | n} dN_d\)</span></p>
-<p>一个方法是先证明<span class="math inline">\(d N_d \leq q^n - 1\)</span>，再进行放缩<span class="math inline">\(\sum_{d | n} d Nd &lt; \sum_{d=1}^n d N_d\)</span>后证明<span class="math inline">\(N_n \neq 0\)</span></p>
-<h4 id="有限域的存在性">有限域的存在性</h4>
-<blockquote>
-<p>存在有限<span class="math inline">\(q\)</span>元域的充要条件为存在素数<span class="math inline">\(p\)</span>和正整数<span class="math inline">\(n\)</span>，使得<span class="math inline">\(q = p^n\)</span></p>
-</blockquote>
-<p>我们已经证明过充分性，对于必要性，我们在<span class="math inline">\(E = Z / pZ\)</span>中取首一<span class="math inline">\(n\)</span>次不可约多项式<span class="math inline">\(f(x)\)</span>，</p>
-<p>那么<span class="math inline">\(E[x] / (f(x))\)</span>就是一个<span class="math inline">\(p^n\)</span>元域</p>
-<blockquote>
-<p>任何两个有限<span class="math inline">\(q\)</span>元域同构，我们不妨记其为<span class="math inline">\(\mathbf{F}_q\)</span></p>
-</blockquote>
-<h4 id="分裂域">分裂域</h4>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果对<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(L[x]\)</span>可分解为一次式的乘积，但对于<span class="math inline">\(L\)</span>上的子域都没有这个性质，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域</p>
-</blockquote>
-<p>我们可以想象，我们把<span class="math inline">\(f(x)\)</span>的所有根添入<span class="math inline">\(K\)</span>之后，新的域应该可以分解为一次式的乘积</p>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>非常数多项式，那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域存在</p>
+<p>定义二元多项式环<span class="math inline">\(R[x,y] = R[x][y]\)</span>，即系数在<span class="math inline">\(R[x]\)</span>中的<span class="math inline">\(y\)</span>的一元多项式环，多元可以类推</p>
 </blockquote>
 <ul>
-<li>我们把<span class="math inline">\(f(x)\)</span>写作不可约多项式的乘积，比如<span class="math inline">\(f(x) = \prod p_i(x)\)</span>，我们考虑对<span class="math inline">\(p_1(x)\)</span>进行讨论，存在扩域<span class="math inline">\(K_1 = K(\alpha_1)\)</span>，并且<span class="math inline">\(\alpha_1\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(p_1(x)\)</span>，那么<span class="math inline">\(f(x) = (x - \alpha_1)f_1(x)\)</span>，此时<span class="math inline">\(f_1(x) \in K_1[x]\)</span>，继续对<span class="math inline">\(f_1(x)\)</span>进行分解，我们就能得到结论</li>
+<li>对于多元多项式：<span class="math inline">\(\sum_{i=0}^n a_{i_1, ...,i_n} x_1^{i_1}x_2^{i_2}...x_n^{i_n}\)</span>，定义次数为<span class="math inline">\(\max\{i_1+i_2+...+i_n:a_{i_1,i_2,...,i_n} \neq 0\}\)</span></li>
+<li>零多项式的次数为<span class="math inline">\(-\infty\)</span></li>
+<li><span class="math inline">\(\deg(f+g) \leq \deg(f) + \deg(g)\)</span></li>
+<li><span class="math inline">\(\deg(fg) \leq \deg(f) + \deg(g)\)</span>，在<span class="math inline">\(f, g\)</span>的首项不是零因子时，这里应该取等，小于号是因为零因子的存在性</li>
 </ul>
-<h4 id="可分元">可分元</h4>
+<h4 id="多项式环的单位群">多项式环的单位群</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，如果<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式没有重根，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的可分元</p>
-</blockquote>
-<p>对于可分元，其有一个性质</p>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，那么<span class="math inline">\(\alpha \in L\)</span>为可分元，当且仅当<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>的导数<span class="math inline">\(f&#39;(x)\)</span>非零</p>
-</blockquote>
-<p>如果<span class="math inline">\(\alpha\)</span>为可分元，设<span class="math inline">\(f(x) = \prod(x - a_i)\)</span>，那么<span class="math inline">\(f&#39;(x) = \sum_i \prod_{j \neq i} (x-a_j)\)</span>，于是<span class="math inline">\(f&#39;(a_1) = \prod_{j\neq 1} (a_1-a_j) \neq 0\)</span></p>
-<p>反之，如果<span class="math inline">\(f&#39;(x)\)</span>非零，那么<span class="math inline">\((f&#39;(x), f(x)) = 1\)</span>（<span class="math inline">\(f(x)\)</span>不可约），那么存在<span class="math inline">\(u(x)f(x)+v(x)f&#39;(x)=1\)</span>成立，但对于重根<span class="math inline">\(\beta\)</span>而言，有<span class="math inline">\(u(\beta)f(\beta)+v(\beta)f&#39;(\beta)=0\)</span>，矛盾</p>
-<p>有了可分元之后，我们定义可分扩张</p>
-<blockquote>
-<p>如果<span class="math inline">\(\forall \alpha \in L\)</span>，<span class="math inline">\(\alpha\)</span>都是<span class="math inline">\(K\)</span>上的可分元，则称<span class="math inline">\(L/K\)</span>为可分扩张</p>
-</blockquote>
-<p>对于可分扩张，我们也有一个性质</p>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，若<span class="math inline">\(ch(K)=0\)</span>或者<span class="math inline">\(|K|&lt;\infty\)</span>，则<span class="math inline">\(L/K\)</span>为可分扩张</p>
-</blockquote>
-<p><span class="math inline">\(ch(K)=0\)</span>时，极小多项式的首项非0</p>
-<p><span class="math inline">\(|K|&lt;\infty\)</span>时，极小多项式<span class="math inline">\(f(x) \mid x^{q^n} - x\)</span>，由于<span class="math inline">\((x^{q^n} - x)&#39; = -1\)</span>（注意到特征的性质），但有重根<span class="math inline">\(\beta\)</span>时，导数的取值为<span class="math inline">\(0\)</span>，矛盾</p>
-<h4 id="单扩张定理">单扩张定理</h4>
-<blockquote>
-<p>有限可分扩张为单扩张</p>
-</blockquote>
-<p>因为是有限扩张，故存在代数元<span class="math inline">\(a_1, ..., a_n\)</span>，使得<span class="math inline">\(L=K(a_1, ..., a_n)\)</span></p>
-<p>尝试利用可分扩张的性质证明，<span class="math inline">\(\forall a, b \in L, \exist c \in L, K(a, b) = K(c)\)</span></p>
-<h4 id="正规扩张">正规扩张</h4>
-<blockquote>
-<p>如果每个<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>都可以在<span class="math inline">\(L[x]\)</span>中分解为一次式的乘积，且不可约多项式<span class="math inline">\(f(x)\)</span>有一个零点在<span class="math inline">\(L\)</span>中时，其剩余的所有零点都在<span class="math inline">\(L\)</span>中时，称<span class="math inline">\(L/K\)</span>为正规扩张</p>
-</blockquote>
-<p>对于正规扩张，我们有</p>
-<blockquote>
-<p><span class="math inline">\(L/K\)</span>为有限正规扩张，当且仅当<span class="math inline">\(L\)</span>为某个<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域</p>
-</blockquote>
-<h4 id="商域">商域</h4>
-<p>对整环<span class="math inline">\(R\)</span>，我们在<span class="math inline">\(R \times R^*\)</span>上定义关系<span class="math inline">\(\sim\)</span>：<span class="math inline">\((a, b) \sim (c, d) \Leftrightarrow ad = bc\)</span></p>
-<p>不难验证，这是一个等价关系，记<span class="math inline">\((a, b)\)</span>按照上述关系形成的等价类为分数<span class="math inline">\(a/b\)</span></p>
-<blockquote>
-<p>令<span class="math inline">\(F = \{a/b:a \in R, b \in R^*\}\)</span>，定义<span class="math inline">\(\frac{a}{b} + \frac{c}{d} = \frac{ad+bc}{bd}\)</span>以及<span class="math inline">\(\frac{a}{b} * \frac{c}{d} = \frac{ac}{bd}\)</span>，不难验证，这种加法和乘法的定义是良定义的</p>
-<p>并且<span class="math inline">\(F\)</span>按照上述加法和乘法构成域，我们称其为整环<span class="math inline">\(R\)</span>的商域</p>
-</blockquote>
-<h2 id="galois理论">Galois理论</h2>
-<h3 id="last-week">last week</h3>
-<h4 id="galois群">Galois群</h4>
-<blockquote>
-<p>如果域扩张<span class="math inline">\(L/K\)</span>是有限可分正规扩张，则称其为<span class="math inline">\(K\)</span>的Galois扩张</p>
-<p>在其上定义Galois群：<span class="math inline">\(Gal(L/K) = \{\sigma \in Aut(L): \sigma|_K = I_K\}\)</span></p>
-</blockquote>
-<p>也就是说，在<span class="math inline">\(L\)</span>的自同构中，保持<span class="math inline">\(K\)</span>不变的群</p>
-<h4 id="不变域">不变域</h4>
-<blockquote>
-<p>对<span class="math inline">\(G \leq Aut(L)\)</span>，定义其不变域为<span class="math inline">\(Inv(G) = \{a \in L | \forall g \in G, g(a) = a\}\)</span></p>
-</blockquote>
-<p>不变域确实是一个域</p>
-<h4 id="galois群论基本定理">Galois群论基本定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为Galois扩张</p>
-<ul>
-<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，则<span class="math inline">\(L/M\)</span>为Galois扩张</p>
-<p>并且<span class="math inline">\(Gal(L/M) \leq Gal(L/K)\)</span>，<span class="math inline">\(|Gal(L/M)| = [L:M]\)</span>，<span class="math inline">\(Inv(Gal(L/M)) = M\)</span></p></li>
-<li><p>设<span class="math inline">\(H \leq Gal(L/K)\)</span>，那么设<span class="math inline">\(M = Inv(H)\)</span>，则<span class="math inline">\(K \leq M \leq L, Gal(L/M)=H\)</span></p>
-<p>也就是说，<span class="math inline">\(Gal(L/K)\)</span>的子群和<span class="math inline">\(L, K\)</span>的中间域之间存在一个一一对应的关系</p></li>
-<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，那么<span class="math inline">\(M/K\)</span>是正规扩张，当且仅当<span class="math inline">\(Gal(L/M) \lhd Gal(L/K)\)</span></p>
-<p>并且当<span class="math inline">\(M/K\)</span>是正规扩张时，<span class="math inline">\(Gal(L/K)/Gal(L/M) \cong Gal(M/K)\)</span></p></li>
-</ul>
-<p>上面这一条建立了正规扩张和正规子群之间的关系</p>
-</blockquote>
-<h4 id="根式可解">根式可解</h4>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果存在域的扩张链，<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，使得<span class="math inline">\(K_n\)</span>包含<span class="math inline">\(f(x)\)</span>的分裂域，并且这些扩张都是根式扩张，则称<span class="math inline">\(f(x)=0\)</span>在<span class="math inline">\(K\)</span>上根式可解</p>
-<p>根式扩张指的是，对于扩张<span class="math inline">\(L/K\)</span>，存在<span class="math inline">\(\alpha \in L\)</span>，使得<span class="math inline">\(L = K(\alpha)\)</span>且<span class="math inline">\(\alpha^n = K\)</span>（也就是说，每次添加一个元素的开根）</p>
-</blockquote>
-<p>对于根式扩张，我们由</p>
-<blockquote>
-<p>如果<span class="math inline">\(L/K\)</span>为根式扩张，那么<span class="math inline">\(Gal(L/K)\)</span>为Abel群</p>
-</blockquote>
-<p>有了上述定理之后，我们对根式可解进行进一步的考虑，将得到</p>
-<p>对<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，其等价于<span class="math inline">\(Gal(L/K) \rhd Gal(L/K_1) ... \rhd Gal(L/K_n) = \{e\}\)</span></p>
-<p>根据<span class="math inline">\(Gal(L/K_{i+1})/Gal(L/K_i) \cong Gal(K_{i+1}/K_i)\)</span>是Abel群，于是</p>
-<blockquote>
-<p><span class="math inline">\(f(x)=0\)</span>根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
-</blockquote>
-<h4 id="galois定理">Galois定理</h4>
-<p>对上面的讨论取一个特殊情况，我们将得到Galois定理，不妨就用这个定理作为这门课的结束吧</p>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(f(x) = 0\)</span>在<span class="math inline">\(L\)</span>上根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
+<p>设<span class="math inline">\(R\)</span>为整环，则<span class="math inline">\(R[x_1,...,x_n]\)</span>也为整环，并且<span class="math inline">\(U(R[x_1,...,x_n])=U(R)\)</span></p>
 </blockquote>
 <ul>
-<li><p>对于一般的<span class="math inline">\(n\)</span>次方程，<span class="math inline">\(f(x) = x^n + t_1x^{n-1} + ... + t_n = 0\)</span></p>
-<p>此时，将<span class="math inline">\(t_1, ..., t_n\)</span>看作字母变量，那么<span class="math inline">\(f(x) \in K=F[t_1, ..., t_n][x]\)</span>，设其在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(Gal(L/K) \cong S_n\)</span></p>
-<p>由于<span class="math inline">\(n \geq 5\)</span>时，<span class="math inline">\(S_n\)</span>不是可解群，因此，五次以上的方程没有通解</p></li>
+<li><p>我们之前已经提到过，如果<span class="math inline">\(R\)</span>为整环，那么<span class="math inline">\(R[x]\)</span>为整环，归纳即可证明<span class="math inline">\(R[x_1,...,x_n]\)</span>为整环</p></li>
+<li><p>对于第二点，在整环中<span class="math inline">\(f(x)g(x) = 1\)</span>，只有<span class="math inline">\(\deg f(x) = 0, \deg g(x) = 0\)</span></p></li>
 </ul>
-<p>Galois无愧于天才之名！</p>
+<h4 id="带余除法">带余除法</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(f(x), g(x) \in R[x]\)</span>，<span class="math inline">\(g(x) \neq 0\)</span>且<span class="math inline">\(g(x)\)</span>的首项为单位，那么有唯一的<span class="math inline">\(q(x), r(x) \in R[x]\)</span>，使得<span class="math inline">\(f(x) = q(x)g(x)+r(x)\)</span>，且<span class="math inline">\(\deg r(x) &lt; \deg g(x)\)</span></p>
+</blockquote>
+<ul>
+<li>取<span class="math inline">\(r(x)\)</span>使得其在<span class="math inline">\(S=\{f(x)-g(x)h(x):h(x)\in R\}\)</span>次数最低，对应的<span class="math inline">\(h(x)\)</span>记为<span class="math inline">\(q(x)\)</span>，从而有<span class="math inline">\(f(x)=q(x)g(x)+r(x)\)</span></li>
+<li>利用<span class="math inline">\(g(x)\)</span>的首项为单位，可以证明有<span class="math inline">\(\deg r(x) &lt; \deg g(x)\)</span></li>
+<li>唯一性：设<span class="math inline">\(f(x)=q(x)g(x)+r(x)=q&#39;(x)g(x)+r&#39;(x)\)</span>，从而<span class="math inline">\(g(x)(q(x)-q&#39;(x))=r&#39;(x)-r(x)\)</span>，右边小于<span class="math inline">\(\deg g(x)\)</span>，如果<span class="math inline">\(q(x)\neq q&#39;(x)\)</span>，左边的度数将<span class="math inline">\(\geq \deg g(x)\)</span>，从而矛盾（注意到在<span class="math inline">\(R\neq O\)</span>中，单位一定不是零因子，单位有<span class="math inline">\(aa^{-1} = 1\)</span>，如果有零因子<span class="math inline">\(b\)</span>，那么<span class="math inline">\(b=1*b=a^{-1}ab=a^{-1}0=0\)</span>，矛盾）</li>
+</ul>
+<p>带余除法有一个经常用的推论：因式定理</p>
+<blockquote>
+<p>设<span class="math inline">\(c \in R\)</span>，<span class="math inline">\(f(x)\in R[x]\)</span>，则<span class="math inline">\((x-c)\mid f(x)\)</span>的充要条件是<span class="math inline">\(c\)</span>为<span class="math inline">\(f(x)\)</span>的一个根</p>
+</blockquote>
+<h4 id="整环中根的数量">整环中根的数量</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为一个整环，<span class="math inline">\(f(x) \in R[x]\)</span>，<span class="math inline">\(\deg f(x) = n \geq 0\)</span>，则<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(R\)</span>中至多有<span class="math inline">\(n\)</span>个根</p>
+</blockquote>
+<ul>
+<li>归纳证明</li>
+</ul>
+<h4 id="整环的单位群">整环的单位群</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为整环，则<span class="math inline">\(U(R)\)</span>的有限子群为循环群</p>
+</blockquote>
+<ul>
+<li>设<span class="math inline">\(m=exp(G)\)</span>，由<span class="math inline">\(x^m = 1\)</span>有<span class="math inline">\(|G|\)</span>个解知道<span class="math inline">\(|G| \leq m\)</span>，又由幂指数的性质<span class="math inline">\(m \leq |G|\)</span>，从而<span class="math inline">\(m=|G|\)</span>，在有限Abel群中，存在元素<span class="math inline">\(a\)</span>，使得<span class="math inline">\(o(a)=m=|G|\)</span></li>
+</ul>
+<p>将其运用到域上，得到</p>
+<ul>
+<li>有限域中<span class="math inline">\(F^* = F-\{0\}\)</span>是有限循环群</li>
+</ul>
+<h4 id="euclid整环">Euclid整环</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为整环，如果存在<span class="math inline">\(L:R-\{0\} \to N\)</span>，使得<span class="math inline">\(a, b \in R\)</span>且<span class="math inline">\(b \neq 0\)</span>时，存在<span class="math inline">\(q, r \in R\)</span>适合<span class="math inline">\(a=bq+r\)</span>并且<span class="math inline">\(r=0\)</span>或<span class="math inline">\(L(r)&lt;L(b)\)</span></p>
+<p>则称<span class="math inline">\(R\)</span>为Euclid整环，<span class="math inline">\(L\)</span>称为Euclid数</p>
+</blockquote>
+<ul>
+<li><p>根据前面的讨论，我们知道：如果<span class="math inline">\(F\)</span>为域，则<span class="math inline">\(F[x]\)</span>为Euclid整环</p></li>
+<li><p><span class="math inline">\(Z[i] = \{a+bi:a, b \in Z\}\)</span>，<span class="math inline">\(Z[w] = \{a+bw:a, b \in Z\}\)</span>按照<span class="math inline">\(L(\xi) = \xi \bar{\xi} = |\xi|^2\)</span>构成Euclid整环</p>
+<ul>
+<li><p>任给<span class="math inline">\(a \in R, b \neq 0 \in R\)</span>（<span class="math inline">\(R=Z[i]\)</span>或<span class="math inline">\(Z[w]\)</span>），要寻找满足条件的<span class="math inline">\(a=bq+r\)</span>，等价于寻找<span class="math inline">\(q\)</span>，使得<span class="math inline">\(|\frac{a}{b}-q|&lt;1\)</span></p>
+<p>根据下面的事实：如果<span class="math inline">\(x \in R\)</span>，那么<span class="math inline">\(\bar{x} \in R\)</span>，且<span class="math inline">\(L(x) \in N\)</span></p>
+<p>那么<span class="math inline">\(\frac{a}{b}\)</span>形如<span class="math inline">\(c+di\)</span>（或者<span class="math inline">\(c+dw\)</span>），其中<span class="math inline">\(c, d \in Q\)</span></p>
+<p>取<span class="math inline">\(m + ni\)</span>为最接近<span class="math inline">\(c+di\)</span>的<span class="math inline">\(R\)</span>中数，简单放缩可以证明该数满足<span class="math inline">\(|\frac{a}{b}-q|&lt;1\)</span></p></li>
+</ul></li>
+</ul>
+<p>下面是关于上述环的一个更一般性的定理</p>
+<blockquote>
+<p>设<span class="math inline">\(d\)</span>为无平方因子数（<span class="math inline">\(d \neq 0, d \neq 1\)</span>），定义</p>
+<p><span class="math inline">\(R_d = \begin{cases} Z[\sqrt{d}]:Z+Z\sqrt {d}, &amp; d \not \equiv 1(mod\;4) \\ Z+Z\frac{-1+\sqrt{d}}{2}, &amp;d \equiv 1(mod\;4)\end{cases}\)</span></p>
+<p>那么，<span class="math inline">\(d&lt;0\)</span>时，按<span class="math inline">\(L(\xi) = |xi|^2\)</span>，当且仅当<span class="math inline">\(d=-1,-2,-3,-7,-11\)</span>时，<span class="math inline">\(R_d\)</span>为整环</p>
+<p><span class="math inline">\(d&gt;0\)</span>时，按<span class="math inline">\(L(a+bd) = |a^2-db^2|\)</span>，当且仅当<span class="math inline">\(d=2, 3, 5, 6, 7, 11, 13, 17, 19, 21, 29, 33, 37, 41, 57, 73\)</span>时，<span class="math inline">\(R_d\)</span>为整环</p>
+</blockquote>
+<h4 id="主理想整环">主理想整环</h4>
+<blockquote>
+<p>如果整环<span class="math inline">\(R\)</span>中的理想都是主理想，则称<span class="math inline">\(R\)</span>为主理想整环（PID）</p>
+</blockquote>
+<ul>
+<li><p>Euclid整环一定是主理想整环</p>
+<p>不妨设<span class="math inline">\(I\)</span>为Euclid整环中的非零理想，那么在<span class="math inline">\(I/\{0\}\)</span>中存在一个<span class="math inline">\(N(\cdot)\)</span>最小的元素<span class="math inline">\(a\)</span></p>
+<p>现在对任意的元素<span class="math inline">\(b\)</span>，根据Euclid整环的定义，存在<span class="math inline">\(I\)</span>中的元素<span class="math inline">\(c, d\)</span>，使得<span class="math inline">\(a=bc+d\)</span>，并且<span class="math inline">\(d=0\)</span>或<span class="math inline">\(N(d)&lt;N(a)\)</span></p>
+<p>由于<span class="math inline">\(a\)</span>是<span class="math inline">\(N(\cdot)\)</span>最小的元素，因此只有<span class="math inline">\(d=0\)</span>，从而<span class="math inline">\(a=bc\)</span>，这也就是说<span class="math inline">\(I=(a)\)</span></p></li>
+<li><p>在整环中，一般有下面的定理成立：</p>
+<ul>
+<li><span class="math inline">\(b \mid a \Leftrightarrow (a) \subseteq (b)\)</span></li>
+<li><span class="math inline">\(u\)</span>为单位<span class="math inline">\(\Leftrightarrow (u) = R\)</span></li>
+<li><span class="math inline">\(a \sim b\)</span>（<span class="math inline">\(a\)</span>与<span class="math inline">\(b\)</span>相伴，<span class="math inline">\(a \mid b, b \mid a\)</span>）<span class="math inline">\(\Leftrightarrow (a)=(b) \Leftrightarrow a, b\)</span>之间相差一个单位</li>
+</ul></li>
+</ul>
+<h4 id="不可约元素元">不可约元，素元</h4>
+<blockquote>
+<p>设<span class="math inline">\(p\)</span>位整环<span class="math inline">\(R\)</span>中非零元，非单位元，如果<span class="math inline">\(a \mid p \Rightarrow a \sim p\)</span>或<span class="math inline">\(a\)</span>为单位，则称<span class="math inline">\(p\)</span>为不可约元</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(p\)</span>可约即存在两个非单位元<span class="math inline">\(a, b\)</span>，使得<span class="math inline">\(p=ab\)</span></li>
+<li><span class="math inline">\((p)\)</span>是极大理想，可以推出<span class="math inline">\(p\)</span>是不可约元，在PID中，反之也是成立的</li>
+</ul>
+<blockquote>
+<p>如果<span class="math inline">\(p \mid ab \Rightarrow p \mid a\)</span>或<span class="math inline">\(p \mid b\)</span>，则称<span class="math inline">\(p\)</span>为素元</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(p\)</span>为素元，当且仅当<span class="math inline">\((p)\)</span>为素理想</li>
+</ul>
+<h4 id="不可约元与素元">不可约元与素元</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为整环，那么</p>
+<ul>
+<li><span class="math inline">\(R\)</span>中素元必为不可约元</li>
+<li><span class="math inline">\(R\)</span>为PID时，不可约元为素元</li>
+</ul>
+</blockquote>
+<p>对于第一条，进行反证，设<span class="math inline">\(p=ab\)</span>，由于<span class="math inline">\(p \mid ab\)</span>及<span class="math inline">\(p\)</span>为素元，不妨设<span class="math inline">\(p \mid a\)</span></p>
+<p>又由于<span class="math inline">\(a \mid p\)</span>，因此<span class="math inline">\(a \sim p\)</span>，从而<span class="math inline">\(b\)</span>为单位，矛盾</p>
+<p>对于第二条，证明素理想为极大理想</p>
+<ul>
+<li>在PID中，非零理想<span class="math inline">\(I\)</span>为素理想，当且仅当其为极大理想</li>
+</ul>
+<h4 id="唯一分解定理">唯一分解定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为PID，<span class="math inline">\(P\)</span>为<span class="math inline">\(R\)</span>中素元（按照相伴构成的等价类）的代表元，那么<span class="math inline">\(\forall x \in R\)</span>，其可以唯一地表为<span class="math inline">\(u \prod_{p_i \in P} p_i^{a_i}\)</span>的形式，其中<span class="math inline">\(u\)</span>为单位，<span class="math inline">\(a_i \in N\)</span>并且只有有限个非零的<span class="math inline">\(a_i\)</span></p>
+</blockquote>
+<h3 id="week14">week14</h3>
+<h4 id="noether环">Noether环</h4>
+<blockquote>
+<p>称交换幺环<span class="math inline">\(R\)</span>为Noether环，当且仅当其每个理想都是有限生成的</p>
+</blockquote>
+<p>关于Noether环，有下面几条非常重要的等价条件</p>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为交换幺环，那么下面三者等价</p>
+<ol type="a">
+<li><p><span class="math inline">\(R\)</span>为Noether环</p></li>
+<li><p>（理想升链条件）：称<span class="math inline">\(I_1 \subseteq I_2 ...\)</span>为<span class="math inline">\(R\)</span>的理想升链，那么存在<span class="math inline">\(N\)</span>，当<span class="math inline">\(n&gt;N\)</span>时，有<span class="math inline">\(I_{n}=I_{n+1}\)</span></p></li>
+<li><p><span class="math inline">\(R\)</span>种的每个非空理想集按照包含关系具有极大元</p></li>
+</ol>
+</blockquote>
+<p><span class="math inline">\((a) \Rightarrow (b)\)</span>：假如有理想升链<span class="math inline">\(I_1 \subseteq I_2...\)</span>，设<span class="math inline">\(I= \bigcup_{i=1}^{\infty} I_i\)</span>，不难证明，<span class="math inline">\(I\)</span>为理想。根据Noether环的定义，<span class="math inline">\(I\)</span>为有限生成，不妨设<span class="math inline">\(I=(a_1,...,a_k)\)</span>，对于每一个<span class="math inline">\(a_i\)</span>，存在<span class="math inline">\(n_i\)</span>使得<span class="math inline">\(a_i \in I_{n_i}\)</span>，那么，取<span class="math inline">\(N=\max(n_1,...,n_k)\)</span>，将有<span class="math inline">\(I_N\)</span>之后都相等的性质</p>
+<p><span class="math inline">\((b) \Rightarrow (c)\)</span>：假设有一个集合没有极大元，我们可以构造出互不相同的理想升链，这与(b)矛盾</p>
+<p><span class="math inline">\((c) \Rightarrow (a)\)</span>：假设<span class="math inline">\(I\)</span>不是有限生成，那么我们总可以构造<span class="math inline">\(I_k = I_{k-1}+(a_k)\)</span>，其中<span class="math inline">\(a_k \in R-I_{k-1}\)</span>，但其中没有极大元，与(c)矛盾</p>
+<h4 id="hilbert基定理">Hilbert基定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为Noether环，那么<span class="math inline">\(R[x]\)</span>为Noether环</p>
+</blockquote>
+<p>对于<span class="math inline">\(R[x]\)</span>种的理想<span class="math inline">\(I\)</span>，对<span class="math inline">\(n \in N\)</span>，定义<span class="math inline">\(I_n = \{[x^n]P(x):P(x)\in I \wedge \deg P \leq n\}\)</span>（即所有小于等于<span class="math inline">\(n\)</span>的多项式的<span class="math inline">\(n\)</span>次项系数）</p>
+<p>可以证明，<span class="math inline">\(I_n \lhd R\)</span>，由于<span class="math inline">\(I\)</span>为理想，因此<span class="math inline">\(P(x) \in I \Rightarrow xP(x) \in I\)</span>，这说明<span class="math inline">\(I_n \subseteq I_{n+1}\)</span>，根据理想升链条件，存在<span class="math inline">\(N\)</span>，使得<span class="math inline">\(n&gt;N\)</span>时，<span class="math inline">\(I_n = I_{n+1}\)</span></p>
+<p>此时，由于<span class="math inline">\(R\)</span>中的理想有限生成，不妨设<span class="math inline">\(I_n = (a_{n,1}, a_{n,2},...,a_{n,l(n)})\)</span></p>
+<p>对<span class="math inline">\(0 \leq i \leq N, 1 \leq j \leq l(n)\)</span>，我们定义<span class="math inline">\(P_{ij}\)</span>为首项元素为<span class="math inline">\(a_{ij}\)</span>的多项式，定义<span class="math inline">\(J\)</span>为这些<span class="math inline">\(P_{ij}\)</span>生成的理想</p>
+<p>不妨设<span class="math inline">\(P(x)\)</span>的次数为<span class="math inline">\(q\)</span>，设<span class="math inline">\(q&#39; = \min(N,q)\)</span>，那么<span class="math inline">\(P(x)\)</span>的首项可以由<span class="math inline">\((a_{q&#39;, 1}, ..., a_{q&#39;, l(q&#39;)})\)</span>生成，注意到<span class="math inline">\(P(x)=Q(x) + \sum_{i=1}^{l(q&#39;)} r_i P_{q&#39;, i} x^{q-q&#39;}\)</span>，其中<span class="math inline">\(r_i\)</span>是生成<span class="math inline">\(P(x)\)</span>首项的系数，那么<span class="math inline">\(\deg Q(x) &lt; \deg P(x)\)</span>，运用归纳法就可以证明</p>
+<ul>
+<li><span class="math inline">\(Z[x_1,...,x_n]\)</span>为Noether环</li>
+<li>设<span class="math inline">\(F\)</span>为域，那么<span class="math inline">\(F[x_1,...,x_n]\)</span>为Noether环</li>
+</ul>
+<blockquote>
+<p>设<span class="math inline">\(R\)</span>为Noether环，则<span class="math inline">\(R\)</span>种的每个理想都包含若干素理想的乘积</p>
+</blockquote>
+<p>这条定理就不证明了</p>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -1755,499 +1937,6 @@ int main() &#123;
 <p>设<span class="math inline">\(G\)</span>为有限生成Abel群，那么<span class="math inline">\(Tor(G)\)</span>为有限子群，并且存在自然数<span class="math inline">\(r \in N\)</span>，使得<span class="math inline">\(G \cong Tor(G) \underbrace{\times Z \times Z....\times Z}_{r \text{个}}\)</span>，<span class="math inline">\(r\)</span>称为（有限生成Abel群）<span class="math inline">\(G\)</span>的秩</p>
 </blockquote>
 <p>证明略</p>
-<h2 id="环">环</h2>
-<h3 id="week9-1">week9</h3>
-<h4 id="环-1">环</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为一个非空集，在其上定义了<span class="math inline">\(+, *\)</span>两种运算</p>
-<p>如果<span class="math inline">\(R\)</span>按<span class="math inline">\(+\)</span>构成Abel群，按<span class="math inline">\(*\)</span>构成半群</p>
-<p>并且<span class="math inline">\(*\)</span>对<span class="math inline">\(+\)</span>有分配律（<span class="math inline">\(a*(b+c)=a*b+a*c, \;(b+c)*a=b*a+c*a\)</span>）</p>
-<p>则称<span class="math inline">\(R\)</span>按<span class="math inline">\(+, *\)</span>构成<strong>环</strong></p>
-<p>而<span class="math inline">\(\langle R, +, *\rangle\)</span>称为环的结构</p>
-</blockquote>
-<p><span class="math inline">\(R\)</span>的加法单位元，记为<span class="math inline">\(0\)</span>，称为零元</p>
-<h4 id="特殊的环">特殊的环</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，如果<span class="math inline">\(R\)</span>对乘法交换，则称<span class="math inline">\(R\)</span>为交换环</p>
-</blockquote>
-<blockquote>
-<p>若环<span class="math inline">\(R\)</span>对乘法构成幺半群，则称<span class="math inline">\(R\)</span>为幺环</p>
-</blockquote>
-<p>为了引入整环，我们先定义零因子</p>
-<blockquote>
-<p>如果存在<span class="math inline">\(a, b \in R\)</span>，如果<span class="math inline">\(a\neq 0, b \neq 0\)</span>，但<span class="math inline">\(ab=0\)</span>，则称<span class="math inline">\(a\)</span>为（左）零因子，<span class="math inline">\(b\)</span>为（右）零因子</p>
-</blockquote>
-<blockquote>
-<p>无零因子的交换幺环称为整环</p>
-</blockquote>
-<h4 id="例子">例子</h4>
-<ul>
-<li><p><span class="math inline">\(Z\)</span>按整数加法，整数乘法构成整环</p></li>
-<li><p><span class="math inline">\(Z/mZ\)</span>按取模加法，取模乘法构成交换幺环</p></li>
-<li><p>记<span class="math inline">\(R[x]=\{a_0 + a_1x + ...+a_nx^n : a_0,a_1, ..., a_n \in R, n \in N\}\)</span>，</p>
-<p>在其上定义加法：<span class="math inline">\(\sum_i a_ix^i + \sum_i b_i x^i = \sum_i (a_i + b_i)x^i\)</span></p>
-<p>在其上定义乘法：<span class="math inline">\((\sum_i a_ix^i)(\sum_j b_jx^j) = \sum_k (\sum_{i+j=k} a_ib_j) x^k\)</span></p>
-<p>那么，<span class="math inline">\(R[x]\)</span>构成环（成为环<span class="math inline">\(R\)</span>上的一元多项式环），<span class="math inline">\(x\)</span>称为未定元</p>
-<ul>
-<li><span class="math inline">\(R\)</span>为交换环时，<span class="math inline">\(R[x]\)</span>也构成交换环</li>
-<li><span class="math inline">\(R\)</span>无零因子时，<span class="math inline">\(R[x]\)</span>也没有零因子</li>
-<li><span class="math inline">\(R\)</span>为幺环时，<span class="math inline">\(R[x]\)</span>也为幺环</li>
-</ul></li>
-<li><p>记<span class="math inline">\(M_n(R) = \{(a_{ij})_{n \times n} : a_{ij} \in R\}\)</span>，称为<span class="math inline">\(R\)</span>上的<span class="math inline">\(n \times n\)</span>的矩阵环</p>
-<ul>
-<li><span class="math inline">\(R\)</span>为交换环时，<span class="math inline">\(M_n(R)\)</span>不一定为交换环</li>
-<li><span class="math inline">\(R\)</span>没有零因子时，<span class="math inline">\(M_n(R)\)</span>也不一定没有零因子</li>
-</ul></li>
-</ul>
-<h3 id="week10">week10</h3>
-<h4 id="环的性质">环的性质</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(a_1, a_2,..., a_n \in R, b_1, ..., b_n \in R\)</span>，那么<span class="math inline">\((\sum_{i=1}^n a_i)(\sum_{j=1}^m b_j) = \sum_{i=1}^n \sum_{j=1}^m a_ib_j\)</span></p>
-</blockquote>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，那么<span class="math inline">\(\forall a \in R, a * 0 = 0*a = 0\)</span></p>
-</blockquote>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(R\)</span>中有零因子当且仅当<span class="math inline">\(R\)</span>中有消去律（即<span class="math inline">\(a \neq 0\)</span>时，<span class="math inline">\(ab=ac \Leftrightarrow b=c\)</span>, <span class="math inline">\(ba=ca \Leftrightarrow b=c\)</span>）</p>
-</blockquote>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，对<span class="math inline">\(a \in R, n \in Z^+\)</span>，定义<span class="math inline">\(na = \overbrace{a + a +... +a}^{n个}\)</span></p>
-<p>对<span class="math inline">\(n=0\)</span>，定义<span class="math inline">\(na = 0\)</span></p>
-<p>对<span class="math inline">\(n &lt; 0\)</span>，定义<span class="math inline">\(na = (-n)(-a) = \overbrace{-a + (-a) +... +(-a)}^{-n个}\)</span></p>
-<p>那么，对<span class="math inline">\(m \in Z, a, b\in R\)</span>，有<span class="math inline">\((ma)b=m(ab)=a(mb)\)</span></p>
-</blockquote>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换环，那么<span class="math inline">\((a+b)^n = \sum_{k=0}^n \binom{n}{k} a^k b^{n-k}\)</span></p>
-</blockquote>
-<h4 id="子环">子环</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(S \subseteq R\)</span>且<span class="math inline">\(S \neq \emptyset\)</span>，如果<span class="math inline">\(S\)</span>按<span class="math inline">\(R\)</span>中的加法和乘法构成环，那么称<span class="math inline">\(S\)</span>为<span class="math inline">\(R\)</span>的子环，记为<span class="math inline">\(S \leq R\)</span></p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(S \leq R\)</span>等价于<span class="math inline">\(S\)</span>对加法，减法，乘法封闭</li>
-<li><span class="math inline">\(O = \{0\}\)</span>是最小子环，称为零环</li>
-<li>对<span class="math inline">\(O \neq S \subseteq R\)</span>，有<span class="math inline">\(S\)</span>中的单位元<span class="math inline">\(1 \neq 0\)</span></li>
-</ul>
-<h4 id="理想">理想</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(\emptyset \neq I \subseteq R\)</span>，如果</p>
-<ul>
-<li>若<span class="math inline">\(a, b\in I\)</span>，那么<span class="math inline">\(a \pm b \in I\)</span></li>
-<li>若<span class="math inline">\(a \in I, r \in R\)</span>，那么<span class="math inline">\(a*r, r*a \in I\)</span></li>
-</ul>
-<p>则称<span class="math inline">\(I\)</span>为环<span class="math inline">\(R\)</span>的理想</p>
-</blockquote>
-<p>理想相当于正规子环</p>
-<h4 id="剩余类">剩余类</h4>
-<blockquote>
-<p>设<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的理想，对<span class="math inline">\(a, b \in R\)</span>，如果<span class="math inline">\(a - b \in I\)</span>，则称<span class="math inline">\(a \equiv b(mod\;I)\)</span>，称为<span class="math inline">\(a, b\)</span>模<span class="math inline">\(I\)</span>同余</p>
-</blockquote>
-<ul>
-<li>这是一个等价关系</li>
-</ul>
-<blockquote>
-<p>按模<span class="math inline">\(I\)</span>同余关系形成的等价类，即<span class="math inline">\(\bar{a} = a + I\)</span>，称为<span class="math inline">\(a\)</span>在模<span class="math inline">\(I\)</span>下的<strong>剩余类</strong></p>
-<p>对剩余类，我们定义加法和乘法</p>
-<ul>
-<li><span class="math inline">\(\bar{a} + \bar{b} = \overline{a+b}\)</span></li>
-<li><span class="math inline">\(\bar{a} * \bar{b} = \overline{a*b}\)</span></li>
-</ul>
-</blockquote>
-<h4 id="商环">商环</h4>
-<blockquote>
-<p>设<span class="math inline">\(I\)</span>为环<span class="math inline">\(R\)</span>的理想，那么<span class="math inline">\(I\)</span>的剩余类按照剩余类的加法和乘法构成环，称为商环</p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(mZ\)</span>为<span class="math inline">\(Z\)</span>的理想，<span class="math inline">\(a \equiv b (mod\;mZ)\)</span>相当于<span class="math inline">\(a \equiv b(mod\;m)\)</span></li>
-</ul>
-<h4 id="同构-1">同构</h4>
-<blockquote>
-<p>设<span class="math inline">\(\sigma\)</span>为环<span class="math inline">\(R\)</span>到环<span class="math inline">\(R&#39;\)</span>的映射，若<span class="math inline">\(\forall a, b, \in R\)</span>，有</p>
-<ul>
-<li><span class="math inline">\(\sigma(a+b)=\sigma(a)+\sigma(b)\)</span></li>
-<li><span class="math inline">\(\sigma(ab)=\sigma(a)\sigma(b)\)</span></li>
-</ul>
-<p>则称<span class="math inline">\(\sigma\)</span>为<span class="math inline">\(R\)</span>到<span class="math inline">\(R&#39;\)</span>的同态</p>
-</blockquote>
-<ul>
-<li>类似于群，我们定义满同态，单同态和同构，特别的，同构记为<span class="math inline">\(R \cong R&#39;\)</span></li>
-</ul>
-<h4 id="环同态基本定理">环同态基本定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(\sigma\)</span>为<span class="math inline">\(R \to \bar{R}\)</span>的同态，则<span class="math inline">\(\ker(\sigma) := \{a \in R : \sigma(a) = \bar{0}\}\)</span>称为同态核，则</p>
-<ul>
-<li><span class="math inline">\(\ker(\sigma) \lhd R\)</span></li>
-<li><span class="math inline">\(\text{Im}(\sigma) = \sigma(R) = \{\sigma(r):r\in R\} \leq \bar{R}\)</span></li>
-<li><span class="math inline">\(R/\ker(\sigma) \cong \text{Im}(\sigma)\)</span></li>
-</ul>
-</blockquote>
-<h4 id="环同态第一定理">环同态第一定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(I \lhd R\)</span>，那么</p>
-<ul>
-<li><span class="math inline">\(R\)</span>中包含<span class="math inline">\(I\)</span>的子环和<span class="math inline">\(R/I\)</span>的子环之间存在一一对应关系<span class="math inline">\(S \to S/I\)</span></li>
-<li>如果<span class="math inline">\(I\subseteq S\)</span>，<span class="math inline">\(S \leq R \Rightarrow S/I \leq R/I\)</span></li>
-<li>如果<span class="math inline">\(I \subseteq S, S \leq R\)</span>，那么<span class="math inline">\(S \lhd R \Leftrightarrow S/I \lhd R/I\)</span></li>
-<li>如果<span class="math inline">\(I\subseteq S\)</span>，<span class="math inline">\(S \lhd R\)</span>，那么<span class="math inline">\(R/S \cong (R/I)/(S/I)\)</span></li>
-</ul>
-</blockquote>
-<h4 id="环同态第二定理">环同态第二定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(I \lhd R\)</span>且<span class="math inline">\(S \leq R\)</span>，那么<span class="math inline">\(I\cap S \lhd S\)</span>，并且<span class="math inline">\(S/(I \cap S) \cong (I+S)/I\)</span></p>
-</blockquote>
-<h4 id="环的外直和">环的外直和</h4>
-<blockquote>
-<p>设<span class="math inline">\(R_1, R_2,...,R_n\)</span>为环，令<span class="math inline">\(R = R_1 \oplus ... \oplus R_n\)</span></p>
-<p>在其上定义加法：<span class="math inline">\((r_1,...,r_n)+(r_1&#39;,...r_n&#39;) = (r_1+r_1&#39;,...,r_n+r_n&#39;)\)</span></p>
-<p>定义乘法<span class="math inline">\((r_1,...,r_n)*(r_1&#39;,...r_n&#39;)=(r_1r_1&#39;,...,r_nr_n&#39;)\)</span></p>
-<p>那么<span class="math inline">\(R\)</span>按上述运算构成环，称为环<span class="math inline">\(R_1, ..., R_n\)</span>的（外）直和</p>
-</blockquote>
-<hr />
-<h3 id="week-11">week 11</h3>
-<h4 id="理想的交">理想的交</h4>
-<blockquote>
-<p>设<span class="math inline">\(I_1, I_2, ..., I_n\)</span>为理想，那么<span class="math inline">\(I = \bigcap_{j=1}^i I_j\)</span>也是理想</p>
-</blockquote>
-<h4 id="生成的理想">生成的理想</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(X \subseteq R\)</span>，那么称由<span class="math inline">\(X\)</span>生成的理想为<span class="math inline">\(\langle X \rangle = \bigcap_{X \subseteq I \lhd R} I\)</span></p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(\langle X \rangle\)</span>是包含<span class="math inline">\(X\)</span>的最小的理想</li>
-<li><span class="math inline">\(\langle X \rangle = \{\sum_{i=1}^n r_i x_is_i:x_i\in X, r_i, s_i \in R, n \in Z^+\}\)</span>（考虑包含<span class="math inline">\(X\)</span>的理想应该含有什么数字，以及这个集合确实构成理想）</li>
-<li>当<span class="math inline">\(R\)</span>为交换幺环时，<span class="math inline">\(\langle X \rangle = \{\sum_{i=1}^n r_i x_i:x_i\in X, r_i\in R, n \in Z^+\}\)</span>，此时，如果<span class="math inline">\(X=\{x_1,...,x_k\}\)</span>，那么我们也记<span class="math inline">\(\langle X\rangle = (x_1,...,x_k)\)</span></li>
-<li>当<span class="math inline">\(R\)</span>为交换幺环时，称<span class="math inline">\((a) = \{ra:r\in R\}\)</span>为<span class="math inline">\(a\)</span>生成的<strong>主理想</strong></li>
-</ul>
-<h4 id="理想的和">理想的和</h4>
-<blockquote>
-<p>设<span class="math inline">\(I_1,I_2,...,I_n\)</span>为理想，那么<span class="math inline">\(\sum_{i=1}^n I_i\)</span>也为理想，称为理想的和</p>
-</blockquote>
-<h4 id="理想的积">理想的积</h4>
-<blockquote>
-<p>设<span class="math inline">\(I_1,I_2,...,I_n\)</span>为理想，那么称<span class="math inline">\(I_1 \cdot I_2 ... \cdot I_n = \langle I_1I_2...I_n \rangle = \{\sum_{j=1}^m \prod_{k=1}^n i_k : i_k \in I_k, m \in Z^+\}\)</span>为理想的积</p>
-</blockquote>
-<p>一般用<span class="math inline">\(I_1I_2...I_n\)</span>直接来代指<span class="math inline">\(I_1 \cdot I_2 ... \cdot I_n\)</span></p>
-<p>理想的积对理想的和有分配率</p>
-<ul>
-<li><span class="math inline">\(I_1 \cdot (I_2 + I_3) = I_1 \cdot I_2 + I_1 \cdot I_3\)</span></li>
-<li><span class="math inline">\((I_2 + I_3) \cdot I_1= I_2 \cdot I_1 + I_3 \cdot I_1\)</span></li>
-</ul>
-<h4 id="环的外直和-1">环的外直和</h4>
-<p>设<span class="math inline">\(R = R_1 \oplus R_2 ... \oplus R_n\)</span>，设<span class="math inline">\(R_i^* = \{(0,0,...0,r_i,0,...,0):r_i \in R_i\}\)</span></p>
-<p>那么和群一致的有：</p>
-<ul>
-<li><span class="math inline">\(R_1^* \oplus ... \oplus R_n^* = R\)</span></li>
-<li><span class="math inline">\(R_i^* \lhd R\)</span></li>
-<li><span class="math inline">\(R_i^* \cap \sum_{j \neq i} R_j^* = (0) = O\)</span></li>
-</ul>
-<h4 id="环的内直和">环的内直和</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环，<span class="math inline">\(R_1,R_2,...,R_n\)</span>为理想，如果</p>
-<ul>
-<li><span class="math inline">\(R_1 \oplus ... \oplus R_n = R\)</span></li>
-<li><span class="math inline">\(R_i \cap \sum_{j \neq i} R_j = O\)</span></li>
-</ul>
-<p>则称<span class="math inline">\(R\)</span>为<span class="math inline">\(R_1,R_2,...,R_n\)</span>的内直和</p>
-</blockquote>
-<p>第二个条件和群一样，可以等价为<span class="math inline">\(R\)</span>中的元素可以唯一的表为<span class="math inline">\(r_1+...+r_n\)</span>的形式</p>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为环<span class="math inline">\(R_1,...,R_n\)</span>的内直和，那么<span class="math inline">\(R \cong R_1 \oplus ... \oplus R_n\)</span></p>
-</blockquote>
-<h4 id="互素">互素</h4>
-<blockquote>
-<p>如果幺环<span class="math inline">\(R\)</span>的理想<span class="math inline">\(I,J\)</span>满足<span class="math inline">\(I+J=R\)</span>，则称<span class="math inline">\(I,J\)</span>互素</p>
-</blockquote>
-<ul>
-<li>互素的充要条件为<span class="math inline">\(\exists i \in I, j \in J\)</span>使<span class="math inline">\(i+j=1\)</span></li>
-</ul>
-<h3 id="week12">week12</h3>
-<h4 id="中国剩余定理">中国剩余定理</h4>
-<blockquote>
-<p>设幺环<span class="math inline">\(R\)</span>上的理想<span class="math inline">\(A_1, A_2, ..., A_n\)</span>两两互素，那么</p>
-<p><span class="math display">\[R/\bigcap_{i=1}^n A_i \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
-<p>特别的，当<span class="math inline">\(R\)</span>为交换幺环时，<span class="math inline">\(\bigcap_{i=1}^n A_i = A_1A_2...A_n\)</span>，从而</p>
-<p><span class="math display">\[R/ A_1A_2...A_n \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
-</blockquote>
-<p>要证明这个定理，我们先证明一个引理</p>
-<blockquote>
-<p>设<span class="math inline">\(I, J, K\)</span>为幺环<span class="math inline">\(R\)</span>的理想，那么</p>
-<ol type="i">
-<li><p>当<span class="math inline">\(I\)</span>与<span class="math inline">\(J, K\)</span>都互素时，<span class="math inline">\(I\)</span>与<span class="math inline">\(JK\)</span>互素</p></li>
-<li><p><span class="math inline">\(I, J\)</span>互素时，<span class="math inline">\(I \cap J = IJ+JI\)</span>，特别的，如果<span class="math inline">\(R\)</span>为交换幺环，那么<span class="math inline">\(I\cap J = IJ+JI=IJ\)</span></p></li>
-</ol>
-</blockquote>
-<p>(i)的证明，由于<span class="math inline">\(I\)</span>与<span class="math inline">\(J, K\)</span>互素，因此存在<span class="math inline">\(i_1, i_2 \in I, j \in J, k \in K\)</span>，使得<span class="math inline">\(i_1 + j = 1, i_2+k = 1\)</span>，因此<span class="math inline">\(1 = (i_1+j)(i_2+k)=(i_1i_2+ji_2+i_1k)+jk \in I+JK\)</span>，从而<span class="math inline">\(I\)</span>与<span class="math inline">\(JK\)</span>互素</p>
-<p>(ii)的证明类似，由于<span class="math inline">\(I, J\)</span>为理想，因此<span class="math inline">\(IJ \subseteq I, J\)</span>，类似<span class="math inline">\(JI \subseteq I \cap J\)</span>，从而<span class="math inline">\(IJ+JI \subseteq I \cap J\)</span></p>
-<p>由于<span class="math inline">\(I, J\)</span>互素，取<span class="math inline">\(i+j=1\)</span>，那么<span class="math inline">\(\forall x \in I \cap J, x=1x=ix+jx\in IJ+JI\)</span>，<span class="math inline">\(\square\)</span></p>
-<hr />
-<p>下面我们正式开始证明中国剩余定理</p>
-<p>构造<span class="math inline">\(R\)</span>到<span class="math inline">\(R/A_1 \oplus R/A_2 \oplus ... \oplus R/A_n\)</span>的映射<span class="math inline">\(\sigma\)</span>：<span class="math inline">\(\sigma(x) = (x+A_1, x+A_2, ..., x+A_n)\)</span></p>
-<p>不难证明这是一个同态，考虑同态核：将有<span class="math inline">\(x+A_1 = A_1, ..., x+A_n=A_n\)</span>，也即<span class="math inline">\(x\in \bigcap_{i=1}^n A_i\)</span></p>
-<p>再考虑同态像，我们依赖于下面的定理，事实上，下面的定理和数论形式的中国剩余定理更为接近</p>
-<blockquote>
-<p>任给<span class="math inline">\(a_1, a_2, ..., a_n \in R\)</span>，那么方程组</p>
-<p><span class="math display">\[\begin{cases} x \equiv a_1(mod\;A_1) \\ x \equiv a_2(mod\;A_2) \\ ... \\x \equiv a_n(mod\;A_n)\end{cases}\]</span>在<span class="math inline">\(R\)</span>中有解，并且在模<span class="math inline">\(\bigcap_{i=1}^n A_i\)</span>的意义下唯一确定</p>
-</blockquote>
-<p>令<span class="math inline">\(B_i = \prod_{j \neq i} A_j\)</span>，根据引理(i)，<span class="math inline">\(B_i\)</span>与<span class="math inline">\(A_i\)</span>互素，因此存在<span class="math inline">\(a_i&#39; \in A_i, b_i \in B_i\)</span>使得<span class="math inline">\(a_i&#39; + b_i = 1\)</span></p>
-<p>此时，对<span class="math inline">\(j \neq i\)</span>，根据<span class="math inline">\(A_j\)</span>是一个理想，将有<span class="math inline">\(b_i \in A_j\)</span>，即<span class="math inline">\(b_i \equiv 0(mod\;A_j)\)</span>，而<span class="math inline">\(b_i \equiv 1(mod\;A_i)\)</span></p>
-<p>那么，令<span class="math inline">\(x_0 = \sum_{i=1}^n a_ib_i\)</span>，这就是原方程组的一个解</p>
-<p>不妨设方程还有另一个<span class="math inline">\(x\)</span>，那么由<span class="math inline">\((x-x_0) \in A_1, ..., (x-x_0)\in A_n\)</span>，得到<span class="math inline">\(x-x_0 \in \bigcap_{i=1}^n A_i\)</span>，也即<span class="math inline">\(x \equiv x_0(mod\;\bigcap_{i=1}^n A_i)\)</span></p>
-<p>根据上面的定理，我们可以知道<span class="math inline">\(\sigma\)</span>实际上是一个满同态，因此由环的同态基本定理</p>
-<p><span class="math display">\[R/\bigcap_{i=1}^n A_i \cong R/A_1 \oplus R/A_2 ... \oplus R/A_n\]</span></p>
-<p>当<span class="math inline">\(R\)</span>是交换幺环时，运用引理(ii)即可归纳证明其形式</p>
-<h4 id="单位群">单位群</h4>
-<blockquote>
-<p>对幺环<span class="math inline">\(R\)</span>，称<span class="math inline">\(u\)</span>为单位，当且仅当<span class="math inline">\(u\)</span>为乘法可逆元，也即存在<span class="math inline">\(u&#39; \in R\)</span>使得<span class="math inline">\(uu&#39; = 1\)</span></p>
-</blockquote>
-<p>注意到，如果<span class="math inline">\(u, v\)</span>为单位，那么<span class="math inline">\(u^{-1}, uv\)</span>也为单位，这告诉我们<span class="math inline">\(U(R) = \{u:u\in R, u\text{是单位}\}\)</span>按乘法构成一个群</p>
-<ul>
-<li><span class="math inline">\(U(Z) = \{\pm 1\}\)</span></li>
-<li>称<span class="math inline">\(Z[i] = \{a+bi:a, b \in Z\}\)</span>为Gauss复整数环，则<span class="math inline">\(U(Z[i]) = \{\pm1, \pm i\}\)</span></li>
-<li>称<span class="math inline">\(Z[w] = \{a+bw : a, b\in Z\}\)</span>为Eisenstein环，其中<span class="math inline">\(w\)</span>为非<span class="math inline">\(1\)</span>的三次单位根，并且<span class="math inline">\(U(Z[w]) = \{\pm 1, \pm w, \pm w^2 \}\)</span></li>
-<li>设<span class="math inline">\(R_1, R_2, ..., R_n\)</span>为幺环，那么<span class="math inline">\(U(R_1 \oplus R_2 \oplus ...\oplus R_n) = U(R_1) \times U(R_2) ... \times U(R_n)\)</span></li>
-</ul>
-<h4 id="素理想">素理想</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，如果<span class="math inline">\(\forall a, b \in R, ab \in I\)</span>可以推出<span class="math inline">\(a \in I\)</span>或者<span class="math inline">\(b \in I\)</span>，那么称<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的素理想</p>
-</blockquote>
-<h4 id="极大理想">极大理想</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，如果<span class="math inline">\(J \lhd R, I \subseteq J \subseteq R\)</span>可以推出<span class="math inline">\(J = I\)</span>或者<span class="math inline">\(J=R\)</span>，那么称<span class="math inline">\(I\)</span>为<span class="math inline">\(R\)</span>的极大理想</p>
-</blockquote>
-<ul>
-<li><p><span class="math inline">\((0)\)</span>是<span class="math inline">\(Z\)</span>的素理想，但不是极大理想</p>
-<p>对于素数<span class="math inline">\(p\)</span>，<span class="math inline">\((p)\)</span>是<span class="math inline">\(Z\)</span>的素理想，也是极大理想</p>
-<p>其余的<span class="math inline">\((n)\)</span>既不是<span class="math inline">\(Z\)</span>的素理想，也不是极大理想</p></li>
-</ul>
-<h4 id="域">域</h4>
-<blockquote>
-<p>若<span class="math inline">\(F\)</span>为环，<span class="math inline">\(F/\{0\}\)</span>构成Abel群，那么，称<span class="math inline">\(F\)</span>构成域</p>
-</blockquote>
-<ul>
-<li><p>域一定是整环</p>
-<p><span class="math inline">\(a \neq 0\)</span>时，<span class="math inline">\(ab=0\Rightarrow a^{-1}ab = 0 \Rightarrow b=0\)</span></p></li>
-</ul>
-<h4 id="素理想与整环极大理想与域">素理想与整环，极大理想与域</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，则</p>
-<ol type="i">
-<li><p><span class="math inline">\(R\)</span>为整环，当且仅当<span class="math inline">\(O\)</span>为<span class="math inline">\(R\)</span>的素理想</p></li>
-<li><p><span class="math inline">\(R\)</span>为域，当且仅当<span class="math inline">\(O\)</span>为<span class="math inline">\(R\)</span>的极大理想</p></li>
-</ol>
-</blockquote>
-<p>(i)是平凡的，考虑(ii)，<span class="math inline">\(R\)</span>为域等价于对任意<span class="math inline">\(a \neq 0\)</span>存在逆元，</p>
-<p>如果存在<span class="math inline">\(I \lhd R\)</span>，使得<span class="math inline">\(O \subseteq I \subseteq R\)</span>，当<span class="math inline">\(I \neq O\)</span>，任取<span class="math inline">\(i \in I - O\)</span>，那么<span class="math inline">\(1 \in i^{-1}I=I\)</span>，从而<span class="math inline">\(I=R\)</span></p>
-<p>反之，考虑<span class="math inline">\(O \subseteq \langle a\rangle \subseteq R\)</span>，当<span class="math inline">\(a \neq 0\)</span>时，有<span class="math inline">\(\langle a \rangle =R\)</span>，于是<span class="math inline">\(a\)</span>存在逆元</p>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(P \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，则</p>
-<ol type="i">
-<li><p><span class="math inline">\(P\)</span>为素理想当且仅当<span class="math inline">\(R/P\)</span>为整环</p></li>
-<li><p><span class="math inline">\(P\)</span>为极大理想当且仅当<span class="math inline">\(R/P\)</span>为域</p></li>
-</ol>
-</blockquote>
-<p>运用上面的引理和定义证明即可</p>
-<ul>
-<li>极大理想一定是素理想</li>
-</ul>
-<blockquote>
-<p>设<span class="math inline">\(\sigma\)</span>是环<span class="math inline">\(R\)</span>到<span class="math inline">\(R&#39;\)</span>的同态，那么</p>
-<ul>
-<li>对<span class="math inline">\(\ker \sigma \subseteq M\)</span>，<span class="math inline">\(M\)</span>为素理想当且仅当<span class="math inline">\(\sigma(M)\)</span>为素理想</li>
-<li>对<span class="math inline">\(\ker \sigma \subseteq M\)</span>，<span class="math inline">\(M\)</span>为极大理想当且仅当<span class="math inline">\(\sigma(M)\)</span>为极大理想</li>
-</ul>
-</blockquote>
-<p>上述定理实际上可以表明，包括核的素/极大理想和像的素/极大理想存在一一对应</p>
-<p>证明：<span class="math inline">\(M\)</span>为<span class="math inline">\(R\)</span>的素理想，当且仅当<span class="math inline">\(R/M\)</span>为整环，当且仅当<span class="math inline">\(\sigma(R)/\sigma(M)\)</span>为整环（第一同构定理），当且仅当<span class="math inline">\(\sigma(M)\)</span>为素理想，极大理想类似</p>
-<h4 id="素理想的存在性">素理想的存在性</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \lhd R\)</span>且存在<span class="math inline">\(a \in R\)</span>，使得<span class="math inline">\(I \cap \{a^n:n\in Z\} = \emptyset\)</span>，那么必然存在包含<span class="math inline">\(I\)</span>的素理想<span class="math inline">\(P\)</span>，使得<span class="math inline">\(P \cap \{a^n:n\in Z\} = \emptyset\)</span></p>
-</blockquote>
-<p>证明较为复杂，略过</p>
-<ul>
-<li>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(I \neq R\)</span>为<span class="math inline">\(R\)</span>的理想，那么存在包含<span class="math inline">\(I\)</span>的极大理想</li>
-</ul>
-<p>注意到<span class="math inline">\(I \cap \{1\} = \emptyset\)</span>，说明极大的满足<span class="math inline">\(P \cap \{1\} = \emptyset\)</span>的理想为极大理想即可</p>
-<h4 id="诣零根">诣零根</h4>
-<blockquote>
-<p>设环<span class="math inline">\(R\)</span>为非零元，则称<span class="math inline">\(r(R)=\bigcap_{P\text{为$R$的素理想}} P\)</span>为<span class="math inline">\(R\)</span>的诣零根</p>
-</blockquote>
-<p>这个结构的名字可能比较奇怪，需要从另一个角度来理解</p>
-<blockquote>
-<p><span class="math inline">\(r(R)\)</span>恰为<span class="math inline">\(A\)</span>中所有的幂零元构成</p>
-</blockquote>
-<p>如果<span class="math inline">\(a^n = 0\in P\)</span>，那么由素理想的性质，不难推出<span class="math inline">\(a \in P\)</span></p>
-<p>如果<span class="math inline">\(a^n \neq 0\)</span>，那么<span class="math inline">\(\{a^n\} \cap O = \emptyset\)</span>，根据上一个定理，存在<span class="math inline">\(P\)</span>，使得<span class="math inline">\(a \notin P\)</span></p>
-<ul>
-<li><span class="math inline">\(r(Z)=O\)</span></li>
-</ul>
-<h3 id="week13">week13</h3>
-<h4 id="形式幂级数环">形式幂级数环</h4>
-<blockquote>
-<p>令<span class="math inline">\(R[[X]] = \{(a_n)_{n \geq 0}, a_n \in R\}\)</span>，其中<span class="math inline">\((a_n) = (a_0,a_1,...)\)</span>为无穷序列，在其上定义加，乘法：</p>
-<ul>
-<li><span class="math inline">\((a_n) + (b_n) = (a_n+b_n)\)</span></li>
-<li><span class="math inline">\((a_n) * (b_n) = (\sum_{i+j=n} a_ib_j)\)</span></li>
-</ul>
-<p>那么<span class="math inline">\(R[[x]]\)</span>按上述加法和乘法构成环，称为<strong>形式幂级数环</strong></p>
-</blockquote>
-<p>这个定义和形式幂级数看起来没什么关系，实则不然</p>
-<ul>
-<li>我们考虑将<span class="math inline">\((0,1,0,...)\)</span>看作<span class="math inline">\(x\)</span>，那么<span class="math inline">\(x^n = (0,0,...,0,1,0,0,...)\)</span>，其中第<span class="math inline">\(n\)</span>位为<span class="math inline">\(1\)</span>，那么<span class="math inline">\((a_n) = a_0 + a_1x + a_2x^2 + ...\)</span>，这样就与平时认知的幂级数有了联系</li>
-<li><span class="math inline">\(R\)</span>可以“看作”是<span class="math inline">\(R[[x]]\)</span>的一个子环（考虑无穷序列到常数项的映射）</li>
-<li><span class="math inline">\(x\)</span>在<span class="math inline">\(R[[x]]\)</span>上生成的子环为<span class="math inline">\(R[x]\)</span>（<span class="math inline">\(R\)</span>上的一元多项式环）</li>
-</ul>
-<h4 id="多元多项式环">多元多项式环</h4>
-<blockquote>
-<p>定义二元多项式环<span class="math inline">\(R[x,y] = R[x][y]\)</span>，即系数在<span class="math inline">\(R[x]\)</span>中的<span class="math inline">\(y\)</span>的一元多项式环，多元可以类推</p>
-</blockquote>
-<ul>
-<li>对于多元多项式：<span class="math inline">\(\sum_{i=0}^n a_{i_1, ...,i_n} x_1^{i_1}x_2^{i_2}...x_n^{i_n}\)</span>，定义次数为<span class="math inline">\(\max\{i_1+i_2+...+i_n:a_{i_1,i_2,...,i_n} \neq 0\}\)</span></li>
-<li>零多项式的次数为<span class="math inline">\(-\infty\)</span></li>
-<li><span class="math inline">\(\deg(f+g) \leq \deg(f) + \deg(g)\)</span></li>
-<li><span class="math inline">\(\deg(fg) \leq \deg(f) + \deg(g)\)</span>，在<span class="math inline">\(f, g\)</span>的首项不是零因子时，这里应该取等，小于号是因为零因子的存在性</li>
-</ul>
-<h4 id="多项式环的单位群">多项式环的单位群</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为整环，则<span class="math inline">\(R[x_1,...,x_n]\)</span>也为整环，并且<span class="math inline">\(U(R[x_1,...,x_n])=U(R)\)</span></p>
-</blockquote>
-<ul>
-<li><p>我们之前已经提到过，如果<span class="math inline">\(R\)</span>为整环，那么<span class="math inline">\(R[x]\)</span>为整环，归纳即可证明<span class="math inline">\(R[x_1,...,x_n]\)</span>为整环</p></li>
-<li><p>对于第二点，在整环中<span class="math inline">\(f(x)g(x) = 1\)</span>，只有<span class="math inline">\(\deg f(x) = 0, \deg g(x) = 0\)</span></p></li>
-</ul>
-<h4 id="带余除法">带余除法</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，<span class="math inline">\(f(x), g(x) \in R[x]\)</span>，<span class="math inline">\(g(x) \neq 0\)</span>且<span class="math inline">\(g(x)\)</span>的首项为单位，那么有唯一的<span class="math inline">\(q(x), r(x) \in R[x]\)</span>，使得<span class="math inline">\(f(x) = q(x)g(x)+r(x)\)</span>，且<span class="math inline">\(\deg r(x) &lt; \deg g(x)\)</span></p>
-</blockquote>
-<ul>
-<li>取<span class="math inline">\(r(x)\)</span>使得其在<span class="math inline">\(S=\{f(x)-g(x)h(x):h(x)\in R\}\)</span>次数最低，对应的<span class="math inline">\(h(x)\)</span>记为<span class="math inline">\(q(x)\)</span>，从而有<span class="math inline">\(f(x)=q(x)g(x)+r(x)\)</span></li>
-<li>利用<span class="math inline">\(g(x)\)</span>的首项为单位，可以证明有<span class="math inline">\(\deg r(x) &lt; \deg g(x)\)</span></li>
-<li>唯一性：设<span class="math inline">\(f(x)=q(x)g(x)+r(x)=q&#39;(x)g(x)+r&#39;(x)\)</span>，从而<span class="math inline">\(g(x)(q(x)-q&#39;(x))=r&#39;(x)-r(x)\)</span>，右边小于<span class="math inline">\(\deg g(x)\)</span>，如果<span class="math inline">\(q(x)\neq q&#39;(x)\)</span>，左边的度数将<span class="math inline">\(\geq \deg g(x)\)</span>，从而矛盾（注意到在<span class="math inline">\(R\neq O\)</span>中，单位一定不是零因子，单位有<span class="math inline">\(aa^{-1} = 1\)</span>，如果有零因子<span class="math inline">\(b\)</span>，那么<span class="math inline">\(b=1*b=a^{-1}ab=a^{-1}0=0\)</span>，矛盾）</li>
-</ul>
-<p>带余除法有一个经常用的推论：因式定理</p>
-<blockquote>
-<p>设<span class="math inline">\(c \in R\)</span>，<span class="math inline">\(f(x)\in R[x]\)</span>，则<span class="math inline">\((x-c)\mid f(x)\)</span>的充要条件是<span class="math inline">\(c\)</span>为<span class="math inline">\(f(x)\)</span>的一个根</p>
-</blockquote>
-<h4 id="整环中根的数量">整环中根的数量</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为一个整环，<span class="math inline">\(f(x) \in R[x]\)</span>，<span class="math inline">\(\deg f(x) = n \geq 0\)</span>，则<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(R\)</span>中至多有<span class="math inline">\(n\)</span>个根</p>
-</blockquote>
-<ul>
-<li>归纳证明</li>
-</ul>
-<h4 id="整环的单位群">整环的单位群</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为整环，则<span class="math inline">\(U(R)\)</span>的有限子群为循环群</p>
-</blockquote>
-<ul>
-<li>设<span class="math inline">\(m=exp(G)\)</span>，由<span class="math inline">\(x^m = 1\)</span>有<span class="math inline">\(|G|\)</span>个解知道<span class="math inline">\(|G| \leq m\)</span>，又由幂指数的性质<span class="math inline">\(m \leq |G|\)</span>，从而<span class="math inline">\(m=|G|\)</span>，在有限Abel群中，存在元素<span class="math inline">\(a\)</span>，使得<span class="math inline">\(o(a)=m=|G|\)</span></li>
-</ul>
-<p>将其运用到域上，得到</p>
-<ul>
-<li>有限域中<span class="math inline">\(F^* = F-\{0\}\)</span>是有限循环群</li>
-</ul>
-<h4 id="euclid整环">Euclid整环</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为整环，如果存在<span class="math inline">\(L:R-\{0\} \to N\)</span>，使得<span class="math inline">\(a, b \in R\)</span>且<span class="math inline">\(b \neq 0\)</span>时，存在<span class="math inline">\(q, r \in R\)</span>适合<span class="math inline">\(a=bq+r\)</span>并且<span class="math inline">\(r=0\)</span>或<span class="math inline">\(L(r)&lt;L(b)\)</span></p>
-<p>则称<span class="math inline">\(R\)</span>为Euclid整环，<span class="math inline">\(L\)</span>称为Euclid数</p>
-</blockquote>
-<ul>
-<li><p>根据前面的讨论，我们知道：如果<span class="math inline">\(F\)</span>为域，则<span class="math inline">\(F[x]\)</span>为Euclid整环</p></li>
-<li><p><span class="math inline">\(Z[i] = \{a+bi:a, b \in Z\}\)</span>，<span class="math inline">\(Z[w] = \{a+bw:a, b \in Z\}\)</span>按照<span class="math inline">\(L(\xi) = \xi \bar{\xi} = |\xi|^2\)</span>构成Euclid整环</p>
-<ul>
-<li><p>任给<span class="math inline">\(a \in R, b \neq 0 \in R\)</span>（<span class="math inline">\(R=Z[i]\)</span>或<span class="math inline">\(Z[w]\)</span>），要寻找满足条件的<span class="math inline">\(a=bq+r\)</span>，等价于寻找<span class="math inline">\(q\)</span>，使得<span class="math inline">\(|\frac{a}{b}-q|&lt;1\)</span></p>
-<p>根据下面的事实：如果<span class="math inline">\(x \in R\)</span>，那么<span class="math inline">\(\bar{x} \in R\)</span>，且<span class="math inline">\(L(x) \in N\)</span></p>
-<p>那么<span class="math inline">\(\frac{a}{b}\)</span>形如<span class="math inline">\(c+di\)</span>（或者<span class="math inline">\(c+dw\)</span>），其中<span class="math inline">\(c, d \in Q\)</span></p>
-<p>取<span class="math inline">\(m + ni\)</span>为最接近<span class="math inline">\(c+di\)</span>的<span class="math inline">\(R\)</span>中数，简单放缩可以证明该数满足<span class="math inline">\(|\frac{a}{b}-q|&lt;1\)</span></p></li>
-</ul></li>
-</ul>
-<p>下面是关于上述环的一个更一般性的定理</p>
-<blockquote>
-<p>设<span class="math inline">\(d\)</span>为无平方因子数（<span class="math inline">\(d \neq 0, d \neq 1\)</span>），定义</p>
-<p><span class="math inline">\(R_d = \begin{cases} Z[\sqrt{d}]:Z+Z\sqrt {d}, &amp; d \not \equiv 1(mod\;4) \\ Z+Z\frac{-1+\sqrt{d}}{2}, &amp;d \equiv 1(mod\;4)\end{cases}\)</span></p>
-<p>那么，<span class="math inline">\(d&lt;0\)</span>时，按<span class="math inline">\(L(\xi) = |xi|^2\)</span>，当且仅当<span class="math inline">\(d=-1,-2,-3,-7,-11\)</span>时，<span class="math inline">\(R_d\)</span>为整环</p>
-<p><span class="math inline">\(d&gt;0\)</span>时，按<span class="math inline">\(L(a+bd) = |a^2-db^2|\)</span>，当且仅当<span class="math inline">\(d=2, 3, 5, 6, 7, 11, 13, 17, 19, 21, 29, 33, 37, 41, 57, 73\)</span>时，<span class="math inline">\(R_d\)</span>为整环</p>
-</blockquote>
-<h4 id="主理想整环">主理想整环</h4>
-<blockquote>
-<p>如果整环<span class="math inline">\(R\)</span>中的理想都是主理想，则称<span class="math inline">\(R\)</span>为主理想整环（PID）</p>
-</blockquote>
-<ul>
-<li><p>Euclid整环一定是主理想整环</p>
-<p>不妨设<span class="math inline">\(I\)</span>为Euclid整环中的非零理想，那么在<span class="math inline">\(I/\{0\}\)</span>中存在一个<span class="math inline">\(N(\cdot)\)</span>最小的元素<span class="math inline">\(a\)</span></p>
-<p>现在对任意的元素<span class="math inline">\(b\)</span>，根据Euclid整环的定义，存在<span class="math inline">\(I\)</span>中的元素<span class="math inline">\(c, d\)</span>，使得<span class="math inline">\(a=bc+d\)</span>，并且<span class="math inline">\(d=0\)</span>或<span class="math inline">\(N(d)&lt;N(a)\)</span></p>
-<p>由于<span class="math inline">\(a\)</span>是<span class="math inline">\(N(\cdot)\)</span>最小的元素，因此只有<span class="math inline">\(d=0\)</span>，从而<span class="math inline">\(a=bc\)</span>，这也就是说<span class="math inline">\(I=(a)\)</span></p></li>
-<li><p>在整环中，一般有下面的定理成立：</p>
-<ul>
-<li><span class="math inline">\(b \mid a \Leftrightarrow (a) \subseteq (b)\)</span></li>
-<li><span class="math inline">\(u\)</span>为单位<span class="math inline">\(\Leftrightarrow (u) = R\)</span></li>
-<li><span class="math inline">\(a \sim b\)</span>（<span class="math inline">\(a\)</span>与<span class="math inline">\(b\)</span>相伴，<span class="math inline">\(a \mid b, b \mid a\)</span>）<span class="math inline">\(\Leftrightarrow (a)=(b) \Leftrightarrow a, b\)</span>之间相差一个单位</li>
-</ul></li>
-</ul>
-<h4 id="不可约元素元">不可约元，素元</h4>
-<blockquote>
-<p>设<span class="math inline">\(p\)</span>位整环<span class="math inline">\(R\)</span>中非零元，非单位元，如果<span class="math inline">\(a \mid p \Rightarrow a \sim p\)</span>或<span class="math inline">\(a\)</span>为单位，则称<span class="math inline">\(p\)</span>为不可约元</p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(p\)</span>可约即存在两个非单位元<span class="math inline">\(a, b\)</span>，使得<span class="math inline">\(p=ab\)</span></li>
-</ul>
-<blockquote>
-<p>如果<span class="math inline">\(p \mid ab \Rightarrow p \mid a\)</span>或<span class="math inline">\(p \mid b\)</span>，则称<span class="math inline">\(p\)</span>为素元</p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(p\)</span>为素元，当且仅当<span class="math inline">\((p)\)</span>为素理想</li>
-</ul>
-<h4 id="不可约元与素元">不可约元与素元</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为整环，那么</p>
-<ul>
-<li><span class="math inline">\(R\)</span>中素元必为不可约元</li>
-<li><span class="math inline">\(R\)</span>为PID时，不可约元为素元</li>
-</ul>
-</blockquote>
-<p>对于第一条，进行反证，设<span class="math inline">\(p=ab\)</span>，由于<span class="math inline">\(p \mid ab\)</span>及<span class="math inline">\(p\)</span>为素元，不妨设<span class="math inline">\(p \mid a\)</span></p>
-<p>又由于<span class="math inline">\(a \mid p\)</span>，因此<span class="math inline">\(a \sim p\)</span>，从而<span class="math inline">\(b\)</span>为单位，矛盾</p>
-<p>对于第二条，证明素理想为极大理想</p>
-<ul>
-<li>在PID中，非零理想<span class="math inline">\(I\)</span>为素理想，当且仅当其为极大理想</li>
-</ul>
-<h4 id="唯一分解定理">唯一分解定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为PID，<span class="math inline">\(P\)</span>为<span class="math inline">\(R\)</span>中素元（按照相伴构成的等价类）的代表元，那么<span class="math inline">\(\forall x \in R\)</span>，其可以唯一地表为<span class="math inline">\(u \prod_{p_i \in P} p_i^{a_i}\)</span>的形式，其中<span class="math inline">\(u\)</span>为单位，<span class="math inline">\(a_i \in N\)</span>并且只有有限个非零的<span class="math inline">\(a_i\)</span></p>
-</blockquote>
-<h3 id="week14">week14</h3>
-<h4 id="noether环">Noether环</h4>
-<blockquote>
-<p>称交换幺环<span class="math inline">\(R\)</span>为Noether环，当且仅当其每个理想都是有限生成的</p>
-</blockquote>
-<p>关于Noether环，有下面几条非常重要的等价条件</p>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为交换幺环，那么下面三者等价</p>
-<ol type="a">
-<li><p><span class="math inline">\(R\)</span>为Noether环</p></li>
-<li><p>（理想升链条件）：称<span class="math inline">\(I_1 \subseteq I_2 ...\)</span>为<span class="math inline">\(R\)</span>的理想升链，那么存在<span class="math inline">\(N\)</span>，当<span class="math inline">\(n&gt;N\)</span>时，有<span class="math inline">\(I_{n}=I_{n+1}\)</span></p></li>
-<li><p><span class="math inline">\(R\)</span>种的每个非空理想集按照包含关系具有极大元</p></li>
-</ol>
-</blockquote>
-<p><span class="math inline">\((a) \Rightarrow (b)\)</span>：假如有理想升链<span class="math inline">\(I_1 \subseteq I_2...\)</span>，设<span class="math inline">\(I= \bigcup_{i=1}^{\infty} I_i\)</span>，不难证明，<span class="math inline">\(I\)</span>为理想。根据Noether环的定义，<span class="math inline">\(I\)</span>为有限生成，不妨设<span class="math inline">\(I=(a_1,...,a_k)\)</span>，对于每一个<span class="math inline">\(a_i\)</span>，存在<span class="math inline">\(n_i\)</span>使得<span class="math inline">\(a_i \in I_{n_i}\)</span>，那么，取<span class="math inline">\(N=\max(n_1,...,n_k)\)</span>，将有<span class="math inline">\(I_N\)</span>之后都相等的性质</p>
-<p><span class="math inline">\((b) \Rightarrow (c)\)</span>：假设有一个集合没有极大元，我们可以构造出互不相同的理想升链，这与(b)矛盾</p>
-<p><span class="math inline">\((c) \Rightarrow (a)\)</span>：假设<span class="math inline">\(I\)</span>不是有限生成，那么我们总可以构造<span class="math inline">\(I_k = I_{k-1}+(a_k)\)</span>，其中<span class="math inline">\(a_k \in R-I_{k-1}\)</span>，但其中没有极大元，与(c)矛盾</p>
-<h4 id="hilbert基定理">Hilbert基定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为Noether环，那么<span class="math inline">\(R[x]\)</span>为Noether环</p>
-</blockquote>
-<p>对于<span class="math inline">\(R[x]\)</span>种的理想<span class="math inline">\(I\)</span>，对<span class="math inline">\(n \in N\)</span>，定义<span class="math inline">\(I_n = \{[x^n]P(x):P(x)\in I \wedge \deg P \leq n\}\)</span>（即所有小于等于<span class="math inline">\(n\)</span>的多项式的<span class="math inline">\(n\)</span>次项系数）</p>
-<p>可以证明，<span class="math inline">\(I_n \lhd R\)</span>，由于<span class="math inline">\(I\)</span>为理想，因此<span class="math inline">\(P(x) \in I \Rightarrow xP(x) \in I\)</span>，这说明<span class="math inline">\(I_n \subseteq I_{n+1}\)</span>，根据理想升链条件，存在<span class="math inline">\(N\)</span>，使得<span class="math inline">\(n&gt;N\)</span>时，<span class="math inline">\(I_n = I_{n+1}\)</span></p>
-<p>此时，由于<span class="math inline">\(R\)</span>种的理想有限生成，不妨设<span class="math inline">\(I_n = (a_{n,1}, a_{n,2},...,a_{n,l(n)})\)</span></p>
-<p>对<span class="math inline">\(0 \leq i \leq N, 1 \leq j \leq l(n)\)</span>，我们定义<span class="math inline">\(P_{ij}\)</span>为首项元素为<span class="math inline">\(a_{ij}\)</span>的多项式，定义<span class="math inline">\(J\)</span>为这些<span class="math inline">\(P_{ij}\)</span>生成的理想</p>
-<p>不妨设<span class="math inline">\(P(x)\)</span>的次数为<span class="math inline">\(q\)</span>，设<span class="math inline">\(q&#39; = \min(N,q)\)</span>，那么<span class="math inline">\(P(x)\)</span>的首项可以由<span class="math inline">\((a_{q&#39;, 1}, ..., a_{q&#39;, l(q&#39;)})\)</span>生成，注意到<span class="math inline">\(P(x)=Q(x) + \sum_{i=1}^{l(q&#39;)} r_i P_{q&#39;, i} x^{q-q&#39;}\)</span>，其中<span class="math inline">\(r_i\)</span>是生成<span class="math inline">\(P(x)\)</span>首项的系数，那么<span class="math inline">\(\deg Q(x) &lt; \deg P(x)\)</span>，运用归纳法就可以证明</p>
-<ul>
-<li><span class="math inline">\(Z[x_1,...,x_n]\)</span>为Noether环</li>
-<li>设<span class="math inline">\(F\)</span>为域，那么<span class="math inline">\(F[x_1,...,x_n]\)</span>为Noether环</li>
-</ul>
-<blockquote>
-<p>设<span class="math inline">\(R\)</span>为Noether环，则<span class="math inline">\(R\)</span>种的每个理想都包含若干素理想的乘积</p>
-</blockquote>
-<p>这条定理就不证明了</p>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -3705,6 +3394,330 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </categories>
       <tags>
         <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>抽象代数3</title>
+    <url>/2022/01/06/abstract-algebra-3/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="域">域</h2>
+<h3 id="week14">week14</h3>
+<h4 id="特征">特征</h4>
+<blockquote>
+<p>记<span class="math inline">\(1\)</span>为域<span class="math inline">\(F\)</span>中的乘法单位元，考虑其在<span class="math inline">\(F\)</span>作为加法群的阶<span class="math inline">\(n\)</span></p>
+<p>如果<span class="math inline">\(n\)</span>有限，那么记<span class="math inline">\(ch(F) = n\)</span>，称为域<span class="math inline">\(F\)</span>的特征</p>
+<p>如果<span class="math inline">\(n = \infty\)</span>，那么记<span class="math inline">\(ch(F)=0\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(ch(Q)=ch(C)=0\)</span></li>
+<li>对于素数<span class="math inline">\(p\)</span>，有<span class="math inline">\(ch(Z/pZ)=p\)</span></li>
+</ul>
+<p>对于域中的非零元<span class="math inline">\(a\)</span>，当且仅当<span class="math inline">\(n1 = 0\)</span>时，有<span class="math inline">\(na = 0\)</span>（这里都是数乘，不是乘法），因此<span class="math inline">\(a\)</span>和<span class="math inline">\(1\)</span>在加法群中的阶数相同</p>
+<p>根据上面这一条中，再注意到<span class="math inline">\(1 \neq 0\)</span>，因此<span class="math inline">\(ch(F)&gt;1\)</span>，我们可以知道</p>
+<ul>
+<li>当<span class="math inline">\(ch(F) \neq 0\)</span>时，<span class="math inline">\(ch(F)\)</span>将是一个素数</li>
+</ul>
+<h4 id="子域">子域</h4>
+<blockquote>
+<p>如果<span class="math inline">\(E \subseteq F\)</span>按<span class="math inline">\(F\)</span>中的<span class="math inline">\(+\)</span>，<span class="math inline">\(*\)</span>构成域，那么，</p>
+<p>称<span class="math inline">\(E\)</span>为<span class="math inline">\(F\)</span>的<strong>子域</strong>，<span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>的<strong>扩域</strong>，用<span class="math inline">\(F/E\)</span>表示这样的域扩张</p>
+</blockquote>
+<h4 id="最小子域">最小子域</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为域，<span class="math inline">\(ch(F)\)</span>为素数</p>
+<p>则<span class="math inline">\(E=\{me:m\in Z\} = \{0,e,2e,...,(p-1)e\}\)</span>为最小子域，且<span class="math inline">\(E \cong Z/pZ\)</span></p>
+</blockquote>
+<ul>
+<li>提醒：域<span class="math inline">\(F\)</span>的乘法群<span class="math inline">\(F/\{0\}\)</span>的有限子群为循环群</li>
+</ul>
+<h4 id="域中的恒等式">域中的恒等式</h4>
+<p>如果域<span class="math inline">\(F\)</span>中恰好有<span class="math inline">\(q\)</span>个元，则称<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域</p>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，那么</p>
+<p><span class="math display">\[\prod_{a \in F^* = F/\{0\}} (x-a) = x^{q-1}-1\]</span></p>
+</blockquote>
+<p>两边作差后为至多<span class="math inline">\(q-2\)</span>次多项式，但是有<span class="math inline">\(q-1\)</span>个根（域中的非零元），因此作差后应该为0</p>
+<blockquote>
+<p>设<span class="math inline">\(ch(F)=p\)</span>，那么对<span class="math inline">\(a_1,...,a_n \in F, m \in N\)</span>，有</p>
+<p><span class="math display">\[(a_1+...+a_n)^{p^m} = a_1^{p^m} + ... + a_n^{p^m}\]</span></p>
+</blockquote>
+<p>先证明<span class="math inline">\((a+b)^p = a^p+b^p\)</span>，这一点利用二项式定理以及<span class="math inline">\(px=0, \forall x \in F\)</span>，然后对<span class="math inline">\(n,m\)</span>依次归纳</p>
+<h4 id="线性空间">线性空间</h4>
+<blockquote>
+<p>称<span class="math inline">\(V\)</span>为域<span class="math inline">\(F\)</span>上的线性空间，如果</p>
+<ol type="1">
+<li><p><span class="math inline">\(V\)</span>按照加法构成Abel群</p></li>
+<li><p>有数乘运算，即<span class="math inline">\(\forall a \in F, x \in V\)</span>，定义<span class="math inline">\(ax\)</span>为数乘，要求</p></li>
+</ol>
+<ul>
+<li><span class="math inline">\(ax\in V\)</span>，<span class="math inline">\(1x = x\)</span>，<span class="math inline">\(abx=(ab)x\)</span>，<span class="math inline">\(a(x+y)=ax+ay\)</span>，<span class="math inline">\((a+b)x=ax+bx\)</span></li>
+</ul>
+</blockquote>
+<h4 id="域扩张">域扩张</h4>
+<p>当<span class="math inline">\(F/E\)</span>为域扩张时，定义数乘为<span class="math inline">\(F\)</span>中的乘法，那么<span class="math inline">\(F\)</span>形成<span class="math inline">\(E\)</span>上的线性空间</p>
+<p>该线性空间的维数，称为域扩张的次数，记为<span class="math inline">\([F:E]\)</span></p>
+<ul>
+<li><p>设<span class="math inline">\(L/M\)</span>,<span class="math inline">\(M/K\)</span>为域扩张，并且<span class="math inline">\([L:M], [M:K]\)</span>有限，那么<span class="math inline">\([L:K]=[L:M][M:K]\)</span></p>
+<ul>
+<li>要证明这一点，取<span class="math inline">\(L/M, M/K\)</span>的一组基<span class="math inline">\(\{\alpha\}, \{\beta\}\)</span>，证明<span class="math inline">\(\{\alpha \beta\}\)</span>为<span class="math inline">\(L/K\)</span>的一组基</li>
+</ul></li>
+<li><p>一些例子：<span class="math inline">\([C:Q]=2\)</span></p>
+<p>设<span class="math inline">\(F=\{a+b\sqrt{d}:a, b\in Q\}\)</span>，则<span class="math inline">\([F:Q]=2\)</span>，称为二次域</p></li>
+</ul>
+<h4 id="最小生成的子环子域">最小生成的子环/子域</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\emptyset \neq X \subseteq L\)</span>，那么</p>
+<p><span class="math inline">\(K[X] = \bigcap_{R \leq L, R \subseteq K\cup X} R\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子环，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子环，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩环</p>
+<p><span class="math inline">\(K(X)=\bigcap_{K \leq F \leq L, F \subseteq X}F\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子域，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子域，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩域</p>
+</blockquote>
+<p>当<span class="math inline">\(X=\{a_1,...,a_n\}\)</span>时，也写<span class="math inline">\(K[X]=K[a_1,...,a_n]\)</span>，<span class="math inline">\(K(X)=K(a_1,...,a_n)\)</span></p>
+<p>特别的，<span class="math inline">\(K[a_1,...,a_n]\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式，<span class="math inline">\(K(a_1,...,a_n)\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式的分式，称为有理函数</p>
+<h4 id="单扩张">单扩张</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，如果存在<span class="math inline">\(a \in L\)</span>，使得<span class="math inline">\(K(a) = L\)</span>，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(K\)</span>的单扩张</p>
+</blockquote>
+<h3 id="week15">week15</h3>
+<h4 id="代数元">代数元</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，如果有非零多项式<span class="math inline">\(f(x) \in K[x]\)</span>，使得<span class="math inline">\(f(\alpha) = 0\)</span>，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元，否则称<span class="math inline">\(\alpha\)</span>为超越元</p>
+</blockquote>
+<ul>
+<li>如果<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(Q\)</span>上的代数元，则称其为代数数，否则，称其为超越数</li>
+<li>如果<span class="math inline">\(\alpha\)</span>是首一的<span class="math inline">\(f(x) \in Z[x]\)</span>的根，则称<span class="math inline">\(\alpha\)</span>为代数整数（比如<span class="math inline">\(x^2 = 3\)</span>的根）</li>
+<li>有理数一定是代数数</li>
+</ul>
+<p>当把代数整数限制在有理数上时，我们有</p>
+<blockquote>
+<p>有理数中的代数整数只有整数</p>
+</blockquote>
+<p>“<span class="math inline">\(\Leftarrow\)</span>”：显然</p>
+<p>"<span class="math inline">\(\Rightarrow\)</span>"：如果<span class="math inline">\(r = \frac{a}{b}, (a, b) = 1\)</span>，满足<span class="math inline">\(f(r) = \frac{a^n}{b^n} + a_1 \frac{a^{n-1}}{b^{n-1}} + ... + a_n = 0\)</span></p>
+<p>那么<span class="math inline">\(a^n + a_1ba^{n-1} + ... + b^n a_b = 0\)</span>，因此<span class="math inline">\(b \mid a^n\)</span>，但是<span class="math inline">\((a, b) = 1\)</span>，于是<span class="math inline">\(b = 1\)</span></p>
+<h4 id="极小多项式">极小多项式</h4>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的代数元，那么<span class="math inline">\(I = \{g(x) \in K[x] \mid g(\alpha) = 0\}\)</span>是<span class="math inline">\(K[x]\)</span>的理想</p>
+<p>注意到<span class="math inline">\(K\)</span>是一个域，因此<span class="math inline">\(K[x]\)</span>是一个Euclid整环，这也就是说存在<span class="math inline">\(f(x)\)</span>使得<span class="math inline">\(I = (f(x))\)</span></p>
+<p>我们称<span class="math inline">\(f(x)\)</span>为<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式</p>
+<ul>
+<li><span class="math inline">\(f(x)\)</span>是<span class="math inline">\(K[x]\)</span>的不可约元</li>
+</ul>
+<h4 id="域扩张的次数">域扩张的次数</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的<span class="math inline">\(n\)</span>次代数元（这个次数是指极小多项式的次数），那么</p>
+<ol type="1">
+<li><p><span class="math inline">\(K(\alpha) = K[\alpha]\)</span>，并且<span class="math inline">\([K(\alpha) : K] = n\)</span>，对应的线性空间的一组基为<span class="math inline">\(\alpha^0, \alpha^1, ..., \alpha^{n-1}\)</span></p></li>
+<li><p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span>，那么<span class="math inline">\(K(\alpha) \cong K[x] / (f(x))\)</span></p></li>
+</ol>
+</blockquote>
+<ol type="1">
+<li>设<span class="math inline">\(g(x) \in K[x]\)</span>，且<span class="math inline">\(g(\alpha) \neq 0\)</span>，我们证明<span class="math inline">\(g(\alpha)\)</span>存在逆元</li>
+</ol>
+<p>由于<span class="math inline">\(f(\alpha)\)</span>是极小多项式（为不可约元），因此<span class="math inline">\((f(x), g(x))=1\)</span>，那么存在<span class="math inline">\(u, v\)</span>使得<span class="math inline">\(uf + gv=1\)</span>，代入<span class="math inline">\(\alpha\)</span>，得到<span class="math inline">\(g(\alpha) v(\alpha) = 1\)</span>，这可以说明<span class="math inline">\(K(\alpha) = K[\alpha]\)</span></p>
+<p>下面，我们考虑证明<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>是一组基，通过取模的方式，其足够表出<span class="math inline">\(K(\alpha)\)</span>中的所有元素，线性无关则可以根据极小多项式的性质来证明</p>
+<ol start="2" type="1">
+<li>设<span class="math inline">\(\sigma : K[x] \to K(\alpha)\)</span>，<span class="math inline">\(\sigma(f(x)) = f(\alpha)\)</span>，这是一个满同态，同态核为<span class="math inline">\((f(x))\)</span></li>
+</ol>
+<ul>
+<li><span class="math inline">\(R[i] = C \cong R[x]/(x^2 + 1)\)</span>，此时<span class="math inline">\(i\)</span>可以看作是取模之后的<span class="math inline">\(x\)</span></li>
+</ul>
+<p>考虑上述定理的“反面”</p>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>不可约，那么存在<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，使得存在<span class="math inline">\(\alpha \in L\)</span>有<span class="math inline">\(K(\alpha) = L\)</span>，并且<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(F = K[x] / (f(x))\)</span>构成一个域（不可约元的理想为极大理想），在这个域中，把<span class="math inline">\(\bar{x}=x + r(x)f(x), r(x) \in K[x]\)</span>“看作”<span class="math inline">\(\alpha\)</span>，那么<span class="math inline">\(\alpha\)</span>对应的极小多项式自然为<span class="math inline">\(f(x)\)</span></p>
+<p>这里的“看作”实际上就是一堆代换，不难感性理解</p></li>
+</ul>
+<h4 id="有限扩张">有限扩张</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\([L:K]\)</span>有穷当且仅当存在有限个<span class="math inline">\(K\)</span>上的代数元<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得<span class="math inline">\(K(\alpha_1, ..., \alpha_n) = L\)</span></p>
+</blockquote>
+<p>必要性：取<span class="math inline">\(L/K\)</span>的一组基<span class="math inline">\(\alpha_1, ..., \alpha_n\)</span>，那么<span class="math inline">\(L \subseteq K(\alpha_1, ..., \alpha_n) \subseteq L\)</span>，于是<span class="math inline">\(L=K(\alpha_1,...,\alpha_n)\)</span>，因为<span class="math inline">\([L:K]\)</span>有限，因此每个<span class="math inline">\(\alpha_i\)</span>都存在一个极小多项式</p>
+<p>充分性：设<span class="math inline">\(K_0 = K, K_i = K_{i-1}(\alpha_i)\)</span>，所有的<span class="math inline">\(\alpha_i\)</span>作为<span class="math inline">\(K\)</span>上的代数元，一定也是<span class="math inline">\(K_{i-1}\)</span>上的代数元，从而<span class="math inline">\([L:K] = \prod_{i=1}^n [K_i : K_{i-1}] &lt; \infty\)</span></p>
+<h4 id="代数扩张">代数扩张</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/M, M/K\)</span>为域的代数扩张，那么<span class="math inline">\(L/K\)</span>为域的代数扩张</p>
+</blockquote>
+<p>证明任给<span class="math inline">\(\alpha \in L\)</span>，证明<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
+<p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(M\)</span>中的极小多项式为<span class="math inline">\(f(x)=x^n + a_1x^{n-1} + ... + a_n\)</span>，注意到<span class="math inline">\(a_1,...,a_n\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
+<p>那么<span class="math inline">\([K(a_1, ..., a_n, \alpha) : K] = [K(a_1,...,\alpha):K(a_1,...,a_n)]*[K(a_1,...,a_n):K] &lt; \infty\)</span></p>
+<p>注意到<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K(a_1, ..., a_n)\)</span>上的代数元，上式成立，由于<span class="math inline">\(\alpha\)</span>在扩张后的域中，因此<span class="math inline">\(\alpha\)</span>为代数元</p>
+<h4 id="代数闭包">代数闭包</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\(\overline{K} = \{a \in L : \alpha \text{为K的代数元}\}\)</span>为<span class="math inline">\(L\)</span>的子域，并且<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span></p>
+</blockquote>
+<ul>
+<li><p>我们给出一个引理：设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，则<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元的充要条件为存在不全为<span class="math inline">\(0\)</span>的<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得令<span class="math inline">\(V = \sum K\alpha_i\)</span>时，有<span class="math inline">\(\alpha V \subseteq V\)</span></p>
+<p>充分性：取<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>为系数即可</p>
+<p>必要性：不妨设<span class="math inline">\(\alpha \alpha_i = \sum_{j=1}^n a_{ij} \alpha_j\)</span>，那么<span class="math inline">\(\alpha\)</span>时特征多项式<span class="math inline">\(|\lambda I - A| = 0\)</span>的根，其中<span class="math inline">\(A = (a_{ij})\)</span></p></li>
+</ul>
+<p>利用引理，证明对加法和乘法封闭时，取<span class="math inline">\(\alpha, \beta\)</span>的极小多项式<span class="math inline">\(f, g\)</span>的次数为<span class="math inline">\(n, m\)</span>，令<span class="math inline">\(V=\sum k_{ij}\alpha^i \beta^j\)</span></p>
+<p>证明<span class="math inline">\((\alpha \pm \beta) V \subseteq V\)</span>，<span class="math inline">\(\alpha \beta V \subseteq V\)</span>即可，逆元的证明是平凡的</p>
+<p>下面考虑证明<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span>，设<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(\overline{K}\)</span>上的代数元，设其极小多项式为<span class="math inline">\(f(x)=x^n+a_1x^{n-1}+...+a_n\)</span></p>
+<p>由于系数都在<span class="math inline">\(K(a_1,...,a_n)\)</span>中，因此<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(K(a_1,...,a_n)\)</span>上的代数元，那么类似前面的分析，有<span class="math inline">\([K(a_1,...,a_n, \alpha):K]&lt;\infty\)</span>，从而<span class="math inline">\(\alpha \in \overline{K}\)</span></p>
+<h4 id="代数闭域">代数闭域</h4>
+<blockquote>
+<p>如果<span class="math inline">\(F = \overline{F}\)</span>，那么称<span class="math inline">\(F\)</span>为代数闭域</p>
+</blockquote>
+<p>代数闭域中任何非常数多项式可以分解为一次多项式的乘积</p>
+<ul>
+<li>复数域<span class="math inline">\(C\)</span>，全体代数数构成的域<span class="math inline">\(\overline{Q}\)</span>都是代数闭域</li>
+</ul>
+<h4 id="有限域">有限域</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为有限域，则<span class="math inline">\(|F|\)</span>为素数幂次</p>
+</blockquote>
+<p>设<span class="math inline">\(F\)</span>为有限域，不难知道<span class="math inline">\(ch(F)\)</span>为素数，设<span class="math inline">\(E = \{0, e, ..., (p-1)e\}\)</span>为<span class="math inline">\(p\)</span>元域，而<span class="math inline">\([F:E]\)</span>为有限扩张，设其为<span class="math inline">\(n\)</span>，那么有<span class="math inline">\(|F|=|E|^n = p^n\)</span></p>
+<h4 id="形式导数">形式导数</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为域，对于<span class="math inline">\(P(x) = \sum_{i=0}^k a_i x^i \in F[x]\)</span>，定义其形式导数为$P'(x) = _{i=1}^k ia_ix^{i-1} $</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\((P(x)Q(x))&#39;=P(x)Q&#39;(x)+P&#39;(x)Q(x)\)</span></li>
+</ul>
+<p>我们将通过这个玩意来寻找有限域</p>
+<ul>
+<li><p>引理：设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则没有非常数多项式<span class="math inline">\(f(x) \in F[x]\)</span>，使得<span class="math inline">\(f(x)^2 \mid x^{nq}-x\)</span></p>
+<p>如果<span class="math inline">\(x^{nq}-x=f(x)^2g(x)\)</span>，求导之后有<span class="math inline">\((nqe)x^{nq-1}-e=f(x)^2g&#39;(x)+2f(x)f&#39;(x)g(x)\)</span></p>
+<p>注意到特征为<span class="math inline">\(q\)</span>的因子，因此<span class="math inline">\((nqe)x^{nq-1} = 0\)</span>，那么<span class="math inline">\(f(x)\)</span>整除右边，自然整除左边，得到<span class="math inline">\(f(x) \mid e\)</span></p></li>
+</ul>
+<h3 id="week16">week16</h3>
+<h4 id="有限域的构造">有限域的构造</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则<span class="math inline">\(x^{q^n} - x\)</span>是<span class="math inline">\(F[x]\)</span>中次数整除<span class="math inline">\(n\)</span>的所有首一不可约多项式的乘积</p>
+</blockquote>
+<p>要证明这个引理，我们证明下面三个性质，不过每个证明都比较繁琐...</p>
+<ul>
+<li><span class="math inline">\(x^{q^n} - x\)</span>可以分解为首一不可约多项式</li>
+<li>首一不可约多项式不可能在<span class="math inline">\(x^{q^n} - x\)</span>中出现两次（使用上周用形式导数相关的引理）</li>
+<li>所有的不可约多项式是其因子</li>
+</ul>
+<p>让我们举一些例子：<span class="math inline">\(x^{2^2} - x = x(x-1)(x^2 + x + 1)\)</span></p>
+<p><span class="math inline">\(x^{3^2} - x = x(x-1)(x+1)(x^2 - 1)(x^2 + x + 2)(x^2 + x - 2)\)</span></p>
+<p>通过上述引理，我们可以证明</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>为有限域，则<span class="math inline">\(E[x]\)</span>中一定存在首一<span class="math inline">\(n\)</span>次不可约多项式</p>
+</blockquote>
+<p>对比上一个定理中的系数，设<span class="math inline">\(N_d\)</span>为首一<span class="math inline">\(d\)</span>次不可约多项式，那么有<span class="math inline">\(q^n = \sum_{d | n} dN_d\)</span></p>
+<p>一个方法是先证明<span class="math inline">\(d N_d \leq q^n - 1\)</span>，再进行放缩<span class="math inline">\(\sum_{d | n} d Nd &lt; \sum_{d=1}^n d N_d\)</span>后证明<span class="math inline">\(N_n \neq 0\)</span></p>
+<h4 id="有限域的存在性">有限域的存在性</h4>
+<blockquote>
+<p>存在有限<span class="math inline">\(q\)</span>元域的充要条件为存在素数<span class="math inline">\(p\)</span>和正整数<span class="math inline">\(n\)</span>，使得<span class="math inline">\(q = p^n\)</span></p>
+</blockquote>
+<p>我们已经证明过充分性，对于必要性，我们在<span class="math inline">\(E = Z / pZ\)</span>中取首一<span class="math inline">\(n\)</span>次不可约多项式<span class="math inline">\(f(x)\)</span>，</p>
+<p>那么<span class="math inline">\(E[x] / (f(x))\)</span>就是一个<span class="math inline">\(p^n\)</span>元域</p>
+<blockquote>
+<p>任何两个有限<span class="math inline">\(q\)</span>元域同构，我们不妨记其为<span class="math inline">\(\mathbf{F}_q\)</span></p>
+</blockquote>
+<h4 id="分裂域">分裂域</h4>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果对<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(L[x]\)</span>可分解为一次式的乘积，但对于<span class="math inline">\(L\)</span>上的子域都没有这个性质，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域</p>
+</blockquote>
+<p>我们可以想象，我们把<span class="math inline">\(f(x)\)</span>的所有根添入<span class="math inline">\(K\)</span>之后，新的域应该可以分解为一次式的乘积</p>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>非常数多项式，那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域存在</p>
+</blockquote>
+<ul>
+<li>我们把<span class="math inline">\(f(x)\)</span>写作不可约多项式的乘积，比如<span class="math inline">\(f(x) = \prod p_i(x)\)</span>，我们考虑对<span class="math inline">\(p_1(x)\)</span>进行讨论，存在扩域<span class="math inline">\(K_1 = K(\alpha_1)\)</span>，并且<span class="math inline">\(\alpha_1\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(p_1(x)\)</span>，那么<span class="math inline">\(f(x) = (x - \alpha_1)f_1(x)\)</span>，此时<span class="math inline">\(f_1(x) \in K_1[x]\)</span>，继续对<span class="math inline">\(f_1(x)\)</span>进行分解，我们就能得到结论</li>
+</ul>
+<h4 id="可分元">可分元</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，如果<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式没有重根，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的可分元</p>
+</blockquote>
+<p>对于可分元，其有一个性质</p>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，那么<span class="math inline">\(\alpha \in L\)</span>为可分元，当且仅当<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>的导数<span class="math inline">\(f&#39;(x)\)</span>非零</p>
+</blockquote>
+<p>如果<span class="math inline">\(\alpha\)</span>为可分元，设<span class="math inline">\(f(x) = \prod(x - a_i)\)</span>，那么<span class="math inline">\(f&#39;(x) = \sum_i \prod_{j \neq i} (x-a_j)\)</span>，于是<span class="math inline">\(f&#39;(a_1) = \prod_{j\neq 1} (a_1-a_j) \neq 0\)</span></p>
+<p>反之，如果<span class="math inline">\(f&#39;(x)\)</span>非零，那么<span class="math inline">\((f&#39;(x), f(x)) = 1\)</span>（<span class="math inline">\(f(x)\)</span>不可约），那么存在<span class="math inline">\(u(x)f(x)+v(x)f&#39;(x)=1\)</span>成立，但对于重根<span class="math inline">\(\beta\)</span>而言，有<span class="math inline">\(u(\beta)f(\beta)+v(\beta)f&#39;(\beta)=0\)</span>，矛盾</p>
+<p>有了可分元之后，我们定义可分扩张</p>
+<blockquote>
+<p>如果<span class="math inline">\(\forall \alpha \in L\)</span>，<span class="math inline">\(\alpha\)</span>都是<span class="math inline">\(K\)</span>上的可分元，则称<span class="math inline">\(L/K\)</span>为可分扩张</p>
+</blockquote>
+<p>对于可分扩张，我们也有一个性质</p>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，若<span class="math inline">\(ch(K)=0\)</span>或者<span class="math inline">\(|K|&lt;\infty\)</span>，则<span class="math inline">\(L/K\)</span>为可分扩张</p>
+</blockquote>
+<p><span class="math inline">\(ch(K)=0\)</span>时，极小多项式的首项非0</p>
+<p><span class="math inline">\(|K|&lt;\infty\)</span>时，极小多项式<span class="math inline">\(f(x) \mid x^{q^n} - x\)</span>，由于<span class="math inline">\((x^{q^n} - x)&#39; = -1\)</span>（注意到特征的性质），但有重根<span class="math inline">\(\beta\)</span>时，导数的取值为<span class="math inline">\(0\)</span>，矛盾</p>
+<h4 id="单扩张定理">单扩张定理</h4>
+<blockquote>
+<p>有限可分扩张为单扩张</p>
+</blockquote>
+<p>因为是有限扩张，故存在代数元<span class="math inline">\(a_1, ..., a_n\)</span>，使得<span class="math inline">\(L=K(a_1, ..., a_n)\)</span></p>
+<p>尝试利用可分扩张的性质证明，<span class="math inline">\(\forall a, b \in L, \exist c \in L, K(a, b) = K(c)\)</span></p>
+<h4 id="正规扩张">正规扩张</h4>
+<blockquote>
+<p>如果每个<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>都可以在<span class="math inline">\(L[x]\)</span>中分解为一次式的乘积，且不可约多项式<span class="math inline">\(f(x)\)</span>有一个零点在<span class="math inline">\(L\)</span>中时，其剩余的所有零点都在<span class="math inline">\(L\)</span>中时，称<span class="math inline">\(L/K\)</span>为正规扩张</p>
+</blockquote>
+<p>对于正规扩张，我们有</p>
+<blockquote>
+<p><span class="math inline">\(L/K\)</span>为有限正规扩张，当且仅当<span class="math inline">\(L\)</span>为某个<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域</p>
+</blockquote>
+<h4 id="商域">商域</h4>
+<p>对整环<span class="math inline">\(R\)</span>，我们在<span class="math inline">\(R \times R^*\)</span>上定义关系<span class="math inline">\(\sim\)</span>：<span class="math inline">\((a, b) \sim (c, d) \Leftrightarrow ad = bc\)</span></p>
+<p>不难验证，这是一个等价关系，记<span class="math inline">\((a, b)\)</span>按照上述关系形成的等价类为分数<span class="math inline">\(a/b\)</span></p>
+<blockquote>
+<p>令<span class="math inline">\(F = \{a/b:a \in R, b \in R^*\}\)</span>，定义<span class="math inline">\(\frac{a}{b} + \frac{c}{d} = \frac{ad+bc}{bd}\)</span>以及<span class="math inline">\(\frac{a}{b} * \frac{c}{d} = \frac{ac}{bd}\)</span>，不难验证，这种加法和乘法的定义是良定义的</p>
+<p>并且<span class="math inline">\(F\)</span>按照上述加法和乘法构成域，我们称其为整环<span class="math inline">\(R\)</span>的商域</p>
+</blockquote>
+<h2 id="galois理论">Galois理论</h2>
+<h3 id="last-week">last week</h3>
+<h4 id="galois群">Galois群</h4>
+<blockquote>
+<p>如果域扩张<span class="math inline">\(L/K\)</span>是有限可分正规扩张，则称其为<span class="math inline">\(K\)</span>的Galois扩张</p>
+<p>在其上定义Galois群：<span class="math inline">\(Gal(L/K) = \{\sigma \in Aut(L): \sigma|_K = I_K\}\)</span></p>
+</blockquote>
+<p>也就是说，在<span class="math inline">\(L\)</span>的自同构中，保持<span class="math inline">\(K\)</span>不变的群</p>
+<h4 id="不变域">不变域</h4>
+<blockquote>
+<p>对<span class="math inline">\(G \leq Aut(L)\)</span>，定义其不变域为<span class="math inline">\(Inv(G) = \{a \in L | \forall g \in G, g(a) = a\}\)</span></p>
+</blockquote>
+<p>不变域确实是一个域</p>
+<h4 id="galois群论基本定理">Galois群论基本定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为Galois扩张</p>
+<ul>
+<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，则<span class="math inline">\(L/M\)</span>为Galois扩张</p>
+<p>并且<span class="math inline">\(Gal(L/M) \leq Gal(L/K)\)</span>，<span class="math inline">\(|Gal(L/M)| = [L:M]\)</span>，<span class="math inline">\(Inv(Gal(L/M)) = M\)</span></p></li>
+<li><p>设<span class="math inline">\(H \leq Gal(L/K)\)</span>，那么设<span class="math inline">\(M = Inv(H)\)</span>，则<span class="math inline">\(K \leq M \leq L, Gal(L/M)=H\)</span></p>
+<p>也就是说，<span class="math inline">\(Gal(L/K)\)</span>的子群和<span class="math inline">\(L, K\)</span>的中间域之间存在一个一一对应的关系</p></li>
+<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，那么<span class="math inline">\(M/K\)</span>是正规扩张，当且仅当<span class="math inline">\(Gal(L/M) \lhd Gal(L/K)\)</span></p>
+<p>并且当<span class="math inline">\(M/K\)</span>是正规扩张时，<span class="math inline">\(Gal(L/K)/Gal(L/M) \cong Gal(M/K)\)</span></p></li>
+</ul>
+<p>上面这一条建立了正规扩张和正规子群之间的关系</p>
+</blockquote>
+<h4 id="根式可解">根式可解</h4>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果存在域的扩张链，<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，使得<span class="math inline">\(K_n\)</span>包含<span class="math inline">\(f(x)\)</span>的分裂域，并且这些扩张都是根式扩张，则称<span class="math inline">\(f(x)=0\)</span>在<span class="math inline">\(K\)</span>上根式可解</p>
+<p>根式扩张指的是，对于扩张<span class="math inline">\(L/K\)</span>，存在<span class="math inline">\(\alpha \in L\)</span>，使得<span class="math inline">\(L = K(\alpha)\)</span>且<span class="math inline">\(\alpha^n = K\)</span>（也就是说，每次添加一个元素的开根）</p>
+</blockquote>
+<p>对于根式扩张，我们由</p>
+<blockquote>
+<p>如果<span class="math inline">\(L/K\)</span>为根式扩张，那么<span class="math inline">\(Gal(L/K)\)</span>为Abel群</p>
+</blockquote>
+<p>有了上述定理之后，我们对根式可解进行进一步的考虑，将得到</p>
+<p>对<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，其等价于<span class="math inline">\(Gal(L/K) \rhd Gal(L/K_1) ... \rhd Gal(L/K_n) = \{e\}\)</span></p>
+<p>根据<span class="math inline">\(Gal(L/K_{i+1})/Gal(L/K_i) \cong Gal(K_{i+1}/K_i)\)</span>是Abel群，于是</p>
+<blockquote>
+<p><span class="math inline">\(f(x)=0\)</span>根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
+</blockquote>
+<h4 id="galois定理">Galois定理</h4>
+<p>对上面的讨论取一个特殊情况，我们将得到Galois定理，不妨就用这个定理作为这门课的结束吧</p>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(f(x) = 0\)</span>在<span class="math inline">\(L\)</span>上根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
+</blockquote>
+<ul>
+<li><p>对于一般的<span class="math inline">\(n\)</span>次方程，<span class="math inline">\(f(x) = x^n + t_1x^{n-1} + ... + t_n = 0\)</span></p>
+<p>此时，将<span class="math inline">\(t_1, ..., t_n\)</span>看作字母变量，那么<span class="math inline">\(f(x) \in K=F[t_1, ..., t_n][x]\)</span>，设其在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(Gal(L/K) \cong S_n\)</span></p>
+<p>由于<span class="math inline">\(n \geq 5\)</span>时，<span class="math inline">\(S_n\)</span>不是可解群，因此，五次以上的方程没有通解</p></li>
+</ul>
+<p>Galois无愧于天才之名！</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>abstract algebra</tag>
       </tags>
   </entry>
 </search>
