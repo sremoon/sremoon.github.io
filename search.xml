@@ -559,8 +559,9 @@ int main() &#123;
 <p>按模<span class="math inline">\(I\)</span>同余关系形成的等价类，即<span class="math inline">\(\bar{a} = a + I\)</span>，称为<span class="math inline">\(a\)</span>在模<span class="math inline">\(I\)</span>下的<strong>剩余类</strong></p>
 <p>对剩余类，我们定义加法和乘法</p>
 <ul>
-<li><span class="math inline">\(\bar{a} + \bar{b} = \overline{a+b}\)</span></li>
-<li><span class="math inline">\(\bar{a} * \bar{b} = \overline{a*b}\)</span></li>
+<li><p><span class="math inline">\(\bar{a} + \bar{b} = \overline{a+b}\)</span></p></li>
+<li><p><span class="math inline">\(\bar{a} * \bar{b} = \overline{a*b}\)</span></p>
+<p>（注意这个定义和群是有所区别的，因为<span class="math inline">\((a+I)(b+I) \neq ab + I\)</span>不一定成立，但我们可以保证<span class="math inline">\((a+I)(b+I) \subseteq ab+ I\)</span>，故而该定义是合法的）</p></li>
 </ul>
 </blockquote>
 <h4 id="商环">商环</h4>
@@ -3422,6 +3423,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>如果<span class="math inline">\(E \subseteq F\)</span>按<span class="math inline">\(F\)</span>中的<span class="math inline">\(+\)</span>，<span class="math inline">\(*\)</span>构成域，那么，</p>
 <p>称<span class="math inline">\(E\)</span>为<span class="math inline">\(F\)</span>的<strong>子域</strong>，<span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>的<strong>扩域</strong>，用<span class="math inline">\(F/E\)</span>表示这样的域扩张</p>
 </blockquote>
+<p>根据群的性质，我们不难知道<span class="math inline">\(ch(E)=ch(F)\)</span></p>
 <h4 id="最小子域">最小子域</h4>
 <blockquote>
 <p>设<span class="math inline">\(F\)</span>为域，<span class="math inline">\(ch(F)\)</span>为素数</p>
@@ -3454,7 +3456,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </ul>
 </blockquote>
 <h4 id="域扩张">域扩张</h4>
-<p>当<span class="math inline">\(F/E\)</span>为域扩张时，定义数乘为<span class="math inline">\(F\)</span>中的乘法，那么<span class="math inline">\(F\)</span>形成<span class="math inline">\(E\)</span>上的线性空间</p>
+<p>当<span class="math inline">\(F/E\)</span>为域扩张时，定义数乘为<span class="math inline">\(F\)</span>中的乘法，那么<span class="math inline">\(F\)</span>形成<span class="math inline">\(E\)</span>上的线性空间（验证线性空间的那几条定义即可）</p>
 <p>该线性空间的维数，称为域扩张的次数，记为<span class="math inline">\([F:E]\)</span></p>
 <ul>
 <li><p>设<span class="math inline">\(L/M\)</span>,<span class="math inline">\(M/K\)</span>为域扩张，并且<span class="math inline">\([L:M], [M:K]\)</span>有限，那么<span class="math inline">\([L:K]=[L:M][M:K]\)</span></p>
@@ -3613,6 +3615,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果对<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(L[x]\)</span>可分解为一次式的乘积，但对于<span class="math inline">\(L\)</span>上的子域都没有这个性质，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域</p>
 </blockquote>
 <p>我们可以想象，我们把<span class="math inline">\(f(x)\)</span>的所有根添入<span class="math inline">\(K\)</span>之后，新的域应该可以分解为一次式的乘积</p>
+<p>实际上，如果<span class="math inline">\(f(x) = (x-a_1)^{r_1}(x-a_2)^{r_2}...(x-a_n)^{r_n}\)</span>（所有的<span class="math inline">\(a_i\)</span>两两不同），那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(K(a_1, ..., a_n)\)</span></p>
 <blockquote>
 <p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>非常数多项式，那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域存在</p>
 </blockquote>
@@ -3621,14 +3624,26 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </ul>
 <h4 id="可分元">可分元</h4>
 <blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，如果<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式没有重根，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的可分元</p>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，如果<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式（在其分裂域中）没有重根，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的可分元</p>
 </blockquote>
+<p>这个定义细想会有点奇怪，这是因为我们没有证明一个性质：对于确定的<span class="math inline">\(f(x)\)</span>的任何的分裂域，<span class="math inline">\(f(x)\)</span>在这些分裂域上根的重数在同构的意义下是相等的</p>
 <p>对于可分元，其有一个性质</p>
 <blockquote>
 <p>设<span class="math inline">\(L/K\)</span>为代数扩张，那么<span class="math inline">\(\alpha \in L\)</span>为可分元，当且仅当<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>的导数<span class="math inline">\(f&#39;(x)\)</span>非零</p>
 </blockquote>
-<p>如果<span class="math inline">\(\alpha\)</span>为可分元，设<span class="math inline">\(f(x) = \prod(x - a_i)\)</span>，那么<span class="math inline">\(f&#39;(x) = \sum_i \prod_{j \neq i} (x-a_j)\)</span>，于是<span class="math inline">\(f&#39;(a_1) = \prod_{j\neq 1} (a_1-a_j) \neq 0\)</span></p>
-<p>反之，如果<span class="math inline">\(f&#39;(x)\)</span>非零，那么<span class="math inline">\((f&#39;(x), f(x)) = 1\)</span>（<span class="math inline">\(f(x)\)</span>不可约），那么存在<span class="math inline">\(u(x)f(x)+v(x)f&#39;(x)=1\)</span>成立，但对于重根<span class="math inline">\(\beta\)</span>而言，有<span class="math inline">\(u(\beta)f(\beta)+v(\beta)f&#39;(\beta)=0\)</span>，矛盾</p>
+<ul>
+<li><p>如果<span class="math inline">\(\alpha\)</span>为可分元，设<span class="math inline">\(f(x) = \prod(x - a_i)\)</span>，那么<span class="math inline">\(f&#39;(x) = \sum_i \prod_{j \neq i} (x-a_j)\)</span>，于是<span class="math inline">\(f&#39;(a_1) = \prod_{j\neq 1} (a_1-a_j) \neq 0\)</span></p>
+<p>反之，如果<span class="math inline">\(f&#39;(x)\)</span>非零，那么<span class="math inline">\((f&#39;(x), f(x)) = 1\)</span>（<span class="math inline">\(f(x)\)</span>不可约），那么存在<span class="math inline">\(u(x)f(x)+v(x)f&#39;(x)=1\)</span>成立，但对于重根<span class="math inline">\(\beta\)</span>而言，有<span class="math inline">\(u(\beta)f(\beta)+v(\beta)f&#39;(\beta)=0\)</span>，矛盾</p></li>
+<li><p>然后我们介绍一下书上的证明，感觉涉及到了不同的角度：</p>
+<ul>
+<li><p>设<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x) \in K[x]\)</span>在其分裂域<span class="math inline">\(L\)</span>上的<span class="math inline">\(k\)</span>重根，那么<span class="math inline">\(f(x) = (x-a)^k g(x), g(a) \neq 0\)</span></p>
+<p>此时<span class="math inline">\(f&#39;(x) = (x-a)^{k-1}(kg(x)+(x-a)g&#39;(x))\)</span></p>
+<p>如果<span class="math inline">\(ch(K) \not \mid k\)</span>，则<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的<span class="math inline">\(k-1\)</span>重根</p>
+<p>而如果<span class="math inline">\(ch(K) \mid k\)</span>，则有<span class="math inline">\(f&#39;(x)=(x-a)^kg(x)\)</span>，<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的至少<span class="math inline">\(k\)</span>重根</p></li>
+</ul>
+<p>从上面的讨论，我们知道，（1）<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x)\)</span>的单根的一个充要条件是<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的零根（2）<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x)\)</span>的重根的充要条件是<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的根</p>
+<p>因此，<span class="math inline">\(f(x)\)</span>要有重根，必然地需要有<span class="math inline">\(\deg (\gcd(f(x), f&#39;(x))) &gt; 1\)</span>，再利用<span class="math inline">\(f(x)\)</span>不可约就不难证明了</p></li>
+</ul>
 <p>有了可分元之后，我们定义可分扩张</p>
 <blockquote>
 <p>如果<span class="math inline">\(\forall \alpha \in L\)</span>，<span class="math inline">\(\alpha\)</span>都是<span class="math inline">\(K\)</span>上的可分元，则称<span class="math inline">\(L/K\)</span>为可分扩张</p>
@@ -3639,6 +3654,12 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 </blockquote>
 <p><span class="math inline">\(ch(K)=0\)</span>时，极小多项式的首项非0</p>
 <p><span class="math inline">\(|K|&lt;\infty\)</span>时，极小多项式<span class="math inline">\(f(x) \mid x^{q^n} - x\)</span>，由于<span class="math inline">\((x^{q^n} - x)&#39; = -1\)</span>（注意到特征的性质），但有重根<span class="math inline">\(\beta\)</span>时，导数的取值为<span class="math inline">\(0\)</span>，矛盾</p>
+<h4 id="不可分的多项式">不可分的多项式</h4>
+<p>设不可约多项式<span class="math inline">\(f(x) \in K[x]\)</span>不可分，根据上面的讨论，必然有<span class="math inline">\(ch(K)\)</span>是一个素数<span class="math inline">\(p\)</span></p>
+<p>由于<span class="math inline">\(f(x)\)</span>不可分，那么有<span class="math inline">\(f&#39;(x)=0\)</span>，设<span class="math inline">\(f(x) = \sum a_ix^i\)</span>，则<span class="math inline">\(f&#39;(x) = \sum ia_i x^{i-1}\)</span>，于是<span class="math inline">\(ia_i = 0\)</span></p>
+<p>对<span class="math inline">\(ch(K) \not \mid i\)</span>的<span class="math inline">\(i\)</span>，必然有<span class="math inline">\(a_i = 0\)</span>，于是<span class="math inline">\(f(x) = g(x^p)\)</span>，<span class="math inline">\(g\)</span>不可约但是不能确定是否可分</p>
+<p>如果<span class="math inline">\(g\)</span>不可分，我们继续上述讨论，最终可以得到<span class="math inline">\(f(x) = h(x^{p^e})\)</span>，其中<span class="math inline">\(h\)</span>是一个可分多项式</p>
+<p>写<span class="math inline">\(h(x) = (x-a_1)...(x-a_n)\)</span>，那么<span class="math inline">\(f(x) = (x^{p^e} - a_1)...(x^{p^e}-a_n)\)</span>，对<span class="math inline">\(x^{p^e} - a_1 = 0\)</span>，设其根为<span class="math inline">\(b_1\)</span>，那么<span class="math inline">\((x^{p^e} - a_1) = (x^{p^e} - b_1^{p^e}) = (x-b_1)^{p^e}\)</span>，因此<span class="math inline">\(f(x) = \prod(x-b_i)^{p^e}\)</span>，每个根都将有相同的重数，并且重数形如素数的幂次</p>
 <h4 id="单扩张定理">单扩张定理</h4>
 <blockquote>
 <p>有限可分扩张为单扩张</p>
@@ -3719,5 +3740,97 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       <tags>
         <tag>abstract algebra</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>training-1</title>
+    <url>/2022/03/07/training-1/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="a">A</h2>
+<blockquote>
+<p>求满足<span class="math inline">\(1 \leq a_{i, j} \leq K\)</span>，并且<span class="math inline">\(a_{i, j} \leq a_{i, j+1}\)</span>，<span class="math inline">\(a_{i, j} \leq a_{i+1,j}\)</span>，<span class="math inline">\(a_{R, C}=V\)</span>的<span class="math inline">\(N*M\)</span>的大小的矩阵的数量</p>
+<p>其中<span class="math inline">\(1 \leq R \leq N, 1 \leq C \leq M\)</span></p>
+</blockquote>
+<p>注意到值为<span class="math inline">\(i-1\)</span>和值为<span class="math inline">\(i\)</span>的部分有一条分界线，一共有<span class="math inline">\(K\)</span>条，把这些分界线稍微作移动，他们就等价于不相交的路径，我们很容易通过这些分界线来还原出原来的取值</p>
+<p>对于<span class="math inline">\(a_{R, C}=V\)</span>，就是<span class="math inline">\((R, C)\)</span>这个点上方有<span class="math inline">\(V-1\)</span>条分界线，在LGV引理中，我们可以把所有满足在<span class="math inline">\((R, C)\)</span>上方的分界线的权值记为<span class="math inline">\(x\)</span>然后算行列式，然后考虑<span class="math inline">\(V-1\)</span>次的系数即可</p>
+<p>直接计算<span class="math inline">\(x\)</span>可能较为复杂，我们可以考虑对<span class="math inline">\(x\)</span>进行赋值之后进行插值</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+  </entry>
+  <entry>
+    <title>数理逻辑</title>
+    <url>/2022/03/08/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="命题逻辑">命题逻辑</h3>
+<p>我们按顺序定义下面的一些定义</p>
+<ul>
+<li><p>命题符</p>
+<p>命题符是一类基本的元素，记<span class="math inline">\(PS\)</span>为所有命题符构成的集合，<span class="math inline">\(PS\)</span>是一个可数无穷集</p></li>
+<li><p>命题</p>
+<p>命题是按照如下方式归纳地定义的：</p>
+<p><span class="math inline">\((1)\)</span> 命题符是命题</p>
+<p><span class="math inline">\((2)\)</span> 如果<span class="math inline">\(A, B\)</span>为命题，那么<span class="math inline">\(\neg A\)</span>以及<span class="math inline">\(A * B\)</span>为命题，其中<span class="math inline">\(* \in \{ \wedge, \vee, \rightarrow\}\)</span></p>
+<p><span class="math inline">\((3)\)</span> 命题仅限于此</p>
+<p>所有命题的集合构成命题集，记为<span class="math inline">\(PROP\)</span></p>
+<p>不难看出，任何一个命题总是能找出一个联结词之后，拆分成更小的命题，由这个性质，我们可以对命题进行称为结构归纳的一种归纳</p></li>
+</ul>
+<p>对于命题和命题集，有一些杂乱的结论，我们省略</p>
+<p>接下来是关于命题的语义的内容</p>
+<ul>
+<li><p>赋值</p>
+<p>一个赋值是一个函数<span class="math inline">\(v : PS \to F_2^*\)</span>，将<span class="math inline">\(PS\)</span>中的每个命题符给予<span class="math inline">\(T, F\)</span>的含义</p>
+<p>对于每一个赋值<span class="math inline">\(v\)</span>，我们定义<span class="math inline">\(\hat{v} : PROP \to F_2^*\)</span>，这是一个按照通常意义上对命题递归式地运算得出的结果</p></li>
+</ul>
+<p>运算一般按照真值表进行运算，即</p>
+<p><img src="%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91.assets/2.png" /></p>
+<ul>
+<li><p>满足</p>
+<p><span class="math inline">\(v\)</span>满足<span class="math inline">\(A\)</span>，指<span class="math inline">\(\hat{v}(A) = T\)</span>，记为<span class="math inline">\(v \models A\)</span></p>
+<p>如果存在<span class="math inline">\(v\)</span>使<span class="math inline">\(v \models A\)</span>，那么称<span class="math inline">\(A\)</span>可满足</p>
+<p>特别的，如果<span class="math inline">\(\forall v, \hat{v}(A)=T\)</span>，则称<span class="math inline">\(A\)</span>为永真式，记为<span class="math inline">\(\models A\)</span></p></li>
+</ul>
+<p>显然，我们只需要确定了<span class="math inline">\(A\)</span>中出现的命题符的<span class="math inline">\(\{T, F\}\)</span>，就能根据真值表就能唯一的确定<span class="math inline">\(A\)</span>的取值</p>
+<ul>
+<li><p>语义结论</p>
+<p>设<span class="math inline">\(\Gamma \subseteq PROP\)</span>，对命题<span class="math inline">\(A \in PROP\)</span>，如果下面条件成立</p>
+<p><span class="math inline">\(\forall v, \forall B \in \Gamma\)</span>，如果<span class="math inline">\(\hat{v}(B)=T\)</span>，那么<span class="math inline">\(\hat{v}(A)=T\)</span></p>
+<p>则称<span class="math inline">\(A\)</span>为<span class="math inline">\(\Gamma\)</span>的语义结论，记为<span class="math inline">\(\Gamma \models A\)</span>（这里滥用了符号，令人难受）</p></li>
+<li><p>等价</p>
+<p>对<span class="math inline">\(A, B \in PROP\)</span>，如果<span class="math inline">\(\forall v, \hat{v}(A) = \hat{v}(B)\)</span>，也即<span class="math inline">\(v \models A\;\text{iff}\;v \models B\)</span>，那么称<span class="math inline">\(A, B\)</span>逻辑等价，记为<span class="math inline">\(A \simeq B\)</span></p></li>
+</ul>
+<p>对于每一个<span class="math inline">\(A\)</span>而言，假设其中一共出现了<span class="math inline">\(n\)</span>个命题符，那么<span class="math inline">\(A\)</span>可以看作确定了一个<span class="math inline">\(F_2^n \to F_2\)</span>的函数，这个函数记为<span class="math inline">\(H_A\)</span></p>
+<p>下面是一个经常见到的定理：对于任何一个<span class="math inline">\(F_2^n \to F_2\)</span>的函数<span class="math inline">\(f\)</span>，存在析合范式<span class="math inline">\(A\)</span>以及合析范式<span class="math inline">\(B\)</span>，使得<span class="math inline">\(f = H_A = H_B\)</span></p>
+<h3 id="自然推理系统">自然推理系统</h3>
+<p><strong>矢列</strong></p>
+<p>一个矢列指一个二元组<span class="math inline">\((\Gamma, \Delta), \Gamma, \Delta \subseteq PROP\)</span>，记为<span class="math inline">\(\Gamma \vdash \Delta\)</span>，称<span class="math inline">\(\Gamma\)</span>为前件，<span class="math inline">\(\Delta\)</span>为后件</p>
+<p>下面介绍自然推理系统<span class="math inline">\(G&#39;\)</span>，<span class="math inline">\(G&#39;\)</span>中包含两部分：公理与规则</p>
+<p>注意公理与规则中的<span class="math inline">\(A, B\)</span>指<strong>一个</strong>命题，运用时稍作注意</p>
+<p><img src="%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91.assets/1.png" /></p>
+<p>有了公理与规则后，我们归纳地定义矢列的证明树</p>
+<ul>
+<li>对于<span class="math inline">\(G&#39;\)</span>公理<span class="math inline">\(\Gamma \vdash \Delta\)</span>，其证明树为一个节点<span class="math inline">\(\Gamma \vdash \Delta\)</span></li>
+<li>对于<span class="math inline">\(G&#39;\)</span>规则<span class="math inline">\(\frac{S_1}{S_2}\)</span>，<span class="math inline">\(S_1, S_2\)</span>为矢列，其证明树为<span class="math inline">\(S_1\)</span>的证明树加上<span class="math inline">\((S_1, S_2)\)</span>这条边</li>
+<li>对于<span class="math inline">\(G&#39;\)</span>规则<span class="math inline">\(\frac{S_1\;S_2}{S_3}\)</span>，其证明树为<span class="math inline">\(S_3\)</span>为根，下面连接上<span class="math inline">\(S_1, S_2\)</span>的证明树</li>
+</ul>
+<p><strong>可证性</strong></p>
+<p>如果矢列<span class="math inline">\(S\)</span>的证明树存在，那么我们称<span class="math inline">\(S\)</span>可证</p>
+<hr />
+<p><strong>有效性</strong></p>
+<p>如果<span class="math inline">\(\Gamma = \{A_1, ..., A_m\}\)</span>，记<span class="math inline">\(\bigwedge \Gamma = (A_1 \wedge ... \wedge A_m)\)</span>，类似的定义<span class="math inline">\(\bigvee \Gamma\)</span></p>
+<p>特别的，<span class="math inline">\(\bigwedge \emptyset = T, \bigvee \emptyset = F\)</span></p>
+<p>称矢列<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效，当且仅当<span class="math inline">\(\forall v, v \models \bigwedge \Gamma \to \bigvee \Delta\)</span>，这和<span class="math inline">\(\Gamma \models \Delta\)</span>的意义是等价的</p>
+<hr />
+<p>接下来我们用另一种方式给出有效的等价定义</p>
+<p>称<span class="math inline">\(\Gamma \to \Delta\)</span>有反例，如果命题<span class="math inline">\((\bigwedge \Gamma) \wedge (\neg (\bigvee \Delta))\)</span>可满足</p>
+<p>那么，<span class="math inline">\(\Gamma \to \Delta\)</span>有效当且仅当<span class="math inline">\(\Gamma \to \Delta\)</span>无反例</p>
+<hr />
+<p>下面一定程度上说明了命题逻辑里语法和语义的关系：</p>
+<p><span class="math inline">\(\Gamma \vdash \Delta\)</span>在<span class="math inline">\(G&#39;\)</span>中可证等价于<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效</p>
+<p>事实上，我们可以给出一个更强的结论：若<span class="math inline">\(\Gamma \vdash \Delta\)</span>在<span class="math inline">\(G&#39;\)</span>中可证，则<span class="math inline">\(\Gamma \vdash \Delta\)</span>在<span class="math inline">\(G&#39;\)</span>中有一个不利用Cut规则的证明</p>
+]]></content>
+      <categories>
+        <category>nodets</category>
+      </categories>
   </entry>
 </search>
