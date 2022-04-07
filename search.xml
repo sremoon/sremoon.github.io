@@ -2264,7 +2264,7 @@ int main() &#123;
 <ul>
 <li>利用线性无关的充要条件为零向量的组合系数仅有<span class="math inline">\(0\)</span>，对于<span class="math inline">\(kx^{(i)}\)</span>，注意到乘以<span class="math inline">\(\lambda_j\)</span>和<span class="math inline">\(Ax^{(i)} = \lambda_i x^{(i)}\)</span>将是两种不一样的变化即可</li>
 </ul></li>
-<li><p>矩阵<span class="math inline">\(A\)</span>可对角化（和对角矩阵相似）的充要条件为<span class="math inline">\(A\)</span>为<span class="math inline">\(n\)</span>个线性无关的特征向量</p>
+<li><p>矩阵<span class="math inline">\(A\)</span>可对角化（和对角矩阵相似）的充要条件为<span class="math inline">\(A\)</span>有<span class="math inline">\(n\)</span>个线性无关的特征向量</p>
 <ul>
 <li><p>注意到以这<span class="math inline">\(n\)</span>个特征向量为基即可，也因此，相似中的转移矩阵即为这<span class="math inline">\(n\)</span>个特征向量的坐标</p></li>
 <li><p>注意和对角矩阵相似时，相似中的转移矩阵和对角矩阵一定会对应于特征值和相应的特征向量</p></li>
@@ -3753,84 +3753,208 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
 <p>注意到值为<span class="math inline">\(i-1\)</span>和值为<span class="math inline">\(i\)</span>的部分有一条分界线，一共有<span class="math inline">\(K\)</span>条，把这些分界线稍微作移动，他们就等价于不相交的路径，我们很容易通过这些分界线来还原出原来的取值</p>
 <p>对于<span class="math inline">\(a_{R, C}=V\)</span>，就是<span class="math inline">\((R, C)\)</span>这个点上方有<span class="math inline">\(V-1\)</span>条分界线，在LGV引理中，我们可以把所有满足在<span class="math inline">\((R, C)\)</span>上方的分界线的权值记为<span class="math inline">\(x\)</span>然后算行列式，然后考虑<span class="math inline">\(V-1\)</span>次的系数即可</p>
 <p>直接计算<span class="math inline">\(x\)</span>可能较为复杂，我们可以考虑对<span class="math inline">\(x\)</span>进行赋值之后进行插值</p>
+<h2 id="d">D</h2>
+<blockquote>
+<p>给定<span class="math inline">\(\{A_n\}, \{B_n\}, \{C_n\}\)</span>，对<span class="math inline">\(k = 1, 2, ..., N\)</span>，求 <span class="math display">\[
+Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
+\]</span></p>
+</blockquote>
+<p>看不懂题解，题解提到了一个Tellegen’s Principle，这个原则说linear straight-line program的转置和原问题有相同的复杂度，但是这个principle没有给出通用的构造，还是要对具体问题进行具体地设计，题解论文里提了这个题的转置转置后的做法，但感觉不够直观，我们就对这个题具体给出一个直观分析</p>
+<p>设<span class="math inline">\(S_j = \sum_{i} C_i A_i^j\)</span>，<span class="math inline">\(f_k(x) = \prod_{1 \leq j \leq k} (x + B_j)\)</span></p>
+<p>那么，我们有<span class="math inline">\(Ans_k = \sum_{i=0}^k f_k(x)[x^i] S_i\)</span>，其中<span class="math inline">\(\{S_n\}\)</span>不难通过FFT计算</p>
+<p>接下来，我们考虑分治，具体的，对区间<span class="math inline">\([l,r]\)</span>分析</p>
+<p>区间<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>对于<span class="math inline">\([l, mid]\)</span>中<span class="math inline">\(Ans\)</span>的影响可以递归考虑，我们只需要考虑<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>对<span class="math inline">\([mid+1, r]\)</span>的<span class="math inline">\(Ans\)</span>的影响，注意到我们只需要考虑<span class="math inline">\([mid+1, r]\)</span>中的<span class="math inline">\(Ans\)</span>中含且仅含<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>的项，而这可以通过一个卷积来计算</p>
+<p>总的复杂度就是<span class="math inline">\(O(n \log^2 n)\)</span></p>
 ]]></content>
       <categories>
         <category>problems</category>
       </categories>
   </entry>
   <entry>
-    <title>数理逻辑</title>
-    <url>/2022/03/08/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/</url>
+    <title>numerical_analysis</title>
+    <url>/2022/04/07/numerical-analysis/</url>
     <content><![CDATA[<span id="more"></span>
-<h3 id="命题逻辑">命题逻辑</h3>
-<p>我们按顺序定义下面的一些定义</p>
+<p>这里的笔记是对于上课内容的一个浓缩</p>
+<h2 id="part-1">part 1</h2>
+<h3 id="不动点迭代">不动点迭代</h3>
 <ul>
-<li><p>命题符</p>
-<p>命题符是一类基本的元素，记<span class="math inline">\(PS\)</span>为所有命题符构成的集合，<span class="math inline">\(PS\)</span>是一个可数无穷集</p></li>
-<li><p>命题</p>
-<p>命题是按照如下方式归纳地定义的：</p>
-<p><span class="math inline">\((1)\)</span> 命题符是命题</p>
-<p><span class="math inline">\((2)\)</span> 如果<span class="math inline">\(A, B\)</span>为命题，那么<span class="math inline">\(\neg A\)</span>以及<span class="math inline">\(A * B\)</span>为命题，其中<span class="math inline">\(* \in \{ \wedge, \vee, \rightarrow\}\)</span></p>
-<p><span class="math inline">\((3)\)</span> 命题仅限于此</p>
-<p>所有命题的集合构成命题集，记为<span class="math inline">\(PROP\)</span></p>
-<p>不难看出，任何一个命题总是能找出一个联结词之后，拆分成更小的命题，由这个性质，我们可以对命题进行称为结构归纳的一种归纳</p></li>
+<li>方法</li>
 </ul>
-<p>对于命题和命题集，有一些杂乱的结论，我们省略</p>
-<p>接下来是关于命题的语义的内容</p>
+<blockquote>
+<p>如果<span class="math inline">\(g(r) = r\)</span>，那么称<span class="math inline">\(r\)</span>为<span class="math inline">\(g\)</span>的一个不动点</p>
+</blockquote>
+<p>我们称下面的方法为不动点迭代法：</p>
+<blockquote>
+<p>猜测一个解<span class="math inline">\(x_0\)</span>，之后不断的进行迭代：<span class="math inline">\(x_{i+1} = g(x_i)\)</span></p>
+</blockquote>
+<p>这个方法有性质：对连续函数<span class="math inline">\(g\)</span>，如果<span class="math inline">\(\lim x_i\)</span>收敛，那么其一定收敛于不动点</p>
+<p>注意到<span class="math inline">\(g(r) = g(\lim x_i) = \lim g(x_i) = \lim x_{i+1} = r\)</span></p>
 <ul>
-<li><p>赋值</p>
-<p>一个赋值是一个函数<span class="math inline">\(v : PS \to F_2^*\)</span>，将<span class="math inline">\(PS\)</span>中的每个命题符给予<span class="math inline">\(T, F\)</span>的含义</p>
-<p>对于每一个赋值<span class="math inline">\(v\)</span>，我们定义<span class="math inline">\(\hat{v} : PROP \to F_2^*\)</span>，这是一个按照通常意义上对命题递归式地运算得出的结果</p></li>
+<li>迭代的速率</li>
 </ul>
-<p>运算一般按照真值表进行运算，即</p>
-<p><img src="%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91.assets/2.png" /></p>
+<p>对于这种迭代方法，记<span class="math inline">\(e_i\)</span>为第<span class="math inline">\(i\)</span>次迭代的误差，即<span class="math inline">\(e_i = |x_i - r|\)</span></p>
+<p>如果<span class="math inline">\(S = \lim e_{i+1} / e_i &lt; 1\)</span>，那么说该不动点迭代线性收敛，<span class="math inline">\(S\)</span>为其收敛速度</p>
+<blockquote>
+<p>如果<span class="math inline">\(g\)</span>连续可导，<span class="math inline">\(r\)</span>为不动点，<span class="math inline">\(S = |g&#39;(r)| &lt; 1\)</span>，那么对于足够接近<span class="math inline">\(r\)</span>的猜测，不动点迭代法可以收敛到<span class="math inline">\(r\)</span>，收敛速度为<span class="math inline">\(S\)</span></p>
+</blockquote>
+<p>证明略</p>
 <ul>
-<li><p>满足</p>
-<p><span class="math inline">\(v\)</span>满足<span class="math inline">\(A\)</span>，指<span class="math inline">\(\hat{v}(A) = T\)</span>，记为<span class="math inline">\(v \models A\)</span></p>
-<p>如果存在<span class="math inline">\(v\)</span>使<span class="math inline">\(v \models A\)</span>，那么称<span class="math inline">\(A\)</span>可满足</p>
-<p>特别的，如果<span class="math inline">\(\forall v, \hat{v}(A)=T\)</span>，则称<span class="math inline">\(A\)</span>为永真式，记为<span class="math inline">\(\models A\)</span></p></li>
+<li>误差</li>
 </ul>
-<p>显然，我们只需要确定了<span class="math inline">\(A\)</span>中出现的命题符的<span class="math inline">\(\{T, F\}\)</span>，就能根据真值表就能唯一的确定<span class="math inline">\(A\)</span>的取值</p>
+<p>如果计算<span class="math inline">\(f\)</span>时有误差函数<span class="math inline">\(\epsilon g\)</span>，那么实际上我们在解方程<span class="math inline">\(f(r&#39;) + \epsilon g(r&#39;) = 0\)</span></p>
+<p>求导并整理，可以得到<span class="math inline">\(\Delta r = r&#39;-r \approx - \epsilon \frac{g(r)}{f&#39;(r)}\)</span></p>
+<h2 id="part-2">part 2</h2>
+<h3 id="lagrange-interpolation">Lagrange Interpolation</h3>
 <ul>
-<li><p>语义结论</p>
-<p>设<span class="math inline">\(\Gamma \subseteq PROP\)</span>，对命题<span class="math inline">\(A \in PROP\)</span>，如果下面条件成立</p>
-<p><span class="math inline">\(\forall v, \forall B \in \Gamma\)</span>，如果<span class="math inline">\(\hat{v}(B)=T\)</span>，那么<span class="math inline">\(\hat{v}(A)=T\)</span></p>
-<p>则称<span class="math inline">\(A\)</span>为<span class="math inline">\(\Gamma\)</span>的语义结论，记为<span class="math inline">\(\Gamma \models A\)</span>（这里滥用了符号，令人难受）</p></li>
-<li><p>等价</p>
-<p>对<span class="math inline">\(A, B \in PROP\)</span>，如果<span class="math inline">\(\forall v, \hat{v}(A) = \hat{v}(B)\)</span>，也即<span class="math inline">\(v \models A\;\text{iff}\;v \models B\)</span>，那么称<span class="math inline">\(A, B\)</span>逻辑等价，记为<span class="math inline">\(A \simeq B\)</span></p></li>
+<li>方法</li>
 </ul>
-<p>对于每一个<span class="math inline">\(A\)</span>而言，假设其中一共出现了<span class="math inline">\(n\)</span>个命题符，那么<span class="math inline">\(A\)</span>可以看作确定了一个<span class="math inline">\(F_2^n \to F_2\)</span>的函数，这个函数记为<span class="math inline">\(H_A\)</span></p>
-<p>下面是一个经常见到的定理：对于任何一个<span class="math inline">\(F_2^n \to F_2\)</span>的函数<span class="math inline">\(f\)</span>，存在析合范式<span class="math inline">\(A\)</span>以及合析范式<span class="math inline">\(B\)</span>，使得<span class="math inline">\(f = H_A = H_B\)</span></p>
-<h3 id="自然推理系统">自然推理系统</h3>
-<p><strong>矢列</strong></p>
-<p>一个矢列指一个二元组<span class="math inline">\((\Gamma, \Delta), \Gamma, \Delta \subseteq PROP\)</span>，记为<span class="math inline">\(\Gamma \vdash \Delta\)</span>，称<span class="math inline">\(\Gamma\)</span>为前件，<span class="math inline">\(\Delta\)</span>为后件</p>
-<p>下面介绍自然推理系统<span class="math inline">\(G&#39;\)</span>，<span class="math inline">\(G&#39;\)</span>中包含两部分：公理与规则</p>
-<p>注意公理与规则中的<span class="math inline">\(A, B\)</span>指<strong>一个</strong>命题，运用时稍作注意</p>
-<p><img src="%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91.assets/1.png" /></p>
-<p>有了公理与规则后，我们归纳地定义矢列的证明树</p>
+<p>给定<span class="math inline">\(n\)</span>个点<span class="math inline">\((x_1,y_1),...,(x_n,y_n)\)</span>，求一个过这些点的多项式</p>
+<p>根据代数基本定理，恰好过这<span class="math inline">\(n\)</span>个点的，次数低于<span class="math inline">\(n\)</span>的多项式至多有一个</p>
+<p>我们可以给出其存在性：</p>
+<p>定义<span class="math inline">\(L_k = A \prod_{i \neq k}(x - x_i)\)</span>，其中<span class="math inline">\(A = \prod_{i \neq k} (x_k - x_i)^{-1}\)</span></p>
+<p>观察到<span class="math inline">\(L_k(x_k) = 1\)</span>，而对于其余的<span class="math inline">\(i \neq k\)</span>，有$ L_k(x_i) = 0$</p>
+<p>令<span class="math inline">\(L(x) = \sum y_i L_i(x)\)</span>就得到了我们希望的多项式</p>
 <ul>
-<li>对于<span class="math inline">\(G&#39;\)</span>公理<span class="math inline">\(\Gamma \vdash \Delta\)</span>，其证明树为一个节点<span class="math inline">\(\Gamma \vdash \Delta\)</span></li>
-<li>对于<span class="math inline">\(G&#39;\)</span>规则<span class="math inline">\(\frac{S_1}{S_2}\)</span>，<span class="math inline">\(S_1, S_2\)</span>为矢列，其证明树为<span class="math inline">\(S_1\)</span>的证明树加上<span class="math inline">\((S_1, S_2)\)</span>这条边</li>
-<li>对于<span class="math inline">\(G&#39;\)</span>规则<span class="math inline">\(\frac{S_1\;S_2}{S_3}\)</span>，其证明树为<span class="math inline">\(S_3\)</span>为根，下面连接上<span class="math inline">\(S_1, S_2\)</span>的证明树</li>
+<li>误差</li>
 </ul>
-<p><strong>可证性</strong></p>
-<p>如果矢列<span class="math inline">\(S\)</span>的证明树存在，那么我们称<span class="math inline">\(S\)</span>可证</p>
+<p>对于插值出来的多项式<span class="math inline">\(P\)</span>，及待插值的<span class="math inline">\(n\)</span>次可导函数<span class="math inline">\(f\)</span>，有</p>
+<p><span class="math inline">\(f(x) - P(x) = \frac{1}{n!} \prod (x- x_i) f^{(n)} (c)\)</span></p>
+<h3 id="bernstein-polynomial">Bernstein Polynomial</h3>
+<h3 id="chebyshev-polynomial">Chebyshev Polynomial</h3>
+<ul>
+<li>引入</li>
+</ul>
+<p>现在先不妨假设函数定义在<span class="math inline">\([-1,1]\)</span>上，我们希望选择<span class="math inline">\(x_1, ..., x_n\)</span>，使得 <span class="math display">\[
+\max_{x \in [-1,1]} (x-x_1)(x-x_2)...(x-x_n)
+\]</span> 最小</p>
 <hr />
-<p><strong>有效性</strong></p>
-<p>如果<span class="math inline">\(\Gamma = \{A_1, ..., A_m\}\)</span>，记<span class="math inline">\(\bigwedge \Gamma = (A_1 \wedge ... \wedge A_m)\)</span>，类似的定义<span class="math inline">\(\bigvee \Gamma\)</span></p>
-<p>特别的，<span class="math inline">\(\bigwedge \emptyset = T, \bigvee \emptyset = F\)</span></p>
-<p>称矢列<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效，当且仅当<span class="math inline">\(\forall v, v \models \bigwedge \Gamma \to \bigvee \Delta\)</span>，这和<span class="math inline">\(\Gamma \models \Delta\)</span>的意义是等价的</p>
+<p>这个问题已经被充分的解决了</p>
+<p>答案是选择<span class="math inline">\(x_i = \cos (2i - 1) \pi / 2n\)</span>时，上面的问题得到最小值<span class="math inline">\(2^{-(n-1)}\)</span></p>
+<ul>
+<li>Chebyshev Polynomial</li>
+</ul>
+<p>对于上面这个问题，我们选择上述点之后，实际上得到了一个多项式，我们称之为Chebyshev多项式，定义为 <span class="math display">\[
+T_n(x) = 2^{n-1}(x-x_1)(x-x_2)...(x-x_n), x_i = \cos (2i - 1) \pi / 2n
+\]</span> 这个多项式有一个等价的定义，即<span class="math inline">\(T_n(x) = \cos (n \arccos x)\)</span>（考虑多项式的次数以及零点）</p>
+<p>考虑这两个等价的定义（主要是考虑三角函数的定义），Chebyshev多项式将满足一系列的性质：</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(|T_n(x)| \leq 1\)</span></li>
+<li><span class="math inline">\(T_n(x)\)</span>的零点恰好为<span class="math inline">\(x_1, ..., x_n\)</span></li>
+<li><span class="math inline">\(T_n(x)\)</span>是一个单增区间和单减区间交替的函数，并且交替<span class="math inline">\(n-1\)</span>次，在<span class="math inline">\(\cos i \pi / n\)</span>处进行交替，每次交替都会发生在<span class="math inline">\(\pm 1\)</span>上</li>
+<li><span class="math inline">\(T_{n+1}(x) = 2x T_n(x) - T_{n-1}(x)\)</span></li>
+</ul>
+</blockquote>
 <hr />
-<p>接下来我们用另一种方式给出有效的等价定义</p>
-<p>称<span class="math inline">\(\Gamma \to \Delta\)</span>有反例，如果命题<span class="math inline">\((\bigwedge \Gamma) \wedge (\neg (\bigvee \Delta))\)</span>可满足</p>
-<p>那么，<span class="math inline">\(\Gamma \to \Delta\)</span>有效当且仅当<span class="math inline">\(\Gamma \to \Delta\)</span>无反例</p>
+<p>其中的性质3可以用于证明开头提到的问题的结论，也被称为Chebyshev TH</p>
+<h3 id="fourier-transform">Fourier Transform</h3>
+<p>省略</p>
+<h2 id="part-3">Part 3</h2>
+<h3 id="linear-system-of-equation">Linear system of equation</h3>
+<p>一般的线性方程组<span class="math inline">\(Ax = b\)</span>，我们可以使用高斯消元法来计算，大约需要<span class="math inline">\(O(n^3)\)</span>运算</p>
+<p>对于线性方程组<span class="math inline">\(Ax = b\)</span>，记<span class="math inline">\(e_b\)</span>为<span class="math inline">\(b\)</span>的相对误差，<span class="math inline">\(e_x\)</span>为<span class="math inline">\(x\)</span>的相对误差，我们称其条件数<span class="math inline">\(cond(A) = e_x / e_b\)</span></p>
+<p>在矩阵<span class="math inline">\(A\)</span>可逆的情况下，<span class="math inline">\(e_x = A^{-1} e_b\)</span>，那么 <span class="math display">\[
+cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \max_{e \neq 0} \frac{||A^{-1} e||}{||e||} \max_{b \neq 0} \frac{||b||}{||A^{-1}b||} = ||A^{-1}|| * ||A|| \geq 1
+\]</span> 其中<span class="math inline">\(||\cdot||\)</span>为任意的向量范数和其导出的矩阵范数</p>
+<h3 id="jacobi-method-gauss-seidel-method">Jacobi method &amp; Gauss-Seidel method</h3>
+<ul>
+<li>Jacobi method</li>
+</ul>
+<p>对于线性方程组<span class="math inline">\(Ax = b\)</span></p>
+<p>我们把<span class="math inline">\(A\)</span>写为<span class="math inline">\(L+D+U\)</span>的形式，其中<span class="math inline">\(L, D, U\)</span>分别为下三角，对角，上三角阵</p>
+<p>此时有<span class="math inline">\(Dx = b - (L+U)x\)</span>，因此我们进行迭代：<span class="math inline">\(x_{k+1} = D^{-1}(b - (L+U)x_k)\)</span></p>
+<ul>
+<li>Gauss-Seidel method</li>
+</ul>
+<p>对于上式的<span class="math inline">\((L+D+U)x = b\)</span>，有<span class="math inline">\((L+D)x = b -Ux\)</span></p>
+<p>我们进行迭代：<span class="math inline">\(x_{k+1} = D^{-1}(b - Ux_k - Lx_{k+1})\)</span></p>
+<p>注意到<span class="math inline">\(L\)</span>是下三角阵，因此不会产生计算上的顺序问题</p>
+<ul>
+<li>分析</li>
+</ul>
+<p>我们有如下的定理</p>
+<blockquote>
+<p>如果<span class="math inline">\(A\)</span>是严格对角占优的，那么<span class="math inline">\(A\)</span>是可逆的，并且对于任何向量<span class="math inline">\(b\)</span>和初始猜测<span class="math inline">\(x_0\)</span>，线性方程组<span class="math inline">\(Ax = b\)</span>使用Jacobi迭代 / Gauss Seidel迭代会收敛到唯一解（即方程组的解）</p>
+</blockquote>
+<p>为了证明上述定理，我们考虑一般性的迭代<span class="math inline">\(x_{k+1} = Ax_k + b\)</span></p>
+<p>设<span class="math inline">\(x^*\)</span>是该迭代的一个不动点，那么有<span class="math inline">\(x_{k+1}-x^* = A(x_k - x^*) = A^k(x_0 -x^*)\)</span></p>
+<p>至少当<span class="math inline">\(A^k \to 0\)</span>时，不动点迭代是收敛的，而<span class="math inline">\(A^k \to 0\)</span>和<span class="math inline">\(\rho(A) &lt; 1\)</span>是等价的</p>
+<p>因此，为了证明不动点迭代是收敛的，我们可以尝试证明<span class="math inline">\(\rho(A) &lt; 1\)</span></p>
+<p>也就是说，我们希望证明<span class="math inline">\(\rho(D^{-1}(L+U)) &lt; 1\)</span>以及<span class="math inline">\(\rho((L+D)^{-1} U) &lt; 1\)</span></p>
 <hr />
-<p>下面一定程度上说明了命题逻辑里语法和语义的关系：</p>
-<p><span class="math inline">\(\Gamma \vdash \Delta\)</span>在<span class="math inline">\(G&#39;\)</span>中可证等价于<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效</p>
-<p>事实上，我们可以给出一个更强的结论：若<span class="math inline">\(\Gamma \vdash \Delta\)</span>在<span class="math inline">\(G&#39;\)</span>中可证，则<span class="math inline">\(\Gamma \vdash \Delta\)</span>在<span class="math inline">\(G&#39;\)</span>中有一个不利用Cut规则的证明</p>
+<p>对<span class="math inline">\(\rho(D^{-1}(L+U))\)</span>考虑，设<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(D^{-1}(L+U)\)</span>的任意一个特征值，<span class="math inline">\(v\)</span>为其特征向量</p>
+<p>那么有<span class="math inline">\((L+U)v = \lambda Dv\)</span>，设<span class="math inline">\(||v||_{\infty} = 1\)</span>，且<span class="math inline">\(v_m\)</span>最大，那么根据<span class="math inline">\((L+U) v = \lambda Dv\)</span>，考虑两边的第<span class="math inline">\(m\)</span>个分量，得到<span class="math inline">\(|\lambda a_m| = \sum_{j \neq m} |a_{mj}| &lt; |a_m|\)</span>，从而<span class="math inline">\(|\lambda| &lt; 1\)</span>，进而有<span class="math inline">\(\rho(D^{-1}(L+U)) &lt; 1\)</span>，另一个分析是类似的</p>
+<h3 id="richardson-iteration">Richardson iteration</h3>
+<ul>
+<li>引入</li>
+</ul>
+<p>根据<span class="math inline">\(Cayley-Hamilton\)</span>定理，存在<span class="math inline">\(n\)</span>次多项式<span class="math inline">\(p(A)\)</span>使得<span class="math inline">\(p(A)A = I\)</span></p>
+<p>这启发我们从多项式角度来迭代地求出<span class="math inline">\(A^{-1}\)</span></p>
+<ul>
+<li>方法</li>
+</ul>
+<p>对于线性方程组<span class="math inline">\(Ax = b\)</span></p>
+<p>令<span class="math inline">\(x_0 = 0\)</span>，<span class="math inline">\(x_{k+1} = (I - \alpha A) x_k + \alpha b\)</span></p>
+<ul>
+<li>分析</li>
+</ul>
+<p>当<span class="math inline">\(\rho(I - \alpha A) &lt; 1\)</span>时收敛，由于<span class="math inline">\(I, \alpha A\)</span>可交换，因此实际上等价于<span class="math inline">\(|1 - \alpha \lambda_{max}| &lt; 1\)</span></p>
+<p>下面我们来探讨为什么这等价于研究一个多项式</p>
+<p>我们希望寻找多项式<span class="math inline">\(p(x)\)</span>，使得<span class="math inline">\(p(A)A = I\)</span>，这等价于寻找多项式<span class="math inline">\(q(x)\)</span>，使<span class="math inline">\(q(x) = 1 - xp(x)\)</span></p>
+<p>在线性方程组<span class="math inline">\(Ax = b\)</span>中，实际上我们在寻找<span class="math inline">\(x = A^{-1}b\)</span>，即<span class="math inline">\(x = p(A)b\)</span></p>
+<p>通过归纳，可以证明我们在考虑多项式<span class="math inline">\(p_k(x) = (1 - \alpha x)^k\)</span></p>
+<h3 id="chebyshev-iteration">Chebyshev iteration</h3>
+<ul>
+<li>方法</li>
+</ul>
+<p><span class="math inline">\(x_{k+1} = (I - \alpha_kA) x_k + \alpha_k b\)</span></p>
+<ul>
+<li>分析</li>
+</ul>
+<p><span class="math inline">\(||e_k|| \leq ||\prod_i (I - \alpha_i A)|| *||e_0||\)</span></p>
+<p>我们希望关于<span class="math inline">\(A\)</span>的那一项系数尽可能小，此时运用Chebyshev多项式就有不错的效果</p>
+<h3 id="conjugate-gradients">Conjugate gradients</h3>
+<ul>
+<li>Krylov 子空间</li>
+</ul>
+<p>记Krylov子空间为：<span class="math inline">\(K_0 = \{0\}, K_i = span\{b, Ab, ..., A^{i-1} b\}\)</span></p>
+<p>设<span class="math inline">\(x_i = \arg \min_{x \in K_i} ||x - x_*||_A^2\)</span>，其中<span class="math inline">\(x_*\)</span>满足<span class="math inline">\(Ax_* = b\)</span>，而<span class="math inline">\(||x||_A = \langle x, x \rangle_A = x Ax^T\)</span>，是由正定矩阵<span class="math inline">\(A\)</span>定义出的内积导出的范数</p>
+<ul>
+<li>引理</li>
+</ul>
+<p>如果<span class="math inline">\(\langle x, y \rangle_A = 0\)</span>，那么我们称<span class="math inline">\(x, y\)</span>关于<span class="math inline">\(A\)</span>共轭</p>
+<blockquote>
+<p>设<span class="math inline">\(v_i = x_i - x_{i-1}\)</span>，那么<span class="math inline">\(v_1, ..., v_n\)</span>两两共轭</p>
+</blockquote>
+<p>注意到对<span class="math inline">\(i &lt; j\)</span>，<span class="math inline">\(\nabla ||x_j - x_*||_A^2 = 2 (Ax_j - b)\)</span>与<span class="math inline">\(K_j\)</span>正交，从而与<span class="math inline">\(K_i\)</span>正交</p>
+<p>类似的<span class="math inline">\(A x_{j-1} - b\)</span>与<span class="math inline">\(K_i\)</span>也正交，因此<span class="math inline">\(Av_j = (Ax_j - b) - (Ax_{j-1} - b)\)</span>也与<span class="math inline">\(K_i\)</span>正交，从而得到了我们希望的结论</p>
+<blockquote>
+<p><span class="math inline">\(K_k = span\{v_1, ..., v_k\}\)</span></p>
+</blockquote>
+<p>由上面的结论就可以得出</p>
+<blockquote>
+<p>设<span class="math inline">\(r_i = b - Ax_i\)</span>，<span class="math inline">\(K_k = span\{v_1,...,v_{k-1}, r_{k-1}\}\)</span></p>
+</blockquote>
+<p>注意到<span class="math inline">\(r_{i-1} \in K_i\)</span>，但是<span class="math inline">\(r_i\)</span>与<span class="math inline">\(K_{i-1}\)</span>正交，因此<span class="math inline">\(K_k = span\{v_1,...,v_{k-1}, r_{k-1}\}\)</span></p>
+<blockquote>
+<p>设<span class="math inline">\(v_i = x_i - x_{i-1}\)</span>，那么<span class="math inline">\(v_i\)</span>是关于<span class="math inline">\(v_{i-1}, r_{i-1}\)</span>的函数</p>
+</blockquote>
+<p>由于<span class="math inline">\(v_i \in K_i\)</span>，因此<span class="math inline">\(v_i\)</span>可以用<span class="math inline">\(v_1, ..., v_{i-1}, r_{i-1}\)</span>线性表出</p>
+<p>不妨设<span class="math inline">\(v_i = c_0 r_{i-1} + \sum_{i=1}^{i-1} c_i v_{i-1}\)</span>，注意到<span class="math inline">\(r_{i-1}\)</span>与<span class="math inline">\(v_1,...,v_{i-1}\)</span>正交，<span class="math inline">\(v_i\)</span>之间共轭</p>
+<p>再注意到<span class="math inline">\(Av_j \in K_{i-1}, \forall j \leq i-2\)</span>，因此<span class="math inline">\(r_{i-1}^TAv_j = 0\)</span>。即<span class="math inline">\(r_{i-1}\)</span>与<span class="math inline">\(v_1,...,v_{i-2}\)</span>共轭</p>
+<p>考虑<span class="math inline">\(v_i^T r_{i-1} = c_0 ||r_{i-1}||_2^2\)</span>，得到<span class="math inline">\(c_0 = v_i^T r_{i-1} / ||r_{i-1}||_2^2\)</span></p>
+<p>再考虑<span class="math inline">\(v_i^T A v_j = 0\)</span>，我们就能相应地解出<span class="math inline">\(c_1, ..., c_{i-1}\)</span></p>
+<ul>
+<li>误差分析</li>
+</ul>
+<p>略</p>
+<p>哦</p>
 ]]></content>
       <categories>
-        <category>nodets</category>
+        <category>notes</category>
       </categories>
+      <tags>
+        <tag>numerical_analysis</tag>
+      </tags>
   </entry>
 </search>
