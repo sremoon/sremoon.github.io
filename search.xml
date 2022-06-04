@@ -3553,7 +3553,7 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
-    <title>training-1</title>
+    <title>有的时候一言难尽</title>
     <url>/2022/03/training-1/</url>
     <content><![CDATA[<span id="more"></span>
 <h2 id="a">A</h2>
@@ -3772,7 +3772,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
       </tags>
   </entry>
   <entry>
-    <title>numerical_analysis</title>
+    <title>计算方法</title>
     <url>/2022/04/numerical-analysis/</url>
     <content><![CDATA[<span id="more"></span>
 <p>这里的笔记是对于上课内容的一个浓缩</p>
