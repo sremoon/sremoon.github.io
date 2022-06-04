@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="一些杂记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="矩阵分析 3">
+<meta property="og:url" content="http://sremoon.github.io/2021/07/matrix-analysis-3/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="一些杂记">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-07-28T13:32:10.000Z">
+<meta property="article:modified_time" content="2021-08-05T02:58:16.000Z">
+<meta property="article:author" content="remoon">
+<meta property="article:tag" content="matrix_analysis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sremoon.github.io/2021/07/matrix-analysis-3/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2021/07/matrix-analysis-3/","path":"2021/07/matrix-analysis-3/","title":"矩阵分析 3"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>矩阵分析 3 | SreMoon's Lake</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%89%E8%A7%92%E5%88%86%E8%A7%A3"><span class="nav-text">三角分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#qr%E5%88%86%E8%A7%A3"><span class="nav-text">\(QR\)分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%B1%E5%88%86%E8%A7%A3"><span class="nav-text">谱分解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%AD%A3%E8%A7%84%E7%9F%A9%E9%98%B5"><span class="nav-text">正规矩阵</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%B0%B1%E5%88%86%E8%A7%A3-1"><span class="nav-text">谱分解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9C%80%E5%A4%A7%E7%A7%A9%E5%88%86%E8%A7%A3"><span class="nav-text">最大秩分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3"><span class="nav-text">奇异值分解</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC"><span class="nav-text">奇异值</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%A5%87%E5%BC%82%E5%80%BC%E5%88%86%E8%A7%A3-1"><span class="nav-text">奇异值分解</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9E%81%E5%88%86%E8%A7%A3"><span class="nav-text">极分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E5%90%8C%E6%97%B6%E5%AF%B9%E8%A7%92%E5%8C%96"><span class="nav-text">可同时对角化</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="remoon"
+      src="/images/ava.jpg">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2021/07/matrix-analysis-3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ava.jpg">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          矩阵分析 3
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-07-28 21:32:10" itemprop="dateCreated datePublished" datetime="2021-07-28T21:32:10+08:00">2021-07-28</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2021-08-05 10:58:16" itemprop="dateModified" datetime="2021-08-05T10:58:16+08:00">2021-08-05</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>7.8k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">一些杂记</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <span id="more"></span>
+<p>这一章的内容十分的有趣</p>
+<h4 id="三角分解">三角分解</h4>
+<p>我们先对三角分解作一个简单的定义</p>
+<ul>
+<li>如果矩阵<span class="math inline">\(A\)</span>可以表示为一个上三角矩阵<span class="math inline">\(L\)</span>和一个下三角矩阵<span class="math inline">\(U\)</span>的乘积，即<span class="math inline">\(A = LU\)</span>，那么这种乘积称为<span class="math inline">\(A\)</span>的<strong>三角分解</strong>或<strong><span class="math inline">\(LU\)</span>分解</strong>，特别的，如果<span class="math inline">\(L\)</span>是单位下三角矩阵（主对角线上的元素为<span class="math inline">\(1\)</span>），那么此时的三角分解称为<strong>Doolittle分解</strong>，如果<span class="math inline">\(U\)</span>是单位上三角矩阵，那么称为<strong>Crout分解</strong></li>
+</ul>
+<p>在讨论三角分解的存在性之前，我们先对唯一性来作一些描述</p>
+<p>如果<span class="math inline">\(A = LU\)</span>，并且<span class="math inline">\(L, U\)</span>都不是单位三角矩阵，那么对于任意<span class="math inline">\(k \neq 0\)</span>，<span class="math inline">\(A = (kL)(k^{-1}U)\)</span>将是另一种分解方式，而加入了单位三角矩阵的限制后，我们就有了下述结论</p>
+<ul>
+<li><p>对于方阵<span class="math inline">\(A\)</span>，其可以唯一地分解为</p>
+<p><span class="math display">\[A = LDU\]</span></p>
+<p>的充要条件为<span class="math inline">\(A\)</span>的前<span class="math inline">\(n - 1\)</span>个顺序主子式<span class="math inline">\(H_1,H_2,...,H_{n-1}\)</span>都不为<span class="math inline">\(0\)</span>，式中<span class="math inline">\(L, U\)</span>分别为单位下三角矩阵，单位上三角矩阵，<span class="math inline">\(D\)</span>为对角矩阵，并且设<span class="math inline">\(D = diag\{d_1,d_2,...,d_n\}\)</span>，则<span class="math inline">\(d_1 = 1, d_i = H_i/H_{i-1}\)</span></p>
+<ul>
+<li>这个定理的证明按照大小进行归纳即可</li>
+</ul></li>
+<li><p>由于<span class="math inline">\(LDU\)</span>分解是唯一的，因此Doolittle分解和Crout分解也都是唯一的</p></li>
+</ul>
+<p>我们还可以讨论特殊矩阵的<span class="math inline">\(LDU\)</span>分解</p>
+<ul>
+<li><p>对于对称正定矩阵<span class="math inline">\(A\)</span>，存在一个实的可逆下三角矩阵<span class="math inline">\(L\)</span>，使得</p>
+<p><span class="math display">\[A = LL^T\]</span></p>
+<p>在限定<span class="math inline">\(L\)</span>的对角线元素为正时，<span class="math inline">\(L\)</span>是唯一的</p>
+<ul>
+<li><p>存在性：由于<span class="math inline">\(A\)</span>的顺序主子式都大于<span class="math inline">\(0\)</span>，因此<span class="math inline">\(A\)</span>存在<span class="math inline">\(LDU\)</span>分解，不妨设<span class="math inline">\(A = LDU\)</span></p>
+<p>由于<span class="math inline">\(A = A^T\)</span>，那么<span class="math inline">\(LDU = U^TDL^T\)</span>，由<span class="math inline">\(LDU\)</span>分解的唯一性，我们得到<span class="math inline">\(U^T = L\)</span></p>
+<p>即<span class="math inline">\(A = LDL^T\)</span>，由于<span class="math inline">\(|A| \neq 0\)</span>，因此<span class="math inline">\(L, D\)</span>都可逆，那么<span class="math inline">\(D = L^{-1}A(L^{-1})^T\)</span>，如此，<span class="math inline">\(D\)</span>也是正定矩阵，因此<span class="math inline">\(D\)</span>中元素都将大于<span class="math inline">\(0\)</span>，设<span class="math inline">\(D = diag(d_1, d_2, ..., d_n)\)</span>，再设<span class="math inline">\(D&#39; = diag(\sqrt d_1, \sqrt d_2, ..., \sqrt d_n)\)</span>，那么<span class="math inline">\(A = (LD&#39;)(LD&#39;)^T\)</span>，由<span class="math inline">\(|LD&#39;| = |L||D&#39;| \neq 0\)</span>知<span class="math inline">\(LD&#39;\)</span>可逆</p></li>
+<li><p>唯一性：设<span class="math inline">\(A = L_1L_1^T = L_2L_2^T\)</span>，则<span class="math inline">\((L_2^{-1}L_1) = (L_2^{-1}L_1)^T\)</span>，<span class="math inline">\(L_2^{-1}L_1\)</span>是上三角矩阵，因此<span class="math inline">\(L_2^{-1}L_1 = I\)</span>，即<span class="math inline">\(L_1 = L_2\)</span></p></li>
+</ul></li>
+</ul>
+<h4 id="qr分解"><span class="math inline">\(QR\)</span>分解</h4>
+<ul>
+<li><p>如果实（复）非奇异矩阵<span class="math inline">\(A\)</span>能表示为一个正交（酉）矩阵<span class="math inline">\(Q\)</span>和一个实（复）非奇异上三角矩阵<span class="math inline">\(R\)</span>的乘积，那么</p>
+<p><span class="math display">\[A = QR\]</span></p>
+<p>就称为<span class="math inline">\(A\)</span>的<span class="math inline">\(QR\)</span>分解</p></li>
+<li><p>任何非奇异矩阵<span class="math inline">\(A\)</span>都存在<span class="math inline">\(QR\)</span>分解，并且除了对角线上的元素差一个绝对值为<span class="math inline">\(1\)</span>的因子外，<span class="math inline">\(QR\)</span>分解是唯一的</p>
+<ul>
+<li><p>存在性：设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\((a_1, a_2, ..., a_n)\)</span>，其可以构成一组基，我们对这组基进行Schmidt正交化，得到一组标准正交基<span class="math inline">\((b_1, b_2, ..., b_n)\)</span></p>
+<p>那么，由Schmidt正交化的公式<span class="math inline">\(b_i&#39; = a_i - \sum_{j &lt; i} b_j&#39; * \frac{(a_i, b_j)}{(b_j, b_j)}\)</span>，标准化之后乘一个非零常数，应该存在<span class="math inline">\(R\)</span>为非奇异上三角矩阵，使得<span class="math inline">\((b_1, b_2, ..., b_n) = (a_1, a_2, ..., a_n) R\)</span></p>
+<p>由于<span class="math inline">\(R\)</span>可逆，那么<span class="math inline">\((a_1, a_2, ..., a_n) = (b_1,b_2,...,b_n)R^{-1}\)</span>，取<span class="math inline">\(Q = (b_1,b_2,...,b_n)\)</span>即可</p></li>
+<li><p>唯一性：设<span class="math inline">\(A = Q_1R_1 = Q_2R_2\)</span>，那么<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1}\)</span>，<span class="math inline">\(Q_2^{-1}Q_1\)</span>为正交阵，<span class="math inline">\(R_2R_1^{-1}\)</span>为上三角阵，不难知道，<span class="math inline">\(Q_2^{-1}Q_1 = R_2R_1^{-1} = I\)</span>，即<span class="math inline">\(Q_1 = Q_2\)</span></p></li>
+</ul></li>
+</ul>
+<h4 id="谱分解">谱分解</h4>
+<h5 id="正规矩阵">正规矩阵</h5>
+<ul>
+<li>如果<span class="math inline">\(AA^H = A^HA\)</span>，则称<span class="math inline">\(A\)</span>为<strong>正规矩阵</strong></li>
+<li>如果对实方阵<span class="math inline">\(A\)</span>，<span class="math inline">\(AA^T=A^TA\)</span>，则称<span class="math inline">\(A\)</span>为<strong>实正规矩阵</strong></li>
+</ul>
+<p>正规矩阵有一些较为简单的性质</p>
+<ul>
+<li><p>如果三角阵<span class="math inline">\(L\)</span>是正规矩阵，那么<span class="math inline">\(L\)</span>是对角阵</p>
+<ul>
+<li><p>由<span class="math inline">\(LL^H = LL^H\)</span>，我们有<span class="math inline">\(\sum_{k} \overline{l_{ki}} * l_{kj} = \sum_{k} \overline{l_{jk}} * l_{ik}\)</span>，而当<span class="math inline">\(i = j\)</span>时，有<span class="math inline">\(\sum_k |l_{ki}|^2 = \sum_k |l_{ik}|^2\)</span></p>
+<p>不妨设<span class="math inline">\(L\)</span>是下三角阵，由于<span class="math inline">\(\sum_k |l_{k1}|^2 = \sum_k |l_{1k}|^2 = |l_{11}|^2\)</span>，我们得到<span class="math inline">\(l_{21} = l_{31} = ... = l_{n1} = 0\)</span>，之后对<span class="math inline">\(i = j = 2\)</span>进行讨论，得到<span class="math inline">\(l_{32} = ... = l_{n2} = 0\)</span>，依次类推，我们可以得到<span class="math inline">\(L\)</span>只在对角线上非零，即<span class="math inline">\(L\)</span>为对角阵</p></li>
+</ul></li>
+</ul>
+<p>埃米尔特矩阵和酉矩阵都是正规矩阵，尝试将埃米尔特矩阵和酉矩阵的性质推导到正规矩阵上，一般来说，我们有下述定理</p>
+<ul>
+<li><p>方阵<span class="math inline">\(A\)</span>酉相似于对角阵的充要条件为<span class="math inline">\(A\)</span>是正规矩阵</p>
+<p>考虑这个定理的证明</p>
+<ul>
+<li>充分性：根据Schur定理，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^HLU\)</span>，其中<span class="math inline">\(L\)</span>为上三角阵，并且对角线上为<span class="math inline">\(A\)</span>的特征值，那么由<span class="math inline">\(A^HA= AA^H\)</span>，得到<span class="math inline">\(L^HL = LL^H\)</span>，由于<span class="math inline">\(L\)</span>同时是三角阵和正规阵，那么<span class="math inline">\(L\)</span>将是对角阵，因而<span class="math inline">\(A\)</span>与对角阵<span class="math inline">\(L\)</span>酉相似</li>
+<li>必要性：设<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(\Lambda\)</span>为对角阵，那么<span class="math inline">\(AA^H = U^H \Lambda \Lambda^H U = U^H \Lambda^H \Lambda U = A^HA\)</span></li>
+</ul></li>
+</ul>
+<p>如果<span class="math inline">\(A\)</span>酉相似于对角阵，即<span class="math inline">\(A = U^H \Lambda U\)</span>，那么矩阵<span class="math inline">\(U\)</span>可以看做是<span class="math inline">\(A\)</span>的特征向量的集合，而<span class="math inline">\(\Lambda\)</span>则为<span class="math inline">\(A\)</span>对应的特征值，因此<span class="math inline">\(A\)</span>将有<span class="math inline">\(n\)</span>个互相正交的单位特征向量</p>
+<h5 id="谱分解-1">谱分解</h5>
+<ul>
+<li><p>对于正规矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^H \Lambda U\)</span></p>
+<p>记<span class="math inline">\(U = (u_1, u_2, ..., u_n)\)</span>，那么</p>
+<p><span class="math display">\[\begin{align*}
+ A &amp;= (u_1, u_2, ..., u_n)^H *diag(\lambda_1, \lambda_2,..., \lambda_n)* (u_1, u_2, ..., u_n)\\ 
+ &amp;= \lambda_1 u_1^Hu_1 + \lambda_2 u_2^Hu_2 + ... + \lambda_nu_n^Hu_n
+\end{align*}\]</span></p>
+<p>我们称此为<span class="math inline">\(A\)</span>的谱分解或者特征值分解</p></li>
+<li><p>如果我们将谱分解稍微改写形式<span class="math inline">\(A = \lambda_1(u_{11}^Hu_{11} + ...+u_{1s}^Hu_{1s}) + ... + \lambda_r(u_{r1}^Hu_{r1} + ...+u_{rs}^Hu_{rs})\)</span>，其中<span class="math inline">\(\lambda_i\)</span>互不相同</p>
+<p>记<span class="math inline">\(P_1 = u_{11}^Hu_{11} + ...+u_{1s}^Hu_{1s}, ...,P_r = u_{r1}^Hu_{r1} + ...+u_{rs}^Hu_{rs}\)</span></p>
+<p>由于<span class="math inline">\(u_{11}, ..., u_{1s}, ..., u_{r1}, ..., u_{rs}\)</span>两两正交，我们有<span class="math inline">\(P_iP_j = O, P_i^2 = P_i, P_i^H=P_i\)</span>，因此单独取出<span class="math inline">\(P_i\)</span>，其表示为一种正交投影</p></li>
+</ul>
+<h4 id="最大秩分解">最大秩分解</h4>
+<ul>
+<li><p>设<span class="math inline">\(A\)</span>是秩为<span class="math inline">\(r\)</span>的<span class="math inline">\(m * n\)</span>的矩阵，那么存在秩为<span class="math inline">\(r\)</span>的<span class="math inline">\(m * r\)</span>的矩阵<span class="math inline">\(B\)</span>以及<span class="math inline">\(r * n\)</span>的矩阵<span class="math inline">\(C\)</span>，使得</p>
+<p><span class="math display">\[A = BC\]</span></p>
+<p>也就是说，<span class="math inline">\(A\)</span>可以分解为两个满秩矩阵的积</p>
+<ul>
+<li><p>设<span class="math inline">\(A\)</span>的列向量为<span class="math inline">\(a_1, a_2, ...,a_n\)</span>，那么<span class="math inline">\(A = (a_1, a_2, ..., a_n)\)</span></p>
+<p>不妨设列向量中的极大线性无关组为<span class="math inline">\((a_1, a_2, ..., a_r)\)</span>，由于<span class="math inline">\(a_1, a_2,..., a_n\)</span>中任意元素可以被<span class="math inline">\(a_1,...a_r\)</span>表出，不妨设<span class="math inline">\(a_i = \sum_{j=1}^r a_j c_{ji}\)</span></p>
+<p>那么</p>
+<p><span class="math display">\[A = (a_1, a_2,..., a_r) \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
+<p>记</p>
+<p><span class="math display">\[B = (a_1, a_2,..., a_r), C = \begin{pmatrix} c_{11} &amp; c_{12} &amp; ... &amp; c_{1n} \\ c_{21} &amp; c_{22} &amp; ... &amp; c_{2n} \\ ... &amp;... &amp; ... &amp;... \\c_{r1} &amp; c_{r2} &amp; ... &amp; c_{rn}\end{pmatrix}\]</span></p>
+<p>由于<span class="math inline">\(r = rank(A) \leq \min\{rank(B), rank(C)\} \leq r\)</span>，因此两者秩都为<span class="math inline">\(r\)</span></p></li>
+<li><p>注意到这个证明中，没有对所取的<span class="math inline">\(a_1,...,a_r\)</span>作任何的限制，因此，我们甚至可以限制<span class="math inline">\(a_1,...,a_r\)</span>为一组标准正交基</p></li>
+</ul></li>
+<li><p>example：</p>
+<p>求</p>
+<p><span class="math display">\[A = \begin{pmatrix} 1 &amp; 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 1 &amp; 0 \\ 1 &amp; 1 &amp; 0 &amp; 0 \\3 &amp; 3 &amp; 2 &amp; 1\end{pmatrix}\]</span></p>
+<p>的最大秩分解</p>
+<p>我们可以利用初等行变化保持线性关系的性质</p>
+<p>将<span class="math inline">\(A\)</span>化作行标准形</p>
+<p><span class="math display">\[A&#39; = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1 \\0 &amp; 0 &amp; 0 &amp; 0\end{pmatrix}\]</span></p>
+<p>取<span class="math inline">\(1, 3, 4\)</span>列的列向量作为极大线性无关组，即</p>
+<p><span class="math display">\[B = \begin{pmatrix} 1 &amp; 1 &amp; 1 \\ 1 &amp; 1 &amp; 0 \\ 1 &amp; 0 &amp; 0  \\3 &amp; 2 &amp; 1\end{pmatrix}\]</span></p>
+<p>再取<span class="math inline">\(A&#39;\)</span>中的非零行（也即组合系数），令</p>
+<p><span class="math display">\[C = \begin{pmatrix} 1 &amp; 1 &amp; 0 &amp; 0 \\ 0 &amp; 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 0 &amp; 1\end{pmatrix}\]</span></p>
+<p>那么<span class="math inline">\(A = BC\)</span>，且<span class="math inline">\(B, C\)</span>满秩</p></li>
+</ul>
+<h4 id="奇异值分解">奇异值分解</h4>
+<p>矩阵的奇异值分解又称<strong>SVD(Singular Value Decomposition)分解</strong></p>
+<h5 id="奇异值">奇异值</h5>
+<ul>
+<li><p>引理：矩阵<span class="math inline">\(AA^H\)</span>的特征值为非负实数</p>
+<ul>
+<li>矩阵<span class="math inline">\(AA^H\)</span>半正定，并且为埃尔米特矩阵，因此其特征值为非负实数</li>
+</ul></li>
+<li><p>对于矩阵<span class="math inline">\(A\)</span>，我们记<span class="math inline">\(AA^H\)</span>的特征值为<span class="math inline">\(\lambda_1, \lambda_2,...,\lambda_n\)</span>，我们称<span class="math inline">\(\sigma_i = \sqrt \lambda_{i}\)</span>为矩阵<span class="math inline">\(A\)</span>的奇异值</p></li>
+<li><p>若<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>酉相抵（存在酉矩阵<span class="math inline">\(U, V\)</span>，使得<span class="math inline">\(B = UAV\)</span>），则<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</p>
+<ul>
+<li><span class="math inline">\(B^HB = V^HA^HU^HUAV=V^H(A^HA)V = V^{-1}(A^HA)V\)</span>，那么<span class="math inline">\(B^HB\)</span>与<span class="math inline">\(A^HA\)</span>有相同的特征值，因此<span class="math inline">\(A\)</span>与<span class="math inline">\(B\)</span>有相同的奇异值</li>
+</ul></li>
+</ul>
+<h5 id="奇异值分解-1">奇异值分解</h5>
+<ul>
+<li><p>对于任意<span class="math inline">\(n*m\)</span>大小的复矩阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U, V\)</span>，使得</p>
+<p><span class="math display">\[U^HAV = diag(\sigma_1, \sigma_2, ..., \sigma_r, 0, ..., 0)\]</span></p>
+<p>其中<span class="math inline">\(\sigma_1, \sigma_2, ..., \sigma_r\)</span>为<span class="math inline">\(A\)</span>的非零奇异值</p>
+<ul>
+<li><p>下面的证明不仅给出了证明方法，而且还给出了构造的具体方法</p></li>
+<li><p>由于<span class="math inline">\(AA^H\)</span>为埃尔米特矩阵，并且半正定，因此存在酉矩阵<span class="math inline">\(U\)</span>，使得</p>
+<p><span class="math display">\[U^HAA^HU = diag(\sigma_1^2, \sigma_2^2, ..., \sigma_r^2, 0, ..., 0) \tag{a}\]</span></p>
+<p>如果记<span class="math inline">\(U = (U_1, U_2)\)</span>，其中<span class="math inline">\(U_1\)</span>为<span class="math inline">\(U\)</span>的前<span class="math inline">\(r\)</span>个列向量构成的矩阵，那么我们可以得到<span class="math display">\[U_1^HAA^HU_1 = \Lambda^2 \tag{b}\]</span></p>
+<p><span class="math display">\[U_2^HAA^HU_2 = O \tag{c}\]</span></p>
+<p>由于<span class="math inline">\(AA^H = O\)</span>，当且仅当<span class="math inline">\(A = O\)</span>（考察对角线上的元素），因此<span class="math inline">\(U_2^HA = O\)</span></p>
+<p>现在我们尝试构造<span class="math inline">\(V = (V_1, V_2)\)</span>，其中<span class="math inline">\(V_1\)</span>为<span class="math inline">\(n * r\)</span>的矩阵，使得<span class="math inline">\(U^HAV = \Lambda\)</span></p>
+<p>不难知道</p>
+<p><span class="math display">\[(U_1, U_2)^H A (V_1, V_2) = \begin{pmatrix} U_1^HAV_1 &amp; U_1^HAV_2\\ U_2^HAV_1 &amp; U_2^HAV_2 \end{pmatrix}\]</span></p>
+<p>与<span class="math inline">\(\begin{pmatrix} \Lambda &amp; O\\ O &amp; O \end{pmatrix}\)</span>对比，我们得到<span class="math inline">\(U_1^HAV_1 = \Lambda, U_1^HAV_2 = U_2^HAV_1 =U_2^HAV_2=O\)</span></p>
+<p>由于<span class="math inline">\(U_2^HA=O\)</span>，后面两项的成立是显然的，观察<span class="math inline">\((b)\)</span>式，我们知道取<span class="math inline">\(V_1 = A^HU_1 \Lambda^{-1}\)</span>可以满足要求，暂定<span class="math inline">\(V_1\)</span>，从而<span class="math inline">\(U_1^HAV_2 = \Lambda^{H} V_1^HV_2\)</span>，只需要取<span class="math inline">\(V_2\)</span>时，保证其与<span class="math inline">\(V_1\)</span>正交即可，这个当然是可以满足的</p>
+<p>我们还需要确定<span class="math inline">\(V_1\)</span>满足酉矩阵的要求，代入<span class="math inline">\(V_1\)</span>，我们得到<span class="math inline">\(V_1^HV_1=(\Lambda^{-1})^H(U_1^HA A^HU_1)\Lambda^{-1} = \Lambda^{-1}\Lambda^2\Lambda^{-1} = I\)</span>，这也就证明了<span class="math inline">\(V_1\)</span>确实满足条件</p></li>
+</ul></li>
+</ul>
+<h4 id="极分解">极分解</h4>
+<ul>
+<li><p>对于任意<span class="math inline">\(n*n\)</span>的复阵<span class="math inline">\(A\)</span>，存在酉矩阵<span class="math inline">\(U\)</span>和唯一的半正定矩阵<span class="math inline">\(G, H\)</span>，使得</p>
+<p><span class="math display">\[A = GU = UH\]</span></p>
+<ul>
+<li><p>存在性：设<span class="math inline">\(A\)</span>的奇异值分解为<span class="math inline">\(A = U^H_0 \Lambda V\)</span></p>
+<p>那么令<span class="math inline">\(G = U^H_0 \Lambda U, H = V^H \Lambda V, U_1 = U^H_0V\)</span>，得到<span class="math inline">\(A = GU_1 = U_1H\)</span></p></li>
+<li><p>唯一性：由于<span class="math inline">\(U\)</span>可逆，唯一性显然</p></li>
+</ul></li>
+</ul>
+<h4 id="可同时对角化">可同时对角化</h4>
+<p>这个知识点感觉还是点一点...</p>
+<p>一般在高等代数中，就会接触到一个结论</p>
+<ul>
+<li><p>设<span class="math inline">\(A, B\)</span>都是<span class="math inline">\(n\)</span>阶埃米尔特矩阵，且<span class="math inline">\(A\)</span>正定，那么存在非奇异矩阵<span class="math inline">\(Q\)</span>，使得</p>
+<p><span class="math display">\[Q^{H}AQ = I, Q^HBQ= diag\{\lambda_1, \lambda_2, ...\lambda_n\}\]</span></p>
+<ul>
+<li><p>一般采取如下方式证明：由于<span class="math inline">\(A\)</span>正定，因此存在非奇异矩阵<span class="math inline">\(P\)</span>，使得<span class="math inline">\(P^HAP = I\)</span>，由于<span class="math inline">\(P^HBP\)</span>仍为埃尔米特矩阵，因此存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\((PU)^H B (PU) = diag\{\lambda_1, ..., \lambda_n\}\)</span>，令<span class="math inline">\(Q = PU\)</span>即可</p></li>
+<li><p>我们尝试考察<span class="math inline">\(\lambda_1,...,\lambda_n\)</span>的值，首先，它们是<span class="math inline">\(P^HBP\)</span>的特征值</p>
+<p>注意到<span class="math inline">\(|\lambda I - P^HBP| = |\lambda P^HAP - P^HBP| = |P^H||P||A|*|\lambda I - A^{-1}B|\)</span></p>
+<p>由于<span class="math inline">\(|P| \neq 0, |A| \neq 0\)</span>，因此<span class="math inline">\(\lambda_1, ... \lambda_n\)</span>也是<span class="math inline">\(A^{-1}B\)</span>的特征追</p></li>
+</ul></li>
+</ul>
+<p>现在我们来考虑同时酉对角化的问题，也即</p>
+<ul>
+<li><p>设<span class="math inline">\(A, B\)</span>为正规矩阵，则<span class="math inline">\(A, B\)</span>可同时酉对角化的充要条件为<span class="math inline">\(AB = BA\)</span></p>
+<ul>
+<li><p>“<span class="math inline">\(\Rightarrow\)</span>”：设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，则<span class="math inline">\(AB = BA\)</span>可以由<span class="math inline">\(\Lambda_1, \Lambda_2\)</span>的可交换性得出</p></li>
+<li><p>“<span class="math inline">\(\Leftarrow\)</span>”：设<span class="math inline">\(A\)</span>对应于特征值<span class="math inline">\(a\)</span>的特征子空间为<span class="math inline">\(V_a\)</span>，取<span class="math inline">\(V_a\)</span>的一组标准正交基为<span class="math inline">\(a_1, a_2,...,a_r\)</span></p>
+<p>注意到<span class="math inline">\(AB a_i = BAa_i = Baa_i = a (Ba_i)\)</span>，这说明<span class="math inline">\(Ba_1, Ba_2,...,Ba_r\)</span>也是<span class="math inline">\(V_a\)</span>中的元素，也说明<span class="math inline">\(BV_a \subseteq V_a\)</span></p>
+<p>设从<span class="math inline">\(C^n\)</span>到<span class="math inline">\(V_a\)</span>的投影变换为<span class="math inline">\(P_a\)</span>，考虑线性映射<span class="math inline">\(B_a = P_aBP_a\)</span>，由于<span class="math inline">\(P_aV_a = V_a\)</span>，因此<span class="math inline">\(B_aV_a \subseteq V_a\)</span>，注意到<span class="math inline">\(B_aB_a^H = P_aBB^HP_a = P_aB^HBP_a = B_a^HB_a\)</span>，那么<span class="math inline">\(B_a\)</span>在<span class="math inline">\(V_a\)</span>上是一个正规变换，也就相应的对应于正规矩阵</p>
+<p>设<span class="math inline">\(B_a\)</span>的线性无关的标准正交特征向量组为<span class="math inline">\(b_1,b_2,...,b_k\)</span>，由于<span class="math inline">\(b_i \in V_a\)</span>，因此<span class="math inline">\(b_i\)</span>是<span class="math inline">\(A\)</span>的一个特征向量，又<span class="math inline">\(B b_i = P_a B P_a b_i = B_ab_i\)</span>，这说明<span class="math inline">\(b_i\)</span>也是<span class="math inline">\(B\)</span>的一个特征向量</p>
+<p>由于<span class="math inline">\(B_a\)</span>在<span class="math inline">\(V_a\)</span>上对应于正规矩阵，那么应该有<span class="math inline">\(k = r\)</span>，那么对于每个特征值，我们都能找到相应的公共特征向量，鉴于<span class="math inline">\(A\)</span>是正规矩阵，我们还可以把这些公共特征向量处理为正交的向量，因此得到两者可以同时酉对角化</p></li>
+</ul></li>
+<li><p>如果<span class="math inline">\(AB = BA\)</span>，且<span class="math inline">\(A, B\)</span>为正规矩阵，那么<span class="math inline">\(AB\)</span>也为正规矩阵</p>
+<ul>
+<li><span class="math inline">\(A, B\)</span>可同时酉对角化，设<span class="math inline">\(A = U^H \Lambda_1 U, B = U^H \Lambda_2 U\)</span>，那么<span class="math inline">\(AB = U^H \Lambda_1 \Lambda_2 U\)</span>，因此<span class="math inline">\(AB\)</span>酉相似于对角矩阵，如此<span class="math inline">\(AB\)</span>为正规矩阵</li>
+<li>不难发现，<span class="math inline">\(AB\)</span>的特征值和<span class="math inline">\(A, B\)</span>的特征值之间存在关系，也即在按照同时酉对角化矩阵的顺序排列下时，有<span class="math inline">\(\lambda_{AB}^{(i)} = \lambda_{A}^{(i)} * \lambda_{B}^{(i)}\)</span>，且对应的特征向量也是相同的</li>
+</ul></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/matrix-analysis/" rel="tag"># matrix_analysis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/07/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/" rel="prev" title="牛客多校第二场">
+                  <i class="fa fa-chevron-left"></i> 牛客多校第二场
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/07/matrix-analysis-4/" rel="next" title="矩阵分析 4">
+                  矩阵分析 4 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">122k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:51</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

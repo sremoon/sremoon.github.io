@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="这门课的讲课水平和教材水平都一言难尽，但又不是很想混过去，尝试捋一下到底在讲什么">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数理逻辑谜语人">
+<meta property="og:url" content="http://sremoon.github.io/2022/05/logic/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="这门课的讲课水平和教材水平都一言难尽，但又不是很想混过去，尝试捋一下到底在讲什么">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-05-14T07:11:50.000Z">
+<meta property="article:modified_time" content="2022-05-14T09:43:52.496Z">
+<meta property="article:author" content="remoon">
+<meta property="article:tag" content="logic">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sremoon.github.io/2022/05/logic/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2022/05/logic/","path":"2022/05/logic/","title":"数理逻辑谜语人"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>数理逻辑谜语人 | SreMoon's Lake</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91"><span class="nav-text">命题逻辑</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%AE%9A%E4%B9%89"><span class="nav-text">基础定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89"><span class="nav-text">语义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E6%8E%A8%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-text">自然推理系统</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E9%98%B6%E8%AF%AD%E8%A8%80"><span class="nav-text">一阶语言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80%E5%AE%9A%E4%B9%89-1"><span class="nav-text">基础定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2"><span class="nav-text">替换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%AF%AD%E4%B9%89-1"><span class="nav-text">语义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%97%AD%E5%85%AC%E5%BC%8F"><span class="nav-text">闭公式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9B%BF%E6%8D%A2%E5%BC%95%E7%90%86"><span class="nav-text">替换引理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#hintikka%E9%9B%86"><span class="nav-text">Hintikka集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#g%E7%B3%BB%E7%BB%9F"><span class="nav-text">G系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%81%E5%A4%A7%E5%8D%8F%E8%B0%83%E9%9B%86"><span class="nav-text">极大协调集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BA%E5%9E%AB"><span class="nav-text">铺垫</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E8%B0%83%E7%9F%9B%E7%9B%BE"><span class="nav-text">协调，矛盾</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E8%B0%83%E4%B8%8E%E5%8F%AF%E6%BB%A1%E8%B6%B3"><span class="nav-text">协调与可满足</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#herbrand%E5%AE%9A%E7%90%86"><span class="nav-text">Herbrand定理</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="remoon"
+      src="/images/ava.jpg">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">categories</span>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">11</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2022/05/logic/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/ava.jpg">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数理逻辑谜语人
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-05-14 15:11:50 / Modified: 17:43:52" itemprop="dateCreated datePublished" datetime="2022-05-14T15:11:50+08:00">2022-05-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>3.6k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>3 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">这门课的讲课水平和教材水平都一言难尽，但又不是很想混过去，尝试捋一下到底在讲什么</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="命题逻辑">命题逻辑</h3>
+<h4 id="基础定义">基础定义</h4>
+<ul>
+<li><p>字母表：由命题符（一个可数集），联结词（<span class="math inline">\(\neg, \vee, \wedge, \rightarrow\)</span>），辅助符（括号）构成</p>
+<p>其中，命题符的集合记为<span class="math inline">\(PS\)</span></p></li>
+<li><p>命题：由字母表按照一定规则构成的字符串</p>
+<p><span class="math inline">\(PROP:= PS|\neg PROP | PROP * PROP, (*= \vee, \wedge, \rightarrow)\)</span></p>
+<p>每个命题可以写出一个构造序列</p></li>
+<li><p>赋值：一个赋值指一个<span class="math inline">\(v:PS \to \mathbb{F}_2\)</span>的函数</p>
+<p>并且按照命题的构造方法，可以计算出与赋值对应的函数<span class="math inline">\(\hat{v}:PROP \to \mathbb{F}_2\)</span></p>
+<p>不难想象，如果两个赋值对<span class="math inline">\(A\)</span>的所有变量赋予了相同的值，那么它们会赋予<span class="math inline">\(A\)</span>相同的值</p></li>
+</ul>
+<h4 id="语义">语义</h4>
+<p>对赋值<span class="math inline">\(v\)</span>，命题<span class="math inline">\(A\)</span>，命题集<span class="math inline">\(\Gamma\)</span></p>
+<ul>
+<li>称<span class="math inline">\(v\)</span>满足<span class="math inline">\(A\)</span>，当且仅当<span class="math inline">\(\hat{v}(A) = T\)</span>，记为<span class="math inline">\(v \models A\)</span></li>
+<li>称<span class="math inline">\(A\)</span>为永真式，当且仅当<span class="math inline">\(\forall v, \hat{v}(A) = T\)</span>，记为<span class="math inline">\(\models A\)</span></li>
+<li>称<span class="math inline">\(A\)</span>为<span class="math inline">\(\Gamma\)</span>的语义结论，当且仅当如果<span class="math inline">\(\hat{v}(\Gamma) = T\)</span>，那么<span class="math inline">\(\hat{v}(A) = T\)</span>，记为<span class="math inline">\(\Gamma \models A\)</span></li>
+</ul>
+<h4 id="自然推理系统">自然推理系统</h4>
+<p><span class="math inline">\(G&#39;\)</span>有一些公理，然后有一些规则，根据使用的规则，可以得到一棵证明树</p>
+<p>下面，<span class="math inline">\(\Gamma, \Delta\)</span>为命题集</p>
+<ul>
+<li><p>反例：称<span class="math inline">\(\Gamma \vdash \Delta\)</span>有反例，指存在赋值，使<span class="math inline">\(v \models (\bigwedge \Gamma) \wedge (\bigwedge \neg \Delta)\)</span></p>
+<p>（前件都为真，后件都为假）</p></li>
+<li><p>有效：称<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效，指对任何赋值，<span class="math inline">\(v \models (\bigwedge\Gamma) \rightarrow (\bigvee \Delta)\)</span></p>
+<p>（前件都为真时，推出某一个某件为真）</p>
+<p>有效和无反例是等价的</p>
+<p>注意到有效和语义结论的定义（在<span class="math inline">\(|\Delta| = 1\)</span>时）等价，为了避免混淆，后面我们不使用语义结论这一说法</p></li>
+<li><p>可证：<span class="math inline">\(\Gamma \vdash \Delta\)</span>可证，指存在<span class="math inline">\(\Gamma \vdash \Delta\)</span>的证明树</p></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(Soundness\)</span>：若<span class="math inline">\(\Gamma \vdash \Delta\)</span>可证，那么<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效</p>
+</blockquote>
+<blockquote>
+<p><span class="math inline">\(Completeness\)</span>：若<span class="math inline">\(\Gamma \vdash \Delta\)</span>有效，那么<span class="math inline">\(\Gamma \vdash \Delta\)</span>可证</p>
+</blockquote>
+<p>先说明，对于大部分规则，上下的有效性是等价的</p>
+<p>然后说明，<span class="math inline">\(Cut\)</span>规则是可以避免的</p>
+<blockquote>
+<p><span class="math inline">\(Compactness\)</span>：若<span class="math inline">\(\Gamma\)</span>的任何有限子集可满足，那么<span class="math inline">\(\Gamma\)</span>可满足</p>
+</blockquote>
+<h3 id="一阶语言">一阶语言</h3>
+<h4 id="基础定义-1">基础定义</h4>
+<ul>
+<li><p>字母表：含有逻辑符，常元符，函数符，谓词符，其中的函数符和谓词符有一个元数<span class="math inline">\(\mu(f), \mu(P)\)</span>的概念</p></li>
+<li><p>项：由常元符，变元符，函数符组成的玩意</p>
+<p><span class="math inline">\(t ::= x|c|f(t_1, ..., t_n)\)</span></p></li>
+<li><p>原子公式：由项和谓词，等词组成的玩意</p></li>
+<li><p>公式：由原子公式和联结词，量词组成的玩意</p></li>
+</ul>
+<h4 id="替换">替换</h4>
+<ul>
+<li>自由变元：可以依次对项/原子公式/公式定义自由变元，记为<span class="math inline">\(FV(A)\)</span></li>
+<li>替换：可以依次对项/原子公式/公式定义替换</li>
+</ul>
+<h4 id="语义-1">语义</h4>
+<ul>
+<li><p>结构：一个结构<span class="math inline">\(\mathbb{M}\)</span>是一个二元组<span class="math inline">\((M, I)\)</span></p>
+<ul>
+<li>其中，<span class="math inline">\(M\)</span>称为论域</li>
+<li><span class="math inline">\(I\)</span>是非逻辑符的一个映射，把常元映射到<span class="math inline">\(M\)</span>，把函数符映射到<span class="math inline">\(M^n \to M\)</span>的函数熵，把谓词映射到<span class="math inline">\(M^n\)</span>的一个集合（表示一种关系）</li>
+</ul>
+<p>一般不区分<span class="math inline">\(M, \mathbb{M}\)</span></p></li>
+<li><p>赋值：在模型<span class="math inline">\(M\)</span>上的一个赋值为变元集到<span class="math inline">\(M\)</span>的映射</p></li>
+<li><p>模型：一个结构和对应的赋值称为模型</p></li>
+<li><p>解释：对于一个模型，我们可以依次解释其项/原子公式/公式</p></li>
+<li><p>可满足就是存在对应的玩意使解释出来是<span class="math inline">\(T\)</span></p></li>
+</ul>
+<h4 id="闭公式">闭公式</h4>
+<p>没有自由变量的公式称为闭公式</p>
+<p>虽然没有明确指出，但<strong>下面所有的讨论都基于闭公式</strong></p>
+<blockquote>
+<p>如果<span class="math inline">\(A\)</span>是一个闭公式，那么<span class="math inline">\(M \models A\)</span>和<span class="math inline">\(M \models_{\sigma} A\)</span>等价</p>
+</blockquote>
+<p>这可以帮助我们排除<span class="math inline">\(\sigma\)</span>的干扰</p>
+<h4 id="替换引理">替换引理</h4>
+<blockquote>
+<p><span class="math inline">\(\left(t\left[\frac{s}{x}\right]\right)_{M[\sigma]} = t_{M[\sigma[x:=s_{M[\sigma]}]]}\)</span></p>
+</blockquote>
+<h4 id="hintikka集">Hintikka集</h4>
+<p>一个性质很好的集合</p>
+<blockquote>
+<p>如果<span class="math inline">\(\psi\)</span>为Hintikka集，那么<span class="math inline">\(\psi\)</span>可满足</p>
+</blockquote>
+<h3 id="g系统">G系统</h3>
+<p>公理，规则和命题逻辑的内容不同，但证明树之类的定义相同</p>
+<p>有效性，有反例和命题逻辑的定义一致</p>
+<blockquote>
+<p><span class="math inline">\(Soundness\)</span>：如果<span class="math inline">\(\Gamma \vdash \Delta\)</span>，那么<span class="math inline">\(\Gamma \models \Delta\)</span></p>
+</blockquote>
+<p>首先证明：对于除cut外的规则，上面和下面矢列的有效性是一样的</p>
+<p>对于cut，上面矢列有效时，下面的矢列有效</p>
+<p>这足够证明soundness，但不够证明completeness</p>
+<h3 id="极大协调集">极大协调集</h3>
+<h4 id="铺垫">铺垫</h4>
+<blockquote>
+<p>如果<span class="math inline">\(\Gamma \vdash \Delta\)</span>，那么<span class="math inline">\(\Gamma, \Theta \vdash \Delta, \psi\)</span></p>
+</blockquote>
+<p>如果把上面的可证改为有效，那么这个定理的正确性非常容易证明</p>
+<p>因此，这个定理相等于给了一个从有效到可证的桥梁</p>
+<h4 id="协调矛盾">协调，矛盾</h4>
+<p>下面这一些定义给的非常蠢，让人完全摸不着头脑，要结合后面的命题来理解</p>
+<p>这一节的内容的排布也很蠢</p>
+<p>设<span class="math inline">\(\Gamma\)</span>为公式集</p>
+<ul>
+<li><p>矛盾：<span class="math inline">\(\Gamma\)</span>矛盾指<span class="math inline">\(\Gamma\)</span>的有穷集<span class="math inline">\(\Delta\)</span>使<span class="math inline">\(\Delta\vdash\)</span>在<span class="math inline">\(G\)</span>中可证，记为<span class="math inline">\(Incon(\Gamma)\)</span></p>
+<p>（注意到，根据铺垫里提到的定理，对任意<span class="math inline">\(\Gamma\)</span>，<span class="math inline">\(\Delta \vdash \Gamma\)</span>都是可证的）</p></li>
+<li><p>协调：<span class="math inline">\(\Gamma\)</span>协调指<span class="math inline">\(\Gamma\)</span>不矛盾，记为<span class="math inline">\(Con(\Gamma)\)</span></p></li>
+<li><p>矛盾的等价定义：</p>
+<p>以下几点等价</p>
+<ul>
+<li><span class="math inline">\(Incon(\Gamma)\)</span>，<span class="math inline">\(\Gamma\)</span>矛盾</li>
+<li>存在公式<span class="math inline">\(A\)</span>和有穷子集<span class="math inline">\(\Delta\)</span>，使<span class="math inline">\(\Delta \vdash A, \Delta \vdash \neg A\)</span>可证</li>
+<li>存在有穷子集<span class="math inline">\(\Delta\)</span>，对任意公式<span class="math inline">\(A\)</span>，使<span class="math inline">\(\Delta \vdash A\)</span></li>
+<li>对任意公式<span class="math inline">\(A\)</span>，存在有穷子集<span class="math inline">\(\Delta\)</span>，使<span class="math inline">\(\Delta \vdash A, \Delta \vdash \neg A\)</span>可证</li>
+</ul>
+<p>这里书上应该有点问题</p>
+<p>协调有类似的等价定义</p></li>
+</ul>
+<h4 id="协调与可满足">协调与可满足</h4>
+<p>下面，我们要证明：协调和可满足是等价的</p>
+<ul>
+<li><p>极大协调：<span class="math inline">\(\Gamma\)</span>极大协调指其是极大的协调集</p>
+<p>极大协调当且仅当：<span class="math inline">\(Con(\Gamma)\)</span>，并且<span class="math inline">\(\forall A\)</span>，如果<span class="math inline">\(Con(\Gamma \cup \{A\})\)</span>，那么<span class="math inline">\(A \in \Gamma\)</span></p>
+<p>极大协调当且仅当：<span class="math inline">\(Con(\Gamma)\)</span>，并且<span class="math inline">\(\forall A\)</span>，要么<span class="math inline">\(A \in \Gamma\)</span>，要么<span class="math inline">\(\neg A \in \Gamma\)</span></p></li>
+<li><p>Henkin集：一个极大协调，满足某些性质的集合</p></li>
+</ul>
+<blockquote>
+<p>如果<span class="math inline">\(\Gamma\)</span>协调，那么<span class="math inline">\(\Gamma\)</span>可满足</p>
+</blockquote>
+<p>证明下面几点：</p>
+<ol type="1">
+<li><p>如果<span class="math inline">\(\Gamma\)</span>协调，那么存在一个Henkin集<span class="math inline">\(\psi\)</span>，使得<span class="math inline">\(\Gamma \subseteq \psi\)</span></p></li>
+<li><p>Henkin集是Hintilkka集</p></li>
+</ol>
+<p>有了上面这个定理，我们就很容易证明：</p>
+<blockquote>
+<p><span class="math inline">\(Completeness\)</span>：<span class="math inline">\(\Gamma\)</span>有效，那么<span class="math inline">\(\Gamma\)</span>可证</p>
+</blockquote>
+<p>当然，这种证明completeness的方法本身并不美妙，应该是选择证明compactness的时候顺带把completeness证了，导致观感会非常奇怪</p>
+<blockquote>
+<p><span class="math inline">\(Compactness\)</span>：若<span class="math inline">\(\Gamma\)</span>的任何有限子集可满足，那么<span class="math inline">\(\Gamma\)</span>可满足</p>
+</blockquote>
+<h3 id="herbrand定理">Herbrand定理</h3>
+<ul>
+<li>前束形范式：把量词提前的公式</li>
+</ul>
+<blockquote>
+<p>对于一阶语言的公式<span class="math inline">\(A\)</span>，存在前束形范式<span class="math inline">\(B\)</span>，使得<span class="math inline">\(\models A \leftrightarrow B\)</span></p>
+</blockquote>
+<p>所以，我们可以把一个公式弄成前束形范式</p>
+<ul>
+<li>Skolem范式：把前束形范式中的<span class="math inline">\(\exists\)</span>想办法弄没，记为<span class="math inline">\(A^s\)</span></li>
+</ul>
+<p>具体方法就是把<span class="math inline">\(\exists\)</span>中的东西用新变元替换，我们因此只能得到一个比上面的定理弱很多的效果：</p>
+<blockquote>
+<p><span class="math inline">\(A\)</span>和<span class="math inline">\(A^s\)</span>可满足性相同</p>
+</blockquote>
+<ul>
+<li><p>Herbrand域：根据Skolem范式中的常元（或某个额外的常元<span class="math inline">\(c_0\)</span>）和范式中函数进行组合形成的玩意</p>
+<p>（ps：这玩意的英文叫Herbrand universe）</p></li>
+<li><p>Herbrand结构，对于每个结构<span class="math inline">\(M\)</span>，我们可以定义对应<span class="math inline">\(M\)</span>的Herbrand结构<span class="math inline">\(H_A\)</span></p></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(M \models A\)</span>当且仅当<span class="math inline">\(H_A \models A\)</span></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/logic/" rel="tag"># logic</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/04/numerical-analysis/" rel="prev" title="numerical_analysis">
+                  <i class="fa fa-chevron-left"></i> numerical_analysis
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">122k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">1:51</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
