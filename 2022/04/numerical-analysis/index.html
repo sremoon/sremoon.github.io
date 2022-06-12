@@ -22,13 +22,13 @@
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 <meta name="description" content="一些杂记">
 <meta property="og:type" content="article">
-<meta property="og:title" content="计算方法">
+<meta property="og:title" content="计算方法（上）">
 <meta property="og:url" content="http://sremoon.github.io/2022/04/numerical-analysis/index.html">
 <meta property="og:site_name" content="SreMoon&#39;s Lake">
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-04-07T06:10:40.000Z">
-<meta property="article:modified_time" content="2022-06-04T15:19:36.866Z">
+<meta property="article:modified_time" content="2022-06-10T03:47:21.080Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="numerical_analysis">
 <meta name="twitter:card" content="summary">
@@ -38,10 +38,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2022/04/numerical-analysis/","path":"2022/04/numerical-analysis/","title":"计算方法"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2022/04/numerical-analysis/","path":"2022/04/numerical-analysis/","title":"计算方法（上）"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>计算方法 | SreMoon's Lake</title>
+<title>计算方法（上） | SreMoon's Lake</title>
   
 
 
@@ -120,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#part-1"><span class="nav-text">Part 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8A%A8%E7%82%B9%E8%BF%AD%E4%BB%A3"><span class="nav-text">不动点迭代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-2"><span class="nav-text">Part 2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lagrange-interpolation"><span class="nav-text">Lagrange Interpolation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bernstein-polynomial"><span class="nav-text">Bernstein Polynomial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chebyshev-polynomial"><span class="nav-text">Chebyshev Polynomial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fourier-transform"><span class="nav-text">Fourier Transform</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-3"><span class="nav-text">Part 3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-system-of-equation"><span class="nav-text">Linear system of equation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jacobi-method-gauss-seidel-method"><span class="nav-text">Jacobi method &amp; Gauss-Seidel method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#richardson-iteration"><span class="nav-text">Richardson iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chebyshev-iteration"><span class="nav-text">Chebyshev iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conjugate-gradients"><span class="nav-text">Conjugate gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#power-method"><span class="nav-text">Power method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inverse-power-method"><span class="nav-text">Inverse Power method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qr-decompesition"><span class="nav-text">QR decompesition</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-4"><span class="nav-text">Part 4</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#graph-spectrum"><span class="nav-text">Graph spectrum</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#perron-frobenius-theorem"><span class="nav-text">Perron-Frobenius Theorem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#random-walk"><span class="nav-text">Random Walk</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#resistance-network"><span class="nav-text">Resistance network</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#part-1"><span class="nav-text">Part 1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%8D%E5%8A%A8%E7%82%B9%E8%BF%AD%E4%BB%A3"><span class="nav-text">不动点迭代</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-2"><span class="nav-text">Part 2</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lagrange-interpolation"><span class="nav-text">Lagrange Interpolation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#bernstein-polynomial"><span class="nav-text">Bernstein Polynomial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chebyshev-polynomial"><span class="nav-text">Chebyshev Polynomial</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#fourier-transform"><span class="nav-text">Fourier Transform</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#part-3"><span class="nav-text">Part 3</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#linear-system-of-equation"><span class="nav-text">Linear system of equation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#norm"><span class="nav-text">Norm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jacobi-method-gauss-seide1l-method"><span class="nav-text">Jacobi method &amp; Gauss-Seide1l method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#moore-penrose-pseudoinverse"><span class="nav-text">Moore-Penrose Pseudoinverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#richardson-iteration"><span class="nav-text">Richardson iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#chebyshev-iteration"><span class="nav-text">Chebyshev iteration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#conjugate-gradients"><span class="nav-text">Conjugate gradients</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#power-method"><span class="nav-text">Power method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#inverse-power-method"><span class="nav-text">Inverse Power method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#qr-decompesition"><span class="nav-text">QR decompesition</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -137,7 +137,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">21</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -208,7 +208,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          计算方法
+          计算方法（上）
         </h1>
 
         <div class="post-meta-container">
@@ -226,7 +226,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-06-04 23:19:36" itemprop="dateModified" datetime="2022-06-04T23:19:36+08:00">2022-06-04</time>
+        <time title="Modified: 2022-06-10 11:47:21" itemprop="dateModified" datetime="2022-06-10T11:47:21+08:00">2022-06-10</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,14 +246,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>11k</span>
+      <span>7.4k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>10 mins.</span>
+      <span>7 mins.</span>
     </span>
 </div>
 
@@ -279,7 +279,7 @@
 <blockquote>
 <p>猜测一个解<span class="math inline">\(x_0\)</span>，之后不断的进行迭代：<span class="math inline">\(x_{i+1} = g(x_i)\)</span></p>
 </blockquote>
-<p>这个方法有性质：对连续函数<span class="math inline">\(g\)</span>，如果<span class="math inline">\(\lim x_i\)</span>收敛，那么其一定收敛于不动点</p>
+<p>性质：对连续函数<span class="math inline">\(g\)</span>，如果<span class="math inline">\(\lim x_i\)</span>收敛，那么其一定收敛于不动点</p>
 <p>注意到<span class="math inline">\(g(r) = g(\lim x_i) = \lim g(x_i) = \lim x_{i+1} = r\)</span></p>
 <ul>
 <li>迭代的速率</li>
@@ -289,7 +289,7 @@
 <blockquote>
 <p>如果<span class="math inline">\(g\)</span>连续可导，<span class="math inline">\(r\)</span>为不动点，<span class="math inline">\(S = |g&#39;(r)| &lt; 1\)</span>，那么对于足够接近<span class="math inline">\(r\)</span>的猜测，不动点迭代法可以收敛到<span class="math inline">\(r\)</span>，收敛速度为<span class="math inline">\(S\)</span></p>
 </blockquote>
-<p>证明略</p>
+<p>证明：<span class="math inline">\((x_{i+1} - r) = g&#39;(\xi_i) (x_i - r)\)</span>，当<span class="math inline">\(g&#39;(x) \leq c&lt; 1\)</span>时，<span class="math inline">\(x\)</span>离<span class="math inline">\(r\)</span>的距离一定在减小</p>
 <ul>
 <li>误差</li>
 </ul>
@@ -330,6 +330,12 @@
 </ol>
 <p>更仔细地分析有：</p>
 <p><span class="math inline">\(|f(x) - E[f(K_n(x)/n)]| \leq ||f||_{\infty} / 2n \epsilon^2 + \sup_{|x-y| \leq \epsilon} |f(x) - f(y)|\)</span></p>
+<ul>
+<li>逼近定理</li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(Weierstrass\)</span>定理：对于连续函数<span class="math inline">\(f\)</span>，多项式可以任意地逼近</p>
+</blockquote>
 <h3 id="chebyshev-polynomial">Chebyshev Polynomial</h3>
 <ul>
 <li>引入</li>
@@ -358,6 +364,9 @@ T_n(x) = 2^{n-1}(x-x_1)(x-x_2)...(x-x_n), x_i = \cos (2i - 1) \pi / 2n
 <hr />
 <p>其中的性质3可以用于证明开头提到的问题的结论，也被称为Chebyshev TH</p>
 <p>（不妨取<span class="math inline">\(g(x)\)</span>为使函数最小的多项式，为方便和<span class="math inline">\(T_n(x)\)</span>比较，设<span class="math inline">\(G(x) = 2^{n-1}g(x)\)</span>，那么<span class="math inline">\(|G(x)|&lt;1\)</span>恒成立， 在<span class="math inline">\(T_n(x)\)</span>的<span class="math inline">\(n+1\)</span>个极值点（取<span class="math inline">\(\pm 1\)</span>）上，<span class="math inline">\(T_n(x) - G(x)\)</span>和<span class="math inline">\(T_n(x)\)</span>有相同的正负，从而<span class="math inline">\(T_n(x) - G(x)\)</span>有<span class="math inline">\(n\)</span>个零点，这不可能）</p>
+<p>Chebyshev 多项式是多项式的一组正交基，在如下的内积下： <span class="math display">\[
+\langle f, g\rangle = \int_{-1}^1 f(x)g(x) \frac{d x}{\sqrt{1-x^2}}
+\]</span></p>
 <h3 id="fourier-transform">Fourier Transform</h3>
 <p>省略</p>
 <h2 id="part-3">Part 3</h2>
@@ -367,7 +376,23 @@ T_n(x) = 2^{n-1}(x-x_1)(x-x_2)...(x-x_n), x_i = \cos (2i - 1) \pi / 2n
 <p>在矩阵<span class="math inline">\(A\)</span>可逆的情况下，<span class="math inline">\(e_x = A^{-1} e_b\)</span>，那么 <span class="math display">\[
 cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \max_{e \neq 0} \frac{||A^{-1} e||}{||e||} \max_{b \neq 0} \frac{||b||}{||A^{-1}b||} = ||A^{-1}|| * ||A|| \geq 1
 \]</span> 其中<span class="math inline">\(||\cdot||\)</span>为任意的向量范数和其导出的矩阵范数</p>
-<h3 id="jacobi-method-gauss-seidel-method">Jacobi method &amp; Gauss-Seidel method</h3>
+<h3 id="norm">Norm</h3>
+<p>一般的，称由向量范数<span class="math inline">\(||\cdot||\)</span>导出的矩阵范数<span class="math inline">\(||A|| := \max_{||x||=1} ||Ax||\)</span>为（<span class="math inline">\(||\cdot||\)</span>导出的）算子范数</p>
+<p>算子范数有如下的性质：</p>
+<p>相容性：<span class="math inline">\(||AB|| \leq ||A|| * ||B||\)</span></p>
+<p>三角不等式：<span class="math inline">\(||A||-||B||\leq ||A + B|| \leq ||A|| + ||B||\)</span></p>
+<hr />
+<p>以下是几个常见的矩阵算子范数：</p>
+<p><span class="math inline">\(||A||_1 = \max_{j} \sum_{i=1}^n |a_{i,j}|\)</span>，向量1-范数的导出范数，也称为列范数</p>
+<p><span class="math inline">\(||A||_{\infty} = \max_{i} \sum_{j=1}^n |a_{i,j}|\)</span>，向量<span class="math inline">\(\infty-\)</span>范数的导出范数，也称为行范数</p>
+<p><span class="math inline">\(||A||_2 = \max_{||x||_2 \leq 1} \sqrt{x^T A^T A x} = \sqrt{\lambda_{max}(A^TA)}\)</span>，向量2-范数的导出范数</p>
+<hr />
+<p>定义谱半径<span class="math inline">\(\rho(A):= \max\{ |\lambda_1|, ..., |\lambda_n|\}\)</span></p>
+<blockquote>
+<p><span class="math inline">\(\rho(A) &lt; 1\)</span>当且仅当<span class="math inline">\(\lim_{k \to \infty} A^k =0\)</span></p>
+</blockquote>
+<p>对于实对称矩阵而言，<span class="math inline">\(\rho(A) = ||A||_2\)</span></p>
+<h3 id="jacobi-method-gauss-seide1l-method">Jacobi method &amp; Gauss-Seide1l method</h3>
 <ul>
 <li>Jacobi method</li>
 </ul>
@@ -395,6 +420,11 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <hr />
 <p>对<span class="math inline">\(\rho(D^{-1}(L+U))\)</span>考虑，设<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(D^{-1}(L+U)\)</span>的任意一个特征值，<span class="math inline">\(v\)</span>为其特征向量</p>
 <p>那么有<span class="math inline">\((L+U)v = \lambda Dv\)</span>，设<span class="math inline">\(||v||_{\infty} = 1\)</span>，且<span class="math inline">\(v_m\)</span>最大，那么根据<span class="math inline">\((L+U) v = \lambda Dv\)</span>，考虑两边的第<span class="math inline">\(m\)</span>个分量，得到<span class="math inline">\(|\lambda a_m| = \sum_{j \neq m} |a_{mj}| &lt; |a_m|\)</span>，从而<span class="math inline">\(|\lambda| &lt; 1\)</span>，进而有<span class="math inline">\(\rho(D^{-1}(L+U)) &lt; 1\)</span>，另一个分析是类似的</p>
+<h3 id="moore-penrose-pseudoinverse">Moore-Penrose Pseudoinverse</h3>
+<p>考虑方程<span class="math inline">\(Ax = b\)</span></p>
+<p>当<span class="math inline">\(A \in \mathbb{R}^{n \times m}(n &gt; m)\)</span>时，并且保证<span class="math inline">\(A\)</span>满秩时，我们将方程<span class="math inline">\(Ax = b\)</span>改写为<span class="math inline">\(A^T A x = A^T b\)</span></p>
+<p>此时，<span class="math inline">\(A^T A\)</span>仍然满秩</p>
+<p>那么，我们可以写出<span class="math inline">\(x = (A^TA)^{-1} A^Tb\)</span>，这是一个pseudoinverse</p>
 <h3 id="richardson-iteration">Richardson iteration</h3>
 <ul>
 <li>引入</li>
@@ -489,153 +519,6 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 </ul>
 <p><span class="math inline">\(Q_0 = I\)</span>，而<span class="math inline">\(Q_i\)</span>满足<span class="math inline">\(AQ_{i-1} = Q_i R_i(i \geq 1)\)</span>，其中<span class="math inline">\(Q_iR_i\)</span>是<span class="math inline">\(AQ_{i-1}\)</span>的<span class="math inline">\(QR\)</span>分解</p>
 <p>这样可以进行特征值的同时迭代</p>
-<h2 id="part-4">Part 4</h2>
-<h3 id="graph-spectrum">Graph spectrum</h3>
-<ul>
-<li>定义</li>
-</ul>
-<p>称<span class="math inline">\(A(G)\)</span>为<span class="math inline">\(G\)</span>的邻接矩阵，<span class="math inline">\(D(G)\)</span>为<span class="math inline">\(G\)</span>的度数矩阵，<span class="math inline">\(L = D-A\)</span>为<span class="math inline">\(G\)</span>的拉普拉斯矩阵</p>
-<ul>
-<li>二分图</li>
-</ul>
-<blockquote>
-<p>对于二分图<span class="math inline">\(G\)</span>，如果<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(A(G)\)</span>的一个特征值，且重数为<span class="math inline">\(k\)</span>，那么<span class="math inline">\(-\lambda\)</span>也是<span class="math inline">\(A(G)\)</span>的重数为<span class="math inline">\(k\)</span>的特征值</p>
-</blockquote>
-<p>注意到<span class="math inline">\(A(G)\)</span>是实对称矩阵，不需要区分代数重数和几何重数</p>
-<p>考虑把<span class="math inline">\(A\)</span>分块为<span class="math inline">\(\begin{bmatrix} O&amp;B \\ B^T&amp;O\end{bmatrix}\)</span>，那么不难验证<span class="math inline">\(\binom{x}{y}\)</span>和<span class="math inline">\(\binom{x}{-y}\)</span>分别是<span class="math inline">\(\pm \lambda\)</span>的特征向量，并且根据这个性质，如果<span class="math inline">\(\lambda\)</span>有<span class="math inline">\(k\)</span>个线性无关的向量，那么<span class="math inline">\(-\lambda\)</span>也有</p>
-<blockquote>
-<p>设<span class="math inline">\(A(G)\)</span>的特征值为<span class="math inline">\(\lambda_1 \geq \lambda_2 \geq ... \geq \lambda_n\)</span>，并且<span class="math inline">\(\lambda_i = -\lambda_{n-i+1}\)</span>，那么<span class="math inline">\(G\)</span>为二分图</p>
-</blockquote>
-<p>注意到对奇数<span class="math inline">\(k\)</span>，<span class="math inline">\(tr(A^k) = \sum \lambda^k = 0\)</span>，而<span class="math inline">\(tr(A^k)\)</span>表示所有点经过<span class="math inline">\(k\)</span>条边后回到自身的方案数的和</p>
-<ul>
-<li>一般图</li>
-</ul>
-<blockquote>
-<p><span class="math inline">\(\deg_{avg}(G) \leq \lambda_{max}(A(G)) \leq \deg_{max}(G) = \Delta(G)\)</span></p>
-</blockquote>
-<p>设<span class="math inline">\(x\)</span>为对应的特征向量，并且<span class="math inline">\(i = \arg \max x_j\)</span>那么<span class="math inline">\(\lambda x_i = (Ax)_i = \sum_{j} A_{ij} x_j \leq (\sum_{j} A_{ij}) x_i = deg_i(G) x_i \leq \Delta(G) x_i\)</span></p>
-<ul>
-<li>拉普拉斯矩阵</li>
-</ul>
-<p>不难注意到：<span class="math inline">\(1\)</span>是<span class="math inline">\(L(G)\)</span>的特征向量，对应的特征值为<span class="math inline">\(0\)</span></p>
-<p>根据<span class="math inline">\(x^TLx = \sum_{ij \in E} (x_i - x_j)^2\)</span>，我们有<span class="math inline">\(L(G) \geq 0\)</span></p>
-<blockquote>
-<p>设<span class="math inline">\(L(G)\)</span>的特征值为<span class="math inline">\(\lambda_1 \leq \lambda_2 ... \leq \lambda_n\)</span>，那么<span class="math inline">\(G\)</span>连通当且仅当<span class="math inline">\(\lambda_2 &gt; 0\)</span></p>
-<p>进一步，<span class="math inline">\(0\)</span>作为特征值的重数实际上揭示了<span class="math inline">\(G\)</span>的连通分量的数量</p>
-</blockquote>
-<p>首先对连通情况作证明：如果不连通，那么至少<span class="math inline">\(L(G) = diag\{L_1(G), L_2(G)\}\)</span>，从而0至少有2个线性无关的特征向量</p>
-<p>反之，如果连通，如果<span class="math inline">\(Lx = 0\)</span>，那么<span class="math inline">\(x^T L x = \sum_{ij} (x_i - x_j)^2 = 0\)</span>，由于连通，因此<span class="math inline">\(x\)</span>的任意分量相同，故<span class="math inline">\(x = c 1\)</span></p>
-<p>如果<span class="math inline">\(G\)</span>有<span class="math inline">\(k\)</span>个连通分量，那么<span class="math inline">\(L(G) = diag\{L_1(G), L_2(G), ..., L_k(G)\}\)</span>，其中<span class="math inline">\(L_1(G), ..., L_k(G)\)</span>是<span class="math inline">\(k\)</span>个连通分量对应的子图，根据连通的结论，<span class="math inline">\(L(G)\)</span>中<span class="math inline">\(0\)</span>的代数重数恰好为<span class="math inline">\(k\)</span>，如果代数重数为<span class="math inline">\(k\)</span>，那么<span class="math inline">\(G\)</span>也只能有<span class="math inline">\(k\)</span>个连通分量</p>
-<h3 id="perron-frobenius-theorem">Perron-Frobenius Theorem</h3>
-<blockquote>
-<p>设<span class="math inline">\(A\)</span>为非负，不可约且非周期的矩阵，那么</p>
-<ul>
-<li><span class="math inline">\(A\)</span>的最大特征值的重数为1</li>
-<li>对应的特征向量中，每个维度都是非零且同号的</li>
-<li><span class="math inline">\(|\lambda_i| &lt; \lambda_1\)</span></li>
-</ul>
-</blockquote>
-<h3 id="random-walk">Random Walk</h3>
-<p>考虑随机游走，记<span class="math inline">\(X_t\)</span>为时间<span class="math inline">\(t\)</span>随机游走所处状态的概率，那么，存在一个转移矩阵使得<span class="math inline">\(X_{t+1} = X_t P\)</span></p>
-<ul>
-<li>定义</li>
-</ul>
-<p>对于有限的马尔可夫链，如果其对应的有向图是强连通的，那么称其为不可约的</p>
-<p>对于马尔可夫链，定义状态<span class="math inline">\(i\)</span>的周期为<span class="math inline">\(period(i) := \gcd\{t:P_{i,i}^t &gt; 0\}\)</span>，如果状态<span class="math inline">\(i\)</span>的周期为<span class="math inline">\(1\)</span>，那么称其为非周期的，如果所有的状态都是非周期的，那么称该马尔可夫链是非周期的</p>
-<ul>
-<li>马尔可夫链基本定理</li>
-</ul>
-<blockquote>
-<p>对于有限，不可约，非周期的马尔可夫链</p>
-<ul>
-<li>存在且仅存在一个稳态分布<span class="math inline">\(\pi\)</span></li>
-<li>无论<span class="math inline">\(p_0\)</span>如何，一定有<span class="math inline">\(\lim_{t \to \infty} p_t \to \pi\)</span></li>
-<li><span class="math inline">\(\pi(i) = 1/ h_i\)</span>，其中<span class="math inline">\(h_i = \mathbb{E}[H_i]\)</span>，而<span class="math inline">\(H_i := \min\{t \geq 1 | X_t = i, X_0 = i\}\)</span></li>
-</ul>
-</blockquote>
-<ul>
-<li>无向图的讨论</li>
-</ul>
-<p>在无向图里面，转移矩阵一般认为是<span class="math inline">\(AD^{-1}\)</span>（也即均匀从邻居中选出一个）</p>
-<p>那么，<span class="math inline">\(p_{t+1} = (AD^{-1})p_t\)</span>，因此<span class="math inline">\(p_t = (AD^{-1})^t p_0\)</span></p>
-<p>不难验证，<span class="math inline">\(\pi = \frac{1}{2m}(deg(1), ..., deg(n))\)</span>是<span class="math inline">\(AD^{-1}\)</span>的一个特征向量，从而是一个稳态分布</p>
-<p>在无向图内，不可约即连通图，非周期即非二分图，因此我们有</p>
-<ul>
-<li>对于有限连通非二分图，都有<span class="math inline">\(p_t \to \pi\)</span></li>
-</ul>
-<p>对于二分图，我们则可以考虑每个点以<span class="math inline">\(1/2\)</span>的概率停留，以<span class="math inline">\(1/2\)</span>的概率进行随机游走（相当于每个点加一个自环）</p>
-<p>转移矩阵写为<span class="math inline">\(p_{t+1} = (\frac{1}{2}I + \frac{1}{2}AD^{-1})p_t\)</span></p>
-<ul>
-<li>在<span class="math inline">\(d-\)</span>正则图中，<span class="math inline">\(\lambda_2(AD^{-1}) &lt; 1\)</span>描述了图的连通性，<span class="math inline">\(\lambda_{n(AD^{-1})} &gt; -1\)</span>描述了图的非周期性</li>
-</ul>
-<p>根据这个思路，我们定义<span class="math inline">\(\lambda = \min\{1 - \lambda_2, 1 - |\lambda_n|\}\)</span>为谱半径</p>
-<blockquote>
-<p>随机游走的<span class="math inline">\(\epsilon-\)</span>混合时间最多为<span class="math inline">\(\frac{1}{\lambda} \log (n / \epsilon)\)</span></p>
-<p>其中<span class="math inline">\(\epsilon-\)</span>混合时间定义为最小的整数<span class="math inline">\(t\)</span>，使得<span class="math inline">\(||p_t - \pi||_1 \leq \epsilon, \forall p_0\)</span></p>
-</blockquote>
-<p>直观上来说，混合时间就是说，过了这个时间之后，我们不再能区分是从哪个点出发</p>
-<h3 id="resistance-network">Resistance network</h3>
-<ul>
-<li>定义</li>
-</ul>
-<p>在一张无向图<span class="math inline">\(G\)</span>上，每条边上有一个电阻<span class="math inline">\(r_e\)</span>，之后每条边需要流过方向电流<span class="math inline">\(i_e(i_{uv} =-i_{vu})\)</span></p>
-<p>对于每条边，我们也称其具有电导率<span class="math inline">\(w_e = 1/r_e\)</span></p>
-<p>对于每个顶点，则有电势<span class="math inline">\(\phi_v\)</span>和一个对于每个节点，统计总流入电流的量<span class="math inline">\(b_v\)</span></p>
-<ul>
-<li>假设</li>
-</ul>
-<p>一般的，我们要求如下定律满足：</p>
-<p>基尔霍夫定律：<span class="math inline">\(\sum_{vu \in E} i_{vu} = b_v, \forall v \in V\)</span></p>
-<p>欧姆定律：<span class="math inline">\(\phi(u) - \phi(v) = i_{uv}r_{uv}\)</span>，加权形式下为<span class="math inline">\(w_{uv}(\phi(u) - \phi(v)) = i_{uv}\)</span></p>
-<p>合并上两式，我们得到<span class="math inline">\(b_v = \deg(v) \phi(v) - \sum_{vu \in E} w_{uv} \phi(u)\)</span>，其中<span class="math inline">\(\deg(v)\)</span>是<span class="math inline">\(w\)</span>的加权的和</p>
-<p>此时有，<span class="math inline">\(b = L \phi\)</span>，当然<span class="math inline">\(L\)</span>是加权的拉普拉斯矩阵</p>
-<ul>
-<li>推导</li>
-</ul>
-<p>（假设网络是连通的）</p>
-<p>设<span class="math inline">\(L = \sum \lambda_i v_i v_i^T\)</span>，其中<span class="math inline">\(\lambda_1 \leq \lambda_2 \leq ...\)</span>并且<span class="math inline">\(v_1, v_2, ..., v_n\)</span>为正交标准基</p>
-<blockquote>
-<p>存在向量<span class="math inline">\(\phi\)</span>使得<span class="math inline">\(L \phi = b\)</span>的充要条件为<span class="math inline">\(b \perp 1\)</span></p>
-</blockquote>
-<p>首先，我们证明<span class="math inline">\(L \phi \perp 1\)</span>，由于<span class="math inline">\(1\)</span>在<span class="math inline">\(L\)</span>的零空间中，这个事实不难证明</p>
-<p>反之，令<span class="math inline">\(\phi = L^{\ddagger} b\)</span>，其中<span class="math inline">\(L^{\ddagger} = \sum_{i \geq 2} \lambda_i^{-1} v_iv_i^{T}\)</span></p>
-<hr />
-<p>根据上述知识，<span class="math inline">\(L \phi = b\)</span>的全体解集形如<span class="math inline">\(\{L^{\ddagger b} + c\mathbb{1}: c\in R\}\)</span></p>
-<p>在固定某个点的电势后，将有唯一的解</p>
-<ul>
-<li>等效电阻</li>
-</ul>
-<p>定义<span class="math inline">\(s,t\)</span>之间的等效电阻<span class="math inline">\(R_{eff}(s, t) := \phi(s) - \phi(t)\)</span>，其中<span class="math inline">\(\phi\)</span>满足<span class="math inline">\(L \phi = b_{st}\)</span>，<span class="math inline">\(b_{st}\)</span>是只在<span class="math inline">\(s\)</span>上分量为1，在<span class="math inline">\(t\)</span>上分量为-1的向量（相当于从s流入1的电流，从t流出1的电流的电阻）</p>
-<p>注意到<span class="math inline">\(\phi = L^{\ddagger} b_{st}\)</span>，又<span class="math inline">\(b_{st}^T \phi = \phi(s) - \phi(t)\)</span>，因此<span class="math inline">\(R_{eff}(s, t) = b_{st}^T L^{\ddagger} b_{st}\)</span></p>
-<ul>
-<li>电势能</li>
-</ul>
-<p>定义电势能为：<span class="math inline">\(\mathscr{E}(i) := \sum_e i_e^2 r_e = \sum_e w_e[\phi(u) - \phi(v)]^2 = \phi^T L \phi\)</span></p>
-<p>根据上面的式子，不难看出<span class="math inline">\(\mathscr{E}(i) = E_{eff}(s, t)\)</span></p>
-<blockquote>
-<p><span class="math inline">\(\mathscr{E}(i) \leq R_{eff}(s, t) \leq \mathscr{E}(f)\)</span>，其中<span class="math inline">\(f\)</span>是任意的<span class="math inline">\(s-t\)</span>流</p>
-</blockquote>
-<p>这是一个凸问题，电势能满足极值条件</p>
-<blockquote>
-<p>如果<span class="math inline">\(r \geq r&#39;\)</span>，那么<span class="math inline">\(R_{eff, r}(s, t) \geq R_{eff, r&#39;}(s, t)\)</span></p>
-</blockquote>
-<p>不难想象，证明则利用电势能作为桥梁</p>
-<blockquote>
-<p><span class="math inline">\(R_{eff}(a, b) + R_{eff}(b, c) \geq R_{eff}(a, c)\)</span></p>
-</blockquote>
-<ul>
-<li>电阻网络与随机游走</li>
-</ul>
-<p>碰撞时间：定义随机变量<span class="math inline">\(H_{uv} := \min\{t \geq 1 | X_1 = u, X_t = v\}\)</span>，之后定义碰撞事件<span class="math inline">\(h_{uv} := \mathbb{E}[H_{u, v}]\)</span></p>
-<p>返程时间：<span class="math inline">\(C_{u, v} := h_{u, v} + h_{v, u}\)</span></p>
-<blockquote>
-<p>我们把无向图看作是所有边<span class="math inline">\(r_e = 1\)</span>的电阻网络，那么<span class="math inline">\(C_{s,t} = 2m R_{eff}(s, t)\)</span></p>
-</blockquote>
-<p>不难想象，考虑<span class="math inline">\(h_{*, t} = (h_{1, t}, ..., h_{t, t})\)</span>，这些碰撞时间存在一些关系，用矩阵写出来为<span class="math inline">\(d_v = (L h_{*, t})_v, \forall v \neq t\)</span></p>
-<p>对于第<span class="math inline">\(t\)</span>行，我们需要特殊考虑，注意到<span class="math inline">\(L \phi = b\)</span>有解当且仅当<span class="math inline">\(b \perp 1\)</span>，因此我们希望构造一个<span class="math inline">\(d&#39;\)</span>，使得<span class="math inline">\(d&#39; \perp 1\)</span></p>
-<p>取<span class="math inline">\(d&#39; = -\sum_{i \neq t} d_i = d_t - 2m\)</span>即可，这个时候可以保证方程组有解</p>
-<p>这个时候，观察到<span class="math inline">\(L(h_{*, t} - h_{*, s}) = 2m b_{st}\)</span>，而<span class="math inline">\(R_{eff}(s, t)\)</span>则对应的是<span class="math inline">\(L \phi = b_{st}\)</span></p>
-<p>稍作说明，就可以得到所需的结论</p>
 
     </div>
 
@@ -692,14 +575,14 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">122k</span>
+    <span title="Symbols count total">126k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:51</span>
+    <span title="Reading time total">1:54</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
