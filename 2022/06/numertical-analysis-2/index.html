@@ -28,7 +28,7 @@
 <meta property="og:description" content="一些杂记">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-10T02:45:33.000Z">
-<meta property="article:modified_time" content="2022-06-10T02:47:20.860Z">
+<meta property="article:modified_time" content="2022-06-12T07:04:43.378Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="numerical_analysis">
 <meta name="twitter:card" content="summary">
@@ -218,10 +218,16 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-06-10 10:45:33 / Modified: 10:47:20" itemprop="dateCreated datePublished" datetime="2022-06-10T10:45:33+08:00">2022-06-10</time>
+      <time title="Created: 2022-06-10 10:45:33" itemprop="dateCreated datePublished" datetime="2022-06-10T10:45:33+08:00">2022-06-10</time>
     </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-06-12 15:04:43" itemprop="dateModified" datetime="2022-06-12T15:04:43+08:00">2022-06-12</time>
+      </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-folder"></i>
@@ -240,7 +246,7 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>7.3k</span>
+      <span>8.2k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
@@ -337,14 +343,18 @@
 <p>对于二分图，我们则可以考虑每个点以<span class="math inline">\(1/2\)</span>的概率停留，以<span class="math inline">\(1/2\)</span>的概率进行随机游走（相当于每个点加一个自环）</p>
 <p>转移矩阵写为<span class="math inline">\(p_{t+1} = (\frac{1}{2}I + \frac{1}{2}AD^{-1})p_t\)</span></p>
 <ul>
-<li>在<span class="math inline">\(d-\)</span>正则图中，<span class="math inline">\(\lambda_2(AD^{-1}) &lt; 1\)</span>描述了图的连通性，<span class="math inline">\(\lambda_{n(AD^{-1})} &gt; -1\)</span>描述了图的非周期性</li>
+<li>对<span class="math inline">\(d-\)</span>正则图的分析</li>
 </ul>
-<p>根据这个思路，我们定义<span class="math inline">\(\lambda = \min\{1 - \lambda_2, 1 - |\lambda_n|\}\)</span>为谱半径</p>
+<p>在<span class="math inline">\(d-\)</span>正则图中，<span class="math inline">\(\lambda_2(AD^{-1}) &lt; 1\)</span>描述了图的连通性，<span class="math inline">\(\lambda_{n(AD^{-1})} &gt; -1\)</span>描述了图的非周期性</p>
+<p>根据这个思路，我们定义<span class="math inline">\(\lambda = \min\{1 - \lambda_2, 1 - |\lambda_n|\}\)</span>为谱间隔</p>
 <blockquote>
 <p>随机游走的<span class="math inline">\(\epsilon-\)</span>混合时间最多为<span class="math inline">\(\frac{1}{\lambda} \log (n / \epsilon)\)</span></p>
 <p>其中<span class="math inline">\(\epsilon-\)</span>混合时间定义为最小的整数<span class="math inline">\(t\)</span>，使得<span class="math inline">\(||p_t - \pi||_1 \leq \epsilon, \forall p_0\)</span></p>
 </blockquote>
 <p>直观上来说，混合时间就是说，过了这个时间之后，我们不再能区分是从哪个点出发</p>
+<p>证明：取一组标准正交特征向量<span class="math inline">\(v_1,v_2,...,v_n\)</span>，其中<span class="math inline">\(v_1 = \pi\)</span>，对应的特征值为<span class="math inline">\(1 = \alpha_1 \geq \alpha_2 ... \alpha_n \geq -1\)</span>（这个假设是不失一般性的，留作习题）</p>
+<p><span class="math inline">\(||p_t - \pi||_2^2 = c_2^2 \alpha_2^{2t} + ... + c_n^2 \alpha_n^{2t} \leq (c_2^2 + ... + c_n^2) (1 - \lambda)^{2t} \leq ||p_0||_1 (1-\lambda)^{2t} = (1-\lambda)^{2t}\)</span></p>
+<p>其中用到了<span class="math inline">\(||p_0||_2^2 \leq ||p_0||_1\)</span></p>
 <h3 id="resistance-network">Resistance network</h3>
 <ul>
 <li>定义</li>
@@ -382,11 +392,11 @@
 <li>电势能</li>
 </ul>
 <p>定义电势能为：<span class="math inline">\(\mathscr{E}(i) := \sum_e i_e^2 r_e = \sum_e w_e[\phi(u) - \phi(v)]^2 = \phi^T L \phi\)</span></p>
-<p>根据上面的式子，不难看出<span class="math inline">\(\mathscr{E}(i) = E_{eff}(s, t)\)</span></p>
+<p>根据上面的式子，不难看出<span class="math inline">\(\mathscr{E}(i) = \phi^T b = b^T \phi = b^T L^{\ddagger} b = R_{eff}(s, t)\)</span>（其中<span class="math inline">\(i\)</span>为<span class="math inline">\(s\)</span>到<span class="math inline">\(t\)</span>的单位电流）</p>
 <blockquote>
-<p><span class="math inline">\(\mathscr{E}(i) \leq R_{eff}(s, t) \leq \mathscr{E}(f)\)</span>，其中<span class="math inline">\(f\)</span>是任意的<span class="math inline">\(s-t\)</span>流</p>
+<p><span class="math inline">\(\mathscr{E}(i) = R_{eff}(s, t) \leq \mathscr{E}(f)\)</span>，其中<span class="math inline">\(f\)</span>是任意的<span class="math inline">\(s-t\)</span>流</p>
 </blockquote>
-<p>这是一个凸问题，电势能满足极值条件</p>
+<p>对于任意流优化<span class="math inline">\(\mathscr{E}(f)\)</span>，这是一个凸问题，电势能满足极值条件</p>
 <blockquote>
 <p>如果<span class="math inline">\(r \geq r&#39;\)</span>，那么<span class="math inline">\(R_{eff, r}(s, t) \geq R_{eff, r&#39;}(s, t)\)</span></p>
 </blockquote>
@@ -394,6 +404,7 @@
 <blockquote>
 <p><span class="math inline">\(R_{eff}(a, b) + R_{eff}(b, c) \geq R_{eff}(a, c)\)</span></p>
 </blockquote>
+<p>将<span class="math inline">\(a\)</span>到<span class="math inline">\(b\)</span>的单位电流和<span class="math inline">\(b,c\)</span>的单位电流组合以下，就得到了一个<span class="math inline">\(a\)</span>到<span class="math inline">\(c\)</span>的流，根据上面的不等式即可证明</p>
 <ul>
 <li>电阻网络与随机游走</li>
 </ul>
@@ -525,6 +536,12 @@
 <p>假设<span class="math inline">\(l_i^{(t)} \in [-1, +1], \forall i, t\)</span>，并且<span class="math inline">\(l_*\)</span>是表现最好的人，那么MWU算法的期望价值满足</p>
 <p><span class="math inline">\(\sum_{t=1}^T \langle l^{(t)}, p^{(t)} \rangle \leq \sum_{t=1}^ T l_*^{(t)} + \eta \sum_{t=1}^T |l_*^{(t)}| + \ln n / \eta\)</span></p>
 </blockquote>
+<p>证明：证明：我们来考虑<span class="math inline">\(\Phi^{(t)} = \sum_{t=1}^n w_i^{(t)}\)</span>进行上下界的估计</p>
+<p>上界：<span class="math inline">\(\Phi^{(t+1)} = \sum_{i=1}^n w_i^{(t)} - \eta \langle l^{(t)}, w^{(t)} \rangle = \Phi^{(t)} (1-\eta \langle l^{(t)}, p^{(t)}\rangle) \leq \Phi^{(t)} e^{-\eta \langle l^{(t)}, p^{(t)}\rangle}\)</span></p>
+<p>下界：<span class="math inline">\(\Phi^{(t)} = \sum_{i=1}^n w_i^{(t)} \geq w_*^{(t)} = \prod_{i=1}^T (1-\eta l_*^{(i)}) \geq (1-\eta)^{\sum_{\geq 0} l_*^{(t)}} (1+\eta)^{-\sum_{&lt;0} l_*^{(t)}}\)</span></p>
+<p>这里用到了<span class="math inline">\(1 - \eta x \geq (1-\eta)^x, x\in [0,1]\)</span>以及<span class="math inline">\(1-\eta x \geq (1+\eta)^x, x \in [-1,0]\)</span></p>
+<p>结合上下界进行整理就可以得到结论</p>
+<hr />
 <p>因此，我们的价值离最优解最多相差<span class="math inline">\(\eta T + \ln n / \eta\)</span>，取<span class="math inline">\(\eta = \sqrt{\ln n / T}\)</span>，这个量级差不多是<span class="math inline">\(O(\sqrt{T \ln n})\)</span>的</p>
 <p>此时，平均每天的遗憾为<span class="math inline">\(\sqrt{\ln n / T}\)</span>，当<span class="math inline">\(T\)</span>足够大时，遗憾将趋于0</p>
 <ul>
@@ -584,14 +601,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">126k</span>
+    <span title="Symbols count total">127k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:54</span>
+    <span title="Reading time total">1:56</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
