@@ -2616,7 +2616,7 @@ int main() &#123;
 </ul>
 <hr />
 <p>在下文中，我们将使用小写字母来指代公式，<span class="math inline">\(\Delta\)</span>来指代公式的集合，大写字母来指代公式的集合的幂集的元素，花体来指代公式的集合的幂集的子集</p>
-<p>设<span class="math inline">\(\Gamma\)</span>是一个有穷可满足的命题集，我们设<span class="math inline">\(\mathscr{O}(\Gamma) = \{\Delta | \Delta 为\Gamma的有穷子集\}\)</span>，自然<span class="math inline">\(\mathscr{O}(\Gamma) \subseteq \mathscr{P}(\Gamma)\)</span></p>
+<p>设<span class="math inline">\(\Gamma\)</span>是一个有穷可满足的命题集，我们设<span class="math inline">\(\mathscr{O}(\Gamma) = \{\Delta | \Delta 为\Gamma的有穷子集\}\)</span></p>
 <p>对于<span class="math inline">\(\Delta \in \mathscr{O}(\Gamma)\)</span>，我们记<span class="math inline">\(v_{\Delta}\)</span>为满足满足<span class="math inline">\(\Delta\)</span>的赋值</p>
 <p>令<span class="math inline">\(A^{\subseteq} = \{\Delta \in I| a \in \Delta \}\)</span>，也即所有包含公式<span class="math inline">\(a\)</span>的集合构成的集合</p>
 <p>令<span class="math inline">\(\mathscr{C}(\Gamma) = \{A^{\subseteq} | a \in \Gamma\}\)</span></p>
