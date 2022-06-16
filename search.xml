@@ -4274,7 +4274,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <ul>
 <li>电阻网络与随机游走</li>
 </ul>
-<p>碰撞时间：定义随机变量<span class="math inline">\(H_{uv} := \min\{t \geq 1 | X_1 = u, X_t = v\}\)</span>，之后定义碰撞事件<span class="math inline">\(h_{uv} := \mathbb{E}[H_{u, v}]\)</span></p>
+<p>碰撞时间：定义随机变量<span class="math inline">\(H_{uv} := \min\{t \geq 1 | X_1 = u, X_t = v\}\)</span>，之后定义碰撞时间<span class="math inline">\(h_{uv} := \mathbb{E}[H_{u, v}]\)</span></p>
 <p>返程时间：<span class="math inline">\(C_{u, v} := h_{u, v} + h_{v, u}\)</span></p>
 <blockquote>
 <p>我们把无向图看作是所有边<span class="math inline">\(r_e = 1\)</span>的电阻网络，那么<span class="math inline">\(C_{s,t} = 2m R_{eff}(s, t)\)</span></p>
@@ -4402,7 +4402,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <p>假设<span class="math inline">\(l_i^{(t)} \in [-1, +1], \forall i, t\)</span>，并且<span class="math inline">\(l_*\)</span>是表现最好的人，那么MWU算法的期望价值满足</p>
 <p><span class="math inline">\(\sum_{t=1}^T \langle l^{(t)}, p^{(t)} \rangle \leq \sum_{t=1}^ T l_*^{(t)} + \eta \sum_{t=1}^T |l_*^{(t)}| + \ln n / \eta\)</span></p>
 </blockquote>
-<p>证明：证明：我们来考虑<span class="math inline">\(\Phi^{(t)} = \sum_{t=1}^n w_i^{(t)}\)</span>进行上下界的估计</p>
+<p>证明：我们来考虑<span class="math inline">\(\Phi^{(t)} = \sum_{t=1}^n w_i^{(t)}\)</span>进行上下界的估计</p>
 <p>上界：<span class="math inline">\(\Phi^{(t+1)} = \sum_{i=1}^n w_i^{(t)} - \eta \langle l^{(t)}, w^{(t)} \rangle = \Phi^{(t)} (1-\eta \langle l^{(t)}, p^{(t)}\rangle) \leq \Phi^{(t)} e^{-\eta \langle l^{(t)}, p^{(t)}\rangle}\)</span></p>
 <p>下界：<span class="math inline">\(\Phi^{(t)} = \sum_{i=1}^n w_i^{(t)} \geq w_*^{(t)} = \prod_{i=1}^T (1-\eta l_*^{(i)}) \geq (1-\eta)^{\sum_{\geq 0} l_*^{(t)}} (1+\eta)^{-\sum_{&lt;0} l_*^{(t)}}\)</span></p>
 <p>这里用到了<span class="math inline">\(1 - \eta x \geq (1-\eta)^x, x\in [0,1]\)</span>以及<span class="math inline">\(1-\eta x \geq (1+\eta)^x, x \in [-1,0]\)</span></p>
