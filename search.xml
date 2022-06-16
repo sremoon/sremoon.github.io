@@ -4211,7 +4211,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <ul>
 <li>对<span class="math inline">\(d-\)</span>正则图的分析</li>
 </ul>
-<p>在<span class="math inline">\(d-\)</span>正则图中，<span class="math inline">\(\lambda_2(AD^{-1}) &lt; 1\)</span>描述了图的连通性，<span class="math inline">\(\lambda_{n(AD^{-1})} &gt; -1\)</span>描述了图的非周期性</p>
+<p>在<span class="math inline">\(d-\)</span>正则图中，<span class="math inline">\(\lambda_2(AD^{-1}) &lt; 1\)</span>描述了图的连通性，<span class="math inline">\(\lambda_{n}(AD^{-1}) &gt; -1\)</span>描述了图的非周期性</p>
 <p>根据这个思路，我们定义<span class="math inline">\(\lambda = \min\{1 - \lambda_2, 1 - |\lambda_n|\}\)</span>为谱间隔</p>
 <blockquote>
 <p>随机游走的<span class="math inline">\(\epsilon-\)</span>混合时间最多为<span class="math inline">\(\frac{1}{\lambda} \log (n / \epsilon)\)</span></p>
@@ -4247,7 +4247,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <p>首先，我们证明<span class="math inline">\(L \phi \perp 1\)</span>，由于<span class="math inline">\(1\)</span>在<span class="math inline">\(L\)</span>的零空间中，这个事实不难证明</p>
 <p>反之，令<span class="math inline">\(\phi = L^{\ddagger} b\)</span>，其中<span class="math inline">\(L^{\ddagger} = \sum_{i \geq 2} \lambda_i^{-1} v_iv_i^{T}\)</span></p>
 <hr />
-<p>根据上述知识，<span class="math inline">\(L \phi = b\)</span>的全体解集形如<span class="math inline">\(\{L^{\ddagger b} + c\mathbb{1}: c\in R\}\)</span></p>
+<p>根据上述知识，<span class="math inline">\(L \phi = b\)</span>的全体解集形如<span class="math inline">\(\{L^{\ddagger} b + c\mathbb{1}: c\in R\}\)</span></p>
 <p>在固定某个点的电势后，将有唯一的解</p>
 <ul>
 <li>等效电阻</li>
