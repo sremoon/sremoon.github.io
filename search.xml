@@ -4752,4 +4752,35 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
         <category>diary</category>
       </categories>
   </entry>
+  <entry>
+    <title>群表示论</title>
+    <url>/2022/05/group-representation/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="群表示">群表示</h3>
+<ul>
+<li>一个群表示包括 <span class="math inline">\((V, \rho)\)</span>，其中<span class="math inline">\(V\)</span>是一个线性空间，而<span class="math inline">\(\rho:G \to GL(V)\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(V\)</span>上的一般线性群的群同态</li>
+</ul>
+<p>大致就是用矩阵来代替群里面的元素，注意不是群同构</p>
+<p>比如：<span class="math inline">\(\rho(g) = I\)</span>是一个平凡的群表示</p>
+<ul>
+<li><p>群表示的同态：对于两个群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\((V&#39;, \rho&#39;)\)</span>，称<span class="math inline">\(T\)</span>为同态映射，当且仅当</p>
+<ol type="1">
+<li><p><span class="math inline">\(T\)</span>是一个<span class="math inline">\(V \to V&#39;\)</span>的线性映射</p></li>
+<li><p><span class="math inline">\(T\)</span>满足<span class="math inline">\(T \circ \rho(g) = \rho&#39;(g) \circ T\)</span></p></li>
+</ol></li>
+</ul>
+<p>这个(2)条件可能比较令人困惑，我们作一个解释：不妨设原来的映射关系为<span class="math inline">\(v \to \rho(g)v\)</span></p>
+<p>那么，在作用<span class="math inline">\(T\)</span>之后，我们希望作用之后保持上述映射关系，即<span class="math inline">\(Tv \to T\rho(g)v\)</span></p>
+<p>并且希望作用之后对应的映射由群的同一元素控制，即希望<span class="math inline">\(T\rho(g)v = \rho&#39;(g)Tv\)</span>，即<span class="math inline">\(T\rho(g) = \rho&#39;(g)T\)</span></p>
+<hr />
+<p>和抽象代数中类似，当<span class="math inline">\(T\)</span>可逆时，我们称<span class="math inline">\(T\)</span>是一个同构映射</p>
+<p>占位</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>logic</tag>
+      </tags>
+  </entry>
 </search>
