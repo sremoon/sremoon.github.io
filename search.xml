@@ -199,6 +199,350 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
+    <title>抽象代数3</title>
+    <url>/2022/01/abstract-algebra-3/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="域">域</h2>
+<h3 id="week14">week14</h3>
+<h4 id="特征">特征</h4>
+<blockquote>
+<p>记<span class="math inline">\(1\)</span>为域<span class="math inline">\(F\)</span>中的乘法单位元，考虑其在<span class="math inline">\(F\)</span>作为加法群的阶<span class="math inline">\(n\)</span></p>
+<p>如果<span class="math inline">\(n\)</span>有限，那么记<span class="math inline">\(ch(F) = n\)</span>，称为域<span class="math inline">\(F\)</span>的特征</p>
+<p>如果<span class="math inline">\(n = \infty\)</span>，那么记<span class="math inline">\(ch(F)=0\)</span></p>
+</blockquote>
+<ul>
+<li><span class="math inline">\(ch(Q)=ch(C)=0\)</span></li>
+<li>对于素数<span class="math inline">\(p\)</span>，有<span class="math inline">\(ch(Z/pZ)=p\)</span></li>
+</ul>
+<p>对于域中的非零元<span class="math inline">\(a\)</span>，当且仅当<span class="math inline">\(n1 = 0\)</span>时，有<span class="math inline">\(na = 0\)</span>（这里都是数乘，不是乘法），因此<span class="math inline">\(a\)</span>和<span class="math inline">\(1\)</span>在加法群中的阶数相同</p>
+<p>根据上面这一条中，再注意到<span class="math inline">\(1 \neq 0\)</span>，因此<span class="math inline">\(ch(F)&gt;1\)</span>，我们可以知道</p>
+<ul>
+<li>当<span class="math inline">\(ch(F) \neq 0\)</span>时，<span class="math inline">\(ch(F)\)</span>将是一个素数</li>
+</ul>
+<h4 id="子域">子域</h4>
+<blockquote>
+<p>如果<span class="math inline">\(E \subseteq F\)</span>按<span class="math inline">\(F\)</span>中的<span class="math inline">\(+\)</span>，<span class="math inline">\(*\)</span>构成域，那么，</p>
+<p>称<span class="math inline">\(E\)</span>为<span class="math inline">\(F\)</span>的<strong>子域</strong>，<span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>的<strong>扩域</strong>，用<span class="math inline">\(F/E\)</span>表示这样的域扩张</p>
+</blockquote>
+<p>根据群的性质，我们不难知道<span class="math inline">\(ch(E)=ch(F)\)</span></p>
+<h4 id="最小子域">最小子域</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为域，<span class="math inline">\(ch(F)\)</span>为素数</p>
+<p>则<span class="math inline">\(E=\{me:m\in Z\} = \{0,e,2e,...,(p-1)e\}\)</span>为最小子域，且<span class="math inline">\(E \cong Z/pZ\)</span></p>
+</blockquote>
+<ul>
+<li>提醒：域<span class="math inline">\(F\)</span>的乘法群<span class="math inline">\(F/\{0\}\)</span>的有限子群为循环群</li>
+</ul>
+<h4 id="域中的恒等式">域中的恒等式</h4>
+<p>如果域<span class="math inline">\(F\)</span>中恰好有<span class="math inline">\(q\)</span>个元，则称<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域</p>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，那么</p>
+<p><span class="math display">\[\prod_{a \in F^* = F/\{0\}} (x-a) = x^{q-1}-1\]</span></p>
+</blockquote>
+<p>两边作差后为至多<span class="math inline">\(q-2\)</span>次多项式，但是有<span class="math inline">\(q-1\)</span>个根（域中的非零元），因此作差后应该为0</p>
+<blockquote>
+<p>设<span class="math inline">\(ch(F)=p\)</span>，那么对<span class="math inline">\(a_1,...,a_n \in F, m \in N\)</span>，有</p>
+<p><span class="math display">\[(a_1+...+a_n)^{p^m} = a_1^{p^m} + ... + a_n^{p^m}\]</span></p>
+</blockquote>
+<p>先证明<span class="math inline">\((a+b)^p = a^p+b^p\)</span>，这一点利用二项式定理以及<span class="math inline">\(px=0, \forall x \in F\)</span>，然后对<span class="math inline">\(n,m\)</span>依次归纳</p>
+<h4 id="线性空间">线性空间</h4>
+<blockquote>
+<p>称<span class="math inline">\(V\)</span>为域<span class="math inline">\(F\)</span>上的线性空间，如果</p>
+<ol type="1">
+<li><p><span class="math inline">\(V\)</span>按照加法构成Abel群</p></li>
+<li><p>有数乘运算，即<span class="math inline">\(\forall a \in F, x \in V\)</span>，定义<span class="math inline">\(ax\)</span>为数乘，要求</p></li>
+</ol>
+<ul>
+<li><span class="math inline">\(ax\in V\)</span>，<span class="math inline">\(1x = x\)</span>，<span class="math inline">\(abx=(ab)x\)</span>，<span class="math inline">\(a(x+y)=ax+ay\)</span>，<span class="math inline">\((a+b)x=ax+bx\)</span></li>
+</ul>
+</blockquote>
+<h4 id="域扩张">域扩张</h4>
+<p>当<span class="math inline">\(F/E\)</span>为域扩张时，定义数乘为<span class="math inline">\(F\)</span>中的乘法，那么<span class="math inline">\(F\)</span>形成<span class="math inline">\(E\)</span>上的线性空间（验证线性空间的那几条定义即可）</p>
+<p>该线性空间的维数，称为域扩张的次数，记为<span class="math inline">\([F:E]\)</span></p>
+<ul>
+<li><p>设<span class="math inline">\(L/M\)</span>,<span class="math inline">\(M/K\)</span>为域扩张，并且<span class="math inline">\([L:M], [M:K]\)</span>有限，那么<span class="math inline">\([L:K]=[L:M][M:K]\)</span></p>
+<ul>
+<li>要证明这一点，取<span class="math inline">\(L/M, M/K\)</span>的一组基<span class="math inline">\(\{\alpha\}, \{\beta\}\)</span>，证明<span class="math inline">\(\{\alpha \beta\}\)</span>为<span class="math inline">\(L/K\)</span>的一组基</li>
+</ul></li>
+<li><p>一些例子：<span class="math inline">\([C:Q]=2\)</span></p>
+<p>设<span class="math inline">\(F=\{a+b\sqrt{d}:a, b\in Q\}\)</span>，则<span class="math inline">\([F:Q]=2\)</span>，称为二次域</p></li>
+</ul>
+<h4 id="最小生成的子环子域">最小生成的子环/子域</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\emptyset \neq X \subseteq L\)</span>，那么</p>
+<p><span class="math inline">\(K[X] = \bigcap_{R \leq L, R \subseteq K\cup X} R\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子环，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子环，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩环</p>
+<p><span class="math inline">\(K(X)=\bigcap_{K \leq F \leq L, F \subseteq X}F\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子域，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子域，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩域</p>
+</blockquote>
+<p>当<span class="math inline">\(X=\{a_1,...,a_n\}\)</span>时，也写<span class="math inline">\(K[X]=K[a_1,...,a_n]\)</span>，<span class="math inline">\(K(X)=K(a_1,...,a_n)\)</span></p>
+<p>特别的，<span class="math inline">\(K[a_1,...,a_n]\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式，<span class="math inline">\(K(a_1,...,a_n)\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式的分式，称为有理函数</p>
+<h4 id="单扩张">单扩张</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，如果存在<span class="math inline">\(a \in L\)</span>，使得<span class="math inline">\(K(a) = L\)</span>，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(K\)</span>的单扩张</p>
+</blockquote>
+<h3 id="week15">week15</h3>
+<h4 id="代数元">代数元</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，如果有非零多项式<span class="math inline">\(f(x) \in K[x]\)</span>，使得<span class="math inline">\(f(\alpha) = 0\)</span>，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元，否则称<span class="math inline">\(\alpha\)</span>为超越元</p>
+</blockquote>
+<ul>
+<li>如果<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(Q\)</span>上的代数元，则称其为代数数，否则，称其为超越数</li>
+<li>如果<span class="math inline">\(\alpha\)</span>是首一的<span class="math inline">\(f(x) \in Z[x]\)</span>的根，则称<span class="math inline">\(\alpha\)</span>为代数整数（比如<span class="math inline">\(x^2 = 3\)</span>的根）</li>
+<li>有理数一定是代数数</li>
+</ul>
+<p>当把代数整数限制在有理数上时，我们有</p>
+<blockquote>
+<p>有理数中的代数整数只有整数</p>
+</blockquote>
+<p>“<span class="math inline">\(\Leftarrow\)</span>”：显然</p>
+<p>"<span class="math inline">\(\Rightarrow\)</span>"：如果<span class="math inline">\(r = \frac{a}{b}, (a, b) = 1\)</span>，满足<span class="math inline">\(f(r) = \frac{a^n}{b^n} + a_1 \frac{a^{n-1}}{b^{n-1}} + ... + a_n = 0\)</span></p>
+<p>那么<span class="math inline">\(a^n + a_1ba^{n-1} + ... + b^n a_b = 0\)</span>，因此<span class="math inline">\(b \mid a^n\)</span>，但是<span class="math inline">\((a, b) = 1\)</span>，于是<span class="math inline">\(b = 1\)</span></p>
+<h4 id="极小多项式">极小多项式</h4>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的代数元，那么<span class="math inline">\(I = \{g(x) \in K[x] \mid g(\alpha) = 0\}\)</span>是<span class="math inline">\(K[x]\)</span>的理想</p>
+<p>注意到<span class="math inline">\(K\)</span>是一个域，因此<span class="math inline">\(K[x]\)</span>是一个Euclid整环，这也就是说存在<span class="math inline">\(f(x)\)</span>使得<span class="math inline">\(I = (f(x))\)</span></p>
+<p>我们称<span class="math inline">\(f(x)\)</span>为<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式</p>
+<ul>
+<li><span class="math inline">\(f(x)\)</span>是<span class="math inline">\(K[x]\)</span>的不可约元</li>
+</ul>
+<h4 id="域扩张的次数">域扩张的次数</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的<span class="math inline">\(n\)</span>次代数元（这个次数是指极小多项式的次数），那么</p>
+<ol type="1">
+<li><p><span class="math inline">\(K(\alpha) = K[\alpha]\)</span>，并且<span class="math inline">\([K(\alpha) : K] = n\)</span>，对应的线性空间的一组基为<span class="math inline">\(\alpha^0, \alpha^1, ..., \alpha^{n-1}\)</span></p></li>
+<li><p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span>，那么<span class="math inline">\(K(\alpha) \cong K[x] / (f(x))\)</span></p></li>
+</ol>
+</blockquote>
+<ol type="1">
+<li>设<span class="math inline">\(g(x) \in K[x]\)</span>，且<span class="math inline">\(g(\alpha) \neq 0\)</span>，我们证明<span class="math inline">\(g(\alpha)\)</span>存在逆元</li>
+</ol>
+<p>由于<span class="math inline">\(f(\alpha)\)</span>是极小多项式（为不可约元），因此<span class="math inline">\((f(x), g(x))=1\)</span>，那么存在<span class="math inline">\(u, v\)</span>使得<span class="math inline">\(uf + gv=1\)</span>，代入<span class="math inline">\(\alpha\)</span>，得到<span class="math inline">\(g(\alpha) v(\alpha) = 1\)</span>，这可以说明<span class="math inline">\(K(\alpha) = K[\alpha]\)</span></p>
+<p>下面，我们考虑证明<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>是一组基，通过取模的方式，其足够表出<span class="math inline">\(K(\alpha)\)</span>中的所有元素，线性无关则可以根据极小多项式的性质来证明</p>
+<ol start="2" type="1">
+<li>设<span class="math inline">\(\sigma : K[x] \to K(\alpha)\)</span>，<span class="math inline">\(\sigma(f(x)) = f(\alpha)\)</span>，这是一个满同态，同态核为<span class="math inline">\((f(x))\)</span></li>
+</ol>
+<ul>
+<li><span class="math inline">\(R[i] = C \cong R[x]/(x^2 + 1)\)</span>，此时<span class="math inline">\(i\)</span>可以看作是取模之后的<span class="math inline">\(x\)</span></li>
+</ul>
+<p>考虑上述定理的“反面”</p>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>不可约，那么存在<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，使得存在<span class="math inline">\(\alpha \in L\)</span>有<span class="math inline">\(K(\alpha) = L\)</span>，并且<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span></p>
+</blockquote>
+<ul>
+<li><p><span class="math inline">\(F = K[x] / (f(x))\)</span>构成一个域（不可约元的理想为极大理想），在这个域中，把<span class="math inline">\(\bar{x}=x + r(x)f(x), r(x) \in K[x]\)</span>“看作”<span class="math inline">\(\alpha\)</span>，那么<span class="math inline">\(\alpha\)</span>对应的极小多项式自然为<span class="math inline">\(f(x)\)</span></p>
+<p>这里的“看作”实际上就是一堆代换，不难感性理解</p></li>
+</ul>
+<h4 id="有限扩张">有限扩张</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\([L:K]\)</span>有穷当且仅当存在有限个<span class="math inline">\(K\)</span>上的代数元<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得<span class="math inline">\(K(\alpha_1, ..., \alpha_n) = L\)</span></p>
+</blockquote>
+<p>必要性：取<span class="math inline">\(L/K\)</span>的一组基<span class="math inline">\(\alpha_1, ..., \alpha_n\)</span>，那么<span class="math inline">\(L \subseteq K(\alpha_1, ..., \alpha_n) \subseteq L\)</span>，于是<span class="math inline">\(L=K(\alpha_1,...,\alpha_n)\)</span>，因为<span class="math inline">\([L:K]\)</span>有限，因此每个<span class="math inline">\(\alpha_i\)</span>都存在一个极小多项式</p>
+<p>充分性：设<span class="math inline">\(K_0 = K, K_i = K_{i-1}(\alpha_i)\)</span>，所有的<span class="math inline">\(\alpha_i\)</span>作为<span class="math inline">\(K\)</span>上的代数元，一定也是<span class="math inline">\(K_{i-1}\)</span>上的代数元，从而<span class="math inline">\([L:K] = \prod_{i=1}^n [K_i : K_{i-1}] &lt; \infty\)</span></p>
+<h4 id="代数扩张">代数扩张</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/M, M/K\)</span>为域的代数扩张，那么<span class="math inline">\(L/K\)</span>为域的代数扩张</p>
+</blockquote>
+<p>证明任给<span class="math inline">\(\alpha \in L\)</span>，证明<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
+<p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(M\)</span>中的极小多项式为<span class="math inline">\(f(x)=x^n + a_1x^{n-1} + ... + a_n\)</span>，注意到<span class="math inline">\(a_1,...,a_n\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
+<p>那么<span class="math inline">\([K(a_1, ..., a_n, \alpha) : K] = [K(a_1,...,\alpha):K(a_1,...,a_n)]*[K(a_1,...,a_n):K] &lt; \infty\)</span></p>
+<p>注意到<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K(a_1, ..., a_n)\)</span>上的代数元，上式成立，由于<span class="math inline">\(\alpha\)</span>在扩张后的域中，因此<span class="math inline">\(\alpha\)</span>为代数元</p>
+<h4 id="代数闭包">代数闭包</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\(\overline{K} = \{a \in L : \alpha \text{为K的代数元}\}\)</span>为<span class="math inline">\(L\)</span>的子域，并且<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span></p>
+</blockquote>
+<ul>
+<li><p>我们给出一个引理：设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，则<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元的充要条件为存在不全为<span class="math inline">\(0\)</span>的<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得令<span class="math inline">\(V = \sum K\alpha_i\)</span>时，有<span class="math inline">\(\alpha V \subseteq V\)</span></p>
+<p>充分性：取<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>为系数即可</p>
+<p>必要性：不妨设<span class="math inline">\(\alpha \alpha_i = \sum_{j=1}^n a_{ij} \alpha_j\)</span>，那么<span class="math inline">\(\alpha\)</span>时特征多项式<span class="math inline">\(|\lambda I - A| = 0\)</span>的根，其中<span class="math inline">\(A = (a_{ij})\)</span></p></li>
+</ul>
+<p>利用引理，证明对加法和乘法封闭时，取<span class="math inline">\(\alpha, \beta\)</span>的极小多项式<span class="math inline">\(f, g\)</span>的次数为<span class="math inline">\(n, m\)</span>，令<span class="math inline">\(V=\sum k_{ij}\alpha^i \beta^j\)</span></p>
+<p>证明<span class="math inline">\((\alpha \pm \beta) V \subseteq V\)</span>，<span class="math inline">\(\alpha \beta V \subseteq V\)</span>即可，逆元的证明是平凡的</p>
+<p>下面考虑证明<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span>，设<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(\overline{K}\)</span>上的代数元，设其极小多项式为<span class="math inline">\(f(x)=x^n+a_1x^{n-1}+...+a_n\)</span></p>
+<p>由于系数都在<span class="math inline">\(K(a_1,...,a_n)\)</span>中，因此<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(K(a_1,...,a_n)\)</span>上的代数元，那么类似前面的分析，有<span class="math inline">\([K(a_1,...,a_n, \alpha):K]&lt;\infty\)</span>，从而<span class="math inline">\(\alpha \in \overline{K}\)</span></p>
+<h4 id="代数闭域">代数闭域</h4>
+<blockquote>
+<p>如果<span class="math inline">\(F = \overline{F}\)</span>，那么称<span class="math inline">\(F\)</span>为代数闭域</p>
+</blockquote>
+<p>代数闭域中任何非常数多项式可以分解为一次多项式的乘积</p>
+<ul>
+<li>复数域<span class="math inline">\(C\)</span>，全体代数数构成的域<span class="math inline">\(\overline{Q}\)</span>都是代数闭域</li>
+</ul>
+<h4 id="有限域">有限域</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为有限域，则<span class="math inline">\(|F|\)</span>为素数幂次</p>
+</blockquote>
+<p>设<span class="math inline">\(F\)</span>为有限域，不难知道<span class="math inline">\(ch(F)\)</span>为素数，设<span class="math inline">\(E = \{0, e, ..., (p-1)e\}\)</span>为<span class="math inline">\(p\)</span>元域，而<span class="math inline">\([F:E]\)</span>为有限扩张，设其为<span class="math inline">\(n\)</span>，那么有<span class="math inline">\(|F|=|E|^n = p^n\)</span></p>
+<h4 id="形式导数">形式导数</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为域，对于<span class="math inline">\(P(x) = \sum_{i=0}^k a_i x^i \in F[x]\)</span>，定义其形式导数为$P'(x) = _{i=1}^k ia_ix^{i-1} $</p>
+</blockquote>
+<ul>
+<li><span class="math inline">\((P(x)Q(x))&#39;=P(x)Q&#39;(x)+P&#39;(x)Q(x)\)</span></li>
+</ul>
+<p>我们将通过这个玩意来寻找有限域</p>
+<ul>
+<li><p>引理：设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则没有非常数多项式<span class="math inline">\(f(x) \in F[x]\)</span>，使得<span class="math inline">\(f(x)^2 \mid x^{nq}-x\)</span></p>
+<p>如果<span class="math inline">\(x^{nq}-x=f(x)^2g(x)\)</span>，求导之后有<span class="math inline">\((nqe)x^{nq-1}-e=f(x)^2g&#39;(x)+2f(x)f&#39;(x)g(x)\)</span></p>
+<p>注意到特征为<span class="math inline">\(q\)</span>的因子，因此<span class="math inline">\((nqe)x^{nq-1} = 0\)</span>，那么<span class="math inline">\(f(x)\)</span>整除右边，自然整除左边，得到<span class="math inline">\(f(x) \mid e\)</span></p></li>
+</ul>
+<h3 id="week16">week16</h3>
+<h4 id="有限域的构造">有限域的构造</h4>
+<blockquote>
+<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则<span class="math inline">\(x^{q^n} - x\)</span>是<span class="math inline">\(F[x]\)</span>中次数整除<span class="math inline">\(n\)</span>的所有首一不可约多项式的乘积</p>
+</blockquote>
+<p>要证明这个引理，我们证明下面三个性质，不过每个证明都比较繁琐...</p>
+<ul>
+<li><span class="math inline">\(x^{q^n} - x\)</span>可以分解为首一不可约多项式</li>
+<li>首一不可约多项式不可能在<span class="math inline">\(x^{q^n} - x\)</span>中出现两次（使用上周用形式导数相关的引理）</li>
+<li>所有的不可约多项式是其因子</li>
+</ul>
+<p>让我们举一些例子：<span class="math inline">\(x^{2^2} - x = x(x-1)(x^2 + x + 1)\)</span></p>
+<p><span class="math inline">\(x^{3^2} - x = x(x-1)(x+1)(x^2 - 1)(x^2 + x + 2)(x^2 + x - 2)\)</span></p>
+<p>通过上述引理，我们可以证明</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>为有限域，则<span class="math inline">\(E[x]\)</span>中一定存在首一<span class="math inline">\(n\)</span>次不可约多项式</p>
+</blockquote>
+<p>对比上一个定理中的系数，设<span class="math inline">\(N_d\)</span>为首一<span class="math inline">\(d\)</span>次不可约多项式，那么有<span class="math inline">\(q^n = \sum_{d | n} dN_d\)</span></p>
+<p>一个方法是先证明<span class="math inline">\(d N_d \leq q^n - 1\)</span>，再进行放缩<span class="math inline">\(\sum_{d | n} d Nd &lt; \sum_{d=1}^n d N_d\)</span>后证明<span class="math inline">\(N_n \neq 0\)</span></p>
+<h4 id="有限域的存在性">有限域的存在性</h4>
+<blockquote>
+<p>存在有限<span class="math inline">\(q\)</span>元域的充要条件为存在素数<span class="math inline">\(p\)</span>和正整数<span class="math inline">\(n\)</span>，使得<span class="math inline">\(q = p^n\)</span></p>
+</blockquote>
+<p>我们已经证明过充分性，对于必要性，我们在<span class="math inline">\(E = Z / pZ\)</span>中取首一<span class="math inline">\(n\)</span>次不可约多项式<span class="math inline">\(f(x)\)</span>，</p>
+<p>那么<span class="math inline">\(E[x] / (f(x))\)</span>就是一个<span class="math inline">\(p^n\)</span>元域</p>
+<blockquote>
+<p>任何两个有限<span class="math inline">\(q\)</span>元域同构，我们不妨记其为<span class="math inline">\(\mathbf{F}_q\)</span></p>
+</blockquote>
+<h4 id="分裂域">分裂域</h4>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果对<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(L[x]\)</span>可分解为一次式的乘积，但对于<span class="math inline">\(L\)</span>上的子域都没有这个性质，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域</p>
+</blockquote>
+<p>我们可以想象，我们把<span class="math inline">\(f(x)\)</span>的所有根添入<span class="math inline">\(K\)</span>之后，新的域应该可以分解为一次式的乘积</p>
+<p>实际上，如果<span class="math inline">\(f(x) = (x-a_1)^{r_1}(x-a_2)^{r_2}...(x-a_n)^{r_n}\)</span>（所有的<span class="math inline">\(a_i\)</span>两两不同），那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(K(a_1, ..., a_n)\)</span></p>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>非常数多项式，那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域存在</p>
+</blockquote>
+<ul>
+<li>我们把<span class="math inline">\(f(x)\)</span>写作不可约多项式的乘积，比如<span class="math inline">\(f(x) = \prod p_i(x)\)</span>，我们考虑对<span class="math inline">\(p_1(x)\)</span>进行讨论，存在扩域<span class="math inline">\(K_1 = K(\alpha_1)\)</span>，并且<span class="math inline">\(\alpha_1\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(p_1(x)\)</span>，那么<span class="math inline">\(f(x) = (x - \alpha_1)f_1(x)\)</span>，此时<span class="math inline">\(f_1(x) \in K_1[x]\)</span>，继续对<span class="math inline">\(f_1(x)\)</span>进行分解，我们就能得到结论</li>
+</ul>
+<h4 id="可分元">可分元</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，如果<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式（在其分裂域中）没有重根，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的可分元</p>
+</blockquote>
+<p>这个定义细想会有点奇怪，这是因为我们没有证明一个性质：对于确定的<span class="math inline">\(f(x)\)</span>的任何的分裂域，<span class="math inline">\(f(x)\)</span>在这些分裂域上根的重数在同构的意义下是相等的</p>
+<p>对于可分元，其有一个性质</p>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，那么<span class="math inline">\(\alpha \in L\)</span>为可分元，当且仅当<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>的导数<span class="math inline">\(f&#39;(x)\)</span>非零</p>
+</blockquote>
+<ul>
+<li><p>如果<span class="math inline">\(\alpha\)</span>为可分元，设<span class="math inline">\(f(x) = \prod(x - a_i)\)</span>，那么<span class="math inline">\(f&#39;(x) = \sum_i \prod_{j \neq i} (x-a_j)\)</span>，于是<span class="math inline">\(f&#39;(a_1) = \prod_{j\neq 1} (a_1-a_j) \neq 0\)</span></p>
+<p>反之，如果<span class="math inline">\(f&#39;(x)\)</span>非零，那么<span class="math inline">\((f&#39;(x), f(x)) = 1\)</span>（<span class="math inline">\(f(x)\)</span>不可约），那么存在<span class="math inline">\(u(x)f(x)+v(x)f&#39;(x)=1\)</span>成立，但对于重根<span class="math inline">\(\beta\)</span>而言，有<span class="math inline">\(u(\beta)f(\beta)+v(\beta)f&#39;(\beta)=0\)</span>，矛盾</p></li>
+<li><p>然后我们介绍一下书上的证明，感觉涉及到了不同的角度：</p>
+<ul>
+<li><p>设<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x) \in K[x]\)</span>在其分裂域<span class="math inline">\(L\)</span>上的<span class="math inline">\(k\)</span>重根，那么<span class="math inline">\(f(x) = (x-a)^k g(x), g(a) \neq 0\)</span></p>
+<p>此时<span class="math inline">\(f&#39;(x) = (x-a)^{k-1}(kg(x)+(x-a)g&#39;(x))\)</span></p>
+<p>如果<span class="math inline">\(ch(K) \not \mid k\)</span>，则<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的<span class="math inline">\(k-1\)</span>重根</p>
+<p>而如果<span class="math inline">\(ch(K) \mid k\)</span>，则有<span class="math inline">\(f&#39;(x)=(x-a)^kg(x)\)</span>，<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的至少<span class="math inline">\(k\)</span>重根</p></li>
+</ul>
+<p>从上面的讨论，我们知道，（1）<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x)\)</span>的单根的一个充要条件是<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的零根（2）<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x)\)</span>的重根的充要条件是<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的根</p>
+<p>因此，<span class="math inline">\(f(x)\)</span>要有重根，必然地需要有<span class="math inline">\(\deg (\gcd(f(x), f&#39;(x))) &gt; 1\)</span>，再利用<span class="math inline">\(f(x)\)</span>不可约就不难证明了</p></li>
+</ul>
+<p>有了可分元之后，我们定义可分扩张</p>
+<blockquote>
+<p>如果<span class="math inline">\(\forall \alpha \in L\)</span>，<span class="math inline">\(\alpha\)</span>都是<span class="math inline">\(K\)</span>上的可分元，则称<span class="math inline">\(L/K\)</span>为可分扩张</p>
+</blockquote>
+<p>对于可分扩张，我们也有一个性质</p>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为代数扩张，若<span class="math inline">\(ch(K)=0\)</span>或者<span class="math inline">\(|K|&lt;\infty\)</span>，则<span class="math inline">\(L/K\)</span>为可分扩张</p>
+</blockquote>
+<p><span class="math inline">\(ch(K)=0\)</span>时，极小多项式的首项非0</p>
+<p><span class="math inline">\(|K|&lt;\infty\)</span>时，极小多项式<span class="math inline">\(f(x) \mid x^{q^n} - x\)</span>，由于<span class="math inline">\((x^{q^n} - x)&#39; = -1\)</span>（注意到特征的性质），但有重根<span class="math inline">\(\beta\)</span>时，导数的取值为<span class="math inline">\(0\)</span>，矛盾</p>
+<h4 id="不可分的多项式">不可分的多项式</h4>
+<p>设不可约多项式<span class="math inline">\(f(x) \in K[x]\)</span>不可分，根据上面的讨论，必然有<span class="math inline">\(ch(K)\)</span>是一个素数<span class="math inline">\(p\)</span></p>
+<p>由于<span class="math inline">\(f(x)\)</span>不可分，那么有<span class="math inline">\(f&#39;(x)=0\)</span>，设<span class="math inline">\(f(x) = \sum a_ix^i\)</span>，则<span class="math inline">\(f&#39;(x) = \sum ia_i x^{i-1}\)</span>，于是<span class="math inline">\(ia_i = 0\)</span></p>
+<p>对<span class="math inline">\(ch(K) \not \mid i\)</span>的<span class="math inline">\(i\)</span>，必然有<span class="math inline">\(a_i = 0\)</span>，于是<span class="math inline">\(f(x) = g(x^p)\)</span>，<span class="math inline">\(g\)</span>不可约但是不能确定是否可分</p>
+<p>如果<span class="math inline">\(g\)</span>不可分，我们继续上述讨论，最终可以得到<span class="math inline">\(f(x) = h(x^{p^e})\)</span>，其中<span class="math inline">\(h\)</span>是一个可分多项式</p>
+<p>写<span class="math inline">\(h(x) = (x-a_1)...(x-a_n)\)</span>，那么<span class="math inline">\(f(x) = (x^{p^e} - a_1)...(x^{p^e}-a_n)\)</span>，对<span class="math inline">\(x^{p^e} - a_1 = 0\)</span>，设其根为<span class="math inline">\(b_1\)</span>，那么<span class="math inline">\((x^{p^e} - a_1) = (x^{p^e} - b_1^{p^e}) = (x-b_1)^{p^e}\)</span>，因此<span class="math inline">\(f(x) = \prod(x-b_i)^{p^e}\)</span>，每个根都将有相同的重数，并且重数形如素数的幂次</p>
+<h4 id="单扩张定理">单扩张定理</h4>
+<blockquote>
+<p>有限可分扩张为单扩张</p>
+</blockquote>
+<p>因为是有限扩张，故存在代数元<span class="math inline">\(a_1, ..., a_n\)</span>，使得<span class="math inline">\(L=K(a_1, ..., a_n)\)</span></p>
+<p>尝试利用可分扩张的性质证明，<span class="math inline">\(\forall a, b \in L, \exist c \in L, K(a, b) = K(c)\)</span></p>
+<h4 id="正规扩张">正规扩张</h4>
+<blockquote>
+<p>如果每个<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>都可以在<span class="math inline">\(L[x]\)</span>中分解为一次式的乘积，且不可约多项式<span class="math inline">\(f(x)\)</span>有一个零点在<span class="math inline">\(L\)</span>中时，其剩余的所有零点都在<span class="math inline">\(L\)</span>中时，称<span class="math inline">\(L/K\)</span>为正规扩张</p>
+</blockquote>
+<p>对于正规扩张，我们有</p>
+<blockquote>
+<p><span class="math inline">\(L/K\)</span>为有限正规扩张，当且仅当<span class="math inline">\(L\)</span>为某个<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域</p>
+</blockquote>
+<h4 id="商域">商域</h4>
+<p>对整环<span class="math inline">\(R\)</span>，我们在<span class="math inline">\(R \times R^*\)</span>上定义关系<span class="math inline">\(\sim\)</span>：<span class="math inline">\((a, b) \sim (c, d) \Leftrightarrow ad = bc\)</span></p>
+<p>不难验证，这是一个等价关系，记<span class="math inline">\((a, b)\)</span>按照上述关系形成的等价类为分数<span class="math inline">\(a/b\)</span></p>
+<blockquote>
+<p>令<span class="math inline">\(F = \{a/b:a \in R, b \in R^*\}\)</span>，定义<span class="math inline">\(\frac{a}{b} + \frac{c}{d} = \frac{ad+bc}{bd}\)</span>以及<span class="math inline">\(\frac{a}{b} * \frac{c}{d} = \frac{ac}{bd}\)</span>，不难验证，这种加法和乘法的定义是良定义的</p>
+<p>并且<span class="math inline">\(F\)</span>按照上述加法和乘法构成域，我们称其为整环<span class="math inline">\(R\)</span>的商域</p>
+</blockquote>
+<h2 id="galois理论">Galois理论</h2>
+<h3 id="last-week">last week</h3>
+<h4 id="galois群">Galois群</h4>
+<blockquote>
+<p>如果域扩张<span class="math inline">\(L/K\)</span>是有限可分正规扩张，则称其为<span class="math inline">\(K\)</span>的Galois扩张</p>
+<p>在其上定义Galois群：<span class="math inline">\(Gal(L/K) = \{\sigma \in Aut(L): \sigma|_K = I_K\}\)</span></p>
+</blockquote>
+<p>也就是说，在<span class="math inline">\(L\)</span>的自同构中，保持<span class="math inline">\(K\)</span>不变的群</p>
+<h4 id="不变域">不变域</h4>
+<blockquote>
+<p>对<span class="math inline">\(G \leq Aut(L)\)</span>，定义其不变域为<span class="math inline">\(Inv(G) = \{a \in L | \forall g \in G, g(a) = a\}\)</span></p>
+</blockquote>
+<p>不变域确实是一个域</p>
+<h4 id="galois群论基本定理">Galois群论基本定理</h4>
+<blockquote>
+<p>设<span class="math inline">\(L/K\)</span>为Galois扩张</p>
+<ul>
+<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，则<span class="math inline">\(L/M\)</span>为Galois扩张</p>
+<p>并且<span class="math inline">\(Gal(L/M) \leq Gal(L/K)\)</span>，<span class="math inline">\(|Gal(L/M)| = [L:M]\)</span>，<span class="math inline">\(Inv(Gal(L/M)) = M\)</span></p></li>
+<li><p>设<span class="math inline">\(H \leq Gal(L/K)\)</span>，那么设<span class="math inline">\(M = Inv(H)\)</span>，则<span class="math inline">\(K \leq M \leq L, Gal(L/M)=H\)</span></p>
+<p>也就是说，<span class="math inline">\(Gal(L/K)\)</span>的子群和<span class="math inline">\(L, K\)</span>的中间域之间存在一个一一对应的关系</p></li>
+<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，那么<span class="math inline">\(M/K\)</span>是正规扩张，当且仅当<span class="math inline">\(Gal(L/M) \lhd Gal(L/K)\)</span></p>
+<p>并且当<span class="math inline">\(M/K\)</span>是正规扩张时，<span class="math inline">\(Gal(L/K)/Gal(L/M) \cong Gal(M/K)\)</span></p></li>
+</ul>
+<p>上面这一条建立了正规扩张和正规子群之间的关系</p>
+</blockquote>
+<h4 id="根式可解">根式可解</h4>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果存在域的扩张链，<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，使得<span class="math inline">\(K_n\)</span>包含<span class="math inline">\(f(x)\)</span>的分裂域，并且这些扩张都是根式扩张，则称<span class="math inline">\(f(x)=0\)</span>在<span class="math inline">\(K\)</span>上根式可解</p>
+<p>根式扩张指的是，对于扩张<span class="math inline">\(L/K\)</span>，存在<span class="math inline">\(\alpha \in L\)</span>，使得<span class="math inline">\(L = K(\alpha)\)</span>且<span class="math inline">\(\alpha^n = K\)</span>（也就是说，每次添加一个元素的开根）</p>
+</blockquote>
+<p>对于根式扩张，我们由</p>
+<blockquote>
+<p>如果<span class="math inline">\(L/K\)</span>为根式扩张，那么<span class="math inline">\(Gal(L/K)\)</span>为Abel群</p>
+</blockquote>
+<p>有了上述定理之后，我们对根式可解进行进一步的考虑，将得到</p>
+<p>对<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，其等价于<span class="math inline">\(Gal(L/K) \rhd Gal(L/K_1) ... \rhd Gal(L/K_n) = \{e\}\)</span></p>
+<p>根据<span class="math inline">\(Gal(L/K_{i+1})/Gal(L/K_i) \cong Gal(K_{i+1}/K_i)\)</span>是Abel群，于是</p>
+<blockquote>
+<p><span class="math inline">\(f(x)=0\)</span>根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
+</blockquote>
+<h4 id="galois定理">Galois定理</h4>
+<p>对上面的讨论取一个特殊情况，我们将得到Galois定理，不妨就用这个定理作为这门课的结束吧</p>
+<blockquote>
+<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(f(x) = 0\)</span>在<span class="math inline">\(L\)</span>上根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
+</blockquote>
+<ul>
+<li><p>对于一般的<span class="math inline">\(n\)</span>次方程，<span class="math inline">\(f(x) = x^n + t_1x^{n-1} + ... + t_n = 0\)</span></p>
+<p>此时，将<span class="math inline">\(t_1, ..., t_n\)</span>看作字母变量，那么<span class="math inline">\(f(x) \in K=F[t_1, ..., t_n][x]\)</span>，设其在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(Gal(L/K) \cong S_n\)</span></p>
+<p>由于<span class="math inline">\(n \geq 5\)</span>时，<span class="math inline">\(S_n\)</span>不是可解群，因此，五次以上的方程没有通解</p></li>
+</ul>
+<p>Galois无愧于天才之名！</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>abstract algebra</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Btree</title>
     <url>/2021/07/Btree/</url>
     <content><![CDATA[<span id="more"></span>
@@ -966,6 +1310,81 @@ int main() &#123;
       </categories>
       <tags>
         <tag>abstract algebra</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>凸优化</title>
+    <url>/2021/12/convex-optimization/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="基础定义">基础定义</h3>
+<ul>
+<li><p>affine set ：包含所有元素的线性组合（<span class="math inline">\(\theta x_1 + (1-\theta)x_2 \in C, \forall \theta \in R\)</span>）</p>
+<ul>
+<li>对于任意集合<span class="math inline">\(S\)</span>，其所有元素的线性组合为包含<span class="math inline">\(S\)</span>的最小仿射集，记为<span class="math inline">\(\text{aff} S\)</span></li>
+</ul></li>
+<li><p>convex set ：包含所有元素的凸组合（<span class="math inline">\(\theta x_1 + (1-\theta)x_2 \in C, \forall \theta \in [0,1]\)</span>）</p>
+<ul>
+<li>对于任意集合<span class="math inline">\(S\)</span>，其所有元素的线性组合为包含<span class="math inline">\(S\)</span>的最小仿射集，记为<span class="math inline">\(\text{conv} S\)</span></li>
+</ul></li>
+<li><p>cone：包含所有元素的非负组合（<span class="math inline">\(\theta_1 x_1 + \theta_2 x_2 \in C, \forall \theta_1, \theta_2 \geq 0\)</span>）</p></li>
+<li><p>hyperplane：<span class="math inline">\(\{x | a^Tx = b\}\)</span>，halfspaces：<span class="math inline">\(\{x|a^Tx \leq b\}\)</span></p></li>
+<li><p>球体（包括范数球），椭球体，锥（含范数锥）都是凸集</p></li>
+</ul>
+<h3 id="保凸集凸性">保凸集凸性</h3>
+<ul>
+<li><p>相交：如果<span class="math inline">\(C_1, C_2\)</span>为凸集，那么<span class="math inline">\(C_1 \cap C_2\)</span>为凸集</p></li>
+<li><p>仿射变换及其逆变换：如果<span class="math inline">\(C\)</span>为凸集，<span class="math inline">\(f(x)=Ax+b\)</span>为仿射变换</p>
+<p>那么<span class="math inline">\(f(C) = \{f(x) | x \in C\}\)</span>和<span class="math inline">\(f^{-1}(C) = \{x|f(x) \in C\}\)</span>构成凸集</p>
+<ul>
+<li>注意到<span class="math inline">\(\theta f( x_1) + (1-\theta) f(x_2) = f(\theta x_1 + (1-\theta)x_2)\)</span>，因此<span class="math inline">\(f(C)\)</span>构成凸集</li>
+<li>对于<span class="math inline">\(f^{-1}\)</span>，等价于证明<span class="math inline">\(f(x_1) \in C, f(x_2) \in C \Rightarrow f(\theta x_1 + (1-\theta)x_2) \in C\)</span>，由上面的式子是显然的</li>
+</ul></li>
+<li><p>透视变换：记<span class="math inline">\(P : R^n \times R_{++} \to R^n\)</span>为<span class="math inline">\(P(x, t) = x/t\)</span></p>
+<p>那么，当<span class="math inline">\(C\)</span>为凸集时，<span class="math inline">\(P(C)\)</span>和<span class="math inline">\(P^{-1}(C)\)</span>为凸集</p>
+<ul>
+<li>按照定义去配凑即可，由于这并不是一个线性函数，因此在理解时可能由大问题</li>
+</ul></li>
+<li><p>线性分式函数：对于<span class="math inline">\(x\)</span>，定义<span class="math inline">\(f(x) = \frac{Ax + b}{c^T x + d}\)</span>，则对于凸集<span class="math inline">\(C\)</span>，<span class="math inline">\(f(C)\)</span>和<span class="math inline">\(f^{-1}(C)\)</span>都是凸集</p>
+<ul>
+<li>线性分式函数可以视为仿射变换和透视变换的复合</li>
+</ul></li>
+</ul>
+<h3 id="分离超平面定理">分离超平面定理</h3>
+<ul>
+<li>对于凸集<span class="math inline">\(C\)</span>和<span class="math inline">\(D\)</span>，如果<span class="math inline">\(C \cap D = \emptyset\)</span>，那么存在超平面<span class="math inline">\(\{x|a^Tx = b\}\)</span>，使得<span class="math inline">\(\forall x \in C, a^Tx \leq b\)</span>并且<span class="math inline">\(\forall x \in D, a^Tx \geq b\)</span>
+<ul>
+<li>证明的思路是构造性的，取<span class="math inline">\(C, D\)</span>上距离最小的两点<span class="math inline">\(c, d\)</span>，作垂直于直线<span class="math inline">\(cd\)</span>，过<span class="math inline">\(c, d\)</span>中点的平面</li>
+</ul></li>
+<li>对于凸集<span class="math inline">\(C\)</span>边界上的每一点<span class="math inline">\(x_0\)</span>，存在超平面，使得<span class="math inline">\(\forall x \in C, a^Tx \leq b\)</span>并且<span class="math inline">\(a^Tx_0 = b\)</span>成立
+<ul>
+<li>这个称为支撑超平面定理</li>
+<li>取凸集的内部<span class="math inline">\(\text{int} C\)</span>和<span class="math inline">\(\{x_0\}\)</span>，对他们运用分离超平面定理</li>
+</ul></li>
+</ul>
+<h3 id="凸函数">凸函数</h3>
+<ul>
+<li><p>设<span class="math inline">\(f : R^n \to R\)</span>为凸，当且仅当<span class="math inline">\(\text{dom} f\)</span>为凸，并且<span class="math inline">\(\forall x, y \in dom\;f, 0 \leq \theta \leq 1\)</span>，有<span class="math inline">\(f(\theta x + (1-\theta) y) \leq \theta f(x) + (1-\theta) f(y)\)</span></p></li>
+<li><p>第二定义：对于任意<span class="math inline">\(x \in dom\;f, v \in R^n\)</span>，<span class="math inline">\(g(t) = f(x + tv)\)</span>为凸函数</p>
+<p>（注意<span class="math inline">\(g\)</span>是一维的函数）</p></li>
+</ul>
+<p>根据上述两个定义，在研究高维时，先对一维情况入手，再使用第二定义将是不错的方法</p>
+<ul>
+<li><p>一阶条件：<span class="math inline">\(f\)</span>可微时，<span class="math inline">\(f\)</span>为凸函数当且仅当<span class="math inline">\(\forall x, y \in dom\;f\)</span>，有<span class="math inline">\(f(y) \geq f(x) + \nabla f(x)^T(y-x)\)</span></p>
+<p>一维情况下，左边推右边的证明是构造性的，右边推左边则是进行逼近</p>
+<p>多维证明一维就使用第二定义</p>
+<ul>
+<li>如果<span class="math inline">\(\nabla f(x_0) = 0\)</span>，那么根据一阶条件，有<span class="math inline">\(\forall y \in dom\;f, f(y) \geq f(x_0)\)</span></li>
+</ul></li>
+<li><p>二阶条件：<span class="math inline">\(f\)</span>二阶可微时，<span class="math inline">\(f\)</span>为凸函数当且仅当<span class="math inline">\(\nabla^2f(x) \geq 0\)</span></p></li>
+</ul>
+<h3 id="kkt条件">KKT条件</h3>
+<p>...前面的所有的知识都是为了推导这个条件，我先在这里给咕咕咕了</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>convex_optimization</tag>
       </tags>
   </entry>
   <entry>
@@ -1872,456 +2291,6 @@ int main() &#123;
       </tags>
   </entry>
   <entry>
-    <title>凸优化</title>
-    <url>/2021/12/convex-optimization/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="基础定义">基础定义</h3>
-<ul>
-<li><p>affine set ：包含所有元素的线性组合（<span class="math inline">\(\theta x_1 + (1-\theta)x_2 \in C, \forall \theta \in R\)</span>）</p>
-<ul>
-<li>对于任意集合<span class="math inline">\(S\)</span>，其所有元素的线性组合为包含<span class="math inline">\(S\)</span>的最小仿射集，记为<span class="math inline">\(\text{aff} S\)</span></li>
-</ul></li>
-<li><p>convex set ：包含所有元素的凸组合（<span class="math inline">\(\theta x_1 + (1-\theta)x_2 \in C, \forall \theta \in [0,1]\)</span>）</p>
-<ul>
-<li>对于任意集合<span class="math inline">\(S\)</span>，其所有元素的线性组合为包含<span class="math inline">\(S\)</span>的最小仿射集，记为<span class="math inline">\(\text{conv} S\)</span></li>
-</ul></li>
-<li><p>cone：包含所有元素的非负组合（<span class="math inline">\(\theta_1 x_1 + \theta_2 x_2 \in C, \forall \theta_1, \theta_2 \geq 0\)</span>）</p></li>
-<li><p>hyperplane：<span class="math inline">\(\{x | a^Tx = b\}\)</span>，halfspaces：<span class="math inline">\(\{x|a^Tx \leq b\}\)</span></p></li>
-<li><p>球体（包括范数球），椭球体，锥（含范数锥）都是凸集</p></li>
-</ul>
-<h3 id="保凸集凸性">保凸集凸性</h3>
-<ul>
-<li><p>相交：如果<span class="math inline">\(C_1, C_2\)</span>为凸集，那么<span class="math inline">\(C_1 \cap C_2\)</span>为凸集</p></li>
-<li><p>仿射变换及其逆变换：如果<span class="math inline">\(C\)</span>为凸集，<span class="math inline">\(f(x)=Ax+b\)</span>为仿射变换</p>
-<p>那么<span class="math inline">\(f(C) = \{f(x) | x \in C\}\)</span>和<span class="math inline">\(f^{-1}(C) = \{x|f(x) \in C\}\)</span>构成凸集</p>
-<ul>
-<li>注意到<span class="math inline">\(\theta f( x_1) + (1-\theta) f(x_2) = f(\theta x_1 + (1-\theta)x_2)\)</span>，因此<span class="math inline">\(f(C)\)</span>构成凸集</li>
-<li>对于<span class="math inline">\(f^{-1}\)</span>，等价于证明<span class="math inline">\(f(x_1) \in C, f(x_2) \in C \Rightarrow f(\theta x_1 + (1-\theta)x_2) \in C\)</span>，由上面的式子是显然的</li>
-</ul></li>
-<li><p>透视变换：记<span class="math inline">\(P : R^n \times R_{++} \to R^n\)</span>为<span class="math inline">\(P(x, t) = x/t\)</span></p>
-<p>那么，当<span class="math inline">\(C\)</span>为凸集时，<span class="math inline">\(P(C)\)</span>和<span class="math inline">\(P^{-1}(C)\)</span>为凸集</p>
-<ul>
-<li>按照定义去配凑即可，由于这并不是一个线性函数，因此在理解时可能由大问题</li>
-</ul></li>
-<li><p>线性分式函数：对于<span class="math inline">\(x\)</span>，定义<span class="math inline">\(f(x) = \frac{Ax + b}{c^T x + d}\)</span>，则对于凸集<span class="math inline">\(C\)</span>，<span class="math inline">\(f(C)\)</span>和<span class="math inline">\(f^{-1}(C)\)</span>都是凸集</p>
-<ul>
-<li>线性分式函数可以视为仿射变换和透视变换的复合</li>
-</ul></li>
-</ul>
-<h3 id="分离超平面定理">分离超平面定理</h3>
-<ul>
-<li>对于凸集<span class="math inline">\(C\)</span>和<span class="math inline">\(D\)</span>，如果<span class="math inline">\(C \cap D = \emptyset\)</span>，那么存在超平面<span class="math inline">\(\{x|a^Tx = b\}\)</span>，使得<span class="math inline">\(\forall x \in C, a^Tx \leq b\)</span>并且<span class="math inline">\(\forall x \in D, a^Tx \geq b\)</span>
-<ul>
-<li>证明的思路是构造性的，取<span class="math inline">\(C, D\)</span>上距离最小的两点<span class="math inline">\(c, d\)</span>，作垂直于直线<span class="math inline">\(cd\)</span>，过<span class="math inline">\(c, d\)</span>中点的平面</li>
-</ul></li>
-<li>对于凸集<span class="math inline">\(C\)</span>边界上的每一点<span class="math inline">\(x_0\)</span>，存在超平面，使得<span class="math inline">\(\forall x \in C, a^Tx \leq b\)</span>并且<span class="math inline">\(a^Tx_0 = b\)</span>成立
-<ul>
-<li>这个称为支撑超平面定理</li>
-<li>取凸集的内部<span class="math inline">\(\text{int} C\)</span>和<span class="math inline">\(\{x_0\}\)</span>，对他们运用分离超平面定理</li>
-</ul></li>
-</ul>
-<h3 id="凸函数">凸函数</h3>
-<ul>
-<li><p>设<span class="math inline">\(f : R^n \to R\)</span>为凸，当且仅当<span class="math inline">\(\text{dom} f\)</span>为凸，并且<span class="math inline">\(\forall x, y \in dom\;f, 0 \leq \theta \leq 1\)</span>，有<span class="math inline">\(f(\theta x + (1-\theta) y) \leq \theta f(x) + (1-\theta) f(y)\)</span></p></li>
-<li><p>第二定义：对于任意<span class="math inline">\(x \in dom\;f, v \in R^n\)</span>，<span class="math inline">\(g(t) = f(x + tv)\)</span>为凸函数</p>
-<p>（注意<span class="math inline">\(g\)</span>是一维的函数）</p></li>
-</ul>
-<p>根据上述两个定义，在研究高维时，先对一维情况入手，再使用第二定义将是不错的方法</p>
-<ul>
-<li><p>一阶条件：<span class="math inline">\(f\)</span>可微时，<span class="math inline">\(f\)</span>为凸函数当且仅当<span class="math inline">\(\forall x, y \in dom\;f\)</span>，有<span class="math inline">\(f(y) \geq f(x) + \nabla f(x)^T(y-x)\)</span></p>
-<p>一维情况下，左边推右边的证明是构造性的，右边推左边则是进行逼近</p>
-<p>多维证明一维就使用第二定义</p>
-<ul>
-<li>如果<span class="math inline">\(\nabla f(x_0) = 0\)</span>，那么根据一阶条件，有<span class="math inline">\(\forall y \in dom\;f, f(y) \geq f(x_0)\)</span></li>
-</ul></li>
-<li><p>二阶条件：<span class="math inline">\(f\)</span>二阶可微时，<span class="math inline">\(f\)</span>为凸函数当且仅当<span class="math inline">\(\nabla^2f(x) \geq 0\)</span></p></li>
-</ul>
-<h3 id="kkt条件">KKT条件</h3>
-<p>...前面的所有的知识都是为了推导这个条件，我先在这里给咕咕咕了</p>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>convex_optimization</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>抽象代数3</title>
-    <url>/2022/01/abstract-algebra-3/</url>
-    <content><![CDATA[<span id="more"></span>
-<h2 id="域">域</h2>
-<h3 id="week14">week14</h3>
-<h4 id="特征">特征</h4>
-<blockquote>
-<p>记<span class="math inline">\(1\)</span>为域<span class="math inline">\(F\)</span>中的乘法单位元，考虑其在<span class="math inline">\(F\)</span>作为加法群的阶<span class="math inline">\(n\)</span></p>
-<p>如果<span class="math inline">\(n\)</span>有限，那么记<span class="math inline">\(ch(F) = n\)</span>，称为域<span class="math inline">\(F\)</span>的特征</p>
-<p>如果<span class="math inline">\(n = \infty\)</span>，那么记<span class="math inline">\(ch(F)=0\)</span></p>
-</blockquote>
-<ul>
-<li><span class="math inline">\(ch(Q)=ch(C)=0\)</span></li>
-<li>对于素数<span class="math inline">\(p\)</span>，有<span class="math inline">\(ch(Z/pZ)=p\)</span></li>
-</ul>
-<p>对于域中的非零元<span class="math inline">\(a\)</span>，当且仅当<span class="math inline">\(n1 = 0\)</span>时，有<span class="math inline">\(na = 0\)</span>（这里都是数乘，不是乘法），因此<span class="math inline">\(a\)</span>和<span class="math inline">\(1\)</span>在加法群中的阶数相同</p>
-<p>根据上面这一条中，再注意到<span class="math inline">\(1 \neq 0\)</span>，因此<span class="math inline">\(ch(F)&gt;1\)</span>，我们可以知道</p>
-<ul>
-<li>当<span class="math inline">\(ch(F) \neq 0\)</span>时，<span class="math inline">\(ch(F)\)</span>将是一个素数</li>
-</ul>
-<h4 id="子域">子域</h4>
-<blockquote>
-<p>如果<span class="math inline">\(E \subseteq F\)</span>按<span class="math inline">\(F\)</span>中的<span class="math inline">\(+\)</span>，<span class="math inline">\(*\)</span>构成域，那么，</p>
-<p>称<span class="math inline">\(E\)</span>为<span class="math inline">\(F\)</span>的<strong>子域</strong>，<span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>的<strong>扩域</strong>，用<span class="math inline">\(F/E\)</span>表示这样的域扩张</p>
-</blockquote>
-<p>根据群的性质，我们不难知道<span class="math inline">\(ch(E)=ch(F)\)</span></p>
-<h4 id="最小子域">最小子域</h4>
-<blockquote>
-<p>设<span class="math inline">\(F\)</span>为域，<span class="math inline">\(ch(F)\)</span>为素数</p>
-<p>则<span class="math inline">\(E=\{me:m\in Z\} = \{0,e,2e,...,(p-1)e\}\)</span>为最小子域，且<span class="math inline">\(E \cong Z/pZ\)</span></p>
-</blockquote>
-<ul>
-<li>提醒：域<span class="math inline">\(F\)</span>的乘法群<span class="math inline">\(F/\{0\}\)</span>的有限子群为循环群</li>
-</ul>
-<h4 id="域中的恒等式">域中的恒等式</h4>
-<p>如果域<span class="math inline">\(F\)</span>中恰好有<span class="math inline">\(q\)</span>个元，则称<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域</p>
-<blockquote>
-<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，那么</p>
-<p><span class="math display">\[\prod_{a \in F^* = F/\{0\}} (x-a) = x^{q-1}-1\]</span></p>
-</blockquote>
-<p>两边作差后为至多<span class="math inline">\(q-2\)</span>次多项式，但是有<span class="math inline">\(q-1\)</span>个根（域中的非零元），因此作差后应该为0</p>
-<blockquote>
-<p>设<span class="math inline">\(ch(F)=p\)</span>，那么对<span class="math inline">\(a_1,...,a_n \in F, m \in N\)</span>，有</p>
-<p><span class="math display">\[(a_1+...+a_n)^{p^m} = a_1^{p^m} + ... + a_n^{p^m}\]</span></p>
-</blockquote>
-<p>先证明<span class="math inline">\((a+b)^p = a^p+b^p\)</span>，这一点利用二项式定理以及<span class="math inline">\(px=0, \forall x \in F\)</span>，然后对<span class="math inline">\(n,m\)</span>依次归纳</p>
-<h4 id="线性空间">线性空间</h4>
-<blockquote>
-<p>称<span class="math inline">\(V\)</span>为域<span class="math inline">\(F\)</span>上的线性空间，如果</p>
-<ol type="1">
-<li><p><span class="math inline">\(V\)</span>按照加法构成Abel群</p></li>
-<li><p>有数乘运算，即<span class="math inline">\(\forall a \in F, x \in V\)</span>，定义<span class="math inline">\(ax\)</span>为数乘，要求</p></li>
-</ol>
-<ul>
-<li><span class="math inline">\(ax\in V\)</span>，<span class="math inline">\(1x = x\)</span>，<span class="math inline">\(abx=(ab)x\)</span>，<span class="math inline">\(a(x+y)=ax+ay\)</span>，<span class="math inline">\((a+b)x=ax+bx\)</span></li>
-</ul>
-</blockquote>
-<h4 id="域扩张">域扩张</h4>
-<p>当<span class="math inline">\(F/E\)</span>为域扩张时，定义数乘为<span class="math inline">\(F\)</span>中的乘法，那么<span class="math inline">\(F\)</span>形成<span class="math inline">\(E\)</span>上的线性空间（验证线性空间的那几条定义即可）</p>
-<p>该线性空间的维数，称为域扩张的次数，记为<span class="math inline">\([F:E]\)</span></p>
-<ul>
-<li><p>设<span class="math inline">\(L/M\)</span>,<span class="math inline">\(M/K\)</span>为域扩张，并且<span class="math inline">\([L:M], [M:K]\)</span>有限，那么<span class="math inline">\([L:K]=[L:M][M:K]\)</span></p>
-<ul>
-<li>要证明这一点，取<span class="math inline">\(L/M, M/K\)</span>的一组基<span class="math inline">\(\{\alpha\}, \{\beta\}\)</span>，证明<span class="math inline">\(\{\alpha \beta\}\)</span>为<span class="math inline">\(L/K\)</span>的一组基</li>
-</ul></li>
-<li><p>一些例子：<span class="math inline">\([C:Q]=2\)</span></p>
-<p>设<span class="math inline">\(F=\{a+b\sqrt{d}:a, b\in Q\}\)</span>，则<span class="math inline">\([F:Q]=2\)</span>，称为二次域</p></li>
-</ul>
-<h4 id="最小生成的子环子域">最小生成的子环/子域</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\emptyset \neq X \subseteq L\)</span>，那么</p>
-<p><span class="math inline">\(K[X] = \bigcap_{R \leq L, R \subseteq K\cup X} R\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子环，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子环，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩环</p>
-<p><span class="math inline">\(K(X)=\bigcap_{K \leq F \leq L, F \subseteq X}F\)</span>为包含<span class="math inline">\(K\cup X\)</span>的最小子域，称为<span class="math inline">\(K\)</span>添加<span class="math inline">\(X\)</span>生成的子域，也说由<span class="math inline">\(X\)</span>生成的<span class="math inline">\(K\)</span>的扩域</p>
-</blockquote>
-<p>当<span class="math inline">\(X=\{a_1,...,a_n\}\)</span>时，也写<span class="math inline">\(K[X]=K[a_1,...,a_n]\)</span>，<span class="math inline">\(K(X)=K(a_1,...,a_n)\)</span></p>
-<p>特别的，<span class="math inline">\(K[a_1,...,a_n]\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式，<span class="math inline">\(K(a_1,...,a_n)\)</span>就是<span class="math inline">\(K\)</span>上的多元多项式的分式，称为有理函数</p>
-<h4 id="单扩张">单扩张</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，如果存在<span class="math inline">\(a \in L\)</span>，使得<span class="math inline">\(K(a) = L\)</span>，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(K\)</span>的单扩张</p>
-</blockquote>
-<h3 id="week15">week15</h3>
-<h4 id="代数元">代数元</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，如果有非零多项式<span class="math inline">\(f(x) \in K[x]\)</span>，使得<span class="math inline">\(f(\alpha) = 0\)</span>，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元，否则称<span class="math inline">\(\alpha\)</span>为超越元</p>
-</blockquote>
-<ul>
-<li>如果<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(Q\)</span>上的代数元，则称其为代数数，否则，称其为超越数</li>
-<li>如果<span class="math inline">\(\alpha\)</span>是首一的<span class="math inline">\(f(x) \in Z[x]\)</span>的根，则称<span class="math inline">\(\alpha\)</span>为代数整数（比如<span class="math inline">\(x^2 = 3\)</span>的根）</li>
-<li>有理数一定是代数数</li>
-</ul>
-<p>当把代数整数限制在有理数上时，我们有</p>
-<blockquote>
-<p>有理数中的代数整数只有整数</p>
-</blockquote>
-<p>“<span class="math inline">\(\Leftarrow\)</span>”：显然</p>
-<p>"<span class="math inline">\(\Rightarrow\)</span>"：如果<span class="math inline">\(r = \frac{a}{b}, (a, b) = 1\)</span>，满足<span class="math inline">\(f(r) = \frac{a^n}{b^n} + a_1 \frac{a^{n-1}}{b^{n-1}} + ... + a_n = 0\)</span></p>
-<p>那么<span class="math inline">\(a^n + a_1ba^{n-1} + ... + b^n a_b = 0\)</span>，因此<span class="math inline">\(b \mid a^n\)</span>，但是<span class="math inline">\((a, b) = 1\)</span>，于是<span class="math inline">\(b = 1\)</span></p>
-<h4 id="极小多项式">极小多项式</h4>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的代数元，那么<span class="math inline">\(I = \{g(x) \in K[x] \mid g(\alpha) = 0\}\)</span>是<span class="math inline">\(K[x]\)</span>的理想</p>
-<p>注意到<span class="math inline">\(K\)</span>是一个域，因此<span class="math inline">\(K[x]\)</span>是一个Euclid整环，这也就是说存在<span class="math inline">\(f(x)\)</span>使得<span class="math inline">\(I = (f(x))\)</span></p>
-<p>我们称<span class="math inline">\(f(x)\)</span>为<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式</p>
-<ul>
-<li><span class="math inline">\(f(x)\)</span>是<span class="math inline">\(K[x]\)</span>的不可约元</li>
-</ul>
-<h4 id="域扩张的次数">域扩张的次数</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>为<span class="math inline">\(K\)</span>上的<span class="math inline">\(n\)</span>次代数元（这个次数是指极小多项式的次数），那么</p>
-<ol type="1">
-<li><p><span class="math inline">\(K(\alpha) = K[\alpha]\)</span>，并且<span class="math inline">\([K(\alpha) : K] = n\)</span>，对应的线性空间的一组基为<span class="math inline">\(\alpha^0, \alpha^1, ..., \alpha^{n-1}\)</span></p></li>
-<li><p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span>，那么<span class="math inline">\(K(\alpha) \cong K[x] / (f(x))\)</span></p></li>
-</ol>
-</blockquote>
-<ol type="1">
-<li>设<span class="math inline">\(g(x) \in K[x]\)</span>，且<span class="math inline">\(g(\alpha) \neq 0\)</span>，我们证明<span class="math inline">\(g(\alpha)\)</span>存在逆元</li>
-</ol>
-<p>由于<span class="math inline">\(f(\alpha)\)</span>是极小多项式（为不可约元），因此<span class="math inline">\((f(x), g(x))=1\)</span>，那么存在<span class="math inline">\(u, v\)</span>使得<span class="math inline">\(uf + gv=1\)</span>，代入<span class="math inline">\(\alpha\)</span>，得到<span class="math inline">\(g(\alpha) v(\alpha) = 1\)</span>，这可以说明<span class="math inline">\(K(\alpha) = K[\alpha]\)</span></p>
-<p>下面，我们考虑证明<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>是一组基，通过取模的方式，其足够表出<span class="math inline">\(K(\alpha)\)</span>中的所有元素，线性无关则可以根据极小多项式的性质来证明</p>
-<ol start="2" type="1">
-<li>设<span class="math inline">\(\sigma : K[x] \to K(\alpha)\)</span>，<span class="math inline">\(\sigma(f(x)) = f(\alpha)\)</span>，这是一个满同态，同态核为<span class="math inline">\((f(x))\)</span></li>
-</ol>
-<ul>
-<li><span class="math inline">\(R[i] = C \cong R[x]/(x^2 + 1)\)</span>，此时<span class="math inline">\(i\)</span>可以看作是取模之后的<span class="math inline">\(x\)</span></li>
-</ul>
-<p>考虑上述定理的“反面”</p>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>不可约，那么存在<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，使得存在<span class="math inline">\(\alpha \in L\)</span>有<span class="math inline">\(K(\alpha) = L\)</span>，并且<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(f(x)\)</span></p>
-</blockquote>
-<ul>
-<li><p><span class="math inline">\(F = K[x] / (f(x))\)</span>构成一个域（不可约元的理想为极大理想），在这个域中，把<span class="math inline">\(\bar{x}=x + r(x)f(x), r(x) \in K[x]\)</span>“看作”<span class="math inline">\(\alpha\)</span>，那么<span class="math inline">\(\alpha\)</span>对应的极小多项式自然为<span class="math inline">\(f(x)\)</span></p>
-<p>这里的“看作”实际上就是一堆代换，不难感性理解</p></li>
-</ul>
-<h4 id="有限扩张">有限扩张</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\([L:K]\)</span>有穷当且仅当存在有限个<span class="math inline">\(K\)</span>上的代数元<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得<span class="math inline">\(K(\alpha_1, ..., \alpha_n) = L\)</span></p>
-</blockquote>
-<p>必要性：取<span class="math inline">\(L/K\)</span>的一组基<span class="math inline">\(\alpha_1, ..., \alpha_n\)</span>，那么<span class="math inline">\(L \subseteq K(\alpha_1, ..., \alpha_n) \subseteq L\)</span>，于是<span class="math inline">\(L=K(\alpha_1,...,\alpha_n)\)</span>，因为<span class="math inline">\([L:K]\)</span>有限，因此每个<span class="math inline">\(\alpha_i\)</span>都存在一个极小多项式</p>
-<p>充分性：设<span class="math inline">\(K_0 = K, K_i = K_{i-1}(\alpha_i)\)</span>，所有的<span class="math inline">\(\alpha_i\)</span>作为<span class="math inline">\(K\)</span>上的代数元，一定也是<span class="math inline">\(K_{i-1}\)</span>上的代数元，从而<span class="math inline">\([L:K] = \prod_{i=1}^n [K_i : K_{i-1}] &lt; \infty\)</span></p>
-<h4 id="代数扩张">代数扩张</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/M, M/K\)</span>为域的代数扩张，那么<span class="math inline">\(L/K\)</span>为域的代数扩张</p>
-</blockquote>
-<p>证明任给<span class="math inline">\(\alpha \in L\)</span>，证明<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
-<p>设<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(M\)</span>中的极小多项式为<span class="math inline">\(f(x)=x^n + a_1x^{n-1} + ... + a_n\)</span>，注意到<span class="math inline">\(a_1,...,a_n\)</span>为<span class="math inline">\(K\)</span>上的代数元</p>
-<p>那么<span class="math inline">\([K(a_1, ..., a_n, \alpha) : K] = [K(a_1,...,\alpha):K(a_1,...,a_n)]*[K(a_1,...,a_n):K] &lt; \infty\)</span></p>
-<p>注意到<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K(a_1, ..., a_n)\)</span>上的代数元，上式成立，由于<span class="math inline">\(\alpha\)</span>在扩张后的域中，因此<span class="math inline">\(\alpha\)</span>为代数元</p>
-<h4 id="代数闭包">代数闭包</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为域扩张，那么<span class="math inline">\(\overline{K} = \{a \in L : \alpha \text{为K的代数元}\}\)</span>为<span class="math inline">\(L\)</span>的子域，并且<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span></p>
-</blockquote>
-<ul>
-<li><p>我们给出一个引理：设<span class="math inline">\(L/K\)</span>为域扩张，<span class="math inline">\(\alpha \in L\)</span>，则<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的代数元的充要条件为存在不全为<span class="math inline">\(0\)</span>的<span class="math inline">\(\alpha_1, ..., \alpha_n \in L\)</span>，使得令<span class="math inline">\(V = \sum K\alpha_i\)</span>时，有<span class="math inline">\(\alpha V \subseteq V\)</span></p>
-<p>充分性：取<span class="math inline">\(\alpha^0, ..., \alpha^{n-1}\)</span>为系数即可</p>
-<p>必要性：不妨设<span class="math inline">\(\alpha \alpha_i = \sum_{j=1}^n a_{ij} \alpha_j\)</span>，那么<span class="math inline">\(\alpha\)</span>时特征多项式<span class="math inline">\(|\lambda I - A| = 0\)</span>的根，其中<span class="math inline">\(A = (a_{ij})\)</span></p></li>
-</ul>
-<p>利用引理，证明对加法和乘法封闭时，取<span class="math inline">\(\alpha, \beta\)</span>的极小多项式<span class="math inline">\(f, g\)</span>的次数为<span class="math inline">\(n, m\)</span>，令<span class="math inline">\(V=\sum k_{ij}\alpha^i \beta^j\)</span></p>
-<p>证明<span class="math inline">\((\alpha \pm \beta) V \subseteq V\)</span>，<span class="math inline">\(\alpha \beta V \subseteq V\)</span>即可，逆元的证明是平凡的</p>
-<p>下面考虑证明<span class="math inline">\(\overline{\overline{K}}=\overline{K}\)</span>，设<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(\overline{K}\)</span>上的代数元，设其极小多项式为<span class="math inline">\(f(x)=x^n+a_1x^{n-1}+...+a_n\)</span></p>
-<p>由于系数都在<span class="math inline">\(K(a_1,...,a_n)\)</span>中，因此<span class="math inline">\(\alpha\)</span>是<span class="math inline">\(K(a_1,...,a_n)\)</span>上的代数元，那么类似前面的分析，有<span class="math inline">\([K(a_1,...,a_n, \alpha):K]&lt;\infty\)</span>，从而<span class="math inline">\(\alpha \in \overline{K}\)</span></p>
-<h4 id="代数闭域">代数闭域</h4>
-<blockquote>
-<p>如果<span class="math inline">\(F = \overline{F}\)</span>，那么称<span class="math inline">\(F\)</span>为代数闭域</p>
-</blockquote>
-<p>代数闭域中任何非常数多项式可以分解为一次多项式的乘积</p>
-<ul>
-<li>复数域<span class="math inline">\(C\)</span>，全体代数数构成的域<span class="math inline">\(\overline{Q}\)</span>都是代数闭域</li>
-</ul>
-<h4 id="有限域">有限域</h4>
-<blockquote>
-<p>设<span class="math inline">\(F\)</span>为有限域，则<span class="math inline">\(|F|\)</span>为素数幂次</p>
-</blockquote>
-<p>设<span class="math inline">\(F\)</span>为有限域，不难知道<span class="math inline">\(ch(F)\)</span>为素数，设<span class="math inline">\(E = \{0, e, ..., (p-1)e\}\)</span>为<span class="math inline">\(p\)</span>元域，而<span class="math inline">\([F:E]\)</span>为有限扩张，设其为<span class="math inline">\(n\)</span>，那么有<span class="math inline">\(|F|=|E|^n = p^n\)</span></p>
-<h4 id="形式导数">形式导数</h4>
-<blockquote>
-<p>设<span class="math inline">\(F\)</span>为域，对于<span class="math inline">\(P(x) = \sum_{i=0}^k a_i x^i \in F[x]\)</span>，定义其形式导数为$P'(x) = _{i=1}^k ia_ix^{i-1} $</p>
-</blockquote>
-<ul>
-<li><span class="math inline">\((P(x)Q(x))&#39;=P(x)Q&#39;(x)+P&#39;(x)Q(x)\)</span></li>
-</ul>
-<p>我们将通过这个玩意来寻找有限域</p>
-<ul>
-<li><p>引理：设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则没有非常数多项式<span class="math inline">\(f(x) \in F[x]\)</span>，使得<span class="math inline">\(f(x)^2 \mid x^{nq}-x\)</span></p>
-<p>如果<span class="math inline">\(x^{nq}-x=f(x)^2g(x)\)</span>，求导之后有<span class="math inline">\((nqe)x^{nq-1}-e=f(x)^2g&#39;(x)+2f(x)f&#39;(x)g(x)\)</span></p>
-<p>注意到特征为<span class="math inline">\(q\)</span>的因子，因此<span class="math inline">\((nqe)x^{nq-1} = 0\)</span>，那么<span class="math inline">\(f(x)\)</span>整除右边，自然整除左边，得到<span class="math inline">\(f(x) \mid e\)</span></p></li>
-</ul>
-<h3 id="week16">week16</h3>
-<h4 id="有限域的构造">有限域的构造</h4>
-<blockquote>
-<p>设<span class="math inline">\(F\)</span>为<span class="math inline">\(q\)</span>元域，<span class="math inline">\(n\)</span>为正整数，则<span class="math inline">\(x^{q^n} - x\)</span>是<span class="math inline">\(F[x]\)</span>中次数整除<span class="math inline">\(n\)</span>的所有首一不可约多项式的乘积</p>
-</blockquote>
-<p>要证明这个引理，我们证明下面三个性质，不过每个证明都比较繁琐...</p>
-<ul>
-<li><span class="math inline">\(x^{q^n} - x\)</span>可以分解为首一不可约多项式</li>
-<li>首一不可约多项式不可能在<span class="math inline">\(x^{q^n} - x\)</span>中出现两次（使用上周用形式导数相关的引理）</li>
-<li>所有的不可约多项式是其因子</li>
-</ul>
-<p>让我们举一些例子：<span class="math inline">\(x^{2^2} - x = x(x-1)(x^2 + x + 1)\)</span></p>
-<p><span class="math inline">\(x^{3^2} - x = x(x-1)(x+1)(x^2 - 1)(x^2 + x + 2)(x^2 + x - 2)\)</span></p>
-<p>通过上述引理，我们可以证明</p>
-<blockquote>
-<p>设<span class="math inline">\(E\)</span>为有限域，则<span class="math inline">\(E[x]\)</span>中一定存在首一<span class="math inline">\(n\)</span>次不可约多项式</p>
-</blockquote>
-<p>对比上一个定理中的系数，设<span class="math inline">\(N_d\)</span>为首一<span class="math inline">\(d\)</span>次不可约多项式，那么有<span class="math inline">\(q^n = \sum_{d | n} dN_d\)</span></p>
-<p>一个方法是先证明<span class="math inline">\(d N_d \leq q^n - 1\)</span>，再进行放缩<span class="math inline">\(\sum_{d | n} d Nd &lt; \sum_{d=1}^n d N_d\)</span>后证明<span class="math inline">\(N_n \neq 0\)</span></p>
-<h4 id="有限域的存在性">有限域的存在性</h4>
-<blockquote>
-<p>存在有限<span class="math inline">\(q\)</span>元域的充要条件为存在素数<span class="math inline">\(p\)</span>和正整数<span class="math inline">\(n\)</span>，使得<span class="math inline">\(q = p^n\)</span></p>
-</blockquote>
-<p>我们已经证明过充分性，对于必要性，我们在<span class="math inline">\(E = Z / pZ\)</span>中取首一<span class="math inline">\(n\)</span>次不可约多项式<span class="math inline">\(f(x)\)</span>，</p>
-<p>那么<span class="math inline">\(E[x] / (f(x))\)</span>就是一个<span class="math inline">\(p^n\)</span>元域</p>
-<blockquote>
-<p>任何两个有限<span class="math inline">\(q\)</span>元域同构，我们不妨记其为<span class="math inline">\(\mathbf{F}_q\)</span></p>
-</blockquote>
-<h4 id="分裂域">分裂域</h4>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果对<span class="math inline">\(K\)</span>的扩域<span class="math inline">\(L\)</span>，<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(L[x]\)</span>可分解为一次式的乘积，但对于<span class="math inline">\(L\)</span>上的子域都没有这个性质，则称<span class="math inline">\(L\)</span>为<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域</p>
-</blockquote>
-<p>我们可以想象，我们把<span class="math inline">\(f(x)\)</span>的所有根添入<span class="math inline">\(K\)</span>之后，新的域应该可以分解为一次式的乘积</p>
-<p>实际上，如果<span class="math inline">\(f(x) = (x-a_1)^{r_1}(x-a_2)^{r_2}...(x-a_n)^{r_n}\)</span>（所有的<span class="math inline">\(a_i\)</span>两两不同），那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(K(a_1, ..., a_n)\)</span></p>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>非常数多项式，那么<span class="math inline">\(f(x)\)</span>在<span class="math inline">\(K\)</span>上的分裂域存在</p>
-</blockquote>
-<ul>
-<li>我们把<span class="math inline">\(f(x)\)</span>写作不可约多项式的乘积，比如<span class="math inline">\(f(x) = \prod p_i(x)\)</span>，我们考虑对<span class="math inline">\(p_1(x)\)</span>进行讨论，存在扩域<span class="math inline">\(K_1 = K(\alpha_1)\)</span>，并且<span class="math inline">\(\alpha_1\)</span>在<span class="math inline">\(K\)</span>上的极小多项式为<span class="math inline">\(p_1(x)\)</span>，那么<span class="math inline">\(f(x) = (x - \alpha_1)f_1(x)\)</span>，此时<span class="math inline">\(f_1(x) \in K_1[x]\)</span>，继续对<span class="math inline">\(f_1(x)\)</span>进行分解，我们就能得到结论</li>
-</ul>
-<h4 id="可分元">可分元</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，如果<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式（在其分裂域中）没有重根，则称<span class="math inline">\(\alpha\)</span>为<span class="math inline">\(K\)</span>上的可分元</p>
-</blockquote>
-<p>这个定义细想会有点奇怪，这是因为我们没有证明一个性质：对于确定的<span class="math inline">\(f(x)\)</span>的任何的分裂域，<span class="math inline">\(f(x)\)</span>在这些分裂域上根的重数在同构的意义下是相等的</p>
-<p>对于可分元，其有一个性质</p>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，那么<span class="math inline">\(\alpha \in L\)</span>为可分元，当且仅当<span class="math inline">\(\alpha\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>的导数<span class="math inline">\(f&#39;(x)\)</span>非零</p>
-</blockquote>
-<ul>
-<li><p>如果<span class="math inline">\(\alpha\)</span>为可分元，设<span class="math inline">\(f(x) = \prod(x - a_i)\)</span>，那么<span class="math inline">\(f&#39;(x) = \sum_i \prod_{j \neq i} (x-a_j)\)</span>，于是<span class="math inline">\(f&#39;(a_1) = \prod_{j\neq 1} (a_1-a_j) \neq 0\)</span></p>
-<p>反之，如果<span class="math inline">\(f&#39;(x)\)</span>非零，那么<span class="math inline">\((f&#39;(x), f(x)) = 1\)</span>（<span class="math inline">\(f(x)\)</span>不可约），那么存在<span class="math inline">\(u(x)f(x)+v(x)f&#39;(x)=1\)</span>成立，但对于重根<span class="math inline">\(\beta\)</span>而言，有<span class="math inline">\(u(\beta)f(\beta)+v(\beta)f&#39;(\beta)=0\)</span>，矛盾</p></li>
-<li><p>然后我们介绍一下书上的证明，感觉涉及到了不同的角度：</p>
-<ul>
-<li><p>设<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x) \in K[x]\)</span>在其分裂域<span class="math inline">\(L\)</span>上的<span class="math inline">\(k\)</span>重根，那么<span class="math inline">\(f(x) = (x-a)^k g(x), g(a) \neq 0\)</span></p>
-<p>此时<span class="math inline">\(f&#39;(x) = (x-a)^{k-1}(kg(x)+(x-a)g&#39;(x))\)</span></p>
-<p>如果<span class="math inline">\(ch(K) \not \mid k\)</span>，则<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的<span class="math inline">\(k-1\)</span>重根</p>
-<p>而如果<span class="math inline">\(ch(K) \mid k\)</span>，则有<span class="math inline">\(f&#39;(x)=(x-a)^kg(x)\)</span>，<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的至少<span class="math inline">\(k\)</span>重根</p></li>
-</ul>
-<p>从上面的讨论，我们知道，（1）<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x)\)</span>的单根的一个充要条件是<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的零根（2）<span class="math inline">\(a\)</span>是<span class="math inline">\(f(x)\)</span>的重根的充要条件是<span class="math inline">\(a\)</span>是<span class="math inline">\(f&#39;(x)\)</span>的根</p>
-<p>因此，<span class="math inline">\(f(x)\)</span>要有重根，必然地需要有<span class="math inline">\(\deg (\gcd(f(x), f&#39;(x))) &gt; 1\)</span>，再利用<span class="math inline">\(f(x)\)</span>不可约就不难证明了</p></li>
-</ul>
-<p>有了可分元之后，我们定义可分扩张</p>
-<blockquote>
-<p>如果<span class="math inline">\(\forall \alpha \in L\)</span>，<span class="math inline">\(\alpha\)</span>都是<span class="math inline">\(K\)</span>上的可分元，则称<span class="math inline">\(L/K\)</span>为可分扩张</p>
-</blockquote>
-<p>对于可分扩张，我们也有一个性质</p>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为代数扩张，若<span class="math inline">\(ch(K)=0\)</span>或者<span class="math inline">\(|K|&lt;\infty\)</span>，则<span class="math inline">\(L/K\)</span>为可分扩张</p>
-</blockquote>
-<p><span class="math inline">\(ch(K)=0\)</span>时，极小多项式的首项非0</p>
-<p><span class="math inline">\(|K|&lt;\infty\)</span>时，极小多项式<span class="math inline">\(f(x) \mid x^{q^n} - x\)</span>，由于<span class="math inline">\((x^{q^n} - x)&#39; = -1\)</span>（注意到特征的性质），但有重根<span class="math inline">\(\beta\)</span>时，导数的取值为<span class="math inline">\(0\)</span>，矛盾</p>
-<h4 id="不可分的多项式">不可分的多项式</h4>
-<p>设不可约多项式<span class="math inline">\(f(x) \in K[x]\)</span>不可分，根据上面的讨论，必然有<span class="math inline">\(ch(K)\)</span>是一个素数<span class="math inline">\(p\)</span></p>
-<p>由于<span class="math inline">\(f(x)\)</span>不可分，那么有<span class="math inline">\(f&#39;(x)=0\)</span>，设<span class="math inline">\(f(x) = \sum a_ix^i\)</span>，则<span class="math inline">\(f&#39;(x) = \sum ia_i x^{i-1}\)</span>，于是<span class="math inline">\(ia_i = 0\)</span></p>
-<p>对<span class="math inline">\(ch(K) \not \mid i\)</span>的<span class="math inline">\(i\)</span>，必然有<span class="math inline">\(a_i = 0\)</span>，于是<span class="math inline">\(f(x) = g(x^p)\)</span>，<span class="math inline">\(g\)</span>不可约但是不能确定是否可分</p>
-<p>如果<span class="math inline">\(g\)</span>不可分，我们继续上述讨论，最终可以得到<span class="math inline">\(f(x) = h(x^{p^e})\)</span>，其中<span class="math inline">\(h\)</span>是一个可分多项式</p>
-<p>写<span class="math inline">\(h(x) = (x-a_1)...(x-a_n)\)</span>，那么<span class="math inline">\(f(x) = (x^{p^e} - a_1)...(x^{p^e}-a_n)\)</span>，对<span class="math inline">\(x^{p^e} - a_1 = 0\)</span>，设其根为<span class="math inline">\(b_1\)</span>，那么<span class="math inline">\((x^{p^e} - a_1) = (x^{p^e} - b_1^{p^e}) = (x-b_1)^{p^e}\)</span>，因此<span class="math inline">\(f(x) = \prod(x-b_i)^{p^e}\)</span>，每个根都将有相同的重数，并且重数形如素数的幂次</p>
-<h4 id="单扩张定理">单扩张定理</h4>
-<blockquote>
-<p>有限可分扩张为单扩张</p>
-</blockquote>
-<p>因为是有限扩张，故存在代数元<span class="math inline">\(a_1, ..., a_n\)</span>，使得<span class="math inline">\(L=K(a_1, ..., a_n)\)</span></p>
-<p>尝试利用可分扩张的性质证明，<span class="math inline">\(\forall a, b \in L, \exist c \in L, K(a, b) = K(c)\)</span></p>
-<h4 id="正规扩张">正规扩张</h4>
-<blockquote>
-<p>如果每个<span class="math inline">\(\alpha \in L\)</span>在<span class="math inline">\(K\)</span>上的极小多项式<span class="math inline">\(f(x)\)</span>都可以在<span class="math inline">\(L[x]\)</span>中分解为一次式的乘积，且不可约多项式<span class="math inline">\(f(x)\)</span>有一个零点在<span class="math inline">\(L\)</span>中时，其剩余的所有零点都在<span class="math inline">\(L\)</span>中时，称<span class="math inline">\(L/K\)</span>为正规扩张</p>
-</blockquote>
-<p>对于正规扩张，我们有</p>
-<blockquote>
-<p><span class="math inline">\(L/K\)</span>为有限正规扩张，当且仅当<span class="math inline">\(L\)</span>为某个<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域</p>
-</blockquote>
-<h4 id="商域">商域</h4>
-<p>对整环<span class="math inline">\(R\)</span>，我们在<span class="math inline">\(R \times R^*\)</span>上定义关系<span class="math inline">\(\sim\)</span>：<span class="math inline">\((a, b) \sim (c, d) \Leftrightarrow ad = bc\)</span></p>
-<p>不难验证，这是一个等价关系，记<span class="math inline">\((a, b)\)</span>按照上述关系形成的等价类为分数<span class="math inline">\(a/b\)</span></p>
-<blockquote>
-<p>令<span class="math inline">\(F = \{a/b:a \in R, b \in R^*\}\)</span>，定义<span class="math inline">\(\frac{a}{b} + \frac{c}{d} = \frac{ad+bc}{bd}\)</span>以及<span class="math inline">\(\frac{a}{b} * \frac{c}{d} = \frac{ac}{bd}\)</span>，不难验证，这种加法和乘法的定义是良定义的</p>
-<p>并且<span class="math inline">\(F\)</span>按照上述加法和乘法构成域，我们称其为整环<span class="math inline">\(R\)</span>的商域</p>
-</blockquote>
-<h2 id="galois理论">Galois理论</h2>
-<h3 id="last-week">last week</h3>
-<h4 id="galois群">Galois群</h4>
-<blockquote>
-<p>如果域扩张<span class="math inline">\(L/K\)</span>是有限可分正规扩张，则称其为<span class="math inline">\(K\)</span>的Galois扩张</p>
-<p>在其上定义Galois群：<span class="math inline">\(Gal(L/K) = \{\sigma \in Aut(L): \sigma|_K = I_K\}\)</span></p>
-</blockquote>
-<p>也就是说，在<span class="math inline">\(L\)</span>的自同构中，保持<span class="math inline">\(K\)</span>不变的群</p>
-<h4 id="不变域">不变域</h4>
-<blockquote>
-<p>对<span class="math inline">\(G \leq Aut(L)\)</span>，定义其不变域为<span class="math inline">\(Inv(G) = \{a \in L | \forall g \in G, g(a) = a\}\)</span></p>
-</blockquote>
-<p>不变域确实是一个域</p>
-<h4 id="galois群论基本定理">Galois群论基本定理</h4>
-<blockquote>
-<p>设<span class="math inline">\(L/K\)</span>为Galois扩张</p>
-<ul>
-<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，则<span class="math inline">\(L/M\)</span>为Galois扩张</p>
-<p>并且<span class="math inline">\(Gal(L/M) \leq Gal(L/K)\)</span>，<span class="math inline">\(|Gal(L/M)| = [L:M]\)</span>，<span class="math inline">\(Inv(Gal(L/M)) = M\)</span></p></li>
-<li><p>设<span class="math inline">\(H \leq Gal(L/K)\)</span>，那么设<span class="math inline">\(M = Inv(H)\)</span>，则<span class="math inline">\(K \leq M \leq L, Gal(L/M)=H\)</span></p>
-<p>也就是说，<span class="math inline">\(Gal(L/K)\)</span>的子群和<span class="math inline">\(L, K\)</span>的中间域之间存在一个一一对应的关系</p></li>
-<li><p>设<span class="math inline">\(K \leq M \leq L\)</span>，那么<span class="math inline">\(M/K\)</span>是正规扩张，当且仅当<span class="math inline">\(Gal(L/M) \lhd Gal(L/K)\)</span></p>
-<p>并且当<span class="math inline">\(M/K\)</span>是正规扩张时，<span class="math inline">\(Gal(L/K)/Gal(L/M) \cong Gal(M/K)\)</span></p></li>
-</ul>
-<p>上面这一条建立了正规扩张和正规子群之间的关系</p>
-</blockquote>
-<h4 id="根式可解">根式可解</h4>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>，如果存在域的扩张链，<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，使得<span class="math inline">\(K_n\)</span>包含<span class="math inline">\(f(x)\)</span>的分裂域，并且这些扩张都是根式扩张，则称<span class="math inline">\(f(x)=0\)</span>在<span class="math inline">\(K\)</span>上根式可解</p>
-<p>根式扩张指的是，对于扩张<span class="math inline">\(L/K\)</span>，存在<span class="math inline">\(\alpha \in L\)</span>，使得<span class="math inline">\(L = K(\alpha)\)</span>且<span class="math inline">\(\alpha^n = K\)</span>（也就是说，每次添加一个元素的开根）</p>
-</blockquote>
-<p>对于根式扩张，我们由</p>
-<blockquote>
-<p>如果<span class="math inline">\(L/K\)</span>为根式扩张，那么<span class="math inline">\(Gal(L/K)\)</span>为Abel群</p>
-</blockquote>
-<p>有了上述定理之后，我们对根式可解进行进一步的考虑，将得到</p>
-<p>对<span class="math inline">\(K_0 = K \leq K_1 \leq K_2 ... \leq K_n\)</span>，其等价于<span class="math inline">\(Gal(L/K) \rhd Gal(L/K_1) ... \rhd Gal(L/K_n) = \{e\}\)</span></p>
-<p>根据<span class="math inline">\(Gal(L/K_{i+1})/Gal(L/K_i) \cong Gal(K_{i+1}/K_i)\)</span>是Abel群，于是</p>
-<blockquote>
-<p><span class="math inline">\(f(x)=0\)</span>根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
-</blockquote>
-<h4 id="galois定理">Galois定理</h4>
-<p>对上面的讨论取一个特殊情况，我们将得到Galois定理，不妨就用这个定理作为这门课的结束吧</p>
-<blockquote>
-<p>设<span class="math inline">\(K\)</span>为域，<span class="math inline">\(f(x) \in K[x]\)</span>的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(f(x) = 0\)</span>在<span class="math inline">\(L\)</span>上根式可解，当且仅当<span class="math inline">\(Gal(L/K)\)</span>为可解群</p>
-</blockquote>
-<ul>
-<li><p>对于一般的<span class="math inline">\(n\)</span>次方程，<span class="math inline">\(f(x) = x^n + t_1x^{n-1} + ... + t_n = 0\)</span></p>
-<p>此时，将<span class="math inline">\(t_1, ..., t_n\)</span>看作字母变量，那么<span class="math inline">\(f(x) \in K=F[t_1, ..., t_n][x]\)</span>，设其在<span class="math inline">\(K\)</span>上的分裂域为<span class="math inline">\(L\)</span>，那么<span class="math inline">\(Gal(L/K) \cong S_n\)</span></p>
-<p>由于<span class="math inline">\(n \geq 5\)</span>时，<span class="math inline">\(S_n\)</span>不是可解群，因此，五次以上的方程没有通解</p></li>
-</ul>
-<p>Galois无愧于天才之名！</p>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>abstract algebra</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>群表示论</title>
-    <url>/2022/05/group-representation/</url>
-    <content><![CDATA[<span id="more"></span>
-<h3 id="群表示">群表示</h3>
-<ul>
-<li>一个群表示包括 <span class="math inline">\((V, \rho)\)</span>，其中<span class="math inline">\(V\)</span>是一个线性空间，而<span class="math inline">\(\rho:G \to GL(V)\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(V\)</span>上的一般线性群的群同态</li>
-</ul>
-<p>大致就是用矩阵来代替群里面的元素，注意不是群同构</p>
-<p>比如：<span class="math inline">\(\rho(g) = I\)</span>是一个平凡的群表示</p>
-<ul>
-<li><p>群表示的同态：对于两个群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\((V&#39;, \rho&#39;)\)</span>，称<span class="math inline">\(T\)</span>为同态映射，当且仅当</p>
-<ol type="1">
-<li><p><span class="math inline">\(T\)</span>是一个<span class="math inline">\(V \to V&#39;\)</span>的线性映射</p></li>
-<li><p><span class="math inline">\(T\)</span>满足<span class="math inline">\(T \circ \rho(g) = \rho&#39;(g) \circ T\)</span></p></li>
-</ol></li>
-</ul>
-<p>这个(2)条件可能比较令人困惑，我们作一个解释：不妨设原来的映射关系为<span class="math inline">\(v \to \rho(g)v\)</span></p>
-<p>那么，在作用<span class="math inline">\(T\)</span>之后，我们希望作用之后保持上述映射关系，即<span class="math inline">\(Tv \to T\rho(g)v\)</span></p>
-<p>并且希望作用之后对应的映射由群的同一元素控制，即希望<span class="math inline">\(T\rho(g)v = \rho&#39;(g)Tv\)</span>，即<span class="math inline">\(T\rho(g) = \rho&#39;(g)T\)</span></p>
-<hr />
-<p>和抽象代数中类似，当<span class="math inline">\(T\)</span>可逆时，我们称<span class="math inline">\(T\)</span>是一个同构映射</p>
-<p>占位</p>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>logic</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>信息论</title>
     <url>/2021/08/information-theory/</url>
     <content><![CDATA[<span id="more"></span>
@@ -2597,6 +2566,37 @@ int main() &#123;
       </categories>
       <tags>
         <tag>information theory</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>群表示论</title>
+    <url>/2022/05/group-representation/</url>
+    <content><![CDATA[<span id="more"></span>
+<h3 id="群表示">群表示</h3>
+<ul>
+<li>一个群表示包括 <span class="math inline">\((V, \rho)\)</span>，其中<span class="math inline">\(V\)</span>是一个线性空间，而<span class="math inline">\(\rho:G \to GL(V)\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(V\)</span>上的一般线性群的群同态</li>
+</ul>
+<p>大致就是用矩阵来代替群里面的元素，注意不是群同构</p>
+<p>比如：<span class="math inline">\(\rho(g) = I\)</span>是一个平凡的群表示</p>
+<ul>
+<li><p>群表示的同态：对于两个群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\((V&#39;, \rho&#39;)\)</span>，称<span class="math inline">\(T\)</span>为同态映射，当且仅当</p>
+<ol type="1">
+<li><p><span class="math inline">\(T\)</span>是一个<span class="math inline">\(V \to V&#39;\)</span>的线性映射</p></li>
+<li><p><span class="math inline">\(T\)</span>满足<span class="math inline">\(T \circ \rho(g) = \rho&#39;(g) \circ T\)</span></p></li>
+</ol></li>
+</ul>
+<p>这个(2)条件可能比较令人困惑，我们作一个解释：不妨设原来的映射关系为<span class="math inline">\(v \to \rho(g)v\)</span></p>
+<p>那么，在作用<span class="math inline">\(T\)</span>之后，我们希望作用之后保持上述映射关系，即<span class="math inline">\(Tv \to T\rho(g)v\)</span></p>
+<p>并且希望作用之后对应的映射由群的同一元素控制，即希望<span class="math inline">\(T\rho(g)v = \rho&#39;(g)Tv\)</span>，即<span class="math inline">\(T\rho(g) = \rho&#39;(g)T\)</span></p>
+<hr />
+<p>和抽象代数中类似，当<span class="math inline">\(T\)</span>可逆时，我们称<span class="math inline">\(T\)</span>是一个同构映射</p>
+<p>占位</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>logic</tag>
       </tags>
   </entry>
   <entry>
@@ -3018,6 +3018,80 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
+    <title>矩阵分析 4</title>
+    <url>/2021/07/matrix-analysis-4/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>这一节来记一些乱七八糟的习题</p>
+<blockquote>
+<p><span class="math inline">\(AA^H\)</span>和<span class="math inline">\(A^HA\)</span>有相同的非零特征值</p>
+</blockquote>
+<p>我们可以考虑特征值的定义的角度来证明这一点</p>
+<p>设<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(AA^H\)</span>的特征向量，<span class="math inline">\(x\)</span>是对应的特征向量，即<span class="math inline">\(AA^Hx = \lambda x\)</span>，由于<span class="math inline">\(\lambda, x \neq 0\)</span>，因此<span class="math inline">\(\lambda x \neq 0\)</span>，从而<span class="math inline">\(A^Hx \neq 0\)</span>，那么由<span class="math inline">\((A^HA)(A^Hx) = \lambda(A^Hx)\)</span>知，<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(A^HA\)</span>的特征值，那么，<span class="math inline">\(AA^H\)</span>的所有非零特征值都是<span class="math inline">\(A^HA\)</span>的非零特征值，反过来也是如此，因此两者非零特征值的集合是相同的</p>
+<p>下面，我们还需要证明两者的特征值的代数重复度相同，由于<span class="math inline">\(AA^H, A^HA\)</span>都可对角化，我们只需要证明两者的几何重复度相同</p>
+<p>设<span class="math inline">\(x_1, x_2, ..., x_n\)</span>是对应于<span class="math inline">\(AA^H\)</span>的特征值<span class="math inline">\(\lambda\)</span>的线性无关的特征向量，由之前推导的对应关系，我们考虑证明<span class="math inline">\(A^Hx_1, A^Hx_2,...,A^Hx_n\)</span>线性无关</p>
+<p>设有<span class="math inline">\(\sum k_i A^H x_i = 0\)</span>，那么<span class="math inline">\(\sum k_i (AA^H) x_i = 0\)</span>，从而<span class="math inline">\(\lambda \sum k_ix_i = 0\)</span>，因此<span class="math inline">\(k_1=k_2=...=k_n=0\)</span></p>
+<blockquote>
+<p>对于<span class="math inline">\(n*n\)</span>的复矩阵<span class="math inline">\(A\)</span>，设<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>为其<span class="math inline">\(n\)</span>个特征值，那么<span class="math inline">\(\sum_{i=1}^n |\lambda_i|^2 \leq \sum_{1 \leq i, j \leq n} |a_{ij}|^2\)</span>，当且仅当<span class="math inline">\(A\)</span>是正规矩阵时取得等号</p>
+</blockquote>
+<p>考虑Schur TH，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^HBU\)</span>，其中<span class="math inline">\(B\)</span>为上三角矩阵，并且对角线元素为<span class="math inline">\(A\)</span>的特征值</p>
+<p>注意到<span class="math inline">\(AA^H = U^HBB^HU\)</span>，而<span class="math inline">\(tr(AA^H) = \sum |a_{ij}|^2\)</span>，<span class="math inline">\(tr(BB^H) = \sum |b_{ij}|^2 \geq \sum |\lambda_i|^2\)</span>，当且仅当<span class="math inline">\(B\)</span>是对角矩阵时，取到等号</p>
+<p>由于相似矩阵的特征多项式相同，那么他们将有相同的迹，因此<span class="math inline">\(\sum |a_{ij}|^2 = tr(AA^H) = tr(BB^H)\geq \sum |\lambda_i|^2\)</span>，当且仅当<span class="math inline">\(A\)</span>是正规矩阵时取得等号</p>
+<blockquote>
+<p>设<span class="math inline">\(\sigma_1, ..., \sigma_n\)</span>是<span class="math inline">\(A\)</span>的奇异值，那么<span class="math inline">\(tr(A^HA) = tr(AA^H) = \sum_{i=1}^r \sigma_i^2\)</span></p>
+</blockquote>
+<p>设<span class="math inline">\(M = AA^H\)</span>，由上个定理证明过程，我们知道，只要证明<span class="math inline">\(M\)</span>可酉对角化即可</p>
+<p>由于<span class="math inline">\(M\)</span>是埃尔米特矩阵，这是显然的</p>
+<blockquote>
+<p>矩阵<span class="math inline">\(A\)</span>的非零奇异值的个数是该矩阵的秩</p>
+</blockquote>
+<p>我们知道<span class="math inline">\(rank(A) = rank(AA^H)\)</span>，而对于<span class="math inline">\(AA^H\)</span>而言，其酉相似于一个对角矩阵<span class="math inline">\(B\)</span>，对角线上的元素为<span class="math inline">\(A\)</span>的奇异值的平方，因此<span class="math inline">\(rank(AA^H)\)</span>为<span class="math inline">\(A\)</span>的非零奇异值的个数</p>
+<blockquote>
+<p>设<span class="math inline">\(A\)</span>为可逆埃米尔特矩阵，且<span class="math inline">\(A\)</span>的谱分解为<span class="math inline">\(\sum \lambda_i x_i x_i^H\)</span>，那么<span class="math inline">\(A^{-1} = \sum \lambda_i^{-1} x_ix_i^H\)</span></p>
+</blockquote>
+<p>设<span class="math inline">\(X = \sum \lambda_i^{-1} x_ix_i^H\)</span>，那么<span class="math inline">\(AX = \sum_{i, j} \lambda_i* \lambda_j^{-1} x_ix_i^H x_jx_j^H = \sum_{i} x_ix_i^H = \sum_{i, j} x_ix_j^H = UU^H = I\)</span></p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>是正规矩阵，则<span class="math inline">\(A\)</span>的奇异值就是<span class="math inline">\(A\)</span>的特征值的模</p>
+</blockquote>
+<p>由<span class="math inline">\(A\)</span>是正规矩阵，<span class="math inline">\(A\)</span>可酉对角化，因此<span class="math inline">\(A = U^H diag(\lambda_1, \lambda_2, ..., \lambda_n) U\)</span></p>
+<p>继而<span class="math inline">\(AA^H = U^H diag(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2) U\)</span>，那么<span class="math inline">\(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2\)</span>就是<span class="math inline">\(AA^H\)</span>的特征值，从而<span class="math inline">\(|\lambda_1|, |\lambda_2|, ..., |\lambda_n|\)</span>就是<span class="math inline">\(A\)</span>的奇异值</p>
+<blockquote>
+<p>酉矩阵特征值值的模都为<span class="math inline">\(1\)</span></p>
+</blockquote>
+<p>由于<span class="math inline">\(x^Hy = x^HU^HUy = (Ux)^H(Uy)\)</span>，对于酉矩阵<span class="math inline">\(U\)</span>的特征值<span class="math inline">\(\lambda\)</span>，我们对其特征向量<span class="math inline">\(x\)</span>进行考察，那么<span class="math inline">\(x^Hx = (Ux)^HUx = \lambda^H \lambda x^Hx = |\lambda|^2 x^Hx\)</span>，故<span class="math inline">\(|\lambda| = 1\)</span></p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>是正规矩阵，且<span class="math inline">\(A\)</span>的特征值的模为<span class="math inline">\(1\)</span>，那么<span class="math inline">\(A\)</span>为酉矩阵</p>
+</blockquote>
+<p>直接运用上题的结论即可</p>
+<blockquote>
+<p>两个正规矩阵相似的充要条件是两者的特征多项式相同</p>
+</blockquote>
+<p>充分性：如果正规矩阵<span class="math inline">\(A, B\)</span>的特征多项式相同，那么存在酉矩阵<span class="math inline">\(U_1, U_2\)</span>，使得<span class="math inline">\(A = U_1^H \Lambda U_1, B = U_2^H \Lambda U_2\)</span>，从而<span class="math inline">\(A = (U_1^{-1}U_2)^H \Lambda (U_1^{-1}U_2)\)</span>，从而两者相似</p>
+<p>必要性：相似矩阵有相同的特征多项式</p>
+<blockquote>
+<p>若<span class="math inline">\(A\)</span>为实矩阵，且<span class="math inline">\(A^TA = AA^T\)</span>，那么<span class="math inline">\(A\)</span>是对称矩阵</p>
+</blockquote>
+<p><span class="math inline">\(A\)</span>满足正规矩阵的定义，因此有<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(U\)</span>为酉矩阵，<span class="math inline">\(\Lambda\)</span>为特征值构成的对角阵</p>
+<p>那么由<span class="math inline">\(A^H=A\)</span>，<span class="math inline">\(A^H = A^T\)</span>，我们得到<span class="math inline">\(A=A^T\)</span></p>
+<blockquote>
+<p>正规矩阵<span class="math inline">\(A\)</span>是埃尔米特矩阵，当且仅当<span class="math inline">\(A\)</span>的特征值全为实数</p>
+</blockquote>
+<p>”<span class="math inline">\(\Rightarrow\)</span>“：显然</p>
+<p>"<span class="math inline">\(\Leftarrow\)</span>"：我们考虑矩阵<span class="math inline">\(A\)</span>的谱分解，<span class="math inline">\(A = \sum_{i} \lambda_i x_ix_i^H\)</span>，则有<span class="math inline">\(A^H = \sum_i \lambda_i^H x_i x_i^H = \sum_i \lambda_i x_ix_i^H = A\)</span></p>
+<blockquote>
+<p><span class="math inline">\(tr(xy^H) = y^Hx\)</span></p>
+</blockquote>
+<p>取一组标准正交基，设出<span class="math inline">\(x, y\)</span>在这组标准正交基下的坐标为，然后就不难看出了</p>
+<p>特别的，如果我们令<span class="math inline">\(y = Ax\)</span>，则有<span class="math inline">\(tr(Axx^H) = x^HAx\)</span></p>
+<p>暂定</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>matrix_analysis</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>矩阵分析 5</title>
     <url>/2021/08/matrix-analysis-5/</url>
     <content><![CDATA[<span id="more"></span>
@@ -3184,71 +3258,187 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </tags>
   </entry>
   <entry>
-    <title>矩阵分析 4</title>
-    <url>/2021/07/matrix-analysis-4/</url>
+    <title>矩阵分析 6</title>
+    <url>/2021/08/matrix-analysis-6/</url>
     <content><![CDATA[<span id="more"></span>
-<p>这一节来记一些乱七八糟的习题</p>
-<blockquote>
-<p><span class="math inline">\(AA^H\)</span>和<span class="math inline">\(A^HA\)</span>有相同的非零特征值</p>
-</blockquote>
-<p>我们可以考虑特征值的定义的角度来证明这一点</p>
-<p>设<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(AA^H\)</span>的特征向量，<span class="math inline">\(x\)</span>是对应的特征向量，即<span class="math inline">\(AA^Hx = \lambda x\)</span>，由于<span class="math inline">\(\lambda, x \neq 0\)</span>，因此<span class="math inline">\(\lambda x \neq 0\)</span>，从而<span class="math inline">\(A^Hx \neq 0\)</span>，那么由<span class="math inline">\((A^HA)(A^Hx) = \lambda(A^Hx)\)</span>知，<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(A^HA\)</span>的特征值，那么，<span class="math inline">\(AA^H\)</span>的所有非零特征值都是<span class="math inline">\(A^HA\)</span>的非零特征值，反过来也是如此，因此两者非零特征值的集合是相同的</p>
-<p>下面，我们还需要证明两者的特征值的代数重复度相同，由于<span class="math inline">\(AA^H, A^HA\)</span>都可对角化，我们只需要证明两者的几何重复度相同</p>
-<p>设<span class="math inline">\(x_1, x_2, ..., x_n\)</span>是对应于<span class="math inline">\(AA^H\)</span>的特征值<span class="math inline">\(\lambda\)</span>的线性无关的特征向量，由之前推导的对应关系，我们考虑证明<span class="math inline">\(A^Hx_1, A^Hx_2,...,A^Hx_n\)</span>线性无关</p>
-<p>设有<span class="math inline">\(\sum k_i A^H x_i = 0\)</span>，那么<span class="math inline">\(\sum k_i (AA^H) x_i = 0\)</span>，从而<span class="math inline">\(\lambda \sum k_ix_i = 0\)</span>，因此<span class="math inline">\(k_1=k_2=...=k_n=0\)</span></p>
-<blockquote>
-<p>对于<span class="math inline">\(n*n\)</span>的复矩阵<span class="math inline">\(A\)</span>，设<span class="math inline">\(\lambda_1, ..., \lambda_n\)</span>为其<span class="math inline">\(n\)</span>个特征值，那么<span class="math inline">\(\sum_{i=1}^n |\lambda_i|^2 \leq \sum_{1 \leq i, j \leq n} |a_{ij}|^2\)</span>，当且仅当<span class="math inline">\(A\)</span>是正规矩阵时取得等号</p>
-</blockquote>
-<p>考虑Schur TH，存在酉矩阵<span class="math inline">\(U\)</span>，使得<span class="math inline">\(A = U^HBU\)</span>，其中<span class="math inline">\(B\)</span>为上三角矩阵，并且对角线元素为<span class="math inline">\(A\)</span>的特征值</p>
-<p>注意到<span class="math inline">\(AA^H = U^HBB^HU\)</span>，而<span class="math inline">\(tr(AA^H) = \sum |a_{ij}|^2\)</span>，<span class="math inline">\(tr(BB^H) = \sum |b_{ij}|^2 \geq \sum |\lambda_i|^2\)</span>，当且仅当<span class="math inline">\(B\)</span>是对角矩阵时，取到等号</p>
-<p>由于相似矩阵的特征多项式相同，那么他们将有相同的迹，因此<span class="math inline">\(\sum |a_{ij}|^2 = tr(AA^H) = tr(BB^H)\geq \sum |\lambda_i|^2\)</span>，当且仅当<span class="math inline">\(A\)</span>是正规矩阵时取得等号</p>
-<blockquote>
-<p>设<span class="math inline">\(\sigma_1, ..., \sigma_n\)</span>是<span class="math inline">\(A\)</span>的奇异值，那么<span class="math inline">\(tr(A^HA) = tr(AA^H) = \sum_{i=1}^r \sigma_i^2\)</span></p>
-</blockquote>
-<p>设<span class="math inline">\(M = AA^H\)</span>，由上个定理证明过程，我们知道，只要证明<span class="math inline">\(M\)</span>可酉对角化即可</p>
-<p>由于<span class="math inline">\(M\)</span>是埃尔米特矩阵，这是显然的</p>
-<blockquote>
-<p>矩阵<span class="math inline">\(A\)</span>的非零奇异值的个数是该矩阵的秩</p>
-</blockquote>
-<p>我们知道<span class="math inline">\(rank(A) = rank(AA^H)\)</span>，而对于<span class="math inline">\(AA^H\)</span>而言，其酉相似于一个对角矩阵<span class="math inline">\(B\)</span>，对角线上的元素为<span class="math inline">\(A\)</span>的奇异值的平方，因此<span class="math inline">\(rank(AA^H)\)</span>为<span class="math inline">\(A\)</span>的非零奇异值的个数</p>
-<blockquote>
-<p>设<span class="math inline">\(A\)</span>为可逆埃米尔特矩阵，且<span class="math inline">\(A\)</span>的谱分解为<span class="math inline">\(\sum \lambda_i x_i x_i^H\)</span>，那么<span class="math inline">\(A^{-1} = \sum \lambda_i^{-1} x_ix_i^H\)</span></p>
-</blockquote>
-<p>设<span class="math inline">\(X = \sum \lambda_i^{-1} x_ix_i^H\)</span>，那么<span class="math inline">\(AX = \sum_{i, j} \lambda_i* \lambda_j^{-1} x_ix_i^H x_jx_j^H = \sum_{i} x_ix_i^H = \sum_{i, j} x_ix_j^H = UU^H = I\)</span></p>
-<blockquote>
-<p>若<span class="math inline">\(A\)</span>是正规矩阵，则<span class="math inline">\(A\)</span>的奇异值就是<span class="math inline">\(A\)</span>的特征值的模</p>
-</blockquote>
-<p>由<span class="math inline">\(A\)</span>是正规矩阵，<span class="math inline">\(A\)</span>可酉对角化，因此<span class="math inline">\(A = U^H diag(\lambda_1, \lambda_2, ..., \lambda_n) U\)</span></p>
-<p>继而<span class="math inline">\(AA^H = U^H diag(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2) U\)</span>，那么<span class="math inline">\(|\lambda_1|^2, |\lambda_2|^2, ..., |\lambda_n|^2\)</span>就是<span class="math inline">\(AA^H\)</span>的特征值，从而<span class="math inline">\(|\lambda_1|, |\lambda_2|, ..., |\lambda_n|\)</span>就是<span class="math inline">\(A\)</span>的奇异值</p>
-<blockquote>
-<p>酉矩阵特征值值的模都为<span class="math inline">\(1\)</span></p>
-</blockquote>
-<p>由于<span class="math inline">\(x^Hy = x^HU^HUy = (Ux)^H(Uy)\)</span>，对于酉矩阵<span class="math inline">\(U\)</span>的特征值<span class="math inline">\(\lambda\)</span>，我们对其特征向量<span class="math inline">\(x\)</span>进行考察，那么<span class="math inline">\(x^Hx = (Ux)^HUx = \lambda^H \lambda x^Hx = |\lambda|^2 x^Hx\)</span>，故<span class="math inline">\(|\lambda| = 1\)</span></p>
-<blockquote>
-<p>若<span class="math inline">\(A\)</span>是正规矩阵，且<span class="math inline">\(A\)</span>的特征值的模为<span class="math inline">\(1\)</span>，那么<span class="math inline">\(A\)</span>为酉矩阵</p>
-</blockquote>
-<p>直接运用上题的结论即可</p>
-<blockquote>
-<p>两个正规矩阵相似的充要条件是两者的特征多项式相同</p>
-</blockquote>
-<p>充分性：如果正规矩阵<span class="math inline">\(A, B\)</span>的特征多项式相同，那么存在酉矩阵<span class="math inline">\(U_1, U_2\)</span>，使得<span class="math inline">\(A = U_1^H \Lambda U_1, B = U_2^H \Lambda U_2\)</span>，从而<span class="math inline">\(A = (U_1^{-1}U_2)^H \Lambda (U_1^{-1}U_2)\)</span>，从而两者相似</p>
-<p>必要性：相似矩阵有相同的特征多项式</p>
-<blockquote>
-<p>若<span class="math inline">\(A\)</span>为实矩阵，且<span class="math inline">\(A^TA = AA^T\)</span>，那么<span class="math inline">\(A\)</span>是对称矩阵</p>
-</blockquote>
-<p><span class="math inline">\(A\)</span>满足正规矩阵的定义，因此有<span class="math inline">\(A = U^H \Lambda U\)</span>，其中<span class="math inline">\(U\)</span>为酉矩阵，<span class="math inline">\(\Lambda\)</span>为特征值构成的对角阵</p>
-<p>那么由<span class="math inline">\(A^H=A\)</span>，<span class="math inline">\(A^H = A^T\)</span>，我们得到<span class="math inline">\(A=A^T\)</span></p>
-<blockquote>
-<p>正规矩阵<span class="math inline">\(A\)</span>是埃尔米特矩阵，当且仅当<span class="math inline">\(A\)</span>的特征值全为实数</p>
-</blockquote>
-<p>”<span class="math inline">\(\Rightarrow\)</span>“：显然</p>
-<p>"<span class="math inline">\(\Leftarrow\)</span>"：我们考虑矩阵<span class="math inline">\(A\)</span>的谱分解，<span class="math inline">\(A = \sum_{i} \lambda_i x_ix_i^H\)</span>，则有<span class="math inline">\(A^H = \sum_i \lambda_i^H x_i x_i^H = \sum_i \lambda_i x_ix_i^H = A\)</span></p>
-<blockquote>
-<p><span class="math inline">\(tr(xy^H) = y^Hx\)</span></p>
-</blockquote>
-<p>取一组标准正交基，设出<span class="math inline">\(x, y\)</span>在这组标准正交基下的坐标为，然后就不难看出了</p>
-<p>特别的，如果我们令<span class="math inline">\(y = Ax\)</span>，则有<span class="math inline">\(tr(Axx^H) = x^HAx\)</span></p>
-<p>暂定</p>
+<ul>
+<li>完备的赋范线性空间，称为Banach空间</li>
+</ul>
+<h3 id="矩阵序列的极限">矩阵序列的极限</h3>
+<ul>
+<li><p>定义：设有矩阵序列<span class="math inline">\(\{A_k\}\)</span>，其中<span class="math inline">\(A_k = (a_{ij}^{(k)})_{n*n}\)</span>，且当<span class="math inline">\(k \to \infty\)</span>时，<span class="math inline">\(a_{ij}^{(k)} \to a_{ij}\)</span>，则称<span class="math inline">\(\{A_k\}\)</span>收敛，并称<span class="math inline">\(A = (a_{ij})\)</span>为<span class="math inline">\(\{A_k\}\)</span>的极限，记做</p>
+<p><span class="math display">\[\lim_{k \to \infty} A_k = A\]</span></p></li>
+<li><p>不收敛的序列称为发散的</p></li>
+</ul>
+<p>这个定义研究起来并不是很方便，我们可以引出一个等价的定义</p>
+<ul>
+<li>在有限维巴拿赫空间中，矩阵序列<span class="math inline">\(\{A_k\}\)</span>收敛于<span class="math inline">\(A\)</span>等价于矩阵序列<span class="math inline">\(\{A_k\}\)</span>按范数收敛于<span class="math inline">\(A\)</span>
+<ul>
+<li>由于所有范数是等价的，我们不妨取矩阵的F-范数来研究，此时矩阵相等于<span class="math inline">\(n*m\)</span>维的一个向量，由向量范数的性质知道，对于F-范数而言，这个定理是成立的</li>
+</ul></li>
+</ul>
+<p>同大多数极限一样，矩阵极限有相应的运算性质</p>
+<ul>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，那么序列<span class="math inline">\(\{||A_k||\}\)</span>有界</p></li>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A, \lim_{k \to \infty} B_k = B\)</span>，那么</p>
+<p><span class="math display">\[\lim_{k \to \infty} (aA_k + bB_k) = aA + bB\]</span></p></li>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A. \lim_{k \to \infty} B_k = B\)</span>，那么</p>
+<p><span class="math display">\[\lim_{k \to \infty} A_kB_k = AB\]</span></p>
+<ul>
+<li><span class="math inline">\(||A_kB_k - AB|| \leq ||(A_k- A)||*||B_k|| + ||(B_k-B)||*||A||\)</span></li>
+</ul></li>
+<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，且<span class="math inline">\(A_k(k \in N^{+}), A\)</span>都可逆，那么</p>
+<p><span class="math display">\[\lim_{k \to \infty} A_k^{=1} = A^{-1}\]</span></p>
+<ul>
+<li><p>注意到对于任意<span class="math inline">\(A_k\)</span>中的子式而言，它可以表示为<span class="math inline">\(A_k\)</span>中元素的连续函数，由连续性，<span class="math inline">\(A_k\)</span>的子式一定收敛于<span class="math inline">\(A\)</span>中对应的子式，特别的，<span class="math inline">\(|A_k| \to |A|\)</span></p>
+<p>同样的，我们将有<span class="math inline">\(\text{adj} A_k \to \text{adj} A\)</span>，从而有<span class="math inline">\(A_k^{-1} \to A^{-1}\)</span></p></li>
+</ul></li>
+</ul>
+<p>下面是一个基础的定理</p>
+<ul>
+<li><p><span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>的充要条件是<span class="math inline">\(\rho(A) &lt; 1\)</span></p>
+<ul>
+<li><p>考虑矩阵<span class="math inline">\(A\)</span>的若尔当标准形<span class="math inline">\(J\)</span>，即<span class="math inline">\(A = TJT^{-1}\)</span>，那么<span class="math inline">\(A^k = T J^K T^{-1}\)</span></p>
+<p>因此<span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>，当且仅当<span class="math inline">\(\lim_{k \to \infty} J^k = 0\)</span></p>
+<p>设<span class="math inline">\(J = diag\{J_1, ..., J_r\}\)</span>，那么<span class="math inline">\(J^k = diag\{J_1^k, ..., J_r^k\}\)</span></p>
+<p>注意到<span class="math inline">\(J_i^k = \begin{pmatrix} \lambda_i^k &amp; \binom{k}{1} \lambda_i^{k-1} &amp; ... &amp; \binom{k}{n_i - 1} \lambda_i^{k - n_i + 1} \\ 0 &amp; \lambda_i^{k} &amp; ... &amp; \binom{k}{n_i-2} \lambda_{i}^{k-n_i+2} \\ ...&amp;... &amp; ... &amp;... \\ ... &amp; ... &amp; ... &amp; \lambda_i^k\end{pmatrix}\)</span>​</p>
+<p>矩阵每个元素都形如<span class="math inline">\(f(k) * \lambda^k\)</span>，其中<span class="math inline">\(f(k)\)</span>是关于<span class="math inline">\(k\)</span>的多项式</p>
+<p>因此，当<span class="math inline">\(|\lambda| &lt; \rho(A) &lt; 1\)</span>时，就有<span class="math inline">\(J_i^k \to O\)</span>，从而<span class="math inline">\(J^k \to O\)</span></p>
+<p>反过来，当<span class="math inline">\(J^k \to O\)</span>时，<span class="math inline">\(J_i^k \to O\)</span>，因此<span class="math inline">\(\lambda_i^k \to 0\)</span>，从而<span class="math inline">\(|\lambda_i| &lt; 1\)</span>，<span class="math inline">\(\rho(A)&lt;1\)</span></p></li>
+</ul></li>
+</ul>
+<h3 id="矩阵级数">矩阵级数</h3>
+<ul>
+<li><p>对矩阵序列<span class="math inline">\(\{A_k\}\)</span>，称<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>为矩阵级数，而<span class="math inline">\(A_k\)</span>称为矩阵级数的一般项</p></li>
+<li><p>称<span class="math inline">\(S_k = \sum_{i=0}^k A_i\)</span>为部分和，如果<span class="math inline">\(\{S_k\}\)</span>收敛，那么称矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，否则称矩阵级数发散</p>
+<ul>
+<li>矩阵级数收敛的充要条件为<span class="math inline">\(n^2\)</span>个对应的数项级数收敛</li>
+</ul></li>
+<li><p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，那么<span class="math inline">\(\lim_{n \to \infty} A_n = O\)</span></p>
+<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>都收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} (A_i + B_i) = \sum_{i=0}^{\infty} A_i + \sum_{i=0}^{\infty} B_i\)</span></p>
+<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} kA_i = k \sum_{i=0}^{\infty} A_i\)</span></p></li>
+<li><p>如果<span class="math inline">\(n^2\)</span>个对应的数项级数都绝对收敛，那么称矩阵级数绝对收敛</p>
+<ul>
+<li><p>矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛的充要条件为<span class="math inline">\(\sum_{i=0}^{\infty} ||A_i||\)</span>收敛，其中<span class="math inline">\(||\cdot||\)</span>为任意一种矩阵级数</p>
+<p>把矩阵想象成一个向量，利用<span class="math inline">\(F\)</span>-​范数不难证明</p></li>
+</ul></li>
+</ul>
+<p>仿照数分中的结果，对于矩阵级数，我们有相似的结果</p>
+<ul>
+<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>绝对收敛于<span class="math inline">\(A, B\)</span>，那么<span class="math inline">\(\sum_{i=0}^{\infty} \sum_{j+k = i} A_jB_k\)</span>绝对收敛于<span class="math inline">\(AB\)</span></li>
+<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛，那么<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，并且<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>改变求和次序后，收敛结果不变</li>
+</ul>
+<p>也有一些和数分中有差异的结果</p>
+<ul>
+<li><p>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>（绝对）收敛，那么对于非奇异矩阵<span class="math inline">\(P, Q\)</span>，有<span class="math inline">\(\sum_{i=0}^{\infty} PA_iQ\)</span>（绝对）收敛</p>
+<ul>
+<li><p>在绝对收敛的情况下，给出证明</p>
+<p>注意到<span class="math inline">\(||PA_iQ|| \leq ||P||*||Q|| * ||A_i||\)</span>，而<span class="math inline">\(||P||*||Q||\)</span>为非零常数</p></li>
+</ul></li>
+</ul>
+<p>接下来考虑矩阵幂级数</p>
+<ul>
+<li>形如<span class="math inline">\(\sum c_i A^i\)</span>的矩阵级数称为矩阵幂级数</li>
+</ul>
+<p>考虑到范数的相容性，我们有</p>
+<ul>
+<li><p>如果对于某一种矩阵范数，<span class="math inline">\(\sum c_i ||A||^i\)</span>收敛，那么对应的矩阵级数绝对收敛</p></li>
+<li><p>如果对于某一种矩阵范数，<span class="math inline">\(||A||\)</span>落在<span class="math inline">\(\sum c_i z^i\)</span>的收敛圆中，那么对应的矩阵级数绝对收敛</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>​的谱半径<span class="math inline">\(\rho(A)\)</span>​落在纯量幂级数<span class="math inline">\(\sum c_ix^i\)</span>​的收敛圆中，那么对应的矩阵级数绝对收敛；如果<span class="math inline">\(A\)</span>​的特征值有一个落在<span class="math inline">\(\sum c_iz^i\)</span>​​的收敛圆外，那么对应的矩阵级数发散</p>
+<ul>
+<li>考虑若尔当标准形</li>
+</ul></li>
+</ul>
+<h3 id="矩阵函数">矩阵函数</h3>
+<ul>
+<li><p>考虑以下三个矩阵级数</p>
+<p><span class="math display">\[\exp(A) = \sum_{i=0}^{\infty} \frac{A^i}{i!}\]</span></p>
+<p><span class="math display">\[\sin(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i+1}}{(2i+1)!}\]</span></p>
+<p><span class="math display">\[\cos(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i}}{(2i)!}\]</span></p>
+<p>它们都是绝对收敛的，具体而言，设<span class="math inline">\(z = ||A||\)</span>，那么，当<span class="math inline">\(i \geq 1\)</span>时，由<span class="math inline">\(||\frac{A^i}{i!}|| \leq z^i *(i!)^{-1}\)</span>，得到<span class="math inline">\(||\sum_{i=0}^{\infty} \frac{A^i}{i!}|| \leq ||I|| + \sum_{i=1}^{\infty} z^i * (i!)^{-1} = e^z - 1 + ||I||\)</span>，因此<span class="math inline">\(\exp(A)\)</span>绝对收敛</p>
+<p><span class="math inline">\(\sin(A), \cos(A)\)</span>的绝对收敛性可以类似地证明</p></li>
+</ul>
+<p>即使是基础的矩阵函数，性质也和普通的函数有所不同</p>
+<ul>
+<li><p>如果<span class="math inline">\(A, B\)</span>可交换，即<span class="math inline">\(AB = BA\)</span>，则有<span class="math inline">\(e^A * e^B = e^B * e^A = e^{A+B}\)</span></p>
+<p>证明：由于<span class="math inline">\(e^A, e^B\)</span>​绝对收敛，我们可以考虑两者的柯西乘积</p>
+<p><span class="math display">\[\begin{align*}e^A * e^B &amp;= (I + A + \frac{1}{2!}A^2 + ...)(I + B + \frac{1}{2!}B^2 + ...) \\ &amp;= I + (A+B) + \frac{1}{2!}(A+B)^2 + ... \\ &amp;= e^{A+B}\end{align*}\]</span></p></li>
+<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\cos(A+B) = \cos A \cos B - \sin A \sin B\)</span></p>
+<p>证明：对比两式同次数的项，显然奇次数项都为0，我们只需要证明</p>
+<p><span class="math display">\[\begin{align*}RHS &amp;= \sum_{i+j = k} (-1)^{i+j} \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} - \sum_{i+j = k-1} (-1)^{i+j} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}\\ &amp;= (-1)^k [\sum_{i+j = k}  \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} + \sum_{i+j = k-1} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}] \\ &amp;= \frac{(-1)^k}{(2k)!} [\sum_{i} \binom{2k}{2i}A^{2i}B^{2k-2i} + \sum_i \binom{2k}{2i+1}A^{2i+1}B^{2k-2i-1}] \\ &amp;= \frac{(-1)^k}{(2k)!} \sum_i \binom{2k}{i} A^i B^{2k-i} \\ &amp;= \frac{(-1)^k}{(2k)!} (A+B)^{2k} \\ &amp;= LHS\end{align*}\]</span></p></li>
+<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\sin(A+B) = \sin A \cos B + \cos A \sin B\)</span>​</p></li>
+</ul>
+<p>当然，也有一些和普通函数相同的性质</p>
+<ul>
+<li><p><span class="math inline">\(\cos(-A) = \cos A, \sin (-A) = -\sin(A)\)</span>​</p></li>
+<li><p>欧拉公式</p>
+<p><span class="math display">\[\exp(iA) = \cos A + i \sin A\]</span></p></li>
+</ul>
+<p>下面给出一些特殊情况下的矩阵函数的求法</p>
+<ul>
+<li>如果矩阵<span class="math inline">\(A\)</span>具有谱分解<span class="math inline">\(\sum \lambda_i x_ix_i^T\)</span>，那么矩阵函数<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></li>
+</ul>
+<p>首先有一个容易验证的引理：对于多项式<span class="math inline">\(f(x)\)</span>，如果<span class="math inline">\(x\)</span>是<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda\)</span>的一个特征向量，那么<span class="math inline">\(x\)</span>也是<span class="math inline">\(f(A)\)</span>的属于<span class="math inline">\(f(\lambda)\)</span>的一个特征向量</p>
+<p>我们设出部分和<span class="math inline">\(f_N(A) = \sum_{i=0}^N c_iA_i\)</span>，那么根据上面的引理，有<span class="math inline">\(f_N(A) = \sum f_N(\lambda_i) x_ix_i^T\)</span></p>
+<p>令<span class="math inline">\(N \to \infty\)</span>，我们就有<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></p>
+<h3 id="矩阵微积分">矩阵微积分</h3>
+<h5 id="矩阵对标量的导数">矩阵对标量的导数</h5>
+<p>对于矩阵<span class="math inline">\(A\)</span>，如果其元素<span class="math inline">\(a_{ij}\)</span>都是变量<span class="math inline">\(x\)</span>的函数<span class="math inline">\(a_{ij}(x)\)</span>，那么我们称矩阵<span class="math inline">\(A\)</span>为变量<span class="math inline">\(x\)</span>的函数矩阵</p>
+<ul>
+<li>函数矩阵的极限：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a^{*}_{ij}\)</span>存在时，我们称<span class="math inline">\(A\)</span>有极限，且极限为<span class="math inline">\(A^* = \{a^{*}_{ij}\}\)</span></li>
+<li>函数矩阵的连续性：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a_{ij}(x_0)\)</span>时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点连续</li>
+<li>函数矩阵的导数：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} \frac{a_{ij}(x) - a_{ij}(x_0)}{x-x_0} = a&#39;_{ij}(x_0)\)</span>存在时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点可导，且导数为<span class="math inline">\(A&#39;(x_0) = \{a&#39;_{ij}(x_0)\}\)</span></li>
+</ul>
+<p>由于可以看成是每个分量函数的一种组合，因此函数矩阵的导数自然地有</p>
+<ul>
+<li><p><span class="math inline">\((aA+bB)&#39;=aA&#39;+bB&#39;\)</span></p></li>
+<li><p><span class="math inline">\((f(x)A(x))&#39; = f&#39;(x)A(x) + f(x)A&#39;(x)\)</span></p></li>
+</ul>
+<p>还有一些并不能自然得到的性质</p>
+<ul>
+<li><span class="math inline">\((A(x)B(x))&#39;=A&#39;(x)B(x)+A(x)B&#39;(x)\)</span></li>
+<li><span class="math inline">\((A^{-1}(x))&#39;=-A^{-1}(x)A&#39;(x)A^{-1}(x)\)</span></li>
+</ul>
+<p>我们对这两个性质作出证明，首先是性质1</p>
+<p><span class="math inline">\((A(x)B(x))_{ij}&#39; = (\sum_k a_{ik}b_{kj})&#39; = \sum_k a&#39;_{ik}b_{kj} + \sum_k a_{ik}b_{kj}&#39; = (A&#39;B+AB&#39;)_{ij}\)</span></p>
+<p>性质2可以视为是对性质1的简单应用</p>
+<p><span class="math inline">\((A(x)A^{-1}(x))&#39; = A&#39;(x)A^{-1}(x)+(A^{-1}(x))&#39;A(x)=O\)</span></p>
+<p>即使是矩阵对标量的导数，一般也没有简单的形式，比如</p>
+<p><span class="math display">\[\frac{\text{d} A^3}{\text{d} x} = A&#39;AA+AA&#39;A+AAA&#39;\]</span></p>
+<p>不过一些初等函数保持了比较好的性质，对于任何常量矩阵<span class="math inline">\(A\)</span>，总有</p>
+<ul>
+<li><span class="math inline">\((e^{Ax})&#39; = A e^{Ax} = e^{Ax}A\)</span></li>
+<li><span class="math inline">\((\cos Ax)&#39; = -A \sin Ax = - \sin Ax *A\)</span></li>
+<li><span class="math inline">\((\sin Ax)&#39; = A \cos Ax = \cos Ax * A\)</span></li>
+<li><span class="math inline">\((\tr A)&#39; = \tr A&#39;\)</span></li>
+</ul>
+<h5 id="数量函数对矩阵的导数">数量函数对矩阵的导数</h5>
+<p>设<span class="math inline">\(f(A)\)</span>是一个将矩阵<span class="math inline">\(A\)</span>映射到标量上的函数，那么我们定义</p>
+<p><span class="math display">\[\frac{\text{d} f(A)}{\text{d} A} = (\frac{\part f(A)}{\part a_{ij}})_{m \times n}\]</span></p>
+<p>为<span class="math inline">\(f(A)\)</span>对矩阵<span class="math inline">\(A\)</span>的导数</p>
+<p>向量时矩阵的一种特例，因此这里也定义出了向量的情况</p>
+<p>一般导数的线性性和乘法法则仍是成立的，我们考察一些特殊的例子</p>
+<ul>
+<li>设<span class="math inline">\(f(x) = x^TAx\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} x^TAx \\ &amp;=\frac{\part}{\part x_k} \sum_{i, j} a_{ij}x_ix_j \\ &amp;= \sum_i a_{ik}x_i + \sum_{j}a_{kj}x_j \\ &amp;= (Ax)_k + (A^Tx)_k\end{align}\]</span></p>
+<p>因此，我们有</p>
+<p><span class="math display">\[\frac{\text{d} f(x)}{\text{d} x} = (A+A^T)x\]</span></p>
+<ul>
+<li>设<span class="math inline">\(f(x) = ||Ax-b||_2^2\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
+</ul>
+<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} 
+||Ax-b||^2_2  \\ &amp;= \frac{\part}{\part x_k}  \sum_i (\sum a_{ij}x_j - b_i)^2 \\ &amp;= \sum_i 2a_{ik}(\sum a_{ij}x_j - b_i) \\ &amp;= 2\sum_{i, j} a_{ik}a_{ij}x_j - 2\sum_i a_{ik}b_i \\ &amp;=2 (A^TAx-A^Tb)_{k}\end{align}\]</span></p>
+<p>因此，<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x} = 2(A^TAx-A^Tb)\)</span></p>
+<p>一般来说，当一个函数取到极值时，其导数为0，而这个函数正是我们十分熟悉的最小二乘法的函数，我们令其导数为0，将得到<span class="math inline">\(x = (A^TA)^{-1} Ab\)</span></p>
+<ul>
+<li>设<span class="math inline">\(f(A) = |A|\)</span>，求<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A}\)</span>，这里<span class="math inline">\(|A|\)</span>是矩阵<span class="math inline">\(A\)</span>的行列式</li>
+</ul>
+<p>事实上，要求对<span class="math inline">\(ij\)</span>位置元素的偏导数，我们可以考虑按矩阵<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>行展开</p>
+<p><span class="math inline">\(A = \sum_j a_{ij} A_{ij}\)</span>，那么，不难直接看出，<span class="math inline">\(\frac{\part f(A)}{\part a_{ij}} = A_{ij}\)</span></p>
+<p>因此，<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (A^*)^T\)</span></p>
+<p>当<span class="math inline">\(|A| \neq 0\)</span>时，我们可以用<span class="math inline">\(A^{-1}\)</span>来表示，即<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (|A|A^{-1})^T = |A|(A^{-1})^T\)</span></p>
+<h5 id="矩阵对矩阵的导数">矩阵对矩阵的导数</h5>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -3549,196 +3739,6 @@ x &amp;1  &amp; 0 &amp; 0 &amp; ... &amp; 0 \\
       </categories>
       <tags>
         <tag>numerical_analysis</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>矩阵分析 6</title>
-    <url>/2021/08/matrix-analysis-6/</url>
-    <content><![CDATA[<span id="more"></span>
-<ul>
-<li>完备的赋范线性空间，称为Banach空间</li>
-</ul>
-<h3 id="矩阵序列的极限">矩阵序列的极限</h3>
-<ul>
-<li><p>定义：设有矩阵序列<span class="math inline">\(\{A_k\}\)</span>，其中<span class="math inline">\(A_k = (a_{ij}^{(k)})_{n*n}\)</span>，且当<span class="math inline">\(k \to \infty\)</span>时，<span class="math inline">\(a_{ij}^{(k)} \to a_{ij}\)</span>，则称<span class="math inline">\(\{A_k\}\)</span>收敛，并称<span class="math inline">\(A = (a_{ij})\)</span>为<span class="math inline">\(\{A_k\}\)</span>的极限，记做</p>
-<p><span class="math display">\[\lim_{k \to \infty} A_k = A\]</span></p></li>
-<li><p>不收敛的序列称为发散的</p></li>
-</ul>
-<p>这个定义研究起来并不是很方便，我们可以引出一个等价的定义</p>
-<ul>
-<li>在有限维巴拿赫空间中，矩阵序列<span class="math inline">\(\{A_k\}\)</span>收敛于<span class="math inline">\(A\)</span>等价于矩阵序列<span class="math inline">\(\{A_k\}\)</span>按范数收敛于<span class="math inline">\(A\)</span>
-<ul>
-<li>由于所有范数是等价的，我们不妨取矩阵的F-范数来研究，此时矩阵相等于<span class="math inline">\(n*m\)</span>维的一个向量，由向量范数的性质知道，对于F-范数而言，这个定理是成立的</li>
-</ul></li>
-</ul>
-<p>同大多数极限一样，矩阵极限有相应的运算性质</p>
-<ul>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，那么序列<span class="math inline">\(\{||A_k||\}\)</span>有界</p></li>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A, \lim_{k \to \infty} B_k = B\)</span>，那么</p>
-<p><span class="math display">\[\lim_{k \to \infty} (aA_k + bB_k) = aA + bB\]</span></p></li>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A. \lim_{k \to \infty} B_k = B\)</span>，那么</p>
-<p><span class="math display">\[\lim_{k \to \infty} A_kB_k = AB\]</span></p>
-<ul>
-<li><span class="math inline">\(||A_kB_k - AB|| \leq ||(A_k- A)||*||B_k|| + ||(B_k-B)||*||A||\)</span></li>
-</ul></li>
-<li><p>如果<span class="math inline">\(\lim_{k \to \infty} A_k = A\)</span>，且<span class="math inline">\(A_k(k \in N^{+}), A\)</span>都可逆，那么</p>
-<p><span class="math display">\[\lim_{k \to \infty} A_k^{=1} = A^{-1}\]</span></p>
-<ul>
-<li><p>注意到对于任意<span class="math inline">\(A_k\)</span>中的子式而言，它可以表示为<span class="math inline">\(A_k\)</span>中元素的连续函数，由连续性，<span class="math inline">\(A_k\)</span>的子式一定收敛于<span class="math inline">\(A\)</span>中对应的子式，特别的，<span class="math inline">\(|A_k| \to |A|\)</span></p>
-<p>同样的，我们将有<span class="math inline">\(\text{adj} A_k \to \text{adj} A\)</span>，从而有<span class="math inline">\(A_k^{-1} \to A^{-1}\)</span></p></li>
-</ul></li>
-</ul>
-<p>下面是一个基础的定理</p>
-<ul>
-<li><p><span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>的充要条件是<span class="math inline">\(\rho(A) &lt; 1\)</span></p>
-<ul>
-<li><p>考虑矩阵<span class="math inline">\(A\)</span>的若尔当标准形<span class="math inline">\(J\)</span>，即<span class="math inline">\(A = TJT^{-1}\)</span>，那么<span class="math inline">\(A^k = T J^K T^{-1}\)</span></p>
-<p>因此<span class="math inline">\(\lim_{k \to \infty} A^k = 0\)</span>，当且仅当<span class="math inline">\(\lim_{k \to \infty} J^k = 0\)</span></p>
-<p>设<span class="math inline">\(J = diag\{J_1, ..., J_r\}\)</span>，那么<span class="math inline">\(J^k = diag\{J_1^k, ..., J_r^k\}\)</span></p>
-<p>注意到<span class="math inline">\(J_i^k = \begin{pmatrix} \lambda_i^k &amp; \binom{k}{1} \lambda_i^{k-1} &amp; ... &amp; \binom{k}{n_i - 1} \lambda_i^{k - n_i + 1} \\ 0 &amp; \lambda_i^{k} &amp; ... &amp; \binom{k}{n_i-2} \lambda_{i}^{k-n_i+2} \\ ...&amp;... &amp; ... &amp;... \\ ... &amp; ... &amp; ... &amp; \lambda_i^k\end{pmatrix}\)</span>​</p>
-<p>矩阵每个元素都形如<span class="math inline">\(f(k) * \lambda^k\)</span>，其中<span class="math inline">\(f(k)\)</span>是关于<span class="math inline">\(k\)</span>的多项式</p>
-<p>因此，当<span class="math inline">\(|\lambda| &lt; \rho(A) &lt; 1\)</span>时，就有<span class="math inline">\(J_i^k \to O\)</span>，从而<span class="math inline">\(J^k \to O\)</span></p>
-<p>反过来，当<span class="math inline">\(J^k \to O\)</span>时，<span class="math inline">\(J_i^k \to O\)</span>，因此<span class="math inline">\(\lambda_i^k \to 0\)</span>，从而<span class="math inline">\(|\lambda_i| &lt; 1\)</span>，<span class="math inline">\(\rho(A)&lt;1\)</span></p></li>
-</ul></li>
-</ul>
-<h3 id="矩阵级数">矩阵级数</h3>
-<ul>
-<li><p>对矩阵序列<span class="math inline">\(\{A_k\}\)</span>，称<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>为矩阵级数，而<span class="math inline">\(A_k\)</span>称为矩阵级数的一般项</p></li>
-<li><p>称<span class="math inline">\(S_k = \sum_{i=0}^k A_i\)</span>为部分和，如果<span class="math inline">\(\{S_k\}\)</span>收敛，那么称矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，否则称矩阵级数发散</p>
-<ul>
-<li>矩阵级数收敛的充要条件为<span class="math inline">\(n^2\)</span>个对应的数项级数收敛</li>
-</ul></li>
-<li><p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，那么<span class="math inline">\(\lim_{n \to \infty} A_n = O\)</span></p>
-<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>都收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} (A_i + B_i) = \sum_{i=0}^{\infty} A_i + \sum_{i=0}^{\infty} B_i\)</span></p>
-<p><span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛时，<span class="math inline">\(\sum_{i=0}^{\infty} kA_i = k \sum_{i=0}^{\infty} A_i\)</span></p></li>
-<li><p>如果<span class="math inline">\(n^2\)</span>个对应的数项级数都绝对收敛，那么称矩阵级数绝对收敛</p>
-<ul>
-<li><p>矩阵级数<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛的充要条件为<span class="math inline">\(\sum_{i=0}^{\infty} ||A_i||\)</span>收敛，其中<span class="math inline">\(||\cdot||\)</span>为任意一种矩阵级数</p>
-<p>把矩阵想象成一个向量，利用<span class="math inline">\(F\)</span>-​范数不难证明</p></li>
-</ul></li>
-</ul>
-<p>仿照数分中的结果，对于矩阵级数，我们有相似的结果</p>
-<ul>
-<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i, \sum_{i=0}^{\infty} B_i\)</span>绝对收敛于<span class="math inline">\(A, B\)</span>，那么<span class="math inline">\(\sum_{i=0}^{\infty} \sum_{j+k = i} A_jB_k\)</span>绝对收敛于<span class="math inline">\(AB\)</span></li>
-<li>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>绝对收敛，那么<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>收敛，并且<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>改变求和次序后，收敛结果不变</li>
-</ul>
-<p>也有一些和数分中有差异的结果</p>
-<ul>
-<li><p>如果<span class="math inline">\(\sum_{i=0}^{\infty} A_i\)</span>（绝对）收敛，那么对于非奇异矩阵<span class="math inline">\(P, Q\)</span>，有<span class="math inline">\(\sum_{i=0}^{\infty} PA_iQ\)</span>（绝对）收敛</p>
-<ul>
-<li><p>在绝对收敛的情况下，给出证明</p>
-<p>注意到<span class="math inline">\(||PA_iQ|| \leq ||P||*||Q|| * ||A_i||\)</span>，而<span class="math inline">\(||P||*||Q||\)</span>为非零常数</p></li>
-</ul></li>
-</ul>
-<p>接下来考虑矩阵幂级数</p>
-<ul>
-<li>形如<span class="math inline">\(\sum c_i A^i\)</span>的矩阵级数称为矩阵幂级数</li>
-</ul>
-<p>考虑到范数的相容性，我们有</p>
-<ul>
-<li><p>如果对于某一种矩阵范数，<span class="math inline">\(\sum c_i ||A||^i\)</span>收敛，那么对应的矩阵级数绝对收敛</p></li>
-<li><p>如果对于某一种矩阵范数，<span class="math inline">\(||A||\)</span>落在<span class="math inline">\(\sum c_i z^i\)</span>的收敛圆中，那么对应的矩阵级数绝对收敛</p></li>
-<li><p>如果<span class="math inline">\(A\)</span>​的谱半径<span class="math inline">\(\rho(A)\)</span>​落在纯量幂级数<span class="math inline">\(\sum c_ix^i\)</span>​的收敛圆中，那么对应的矩阵级数绝对收敛；如果<span class="math inline">\(A\)</span>​的特征值有一个落在<span class="math inline">\(\sum c_iz^i\)</span>​​的收敛圆外，那么对应的矩阵级数发散</p>
-<ul>
-<li>考虑若尔当标准形</li>
-</ul></li>
-</ul>
-<h3 id="矩阵函数">矩阵函数</h3>
-<ul>
-<li><p>考虑以下三个矩阵级数</p>
-<p><span class="math display">\[\exp(A) = \sum_{i=0}^{\infty} \frac{A^i}{i!}\]</span></p>
-<p><span class="math display">\[\sin(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i+1}}{(2i+1)!}\]</span></p>
-<p><span class="math display">\[\cos(A) = \sum_{i=0}^{\infty} (-1)^i \frac{A^{2i}}{(2i)!}\]</span></p>
-<p>它们都是绝对收敛的，具体而言，设<span class="math inline">\(z = ||A||\)</span>，那么，当<span class="math inline">\(i \geq 1\)</span>时，由<span class="math inline">\(||\frac{A^i}{i!}|| \leq z^i *(i!)^{-1}\)</span>，得到<span class="math inline">\(||\sum_{i=0}^{\infty} \frac{A^i}{i!}|| \leq ||I|| + \sum_{i=1}^{\infty} z^i * (i!)^{-1} = e^z - 1 + ||I||\)</span>，因此<span class="math inline">\(\exp(A)\)</span>绝对收敛</p>
-<p><span class="math inline">\(\sin(A), \cos(A)\)</span>的绝对收敛性可以类似地证明</p></li>
-</ul>
-<p>即使是基础的矩阵函数，性质也和普通的函数有所不同</p>
-<ul>
-<li><p>如果<span class="math inline">\(A, B\)</span>可交换，即<span class="math inline">\(AB = BA\)</span>，则有<span class="math inline">\(e^A * e^B = e^B * e^A = e^{A+B}\)</span></p>
-<p>证明：由于<span class="math inline">\(e^A, e^B\)</span>​绝对收敛，我们可以考虑两者的柯西乘积</p>
-<p><span class="math display">\[\begin{align*}e^A * e^B &amp;= (I + A + \frac{1}{2!}A^2 + ...)(I + B + \frac{1}{2!}B^2 + ...) \\ &amp;= I + (A+B) + \frac{1}{2!}(A+B)^2 + ... \\ &amp;= e^{A+B}\end{align*}\]</span></p></li>
-<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\cos(A+B) = \cos A \cos B - \sin A \sin B\)</span></p>
-<p>证明：对比两式同次数的项，显然奇次数项都为0，我们只需要证明</p>
-<p><span class="math display">\[\begin{align*}RHS &amp;= \sum_{i+j = k} (-1)^{i+j} \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} - \sum_{i+j = k-1} (-1)^{i+j} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}\\ &amp;= (-1)^k [\sum_{i+j = k}  \frac{A^{2i}}{(2i)!} \frac{B^{2j}}{(2j)!} + \sum_{i+j = k-1} \frac{A^{2i+1}}{(2i+1)!} \frac{B^{2j+1}}{(2j+1)!}] \\ &amp;= \frac{(-1)^k}{(2k)!} [\sum_{i} \binom{2k}{2i}A^{2i}B^{2k-2i} + \sum_i \binom{2k}{2i+1}A^{2i+1}B^{2k-2i-1}] \\ &amp;= \frac{(-1)^k}{(2k)!} \sum_i \binom{2k}{i} A^i B^{2k-i} \\ &amp;= \frac{(-1)^k}{(2k)!} (A+B)^{2k} \\ &amp;= LHS\end{align*}\]</span></p></li>
-<li><p>如果<span class="math inline">\(A, B\)</span>可交换，那么<span class="math inline">\(\sin(A+B) = \sin A \cos B + \cos A \sin B\)</span>​</p></li>
-</ul>
-<p>当然，也有一些和普通函数相同的性质</p>
-<ul>
-<li><p><span class="math inline">\(\cos(-A) = \cos A, \sin (-A) = -\sin(A)\)</span>​</p></li>
-<li><p>欧拉公式</p>
-<p><span class="math display">\[\exp(iA) = \cos A + i \sin A\]</span></p></li>
-</ul>
-<p>下面给出一些特殊情况下的矩阵函数的求法</p>
-<ul>
-<li>如果矩阵<span class="math inline">\(A\)</span>具有谱分解<span class="math inline">\(\sum \lambda_i x_ix_i^T\)</span>，那么矩阵函数<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></li>
-</ul>
-<p>首先有一个容易验证的引理：对于多项式<span class="math inline">\(f(x)\)</span>，如果<span class="math inline">\(x\)</span>是<span class="math inline">\(A\)</span>的属于<span class="math inline">\(\lambda\)</span>的一个特征向量，那么<span class="math inline">\(x\)</span>也是<span class="math inline">\(f(A)\)</span>的属于<span class="math inline">\(f(\lambda)\)</span>的一个特征向量</p>
-<p>我们设出部分和<span class="math inline">\(f_N(A) = \sum_{i=0}^N c_iA_i\)</span>，那么根据上面的引理，有<span class="math inline">\(f_N(A) = \sum f_N(\lambda_i) x_ix_i^T\)</span></p>
-<p>令<span class="math inline">\(N \to \infty\)</span>，我们就有<span class="math inline">\(f(A) = \sum f(\lambda_i) x_ix_i^T\)</span></p>
-<h3 id="矩阵微积分">矩阵微积分</h3>
-<h5 id="矩阵对标量的导数">矩阵对标量的导数</h5>
-<p>对于矩阵<span class="math inline">\(A\)</span>，如果其元素<span class="math inline">\(a_{ij}\)</span>都是变量<span class="math inline">\(x\)</span>的函数<span class="math inline">\(a_{ij}(x)\)</span>，那么我们称矩阵<span class="math inline">\(A\)</span>为变量<span class="math inline">\(x\)</span>的函数矩阵</p>
-<ul>
-<li>函数矩阵的极限：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a^{*}_{ij}\)</span>存在时，我们称<span class="math inline">\(A\)</span>有极限，且极限为<span class="math inline">\(A^* = \{a^{*}_{ij}\}\)</span></li>
-<li>函数矩阵的连续性：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} a_{ij}(x) = a_{ij}(x_0)\)</span>时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点连续</li>
-<li>函数矩阵的导数：当<span class="math inline">\(\forall i, j, \lim_{x \to x_0} \frac{a_{ij}(x) - a_{ij}(x_0)}{x-x_0} = a&#39;_{ij}(x_0)\)</span>存在时，我们称<span class="math inline">\(A\)</span>在<span class="math inline">\(x_0\)</span>这一点可导，且导数为<span class="math inline">\(A&#39;(x_0) = \{a&#39;_{ij}(x_0)\}\)</span></li>
-</ul>
-<p>由于可以看成是每个分量函数的一种组合，因此函数矩阵的导数自然地有</p>
-<ul>
-<li><p><span class="math inline">\((aA+bB)&#39;=aA&#39;+bB&#39;\)</span></p></li>
-<li><p><span class="math inline">\((f(x)A(x))&#39; = f&#39;(x)A(x) + f(x)A&#39;(x)\)</span></p></li>
-</ul>
-<p>还有一些并不能自然得到的性质</p>
-<ul>
-<li><span class="math inline">\((A(x)B(x))&#39;=A&#39;(x)B(x)+A(x)B&#39;(x)\)</span></li>
-<li><span class="math inline">\((A^{-1}(x))&#39;=-A^{-1}(x)A&#39;(x)A^{-1}(x)\)</span></li>
-</ul>
-<p>我们对这两个性质作出证明，首先是性质1</p>
-<p><span class="math inline">\((A(x)B(x))_{ij}&#39; = (\sum_k a_{ik}b_{kj})&#39; = \sum_k a&#39;_{ik}b_{kj} + \sum_k a_{ik}b_{kj}&#39; = (A&#39;B+AB&#39;)_{ij}\)</span></p>
-<p>性质2可以视为是对性质1的简单应用</p>
-<p><span class="math inline">\((A(x)A^{-1}(x))&#39; = A&#39;(x)A^{-1}(x)+(A^{-1}(x))&#39;A(x)=O\)</span></p>
-<p>即使是矩阵对标量的导数，一般也没有简单的形式，比如</p>
-<p><span class="math display">\[\frac{\text{d} A^3}{\text{d} x} = A&#39;AA+AA&#39;A+AAA&#39;\]</span></p>
-<p>不过一些初等函数保持了比较好的性质，对于任何常量矩阵<span class="math inline">\(A\)</span>，总有</p>
-<ul>
-<li><span class="math inline">\((e^{Ax})&#39; = A e^{Ax} = e^{Ax}A\)</span></li>
-<li><span class="math inline">\((\cos Ax)&#39; = -A \sin Ax = - \sin Ax *A\)</span></li>
-<li><span class="math inline">\((\sin Ax)&#39; = A \cos Ax = \cos Ax * A\)</span></li>
-<li><span class="math inline">\((\tr A)&#39; = \tr A&#39;\)</span></li>
-</ul>
-<h5 id="数量函数对矩阵的导数">数量函数对矩阵的导数</h5>
-<p>设<span class="math inline">\(f(A)\)</span>是一个将矩阵<span class="math inline">\(A\)</span>映射到标量上的函数，那么我们定义</p>
-<p><span class="math display">\[\frac{\text{d} f(A)}{\text{d} A} = (\frac{\part f(A)}{\part a_{ij}})_{m \times n}\]</span></p>
-<p>为<span class="math inline">\(f(A)\)</span>对矩阵<span class="math inline">\(A\)</span>的导数</p>
-<p>向量时矩阵的一种特例，因此这里也定义出了向量的情况</p>
-<p>一般导数的线性性和乘法法则仍是成立的，我们考察一些特殊的例子</p>
-<ul>
-<li>设<span class="math inline">\(f(x) = x^TAx\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
-</ul>
-<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} x^TAx \\ &amp;=\frac{\part}{\part x_k} \sum_{i, j} a_{ij}x_ix_j \\ &amp;= \sum_i a_{ik}x_i + \sum_{j}a_{kj}x_j \\ &amp;= (Ax)_k + (A^Tx)_k\end{align}\]</span></p>
-<p>因此，我们有</p>
-<p><span class="math display">\[\frac{\text{d} f(x)}{\text{d} x} = (A+A^T)x\]</span></p>
-<ul>
-<li>设<span class="math inline">\(f(x) = ||Ax-b||_2^2\)</span>，求<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x}\)</span></li>
-</ul>
-<p><span class="math display">\[\begin{align}\frac{\part f(x)}{\part x_k} &amp;= \frac{\part}{\part x_k} 
-||Ax-b||^2_2  \\ &amp;= \frac{\part}{\part x_k}  \sum_i (\sum a_{ij}x_j - b_i)^2 \\ &amp;= \sum_i 2a_{ik}(\sum a_{ij}x_j - b_i) \\ &amp;= 2\sum_{i, j} a_{ik}a_{ij}x_j - 2\sum_i a_{ik}b_i \\ &amp;=2 (A^TAx-A^Tb)_{k}\end{align}\]</span></p>
-<p>因此，<span class="math inline">\(\frac{\text{d} f(x)}{\text{d} x} = 2(A^TAx-A^Tb)\)</span></p>
-<p>一般来说，当一个函数取到极值时，其导数为0，而这个函数正是我们十分熟悉的最小二乘法的函数，我们令其导数为0，将得到<span class="math inline">\(x = (A^TA)^{-1} Ab\)</span></p>
-<ul>
-<li>设<span class="math inline">\(f(A) = |A|\)</span>，求<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A}\)</span>，这里<span class="math inline">\(|A|\)</span>是矩阵<span class="math inline">\(A\)</span>的行列式</li>
-</ul>
-<p>事实上，要求对<span class="math inline">\(ij\)</span>位置元素的偏导数，我们可以考虑按矩阵<span class="math inline">\(A\)</span>的第<span class="math inline">\(i\)</span>行展开</p>
-<p><span class="math inline">\(A = \sum_j a_{ij} A_{ij}\)</span>，那么，不难直接看出，<span class="math inline">\(\frac{\part f(A)}{\part a_{ij}} = A_{ij}\)</span></p>
-<p>因此，<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (A^*)^T\)</span></p>
-<p>当<span class="math inline">\(|A| \neq 0\)</span>时，我们可以用<span class="math inline">\(A^{-1}\)</span>来表示，即<span class="math inline">\(\frac{\text{d} f(A)}{\text{d} A} = (|A|A^{-1})^T = |A|(A^{-1})^T\)</span></p>
-<h5 id="矩阵对矩阵的导数">矩阵对矩阵的导数</h5>
-]]></content>
-      <categories>
-        <category>notes</category>
-      </categories>
-      <tags>
-        <tag>matrix_analysis</tag>
       </tags>
   </entry>
   <entry>
@@ -4310,44 +4310,6 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
       </tags>
   </entry>
   <entry>
-    <title>牛客多校第五场</title>
-    <url>/2021/08/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/</url>
-    <content><![CDATA[<span id="more"></span>
-<p>Gromah的题...</p>
-<p>有些科技还是太为难老年人了...</p>
-<h4 id="c">C</h4>
-<h5 id="题意">题意</h5>
-<p>给定一个长为<span class="math inline">\(n\)</span>的串，表示两个人打乒乓球，连续打<span class="math inline">\(n\)</span>个球的结果</p>
-<p>对于<span class="math inline">\(i\)</span>，我们定义<span class="math inline">\(i\)</span>赛制表示，双方中有一方得分超过<span class="math inline">\(i\)</span>分，并且分差大于等于<span class="math inline">\(2\)</span>时结果比赛的赛制</p>
-<p>现在询问，对<span class="math inline">\(i = 1, 2, ..., n\)</span>，在<span class="math inline">\(i\)</span>赛制的情况下，Gromah赢了多少场</p>
-<h5 id="题解">题解</h5>
-<p>还挺有意思的</p>
-<p>一个显然的性质是，在<span class="math inline">\(i\)</span>赛制下，比赛最多只有<span class="math inline">\(\lfloor \frac{n}{i} \rfloor\)</span>场</p>
-<p>.....然后考场上就短路了...</p>
-<p>我们可以预处理出<span class="math inline">\(A\)</span>赢了<span class="math inline">\(i\)</span>个球的位置和<span class="math inline">\(B\)</span>赢了<span class="math inline">\(i\)</span>个球的位置，依次，我们可以判断他们是否进入了平局的阶段，如果进入了平局的阶段，说明之后的比赛应该是两者一赢一输，这个段也可以预处理出来</p>
-<p>然后就完事了</p>
-<h4 id="e">E</h4>
-<h5 id="吐槽">吐槽</h5>
-<p>考场上写的脑子有点懵</p>
-<p>C++的右移是坑爹的逻辑右移，对一个负数不断右移会得到一堆<span class="math inline">\(1\)</span>，在利用<span class="math inline">\(\sim\)</span>时被卡了记下...</p>
-<h4 id="g">G</h4>
-<h5 id="吐槽-1">吐槽</h5>
-<p>奇奇怪怪题</p>
-<h5 id="题意-1">题意</h5>
-<p>给定<span class="math inline">\(a, b, \{p_i\}, \{q_i\}\)</span>，定义<span class="math inline">\(c = \prod p_i^{q_i}\)</span>，尝试找到<span class="math inline">\(x, y\)</span>，使得<span class="math inline">\(x + y\)</span>最小，并且<span class="math inline">\(lcm(a+x, b+y) = c\)</span></p>
-<h5 id="题解-1">题解</h5>
-<p>队友的做法我没听...好像是极限数据<span class="math inline">\(2^{27}\)</span>，但能卡卡的做法...（然后就WA了）</p>
-<p>一个简单的想法是，枚举<span class="math inline">\(c\)</span>的约数<span class="math inline">\(d_1\)</span>，假设<span class="math inline">\(a + x = d_1\)</span>，<span class="math inline">\(d_1\)</span>也许会在若干质数上的次数没有卡到<span class="math inline">\(q_i\)</span>，这就需要<span class="math inline">\(b+y\)</span>去调整，也就是说相当于对于某个数<span class="math inline">\(M\)</span>，<span class="math inline">\(b+y\)</span>需要是<span class="math inline">\(M\)</span>的倍数，而系数则应该是剩下卡到<span class="math inline">\(q_i\)</span>的位置上质数次幂乘积的一个因子，难点在于如何寻找这个因子</p>
-<p>利用折半搜索优化一下复杂度就能过了...</p>
-]]></content>
-      <categories>
-        <category>problems</category>
-      </categories>
-      <tags>
-        <tag>ACM</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>2021杭电多校第二场T9</title>
     <url>/2021/07/problem-1/</url>
     <content><![CDATA[<span id="more"></span>
@@ -4496,6 +4458,35 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
       </tags>
   </entry>
   <entry>
+    <title>有的时候一言难尽</title>
+    <url>/2022/03/training-1/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="a">A</h2>
+<blockquote>
+<p>求满足<span class="math inline">\(1 \leq a_{i, j} \leq K\)</span>，并且<span class="math inline">\(a_{i, j} \leq a_{i, j+1}\)</span>，<span class="math inline">\(a_{i, j} \leq a_{i+1,j}\)</span>，<span class="math inline">\(a_{R, C}=V\)</span>的<span class="math inline">\(N*M\)</span>的大小的矩阵的数量</p>
+<p>其中<span class="math inline">\(1 \leq R \leq N, 1 \leq C \leq M\)</span></p>
+</blockquote>
+<p>注意到值为<span class="math inline">\(i-1\)</span>和值为<span class="math inline">\(i\)</span>的部分有一条分界线，一共有<span class="math inline">\(K\)</span>条，把这些分界线稍微作移动，他们就等价于不相交的路径，我们很容易通过这些分界线来还原出原来的取值</p>
+<p>对于<span class="math inline">\(a_{R, C}=V\)</span>，就是<span class="math inline">\((R, C)\)</span>这个点上方有<span class="math inline">\(V-1\)</span>条分界线，在LGV引理中，我们可以把所有满足在<span class="math inline">\((R, C)\)</span>上方的分界线的权值记为<span class="math inline">\(x\)</span>然后算行列式，然后考虑<span class="math inline">\(V-1\)</span>次的系数即可</p>
+<p>直接计算<span class="math inline">\(x\)</span>可能较为复杂，我们可以考虑对<span class="math inline">\(x\)</span>进行赋值之后进行插值</p>
+<h2 id="d">D</h2>
+<blockquote>
+<p>给定<span class="math inline">\(\{A_n\}, \{B_n\}, \{C_n\}\)</span>，对<span class="math inline">\(k = 1, 2, ..., N\)</span>，求 <span class="math display">\[
+Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
+\]</span></p>
+</blockquote>
+<p>看不懂题解，题解提到了一个Tellegen’s Principle，这个原则说linear straight-line program的转置和原问题有相同的复杂度，但是这个principle没有给出通用的构造，还是要对具体问题进行具体地设计，题解论文里提了这个题的转置转置后的做法，但感觉不够直观，我们就对这个题具体给出一个直观分析</p>
+<p>设<span class="math inline">\(S_j = \sum_{i} C_i A_i^j\)</span>，<span class="math inline">\(f_k(x) = \prod_{1 \leq j \leq k} (x + B_j)\)</span></p>
+<p>那么，我们有<span class="math inline">\(Ans_k = \sum_{i=0}^k f_k(x)[x^i] S_i\)</span>，其中<span class="math inline">\(\{S_n\}\)</span>不难通过FFT计算</p>
+<p>接下来，我们考虑分治，具体的，对区间<span class="math inline">\([l,r]\)</span>分析</p>
+<p>区间<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>对于<span class="math inline">\([l, mid]\)</span>中<span class="math inline">\(Ans\)</span>的影响可以递归考虑，我们只需要考虑<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>对<span class="math inline">\([mid+1, r]\)</span>的<span class="math inline">\(Ans\)</span>的影响，注意到我们只需要考虑<span class="math inline">\([mid+1, r]\)</span>中的<span class="math inline">\(Ans\)</span>中含且仅含<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>的项，而这可以通过一个卷积来计算</p>
+<p>总的复杂度就是<span class="math inline">\(O(n \log^2 n)\)</span></p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+  </entry>
+  <entry>
     <title>牛客多校第二场</title>
     <url>/2021/07/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%8C%E5%9C%BA/</url>
     <content><![CDATA[<span id="more"></span>
@@ -4635,6 +4626,44 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
       </tags>
   </entry>
   <entry>
+    <title>牛客多校第五场</title>
+    <url>/2021/08/%E7%89%9B%E5%AE%A2%E5%A4%9A%E6%A0%A1%E7%AC%AC%E4%BA%94%E5%9C%BA/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>Gromah的题...</p>
+<p>有些科技还是太为难老年人了...</p>
+<h4 id="c">C</h4>
+<h5 id="题意">题意</h5>
+<p>给定一个长为<span class="math inline">\(n\)</span>的串，表示两个人打乒乓球，连续打<span class="math inline">\(n\)</span>个球的结果</p>
+<p>对于<span class="math inline">\(i\)</span>，我们定义<span class="math inline">\(i\)</span>赛制表示，双方中有一方得分超过<span class="math inline">\(i\)</span>分，并且分差大于等于<span class="math inline">\(2\)</span>时结果比赛的赛制</p>
+<p>现在询问，对<span class="math inline">\(i = 1, 2, ..., n\)</span>，在<span class="math inline">\(i\)</span>赛制的情况下，Gromah赢了多少场</p>
+<h5 id="题解">题解</h5>
+<p>还挺有意思的</p>
+<p>一个显然的性质是，在<span class="math inline">\(i\)</span>赛制下，比赛最多只有<span class="math inline">\(\lfloor \frac{n}{i} \rfloor\)</span>场</p>
+<p>.....然后考场上就短路了...</p>
+<p>我们可以预处理出<span class="math inline">\(A\)</span>赢了<span class="math inline">\(i\)</span>个球的位置和<span class="math inline">\(B\)</span>赢了<span class="math inline">\(i\)</span>个球的位置，依次，我们可以判断他们是否进入了平局的阶段，如果进入了平局的阶段，说明之后的比赛应该是两者一赢一输，这个段也可以预处理出来</p>
+<p>然后就完事了</p>
+<h4 id="e">E</h4>
+<h5 id="吐槽">吐槽</h5>
+<p>考场上写的脑子有点懵</p>
+<p>C++的右移是坑爹的逻辑右移，对一个负数不断右移会得到一堆<span class="math inline">\(1\)</span>，在利用<span class="math inline">\(\sim\)</span>时被卡了记下...</p>
+<h4 id="g">G</h4>
+<h5 id="吐槽-1">吐槽</h5>
+<p>奇奇怪怪题</p>
+<h5 id="题意-1">题意</h5>
+<p>给定<span class="math inline">\(a, b, \{p_i\}, \{q_i\}\)</span>，定义<span class="math inline">\(c = \prod p_i^{q_i}\)</span>，尝试找到<span class="math inline">\(x, y\)</span>，使得<span class="math inline">\(x + y\)</span>最小，并且<span class="math inline">\(lcm(a+x, b+y) = c\)</span></p>
+<h5 id="题解-1">题解</h5>
+<p>队友的做法我没听...好像是极限数据<span class="math inline">\(2^{27}\)</span>，但能卡卡的做法...（然后就WA了）</p>
+<p>一个简单的想法是，枚举<span class="math inline">\(c\)</span>的约数<span class="math inline">\(d_1\)</span>，假设<span class="math inline">\(a + x = d_1\)</span>，<span class="math inline">\(d_1\)</span>也许会在若干质数上的次数没有卡到<span class="math inline">\(q_i\)</span>，这就需要<span class="math inline">\(b+y\)</span>去调整，也就是说相当于对于某个数<span class="math inline">\(M\)</span>，<span class="math inline">\(b+y\)</span>需要是<span class="math inline">\(M\)</span>的倍数，而系数则应该是剩下卡到<span class="math inline">\(q_i\)</span>的位置上质数次幂乘积的一个因子，难点在于如何寻找这个因子</p>
+<p>利用折半搜索优化一下复杂度就能过了...</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>雨夜有记</title>
     <url>/2022/06/%E9%9B%A8%E5%A4%9C%E6%9C%89%E8%AE%B0/</url>
     <content><![CDATA[<span id="more"></span>
@@ -4671,32 +4700,88 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
       </categories>
   </entry>
   <entry>
-    <title>有的时候一言难尽</title>
-    <url>/2022/03/training-1/</url>
+    <title>数理逻辑之究极抽象魔幻</title>
+    <url>/2022/05/logical/</url>
     <content><![CDATA[<span id="more"></span>
-<h2 id="a">A</h2>
-<blockquote>
-<p>求满足<span class="math inline">\(1 \leq a_{i, j} \leq K\)</span>，并且<span class="math inline">\(a_{i, j} \leq a_{i, j+1}\)</span>，<span class="math inline">\(a_{i, j} \leq a_{i+1,j}\)</span>，<span class="math inline">\(a_{R, C}=V\)</span>的<span class="math inline">\(N*M\)</span>的大小的矩阵的数量</p>
-<p>其中<span class="math inline">\(1 \leq R \leq N, 1 \leq C \leq M\)</span></p>
-</blockquote>
-<p>注意到值为<span class="math inline">\(i-1\)</span>和值为<span class="math inline">\(i\)</span>的部分有一条分界线，一共有<span class="math inline">\(K\)</span>条，把这些分界线稍微作移动，他们就等价于不相交的路径，我们很容易通过这些分界线来还原出原来的取值</p>
-<p>对于<span class="math inline">\(a_{R, C}=V\)</span>，就是<span class="math inline">\((R, C)\)</span>这个点上方有<span class="math inline">\(V-1\)</span>条分界线，在LGV引理中，我们可以把所有满足在<span class="math inline">\((R, C)\)</span>上方的分界线的权值记为<span class="math inline">\(x\)</span>然后算行列式，然后考虑<span class="math inline">\(V-1\)</span>次的系数即可</p>
-<p>直接计算<span class="math inline">\(x\)</span>可能较为复杂，我们可以考虑对<span class="math inline">\(x\)</span>进行赋值之后进行插值</p>
-<h2 id="d">D</h2>
-<blockquote>
-<p>给定<span class="math inline">\(\{A_n\}, \{B_n\}, \{C_n\}\)</span>，对<span class="math inline">\(k = 1, 2, ..., N\)</span>，求 <span class="math display">\[
-Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
-\]</span></p>
-</blockquote>
-<p>看不懂题解，题解提到了一个Tellegen’s Principle，这个原则说linear straight-line program的转置和原问题有相同的复杂度，但是这个principle没有给出通用的构造，还是要对具体问题进行具体地设计，题解论文里提了这个题的转置转置后的做法，但感觉不够直观，我们就对这个题具体给出一个直观分析</p>
-<p>设<span class="math inline">\(S_j = \sum_{i} C_i A_i^j\)</span>，<span class="math inline">\(f_k(x) = \prod_{1 \leq j \leq k} (x + B_j)\)</span></p>
-<p>那么，我们有<span class="math inline">\(Ans_k = \sum_{i=0}^k f_k(x)[x^i] S_i\)</span>，其中<span class="math inline">\(\{S_n\}\)</span>不难通过FFT计算</p>
-<p>接下来，我们考虑分治，具体的，对区间<span class="math inline">\([l,r]\)</span>分析</p>
-<p>区间<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>对于<span class="math inline">\([l, mid]\)</span>中<span class="math inline">\(Ans\)</span>的影响可以递归考虑，我们只需要考虑<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>对<span class="math inline">\([mid+1, r]\)</span>的<span class="math inline">\(Ans\)</span>的影响，注意到我们只需要考虑<span class="math inline">\([mid+1, r]\)</span>中的<span class="math inline">\(Ans\)</span>中含且仅含<span class="math inline">\([l, mid]\)</span>中的<span class="math inline">\(B\)</span>的项，而这可以通过一个卷积来计算</p>
-<p>总的复杂度就是<span class="math inline">\(O(n \log^2 n)\)</span></p>
+<p>由于这门课的老师说不要公开声明其犯下的错误，我就只在该文章的内容前喷一下</p>
+<p>参考的教材为宋公的《数理逻辑十二讲》，这本书挺一言难尽的</p>
+<h3 id="完全性定理">完全性定理</h3>
+<h4 id="描述">描述</h4>
+<p>在一阶逻辑和其对应的自然推理系统，<span class="math inline">\(\Gamma \vdash \Delta \Leftrightarrow \Gamma \models \Delta\)</span></p>
+<h4 id="证明">证明</h4>
+<p>分为两部分证明</p>
+<hr />
+<p><span class="math inline">\(Soundness\)</span>：<span class="math inline">\(\Gamma \vdash \Delta \Rightarrow \Gamma \models \Delta\)</span></p>
+<p><span class="math inline">\(\Gamma \vdash \Delta\)</span>即可证，那么存在一个证明树<span class="math inline">\(T\)</span>，我们按照该证明树证明<span class="math inline">\(\Gamma \models \Delta\)</span>有效</p>
+<p>引理4.8：<span class="math inline">\(G\)</span>的公理有效</p>
+<p>引理4.9：对于除Cut以外的规则，所有上矢列有效，当且仅当下矢列有效</p>
+<p>对于Cut规则，上矢列有效，则下矢列有效，反之不然</p>
+<p>利用引理4.8和4.9，我们就能证明<span class="math inline">\(Soundness\)</span></p>
+<hr />
+<p><span class="math inline">\(Completeness\)</span>：<span class="math inline">\(\Gamma \models \Delta \Rightarrow \Gamma \vdash \Delta\)</span></p>
+<p>可以选择利用和上面差不多的说辞来证明，说明存在一个不利用Cut规则的证明树即可，这里不选择这条路</p>
+<p>书中选择了从协调性的理论出发，具体而言，需要利用<strong>定理6.19</strong>：若<span class="math inline">\(\Gamma\)</span>协调，则<span class="math inline">\(\Gamma\)</span>可满足</p>
+<p><strong>定理6.17</strong>：如果<span class="math inline">\(\Gamma\)</span>协调，那么存在<span class="math inline">\(\Gamma \subseteq \Phi\)</span>，使得<span class="math inline">\(\Phi\)</span>为Henkin集</p>
+<p><strong>定理6.18</strong>：若<span class="math inline">\(\Phi\)</span>为Henkin集，那么<span class="math inline">\(\Phi\)</span>为Hintikka集</p>
+<p><strong>定理3.26</strong>：若<span class="math inline">\(\Phi\)</span>为Hintikka集，那么<span class="math inline">\(\Phi\)</span>可满足</p>
+<p>根据上述三条定理，我们就足以证明定理6.19</p>
+<p>利用定理6.19和协调的定义，我们可以证明completeness（定理6.20）</p>
+<h3 id="紧性定理">紧性定理</h3>
+<h4 id="描述-1">描述</h4>
+<p>设<span class="math inline">\(\Gamma\)</span>为命题的集合，若<span class="math inline">\(\Gamma\)</span>的任何有穷子集可满足，那么<span class="math inline">\(\Gamma\)</span>可满足</p>
+<h4 id="可满足与协调">可满足与协调</h4>
+<p>定理6.19实际上告诉我们：可满足性等价于协调性</p>
+<p>因此，我们可以说明<span class="math inline">\(Con(\Gamma)\)</span>，反设不协调，那么存在一个有限子集不可满足，矛盾</p>
+<h4 id="语义证明">语义证明</h4>
+<p>我们先给出上滤和超滤的定义</p>
+<ul>
+<li><p>对于集合<span class="math inline">\(E\)</span>，记其幂集为<span class="math inline">\(\mathscr{P}(E)\)</span>，称<span class="math inline">\(F \subseteq \mathscr{P}(E)\)</span>当且仅当</p>
+<ul>
+<li><span class="math inline">\(E \in F\)</span></li>
+<li><span class="math inline">\(A, B \in F \Rightarrow A \cap B \in F\)</span></li>
+<li><span class="math inline">\(A \in F, A \subseteq B \Rightarrow B \in F\)</span></li>
+<li><span class="math inline">\(\emptyset \notin F\)</span></li>
+</ul></li>
+<li><p><span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>超滤指<span class="math inline">\(F\)</span>为<span class="math inline">\(E\)</span>的极大上滤</p></li>
+<li><p>对于幂集的一个子集，<span class="math inline">\(C \subseteq \mathscr{P}(E)\)</span>，称<span class="math inline">\(C\)</span>有有穷交性质（也称<span class="math inline">\(C\)</span>有f.i.p.），当且仅当</p>
+<p><span class="math inline">\(\forall A_1, ..., A_n \in C, A_1 \cap A_2 ... \cap A_n \neq \emptyset\)</span></p></li>
+</ul>
+<hr />
+<p>在下文中，我们将使用小写字母来指代公式，<span class="math inline">\(\Delta\)</span>来指代公式的集合，大写字母来指代公式的集合的幂集的元素，花体来指代公式的集合的幂集的子集</p>
+<p>设<span class="math inline">\(\Gamma\)</span>是一个有穷可满足的命题集，我们设<span class="math inline">\(\mathscr{O}(\Gamma) = \{\Delta | \Delta 为\Gamma的有穷子集\}\)</span></p>
+<p>对于<span class="math inline">\(\Delta \in \mathscr{O}(\Gamma)\)</span>，我们记<span class="math inline">\(v_{\Delta}\)</span>为满足满足<span class="math inline">\(\Delta\)</span>的赋值</p>
+<p>令<span class="math inline">\(A^{\subseteq} = \{\Delta \in I| a \in \Delta \}\)</span>，也即所有包含公式<span class="math inline">\(a\)</span>的集合构成的集合</p>
+<p>令<span class="math inline">\(\mathscr{C}(\Gamma) = \{A^{\subseteq} | a \in \Gamma\}\)</span></p>
+<p><strong>命题11.8</strong>：<span class="math inline">\(\mathscr{C}(\Gamma)\)</span>有f.i.p.</p>
+<p>注意到<span class="math inline">\(\{a_1, a_2, ..., a_n\} \in A_1^\subseteq \cap A_2^\subseteq ... \cap A_n^\subseteq\)</span></p>
+<p><strong>命题11.4</strong>：如果<span class="math inline">\(C\)</span>有f.i.p.，那么存在一个包含<span class="math inline">\(C\)</span>的超滤<span class="math inline">\(U\)</span>，（且<span class="math inline">\(U\)</span>保持了f.i.p.）</p>
+<p>不难想象，命题11.4的正确性和AC等价</p>
+<p>根据命题11.4，我们取一个包含<span class="math inline">\(\mathscr{C}(\Gamma)\)</span>的超滤<span class="math inline">\(\mathscr{U}\)</span></p>
+<p><strong>命题11.9</strong>：若<span class="math inline">\(a \in \Gamma\)</span>，那么<span class="math inline">\(\{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta} \models a\} \in \mathscr{U}\)</span></p>
+<p><span class="math inline">\(a \in \Gamma\)</span>，因此<span class="math inline">\(A^{\subseteq} \in \mathscr{C}(\Gamma) \subseteq\mathscr{U}\)</span></p>
+<p>由于<span class="math inline">\(A^{\subseteq}\)</span>中的子集都是有穷的，从而是可满足的，因此<span class="math inline">\(A^{\subseteq} \subseteq \{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta} \models a\}\)</span></p>
+<p>根据上滤的性质，<span class="math inline">\(\{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta} \models a\} \in \mathscr{U}\)</span></p>
+<p><strong>命题11.3</strong>：<span class="math inline">\(U\)</span>为上滤，且有f.i.p.，那么<span class="math inline">\(U\)</span>为超滤当且仅当<span class="math inline">\(\forall X \subseteq E\)</span>，<span class="math inline">\(X \in U \leftrightarrow (E-X) \notin U\)</span></p>
+<p>按定义证明</p>
+<p><strong>命题11.10</strong>：对于<span class="math inline">\(\Gamma\)</span>，和其由上定义的<span class="math inline">\(\mathscr{U}\)</span>，<span class="math inline">\(\mathscr{O}(\Gamma)\)</span></p>
+<p>定义赋值<span class="math inline">\(v\)</span>为：<span class="math inline">\(v(P) = T \Leftrightarrow \{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta}(P) = T\} \in \mathscr{U}\)</span>，那么，<span class="math inline">\(v \models \Gamma\)</span></p>
+<hr />
+<p>证明：首先，我们要给出这个赋值的一些性质</p>
+<ul>
+<li><span class="math inline">\(v(P) = F \Leftrightarrow \{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta}(P) = F\} \in \mathscr{U}\)</span></li>
+</ul>
+<p>注意到如果<span class="math inline">\(v(P) = F\)</span>，那么<span class="math inline">\(\{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta}(P) = T\} \notin \mathscr{U}\)</span>，根据命题11.3，我们有<span class="math inline">\(\{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta}(P) = F\} \in \mathscr{U}\)</span>，反之同理</p>
+<p>根据赋值的以上的性质，我们有</p>
+<ul>
+<li>对任何公式<span class="math inline">\(a\)</span>，<span class="math inline">\(v(a) = T(F) \Leftrightarrow \{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta}(a) = T(F)\} \in \mathscr{U}\)</span></li>
+</ul>
+<p>现在，对于任何公式<span class="math inline">\(a \in \Gamma\)</span>，根据命题11.9，有<span class="math inline">\(\{\Delta \in \mathscr{O}(\Gamma) | v_{\Delta} \models a\} \in \mathscr{U}\)</span>，根据以上的结论，有<span class="math inline">\(v \models T\)</span> <span class="math inline">\(\square\)</span></p>
 ]]></content>
       <categories>
-        <category>problems</category>
+        <category>notes</category>
       </categories>
+      <tags>
+        <tag>logic</tag>
+      </tags>
   </entry>
 </search>
