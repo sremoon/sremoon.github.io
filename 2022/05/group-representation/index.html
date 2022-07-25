@@ -28,7 +28,7 @@
 <meta property="og:description" content="学一些新的玩意">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-14T07:11:50.000Z">
-<meta property="article:modified_time" content="2022-06-29T15:19:09.602Z">
+<meta property="article:modified_time" content="2022-07-21T05:48:18.260Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="logic">
 <meta name="twitter:card" content="summary">
@@ -137,7 +137,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">22</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -226,7 +226,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-06-29 23:19:09" itemprop="dateModified" datetime="2022-06-29T23:19:09+08:00">2022-06-29</time>
+        <time title="Modified: 2022-07-21 13:48:18" itemprop="dateModified" datetime="2022-07-21T13:48:18+08:00">2022-07-21</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -246,14 +246,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>484</span>
+      <span>2.4k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>1 mins.</span>
+      <span>2 mins.</span>
     </span>
 </div>
 
@@ -270,7 +270,7 @@
 <ul>
 <li>一个群表示包括 <span class="math inline">\((V, \rho)\)</span>，其中<span class="math inline">\(V\)</span>是一个线性空间，而<span class="math inline">\(\rho:G \to GL(V)\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(V\)</span>上的一般线性群的群同态</li>
 </ul>
-<p>大致就是用矩阵来代替群里面的元素，注意不是群同构</p>
+<p>大致就是用线性变换/矩阵来代替群里面的元素，注意不是群同构</p>
 <p>比如：<span class="math inline">\(\rho(g) = I\)</span>是一个平凡的群表示</p>
 <ul>
 <li><p>群表示的同态：对于两个群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\((V&#39;, \rho&#39;)\)</span>，称<span class="math inline">\(T\)</span>为同态映射，当且仅当</p>
@@ -284,6 +284,58 @@
 <p>并且希望作用之后对应的映射由群的同一元素控制，即希望<span class="math inline">\(T\rho(g)v = \rho&#39;(g)Tv\)</span>，即<span class="math inline">\(T\rho(g) = \rho&#39;(g)T\)</span></p>
 <hr />
 <p>和抽象代数中类似，当<span class="math inline">\(T\)</span>可逆时，我们称<span class="math inline">\(T\)</span>是一个同构映射</p>
+<hr />
+<p>如果两个线性变换仅仅是作用的基不同，但对于基的效果是一样的，我们应当认为这是两个相同的线性变换，同理，如果两个群表示仅仅是作用的基不同，也应当被视作相同的群表示，这启发我们给出下面的定义</p>
+<p>下面，我们设基<span class="math inline">\(B = (v_1, ..., v_n), B&#39; = (v_1&#39;, ..., v_n&#39;)\)</span></p>
+<ul>
+<li>记号：<span class="math inline">\([T]_{B, B&#39;}\)</span>表关联<span class="math inline">\(B\)</span>到<span class="math inline">\(B&#39;\)</span>的<span class="math inline">\(T\)</span>，形式化的，<span class="math inline">\((v_1, ..., v_n) [T]_{B, B&#39;} = T (v_1&#39;,...,v_n&#39;)\)</span></li>
+<li>对于两组基而言，它们之间的过渡矩阵是一个可逆矩阵<span class="math inline">\(P\)</span>，用上面提到的记号，也就是<span class="math inline">\(P = [I_{B,B&#39;}\)</span></li>
+<li>对于两个线性变换，如果我们认为作用在不同基意义下它们相同，这就等同于说明它们对应的矩阵相似，也就是说<span class="math inline">\(S = P^{-1}TP\)</span></li>
+<li>对于两个群表示，我们称其等价，当且仅当<span class="math inline">\(\rho(g) = P^{-1} \rho&#39;(g) P, \forall g \in G\)</span></li>
+</ul>
+<p>从群的角度来看，原本的群表示对应了一个矩阵的子群<span class="math inline">\(M\)</span>，等价则相当于说对应到<span class="math inline">\(M\)</span>的一个共轭子群</p>
+<p>等价是对于矩阵来说的，同构是对于线性变换来说的，在有限维的情况下，两者是可以互相表述的，因此我们有如下观察：同构的群表示自然是等价的，而如果两个群表示等价，那么取相应的过渡矩阵，如果基是有限的，我们又可以得到他们同构，因此，对于<strong>有限维</strong>来说，同构和等价是一个概念</p>
+<hr />
+<ul>
+<li><p>在给定一组群表示<span class="math inline">\((V, \rho)\)</span>的情况下，如果对<span class="math inline">\(W \subseteq V\)</span>，有<span class="math inline">\(\forall g \in G, \rho(g)(W) \subseteq W\)</span>，那么我们称<span class="math inline">\(W\)</span>是<span class="math inline">\(G-\)</span>不变子空间（也就是说，<span class="math inline">\(G-\)</span>不变子空间是所有群表示中的线性变换的不变子空间的交）</p>
+<p>在上述情况下，把<span class="math inline">\(\rho\)</span>中元素的定义域限制在<span class="math inline">\(W\)</span>上，<span class="math inline">\((W, \rho|_W)\)</span>也构成一个群<span class="math inline">\(G\)</span>的群表示，称为子表示</p></li>
+</ul>
+<p>当<span class="math inline">\(W\)</span>是有限维子空间时，注意到<span class="math inline">\(\rho(g)\)</span>是一个保秩的变换（有逆的存在），因此<span class="math inline">\(\rho(g)(W) \subseteq W\)</span>实际上等价于<span class="math inline">\(\rho(g)(W)=W\)</span></p>
+<p>类似于群同态一样，我们可以定义出商表示</p>
+<ul>
+<li>对于群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\(V\)</span>的一个子表示<span class="math inline">\(W\)</span>，定义商表示形如<span class="math inline">\((V/W, \rho_{V/W})\)</span>，其中<span class="math inline">\(\rho_{V/W}(g)(v+W)=\rho(g)(v)+W\)</span></li>
+</ul>
+<p>在给出商表示后，不出意外的，同构定理仍然成立</p>
+<ul>
+<li><p>如果<span class="math inline">\(T:(V, \rho) \to (V&#39;, \rho&#39;)\)</span>是一个群表示的同态，那么<span class="math inline">\(\ker(T)\subseteq V\)</span>和<span class="math inline">\(im(T)\subseteq V&#39;\)</span>都是子表示</p>
+<p>并且有群表示的同构：<span class="math inline">\(T&#39;:(V/\ker(T), \rho_{V/\ker(T)}) \cong (im(T), \rho&#39;_{im(T)})\)</span></p>
+<p>同构映射为<span class="math inline">\(T&#39;(v+W)=T(v)\)</span></p></li>
+</ul>
+<hr />
+<ul>
+<li><p>称一个群表示不可约，当且仅当不存在任何非平凡的子表示</p>
+<p>称其为可约，当且仅当其存在一个非平凡的子表示</p></li>
+</ul>
+<hr />
+<p>接下来，我们定义群表示的直和，一般的来说，我们有外直和和内直和的定义</p>
+<p>对于内直和，我们运用子表示来定义，即：</p>
+<ul>
+<li><p>对于群表示<span class="math inline">\((V, \rho)\)</span>和子表示<span class="math inline">\(V_1, V_2 \subseteq V\)</span>，如果<span class="math inline">\(V = V_1 \oplus V_2\)</span>，则称群表示<span class="math inline">\(V\)</span>为子表示<span class="math inline">\(V_1, V_2\)</span>的内直和， 记为<span class="math inline">\(V = V_1 \oplus_{int} V_2\)</span></p></li>
+<li><p>给定两个群表示<span class="math inline">\((V_1, \rho_1), (V_2, \rho_2)\)</span>，我们定义<span class="math inline">\(V = V_1 \oplus V_2, \rho(g)(v_1, v_2) = (\rho_1(g)(v_1), \rho_2(g)(v_2))\)</span>， 称<span class="math inline">\((V, \rho)\)</span>为外直和，记为<span class="math inline">\(V = V_1 \oplus_{ext} V_2\)</span></p></li>
+</ul>
+<p>不难证明，<span class="math inline">\(V_1 \oplus_{int} V_2 \cong V_1 \oplus_{ext} V_2\)</span>，以后不再区分两个符号</p>
+<hr />
+<ul>
+<li><p>称一个群表示可分解的，当且仅当其是两个群表示的直和，否则称其为不可分解的</p></li>
+<li><p>称一个群表示semisimple(?)或者完全既约的，当且仅当其是若干不可约群表示的直和</p></li>
+</ul>
+<hr />
+<ul>
+<li>对于群表示<span class="math inline">\(V\)</span>和子表示<span class="math inline">\(W\)</span>，称<span class="math inline">\(U\)</span>为<span class="math inline">\(W\)</span>在<span class="math inline">\(V\)</span>下的补表示，当且仅当<span class="math inline">\(V = W \oplus U\)</span></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(Maschke&#39;s TH\)</span>：当<span class="math inline">\(G\)</span>为有限群，<span class="math inline">\(V\)</span>为有限维域时，补表示一定存在</p>
+</blockquote>
 <p>占位</p>
 
     </div>
@@ -341,14 +393,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">126k</span>
+    <span title="Symbols count total">129k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:54</span>
+    <span title="Reading time total">1:58</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

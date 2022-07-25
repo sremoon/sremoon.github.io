@@ -2288,7 +2288,7 @@ int main() &#123;
 <ul>
 <li>一个群表示包括 <span class="math inline">\((V, \rho)\)</span>，其中<span class="math inline">\(V\)</span>是一个线性空间，而<span class="math inline">\(\rho:G \to GL(V)\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(V\)</span>上的一般线性群的群同态</li>
 </ul>
-<p>大致就是用矩阵来代替群里面的元素，注意不是群同构</p>
+<p>大致就是用线性变换/矩阵来代替群里面的元素，注意不是群同构</p>
 <p>比如：<span class="math inline">\(\rho(g) = I\)</span>是一个平凡的群表示</p>
 <ul>
 <li><p>群表示的同态：对于两个群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\((V&#39;, \rho&#39;)\)</span>，称<span class="math inline">\(T\)</span>为同态映射，当且仅当</p>
@@ -2302,6 +2302,58 @@ int main() &#123;
 <p>并且希望作用之后对应的映射由群的同一元素控制，即希望<span class="math inline">\(T\rho(g)v = \rho&#39;(g)Tv\)</span>，即<span class="math inline">\(T\rho(g) = \rho&#39;(g)T\)</span></p>
 <hr />
 <p>和抽象代数中类似，当<span class="math inline">\(T\)</span>可逆时，我们称<span class="math inline">\(T\)</span>是一个同构映射</p>
+<hr />
+<p>如果两个线性变换仅仅是作用的基不同，但对于基的效果是一样的，我们应当认为这是两个相同的线性变换，同理，如果两个群表示仅仅是作用的基不同，也应当被视作相同的群表示，这启发我们给出下面的定义</p>
+<p>下面，我们设基<span class="math inline">\(B = (v_1, ..., v_n), B&#39; = (v_1&#39;, ..., v_n&#39;)\)</span></p>
+<ul>
+<li>记号：<span class="math inline">\([T]_{B, B&#39;}\)</span>表关联<span class="math inline">\(B\)</span>到<span class="math inline">\(B&#39;\)</span>的<span class="math inline">\(T\)</span>，形式化的，<span class="math inline">\((v_1, ..., v_n) [T]_{B, B&#39;} = T (v_1&#39;,...,v_n&#39;)\)</span></li>
+<li>对于两组基而言，它们之间的过渡矩阵是一个可逆矩阵<span class="math inline">\(P\)</span>，用上面提到的记号，也就是<span class="math inline">\(P = [I_{B,B&#39;}\)</span></li>
+<li>对于两个线性变换，如果我们认为作用在不同基意义下它们相同，这就等同于说明它们对应的矩阵相似，也就是说<span class="math inline">\(S = P^{-1}TP\)</span></li>
+<li>对于两个群表示，我们称其等价，当且仅当<span class="math inline">\(\rho(g) = P^{-1} \rho&#39;(g) P, \forall g \in G\)</span></li>
+</ul>
+<p>从群的角度来看，原本的群表示对应了一个矩阵的子群<span class="math inline">\(M\)</span>，等价则相当于说对应到<span class="math inline">\(M\)</span>的一个共轭子群</p>
+<p>等价是对于矩阵来说的，同构是对于线性变换来说的，在有限维的情况下，两者是可以互相表述的，因此我们有如下观察：同构的群表示自然是等价的，而如果两个群表示等价，那么取相应的过渡矩阵，如果基是有限的，我们又可以得到他们同构，因此，对于<strong>有限维</strong>来说，同构和等价是一个概念</p>
+<hr />
+<ul>
+<li><p>在给定一组群表示<span class="math inline">\((V, \rho)\)</span>的情况下，如果对<span class="math inline">\(W \subseteq V\)</span>，有<span class="math inline">\(\forall g \in G, \rho(g)(W) \subseteq W\)</span>，那么我们称<span class="math inline">\(W\)</span>是<span class="math inline">\(G-\)</span>不变子空间（也就是说，<span class="math inline">\(G-\)</span>不变子空间是所有群表示中的线性变换的不变子空间的交）</p>
+<p>在上述情况下，把<span class="math inline">\(\rho\)</span>中元素的定义域限制在<span class="math inline">\(W\)</span>上，<span class="math inline">\((W, \rho|_W)\)</span>也构成一个群<span class="math inline">\(G\)</span>的群表示，称为子表示</p></li>
+</ul>
+<p>当<span class="math inline">\(W\)</span>是有限维子空间时，注意到<span class="math inline">\(\rho(g)\)</span>是一个保秩的变换（有逆的存在），因此<span class="math inline">\(\rho(g)(W) \subseteq W\)</span>实际上等价于<span class="math inline">\(\rho(g)(W)=W\)</span></p>
+<p>类似于群同态一样，我们可以定义出商表示</p>
+<ul>
+<li>对于群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\(V\)</span>的一个子表示<span class="math inline">\(W\)</span>，定义商表示形如<span class="math inline">\((V/W, \rho_{V/W})\)</span>，其中<span class="math inline">\(\rho_{V/W}(g)(v+W)=\rho(g)(v)+W\)</span></li>
+</ul>
+<p>在给出商表示后，不出意外的，同构定理仍然成立</p>
+<ul>
+<li><p>如果<span class="math inline">\(T:(V, \rho) \to (V&#39;, \rho&#39;)\)</span>是一个群表示的同态，那么<span class="math inline">\(\ker(T)\subseteq V\)</span>和<span class="math inline">\(im(T)\subseteq V&#39;\)</span>都是子表示</p>
+<p>并且有群表示的同构：<span class="math inline">\(T&#39;:(V/\ker(T), \rho_{V/\ker(T)}) \cong (im(T), \rho&#39;_{im(T)})\)</span></p>
+<p>同构映射为<span class="math inline">\(T&#39;(v+W)=T(v)\)</span></p></li>
+</ul>
+<hr />
+<ul>
+<li><p>称一个群表示不可约，当且仅当不存在任何非平凡的子表示</p>
+<p>称其为可约，当且仅当其存在一个非平凡的子表示</p></li>
+</ul>
+<hr />
+<p>接下来，我们定义群表示的直和，一般的来说，我们有外直和和内直和的定义</p>
+<p>对于内直和，我们运用子表示来定义，即：</p>
+<ul>
+<li><p>对于群表示<span class="math inline">\((V, \rho)\)</span>和子表示<span class="math inline">\(V_1, V_2 \subseteq V\)</span>，如果<span class="math inline">\(V = V_1 \oplus V_2\)</span>，则称群表示<span class="math inline">\(V\)</span>为子表示<span class="math inline">\(V_1, V_2\)</span>的内直和， 记为<span class="math inline">\(V = V_1 \oplus_{int} V_2\)</span></p></li>
+<li><p>给定两个群表示<span class="math inline">\((V_1, \rho_1), (V_2, \rho_2)\)</span>，我们定义<span class="math inline">\(V = V_1 \oplus V_2, \rho(g)(v_1, v_2) = (\rho_1(g)(v_1), \rho_2(g)(v_2))\)</span>， 称<span class="math inline">\((V, \rho)\)</span>为外直和，记为<span class="math inline">\(V = V_1 \oplus_{ext} V_2\)</span></p></li>
+</ul>
+<p>不难证明，<span class="math inline">\(V_1 \oplus_{int} V_2 \cong V_1 \oplus_{ext} V_2\)</span>，以后不再区分两个符号</p>
+<hr />
+<ul>
+<li><p>称一个群表示可分解的，当且仅当其是两个群表示的直和，否则称其为不可分解的</p></li>
+<li><p>称一个群表示semisimple(?)或者完全既约的，当且仅当其是若干不可约群表示的直和</p></li>
+</ul>
+<hr />
+<ul>
+<li>对于群表示<span class="math inline">\(V\)</span>和子表示<span class="math inline">\(W\)</span>，称<span class="math inline">\(U\)</span>为<span class="math inline">\(W\)</span>在<span class="math inline">\(V\)</span>下的补表示，当且仅当<span class="math inline">\(V = W \oplus U\)</span></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(Maschke&#39;s TH\)</span>：当<span class="math inline">\(G\)</span>为有限群，<span class="math inline">\(V\)</span>为有限维域时，补表示一定存在</p>
+</blockquote>
 <p>占位</p>
 ]]></content>
       <categories>
@@ -4346,6 +4398,61 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
       </categories>
       <tags>
         <tag>logic</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>2022多校补题</title>
+    <url>/2022/07/2022%E5%A4%9A%E6%A0%A1%E8%A1%A5%E9%A2%98/</url>
+    <content><![CDATA[<span id="more"></span>
+<h2 id="牛客2">牛客2</h2>
+<h3 id="c">C</h3>
+<p>Alice和Bob玩Nim游戏，必胜的人希望尽快结束，必输的人希望尽慢结束，求游戏要进行几轮以及第一个人有多少种方法达成游戏进行的轮数最大化</p>
+<hr />
+<p>考虑<span class="math inline">\(n=2\)</span>的情况，两堆石子，不妨设为<span class="math inline">\(x, x\)</span>，那么必输者的最佳策略是调整为<span class="math inline">\(x-1,x\)</span>，依此类推，让游戏进行<span class="math inline">\(2x\)</span>轮</p>
+<p>由上述观察启发，我们从先手必输者的角度考虑，假定后手选择一堆石子<span class="math inline">\(a_i\)</span>，调整至<span class="math inline">\(a_{i}-1\)</span>，反应在异或和<span class="math inline">\(s\)</span>上</p>
+<p>就是<span class="math inline">\(0\)</span>变为<span class="math inline">\(a_i \oplus (a_i - 1)\)</span>，也即把<span class="math inline">\(a_i\)</span>的lowbit及以下的位进行翻转</p>
+<p>现在，我们考虑必胜者的决策，他需要选择满足<span class="math inline">\(a_j \oplus a_i \oplus (a_i - 1) &lt; a_j\)</span>的<span class="math inline">\(a_j\)</span>，这等价于选择<span class="math inline">\(lowbit(a_j) \leq lowbit(a_i)\)</span>的<span class="math inline">\(a_j\)</span>，如果我们选择<span class="math inline">\(lowbit(a_i)\)</span>最小的<span class="math inline">\(a_i\)</span>，那么对手选择满足<span class="math inline">\(lowbit(a_j)=lowbit(a_i)\)</span>，此时，对手的决策为<span class="math inline">\(a_j \to a_j - 1\)</span></p>
+<p>根据上述分析，必输者可以把局数控制在<span class="math inline">\(\sum a_i\)</span>，这显然也是局数的上界</p>
+<p>如果我们选择了一个<span class="math inline">\(lowbit(a_i)\)</span>较大的值，有可能达到这个界吗？记<span class="math inline">\(l=lowbit(a_i)\)</span>，对手可以选择的所有解为<span class="math inline">\(a_j \oplus (2^{l+1}-1) &lt; a_j\)</span>的<span class="math inline">\(a_j\)</span>，也就是第<span class="math inline">\(l\)</span>位为<span class="math inline">\(1\)</span>的<span class="math inline">\(a_j\)</span>，我们需要<span class="math inline">\(a_j \oplus (a_j - 1) = 2^{l+1}-1\)</span>，在<span class="math inline">\(a_j\)</span>的第<span class="math inline">\(l\)</span>位为1时，这等价于<span class="math inline">\(a_j = 2^l\)</span></p>
+<p>剩下的分析是平凡的</p>
+<h3 id="f">F</h3>
+<p>题目本身没啥意思，建Trie树删删减减就行</p>
+<p>考场上感觉自己脑溢血，离线做的题写了个在线版本的根号做法，最后还剩了一点bug不想修了...</p>
+<p>每次后半场比赛感觉自己都在做梦...</p>
+<h2 id="牛客3">牛客3</h2>
+<h3 id="b">B</h3>
+<p>把<span class="math inline">\(N\)</span>个人分配给<span class="math inline">\(k\)</span>个城市，其中第<span class="math inline">\(k\)</span>个城市需要恰好被分配<span class="math inline">\(e_k\)</span>个人，把<span class="math inline">\(i\)</span>分配给<span class="math inline">\(j\)</span>会产生<span class="math inline">\(c_{ij}\)</span>的代价，求最小代价</p>
+<p><span class="math inline">\(N \leq 10^5, k \leq 10\)</span></p>
+<hr />
+<p>很容易就能建出费用流的模型，不过点数太大，考虑模拟费用流</p>
+<p>由于流量为<span class="math inline">\(1\)</span>，因此每次都是找到若干个人<span class="math inline">\(a_1, a_2, ..., a_k\)</span>，然后<span class="math inline">\(a_2\)</span>移动到<span class="math inline">\(a_1\)</span>所在的城市，<span class="math inline">\(a_3\)</span>到<span class="math inline">\(a_2\)</span>，最后由新点挤到<span class="math inline">\(a_k\)</span>的位置，可以发现这对应了原题中<span class="math inline">\(k\)</span>个汇点中<span class="math inline">\(a_1\)</span>到新点的一个路径，用spfa求出这个最短路增广即可</p>
+<h3 id="h">H</h3>
+<p>给定字符串<span class="math inline">\(A\)</span>和字符串<span class="math inline">\(B_1, ..., B_k\)</span>以及序列<span class="math inline">\(v_1,...,v_m\)</span>，对每个<span class="math inline">\(B_i\)</span>，求出<span class="math inline">\(B_i[l, r]\)</span>是<span class="math inline">\(A\)</span>的字串并且<span class="math inline">\(v_l + ... +v_r\)</span>最大的字串的权值</p>
+<hr />
+<p>其实就是字串匹配和最大字段和糅合的一个题...不过卡SA...复习一下SAM...</p>
+<p>后缀自动机每个点对应若干个串，不妨设<span class="math inline">\(i\)</span>对应的字符串集合为<span class="math inline">\(S_i\)</span>，那么有如下的参数</p>
+<ol type="1">
+<li><span class="math inline">\(endpos\)</span>，表示<span class="math inline">\(S_i\)</span>中的串在<span class="math inline">\(S\)</span>中恰好以这些位置结尾</li>
+<li><span class="math inline">\(minl, maxl\)</span>，显然<span class="math inline">\(S_i\)</span>中的串的长度是连续的，<span class="math inline">\(minl, maxl\)</span>分别指代对应长度的最小/最大值</li>
+<li><span class="math inline">\(endpos\)</span>的集合会产生一棵树，记<span class="math inline">\(fa\)</span>为<span class="math inline">\(i\)</span>在这棵树上的父亲，<span class="math inline">\(fa\)</span>的<span class="math inline">\(endpos\)</span>集合包含<span class="math inline">\(i\)</span>的集合，也不难想象<span class="math inline">\(minl(i) = maxl(fa) + 1\)</span></li>
+<li><span class="math inline">\(son_{i, c}\)</span>，表示<span class="math inline">\(i\)</span>转移<span class="math inline">\(c\)</span>之后到达的状态</li>
+</ol>
+<p>现在我们考虑如何匹配，转移就是能转移就转移，否则跳父边</p>
+<h3 id="i">I</h3>
+<p>求<span class="math inline">\(\sum_{i=0}^n \binom{n}{i} D_{n-i} i^k / n!\)</span>，对一个1000左右的质数取模</p>
+<hr />
+<p>考场上好像把这个最开始的式子写错了，离大谱...</p>
+<p>一看答案是个分数，玩不明白了...</p>
+<p>把表打出来，进OEIS查一查，可以知道答案是<span class="math inline">\(\sum_{i=0}^k S(k, i)\)</span></p>
+<p>题目里有个条件是<span class="math inline">\(k - n \leq 5000\)</span>，我们可以把边边角角的斯特林数减掉，剩下的就是求贝尔数</p>
+<p>剩下的部分感觉太科技了，学了感觉用不到，算了...</p>
+<p>占位</p>
+]]></content>
+      <categories>
+        <category>problems</category>
+      </categories>
+      <tags>
+        <tag>ACM</tag>
       </tags>
   </entry>
 </search>
