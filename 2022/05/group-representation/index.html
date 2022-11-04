@@ -28,7 +28,7 @@
 <meta property="og:description" content="学一些新的玩意">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-05-14T07:11:50.000Z">
-<meta property="article:modified_time" content="2022-07-21T05:48:18.260Z">
+<meta property="article:modified_time" content="2022-09-23T06:18:55.652Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="logic">
 <meta name="twitter:card" content="summary">
@@ -120,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%E8%A1%A8%E7%A4%BA"><span class="nav-text">群表示</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BE%A4%E8%A1%A8%E7%A4%BA"><span class="nav-text">群表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E8%A6%81%E7%B4%A0"><span class="nav-text">基本要素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2%E7%BE%A4%E7%9A%84%E7%BE%A4%E8%A1%A8%E7%A4%BA"><span class="nav-text">交换群的群表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E7%BB%B4%E4%B8%8D%E5%8F%AF%E7%BA%A6%E7%BE%A4%E8%A1%A8%E7%A4%BA"><span class="nav-text">一维不可约群表示</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -135,7 +135,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -148,7 +148,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -224,7 +224,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-07-21 13:48:18" itemprop="dateModified" datetime="2022-07-21T13:48:18+08:00">2022-07-21</time>
+        <time title="Modified: 2022-09-23 14:18:55" itemprop="dateModified" datetime="2022-09-23T14:18:55+08:00">2022-09-23</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -244,14 +244,14 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">Symbols count in article: </span>
-      <span>2.4k</span>
+      <span>4.1k</span>
     </span>
     <span class="post-meta-item" title="Reading time">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">Reading time &asymp;</span>
-      <span>2 mins.</span>
+      <span>4 mins.</span>
     </span>
 </div>
 
@@ -265,6 +265,7 @@
     <div class="post-body" itemprop="articleBody">
         <span id="more"></span>
 <h3 id="群表示">群表示</h3>
+<h4 id="基本要素">基本要素</h4>
 <ul>
 <li>一个群表示包括 <span class="math inline">\((V, \rho)\)</span>，其中<span class="math inline">\(V\)</span>是一个线性空间，而<span class="math inline">\(\rho:G \to GL(V)\)</span>是<span class="math inline">\(G\)</span>到<span class="math inline">\(V\)</span>上的一般线性群的群同态</li>
 </ul>
@@ -287,7 +288,7 @@
 <p>下面，我们设基<span class="math inline">\(B = (v_1, ..., v_n), B&#39; = (v_1&#39;, ..., v_n&#39;)\)</span></p>
 <ul>
 <li>记号：<span class="math inline">\([T]_{B, B&#39;}\)</span>表关联<span class="math inline">\(B\)</span>到<span class="math inline">\(B&#39;\)</span>的<span class="math inline">\(T\)</span>，形式化的，<span class="math inline">\((v_1, ..., v_n) [T]_{B, B&#39;} = T (v_1&#39;,...,v_n&#39;)\)</span></li>
-<li>对于两组基而言，它们之间的过渡矩阵是一个可逆矩阵<span class="math inline">\(P\)</span>，用上面提到的记号，也就是<span class="math inline">\(P = [I_{B,B&#39;}\)</span></li>
+<li>对于两组基而言，它们之间的过渡矩阵是一个可逆矩阵<span class="math inline">\(P\)</span>，用上面提到的记号，也就是<span class="math inline">\(P = [I]_{B,B&#39;}\)</span></li>
 <li>对于两个线性变换，如果我们认为作用在不同基意义下它们相同，这就等同于说明它们对应的矩阵相似，也就是说<span class="math inline">\(S = P^{-1}TP\)</span></li>
 <li>对于两个群表示，我们称其等价，当且仅当<span class="math inline">\(\rho(g) = P^{-1} \rho&#39;(g) P, \forall g \in G\)</span></li>
 </ul>
@@ -303,6 +304,7 @@
 <ul>
 <li>对于群表示<span class="math inline">\((V, \rho)\)</span>和<span class="math inline">\(V\)</span>的一个子表示<span class="math inline">\(W\)</span>，定义商表示形如<span class="math inline">\((V/W, \rho_{V/W})\)</span>，其中<span class="math inline">\(\rho_{V/W}(g)(v+W)=\rho(g)(v)+W\)</span></li>
 </ul>
+<p>在给定原表示的情况下，只需要给出线性子空间就唯一确定了子表示，因此我们下面直接以线性子空间代指子表示</p>
 <p>在给出商表示后，不出意外的，同构定理仍然成立</p>
 <ul>
 <li><p>如果<span class="math inline">\(T:(V, \rho) \to (V&#39;, \rho&#39;)\)</span>是一个群表示的同态，那么<span class="math inline">\(\ker(T)\subseteq V\)</span>和<span class="math inline">\(im(T)\subseteq V&#39;\)</span>都是子表示</p>
@@ -324,16 +326,56 @@
 <p>不难证明，<span class="math inline">\(V_1 \oplus_{int} V_2 \cong V_1 \oplus_{ext} V_2\)</span>，以后不再区分两个符号</p>
 <hr />
 <ul>
-<li><p>称一个群表示可分解的，当且仅当其是两个群表示的直和，否则称其为不可分解的</p></li>
-<li><p>称一个群表示semisimple(?)或者完全既约的，当且仅当其是若干不可约群表示的直和</p></li>
+<li><p>称一个非零群表示是可分解的，当且仅当其是两个群表示的直和，否则称其为不可分解的</p></li>
+<li><p>称一个群表示半单的或者完全可约的，当且仅当其是若干不可约群表示的直和</p></li>
 </ul>
 <hr />
+<p>下面的讨论默认基于<span class="math inline">\(\mathbb{C}^n\)</span>进行</p>
+<p>直觉可以告诉我们，可分解和可约应当是差不多的概念，我们可以参考如下的定理</p>
 <ul>
 <li>对于群表示<span class="math inline">\(V\)</span>和子表示<span class="math inline">\(W\)</span>，称<span class="math inline">\(U\)</span>为<span class="math inline">\(W\)</span>在<span class="math inline">\(V\)</span>下的补表示，当且仅当<span class="math inline">\(V = W \oplus U\)</span></li>
 </ul>
 <blockquote>
-<p><span class="math inline">\(Maschke&#39;s TH\)</span>：当<span class="math inline">\(G\)</span>为有限群，<span class="math inline">\(V\)</span>为有限维域时，补表示一定存在</p>
+<p>Maschke's TH：当<span class="math inline">\(G\)</span>为有限群，<span class="math inline">\(V\)</span>为有限维域时，补表示一定存在</p>
 </blockquote>
+<p>证明利用了群表示的同构定理，我们考虑构造一个<span class="math inline">\((V, \rho)\)</span>到<span class="math inline">\((V, \rho)\)</span>的同态映射，设<span class="math inline">\(W \subseteqq V\)</span>是任一的一个子表示，具体的，设<span class="math inline">\(U\)</span>是<span class="math inline">\(W\)</span>的正交补空间，<span class="math inline">\(T\)</span>是<span class="math inline">\(W\)</span>上的投影映射，那么<span class="math inline">\(T&#39; := |G|^{-1} \sum_{g \in G} \rho(g) \circ T \circ \rho(g)^{-1}\)</span>就是我们需要的同态映射，其中注意到我们使用了<span class="math inline">\(|G|^{-1}\)</span>这一元素</p>
+<p>通过上述定理，当一个（有限）群表示是有限维的，要么他是不可约的，要么他是可约的，从而是可分解的，因此可以表述为若干更小维度的表示的直和，以此类推，有限维群表示一定是完全可约的</p>
+<hr />
+<blockquote>
+<p>Schur's Lemma：对于群<span class="math inline">\(G\)</span>的两个不可约的群表示<span class="math inline">\(V,W\)</span></p>
+<ul>
+<li>如果<span class="math inline">\(T:V \to W\)</span>是一个群表示的同态，那么<span class="math inline">\(T\)</span>要么是同构，要么是零映射</li>
+<li>如果<span class="math inline">\(V\)</span>是有限维的，并且<span class="math inline">\(T:V\to V\)</span>是一个群表示的同态，那么存在<span class="math inline">\(\lambda \in \mathbb{C}\)</span>，使得<span class="math inline">\(T = \lambda I\)</span></li>
+</ul>
+</blockquote>
+<p>性质1是好证的，对于性质2，由于<span class="math inline">\(V\)</span>是有限维的，我们可以找出<span class="math inline">\(T\)</span>的一个非零的特征值<span class="math inline">\(\lambda\)</span>，考虑<span class="math inline">\(T-\lambda I\)</span>符合性质1的条件，并且不是同构，从而是零映射</p>
+<p>根据Schur's Lemma，在有限维的情况下，如果一个群表示的同态不是数乘，那么它一定不是不可约的</p>
+<h4 id="交换群的群表示">交换群的群表示</h4>
+<p>先从一个引理开始</p>
+<blockquote>
+<p>如果<span class="math inline">\((V, \rho)\)</span>是群<span class="math inline">\(G\)</span>的群表示，<span class="math inline">\(z \in C(G)\)</span>，那么<span class="math inline">\(\rho_z\)</span>是一个<span class="math inline">\((V, \rho)\)</span>到<span class="math inline">\((V, \rho)\)</span>的群表示同态</p>
+</blockquote>
+<p>注意到<span class="math inline">\(\rho(z) \circ \rho(g) = \rho(zg) = \rho(gz) = \rho(g) \circ \rho(z)\)</span></p>
+<hr />
+<p>现在，考虑我们有一个交换群<span class="math inline">\(G\)</span>，<span class="math inline">\((V, \rho)\)</span>是一个有限维的不可约的群表示，对于任意<span class="math inline">\(g \in G\)</span>，<span class="math inline">\(\rho(g)\)</span>是群表示的同态，根据Schur's Lemma，<span class="math inline">\(\rho(g)\)</span>是一个数乘，那么以<span class="math inline">\(V\)</span>中某个向量张成的空间构成一个子表示，从而<span class="math inline">\(V\)</span>是一维的，这意味着</p>
+<blockquote>
+<p>对于交换群<span class="math inline">\(G\)</span>，任何有限维不可约子表示都是一维的</p>
+</blockquote>
+<p>特别的</p>
+<blockquote>
+<p>对于有限交换群<span class="math inline">\(G\)</span>​，任何有限维群表示都是若干一维不可约群表示的直和</p>
+</blockquote>
+<p>根据上述结论，对于循环群<span class="math inline">\(C_n\)</span>来说，其不可约群表示就是把群中的元素映射到复数上，由于<span class="math inline">\(C_n\)</span>中的生成元一定要映射到单位根，因此我们恰有<span class="math inline">\(n\)</span>种不同的群表示，对于有限交换群而言，根据有限交换群结构定理，其必定形如<span class="math inline">\(C_{i_1} \otimes C_{i_2} ... \otimes C_{i_s}\)</span>，套用循环群的结论，我们可以描述出有限交换群的所有的群表示（在同构意义下）</p>
+<h4 id="一维不可约群表示">一维不可约群表示</h4>
+<blockquote>
+<p>设<span class="math inline">\(\varphi\)</span>是一个群同态，<span class="math inline">\(K \lhd G\)</span>，那么<span class="math inline">\(\varphi\)</span>可以表述为<span class="math inline">\(\bar{\varphi} \circ q_K\)</span>（其中<span class="math inline">\(q_K\)</span>是<span class="math inline">\(G \to G/K\)</span>的商群映射，<span class="math inline">\(\bar{\varphi}:G/K \to \text{im}(\varphi)\)</span>）当且仅当<span class="math inline">\(K \subseteq \ker{\varphi}\)</span></p>
+</blockquote>
+<p>当<span class="math inline">\(K \subseteqq \ker \varphi\)</span>时，我们直接定义<span class="math inline">\(\bar{\varphi}(gK) = \varphi(g)\)</span>即可，反之容易证明</p>
+<blockquote>
+<p>设<span class="math inline">\(\varphi:G \to \text{im}(\varphi)\)</span>是一个群同态，那么<span class="math inline">\(\text{im}(\varphi)\)</span>是阿贝尔群，当且仅当<span class="math inline">\(G&#39; \subseteq \ker \varphi\)</span></p>
+<p>这又等价于<span class="math inline">\(\varphi\)</span>可以表述为<span class="math inline">\(\bar{\varphi} \circ q_{G&#39;}\)</span></p>
+</blockquote>
+<p>第一句话是群论的结论，第二句话则根据上一条引理</p>
 <p>占位</p>
 
     </div>
@@ -391,14 +433,14 @@
       <i class="fa fa-chart-line"></i>
     </span>
       <span>Symbols count total: </span>
-    <span title="Symbols count total">121k</span>
+    <span title="Symbols count total">147k</span>
   </span>
   <span class="post-meta-item">
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">1:50</span>
+    <span title="Reading time total">2:14</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

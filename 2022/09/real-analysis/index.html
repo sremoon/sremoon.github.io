@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="矩阵分析好像也不是那么分析，为什么叫矩阵分析，而实变函数不叫实分析呢？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实变函数">
+<meta property="og:url" content="http://sremoon.github.io/2022/09/real-analysis/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="矩阵分析好像也不是那么分析，为什么叫矩阵分析，而实变函数不叫实分析呢？">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-07T06:37:01.000Z">
+<meta property="article:modified_time" content="2022-10-29T14:20:24.277Z">
+<meta property="article:author" content="remoon">
+<meta property="article:tag" content="real-analysis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sremoon.github.io/2022/09/real-analysis/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2022/09/real-analysis/","path":"2022/09/real-analysis/","title":"实变函数"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>实变函数 | SreMoon's Lake</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%9B%86%E5%90%88"><span class="nav-text">集合</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E5%88%97%E7%9A%84%E6%9E%81%E9%99%90"><span class="nav-text">集合列的极限</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%86%E5%90%88%E7%9A%84%E5%8A%BF"><span class="nav-text">集合的势</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E7%A9%BA%E9%97%B4%E4%B8%8E%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%97%B4"><span class="nav-text">拓扑空间与度量空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8B%93%E6%89%91%E7%A9%BA%E9%97%B4"><span class="nav-text">拓扑空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%97%B4"><span class="nav-text">度量空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B4%A7%E9%9B%86%E5%88%97%E7%B4%A7%E9%9B%86"><span class="nav-text">紧集，列紧集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9E%E7%BB%AD%E6%80%A7"><span class="nav-text">连续性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#urysohns-lemma"><span class="nav-text">Urysohn&#39;s Lemma</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E6%B5%8B%E7%A9%BA%E9%97%B4%E4%B8%8E%E6%B5%8B%E5%BA%A6%E7%A9%BA%E9%97%B4"><span class="nav-text">可测空间与测度空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E6%B5%8B"><span class="nav-text">可测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E5%8D%95%E5%87%BD%E6%95%B0%E9%80%BC%E8%BF%91"><span class="nav-text">简单函数逼近</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E5%BA%A6%E7%A9%BA%E9%97%B4"><span class="nav-text">测度空间</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2022/09/real-analysis/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          实变函数
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-07 14:37:01" itemprop="dateCreated datePublished" datetime="2022-09-07T14:37:01+08:00">2022-09-07</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-10-29 22:20:24" itemprop="dateModified" datetime="2022-10-29T22:20:24+08:00">2022-10-29</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>15k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>14 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">矩阵分析好像也不是那么分析，为什么叫矩阵分析，而实变函数不叫实分析呢？</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <span id="more"></span>
+<h3 id="集合">集合</h3>
+<hr />
+<p>大部分都懒得记了...</p>
+<ul>
+<li>偏序集：自反性，弱对称性，传递性</li>
+</ul>
+<p>对于偏序集<span class="math inline">\((X, \leq)\)</span>，程<span class="math inline">\(x \in X\)</span>为<span class="math inline">\(A \subseteq X\)</span>的<strong>上界</strong>，当且仅当<span class="math inline">\(\forall y \in A, y \leq x\)</span>，<strong>下界</strong>同理</p>
+<p>当<span class="math inline">\(x\)</span>作为上界属于<span class="math inline">\(A\)</span>时，可称其为<strong>最大元</strong>，<strong>最小元</strong>同理</p>
+<p>上界的集合若存在最小元，称其为<strong>上确界</strong>，记为<span class="math inline">\(\sup A\)</span>，<strong>下确界</strong>类似，记为<span class="math inline">\(\inf A\)</span></p>
+<p>不难证明，最大元，最小元，上确界，下确界存在时是唯一的</p>
+<hr />
+<p>如果对任意<span class="math inline">\(x, y \in X\)</span>，<span class="math inline">\(\sup \{x,y\}\)</span>和<span class="math inline">\(\inf\{x,y\}\)</span>都存在，那么称<span class="math inline">\(X\)</span>为<strong>格</strong>，简记<span class="math inline">\(\sup\{x,y\}:=x \vee y, \inf \{x,y\} := x \wedge y\)</span></p>
+<p>如果对<span class="math inline">\(A \subseteq X\)</span>，<span class="math inline">\(\sup A\)</span>和<span class="math inline">\(\inf A\)</span>都存在，称<span class="math inline">\(X\)</span>为<strong>完备格</strong></p>
+<p>通过归纳法，我们可以证明在一个格中，任意有限集都有上确界和下确界，对<span class="math inline">\(\{x_1,...,x_n\}\)</span>的上确界记为<span class="math inline">\(x_1 \vee ... \vee x_n\)</span>. 也因此，任何有限格都是完备格</p>
+<p>ex：<span class="math inline">\((\mathbb{R}, \leq )\)</span>不是一个完备格，只需注意到集合<span class="math inline">\(\mathbb{N}\)</span>的上确界不存在</p>
+<p><span class="math inline">\((\mathscr{F}(X), \leq)\)</span>是一个格，一般的，<span class="math inline">\(f \vee g = \max\{f,g\}, f \wedge g = \min \{f, g\}\)</span></p>
+<p><span class="math inline">\((2^X, \leq)\)</span>是一个完备格，<span class="math inline">\(A \wedge B = A \cap B, A \vee B = A \cup B\)</span></p>
+<p>对于特征函数，我们有<span class="math inline">\(1_{A \wedge B} = 1_A \wedge 1_B\)</span>，这联系了集合和函数</p>
+<hr />
+<h4 id="集合列的极限">集合列的极限</h4>
+<ul>
+<li>上下极限</li>
+</ul>
+<p>设<span class="math inline">\(A_1 \subseteq A_2 ... \subseteq A_n \subseteq ...\)</span>为一单调增集合列，则称<span class="math inline">\(\{A_n\}\)</span>的极限为<span class="math inline">\(\bigcup_{n=1}^{\infty} A_n\)</span>，记为<span class="math inline">\(\lim_{n \to \infty} A_n\)</span></p>
+<p>对于单调减集合列的极限，类似的定义为<span class="math inline">\(\bigcap_{n=1}^{\infty} A_n\)</span></p>
+<p>对于一般的集合列<span class="math inline">\(\{A_n\}\)</span>，记<span class="math inline">\(B_n = \bigcup_{k \geq n} A_k, C_n = \bigcap_{k \geq n} A_k\)</span>，那么称单调减集合列<span class="math inline">\(B_n\)</span>的极限为<span class="math inline">\(A_n\)</span>的上极限，单调减集合列<span class="math inline">\(C_n\)</span>的极限为<span class="math inline">\(A_n\)</span>的下极限，分别记为<span class="math inline">\(\limsup_{n \to \infty} A_n := \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k,\liminf_{n \to \infty} A_n := \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} A_k\)</span></p>
+<p>上极限也可以记为<span class="math inline">\(\inf_{n \geq 1} \sup_{k \geq n} A_k\)</span>，下记限类似，这个记法是跟数列极限相对应的</p>
+<p>若集合列<span class="math inline">\(\{A_n\}\)</span>的上下极限相等，则称<span class="math inline">\(\{A_n\}\)</span>存在极限，记为<span class="math inline">\(\lim_{n \to \infty} A_n = \limsup_{n \to \infty} A_n\)</span></p>
+<ul>
+<li>设<span class="math inline">\(\{A_n\}\)</span>为一<span class="math inline">\(X\)</span>中的集合列</li>
+</ul>
+<p>那么，<span class="math inline">\(x \in \limsup_{n \to \infty} A_n\)</span>当且仅当<span class="math inline">\(\forall n \in \mathbb{N}, \exists k \geq n, s.t. x \in A_k\)</span>，即<span class="math inline">\(x\)</span>在<span class="math inline">\(\{A_n\}\)</span>中无穷个集合中</p>
+<p><span class="math inline">\(x \in \liminf_{n \to \infty} A_n\)</span>当且仅当<span class="math inline">\(\exists n \in \mathbb{N}, s.t. \forall k \geq n, x \in A_k\)</span>，也即<span class="math inline">\(x\)</span>仅在有限个集合中不出现</p>
+<hr />
+<h4 id="集合的势">集合的势</h4>
+<p>如果两个集合<span class="math inline">\(A, B\)</span>之间存在一一映射，那么称<span class="math inline">\(A\)</span>和<span class="math inline">\(B\)</span>等势，记为<span class="math inline">\(A \sim B\)</span>，也记为<span class="math inline">\(card(A) = card(B)\)</span>，又可记为<span class="math inline">\(|A|=|B|\)</span>，如果存在<span class="math inline">\(A\)</span>到<span class="math inline">\(B\)</span>的单射，那么称<span class="math inline">\(|A| \leq |B|\)</span>，特别的，如果存在<span class="math inline">\(A\)</span>到<span class="math inline">\(B\)</span>的单射但是不存在双射，那么称<span class="math inline">\(|A|&lt;|B|\)</span></p>
+<blockquote>
+<p><span class="math inline">\(card\)</span>上的<span class="math inline">\(\leq\)</span>关系构成一个偏序</p>
+</blockquote>
+<p>自反性，传递性的正确性显然，而对称性的正确性依赖于Cantor-Bernstein TH</p>
+<blockquote>
+<p>如果承认<span class="math inline">\(AC\)</span>，那么<span class="math inline">\(card\)</span>上的<span class="math inline">\(\leq\)</span>关系构成一个全序</p>
+</blockquote>
+<p>虽然我们不能证明，也不能证伪<span class="math inline">\(AC\)</span>，但我们接下来会默认<span class="math inline">\(AC\)</span>成立</p>
+<p><span class="math inline">\(AC\)</span>的表述为：给封一个非空的集合族<span class="math inline">\(\{A_i\}_{i\in I}, A_i \neq \empty\)</span>，那么<span class="math inline">\(\forall i \in I\)</span>，可以选择出<span class="math inline">\((a_i)_{i \in I}\)</span>，s.t. <span class="math inline">\(a_i \in A_i\)</span>。这等价地说<span class="math inline">\(\bigotimes_{i \in I} A_i\)</span>可以定义</p>
+<blockquote>
+<p>Corollory：若<span class="math inline">\(A \subseteq B \subseteq C\)</span>，且<span class="math inline">\(|A| = |C|\)</span>，那么<span class="math inline">\(|A|=|B|=|C|\)</span></p>
+</blockquote>
+<blockquote>
+<p>Cantor TH：设<span class="math inline">\(A\)</span>为非空集，那么<span class="math inline">\(|A| &lt; |2^A|\)</span>，也就是说不存在势最大的集合</p>
+</blockquote>
+<p>一般约定<span class="math inline">\(|2^A|\)</span>记为<span class="math inline">\(2^{|A|}\)</span>，对于<span class="math inline">\(|A^B|\)</span>则记为<span class="math inline">\(|A|^{|B|}\)</span></p>
+<blockquote>
+<p>TH：<span class="math inline">\(|\mathbb{R}|=2^{|\mathbb{N}|}&gt;|\mathbb{N}|\)</span></p>
+</blockquote>
+<p>证明思路就是<span class="math inline">\(2^{|\mathbb{N}|}\)</span>取二进制小数映射到<span class="math inline">\((0,1]\)</span></p>
+<ul>
+<li>定义<span class="math inline">\(\aleph_0 = |\mathbb{N}|\)</span>，称为可数基数，<span class="math inline">\(\aleph_1 = |\mathbb{R}|\)</span>，称为连续势</li>
+</ul>
+<p>我们知道<span class="math inline">\(\aleph_1 = 2^{\aleph_0}\)</span>，那么是不是会有介于<span class="math inline">\(\aleph_0\)</span>和<span class="math inline">\(\aleph_1\)</span>之间的基数呢？我们引入连续统假设：不存在基数<span class="math inline">\(\alpha\)</span>使得<span class="math inline">\(\aleph_0 &lt; \alpha &lt; \aleph_1\)</span>。并且，由连续统假设可以推出<span class="math inline">\(AC\)</span></p>
+<p>我们把基数为<span class="math inline">\(\aleph_1\)</span>的集合称为可数集，把有限集和可数集并称为至多可数集</p>
+<blockquote>
+<p>Prop. 1：任何一个无限集一定包含一个可数子集，这等价于说<span class="math inline">\(\aleph_0\)</span>是最小的无穷集的基数</p>
+</blockquote>
+<p>运用选择公理即可</p>
+<blockquote>
+<p>Prop. 2：如果<span class="math inline">\(A\)</span>为有限集，<span class="math inline">\(B\)</span>为可数集，那么<span class="math inline">\(A \cup B\)</span>为可数集</p>
+</blockquote>
+<p>不妨设<span class="math inline">\(A \cap B = \empty\)</span>，那么<span class="math inline">\(A \cup B\)</span>可以列为<span class="math inline">\(a_1,...,a_n,b_1,b_2,...\)</span></p>
+<blockquote>
+<p>Prop. 3：如果<span class="math inline">\(\{A_n\}_{n=0}^{\infty}\)</span>中均为可数集，那么<span class="math inline">\(\bigcup_{n=1}^{\infty} A_n\)</span>也为可数集，也即可数个可数集的并为可数集</p>
+</blockquote>
+<p>经典的对角线构造</p>
+<blockquote>
+<p>Prop. 4：如果<span class="math inline">\(\{A_n\}_{n=0}^{m}\)</span>中均为可数集，那么<span class="math inline">\(\bigotimes_{n=1}^{m} A_n\)</span>也为可数集，也即有限个可数集的积为可数集</p>
+</blockquote>
+<blockquote>
+<p>Prop. 5：设<span class="math inline">\(A\)</span>为无穷集，<span class="math inline">\(B\)</span>为至多可数集，那么<span class="math inline">\(|A \cup B| = |A|\)</span></p>
+</blockquote>
+<blockquote>
+<p>Prop. 6：集合<span class="math inline">\(A\)</span>为无限集的充要条件为存在<span class="math inline">\(B \subseteq A\)</span>，使得<span class="math inline">\(|A|=|B|\)</span></p>
+</blockquote>
+<hr />
+<p>一些上课提的结论：</p>
+<blockquote>
+<p><span class="math inline">\(\mathbb{R}^n\)</span>中的有界无穷集必有聚点</p>
+</blockquote>
+<blockquote>
+<p>如果<span class="math inline">\(E \subseteq \mathbb{R}^n\)</span>中只有孤立点，那么<span class="math inline">\(E\)</span>可数</p>
+</blockquote>
+<h3 id="拓扑空间与度量空间">拓扑空间与度量空间</h3>
+<h4 id="拓扑空间">拓扑空间</h4>
+<p>对于非空集合<span class="math inline">\(X\)</span>，设<span class="math inline">\(\tau \subset 2^X\)</span>，如果</p>
+<ol type="1">
+<li><p><span class="math inline">\(X, \emptyset \in \tau\)</span></p></li>
+<li><p><span class="math inline">\(A_1,...,A_n \in \tau\)</span>，则<span class="math inline">\(A_1 \cap ... \cap A_n \in \tau\)</span>（对有限交封闭）</p></li>
+<li><p><span class="math inline">\(\{A_i\}_{i \in I} \in \tau\)</span>，则<span class="math inline">\(\bigcup_{i \in I} A_i \in \tau\)</span>（对任意并封闭）</p></li>
+</ol>
+<p>则称<span class="math inline">\((X,\tau)\)</span>为一拓扑空间（一般简写为<span class="math inline">\(X\)</span>），<span class="math inline">\(\tau\)</span>中的元素称为<strong>开集</strong></p>
+<hr />
+<p>设<span class="math inline">\(X\)</span>为一拓扑空间，设<span class="math inline">\(A \subset X\)</span></p>
+<ul>
+<li><p>如果<span class="math inline">\(A^c\)</span>为开集，那么称<span class="math inline">\(A\)</span>为<strong>闭集</strong></p></li>
+<li><p>对<span class="math inline">\(X\)</span>上的开集族<span class="math inline">\(\{B_i\}_{i \in I}\)</span>，如果<span class="math inline">\(A \subset \bigcup_{i \in I} B_i \subset X\)</span>，那么称<span class="math inline">\(\{B_i\}_{i \in I}\)</span>为<span class="math inline">\(A\)</span>上的<strong>开覆盖</strong></p></li>
+<li><p>如果<span class="math inline">\(A\)</span>的任意一个开覆盖存在有限子覆盖，则称<span class="math inline">\(A\)</span>为<strong>紧集</strong></p></li>
+<li><p>包含<span class="math inline">\(A\)</span>的闭集中的最小元为<span class="math inline">\(A\)</span>的<strong>闭包</strong>，记为<span class="math inline">\(\bar{A}\)</span>. 注意到闭集的任意交仍然是闭集，那么闭包实际上就是<span class="math inline">\(\bigcap_{A \subset B \subset X, B \;closed} B\)</span></p></li>
+<li><p>被<span class="math inline">\(A\)</span>包含的开集中的最大元为<span class="math inline">\(A\)</span>的<strong>内部</strong>，记为<span class="math inline">\(\mathring{A}\)</span>. 内部实际上就是<span class="math inline">\(\bigcup_{B \subset A, B \;opened} B\)</span></p></li>
+<li><p>对<span class="math inline">\(A \subset B \subset X\)</span>，如果<span class="math inline">\(\bar{A} = B\)</span>，称<span class="math inline">\(A\)</span>在<span class="math inline">\(B\)</span>中<strong>稠密</strong></p></li>
+<li><p>如果<span class="math inline">\(X\)</span>有可数稠子集，称<span class="math inline">\(X\)</span><strong>可分</strong></p></li>
+<li><p>对<span class="math inline">\(f:X \to Y\)</span>，如果开集的原像是开集，那么称<span class="math inline">\(f\)</span>为<strong>连续映射</strong></p></li>
+<li><p>如果集合<span class="math inline">\(V \subset X\)</span>满足，存在开集<span class="math inline">\(U \subset X\)</span>，使得<span class="math inline">\(x \in U \sub V\)</span>，那么<span class="math inline">\(V\)</span>称为<span class="math inline">\(x\)</span>在<span class="math inline">\(X\)</span>中的<strong>邻域</strong>。特别的，当<span class="math inline">\(V\)</span>是开集时，称<span class="math inline">\(V\)</span>为<span class="math inline">\(x\)</span>的<strong>开邻域</strong></p></li>
+</ul>
+<h4 id="度量空间">度量空间</h4>
+<p>设非空集合<span class="math inline">\(X\)</span>，如果存在<span class="math inline">\(X \times X \to R_{\geq 0}\)</span>的函数<span class="math inline">\(d\)</span>满足：</p>
+<ol type="1">
+<li><p><span class="math inline">\(d(x, y) \geq 0\)</span> 且 <span class="math inline">\(d(x,y) = 0\)</span>当且仅当<span class="math inline">\(x = y\)</span>（正定性）</p></li>
+<li><p><span class="math inline">\(d(x,y) = d(y,x)\)</span> （对称性）</p></li>
+<li><p><span class="math inline">\(d(x,y) \leq d(x,z) + d(z,y)\)</span>（三角不等式）</p></li>
+</ol>
+<p>则称<span class="math inline">\(d\)</span>为<span class="math inline">\(X\)</span>上的距离函数，<span class="math inline">\((X,d)\)</span>为一度量空间</p>
+<hr />
+<p>对<span class="math inline">\(x \in X, r &gt; 0\)</span>，定义<span class="math inline">\(B(x,r) := \{y \in X | d(y,x) &lt; r\}\)</span>为<strong>开球</strong>，<span class="math inline">\(\overline{B(x,r)} := \{y \in X|d(x,y) \leq r\}\)</span>为<strong>闭球</strong></p>
+<p>如果<span class="math inline">\(\forall x \in A, \exists c &gt; 0\)</span>，使得<span class="math inline">\(B(x,c) \subset A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>开集</strong></p>
+<p>上述定义描述的开集满足拓扑空间中开集的性质，因此根据这个定义，度量空间自然诱导出拓扑空间</p>
+<hr />
+<p>对度量空间<span class="math inline">\((X,d)\)</span></p>
+<ul>
+<li>对<span class="math inline">\(x \in X, \{x_n\} \in X\)</span>，如果<span class="math inline">\(\lim_{n \to \infty} d(x_n,x) = 0\)</span>，称<span class="math inline">\(\{x_n\}\)</span>收敛于<span class="math inline">\(x\)</span>，<span class="math inline">\(x\)</span>为<span class="math inline">\(X\)</span>的一个聚点或者极限点，聚点的全体记为<span class="math inline">\(X&#39;\)</span>，称为<span class="math inline">\(X\)</span>的导集</li>
+<li>记<span class="math inline">\(X&#39; \cup X = \bar{X}\)</span>为<span class="math inline">\(X\)</span>的闭包，<span class="math inline">\(X/X&#39;\)</span>为<span class="math inline">\(X\)</span>的孤立点</li>
+</ul>
+<blockquote>
+<p>开球<span class="math inline">\(B(x,r)\)</span>的闭包为闭球<span class="math inline">\(\overline{B(x,r)}\)</span>，因此符号系统是合理的</p>
+</blockquote>
+<ul>
+<li>对<span class="math inline">\(x \in X, \exist c &gt; 0, B(x,c) \subset A\)</span>，则称<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的内点，<span class="math inline">\(A\)</span>的内点的全体记为<span class="math inline">\(\mathring{A}\)</span>，称为<span class="math inline">\(A\)</span>的内部</li>
+<li><span class="math inline">\(\bar{A} / \mathring{A}\)</span>称为<span class="math inline">\(A\)</span>的边界，记为<span class="math inline">\(\part A\)</span></li>
+</ul>
+<blockquote>
+<p><span class="math inline">\(A\)</span>为闭集当且仅当<span class="math inline">\(\bar{A} = A\)</span></p>
+<p><span class="math inline">\(A\)</span>为开集当且仅当<span class="math inline">\(\mathring{A} = A\)</span></p>
+</blockquote>
+<hr />
+<p>对度量空间<span class="math inline">\((X, d)\)</span></p>
+<ul>
+<li>设<span class="math inline">\(U\)</span>为开集，如果<span class="math inline">\(A \subset U\)</span>，称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的开邻域（这个拓扑空间下的定义是一样的）</li>
+<li>如果<span class="math inline">\(\mathring{U} = A\)</span>，则称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的邻域</li>
+</ul>
+<hr />
+<ul>
+<li><p>对<span class="math inline">\(A \subset X\)</span>，定义<span class="math inline">\(A\)</span>的直径为<span class="math inline">\(diam(A) := \sup_{x,y} \{d(x,y), x,y \in E\}\)</span></p>
+<p>如果<span class="math inline">\(diam(A) &lt; \infty\)</span>，则称<span class="math inline">\(A\)</span>为有界集</p></li>
+</ul>
+<hr />
+<ul>
+<li>对<span class="math inline">\(\{x_n\} \in X\)</span>，如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(\exist N \in \mathbb{N}\)</span>，<span class="math inline">\(\forall m, n \geq N\)</span>，有<span class="math inline">\(d(x_n,x_m) &lt; \epsilon\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>为一柯西列</li>
+<li>如果<span class="math inline">\(X\)</span>中任意柯西列收敛，称<span class="math inline">\(X\)</span>完备</li>
+</ul>
+<h4 id="紧集列紧集">紧集，列紧集</h4>
+<p>这一节的主要目的是证明下面的几个命题大致是等价的</p>
+<p>设<span class="math inline">\((X, d)\)</span>为一度量空间，<span class="math inline">\(M \subset X\)</span>为一集合</p>
+<ul>
+<li><ol type="i">
+<li>称<span class="math inline">\(M\)</span>为紧集，当且仅当其任意开覆盖有有限的子覆盖</li>
+</ol></li>
+<li><ol start="2" type="i">
+<li>称<span class="math inline">\(M\)</span>为（相对）序列紧集，当且仅当其任意序列有收敛子列，且收敛值在<span class="math inline">\((X)M\)</span>中</li>
+</ol></li>
+<li><ol start="3" type="i">
+<li>对<span class="math inline">\(\epsilon &lt; 0, E \subset M\)</span>，称<span class="math inline">\(E\)</span>为<span class="math inline">\(M\)</span>的<span class="math inline">\(\epsilon-\)</span>网，如果<span class="math inline">\(M \subset \bigcup_{x \in E} B(x, \epsilon)\)</span></li>
+</ol>
+<p>称<span class="math inline">\(M\)</span>为完全有界的（totally bounded），如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(M\)</span>存在有限大小的<span class="math inline">\(\epsilon-\)</span>网</p></li>
+<li><ol start="4" type="i">
+<li>称<span class="math inline">\(M\)</span>有闭集有限交性质，如果对任意非空递减闭集列<span class="math inline">\(M \supset E_1 \supset E_2 ... \supset E_n \supset ...\)</span>，有<span class="math inline">\(\bigcap_{n=1}^{\infty} E_n \neq \empty\)</span></li>
+</ol></li>
+</ul>
+<hr />
+<p>在<span class="math inline">\(\mathbb{R}^n\)</span>中，(i)对应有限开覆盖定理，(ii)对应收敛子列定理，(iv)对应闭区间套</p>
+<hr />
+<blockquote>
+<p>如果<span class="math inline">\(M\)</span>紧，那么<span class="math inline">\(M\)</span>为有界闭集</p>
+</blockquote>
+<p>证明：如果<span class="math inline">\(M\)</span>为紧集，那么<span class="math inline">\(\{B(x,1)\}_{x \in M}\)</span>构成一个开覆盖，我们取一个有限子覆盖，根据该有限子覆盖易知<span class="math inline">\(M\)</span>有界</p>
+<p>对于闭集，任取<span class="math inline">\(x \in M^c\)</span>，此时对于<span class="math inline">\(y \in M\)</span>，存在<span class="math inline">\(r_x(x,y), r_y(x,y)&gt;0\)</span>，使得<span class="math inline">\(B(x,r_x(x,y)) \cap B(y, r_y(x,y)) = \empty\)</span></p>
+<p>注意到<span class="math inline">\(\{B(y, r_y(x,y))\}\)</span>为一开覆盖，取其有限子覆盖<span class="math inline">\(\{y_i\}\)</span>，此时<span class="math inline">\(B(x, \min_{y_i} r_x(z,y_i)) \subset M^c\)</span>，根据开集的定义，<span class="math inline">\(M^c\)</span>为开集，从而<span class="math inline">\(M\)</span>为闭集</p>
+<hr />
+<p>更一般的，我们称拓扑空间<span class="math inline">\((X, \tau)\)</span>有Hausdorff性质，当且仅当<span class="math inline">\(\forall x, y \in X, x \neq y, \exists U_x, U_y \in \tau, x\in U_x, y \in U_y, U_x \cap U_y = \emptyset\)</span></p>
+<hr />
+<blockquote>
+<p>如果<span class="math inline">\(M\)</span>列紧，那么<span class="math inline">\(M\)</span>为有界闭集</p>
+</blockquote>
+<p>证明：由于<span class="math inline">\(M\)</span>列紧，因此<span class="math inline">\(\bar{M} = M\)</span>，从而<span class="math inline">\(M\)</span>为闭集</p>
+<p>假设<span class="math inline">\(M\)</span>无界，任取<span class="math inline">\(x_0\)</span>，之后我们总可以取<span class="math inline">\(x_i\)</span>，使得<span class="math inline">\(d(x_i,x_j)&gt; 1, \forall j&lt;i\)</span>，这个序列没有收敛子列从而矛盾</p>
+<hr />
+<blockquote>
+<p><span class="math inline">\((ii) \Leftrightarrow (iv)\)</span>：<span class="math inline">\(M\)</span>列紧，当且仅当<span class="math inline">\(M\)</span>有闭集有限交性质</p>
+</blockquote>
+<p><span class="math inline">\(\Rightarrow\)</span>：<span class="math inline">\(M \supset E_1 \supset E_2 ... \supset E_n \supset ...\)</span>为一非空递减闭集列，任取<span class="math inline">\(x_n \in E_n\)</span>，那么<span class="math inline">\(\{x_n\}\)</span>有收敛子列<span class="math inline">\(\{x_{n_k}\} \to x_0\)</span></p>
+<p>注意到<span class="math inline">\(\forall n, \forall n_k \geq n, x_{n_k} \in E_n\)</span>，因此<span class="math inline">\(E_n\)</span>中总有<span class="math inline">\(\{x_{n_k}\}\)</span>的后无限项，根据<span class="math inline">\(E_n\)</span>为闭集，<span class="math inline">\(x_0 \in E_n\)</span>，这也就说明了<span class="math inline">\(\bigcap E_i \neq \emptyset\)</span></p>
+<p><span class="math inline">\(\Leftarrow\)</span>：任取<span class="math inline">\(\{x_n\} \in M\)</span>，定义<span class="math inline">\(E_n = \{x_k:k&gt;n\}, F_n = \bar{E_n}\)</span>，那么<span class="math inline">\(M \supset F_1 \supset F_2 ... \supset F_n \supset ...\)</span>为一非空递减闭集列，根据闭集有限交的定义，取<span class="math inline">\(x_0 \in \bigcap F_i\)</span></p>
+<p>由于<span class="math inline">\(x_0 \in \bar{E_1}\)</span>，我们可以取<span class="math inline">\(x_{n_1} \in E_1\)</span>，使<span class="math inline">\(d(x_{n_1}, x_0) \leq 1\)</span>，接着，由于<span class="math inline">\(x_0 \in \bar{E_{n_1}}\)</span>，我们取<span class="math inline">\(x_{n_2} \in E_{n_1}\)</span>，使<span class="math inline">\(d(x_{n_2}, x_0) \leq 1/2\)</span>...，依次类推，我们取出了一个子列，并且其收敛到<span class="math inline">\(x_0\)</span></p>
+<hr />
+<blockquote>
+<p><span class="math inline">\((ii) \Rightarrow (iii)\)</span>：<span class="math inline">\(M\)</span>列紧，那么<span class="math inline">\(M\)</span>完全有界</p>
+<p>反之，<span class="math inline">\(M\)</span>完全有界，并且<span class="math inline">\(X\)</span>完备，则<span class="math inline">\(M\)</span>列紧</p>
+</blockquote>
+<p><span class="math inline">\(\Rightarrow\)</span>：反证，如果<span class="math inline">\(M\)</span>不是完全有界的，那么<span class="math inline">\(\exists \epsilon &gt; 0\)</span>，使得<span class="math inline">\(M\)</span>没有有限的<span class="math inline">\(\epsilon-\)</span>网</p>
+<p>任取<span class="math inline">\(x_1 \in M\)</span>，之后根据上述性质，我们总能选取<span class="math inline">\(x_i \in M\)</span>，使得<span class="math inline">\(x_i \in M / \bigcup_{j=1}^{i-1} B(x_j, \epsilon)\)</span>，该序列无收敛子列</p>
+<p><span class="math inline">\(\Leftarrow\)</span>：任取序列<span class="math inline">\(\{x_n\}\)</span>，<span class="math inline">\(M\)</span>完全有界，因此<span class="math inline">\(M\)</span>有有限的<span class="math inline">\(1-\)</span>网<span class="math inline">\(E_1\)</span>，无限序列<span class="math inline">\(\{x_n\}\)</span>被包含于有限个集合中，一定有一个几个包含了<span class="math inline">\(\{x_n\}\)</span>中的无限个元素，记这无限个元素构成新的子列<span class="math inline">\(\{x_n^1\}\)</span></p>
+<p>对<span class="math inline">\(\{x_n^1\}\)</span>和<span class="math inline">\(M\)</span>的<span class="math inline">\(1/2-\)</span>网<span class="math inline">\(E_2\)</span>类似的分析，我们可以取出子列<span class="math inline">\(\{x_n^2\}\)</span>，依次类推，我们可以取出可数个子列<span class="math inline">\(\{x_n^i\}\)</span></p>
+<p>最终取子列<span class="math inline">\(\{x_i^i\}\)</span>，注意到我们取的子列满足<span class="math inline">\(d(x_i^b, x_j^n) \leq \frac{2}{n}\)</span>以及<span class="math inline">\(x_{i}^{n+m} \in \{x_i^n\}\)</span>，因此有<span class="math inline">\(d(x_{n+m}^{n+m}, x_n^n) \leq 4/n\)</span>，故这是柯西列，于是收敛</p>
+<hr />
+<blockquote>
+<p>(Lebesgue number lemma) 如果<span class="math inline">\(M\)</span>列紧，那么对任意<span class="math inline">\(M\)</span>的开覆盖<span class="math inline">\(\{E_{\alpha}\}_{\alpha \in I}\)</span>，存在<span class="math inline">\(\delta &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in M, B(x, \delta) \subset E_{\alpha}\)</span>，对于某个<span class="math inline">\(\alpha \in I\)</span></p>
+</blockquote>
+<p>这里<span class="math inline">\(\delta\)</span>的选择应是一致的</p>
+<p>反证，<span class="math inline">\(\forall n \in N, \forall \alpha \in I, \exists x_n, B(x_n, 1/n) \not\subset E_{\alpha}\)</span>，取<span class="math inline">\(\{x_n\}\)</span>的收敛子列<span class="math inline">\(\{x_{n_k}\} \to x_0\)</span></p>
+<p>由于<span class="math inline">\(x_0 \subset \bigcup_{\alpha \in I} E_{\alpha}\)</span>，因此<span class="math inline">\(\exists \alpha_0\)</span>，使<span class="math inline">\(x_0 \in E_{\alpha_0}\)</span>，根据开集的性质，<span class="math inline">\(\exists \delta_0, B(x_0, \delta_0) \subset E_{\alpha_0}\)</span></p>
+<p>我们取<span class="math inline">\(k_0\)</span>，使得<span class="math inline">\(d(x_{n_{k_0}}, x_0) &lt; \delta_0/2,1/n_{k_0} &lt; \delta_0/2\)</span>，此时有<span class="math inline">\(B(x_{n_{k_0}}, 1/n_{k_0}) \subset B(x_0, \delta_0) \subset E_{\alpha_0}\)</span>，矛盾!</p>
+<hr />
+<blockquote>
+<p><span class="math inline">\((ii) \Leftrightarrow (i)\)</span>：<span class="math inline">\(M\)</span>列紧，当且仅当<span class="math inline">\(M\)</span>紧</p>
+</blockquote>
+<p><span class="math inline">\(\Leftarrow\)</span>：反证，假设<span class="math inline">\(M\)</span>不满足闭集有限交性质，即<span class="math inline">\(M \supset E_1 \supset E_2 ... \supset E_n \supset ...\)</span>为一非空递减闭集列，假设<span class="math inline">\(\bigcap E_n = \emptyset\)</span></p>
+<p>此时<span class="math inline">\(M \subset X = (\bigcap E_n)^c = \bigcup E_n^c\)</span>，于是<span class="math inline">\(M\)</span>有开覆盖，进而有有限子覆盖<span class="math inline">\(\{E_{i}^c\}_{i=1}^N\)</span>（这里我们取遍有限子覆盖中编号最大的集合，仍得到一个有限子覆盖）</p>
+<p><span class="math inline">\(M \subset \bigcup^N E_i^c\)</span>，进而<span class="math inline">\(M^c \supset (\bigcup^N E_i^c)^c = \bigcap^N E_i = E_N\)</span>，这于<span class="math inline">\(M \supset E_N\)</span>矛盾</p>
+<p><span class="math inline">\(\Rightarrow\)</span>：根据<span class="math inline">\(M\)</span>完全有界以及Lebesgue number lemma，我们不难取出一个有限开覆盖<span class="math inline">\(M \subset\{E_{\alpha}\}\)</span></p>
+<h4 id="连续性">连续性</h4>
+<ul>
+<li>设<span class="math inline">\((X, \tau_X), (Y, \tau_Y)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>为一映射</li>
+</ul>
+<ol type="i">
+<li>如果对<span class="math inline">\(\forall F \in \tau_Y, f^{-1}(F) \in \tau_X\)</span>，则称<span class="math inline">\(f\)</span>连续（即开集的原像是开集）</li>
+<li>对<span class="math inline">\(x \in X\)</span>，如果对任一<span class="math inline">\(f(x)\)</span>的开邻域<span class="math inline">\(F\)</span>，均有<span class="math inline">\(f^{-1}(F)\)</span>包含<span class="math inline">\(x\)</span>的一个开邻域，则称<span class="math inline">\(f\)</span>在<span class="math inline">\(x\)</span>处连续</li>
+</ol>
+<hr />
+<blockquote>
+<p><span class="math inline">\(f: X \to Y\)</span>连续当且仅当<span class="math inline">\(f\)</span>在每一点处连续</p>
+</blockquote>
+<p>证明略</p>
+<blockquote>
+<p>当<span class="math inline">\((X,d_X),(Y,d_Y)\)</span>为度量空间时，<span class="math inline">\(f:X \to Y\)</span>在点<span class="math inline">\(x_0\)</span>处连续当且仅当<span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in B(x_0, \delta)\)</span>，有<span class="math inline">\(f(x) \in B(f(x_0), \epsilon)\)</span></p>
+</blockquote>
+<p>仍然省略证明</p>
+<blockquote>
+<p><span class="math inline">\(\mathbb{R}\)</span>上的开集可以表为若干不交的开区间的并</p>
+</blockquote>
+<blockquote>
+<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to \mathbb{R}\)</span>连续当且仅当<span class="math inline">\(\forall -\infty \leq a \leq b \leq \infty\)</span>，有<span class="math inline">\(f^{-1}((a,b))\)</span>为<span class="math inline">\(X\)</span>中开集</p>
+</blockquote>
+<p>通过引入<span class="math inline">\(\infty, -\infty\)</span>，我们常常考虑集合<span class="math inline">\([-\infty, \infty]\)</span>，特别的，<span class="math inline">\([-\infty, a)\)</span>，<span class="math inline">\((a,\infty]\)</span>视为一个开区间，此时，我们可以将上面的命题进行扩展：</p>
+<blockquote>
+<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to [-\infty, \infty]\)</span>连续当且仅当<span class="math inline">\(\forall -\infty \leq a \leq b \leq \infty\)</span>，有<span class="math inline">\(f^{-1}(L)\)</span>为<span class="math inline">\(X\)</span>中开集，其中<span class="math inline">\(L\)</span>为任一开区间</p>
+</blockquote>
+<hr />
+<ul>
+<li><p>设<span class="math inline">\((X, \tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to \mathbb{R}\)</span></p>
+<ol type="i">
+<li><p>如果对任一的<span class="math inline">\(\alpha\)</span>，<span class="math inline">\(f^{-1}((\alpha, +\infty))\)</span>是开集，那么称<span class="math inline">\(f\)</span>是下半连续的（lower semicontinuous）</p></li>
+<li><p>如果对任一的<span class="math inline">\(\alpha\)</span>，<span class="math inline">\(f^{-1}((-\infty, \alpha))\)</span>是开集，那么称<span class="math inline">\(f\)</span>是上半连续的（lower semicontinuous）</p></li>
+</ol></li>
+</ul>
+<p>不难证明，<span class="math inline">\(f\)</span>是连续函数，当且仅当<span class="math inline">\(f\)</span>既是上半连续的，又是下半连续的</p>
+<blockquote>
+<p>设<span class="math inline">\(\{f_{\alpha}:X\to \mathbb{R}\}_{\alpha \in I}\)</span>为下半连续函数族，那么<span class="math inline">\(\sup_{\alpha \in I} f_{\alpha}\)</span>是下半连续的</p>
+<p>类似的，设<span class="math inline">\(\{g_{\alpha}:X\to \mathbb{R}\}_{\alpha \in I}\)</span>为上半连续函数族，那么<span class="math inline">\(\inf_{\alpha \in I} g_{\alpha}\)</span>是上半连续的</p>
+</blockquote>
+<p>后面定义的函数的原像就是前面的函数族的原像族的并，进而是开集</p>
+<blockquote>
+<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to \mathbb{R}\)</span> (i) <span class="math inline">\(f\)</span>是下半连续函数，当且仅当<span class="math inline">\(\forall x \in X, \lim \inf_{y \to x} f(y) \geq f(x)\)</span> (ii) <span class="math inline">\(f\)</span>是上半连续函数，当且仅当<span class="math inline">\(\forall x \in X, \lim \sup_{y \to x} f(y) \leq f(x)\)</span></p>
+</blockquote>
+<hr />
+<h4 id="urysohns-lemma">Urysohn's Lemma</h4>
+<ul>
+<li>设<span class="math inline">\((X, d)\)</span>是一个度量空间，对<span class="math inline">\(E \subset X\)</span>，称<span class="math inline">\(d_E:X \to \mathbb{R}, d_E(x) = \inf \{ d(x,y):y \in E\}\)</span>为<span class="math inline">\(E\)</span>上的距离函数，那么
+<ol type="i">
+<li><span class="math inline">\(x \in \bar{E}\)</span>，当且仅当<span class="math inline">\(d_E(x)= 0\)</span></li>
+<li><span class="math inline">\(d_E\)</span>是<span class="math inline">\(X\)</span>上的Lip常数为<span class="math inline">\(1\)</span>的Lipschitz函数，即<span class="math inline">\(|d_E(x)-d_E(y)| \leq d(x,y)\)</span></li>
+</ol></li>
+</ul>
+<p>(i)，(ii)按定义写易证</p>
+<hr />
+<blockquote>
+<p>(Urysohn's lemma for metric spaces) 设<span class="math inline">\((X, d)\)</span>是度量空间，<span class="math inline">\(A,B \subset X\)</span>且<span class="math inline">\(A,B\)</span>为闭集，<span class="math inline">\(A \cap B = \empty\)</span>，那么存在一个连续函数<span class="math inline">\(f : X \to [0,1]\)</span>，使得<span class="math inline">\(f|_A = 0, f|_B = 1\)</span></p>
+</blockquote>
+<p>证明：取<span class="math inline">\(f(x) = d_A(x) / (d_A(x) + d_B(x))\)</span>即可</p>
+<p>这也就说，在度量空间中，我们存在一个标记两个闭集<span class="math inline">\(A,B\)</span>的函数的连续函数的近似</p>
+<hr />
+<ul>
+<li>对于拓扑空间<span class="math inline">\((X, \tau)\)</span>，称其为正规的，如果对任意两个闭集<span class="math inline">\(A,B\)</span>，<span class="math inline">\(A \cap B = \empty\)</span>，存在<span class="math inline">\(A,B\)</span>的邻域<span class="math inline">\(U,V\)</span>，使得<span class="math inline">\(U \cap V = \empty\)</span></li>
+</ul>
+<p>也就是说，我们可以用开集来分离两个闭集，Urysohn引理给出了正规拓扑空间的一种优美的刻画</p>
+<blockquote>
+<p>(Urysohn's lemma for Topological spaces) 当且仅当<span class="math inline">\(\forall A, B \;closed\subset X\)</span>，<span class="math inline">\(A \cap B = \emptyset\)</span>，存在连续函数<span class="math inline">\(f:X \to [0,1]\)</span>，使得<span class="math inline">\(f(A) = \{0\}, f(B)=\{1\}\)</span></p>
+</blockquote>
+<p>我们通过下面这些命题来证明Urysohn's lemma</p>
+<ul>
+<li>拓扑空间<span class="math inline">\((X, \tau)\)</span>是正规的，当且仅当<span class="math inline">\(\forall A\;closed \sub U\;open\sub X\)</span>, <span class="math inline">\(\exists V\;open\)</span>，使得<span class="math inline">\(A \sub V \sub \bar{V} \sub U\)</span></li>
+</ul>
+<hr />
+<ul>
+<li><p>拓扑空间称为局部紧的（locally compact），当且仅当<span class="math inline">\(\forall x \in X,\)</span>，存在<span class="math inline">\(X\)</span>的一个紧的开邻域</p></li>
+<li><p>对<span class="math inline">\(f:X \to \mathbb{R}\)</span>，称<span class="math inline">\(\text{supp} f := \overline{\{x \in X:f(x) \neq 0\}}\)</span>为<span class="math inline">\(f\)</span>的支集</p></li>
+<li><p>称<span class="math inline">\(C_c(X)\)</span>为<span class="math inline">\(X\)</span>上有紧支集的连续函数的全体</p></li>
+</ul>
+<hr />
+<ul>
+<li>如果<span class="math inline">\(X\)</span>是局部紧的Hausdorff空间，如果<span class="math inline">\(K\;compact \sub U\;open \sub X\)</span>，那么<span class="math inline">\(\exists V\;open\)</span> 使得 <span class="math inline">\(K \sub V \sub \bar{V} \sub U\)</span> 并且<span class="math inline">\(V\;open, \bar{V}\;compact\)</span></li>
+<li>设<span class="math inline">\(X\)</span>是局部紧的Hausdorff空间，<span class="math inline">\(K\;compact \sub V\;open \sub X\)</span>，那么存在<span class="math inline">\(f \in C_c(X)\)</span>，使得<span class="math inline">\(1_K \leq f \leq 1_V\)</span></li>
+</ul>
+<h3 id="可测空间与测度空间">可测空间与测度空间</h3>
+<h4 id="可测">可测</h4>
+<ul>
+<li>设<span class="math inline">\(X\)</span>是一个非空集，<span class="math inline">\(\Gamma \sub 2^X\)</span>，称<span class="math inline">\(\Gamma\)</span>是<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数，如果</li>
+</ul>
+<ol type="i">
+<li><span class="math inline">\(X \in \Gamma\)</span> (ii) <span class="math inline">\(A \in \Gamma \Rightarrow A^c \in \Gamma\)</span> (iii) <span class="math inline">\(\{A_n\} \in \Gamma \Rightarrow \bigcup A_n \in \Gamma\)</span>，对可数并封闭</li>
+</ol>
+<ul>
+<li><p>如果<span class="math inline">\(\Gamma\)</span>为<span class="math inline">\(\sigma-\)</span>代数，称<span class="math inline">\(\Gamma\)</span>中元素为<span class="math inline">\(X\)</span>中的可测集，此时，称<span class="math inline">\((X,\Gamma)\)</span>为可测空间</p></li>
+<li><p>如果<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau, f^{-1}(V) \in \Gamma\)</span>，则称<span class="math inline">\(f\)</span>为可测映射（开集的原像为可测集）</p></li>
+</ul>
+<hr />
+<p>可测空间对补集，可数并操作封闭，因而对差集，可数交都封闭</p>
+<p>特别的，如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>，那么<span class="math inline">\(\lim \inf A_n \in \Gamma, \lim \sup A_n \in \Gamma\)</span></p>
+<hr />
+<blockquote>
+<p>如果<span class="math inline">\(f:X\to Y\)</span>可测，<span class="math inline">\(g:Y\to Z\)</span>连续，那么<span class="math inline">\(h=g \circ f:X\to Z\)</span>也是可测函数</p>
+</blockquote>
+<p>不难想象，<span class="math inline">\(Z\)</span>中开集对应到<span class="math inline">\(Y\)</span>中开集再对应到<span class="math inline">\(X\)</span>中可测集</p>
+<blockquote>
+<p>如果<span class="math inline">\(f,g:X\to \mathbb{R}\)</span>可测，<span class="math inline">\(\phi:\mathbb{R}^2 \to \mathbb{R}\)</span>连续，那么<span class="math inline">\(h(x)=\phi(f(x),g(x))\)</span>可测</p>
+</blockquote>
+<p>这个证明用到一个结论：<span class="math inline">\(\mathbb{R}^k\)</span>中的开集是可数个立方体的并</p>
+<blockquote>
+<p>如果<span class="math inline">\(\{\Gamma_i\}_{i \in I}\)</span>为<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数族，那么<span class="math inline">\(\bigcap_{i \in I} \Gamma_i\)</span>为<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数</p>
+</blockquote>
+<p>按定义写即可</p>
+<hr />
+<ul>
+<li><p>设<span class="math inline">\(X\)</span>非空，<span class="math inline">\(S \sub 2^X\)</span>，称包含<span class="math inline">\(S\)</span>的最小的<span class="math inline">\(\sigma-\)</span>代数为<span class="math inline">\(S\)</span>生成的<span class="math inline">\(\sigma-\)</span>代数，记为<span class="math inline">\(\sigma(S)\)</span></p>
+<p>这个定义是良定义，因为事实上，<span class="math inline">\(\sigma(S) = \bigcap_{\Gamma \;is\;\sigma-algebra, S \sub \Gamma} \Gamma\)</span></p></li>
+<li><p>设<span class="math inline">\((X, \tau)\)</span>为拓扑空间，记<span class="math inline">\(\sigma(\tau)\)</span>为该拓扑空间上的Borel代数，记为<span class="math inline">\(\mathscr{B}(x)\)</span>，<span class="math inline">\(\mathscr{B}(x)\)</span>中的元素称为Borel集</p>
+<p>在拓扑空间<span class="math inline">\(X\)</span>中，可数个闭集的并是Borel集，称其为<span class="math inline">\(F_{\sigma}\)</span>集；可数个开集的交是Borel集，称其为<span class="math inline">\(G_{\sigma}\)</span>集</p></li>
+<li><p>设<span class="math inline">\(X,Y\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau_Y, f^{-1}(V)\)</span>是<span class="math inline">\(X\)</span>中的Borel集，称<span class="math inline">\(f\)</span>为Borel可测（即开集的原像为Borel集）</p></li>
+</ul>
+<hr />
+<blockquote>
+<p>如果<span class="math inline">\(f\)</span>连续，那么<span class="math inline">\(f\)</span>一定是Borel可测的</p>
+</blockquote>
+<p>显然</p>
+<blockquote>
+<p>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，那么</p>
+<ul>
+<li><span class="math inline">\(\{F\sub Y:f^{-1}(F) \sub \Gamma\}\)</span>是<span class="math inline">\(\sigma-\)</span>代数</li>
+<li>如果<span class="math inline">\(f\)</span>可测且<span class="math inline">\(F \sub Y\)</span>为Borel集，那么<span class="math inline">\(f^{-1}(F) \in \Gamma\)</span>，即Borel集在可测映射下的原像为可测集</li>
+<li>如果<span class="math inline">\(f\)</span>可测，<span class="math inline">\(g:Y\to Z\)</span>为Borel可测，那么<span class="math inline">\(g\circ f:X\to Z\)</span>可测</li>
+</ul>
+</blockquote>
+<p>证明都比较简单...</p>
+<hr />
+<p>接下来，我们考虑更具体的值域<span class="math inline">\(f:X \to [-\infty, +\infty]\)</span></p>
+<blockquote>
+<p>假设<span class="math inline">\(f:X\to (-\infty, +\infty)\)</span>，那么<span class="math inline">\(f\)</span>可测等价于<span class="math inline">\(\forall a \in (-\infty, +\infty), \{x:f(x)&gt;a\}\)</span>为可测集</p>
+</blockquote>
+<p>证明：<span class="math inline">\(\Rightarrow\)</span>是显然的，我们考虑<span class="math inline">\(\Leftarrow\)</span></p>
+<p>由于<span class="math inline">\((a,+\infty)\)</span>为可测集，因此<span class="math inline">\([a,+\infty) = \bigcap_{n=1}^{\infty} (a+\frac{1}{n},+\infty)\)</span>也为可测集，其补集<span class="math inline">\((-\infty, a)\)</span>也为可测集</p>
+<p>此时，<span class="math inline">\((\alpha, \beta) = (\alpha, +\infty) \cap (-\infty, \beta)\)</span>为可测集，形如<span class="math inline">\((\alpha,\beta]\)</span>的区间也是类似的</p>
+<blockquote>
+<p>假设<span class="math inline">\(\{f_n\}:X\to [-\infty, +\infty]\)</span>是一个可测函数列，那么</p>
+<ul>
+<li><span class="math inline">\(\sup f_n := (\sup f_n)(x) = \sup f_n(x)\)</span>为可测函数</li>
+<li><span class="math inline">\(\inf f_n := (\inf f_n)(x) = \inf f_n(x)\)</span>为可测函数</li>
+<li><span class="math inline">\((\lim \sup f_n)(x) = \inf_{k \geq 1} \sup_{n\geq k} f_n(x)\)</span>为可测函数</li>
+<li><span class="math inline">\(\lim \inf f_n\)</span>为可测函数</li>
+</ul>
+</blockquote>
+<p>证明：只证明第一条，注意到<span class="math inline">\(\{\sup f_n(x)&gt;a\} = \bigcup_{n=1}^{\infty} \{f_n(x)&gt;a\}\)</span>为可测集，根据之前的引理即证</p>
+<blockquote>
+<p>Corollary：如果<span class="math inline">\(\{f_n\}\)</span>可测，并且收敛到<span class="math inline">\(f\)</span>，那么<span class="math inline">\(f\)</span>可测</p>
+<p>当<span class="math inline">\(f, g\)</span>可测时，<span class="math inline">\(\max \{f,g\}, \min \{f,g\}\)</span>可测</p>
+</blockquote>
+<p>根据以上的推论，我们可以将一个函数<span class="math inline">\(f\)</span>分解为<span class="math inline">\(f^+\)</span>和<span class="math inline">\(f^{-}\)</span>，其中<span class="math inline">\(f^+ = \max \{f,0\}, f^{-}=-\min\{f,0\}\)</span>，那么<span class="math inline">\(f=f^+-f^-\)</span>，并且<span class="math inline">\(f^+,f^- \geq 0\)</span></p>
+<h4 id="简单函数逼近">简单函数逼近</h4>
+<ul>
+<li>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\(S:X\to (-\infty, +\infty)\)</span>称为简单函数，当且仅当<span class="math inline">\(S(X)\)</span>为有限集</li>
+</ul>
+<hr />
+<blockquote>
+<p>对简单函数<span class="math inline">\(S:X\to(-\infty, +\infty)\)</span>，设<span class="math inline">\(S(X)=\{\alpha_1,...,\alpha_n\}\)</span>，再设<span class="math inline">\(A_i = S^{-1}(\{\alpha_i\})\)</span></p>
+<p>那么<span class="math inline">\(S=\sum_{i=1}^n \alpha_i 1_{A_i}\)</span>，并且<span class="math inline">\(S\)</span>可测当且仅当<span class="math inline">\(A_1,...,A_n\)</span>为可测集</p>
+</blockquote>
+<p>只证明第二个命题的<span class="math inline">\(\Leftarrow\)</span>方向，此时，任何一个开区间的原像是若干<span class="math inline">\(A_i\)</span>的并，从而仍然为可测集</p>
+<hr />
+<blockquote>
+<p>如果<span class="math inline">\(f:X\to [0,+\infty]\)</span>是可测函数，那么存在非负简单函数列<span class="math inline">\(\{S_n\}\)</span>，使得</p>
+<ul>
+<li><span class="math inline">\(0\leq S_1 \leq S_2 ... \leq f\)</span></li>
+<li><span class="math inline">\(S_n(x) \to f(x), \forall x \in X\)</span></li>
+</ul>
+</blockquote>
+<p>证明：构造<span class="math inline">\(S_n(x) := \begin{cases} &amp;\frac{k-1}{2^n}, &amp;\frac{k-1}{2^n} \leq f(x)\leq \frac{k}{2^n}, k\in \{1,...,n2^n\} \\ &amp;n, &amp;f(x)\geq n\end{cases}\)</span>即可</p>
+<h4 id="测度空间">测度空间</h4>
+<ul>
+<li><p>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，非负函数<span class="math inline">\(\mu: \Gamma \to [0,+\infty]\)</span>称为<span class="math inline">\(X\)</span>上的正测度，当且仅当<span class="math inline">\(\mu\)</span>满足可列可加性：如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>是一列两两不交的可测集，那么<span class="math inline">\(\mu(\bigcup_{n=1}^{\infty} A_n) = \sum_{n=1}^{\infty} \mu(A_n)\)</span></p>
+<p>在有测度的情况下，我们称<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间</p></li>
+</ul>
+<p>特别的，对于测度而言，<span class="math inline">\(\mu=+\infty\)</span>是一个平凡的测度，不失一般性，我们假设至少存在一个可测集<span class="math inline">\(E\)</span>，使<span class="math inline">\(\mu(E)\neq +\infty\)</span></p>
+<hr />
+<p>对于测度空间<span class="math inline">\((X,\Gamma,\mu)\)</span>，我们有以下的普适结论</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(\mu(\emptyset) = 0\)</span></li>
+<li>如果<span class="math inline">\(A_1,...,A_n\)</span>为两两不交可测集，那么<span class="math inline">\(\mu(\bigcup_{i=1}^n A_i) = \sum_{i=1}^n \mu(A_i)\)</span></li>
+<li>如果<span class="math inline">\(A \sub B\)</span>且<span class="math inline">\(A,B\)</span>可测，那么<span class="math inline">\(\mu(A) \leq \mu(B)\)</span></li>
+<li>如果<span class="math inline">\(\{A_n\}\)</span>是递增的可测集列，那么<span class="math inline">\(\mu(A_n) \to \mu(\lim A_n)\)</span></li>
+<li>如果<span class="math inline">\(\{A_n\}\)</span>是递减的可测集列，并且<span class="math inline">\(\mu(A_1) &lt; +\infty\)</span>，那么<span class="math inline">\(\mu(A_n) \to \mu(\lim A_n)\)</span></li>
+</ul>
+</blockquote>
+<p>这些都不是很难证明</p>
+<hr />
+<p>下面介绍一个例子：计数测度</p>
+<p>对<span class="math inline">\((X,2^X,\mu)\)</span>可以定义测度：<span class="math inline">\(\mu(E) = \begin{cases} &amp;card(E),&amp;E\;is\;finite \\ &amp; +\infty, &amp;o.w.\end{cases}\)</span></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/real-analysis/" rel="tag"># real-analysis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/2022%E5%A4%9A%E6%A0%A1%E8%A1%A5%E9%A2%98/" rel="prev" title="2022多校补题">
+                  <i class="fa fa-chevron-left"></i> 2022多校补题
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/real-analysis-2/" rel="next" title="real-analysis-2">
+                  real-analysis-2 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">147k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">2:14</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="Rudin的书写的深度不错">
+<meta property="og:type" content="article">
+<meta property="og:title" content="real-analysis-2">
+<meta property="og:url" content="http://sremoon.github.io/2022/10/real-analysis-2/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="Rudin的书写的深度不错">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-10-13T06:46:56.000Z">
+<meta property="article:modified_time" content="2022-10-31T15:00:51.196Z">
+<meta property="article:author" content="remoon">
+<meta property="article:tag" content="real-analysis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sremoon.github.io/2022/10/real-analysis-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2022/10/real-analysis-2/","path":"2022/10/real-analysis-2/","title":"real-analysis-2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>real-analysis-2 | SreMoon's Lake</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#lebesgue%E7%A7%AF%E5%88%86"><span class="nav-text">Lebesgue积分</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lebesgue%E7%A7%AF%E5%88%86%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-text">Lebesgue积分的定义</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lebesgue-monotone-convergence-theorem"><span class="nav-text">Lebesgue Monotone convergence Theorem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A7%AF%E5%88%86%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="nav-text">积分的性质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lebesgue-dominated-convergence-theorem"><span class="nav-text">Lebesgue Dominated convergence Theorem</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BD%99%E8%AE%A8%E8%AE%BA"><span class="nav-text">其余讨论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%94%B6%E6%95%9B"><span class="nav-text">收敛</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lebesgue%E6%B5%8B%E5%BA%A6"><span class="nav-text">Lebesgue测度</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2022/10/real-analysis-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          real-analysis-2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-13 14:46:56" itemprop="dateCreated datePublished" datetime="2022-10-13T14:46:56+08:00">2022-10-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2022-10-31 23:00:51" itemprop="dateModified" datetime="2022-10-31T23:00:51+08:00">2022-10-31</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>8.7k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>8 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">Rudin的书写的深度不错</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="lebesgue积分">Lebesgue积分</h3>
+<h4 id="lebesgue积分的定义">Lebesgue积分的定义</h4>
+<ul>
+<li>非负简单函数的积分</li>
+</ul>
+<p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>是一个测度空间，<span class="math inline">\(S:X\to[0,+\infty]\)</span>是一个可测简单函数，写为<span class="math inline">\(S = \sum_{i=1}^n \alpha_i 1_{A_i}\)</span></p>
+<p>那么，定义<span class="math inline">\(S\)</span>在<span class="math inline">\(X\)</span>上的Lebesgue积分为<span class="math inline">\(\int_X S \text{d} \mu = \sum_{i=1}^n \alpha_i \mu(A_i)\)</span>，对于任给的<span class="math inline">\(E \in \Gamma\)</span>，定义<span class="math inline">\(S\)</span>在<span class="math inline">\(E\)</span>上的Lebesgue积分为<span class="math inline">\(\int_E S \text{d} \mu = \sum_{i=1}^n \alpha_i \mu(A_i \cap E)\)</span></p>
+<ul>
+<li>可测函数的积分</li>
+</ul>
+<p>对测度空间<span class="math inline">\((X,\Gamma,\mu)\)</span>，非负可测函数<span class="math inline">\(f:X\to[0,+\infty]\)</span>，对<span class="math inline">\(E\in \Gamma\)</span>，定义<span class="math inline">\(f\)</span>在<span class="math inline">\(E\)</span>上积分为</p>
+<p><span class="math inline">\(\int_E f \text{d} \mu = \sup \{\int_E S \text{d} \mu : 0 \leq S \leq f, S \;is\;simple\;and\;measurable\}\)</span></p>
+<p>对于一般的可测函数<span class="math inline">\(f\)</span>，我们将其写为<span class="math inline">\(f=f^+-f^-\)</span>，如果<span class="math inline">\(\int_E f^+ \text{d} \mu\)</span>和<span class="math inline">\(\int_E f^{-} \text{d} \mu\)</span>中至少有一个是有限的，我们就定义<span class="math inline">\(\int_E f\text{d}\mu = \int_E f^+ \text{d} \mu-\int_E f^{-} \text{d} \mu\)</span>，否则，我们称<span class="math inline">\(f\)</span>的积分无定义</p>
+<hr />
+<p>接下来介绍Lebesgue积分的一些性质，设<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间，<span class="math inline">\(E,F\)</span>为可测集，<span class="math inline">\(f,g\)</span>为非负可测函数</p>
+<blockquote>
+<ul>
+<li>如果<span class="math inline">\(0 \leq f \leq g\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu \leq \int_E g\text{d} \mu\)</span></li>
+<li>如果<span class="math inline">\(E \sub F\)</span>，那么<span class="math inline">\(\int_E f \;\text{d}\mu \leq \int_F f\;\text{d} \mu\)</span></li>
+<li>如果<span class="math inline">\(\alpha \in (0,+\infty)\)</span>，那么<span class="math inline">\(\int_E \alpha f\text{d} \mu = \alpha \int_E f\text{d}\mu\)</span></li>
+<li>如果<span class="math inline">\(f|_E = 0\)</span>或者<span class="math inline">\(\mu(E)=0\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu = 0\)</span></li>
+<li>如果<span class="math inline">\(E \sub X\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu = \int_X f 1_{E} \text{d} \mu\)</span></li>
+</ul>
+</blockquote>
+<h4 id="lebesgue-monotone-convergence-theorem">Lebesgue Monotone convergence Theorem</h4>
+<blockquote>
+<p>单调收敛定理：设<span class="math inline">\(\{f_n\}\)</span>为<span class="math inline">\(X\)</span>上的可测函数列，并且<span class="math inline">\(0 \leq f_1 \leq f_2 ... \leq f_n \leq ... \leq +\infty\)</span>，并且<span class="math inline">\(\forall x \in X, \lim_{n \to \infty} f_n(x) = f(x)\)</span>，那么<span class="math inline">\(f\)</span>非负可测，并且<span class="math inline">\(\lim_{n \to \infty} \int_X f_n \text{d} \mu = \int_X f\text{d}\mu\)</span></p>
+</blockquote>
+<p>证明：<span class="math inline">\(f\)</span>非负可测可以根据我们之前的讨论结果得出</p>
+<p>我们用到如下的引理</p>
+<blockquote>
+<p>如果<span class="math inline">\(S\)</span>是一个简单函数，那么<span class="math inline">\(\varphi(E):=\int_E S\text{d}\mu\)</span>是<span class="math inline">\(\Gamma\)</span>上的测度</p>
+</blockquote>
+<p>首先，<span class="math inline">\(\int_X f_1 \text{d} \mu \leq ... \int_X f_n \text{d} \mu \leq...\leq \int_X f \text{d} \mu\)</span>，因此<span class="math inline">\(\lim \int_X f_n \text{d} \mu \leq \int_X f \text{d} \mu\)</span></p>
+<p>下面证明<span class="math inline">\(\int_X f\text{d} \mu \leq \lim \int_X f_n \text{d} \mu\)</span>，只需证明对满足<span class="math inline">\(0 \leq S \leq f\)</span>的简单函数<span class="math inline">\(S\)</span>，有<span class="math inline">\(\int_X S \text{d} \mu \leq \lim \int_X f_n \text{d} \mu\)</span></p>
+<p>固定<span class="math inline">\(C \in (0,1)\)</span>，设<span class="math inline">\(E_n:=\{f_n(x)&gt;C\cdot S(x)\}\)</span>，那么<span class="math inline">\(E_n\)</span>可测，<span class="math inline">\(E_n \sub E_{n+1}\)</span>，并且<span class="math inline">\(X = \bigcup E_n\)</span></p>
+<p>因此<span class="math inline">\(\int_X f_n \geq \int_{E_n} f_n \geq \int_{E_n} C\cdot S=C\int_{E_n} S\)</span>，令<span class="math inline">\(n \to \infty\)</span>，注意到<span class="math inline">\(\int_E S\)</span>是一个测度，因此<span class="math inline">\(\lim C \int_{E_n} S = C \lim \varphi(E_n)=C \varphi(\bigcup E_n) = C \varphi(X)\)</span>，最终得到<span class="math inline">\(\lim \int_X f_n \geq C \varphi(X)\)</span>，由于<span class="math inline">\(C\)</span>在<span class="math inline">\((0,1)\)</span>中任取，最后又<span class="math inline">\(\lim f_X f_n \geq \varphi(X)=\int_X S\)</span>，证毕</p>
+<hr />
+<p>我们使用Lebesgue Monotone convergence Theorem来得到Lebesgue积分的可加性</p>
+<blockquote>
+<p>如果<span class="math inline">\(f,g\)</span>为非负可测函数，那么<span class="math inline">\(\int (f+g)=\int f + \int g\)</span></p>
+</blockquote>
+<p>根据之前的简单函数逼近的讨论，我们知道存在递增简单函数列<span class="math inline">\(\{S_n\},\{T_n\}\)</span>逼近<span class="math inline">\(f,g\)</span>，再根据下面的引理</p>
+<blockquote>
+<p>如果<span class="math inline">\(S,T\)</span>为可测简单函数，那么<span class="math inline">\(\int (S+T)=\int S + \int T\)</span></p>
+</blockquote>
+<p>自然<span class="math inline">\(\{S_n+T_n\}\)</span>逼近<span class="math inline">\(f+g\)</span>，那么根据单调收敛定理，我们有<span class="math inline">\(\int (f+g)=\lim \int (S_n+T_n) = \lim \int S_n + \lim \int T_n = \int f + \int g\)</span></p>
+<hr />
+<p>级数的收敛自然是单调收敛定理的一个情形，因此有</p>
+<blockquote>
+<p>设非负函数<span class="math inline">\(\{f_n\}\)</span>可测，<span class="math inline">\(f = \sum_{n=1}^{\infty} f_n\)</span>，那么<span class="math inline">\(\int_X f \text{d}\mu = \sum_{n=1}^{\infty} \int_X f_n \text{d} \mu\)</span></p>
+</blockquote>
+<p>后者的证明用到了有限和与积分可以交换顺序的性质</p>
+<hr />
+<blockquote>
+<p>(<strong>Fatou's lemma</strong>) 设<strong>非负</strong>函数族<span class="math inline">\(\{f_n\}\)</span>可测，那么<span class="math inline">\(\int_X \lim \inf f_n d\mu \leq \lim \inf \int_X f_n d\mu\)</span></p>
+</blockquote>
+<h4 id="积分的性质">积分的性质</h4>
+<p>接下来，我们将考虑所有的函数，而不仅限于非负函数</p>
+<ul>
+<li><p>设<span class="math inline">\(f\)</span>可测，如果<span class="math inline">\(\int_X |f| d\mu &lt; \infty\)</span>，则称<span class="math inline">\(f\)</span>为Lebesgue可积</p>
+<p>Lebesgue可积函数的全体记为<span class="math inline">\(L^1(X,\mu)\)</span></p></li>
+<li><p>换元：设<span class="math inline">\(f:X\to[0,\infty]\)</span>可测，<span class="math inline">\(\varphi:\Gamma \to[0,\infty], \varphi(E) = \int_E f d \mu\)</span></p>
+<p>那么，<span class="math inline">\(\varphi\)</span>是<span class="math inline">\((X,\Gamma)\)</span>上的正测度，并且<span class="math inline">\(\forall g:X\to[0,\infty]\)</span>，<span class="math inline">\(\int_X g d \varphi = \int_X gf d \mu\)</span></p>
+<p>在这个换元的理解下，<span class="math inline">\(\mu(E) = \int_E 1 d\mu\)</span></p></li>
+<li><p>替换积分域：<span class="math inline">\(\int_E f d\mu = \int_X f1_{E} d\mu\)</span></p>
+<p>特别的，<span class="math inline">\(\int_B f = \int_A f + \int_{B/A} f\)</span></p></li>
+<li><p>绝对值的积分：如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(|\int_X f d\mu| \leq \int_X |f| d\mu\)</span></p></li>
+<li><p>积分的线性性：如果<span class="math inline">\(f,g \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\alpha f + \beta g \in L^1(X,\mu)\)</span>，并且<span class="math inline">\(\int_X \alpha f + \beta g = \alpha \int_X f + \beta \int_X g\)</span></p></li>
+</ul>
+<h4 id="lebesgue-dominated-convergence-theorem">Lebesgue Dominated convergence Theorem</h4>
+<blockquote>
+<p>控制收敛定理：设<span class="math inline">\(\{f_n\}\)</span>可测，如果<span class="math inline">\(f_n \to f\)</span>，且存在<span class="math inline">\(g \in L^1(X,\mu)\)</span>使得<span class="math inline">\(|f_n| \leq g\)</span>，那么<span class="math inline">\(f \in L^1(X,\mu)\)</span>，并且<span class="math inline">\(\lim \int_X f_n d \mu = \int_X f d \mu\)</span></p>
+</blockquote>
+<p>注意到<span class="math inline">\(2g - |f_n - f|\)</span>非负可测</p>
+<p>应用Fatou's lemma得到<span class="math inline">\(\lim\inf \int 2g-|f_n-f| \geq \int \lim \inf 2g-|f_n-f| = \int 2g\)</span></p>
+<p>这告诉我们<span class="math inline">\(\lim \int |f_n - f| = 0\)</span>，而<span class="math inline">\(|\lim \int f_n - \int f| = |\lim \int(f_n-f)|= \lim |\int (f_n-f)| \leq \lim \int |f_n-f|\)</span></p>
+<blockquote>
+<p>如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\varphi(E):=\int_E f\text{d}\mu\)</span>是<span class="math inline">\(\Gamma\)</span>上的实测度</p>
+</blockquote>
+<p>类似于之前证明正测度，不过我们将使用控制收敛定理而不是单调收敛定理</p>
+<blockquote>
+<p>（积分的绝对连续性）：如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\forall \epsilon&gt;0, \exists \delta&gt;0\)</span>，对<span class="math inline">\(\mu(E)&lt;\delta\)</span>的<span class="math inline">\(E\)</span>，有<span class="math inline">\(\int_E |f| d\mu &lt; \epsilon\)</span></p>
+</blockquote>
+<p>考虑取简单函数列<span class="math inline">\(\{S_n\}\)</span>去逼近<span class="math inline">\(f\)</span>，<span class="math inline">\(S_n\)</span>有界，而<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(f-S_n\)</span>根据收敛性也足够小，从而得到一个证明</p>
+<h4 id="其余讨论">其余讨论</h4>
+<ul>
+<li><p>almost everywhere 以及almost all的含义都是除了一个零测集外成立，一般根据适用语境的不同会有所调整</p></li>
+<li><p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>是测度空间，且<span class="math inline">\(f,g\)</span>为可测函数，如果<span class="math inline">\(\mu{\{f(x)\neq g(x)\}}=0\)</span>，则称<span class="math inline">\(f,g\)</span>几乎处处相等，记为<span class="math inline">\(f \sim g\)</span>，这是可测函数上的一种等价关系</p></li>
+</ul>
+<blockquote>
+<p>对可测函数<span class="math inline">\(f,g\)</span>，如果<span class="math inline">\(f \sim g\)</span>，那么<span class="math inline">\(f^+ \sim g^+, f^- \sim g^-, |f| \sim |g|\)</span></p>
+</blockquote>
+<p>易证</p>
+<blockquote>
+<p>如果<span class="math inline">\(f \sim g\)</span>，并且$f <span class="math inline">\(存在，那么\)</span>g<span class="math inline">\(也存在，并且\)</span>g = f$</p>
+</blockquote>
+<p>这告诉我们，在积分的意义下，零测集没有讨论的意义，举个例子：</p>
+<blockquote>
+<p>设<span class="math inline">\(\{f_n\}:X\to[-\infty,+\infty]\)</span>可测，且<span class="math inline">\(\sum \int_X |f_n| d \mu &lt; +\infty\)</span>，那么</p>
+<p>记<span class="math inline">\(f(x) = \sum f_n(x)\)</span>，对a.a. <span class="math inline">\(x \in X\)</span>，<span class="math inline">\(f(x)\)</span>收敛</p>
+<p>则<span class="math inline">\(f \in L^1(X,\mu)\)</span>，且<span class="math inline">\(\int_X f d \mu = \sum_{n=1}^{\infty} \int_X f_n d \mu\)</span></p>
+</blockquote>
+<p>证明：记<span class="math inline">\(g = \sum |f_n|\)</span>，那么<span class="math inline">\(g\)</span>可测，并且<span class="math inline">\(\int g = \int \sum |f_n| = \sum \int |f_n| &lt; \infty\)</span>（单调收敛定理）</p>
+<p>记<span class="math inline">\(E = \{g(x)&lt;\infty\}\)</span>，由于<span class="math inline">\(g \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\mu(E^c) = 0\)</span></p>
+<p>从而<span class="math inline">\(\forall x \in E, g(x)=\sum |f_n(x)| &lt; \infty\)</span>，故<span class="math inline">\(f(x)=\sum f_n(x)\)</span>在<span class="math inline">\(E\)</span>上收敛</p>
+<p>注意到在<span class="math inline">\(E\)</span>上，<span class="math inline">\(|f| \leq g &lt; \infty\)</span>，根据控制收敛定理，<span class="math inline">\(f \in L^1(X,\mu)\)</span>，<span class="math inline">\(\int_E \sum f_n(x) = \int_E f d\mu\)</span></p>
+<blockquote>
+<p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间，定义<span class="math inline">\(\Gamma^* = \{E:\exists A,B \in \Gamma, A \sub E \sub B, \mu(B/A)=0\}\)</span>，那么<span class="math inline">\(\Gamma^*\)</span>为<span class="math inline">\(\sigma-\)</span>代数</p>
+<p>如果在这里补充定义<span class="math inline">\(\mu(E)=\mu(A)\)</span>，那么<span class="math inline">\((X,\Gamma^*,\mu)\)</span>是完备化的测度空间</p>
+<p>并且，对<span class="math inline">\(\mu(E)=0\)</span>的集合，如果<span class="math inline">\(F \sub E\)</span>，那么<span class="math inline">\(F \in \Gamma^*\)</span>，且<span class="math inline">\(\mu(F)=0\)</span></p>
+</blockquote>
+<p>这可以对零测度进行一个补充定义</p>
+<blockquote>
+<p>对于完备化的测度空间，修改函数在零测集上的函数值不改变该函数的积分</p>
+</blockquote>
+<p>完备化的主要目的在于确保修改定义之后的函数是一个可测函数</p>
+<blockquote>
+<ul>
+<li>如果<span class="math inline">\(f:X\to [0,\infty]\)</span>可测，<span class="math inline">\(\int_E f d \mu = 0\)</span>，那么<span class="math inline">\(f\)</span>在<span class="math inline">\(E\)</span>上几乎处处为<span class="math inline">\(0\)</span></li>
+<li>如果<span class="math inline">\(f \in L^1(X, \mu)\)</span>并且<span class="math inline">\(\forall E, \int_E f d \mu = 0\)</span>，那么<span class="math inline">\(f\)</span>在<span class="math inline">\(X\)</span>上几乎处处为<span class="math inline">\(0\)</span></li>
+<li>如果<span class="math inline">\(f \in L^1(X, \mu)\)</span>且<span class="math inline">\(|\int_X f d \mu| = \int_X |f| d\mu\)</span>，那么<span class="math inline">\(f \geq 0\)</span>或者<span class="math inline">\(f \leq 0\)</span>在<span class="math inline">\(X\)</span>上几乎处处成立</li>
+</ul>
+</blockquote>
+<h4 id="收敛">收敛</h4>
+<ul>
+<li>Def：对于测度空间<span class="math inline">\((X,\Gamma, \mu)\)</span>，<span class="math inline">\(\{f_n\}\)</span>可测，我们有以下几种收敛
+<ul>
+<li>处处收敛：<span class="math inline">\(\forall x, f_n(x) \to f(x)\)</span></li>
+<li>几乎处处收敛：<span class="math inline">\(\mu(\{f_n(x) \not\to f(x)\}) = 0\)</span></li>
+<li>一致收敛：<span class="math inline">\(\forall \epsilon &gt; 0, \exists N, \forall n&gt;N, |f_n(x)-f(x)| &lt; \epsilon\)</span></li>
+<li><span class="math inline">\(L^1\)</span>收敛：当<span class="math inline">\(\{f_n\},f \in L^1(X,\mu)\)</span>时，<span class="math inline">\(f_n \to f\)</span>以<span class="math inline">\(L^1\)</span>收敛当且仅当<span class="math inline">\(\int_X |f_n-f|\to 0\)</span>）（实际上也就是以<span class="math inline">\(L^1\)</span>范数收敛）</li>
+<li>依测度收敛：<span class="math inline">\(\forall \epsilon, \mu(\{|f_n(x)-f(x)|&gt;\epsilon\})\to 0\)</span></li>
+<li>近一致收敛：<span class="math inline">\(\forall \epsilon, \exist \mu(E)&lt;\epsilon\)</span>，使<span class="math inline">\(f_n \to f\)</span>在<span class="math inline">\(X \setminus E\)</span>上一致收敛</li>
+</ul></li>
+</ul>
+<hr />
+<p>下面我们来逐步介绍这些收敛之间的强弱关系</p>
+<blockquote>
+<p>s1: 如果<span class="math inline">\(\{f_n\}\)</span>依<span class="math inline">\(L^1\)</span>收敛，那么<span class="math inline">\(\{f_n\}\)</span>依测度收敛</p>
+</blockquote>
+<p>证明：<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，如果<span class="math inline">\(f_n \to f\)</span>以<span class="math inline">\(L^1\)</span>收敛，那么<span class="math inline">\(\int_X|f_n-f| \to 0\)</span></p>
+<p>注意到<span class="math inline">\(\mu(\{|f(x)|&gt;\alpha\}) \leq \frac{1}{\alpha} ||f||_1\)</span>，因此<span class="math inline">\(\mu(\{|f_n-f| &gt; \epsilon\}) \leq \frac{1}{\epsilon} ||f_n-f||_1 \to 0\)</span></p>
+<blockquote>
+<p>s2: 如果<span class="math inline">\(\mu(X)&lt;+\infty\)</span>并且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，那么<span class="math inline">\(f_n \to f\)</span>依测度收敛</p>
+</blockquote>
+<p>对应到概率论中，这实际上对应以概率<span class="math inline">\(1\)</span>收敛和依概率收敛</p>
+<p>证明：不难知道，<span class="math inline">\(f_n(x) \to f(x)\)</span>当且仅当<span class="math inline">\(\lim \sup |f_n-f|=0\)</span></p>
+<p>因此$({f_n(x)f(x)}) = 0 (_{m=1}^{} {|f_n - f| &gt; }) = 0 $</p>
+<p>这又等价于说明<span class="math inline">\(\mu(\{\lim \sup |f_n - f| &gt; \frac{1}{m}\}) = 0\)</span></p>
+<p>记<span class="math inline">\(F_n = \bigcup_{k \geq n} \{|f_k - f| &gt; \frac{1}{m}\}\)</span>，自然<span class="math inline">\(X \supset F_1 \supset F_2 ...\)</span>，由于<span class="math inline">\(\mu(X)&lt;+\infty\)</span>，因此<span class="math inline">\(\lim \mu(F_n) = \mu(\lim F_n) = 0\)</span>，而<span class="math inline">\(\mu(\lim F_n) = 0\)</span>等价于<span class="math inline">\(\mu( \{\lim \sup |f_n - f| &gt; \frac{1}{m}\}) = 0\)</span>，这就是我们想证的</p>
+<blockquote>
+<p>s3: 设<span class="math inline">\(\{\epsilon_n\}\)</span>单调递减收敛至<span class="math inline">\(0\)</span>，<span class="math inline">\(\{g_n\}\)</span>可测，令<span class="math inline">\(E_n = \{|g_n(x)|&gt;\epsilon_n\}\)</span>，如果<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，那么<span class="math inline">\(g_n\)</span>几乎处处收敛到<span class="math inline">\(0\)</span>，同时，<span class="math inline">\(g_n\)</span>近一致收敛到<span class="math inline">\(0\)</span></p>
+</blockquote>
+<p>证明：要说明<span class="math inline">\(g_n\)</span>几乎处处收敛到<span class="math inline">\(0\)</span>，我们只需要说明<span class="math inline">\(\mu(\lim \sup |g_n| &gt; \frac{1}{m})=0\)</span></p>
+<p>由于<span class="math inline">\(\{\epsilon_n\}\)</span>单调递减收敛至<span class="math inline">\(0\)</span>，这其实只需要说明<span class="math inline">\(\mu(\lim \sup |g_n| &gt; \epsilon) = 0\)</span>，由下面这个引理可以直接给出</p>
+<ul>
+<li>如果<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，那么<span class="math inline">\(\mu(\lim \sup E_n) = 0\)</span></li>
+</ul>
+<p>说明<span class="math inline">\(g_n\)</span>近一致收敛，当<span class="math inline">\(N\)</span>足够大时，<span class="math inline">\(\sum_{n = N} \mu(E_n) &lt; \epsilon\)</span>，取<span class="math inline">\(E = \bigcup {E_n}\)</span>，在<span class="math inline">\(X \setminus E\)</span>上，<span class="math inline">\(g_n\)</span>处处收敛到<span class="math inline">\(0\)</span></p>
+<blockquote>
+<p>s4: 如果<span class="math inline">\(\{f_n\}\)</span>依测度收敛到<span class="math inline">\(f\)</span>，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>，使得<span class="math inline">\(\{f_{n_{k}}\}\)</span>几乎处处收敛并且近一致收敛到<span class="math inline">\(f\)</span></p>
+</blockquote>
+<p>证明：联想到上一条定理，我们构造<span class="math inline">\(\epsilon_n = \frac{1}{n}, E_m = \mu(\{|f_{n_m}-f| &gt; \epsilon_m\}) &lt; \frac{1}{2^m}\)</span>即可，<span class="math inline">\(n_m\)</span>可够取得则根据依测度收敛的性质</p>
+<blockquote>
+<p>Theorem：如果<span class="math inline">\(\mu(X) &lt; \infty\)</span>并且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，那么<span class="math inline">\(f_n\to f\)</span>近一致收敛</p>
+</blockquote>
+<p>证明：令<span class="math inline">\(g_n = \sup_{k \geq n} f_k\)</span>，那么<span class="math inline">\(\lim g_n = \lim \sup f_n = \lim f_n = f\)</span>，对几乎所有的<span class="math inline">\(x\)</span>，因此<span class="math inline">\(g_n \to f\)</span>几乎处处收敛，根据s2，<span class="math inline">\(g_n\)</span>依概率收敛，根据s4，存在子列<span class="math inline">\(\{g_{n_k}\}\)</span>几乎处处收敛</p>
+<p>注意到<span class="math inline">\(|f_n - f| \geq g_{n_k}, \forall n \geq n_k\)</span>，因此当<span class="math inline">\(g_{n_k}\)</span>收敛到<span class="math inline">\(0\)</span>时，<span class="math inline">\(|f_n-f|\)</span>也收敛到<span class="math inline">\(0\)</span>，因此<span class="math inline">\(f_n\to f\)</span>近一致收敛</p>
+<blockquote>
+<p>Theorem：如果<span class="math inline">\(f_n \to f\)</span>近一致收敛，那么<span class="math inline">\(f_n \to f\)</span>几乎处处并且依测度收敛</p>
+</blockquote>
+<p>证明：<span class="math inline">\(f_n\to f\)</span>近一致收敛，因此对<span class="math inline">\(\epsilon &gt; 0\)</span>，存在<span class="math inline">\(\mu(E_{\epsilon})&lt;0\)</span>，在<span class="math inline">\(X \setminus E_{\epsilon}\)</span>上处处收敛</p>
+<p>注意到<span class="math inline">\(\{f_n(x) \not \to f(x)\} \sub E_{\epsilon}\)</span>，因此<span class="math inline">\(\mu\{f_n(x) \not \to f(x)\} \leq \mu\{E_{\epsilon}\} \leq \epsilon\)</span>，将<span class="math inline">\(\epsilon \to 0\)</span>，我们就得到了<span class="math inline">\(f_n\to f\)</span>几乎处处收敛。固定<span class="math inline">\(c\)</span>，当<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(\{|f_n(x)-f(x)|\geq c\} \sub E_{\epsilon}\)</span>，此时和上面一样，有<span class="math inline">\(\lim \mu\{|f_n(x)-f(x)|\geq c\} = 0\)</span>，这就证明了依测度收敛</p>
+<h4 id="lebesgue测度">Lebesgue测度</h4>
+<ul>
+<li>Def：我们称<span class="math inline">\(I=\{x:a_i&lt;x_i&lt;b_i\}\)</span>为一个开矩体，记其体积为<span class="math inline">\(vol(I) = \prod(b_i - a_i)\)</span></li>
+<li>Def：如果<span class="math inline">\(E \sub \bigcup I_k\)</span>（可数个），其中<span class="math inline">\(I_k\)</span>为开矩体，那么称<span class="math inline">\(\{I_k\}\)</span>为<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖，称<span class="math inline">\(m^*(E) := \inf \{ \sum_{k=1}^{\infty} vol(I_k) : E \sub \bigcup I_k\}\)</span>为<span class="math inline">\(E\)</span>的外测度</li>
+</ul>
+<hr />
+<p>外测度满足一些类似于测度的性质：</p>
+<blockquote>
+<ul>
+<li><span class="math inline">\(m^*(E) \geq 0\)</span>且<span class="math inline">\(m^*(\emptyset) = 0\)</span></li>
+<li>如果<span class="math inline">\(E_1 \sub E_2\)</span>，那么<span class="math inline">\(m^*(E_1) \leq m^*(E_2)\)</span></li>
+<li><span class="math inline">\(m^*(\bigcup E_k) \leq \sum m^*(E_k)\)</span>（可列次可加性）</li>
+</ul>
+</blockquote>
+<hr />
+<p>外测度还需要有一些看起来很正确的性质：</p>
+<blockquote>
+<p>对于可数点集<span class="math inline">\(A\)</span>，<span class="math inline">\(m^*(A) = 0\)</span></p>
+</blockquote>
+<p>证明一个点是0之后，运用可列次可加性</p>
+<blockquote>
+<p>对于开矩体<span class="math inline">\(I\)</span>，<span class="math inline">\(m^*(\bar{I}) = vol(I)\)</span>，其中<span class="math inline">\(\bar{I}\)</span>为<span class="math inline">\(I\)</span>的闭包</p>
+</blockquote>
+<p>运用紧集的有限子覆盖性质进行夹逼</p>
+<blockquote>
+<p>对于超平面<span class="math inline">\(H\)</span>，<span class="math inline">\(m^*(H) = 0\)</span></p>
+</blockquote>
+<p>超平面虽然是无界的，但我们可以用可数个有界的外测度和为0的开矩体集进行放缩</p>
+<blockquote>
+<p>对于开矩体<span class="math inline">\(I\)</span>，<span class="math inline">\(m^*(I)=vol(I)\)</span></p>
+</blockquote>
+<p>开矩体就是其闭包去除若干超平面</p>
+<hr />
+<blockquote>
+<p>如果<span class="math inline">\(d(E_1,E_2) &gt; 0\)</span>，那么<span class="math inline">\(m^*(E_1\cup E_2) = m^*(E_1) + m^*(E_2)\)</span></p>
+</blockquote>
+<p>我们通过控制覆盖<span class="math inline">\(E_1 \cup E_2\)</span>开矩体集中的开矩体足够小，来保证其不同时与<span class="math inline">\(E_1,E_2\)</span>交，之后就方便放缩了</p>
+<blockquote>
+<p><span class="math inline">\(m^*(E+\{x_0\})=m^*(E)\)</span></p>
+</blockquote>
+<p>不难证明</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/real-analysis/" rel="tag"># real-analysis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/real-analysis/" rel="prev" title="实变函数">
+                  <i class="fa fa-chevron-left"></i> 实变函数
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">147k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">2:14</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
