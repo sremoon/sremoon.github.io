@@ -4497,7 +4497,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
       </tags>
   </entry>
   <entry>
-    <title>实变汉书2</title>
+    <title>实变函数2</title>
     <url>/2022/10/real-analysis-2/</url>
     <content><![CDATA[<h3 id="lebesgue积分">Lebesgue积分</h3>
 <h4 id="简单函数">简单函数</h4>
