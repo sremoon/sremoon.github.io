@@ -4288,7 +4288,6 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </blockquote>
 <p>证明：<span class="math inline">\(A \cap B(0, n)\)</span>如果是无限集，根据Bolzano-Weierstrass定理，其必定存在一个聚点，矛盾。而<span class="math inline">\(A = \bigcup (A \cap B(0, n))\)</span>，从而为可数集</p>
 <h3 id="拓扑空间度量空间">拓扑空间、度量空间</h3>
-<hr />
 <h4 id="拓扑空间">拓扑空间</h4>
 <p>(Definition)：</p>
 <ol type="1">
@@ -4323,7 +4322,6 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li><p>对Hausdorff空间，如果<span class="math inline">\(K\)</span>紧，那么<span class="math inline">\(K\)</span>闭</p></li>
 </ul>
 </blockquote>
-<hr />
 <h4 id="度量空间">度量空间</h4>
 <p>(Definition)：</p>
 <ol type="1">
@@ -4499,7 +4497,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
       </tags>
   </entry>
   <entry>
-    <title>real-analysis-2</title>
+    <title>实变汉书2</title>
     <url>/2022/10/real-analysis-2/</url>
     <content><![CDATA[<h3 id="lebesgue积分">Lebesgue积分</h3>
 <h4 id="简单函数">简单函数</h4>
@@ -4532,14 +4530,14 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间，<span class="math inline">\(E,F\)</span>为可测集，<span class="math inline">\(f,g\)</span>为<strong>非负</strong>可测函数</p>
 <ul>
 <li>如果<span class="math inline">\(0 \leq f \leq g\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu \leq \int_E g\text{d} \mu\)</span></li>
-<li>如果<span class="math inline">\(E \sub F\)</span>，那么<span class="math inline">\(\int_E f \;\text{d}\mu \leq \int_F f\;\text{d} \mu\)</span></li>
+<li>如果<span class="math inline">\(E \subset F\)</span>，那么<span class="math inline">\(\int_E f \;\text{d}\mu \leq \int_F f\;\text{d} \mu\)</span></li>
 <li>如果<span class="math inline">\(\alpha \in (0,+\infty)\)</span>，那么<span class="math inline">\(\int_E \alpha f\text{d} \mu = \alpha \int_E f\text{d}\mu\)</span></li>
 <li>如果<span class="math inline">\(f|_E = 0\)</span>或者<span class="math inline">\(\mu(E)=0\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu = 0\)</span></li>
-<li>如果<span class="math inline">\(E \sub X\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu = \int_X f 1_{E} \text{d} \mu\)</span></li>
+<li>如果<span class="math inline">\(E \subset X\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu = \int_X f 1_{E} \text{d} \mu\)</span></li>
 </ul>
 </blockquote>
 <p>我们对最后一条作出证明：<span class="math inline">\(\int_X f 1_{E} d \mu = \sup_{0 \leq S \leq f1_{E}} \int_X S d \mu = \sup_{S} \sum \alpha_i \mu(A_i)\)</span></p>
-<p><span class="math inline">\(A_i \sub E\)</span>除<span class="math inline">\(\alpha_i = 0\)</span>外一定成立，否则对<span class="math inline">\(x \in A_i \setminus E\)</span>，<span class="math inline">\(\alpha_i = S(x) \leq f1_{E}(x)=0\)</span></p>
+<p><span class="math inline">\(A_i \subset E\)</span>除<span class="math inline">\(\alpha_i = 0\)</span>外一定成立，否则对<span class="math inline">\(x \in A_i \setminus E\)</span>，<span class="math inline">\(\alpha_i = S(x) \leq f1_{E}(x)=0\)</span></p>
 <p>此时，<span class="math inline">\(\sup_{S} \sum \alpha_i \mu(A_i) = \sup_{S \leq f1_{E}} \sum \alpha_i \mu(A_i \cap E) \leq \sup_{S \leq f} \sum \alpha_i \mu(A_i \cap E) = \int_E f d \mu\)</span></p>
 <p>另一方面，$_E f d = <em>E S d = </em>{0S f} <em>X S1</em>{E} d $</p>
 <p><span class="math inline">\(= \sup_{0\leq S1_{E} \leq f1_{E}} \int_X S1_{E} d \mu \leq \sup_{0\leq S \leq f1_{E}} \int_X S d \mu= \int_X f1_{E} d \mu\)</span>，<span class="math inline">\(\square\)</span></p>
@@ -4557,7 +4555,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>那么<span class="math inline">\(\varphi(\bigcup E_n) = \sum \alpha_i \mu(A_i \cap \bigcup E_n) = \sum \alpha_i \mu(\bigcup (A_i \cap E_n)) = \sum \alpha_i \sum_j \mu(A_i \cap E_j) = \sum \varphi(E_n)\)</span>，<span class="math inline">\(\square\)</span></p>
 <hr />
 <p>注意到<span class="math inline">\(\int f_1 \leq \int f_2 ... \leq \int f_n \leq ...\)</span>，因此<span class="math inline">\(\lim \int f_n \leq \int f\)</span>，只需证<span class="math inline">\(\int f \leq \lim \int f_n\)</span>，这等价于证明对<span class="math inline">\(0 \leq S \leq f\)</span>的简单函数<span class="math inline">\(S\)</span>有<span class="math inline">\(\int S \leq \lim \int f_n\)</span></p>
-<p>固定<span class="math inline">\(C \in (0,1)\)</span>，设<span class="math inline">\(E_n := \{f_n(x)&gt;C \cdot S(x)\}\)</span>，那么<span class="math inline">\(E_n\)</span>可测，并且<span class="math inline">\(E_n \sub E_{n+1}\)</span>且<span class="math inline">\(X = \bigcup E_n = \lim E_n\)</span></p>
+<p>固定<span class="math inline">\(C \in (0,1)\)</span>，设<span class="math inline">\(E_n := \{f_n(x)&gt;C \cdot S(x)\}\)</span>，那么<span class="math inline">\(E_n\)</span>可测，并且<span class="math inline">\(E_n \subset E_{n+1}\)</span>且<span class="math inline">\(X = \bigcup E_n = \lim E_n\)</span></p>
 <p>那么，<span class="math inline">\(\int_X f_n \geq \int_{E_n} f_n &gt; C \int_{E_n} S = C \varphi_S(E_n)\)</span>，期中<span class="math inline">\(\varphi_S\)</span>是根据引理定义出的测度，根据测度的极限性质，我们有<span class="math inline">\(\lim \int_X f_n \geq C \varphi_S(X) = C \int S\)</span>，此时令<span class="math inline">\(C \to 1\)</span>，我们得到<span class="math inline">\(\lim \int_X f_n \geq \int S\)</span>，<span class="math inline">\(\square\)</span></p>
 <hr />
 <p>级数作为收敛的一种特殊情况，我们单独列出</p>
@@ -4635,7 +4633,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <ol start="3" type="1">
 <li>设<span class="math inline">\((X,\Gamma, \mu)\)</span>是测度空间，定义<span class="math inline">\(\Gamma\)</span>的完备化为</li>
 </ol>
-<p><span class="math inline">\(\Gamma^* = \{E \sub X, \exists A, B \in \Gamma, s.t. A \sub E \sub B, \mu(B\setminus A)=0\}\)</span>，那么<span class="math inline">\(\Gamma^*\)</span>是<span class="math inline">\(\sigma-\)</span>代数</p>
+<p><span class="math inline">\(\Gamma^* = \{E \subset X, \exists A, B \in \Gamma, s.t. A \subset E \subset B, \mu(B\setminus A)=0\}\)</span>，那么<span class="math inline">\(\Gamma^*\)</span>是<span class="math inline">\(\sigma-\)</span>代数</p>
 <p>此时，补充定义<span class="math inline">\(\mu(E) = \mu(A)\)</span>，我们得到了<span class="math inline">\((X,\Gamma^*, \mu)\)</span>，我们称其为完备化的测度空间</p>
 <p>在完备化的测度空间下，任意修改一个零测集的取值，不会修改一个函数的积分值</p>
 <blockquote>
@@ -4682,8 +4680,8 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p><span class="math inline">\((6) \Rightarrow (2), (5)\)</span>：如果<span class="math inline">\(f_n \to f\)</span>近一致收敛，那么<span class="math inline">\(f_n \to f\)</span>几乎处处并且依测度收敛</p>
 </blockquote>
 <p>这就是说近一致收敛是这三者之中最强的</p>
-<p>证明：<span class="math inline">\(\forall \epsilon\)</span>，存在<span class="math inline">\(\mu(E) &lt; \epsilon\)</span>，<span class="math inline">\(f_n \to f\)</span>在<span class="math inline">\(X \setminus E\)</span>上一致收敛，那么<span class="math inline">\(\{f_n \not\to f\} \sub E\)</span>，于是<span class="math inline">\(\mu(\{f_n \not \to f\}) \leq \mu(E) &lt; \epsilon\)</span>，令<span class="math inline">\(\epsilon \to 0\)</span>，我们得到<span class="math inline">\(\mu(\{f_n \not\to f\}) = 0\)</span>，即<span class="math inline">\(f_n \to f\)</span>几乎处处收敛</p>
-<p>固定<span class="math inline">\(c\)</span>，当<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(\{|f_n-f| \geq c\} \sub E\)</span>，那么<span class="math inline">\(\lim \mu(\{|f_n-f| \geq c\}) \to 0\)</span>，即<span class="math inline">\(f_n\to f\)</span>依测度收敛，<span class="math inline">\(\square\)</span></p>
+<p>证明：<span class="math inline">\(\forall \epsilon\)</span>，存在<span class="math inline">\(\mu(E) &lt; \epsilon\)</span>，<span class="math inline">\(f_n \to f\)</span>在<span class="math inline">\(X \setminus E\)</span>上一致收敛，那么<span class="math inline">\(\{f_n \not\to f\} \subset E\)</span>，于是<span class="math inline">\(\mu(\{f_n \not \to f\}) \leq \mu(E) &lt; \epsilon\)</span>，令<span class="math inline">\(\epsilon \to 0\)</span>，我们得到<span class="math inline">\(\mu(\{f_n \not\to f\}) = 0\)</span>，即<span class="math inline">\(f_n \to f\)</span>几乎处处收敛</p>
+<p>固定<span class="math inline">\(c\)</span>，当<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(\{|f_n-f| \geq c\} \subset E\)</span>，那么<span class="math inline">\(\lim \mu(\{|f_n-f| \geq c\}) \to 0\)</span>，即<span class="math inline">\(f_n\to f\)</span>依测度收敛，<span class="math inline">\(\square\)</span></p>
 <hr />
 <p>如果加上了<span class="math inline">\(\mu(X)&lt;\infty\)</span>的条件，我们可以证明几乎处处收敛和近一致收敛是一致的</p>
 <blockquote>
@@ -4707,7 +4705,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </ul>
 <p>注意引理3并不要求<span class="math inline">\(\mu(X)&lt;\infty\)</span></p>
 <p>引理2的证明：由于<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，因此对<span class="math inline">\(N\)</span>足够大，<span class="math inline">\(\sum_{n=N} \mu(E_n) &lt; \epsilon\)</span>，取<span class="math inline">\(E_{\epsilon} = \bigcup E_n\)</span>，在<span class="math inline">\(X \setminus E\)</span>上，<span class="math inline">\(|g_n(x)| \leq \epsilon_n\)</span>，从而<span class="math inline">\(g_n(x) \to 0\)</span>，<span class="math inline">\(N\)</span>的选取对<span class="math inline">\(X \setminus E\)</span>上的元素是一致的，这说明了<span class="math inline">\(f\)</span>近一致收敛</p>
-<p>而要说明几乎处处收敛，我们只需要证明<span class="math inline">\(\mu(\{\lim \sup_n |g_n| &gt; \epsilon_m\}) = 0\)</span>，注意到<span class="math inline">\(\{\lim \sup_n |g_n| &gt; \epsilon_m\} = \bigcap_k\bigcup_{n \geq k} \{|g_n| &gt; \epsilon_m\} \sub \bigcap_k\bigcup_n \{|g_n| &gt; \epsilon_n\} = \lim \sup E_n\)</span></p>
+<p>而要说明几乎处处收敛，我们只需要证明<span class="math inline">\(\mu(\{\lim \sup_n |g_n| &gt; \epsilon_m\}) = 0\)</span>，注意到<span class="math inline">\(\{\lim \sup_n |g_n| &gt; \epsilon_m\} = \bigcap_k\bigcup_{n \geq k} \{|g_n| &gt; \epsilon_m\} \subset \bigcap_k\bigcup_n \{|g_n| &gt; \epsilon_n\} = \lim \sup E_n\)</span></p>
 <p>而<span class="math inline">\(\mu(\lim \sup E_n) = 0\)</span>，因此<span class="math inline">\(f\)</span>几乎处处收敛，<span class="math inline">\(\square\)</span></p>
 <p>引理3的证明：取<span class="math inline">\(\epsilon_m = \frac{1}{m}, E_m = \{|f_{n_m} - f| &gt; \epsilon_m\}\)</span>，其中<span class="math inline">\(n_m\)</span>根据<span class="math inline">\(f_n\)</span>依测度收敛的性质选取，使得<span class="math inline">\(\mu(E_m) &lt; 2^{-m}\)</span>，如此选取的子列满足引理2的要求，<span class="math inline">\(\square\)</span></p>
 <hr />
@@ -4717,13 +4715,13 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>(Definition)：</p>
 <ol type="1">
 <li>我们称<span class="math inline">\(I=\{x:a_i&lt;x_i&lt;b_i\}\)</span>为一个<strong>开矩体</strong>，记其体积为<span class="math inline">\(|I| = \prod(b_i - a_i)\)</span></li>
-<li>如果<span class="math inline">\(E \sub \bigcup I_k\)</span>（可数个），其中<span class="math inline">\(I_k\)</span>为开矩体，那么称<span class="math inline">\(\{I_k\}\)</span>为<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖，称<span class="math inline">\(m^*(E) := \inf \{ \sum_{k=1}^{\infty} |T_k| : E \sub \bigcup I_k\}\)</span>为<span class="math inline">\(E\)</span>的<strong>外测度</strong></li>
+<li>如果<span class="math inline">\(E \subset \bigcup I_k\)</span>（可数个），其中<span class="math inline">\(I_k\)</span>为开矩体，那么称<span class="math inline">\(\{I_k\}\)</span>为<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖，称<span class="math inline">\(m^*(E) := \inf \{ \sum_{k=1}^{\infty} |T_k| : E \subset \bigcup I_k\}\)</span>为<span class="math inline">\(E\)</span>的<strong>外测度</strong></li>
 </ol>
 <p>外测度具有一些类似于测度的性质</p>
 <blockquote>
 <ol type="1">
 <li><p><span class="math inline">\(m^*(E) \geq 0\)</span></p></li>
-<li><p>如果<span class="math inline">\(E_1 \sub E_2\)</span>，那么<span class="math inline">\(m^*(E_1) \leq m^*(E_2)\)</span></p></li>
+<li><p>如果<span class="math inline">\(E_1 \subset E_2\)</span>，那么<span class="math inline">\(m^*(E_1) \leq m^*(E_2)\)</span></p></li>
 <li><p><span class="math inline">\(m^*(\bigcup E_k) \leq \sum m^*(E_k)\)</span>（可列次可加性）</p></li>
 </ol>
 </blockquote>
@@ -4762,7 +4760,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </blockquote>
 <p>(1)根据闭区间套定理知<span class="math inline">\(C\)</span>为非空闭集，(2)根据构造过程可知</p>
 <p>在构造的第<span class="math inline">\(n\)</span>步中，恰有<span class="math inline">\(2^{n}\)</span>个闭区间，每个区间之间距离至少为<span class="math inline">\(3^{-n}\)</span>，每个区间的长度为<span class="math inline">\(3^{-n}\)</span></p>
-<p>因此对于任何<span class="math inline">\(C\)</span>中的点<span class="math inline">\(x\)</span>，<span class="math inline">\(B(x, \delta) \not \sub C\)</span>，且总存在<span class="math inline">\(\{x_n\}\)</span>逼近<span class="math inline">\(x\)</span>，这证明了(3), (4)</p>
+<p>因此对于任何<span class="math inline">\(C\)</span>中的点<span class="math inline">\(x\)</span>，<span class="math inline">\(B(x, \delta) \not \subset C\)</span>，且总存在<span class="math inline">\(\{x_n\}\)</span>逼近<span class="math inline">\(x\)</span>，这证明了(3), (4)</p>
 <p>而<span class="math inline">\(m^*(I_n) = (2/3)^n \to 0\)</span>，这证明了(6)，对于(5)，可以证明<span class="math inline">\(C\)</span>中点和<span class="math inline">\(\{\sum_{i=1}^{\infty} \frac{a_i}{3^i}, a_i \in \{0,2\}\}\)</span>一一对应</p>
 <hr />
 <p>(Definition)：定义<span class="math inline">\(C \to [0,1]\)</span>的函数<span class="math inline">\(f\)</span>：<span class="math inline">\(f(\sum_{i=1}^{\infty} \frac{a_i}{3^i}) = \sum_{i=1}^{\infty} \frac{a_i / 2}{2^i}\)</span></p>
@@ -4780,10 +4778,10 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <hr />
 <p>如果每次不是去掉中间的<span class="math inline">\(1/3\)</span>，而是去掉中间的<span class="math inline">\(\delta, \delta \in (0,1/3)\)</span>，那么我们就得到了类Cantor集，这个集合有测度但是没有内点</p>
 <h4 id="lebesgue可测集">Lebesgue可测集</h4>
-<p>(Definition)：设<span class="math inline">\(E \sub \mathbb{R}^d\)</span>，如果对任意<span class="math inline">\(A \sub \mathbb{R}^d\)</span>有<span class="math inline">\(m^*(A) = m^*(A \cap E) + m^*(A \cap E^c)\)</span>，则称<span class="math inline">\(E\)</span>为<strong>Lebesgue可测集</strong>，记<span class="math inline">\(M\)</span>为Lebesgue可测集的全体</p>
+<p>(Definition)：设<span class="math inline">\(E \subset \mathbb{R}^d\)</span>，如果对任意<span class="math inline">\(A \subset \mathbb{R}^d\)</span>有<span class="math inline">\(m^*(A) = m^*(A \cap E) + m^*(A \cap E^c)\)</span>，则称<span class="math inline">\(E\)</span>为<strong>Lebesgue可测集</strong>，记<span class="math inline">\(M\)</span>为Lebesgue可测集的全体</p>
 <p>这个定义由Caratheodory提出，其和Lebesgue提出的定义是等价的，换而言之</p>
 <blockquote>
-<p>对<span class="math inline">\(A \sub \mathbb{R}^d\)</span>有<span class="math inline">\(m^*(A) = m^*(A \cap E) + m^*(A \cap E^c)\)</span>当且仅当对任意开矩体<span class="math inline">\(I\)</span>有<span class="math inline">\(m^*(I) = m^*(I \cap E) + m^*(I \cap E^c)\)</span></p>
+<p>对<span class="math inline">\(A \subset \mathbb{R}^d\)</span>有<span class="math inline">\(m^*(A) = m^*(A \cap E) + m^*(A \cap E^c)\)</span>当且仅当对任意开矩体<span class="math inline">\(I\)</span>有<span class="math inline">\(m^*(I) = m^*(I \cap E) + m^*(I \cap E^c)\)</span></p>
 </blockquote>
 <p>证明：</p>
 <p>下面将我们之前的讨论联系起来</p>
