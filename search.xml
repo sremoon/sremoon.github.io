@@ -4372,7 +4372,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <hr />
 <p>紧，列紧等等的关系，先咕着</p>
 <hr />
-<p>Urysohn's Lemma，咕着</p>
+<p>Urysohn's Lemma，咕着...</p>
 <hr />
 <h4 id="连续">连续</h4>
 <p>(Definition)：1. 对<span class="math inline">\(x \in X\)</span>，如果对任一<span class="math inline">\(f(x)\)</span>的开邻域<span class="math inline">\(F\)</span>，均有<span class="math inline">\(f^{-1}(F)\)</span>包含<span class="math inline">\(x\)</span>的开邻域，那么称<span class="math inline">\(f\)</span>在<span class="math inline">\(x\)</span>这<strong>一点连续</strong></p>
