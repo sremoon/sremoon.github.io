@@ -4236,366 +4236,220 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
     <title>实变函数</title>
     <url>/2022/09/real-analysis/</url>
     <content><![CDATA[<span id="more"></span>
-<h3 id="集合">集合</h3>
+<h3 id="预备知识集合论">预备知识——集合论</h3>
 <hr />
-<p>大部分都懒得记了...</p>
-<ul>
-<li>偏序集：自反性，弱对称性，传递性</li>
-</ul>
-<p>对于偏序集<span class="math inline">\((X, \leq)\)</span>，程<span class="math inline">\(x \in X\)</span>为<span class="math inline">\(A \subseteq X\)</span>的<strong>上界</strong>，当且仅当<span class="math inline">\(\forall y \in A, y \leq x\)</span>，<strong>下界</strong>同理</p>
-<p>当<span class="math inline">\(x\)</span>作为上界属于<span class="math inline">\(A\)</span>时，可称其为<strong>最大元</strong>，<strong>最小元</strong>同理</p>
-<p>上界的集合若存在最小元，称其为<strong>上确界</strong>，记为<span class="math inline">\(\sup A\)</span>，<strong>下确界</strong>类似，记为<span class="math inline">\(\inf A\)</span></p>
-<p>不难证明，最大元，最小元，上确界，下确界存在时是唯一的</p>
+<p>(Definition)：</p>
+<ol type="1">
+<li><p><strong>偏序</strong>：一种满足弱对称性，传递性，自反性的关系</p></li>
+<li><p><strong>全序</strong>：任何两个元素都可以比较</p></li>
+<li><p><strong>上界</strong>：<span class="math inline">\(x\)</span>称为<span class="math inline">\(A\)</span>的上界，当且仅当<span class="math inline">\(\forall y \in A, y \leq x\)</span></p>
+<p><strong>下界</strong>：<span class="math inline">\(x\)</span>称为<span class="math inline">\(A\)</span>的下界，当且仅当<span class="math inline">\(\forall y \in A, y \geq x\)</span></p></li>
+<li><p><strong>最大元，最小元</strong>：如果<span class="math inline">\(A\)</span>的上下界属于<span class="math inline">\(A\)</span>，那么称其为最大元，最小元</p>
+<p>最大元，最小元如果存在，那么便是唯一的</p></li>
+<li><p><strong>上确界，下确界</strong>：<span class="math inline">\(A\)</span>的上界的最小元称为上确界，记为<span class="math inline">\(\sup A\)</span>，类似的下确界记为<span class="math inline">\(\inf A\)</span></p></li>
+<li><p><strong>格</strong>：如果<span class="math inline">\(\forall x, y, \sup \{x,y\}\)</span>和<span class="math inline">\(\inf \{x,y\}\)</span>都存在，那么称<span class="math inline">\(X\)</span>为格，如果对<span class="math inline">\(A \sub X\)</span>都满足<span class="math inline">\(\sup A\)</span>与<span class="math inline">\(\inf A\)</span>存在，那么称<span class="math inline">\(X\)</span>为<strong>完备格</strong></p></li>
+<li><p><strong>示性函数</strong>：对<span class="math inline">\(A \sub X\)</span>，我们称<span class="math inline">\(1_A(x) = \begin{cases} 1, x \in A\\ 0, x \notin A\end{cases}\)</span>为<span class="math inline">\(A\)</span>的示性函数</p></li>
+</ol>
 <hr />
-<p>如果对任意<span class="math inline">\(x, y \in X\)</span>，<span class="math inline">\(\sup \{x,y\}\)</span>和<span class="math inline">\(\inf\{x,y\}\)</span>都存在，那么称<span class="math inline">\(X\)</span>为<strong>格</strong>，简记<span class="math inline">\(\sup\{x,y\}:=x \vee y, \inf \{x,y\} := x \wedge y\)</span></p>
-<p>如果对<span class="math inline">\(A \subseteq X\)</span>，<span class="math inline">\(\sup A\)</span>和<span class="math inline">\(\inf A\)</span>都存在，称<span class="math inline">\(X\)</span>为<strong>完备格</strong></p>
-<p>通过归纳法，我们可以证明在一个格中，任意有限集都有上确界和下确界，对<span class="math inline">\(\{x_1,...,x_n\}\)</span>的上确界记为<span class="math inline">\(x_1 \vee ... \vee x_n\)</span>. 也因此，任何有限格都是完备格</p>
-<p>ex：<span class="math inline">\((\mathbb{R}, \leq )\)</span>不是一个完备格，只需注意到集合<span class="math inline">\(\mathbb{N}\)</span>的上确界不存在</p>
-<p><span class="math inline">\((\mathscr{F}(X), \leq)\)</span>是一个格，一般的，<span class="math inline">\(f \vee g = \max\{f,g\}, f \wedge g = \min \{f, g\}\)</span></p>
-<p><span class="math inline">\((2^X, \leq)\)</span>是一个完备格，<span class="math inline">\(A \wedge B = A \cap B, A \vee B = A \cup B\)</span></p>
-<p>对于特征函数，我们有<span class="math inline">\(1_{A \wedge B} = 1_A \wedge 1_B\)</span>，这联系了集合和函数</p>
+<p>(Definition)：</p>
+<ol type="1">
+<li><p><strong>集合列的上下极限</strong>：定义<span class="math inline">\(\{A_n\}\)</span>的上极限为<span class="math inline">\(\lim \sup A_n = \inf_{n} \sup_{k \geq n} A_k = \bigcap_{n} \bigcup_{k \geq n} A_k\)</span></p>
+<p>下极限为<span class="math inline">\(\lim \inf A_n = \sup_{n} \inf_{k \geq n} A_k = \bigcup_{n} \bigcap_{k \geq n} A_k\)</span></p></li>
+<li><p><strong>集合列的极限</strong>：如果集合列的上下极限相等，那么称其为该集合列的极限，记为<span class="math inline">\(\lim A_n\)</span></p></li>
+</ol>
+<p>对于上下极限来说，<span class="math inline">\(x \in \lim \inf A_n\)</span>，当且仅当<span class="math inline">\(x\)</span>仅在有限个集合中不出现，<span class="math inline">\(x \in \lim \sup A_n\)</span>，当且仅当<span class="math inline">\(x\)</span>在无穷个集合中</p>
 <hr />
-<h4 id="集合列的极限">集合列的极限</h4>
-<ul>
-<li>上下极限</li>
-</ul>
-<p>设<span class="math inline">\(A_1 \subseteq A_2 ... \subseteq A_n \subseteq ...\)</span>为一单调增集合列，则称<span class="math inline">\(\{A_n\}\)</span>的极限为<span class="math inline">\(\bigcup_{n=1}^{\infty} A_n\)</span>，记为<span class="math inline">\(\lim_{n \to \infty} A_n\)</span></p>
-<p>对于单调减集合列的极限，类似的定义为<span class="math inline">\(\bigcap_{n=1}^{\infty} A_n\)</span></p>
-<p>对于一般的集合列<span class="math inline">\(\{A_n\}\)</span>，记<span class="math inline">\(B_n = \bigcup_{k \geq n} A_k, C_n = \bigcap_{k \geq n} A_k\)</span>，那么称单调减集合列<span class="math inline">\(B_n\)</span>的极限为<span class="math inline">\(A_n\)</span>的上极限，单调减集合列<span class="math inline">\(C_n\)</span>的极限为<span class="math inline">\(A_n\)</span>的下极限，分别记为<span class="math inline">\(\limsup_{n \to \infty} A_n := \bigcap_{n=1}^{\infty} \bigcup_{k=n}^{\infty} A_k,\liminf_{n \to \infty} A_n := \bigcup_{n=1}^{\infty} \bigcap_{k=n}^{\infty} A_k\)</span></p>
-<p>上极限也可以记为<span class="math inline">\(\inf_{n \geq 1} \sup_{k \geq n} A_k\)</span>，下记限类似，这个记法是跟数列极限相对应的</p>
-<p>若集合列<span class="math inline">\(\{A_n\}\)</span>的上下极限相等，则称<span class="math inline">\(\{A_n\}\)</span>存在极限，记为<span class="math inline">\(\lim_{n \to \infty} A_n = \limsup_{n \to \infty} A_n\)</span></p>
-<ul>
-<li>设<span class="math inline">\(\{A_n\}\)</span>为一<span class="math inline">\(X\)</span>中的集合列</li>
-</ul>
-<p>那么，<span class="math inline">\(x \in \limsup_{n \to \infty} A_n\)</span>当且仅当<span class="math inline">\(\forall n \in \mathbb{N}, \exists k \geq n, s.t. x \in A_k\)</span>，即<span class="math inline">\(x\)</span>在<span class="math inline">\(\{A_n\}\)</span>中无穷个集合中</p>
-<p><span class="math inline">\(x \in \liminf_{n \to \infty} A_n\)</span>当且仅当<span class="math inline">\(\exists n \in \mathbb{N}, s.t. \forall k \geq n, x \in A_k\)</span>，也即<span class="math inline">\(x\)</span>仅在有限个集合中不出现</p>
+<p>(Definition)：</p>
+<ol type="1">
+<li>如果可以建立两个集合的双射，我们称这两个集合有相同的基数，或者<strong>等势</strong>，记为<span class="math inline">\(card(A) = card(B)\)</span></li>
+<li>如果存在<span class="math inline">\(A \to B\)</span>的单射，那么定义<span class="math inline">\(card(A) \leq card(B)\)</span>，如果存在<span class="math inline">\(A \to B\)</span>的满射，那么<span class="math inline">\(card(A) \geq card(B)\)</span></li>
+</ol>
+<p>有几点需要说明：等势关系是一个等价关系，而基数的<span class="math inline">\(\leq\)</span>关系构成一个偏序，下面是一些重要的定理</p>
+<blockquote>
+<p>(Cantor-Bernstein)：在承认选择公理的情况下，如果存在<span class="math inline">\(A \to B\)</span>的单射，满射，那么存在<span class="math inline">\(A \to B\)</span>的双射</p>
+</blockquote>
+<p>这个定理保证了我们符号系统的合理性</p>
+<blockquote>
+<p>(Cantor)：<span class="math inline">\(card(A) &lt; card(2^A)\)</span></p>
+</blockquote>
+<p>这个定理说明了没有最大的势</p>
+<p>(Definition)：3. 我们定义<span class="math inline">\(\aleph_0 = card(\mathbb{N})\)</span>，称具有<span class="math inline">\(\aleph_0\)</span>基数的集合为<strong>可数集</strong>，可数集及有限集一起称为至多可数集（有时也省略为可数集）</p>
+<p>关于可数集，我们有以下的性质</p>
+<blockquote>
+<ol type="1">
+<li>任何无限集一定包含一个可数子集</li>
+<li>如果<span class="math inline">\(\{A_n\}\)</span>为至多可数集，那么<span class="math inline">\(\bigcup A_n\)</span>为至多可数集</li>
+<li>如果<span class="math inline">\(\{A_n\}_{n=0}^m\)</span>为有限个至多可数集，那么<span class="math inline">\(\otimes_{n=1}^m A_n\)</span>也为可数集</li>
+</ol>
+</blockquote>
+<p>下面列举了一些在做题时用的结论</p>
+<blockquote>
+<p>任给<span class="math inline">\(A \sub\mathbb{R}^n\)</span>，那么<span class="math inline">\(A\)</span>中孤立点至多可数</p>
+</blockquote>
+<p>证明：<span class="math inline">\(A \cap B(0, n)\)</span>如果是无限集，根据Bolzano-Weierstrass定理，其必定存在一个聚点，矛盾。而<span class="math inline">\(A = \bigcup (A \cap B(0, n))\)</span>，从而为可数集</p>
+<h3 id="拓扑空间度量空间">拓扑空间、度量空间</h3>
 <hr />
-<h4 id="集合的势">集合的势</h4>
-<p>如果两个集合<span class="math inline">\(A, B\)</span>之间存在一一映射，那么称<span class="math inline">\(A\)</span>和<span class="math inline">\(B\)</span>等势，记为<span class="math inline">\(A \sim B\)</span>，也记为<span class="math inline">\(card(A) = card(B)\)</span>，又可记为<span class="math inline">\(|A|=|B|\)</span>，如果存在<span class="math inline">\(A\)</span>到<span class="math inline">\(B\)</span>的单射，那么称<span class="math inline">\(|A| \leq |B|\)</span>，特别的，如果存在<span class="math inline">\(A\)</span>到<span class="math inline">\(B\)</span>的单射但是不存在双射，那么称<span class="math inline">\(|A|&lt;|B|\)</span></p>
-<blockquote>
-<p><span class="math inline">\(card\)</span>上的<span class="math inline">\(\leq\)</span>关系构成一个偏序</p>
-</blockquote>
-<p>自反性，传递性的正确性显然，而对称性的正确性依赖于Cantor-Bernstein TH</p>
-<blockquote>
-<p>如果承认<span class="math inline">\(AC\)</span>，那么<span class="math inline">\(card\)</span>上的<span class="math inline">\(\leq\)</span>关系构成一个全序</p>
-</blockquote>
-<p>虽然我们不能证明，也不能证伪<span class="math inline">\(AC\)</span>，但我们接下来会默认<span class="math inline">\(AC\)</span>成立</p>
-<p><span class="math inline">\(AC\)</span>的表述为：给封一个非空的集合族<span class="math inline">\(\{A_i\}_{i\in I}, A_i \neq \empty\)</span>，那么<span class="math inline">\(\forall i \in I\)</span>，可以选择出<span class="math inline">\((a_i)_{i \in I}\)</span>，s.t. <span class="math inline">\(a_i \in A_i\)</span>。这等价地说<span class="math inline">\(\bigotimes_{i \in I} A_i\)</span>可以定义</p>
-<blockquote>
-<p>Corollory：若<span class="math inline">\(A \subseteq B \subseteq C\)</span>，且<span class="math inline">\(|A| = |C|\)</span>，那么<span class="math inline">\(|A|=|B|=|C|\)</span></p>
-</blockquote>
-<blockquote>
-<p>Cantor TH：设<span class="math inline">\(A\)</span>为非空集，那么<span class="math inline">\(|A| &lt; |2^A|\)</span>，也就是说不存在势最大的集合</p>
-</blockquote>
-<p>一般约定<span class="math inline">\(|2^A|\)</span>记为<span class="math inline">\(2^{|A|}\)</span>，对于<span class="math inline">\(|A^B|\)</span>则记为<span class="math inline">\(|A|^{|B|}\)</span></p>
-<blockquote>
-<p>TH：<span class="math inline">\(|\mathbb{R}|=2^{|\mathbb{N}|}&gt;|\mathbb{N}|\)</span></p>
-</blockquote>
-<p>证明思路就是<span class="math inline">\(2^{|\mathbb{N}|}\)</span>取二进制小数映射到<span class="math inline">\((0,1]\)</span></p>
-<ul>
-<li>定义<span class="math inline">\(\aleph_0 = |\mathbb{N}|\)</span>，称为可数基数，<span class="math inline">\(\aleph_1 = |\mathbb{R}|\)</span>，称为连续势</li>
-</ul>
-<p>我们知道<span class="math inline">\(\aleph_1 = 2^{\aleph_0}\)</span>，那么是不是会有介于<span class="math inline">\(\aleph_0\)</span>和<span class="math inline">\(\aleph_1\)</span>之间的基数呢？我们引入连续统假设：不存在基数<span class="math inline">\(\alpha\)</span>使得<span class="math inline">\(\aleph_0 &lt; \alpha &lt; \aleph_1\)</span>。并且，由连续统假设可以推出<span class="math inline">\(AC\)</span></p>
-<p>我们把基数为<span class="math inline">\(\aleph_1\)</span>的集合称为可数集，把有限集和可数集并称为至多可数集</p>
-<blockquote>
-<p>Prop. 1：任何一个无限集一定包含一个可数子集，这等价于说<span class="math inline">\(\aleph_0\)</span>是最小的无穷集的基数</p>
-</blockquote>
-<p>运用选择公理即可</p>
-<blockquote>
-<p>Prop. 2：如果<span class="math inline">\(A\)</span>为有限集，<span class="math inline">\(B\)</span>为可数集，那么<span class="math inline">\(A \cup B\)</span>为可数集</p>
-</blockquote>
-<p>不妨设<span class="math inline">\(A \cap B = \empty\)</span>，那么<span class="math inline">\(A \cup B\)</span>可以列为<span class="math inline">\(a_1,...,a_n,b_1,b_2,...\)</span></p>
-<blockquote>
-<p>Prop. 3：如果<span class="math inline">\(\{A_n\}_{n=0}^{\infty}\)</span>中均为可数集，那么<span class="math inline">\(\bigcup_{n=1}^{\infty} A_n\)</span>也为可数集，也即可数个可数集的并为可数集</p>
-</blockquote>
-<p>经典的对角线构造</p>
-<blockquote>
-<p>Prop. 4：如果<span class="math inline">\(\{A_n\}_{n=0}^{m}\)</span>中均为可数集，那么<span class="math inline">\(\bigotimes_{n=1}^{m} A_n\)</span>也为可数集，也即有限个可数集的积为可数集</p>
-</blockquote>
-<blockquote>
-<p>Prop. 5：设<span class="math inline">\(A\)</span>为无穷集，<span class="math inline">\(B\)</span>为至多可数集，那么<span class="math inline">\(|A \cup B| = |A|\)</span></p>
-</blockquote>
-<blockquote>
-<p>Prop. 6：集合<span class="math inline">\(A\)</span>为无限集的充要条件为存在<span class="math inline">\(B \subseteq A\)</span>，使得<span class="math inline">\(|A|=|B|\)</span></p>
-</blockquote>
-<hr />
-<p>一些上课提的结论：</p>
-<blockquote>
-<p><span class="math inline">\(\mathbb{R}^n\)</span>中的有界无穷集必有聚点</p>
-</blockquote>
-<blockquote>
-<p>如果<span class="math inline">\(E \subseteq \mathbb{R}^n\)</span>中只有孤立点，那么<span class="math inline">\(E\)</span>可数</p>
-</blockquote>
-<h3 id="拓扑空间与度量空间">拓扑空间与度量空间</h3>
 <h4 id="拓扑空间">拓扑空间</h4>
-<p>对于非空集合<span class="math inline">\(X\)</span>，设<span class="math inline">\(\tau \subset 2^X\)</span>，如果</p>
+<p>(Definition)：</p>
 <ol type="1">
-<li><p><span class="math inline">\(X, \emptyset \in \tau\)</span></p></li>
-<li><p><span class="math inline">\(A_1,...,A_n \in \tau\)</span>，则<span class="math inline">\(A_1 \cap ... \cap A_n \in \tau\)</span>（对有限交封闭）</p></li>
-<li><p><span class="math inline">\(\{A_i\}_{i \in I} \in \tau\)</span>，则<span class="math inline">\(\bigcup_{i \in I} A_i \in \tau\)</span>（对任意并封闭）</p></li>
-</ol>
-<p>则称<span class="math inline">\((X,\tau)\)</span>为一拓扑空间（一般简写为<span class="math inline">\(X\)</span>），<span class="math inline">\(\tau\)</span>中的元素称为<strong>开集</strong></p>
-<hr />
-<p>设<span class="math inline">\(X\)</span>为一拓扑空间，设<span class="math inline">\(A \subset X\)</span></p>
+<li><p>设<span class="math inline">\(X\)</span>为集合，<span class="math inline">\(\tau \sub 2^X\)</span>，如果</p>
 <ul>
-<li><p>如果<span class="math inline">\(A^c\)</span>为开集，那么称<span class="math inline">\(A\)</span>为<strong>闭集</strong></p></li>
-<li><p>对<span class="math inline">\(X\)</span>上的开集族<span class="math inline">\(\{B_i\}_{i \in I}\)</span>，如果<span class="math inline">\(A \subset \bigcup_{i \in I} B_i \subset X\)</span>，那么称<span class="math inline">\(\{B_i\}_{i \in I}\)</span>为<span class="math inline">\(A\)</span>上的<strong>开覆盖</strong></p></li>
-<li><p>如果<span class="math inline">\(A\)</span>的任意一个开覆盖存在有限子覆盖，则称<span class="math inline">\(A\)</span>为<strong>紧集</strong></p></li>
-<li><p>包含<span class="math inline">\(A\)</span>的闭集中的最小元为<span class="math inline">\(A\)</span>的<strong>闭包</strong>，记为<span class="math inline">\(\bar{A}\)</span>. 注意到闭集的任意交仍然是闭集，那么闭包实际上就是<span class="math inline">\(\bigcap_{A \subset B \subset X, B \;closed} B\)</span></p></li>
-<li><p>被<span class="math inline">\(A\)</span>包含的开集中的最大元为<span class="math inline">\(A\)</span>的<strong>内部</strong>，记为<span class="math inline">\(\mathring{A}\)</span>. 内部实际上就是<span class="math inline">\(\bigcup_{B \subset A, B \;opened} B\)</span></p></li>
-<li><p>对<span class="math inline">\(A \subset B \subset X\)</span>，如果<span class="math inline">\(\bar{A} = B\)</span>，称<span class="math inline">\(A\)</span>在<span class="math inline">\(B\)</span>中<strong>稠密</strong></p></li>
-<li><p>如果<span class="math inline">\(X\)</span>有可数稠子集，称<span class="math inline">\(X\)</span><strong>可分</strong></p></li>
-<li><p>对<span class="math inline">\(f:X \to Y\)</span>，如果开集的原像是开集，那么称<span class="math inline">\(f\)</span>为<strong>连续映射</strong></p></li>
-<li><p>如果集合<span class="math inline">\(V \subset X\)</span>满足，存在开集<span class="math inline">\(U \subset X\)</span>，使得<span class="math inline">\(x \in U \sub V\)</span>，那么<span class="math inline">\(V\)</span>称为<span class="math inline">\(x\)</span>在<span class="math inline">\(X\)</span>中的<strong>邻域</strong>。特别的，当<span class="math inline">\(V\)</span>是开集时，称<span class="math inline">\(V\)</span>为<span class="math inline">\(x\)</span>的<strong>开邻域</strong></p></li>
+<li><span class="math inline">\(\emptyset , X \in \tau\)</span></li>
+<li><span class="math inline">\(A_1,...,A_n \in \tau\)</span>，则<span class="math inline">\(\bigcap A_n \in \tau\)</span>，即对有限交封闭</li>
+<li><span class="math inline">\(\{A_n\} \in \tau\)</span>，则<span class="math inline">\(\bigcup A_n \in \tau\)</span>，即对可数并封闭</li>
 </ul>
+<p>则称<span class="math inline">\((X,\tau)\)</span>为<strong>拓扑空间</strong>，<span class="math inline">\(\tau\)</span>称为<span class="math inline">\(X\)</span>中的开集</p></li>
+</ol>
+<p>下面设<span class="math inline">\(X,Y\)</span>为拓扑空间</p>
+<ol start="2" type="1">
+<li><p><span class="math inline">\(A \sub X\)</span>为<strong>闭集</strong>当且仅当<span class="math inline">\(A^c=X \setminus A\)</span>为开集</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>的任意开覆盖存在有限子覆盖，则称<span class="math inline">\(A\)</span>为<strong>紧集</strong></p></li>
+<li><p>包含<span class="math inline">\(A\)</span>的闭集的最小元为<span class="math inline">\(A\)</span>的<strong>闭包</strong>，记为<span class="math inline">\(\bar{A}\)</span>，由于闭集对交封闭，这实际上就是包含<span class="math inline">\(A\)</span>的闭集的交</p></li>
+<li><p>被<span class="math inline">\(A\)</span>包含的开集的最大元为<span class="math inline">\(A\)</span>的<strong>内部</strong>，记为<span class="math inline">\(\mathring{A}\)</span>，这实际上就是被<span class="math inline">\(A\)</span>包含的开集的并</p></li>
+<li><p>如果<span class="math inline">\(\bar{A} = B\)</span>，则称<span class="math inline">\(A\)</span>在<span class="math inline">\(B\)</span>中<strong>稠密</strong></p></li>
+<li><p>如果<span class="math inline">\(X\)</span>有可数的稠密子集，则称<span class="math inline">\(X\)</span><strong>可分</strong></p></li>
+<li><p>如果<span class="math inline">\(f:X\to Y\)</span>满足<span class="math inline">\(\forall B \in \tau_Y, f^{-1}(B) \in \tau_X\)</span>，即开集的原象是开集，那么称<span class="math inline">\(f\)</span>为<strong>连续映射</strong></p></li>
+<li><p>如果集合<span class="math inline">\(V \subset X\)</span>满足，存在开集<span class="math inline">\(U \subset X\)</span>，使得<span class="math inline">\(x \in U \sub V\)</span>，那么<span class="math inline">\(V\)</span>称为<span class="math inline">\(x\)</span>在<span class="math inline">\(X\)</span>中的<strong>邻域</strong></p>
+<p>特别的，当<span class="math inline">\(V\)</span>是开集时，称<span class="math inline">\(V\)</span>为<span class="math inline">\(x\)</span>的<strong>开邻域</strong></p></li>
+<li><p>称<span class="math inline">\(X\)</span>为Hausdorff的，当且仅当<span class="math inline">\(\forall x \neq y \in X\)</span>，存在<span class="math inline">\(U_x,U_y \in \tau\)</span>，使得<span class="math inline">\(U_x \cap U_y = \emptyset\)</span></p></li>
+</ol>
+<p>注意：上述定义在后面的度量空间中是通用的</p>
+<p>下面是作业题</p>
+<blockquote>
+<ul>
+<li><p><span class="math inline">\(A \sub K\)</span>时，如果<span class="math inline">\(A\)</span>闭，<span class="math inline">\(K\)</span>紧，那么<span class="math inline">\(A\)</span>紧</p></li>
+<li><p>如果<span class="math inline">\(A\)</span>紧，<span class="math inline">\(B\)</span>紧，那么<span class="math inline">\(A \cup B\)</span>紧</p></li>
+<li><p>如果<span class="math inline">\(\{K_{\alpha}\}\)</span>紧，那么<span class="math inline">\(\bigcap K_{\alpha}\)</span>紧</p></li>
+<li><p>对Hausdorff空间，如果<span class="math inline">\(K\)</span>紧，那么<span class="math inline">\(K\)</span>闭</p></li>
+</ul>
+</blockquote>
+<hr />
 <h4 id="度量空间">度量空间</h4>
-<p>设非空集合<span class="math inline">\(X\)</span>，如果存在<span class="math inline">\(X \times X \to R_{\geq 0}\)</span>的函数<span class="math inline">\(d\)</span>满足：</p>
+<p>(Definition)：</p>
 <ol type="1">
-<li><p><span class="math inline">\(d(x, y) \geq 0\)</span> 且 <span class="math inline">\(d(x,y) = 0\)</span>当且仅当<span class="math inline">\(x = y\)</span>（正定性）</p></li>
-<li><p><span class="math inline">\(d(x,y) = d(y,x)\)</span> （对称性）</p></li>
-<li><p><span class="math inline">\(d(x,y) \leq d(x,z) + d(z,y)\)</span>（三角不等式）</p></li>
+<li><p>设<span class="math inline">\(X\)</span>为非空集合，如果函数<span class="math inline">\(d:X^2 \to R_{\geq 0}\)</span>满足</p>
+<ul>
+<li>正定性：<span class="math inline">\(d(x, y) \geq 0\)</span>并且<span class="math inline">\(d(x, y) = 0\)</span>当且仅当<span class="math inline">\(x = y\)</span></li>
+<li>对称性：<span class="math inline">\(d(x, y) = d(y, x)\)</span></li>
+<li>三角不等式：<span class="math inline">\(d(x, y) \leq d(x, z) + d(z, y)\)</span></li>
+</ul>
+<p>那么，我们称<span class="math inline">\((X,d)\)</span>为一<strong>度量空间</strong>，<span class="math inline">\(d\)</span>称为<strong>距离函数</strong></p></li>
 </ol>
-<p>则称<span class="math inline">\(d\)</span>为<span class="math inline">\(X\)</span>上的距离函数，<span class="math inline">\((X,d)\)</span>为一度量空间</p>
-<hr />
-<p>对<span class="math inline">\(x \in X, r &gt; 0\)</span>，定义<span class="math inline">\(B(x,r) := \{y \in X | d(y,x) &lt; r\}\)</span>为<strong>开球</strong>，<span class="math inline">\(\overline{B(x,r)} := \{y \in X|d(x,y) \leq r\}\)</span>为<strong>闭球</strong></p>
-<p>如果<span class="math inline">\(\forall x \in A, \exists c &gt; 0\)</span>，使得<span class="math inline">\(B(x,c) \subset A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>开集</strong></p>
-<p>上述定义描述的开集满足拓扑空间中开集的性质，因此根据这个定义，度量空间自然诱导出拓扑空间</p>
-<hr />
-<p>对度量空间<span class="math inline">\((X,d)\)</span></p>
-<ul>
-<li>对<span class="math inline">\(x \in X, \{x_n\} \in X\)</span>，如果<span class="math inline">\(\lim_{n \to \infty} d(x_n,x) = 0\)</span>，称<span class="math inline">\(\{x_n\}\)</span>收敛于<span class="math inline">\(x\)</span>，<span class="math inline">\(x\)</span>为<span class="math inline">\(X\)</span>的一个聚点或者极限点，聚点的全体记为<span class="math inline">\(X&#39;\)</span>，称为<span class="math inline">\(X\)</span>的导集</li>
-<li>记<span class="math inline">\(X&#39; \cup X = \bar{X}\)</span>为<span class="math inline">\(X\)</span>的闭包，<span class="math inline">\(X/X&#39;\)</span>为<span class="math inline">\(X\)</span>的孤立点</li>
-</ul>
-<blockquote>
-<p>开球<span class="math inline">\(B(x,r)\)</span>的闭包为闭球<span class="math inline">\(\overline{B(x,r)}\)</span>，因此符号系统是合理的</p>
-</blockquote>
-<ul>
-<li>对<span class="math inline">\(x \in X, \exist c &gt; 0, B(x,c) \subset A\)</span>，则称<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的内点，<span class="math inline">\(A\)</span>的内点的全体记为<span class="math inline">\(\mathring{A}\)</span>，称为<span class="math inline">\(A\)</span>的内部</li>
-<li><span class="math inline">\(\bar{A} / \mathring{A}\)</span>称为<span class="math inline">\(A\)</span>的边界，记为<span class="math inline">\(\part A\)</span></li>
-</ul>
-<blockquote>
-<p><span class="math inline">\(A\)</span>为闭集当且仅当<span class="math inline">\(\bar{A} = A\)</span></p>
-<p><span class="math inline">\(A\)</span>为开集当且仅当<span class="math inline">\(\mathring{A} = A\)</span></p>
-</blockquote>
-<hr />
-<p>对度量空间<span class="math inline">\((X, d)\)</span></p>
-<ul>
-<li>设<span class="math inline">\(U\)</span>为开集，如果<span class="math inline">\(A \subset U\)</span>，称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的开邻域（这个拓扑空间下的定义是一样的）</li>
-<li>如果<span class="math inline">\(\mathring{U} = A\)</span>，则称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的邻域</li>
-</ul>
-<hr />
-<ul>
-<li><p>对<span class="math inline">\(A \subset X\)</span>，定义<span class="math inline">\(A\)</span>的直径为<span class="math inline">\(diam(A) := \sup_{x,y} \{d(x,y), x,y \in E\}\)</span></p>
-<p>如果<span class="math inline">\(diam(A) &lt; \infty\)</span>，则称<span class="math inline">\(A\)</span>为有界集</p></li>
-</ul>
-<hr />
-<ul>
-<li>对<span class="math inline">\(\{x_n\} \in X\)</span>，如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(\exist N \in \mathbb{N}\)</span>，<span class="math inline">\(\forall m, n \geq N\)</span>，有<span class="math inline">\(d(x_n,x_m) &lt; \epsilon\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>为一柯西列</li>
-<li>如果<span class="math inline">\(X\)</span>中任意柯西列收敛，称<span class="math inline">\(X\)</span>完备</li>
-</ul>
-<h4 id="紧集列紧集">紧集，列紧集</h4>
-<p>这一节的主要目的是证明下面的几个命题大致是等价的</p>
-<p>设<span class="math inline">\((X, d)\)</span>为一度量空间，<span class="math inline">\(M \subset X\)</span>为一集合</p>
-<ul>
-<li><ol type="i">
-<li>称<span class="math inline">\(M\)</span>为紧集，当且仅当其任意开覆盖有有限的子覆盖</li>
-</ol></li>
-<li><ol start="2" type="i">
-<li>称<span class="math inline">\(M\)</span>为（相对）序列紧集，当且仅当其任意序列有收敛子列，且收敛值在<span class="math inline">\((X)M\)</span>中</li>
-</ol></li>
-<li><ol start="3" type="i">
-<li>对<span class="math inline">\(\epsilon &lt; 0, E \subset M\)</span>，称<span class="math inline">\(E\)</span>为<span class="math inline">\(M\)</span>的<span class="math inline">\(\epsilon-\)</span>网，如果<span class="math inline">\(M \subset \bigcup_{x \in E} B(x, \epsilon)\)</span></li>
+<p>下面设<span class="math inline">\(X\)</span>为度量空间</p>
+<ol start="2" type="1">
+<li><p>对<span class="math inline">\(x \in X, r &gt; 0\)</span>，定义<span class="math inline">\(B(x,r) := \{y \in X | d(y,x) &lt; r\}\)</span>为<strong>开球</strong></p>
+<p><span class="math inline">\(\overline{B(x,r)} := \{y \in X|d(x,y) \leq r\}\)</span>为<strong>闭球</strong></p></li>
+<li><p>如果<span class="math inline">\(\forall x \in A, \exists c &gt; 0\)</span>，使得<span class="math inline">\(B(x,c) \subset A\)</span>，则称<span class="math inline">\(A\)</span>为<strong>开集</strong></p></li>
 </ol>
-<p>称<span class="math inline">\(M\)</span>为完全有界的（totally bounded），如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(M\)</span>存在有限大小的<span class="math inline">\(\epsilon-\)</span>网</p></li>
-<li><ol start="4" type="i">
-<li>称<span class="math inline">\(M\)</span>有闭集有限交性质，如果对任意非空递减闭集列<span class="math inline">\(M \supset E_1 \supset E_2 ... \supset E_n \supset ...\)</span>，有<span class="math inline">\(\bigcap_{n=1}^{\infty} E_n \neq \empty\)</span></li>
-</ol></li>
-</ul>
-<hr />
-<p>在<span class="math inline">\(\mathbb{R}^n\)</span>中，(i)对应有限开覆盖定理，(ii)对应收敛子列定理，(iv)对应闭区间套</p>
-<hr />
-<blockquote>
-<p>如果<span class="math inline">\(M\)</span>紧，那么<span class="math inline">\(M\)</span>为有界闭集</p>
-</blockquote>
-<p>证明：如果<span class="math inline">\(M\)</span>为紧集，那么<span class="math inline">\(\{B(x,1)\}_{x \in M}\)</span>构成一个开覆盖，我们取一个有限子覆盖，根据该有限子覆盖易知<span class="math inline">\(M\)</span>有界</p>
-<p>对于闭集，任取<span class="math inline">\(x \in M^c\)</span>，此时对于<span class="math inline">\(y \in M\)</span>，存在<span class="math inline">\(r_x(x,y), r_y(x,y)&gt;0\)</span>，使得<span class="math inline">\(B(x,r_x(x,y)) \cap B(y, r_y(x,y)) = \empty\)</span></p>
-<p>注意到<span class="math inline">\(\{B(y, r_y(x,y))\}\)</span>为一开覆盖，取其有限子覆盖<span class="math inline">\(\{y_i\}\)</span>，此时<span class="math inline">\(B(x, \min_{y_i} r_x(z,y_i)) \subset M^c\)</span>，根据开集的定义，<span class="math inline">\(M^c\)</span>为开集，从而<span class="math inline">\(M\)</span>为闭集</p>
-<hr />
-<p>更一般的，我们称拓扑空间<span class="math inline">\((X, \tau)\)</span>有Hausdorff性质，当且仅当<span class="math inline">\(\forall x, y \in X, x \neq y, \exists U_x, U_y \in \tau, x\in U_x, y \in U_y, U_x \cap U_y = \emptyset\)</span></p>
-<hr />
-<blockquote>
-<p>如果<span class="math inline">\(M\)</span>列紧，那么<span class="math inline">\(M\)</span>为有界闭集</p>
-</blockquote>
-<p>证明：由于<span class="math inline">\(M\)</span>列紧，因此<span class="math inline">\(\bar{M} = M\)</span>，从而<span class="math inline">\(M\)</span>为闭集</p>
-<p>假设<span class="math inline">\(M\)</span>无界，任取<span class="math inline">\(x_0\)</span>，之后我们总可以取<span class="math inline">\(x_i\)</span>，使得<span class="math inline">\(d(x_i,x_j)&gt; 1, \forall j&lt;i\)</span>，这个序列没有收敛子列从而矛盾</p>
-<hr />
-<blockquote>
-<p><span class="math inline">\((ii) \Leftrightarrow (iv)\)</span>：<span class="math inline">\(M\)</span>列紧，当且仅当<span class="math inline">\(M\)</span>有闭集有限交性质</p>
-</blockquote>
-<p><span class="math inline">\(\Rightarrow\)</span>：<span class="math inline">\(M \supset E_1 \supset E_2 ... \supset E_n \supset ...\)</span>为一非空递减闭集列，任取<span class="math inline">\(x_n \in E_n\)</span>，那么<span class="math inline">\(\{x_n\}\)</span>有收敛子列<span class="math inline">\(\{x_{n_k}\} \to x_0\)</span></p>
-<p>注意到<span class="math inline">\(\forall n, \forall n_k \geq n, x_{n_k} \in E_n\)</span>，因此<span class="math inline">\(E_n\)</span>中总有<span class="math inline">\(\{x_{n_k}\}\)</span>的后无限项，根据<span class="math inline">\(E_n\)</span>为闭集，<span class="math inline">\(x_0 \in E_n\)</span>，这也就说明了<span class="math inline">\(\bigcap E_i \neq \emptyset\)</span></p>
-<p><span class="math inline">\(\Leftarrow\)</span>：任取<span class="math inline">\(\{x_n\} \in M\)</span>，定义<span class="math inline">\(E_n = \{x_k:k&gt;n\}, F_n = \bar{E_n}\)</span>，那么<span class="math inline">\(M \supset F_1 \supset F_2 ... \supset F_n \supset ...\)</span>为一非空递减闭集列，根据闭集有限交的定义，取<span class="math inline">\(x_0 \in \bigcap F_i\)</span></p>
-<p>由于<span class="math inline">\(x_0 \in \bar{E_1}\)</span>，我们可以取<span class="math inline">\(x_{n_1} \in E_1\)</span>，使<span class="math inline">\(d(x_{n_1}, x_0) \leq 1\)</span>，接着，由于<span class="math inline">\(x_0 \in \bar{E_{n_1}}\)</span>，我们取<span class="math inline">\(x_{n_2} \in E_{n_1}\)</span>，使<span class="math inline">\(d(x_{n_2}, x_0) \leq 1/2\)</span>...，依次类推，我们取出了一个子列，并且其收敛到<span class="math inline">\(x_0\)</span></p>
-<hr />
-<blockquote>
-<p><span class="math inline">\((ii) \Rightarrow (iii)\)</span>：<span class="math inline">\(M\)</span>列紧，那么<span class="math inline">\(M\)</span>完全有界</p>
-<p>反之，<span class="math inline">\(M\)</span>完全有界，并且<span class="math inline">\(X\)</span>完备，则<span class="math inline">\(M\)</span>列紧</p>
-</blockquote>
-<p><span class="math inline">\(\Rightarrow\)</span>：反证，如果<span class="math inline">\(M\)</span>不是完全有界的，那么<span class="math inline">\(\exists \epsilon &gt; 0\)</span>，使得<span class="math inline">\(M\)</span>没有有限的<span class="math inline">\(\epsilon-\)</span>网</p>
-<p>任取<span class="math inline">\(x_1 \in M\)</span>，之后根据上述性质，我们总能选取<span class="math inline">\(x_i \in M\)</span>，使得<span class="math inline">\(x_i \in M / \bigcup_{j=1}^{i-1} B(x_j, \epsilon)\)</span>，该序列无收敛子列</p>
-<p><span class="math inline">\(\Leftarrow\)</span>：任取序列<span class="math inline">\(\{x_n\}\)</span>，<span class="math inline">\(M\)</span>完全有界，因此<span class="math inline">\(M\)</span>有有限的<span class="math inline">\(1-\)</span>网<span class="math inline">\(E_1\)</span>，无限序列<span class="math inline">\(\{x_n\}\)</span>被包含于有限个集合中，一定有一个几个包含了<span class="math inline">\(\{x_n\}\)</span>中的无限个元素，记这无限个元素构成新的子列<span class="math inline">\(\{x_n^1\}\)</span></p>
-<p>对<span class="math inline">\(\{x_n^1\}\)</span>和<span class="math inline">\(M\)</span>的<span class="math inline">\(1/2-\)</span>网<span class="math inline">\(E_2\)</span>类似的分析，我们可以取出子列<span class="math inline">\(\{x_n^2\}\)</span>，依次类推，我们可以取出可数个子列<span class="math inline">\(\{x_n^i\}\)</span></p>
-<p>最终取子列<span class="math inline">\(\{x_i^i\}\)</span>，注意到我们取的子列满足<span class="math inline">\(d(x_i^b, x_j^n) \leq \frac{2}{n}\)</span>以及<span class="math inline">\(x_{i}^{n+m} \in \{x_i^n\}\)</span>，因此有<span class="math inline">\(d(x_{n+m}^{n+m}, x_n^n) \leq 4/n\)</span>，故这是柯西列，于是收敛</p>
-<hr />
-<blockquote>
-<p>(Lebesgue number lemma) 如果<span class="math inline">\(M\)</span>列紧，那么对任意<span class="math inline">\(M\)</span>的开覆盖<span class="math inline">\(\{E_{\alpha}\}_{\alpha \in I}\)</span>，存在<span class="math inline">\(\delta &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in M, B(x, \delta) \subset E_{\alpha}\)</span>，对于某个<span class="math inline">\(\alpha \in I\)</span></p>
-</blockquote>
-<p>这里<span class="math inline">\(\delta\)</span>的选择应是一致的</p>
-<p>反证，<span class="math inline">\(\forall n \in N, \forall \alpha \in I, \exists x_n, B(x_n, 1/n) \not\subset E_{\alpha}\)</span>，取<span class="math inline">\(\{x_n\}\)</span>的收敛子列<span class="math inline">\(\{x_{n_k}\} \to x_0\)</span></p>
-<p>由于<span class="math inline">\(x_0 \subset \bigcup_{\alpha \in I} E_{\alpha}\)</span>，因此<span class="math inline">\(\exists \alpha_0\)</span>，使<span class="math inline">\(x_0 \in E_{\alpha_0}\)</span>，根据开集的性质，<span class="math inline">\(\exists \delta_0, B(x_0, \delta_0) \subset E_{\alpha_0}\)</span></p>
-<p>我们取<span class="math inline">\(k_0\)</span>，使得<span class="math inline">\(d(x_{n_{k_0}}, x_0) &lt; \delta_0/2,1/n_{k_0} &lt; \delta_0/2\)</span>，此时有<span class="math inline">\(B(x_{n_{k_0}}, 1/n_{k_0}) \subset B(x_0, \delta_0) \subset E_{\alpha_0}\)</span>，矛盾!</p>
-<hr />
-<blockquote>
-<p><span class="math inline">\((ii) \Leftrightarrow (i)\)</span>：<span class="math inline">\(M\)</span>列紧，当且仅当<span class="math inline">\(M\)</span>紧</p>
-</blockquote>
-<p><span class="math inline">\(\Leftarrow\)</span>：反证，假设<span class="math inline">\(M\)</span>不满足闭集有限交性质，即<span class="math inline">\(M \supset E_1 \supset E_2 ... \supset E_n \supset ...\)</span>为一非空递减闭集列，假设<span class="math inline">\(\bigcap E_n = \emptyset\)</span></p>
-<p>此时<span class="math inline">\(M \subset X = (\bigcap E_n)^c = \bigcup E_n^c\)</span>，于是<span class="math inline">\(M\)</span>有开覆盖，进而有有限子覆盖<span class="math inline">\(\{E_{i}^c\}_{i=1}^N\)</span>（这里我们取遍有限子覆盖中编号最大的集合，仍得到一个有限子覆盖）</p>
-<p><span class="math inline">\(M \subset \bigcup^N E_i^c\)</span>，进而<span class="math inline">\(M^c \supset (\bigcup^N E_i^c)^c = \bigcap^N E_i = E_N\)</span>，这于<span class="math inline">\(M \supset E_N\)</span>矛盾</p>
-<p><span class="math inline">\(\Rightarrow\)</span>：根据<span class="math inline">\(M\)</span>完全有界以及Lebesgue number lemma，我们不难取出一个有限开覆盖<span class="math inline">\(M \subset\{E_{\alpha}\}\)</span></p>
-<h4 id="连续性">连续性</h4>
-<ul>
-<li>设<span class="math inline">\((X, \tau_X), (Y, \tau_Y)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>为一映射</li>
-</ul>
-<ol type="i">
-<li>如果对<span class="math inline">\(\forall F \in \tau_Y, f^{-1}(F) \in \tau_X\)</span>，则称<span class="math inline">\(f\)</span>连续（即开集的原像是开集）</li>
-<li>对<span class="math inline">\(x \in X\)</span>，如果对任一<span class="math inline">\(f(x)\)</span>的开邻域<span class="math inline">\(F\)</span>，均有<span class="math inline">\(f^{-1}(F)\)</span>包含<span class="math inline">\(x\)</span>的一个开邻域，则称<span class="math inline">\(f\)</span>在<span class="math inline">\(x\)</span>处连续</li>
+<p>根据开集的定义，度量空间自然诱导出拓扑空间</p>
+<p>并且下面的内点、闭包的概念和拓扑空间内的定义是对应的</p>
+<ol start="4" type="1">
+<li><p>对<span class="math inline">\(x \in X, \{x_n\} \in X\)</span>，如果<span class="math inline">\(\lim_{n \to \infty} d(x_n,x) = 0\)</span>，称<span class="math inline">\(\{x_n\}\)</span>收敛于<span class="math inline">\(x\)</span>，<span class="math inline">\(x\)</span>为<span class="math inline">\(X\)</span>的一个<strong>聚点</strong>或者极限点，聚点的全体记为<span class="math inline">\(X&#39;\)</span>，称为<span class="math inline">\(X\)</span>的<strong>导集</strong></p></li>
+<li><p>记<span class="math inline">\(X&#39; \cup X = \bar{X}\)</span>为<span class="math inline">\(X\)</span>的<strong>闭包</strong>，<span class="math inline">\(X/X&#39;\)</span>为<span class="math inline">\(X\)</span>的<strong>孤立点</strong></p></li>
+<li><p>对<span class="math inline">\(x \in X, \exist c &gt; 0, B(x,c) \subset A\)</span>，则称<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>内点</strong>，<span class="math inline">\(A\)</span>的内点的全体记为<span class="math inline">\(\mathring{A}\)</span>，称为<span class="math inline">\(A\)</span>的<strong>内部</strong></p></li>
+<li><p><span class="math inline">\(\bar{A} / \mathring{A}\)</span>称为<span class="math inline">\(A\)</span>的<strong>边界</strong>，记为<span class="math inline">\(\part A\)</span></p></li>
+<li><p>如果<span class="math inline">\(A \sub \mathring{U}\)</span>，则称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>邻域</strong>，特别的，当<span class="math inline">\(U\)</span>是开集时，称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>开邻域</strong></p></li>
+<li><p>对<span class="math inline">\(A \subset X\)</span>，定义<span class="math inline">\(A\)</span>的<strong>直径</strong>为<span class="math inline">\(diam(A) := \sup_{x,y} \{d(x,y), x,y \in E\}\)</span></p>
+<p>如果<span class="math inline">\(diam(A) &lt; \infty\)</span>，则称<span class="math inline">\(A\)</span>为<strong>有界集</strong></p></li>
+<li><p>对<span class="math inline">\(\{x_n\} \in X\)</span>，如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(\exist N \in \mathbb{N}\)</span>，<span class="math inline">\(\forall m, n \geq N\)</span>，有<span class="math inline">\(d(x_n,x_m) &lt; \epsilon\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>为一<strong>柯西列</strong></p></li>
 </ol>
+<p>如果<span class="math inline">\(X\)</span>中任意柯西列收敛，称<span class="math inline">\(X\)</span><strong>完备</strong></p>
+<p>下面是一个经常用到的性质</p>
+<blockquote>
+<p><span class="math inline">\(A\)</span>为闭集当且仅当<span class="math inline">\(\bar{A} = A\)</span>，<span class="math inline">\(A\)</span>为开集当且仅当<span class="math inline">\(\mathring{A} = A\)</span></p>
+</blockquote>
+<p>以及对<span class="math inline">\(\mathbb{R}\)</span>的讨论：</p>
+<blockquote>
+<p><span class="math inline">\(\mathbb{R}\)</span>上的开集可以表示成两两不交的开区间的并</p>
+</blockquote>
+<p>证明：设<span class="math inline">\(A\)</span>为<span class="math inline">\(\mathbb{R}\)</span>上的开集，任取<span class="math inline">\(x \in A\)</span>，定义<span class="math inline">\(a := \inf\{x_1:(x_1,x) \in A\}, b := \sup \{x_2:(x,x_2) \in A\}\)</span></p>
+<p>考虑<span class="math inline">\(a_x,b_x\)</span>之间的关系即可，<span class="math inline">\(\square\)</span></p>
 <hr />
-<blockquote>
-<p><span class="math inline">\(f: X \to Y\)</span>连续当且仅当<span class="math inline">\(f\)</span>在每一点处连续</p>
-</blockquote>
-<p>证明略</p>
-<blockquote>
-<p>当<span class="math inline">\((X,d_X),(Y,d_Y)\)</span>为度量空间时，<span class="math inline">\(f:X \to Y\)</span>在点<span class="math inline">\(x_0\)</span>处连续当且仅当<span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in B(x_0, \delta)\)</span>，有<span class="math inline">\(f(x) \in B(f(x_0), \epsilon)\)</span></p>
-</blockquote>
-<p>仍然省略证明</p>
-<blockquote>
-<p><span class="math inline">\(\mathbb{R}\)</span>上的开集可以表为若干不交的开区间的并</p>
-</blockquote>
-<blockquote>
-<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to \mathbb{R}\)</span>连续当且仅当<span class="math inline">\(\forall -\infty \leq a \leq b \leq \infty\)</span>，有<span class="math inline">\(f^{-1}((a,b))\)</span>为<span class="math inline">\(X\)</span>中开集</p>
-</blockquote>
-<p>通过引入<span class="math inline">\(\infty, -\infty\)</span>，我们常常考虑集合<span class="math inline">\([-\infty, \infty]\)</span>，特别的，<span class="math inline">\([-\infty, a)\)</span>，<span class="math inline">\((a,\infty]\)</span>视为一个开区间，此时，我们可以将上面的命题进行扩展：</p>
-<blockquote>
-<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to [-\infty, \infty]\)</span>连续当且仅当<span class="math inline">\(\forall -\infty \leq a \leq b \leq \infty\)</span>，有<span class="math inline">\(f^{-1}(L)\)</span>为<span class="math inline">\(X\)</span>中开集，其中<span class="math inline">\(L\)</span>为任一开区间</p>
-</blockquote>
-<hr />
+<p>下面是一些做题用的玩意</p>
 <ul>
-<li><p>设<span class="math inline">\((X, \tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to \mathbb{R}\)</span></p>
-<ol type="i">
-<li><p>如果对任一的<span class="math inline">\(\alpha\)</span>，<span class="math inline">\(f^{-1}((\alpha, +\infty))\)</span>是开集，那么称<span class="math inline">\(f\)</span>是下半连续的（lower semicontinuous）</p></li>
-<li><p>如果对任一的<span class="math inline">\(\alpha\)</span>，<span class="math inline">\(f^{-1}((-\infty, \alpha))\)</span>是开集，那么称<span class="math inline">\(f\)</span>是上半连续的（lower semicontinuous）</p></li>
-</ol></li>
-</ul>
-<p>不难证明，<span class="math inline">\(f\)</span>是连续函数，当且仅当<span class="math inline">\(f\)</span>既是上半连续的，又是下半连续的</p>
-<blockquote>
-<p>设<span class="math inline">\(\{f_{\alpha}:X\to \mathbb{R}\}_{\alpha \in I}\)</span>为下半连续函数族，那么<span class="math inline">\(\sup_{\alpha \in I} f_{\alpha}\)</span>是下半连续的</p>
-<p>类似的，设<span class="math inline">\(\{g_{\alpha}:X\to \mathbb{R}\}_{\alpha \in I}\)</span>为上半连续函数族，那么<span class="math inline">\(\inf_{\alpha \in I} g_{\alpha}\)</span>是上半连续的</p>
-</blockquote>
-<p>后面定义的函数的原像就是前面的函数族的原像族的并，进而是开集</p>
-<blockquote>
-<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to \mathbb{R}\)</span> (i) <span class="math inline">\(f\)</span>是下半连续函数，当且仅当<span class="math inline">\(\forall x \in X, \lim \inf_{y \to x} f(y) \geq f(x)\)</span> (ii) <span class="math inline">\(f\)</span>是上半连续函数，当且仅当<span class="math inline">\(\forall x \in X, \lim \sup_{y \to x} f(y) \leq f(x)\)</span></p>
-</blockquote>
-<hr />
-<h4 id="urysohns-lemma">Urysohn's Lemma</h4>
-<ul>
-<li>设<span class="math inline">\((X, d)\)</span>是一个度量空间，对<span class="math inline">\(E \subset X\)</span>，称<span class="math inline">\(d_E:X \to \mathbb{R}, d_E(x) = \inf \{ d(x,y):y \in E\}\)</span>为<span class="math inline">\(E\)</span>上的距离函数，那么
-<ol type="i">
-<li><span class="math inline">\(x \in \bar{E}\)</span>，当且仅当<span class="math inline">\(d_E(x)= 0\)</span></li>
-<li><span class="math inline">\(d_E\)</span>是<span class="math inline">\(X\)</span>上的Lip常数为<span class="math inline">\(1\)</span>的Lipschitz函数，即<span class="math inline">\(|d_E(x)-d_E(y)| \leq d(x,y)\)</span></li>
-</ol></li>
-</ul>
-<p>(i)，(ii)按定义写易证</p>
-<hr />
-<blockquote>
-<p>(Urysohn's lemma for metric spaces) 设<span class="math inline">\((X, d)\)</span>是度量空间，<span class="math inline">\(A,B \subset X\)</span>且<span class="math inline">\(A,B\)</span>为闭集，<span class="math inline">\(A \cap B = \empty\)</span>，那么存在一个连续函数<span class="math inline">\(f : X \to [0,1]\)</span>，使得<span class="math inline">\(f|_A = 0, f|_B = 1\)</span></p>
-</blockquote>
-<p>证明：取<span class="math inline">\(f(x) = d_A(x) / (d_A(x) + d_B(x))\)</span>即可</p>
-<p>这也就说，在度量空间中，我们存在一个标记两个闭集<span class="math inline">\(A,B\)</span>的函数的连续函数的近似</p>
-<hr />
-<ul>
-<li>对于拓扑空间<span class="math inline">\((X, \tau)\)</span>，称其为正规的，如果对任意两个闭集<span class="math inline">\(A,B\)</span>，<span class="math inline">\(A \cap B = \empty\)</span>，存在<span class="math inline">\(A,B\)</span>的邻域<span class="math inline">\(U,V\)</span>，使得<span class="math inline">\(U \cap V = \empty\)</span></li>
-</ul>
-<p>也就是说，我们可以用开集来分离两个闭集，Urysohn引理给出了正规拓扑空间的一种优美的刻画</p>
-<blockquote>
-<p>(Urysohn's lemma for Topological spaces) 当且仅当<span class="math inline">\(\forall A, B \;closed\subset X\)</span>，<span class="math inline">\(A \cap B = \emptyset\)</span>，存在连续函数<span class="math inline">\(f:X \to [0,1]\)</span>，使得<span class="math inline">\(f(A) = \{0\}, f(B)=\{1\}\)</span></p>
-</blockquote>
-<p>我们通过下面这些命题来证明Urysohn's lemma</p>
-<ul>
-<li>拓扑空间<span class="math inline">\((X, \tau)\)</span>是正规的，当且仅当<span class="math inline">\(\forall A\;closed \sub U\;open\sub X\)</span>, <span class="math inline">\(\exists V\;open\)</span>，使得<span class="math inline">\(A \sub V \sub \bar{V} \sub U\)</span></li>
+<li><p><span class="math inline">\(x \in \mathring{A}\)</span>等价于对<span class="math inline">\(x \in X, \exist c &gt; 0, B(x,c) \subset A\)</span></p></li>
+<li><p><span class="math inline">\(x \in \bar{A}\)</span>等价于<span class="math inline">\(\forall \delta &gt; 0, B(x, \delta) \cap A \neq \empty\)</span>，即任意小的开球都与<span class="math inline">\(A\)</span>有交</p></li>
+<li><p><span class="math inline">\(x \in A/A&#39;\)</span>等价于<span class="math inline">\(\exist \delta &gt; 0, B(x, \delta) \cap A = \{x\}\)</span></p></li>
 </ul>
 <hr />
-<ul>
-<li><p>拓扑空间称为局部紧的（locally compact），当且仅当<span class="math inline">\(\forall x \in X,\)</span>，存在<span class="math inline">\(X\)</span>的一个紧的开邻域</p></li>
-<li><p>对<span class="math inline">\(f:X \to \mathbb{R}\)</span>，称<span class="math inline">\(\text{supp} f := \overline{\{x \in X:f(x) \neq 0\}}\)</span>为<span class="math inline">\(f\)</span>的支集</p></li>
-<li><p>称<span class="math inline">\(C_c(X)\)</span>为<span class="math inline">\(X\)</span>上有紧支集的连续函数的全体</p></li>
-</ul>
+<p>紧，列紧等等的关系，先咕着</p>
 <hr />
-<ul>
-<li>如果<span class="math inline">\(X\)</span>是局部紧的Hausdorff空间，如果<span class="math inline">\(K\;compact \sub U\;open \sub X\)</span>，那么<span class="math inline">\(\exists V\;open\)</span> 使得 <span class="math inline">\(K \sub V \sub \bar{V} \sub U\)</span> 并且<span class="math inline">\(V\;open, \bar{V}\;compact\)</span></li>
-<li>设<span class="math inline">\(X\)</span>是局部紧的Hausdorff空间，<span class="math inline">\(K\;compact \sub V\;open \sub X\)</span>，那么存在<span class="math inline">\(f \in C_c(X)\)</span>，使得<span class="math inline">\(1_K \leq f \leq 1_V\)</span></li>
-</ul>
-<h3 id="可测空间与测度空间">可测空间与测度空间</h3>
-<h4 id="可测">可测</h4>
-<ul>
-<li>设<span class="math inline">\(X\)</span>是一个非空集，<span class="math inline">\(\Gamma \sub 2^X\)</span>，称<span class="math inline">\(\Gamma\)</span>是<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数，如果</li>
-</ul>
-<ol type="i">
-<li><span class="math inline">\(X \in \Gamma\)</span> (ii) <span class="math inline">\(A \in \Gamma \Rightarrow A^c \in \Gamma\)</span> (iii) <span class="math inline">\(\{A_n\} \in \Gamma \Rightarrow \bigcup A_n \in \Gamma\)</span>，对可数并封闭</li>
+<p>Urysohn's Lemma，咕着</p>
+<hr />
+<h4 id="连续">连续</h4>
+<p>(Definition)：1. 对<span class="math inline">\(x \in X\)</span>，如果对任一<span class="math inline">\(f(x)\)</span>的开邻域<span class="math inline">\(F\)</span>，均有<span class="math inline">\(f^{-1}(F)\)</span>包含<span class="math inline">\(x\)</span>的开邻域，那么称<span class="math inline">\(f\)</span>在<span class="math inline">\(x\)</span>这<strong>一点连续</strong></p>
+<blockquote>
+<p><span class="math inline">\(f:X\to Y\)</span>连续当且仅当<span class="math inline">\(f\)</span>在每一点都连续</p>
+</blockquote>
+<p>证明：<span class="math inline">\(\Rightarrow\)</span>显然，<span class="math inline">\(\Leftarrow\)</span>只需要知晓<span class="math inline">\(f^{-1}(F) = \bigcup_{x \in F} U_x\)</span>即可</p>
+<p>在度量空间中，由于开集采用开球来定义，我们可以给出度量空间中的连续的定义</p>
+<blockquote>
+<p>当<span class="math inline">\(X，Y\)</span>为度量空间时，<span class="math inline">\(f:X \to Y\)</span>在点<span class="math inline">\(x_0\)</span>处连续当且仅当<span class="math inline">\(\forall \epsilon &gt; 0, \exists \delta &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in B(x_0, \delta)\)</span>，有<span class="math inline">\(f(x) \in B(f(x_0), \epsilon)\)</span></p>
+</blockquote>
+<p>而在<span class="math inline">\(\mathbb{R}\)</span>中，任何开集都是若干不交的开区间的并，因此</p>
+<blockquote>
+<p>对度量空间<span class="math inline">\((X, d)\)</span>，<span class="math inline">\(f:X\to [-\infty, \infty]\)</span>连续当且仅当<span class="math inline">\(\forall -\infty \leq a \leq b \leq \infty\)</span>，有<span class="math inline">\(f^{-1}(L)\)</span>为<span class="math inline">\(X\)</span>中开集，其中<span class="math inline">\(L\)</span>为任一开区间，即形如<span class="math inline">\((a,b), (a,+\infty], [-\infty, b)\)</span>的区间</p>
+</blockquote>
+<p>(Definition)：</p>
+<ol start="2" type="1">
+<li><p>在拓扑空间<span class="math inline">\((X,\tau)\)</span>中，<span class="math inline">\(f:X \to \mathbb{R}\)</span></p>
+<p>如果<span class="math inline">\(\{f(x) &gt; \alpha\}\)</span>是开集，<span class="math inline">\(\forall \alpha \in \mathbb{R}\)</span>，那么我们称<span class="math inline">\(f(x)\)</span>是<strong>下半连续</strong>的</p>
+<p>如果<span class="math inline">\(\{f(x) &lt; \alpha\}\)</span>是开集，<span class="math inline">\(\forall \alpha \in \mathbb{R}\)</span>，那么我们称<span class="math inline">\(f(x)\)</span>是<strong>上半连续</strong>的</p></li>
 </ol>
+<p>如果一个函数同时上半连续和下半连续，那么我们自然希望它是连续的</p>
+<blockquote>
+<p>如果<span class="math inline">\(f:X \to \mathbb{R}\)</span>上半连续并且下半连续，那么<span class="math inline">\(f\)</span>连续</p>
+</blockquote>
+<p>证明：<span class="math inline">\(\Leftarrow\)</span>显然，<span class="math inline">\(\Rightarrow\)</span>考虑<span class="math inline">\((a,b) = (a, +\infty) \cap (-\infty, b)\)</span>即可</p>
+<blockquote>
+<p>如果<span class="math inline">\(\{f_{\alpha}\}\)</span>是一族下半连续函数，那么<span class="math inline">\(\sup f_{\alpha}\)</span>也是下半连续函数</p>
+<p>如果<span class="math inline">\(\{f_{\alpha}\}\)</span>是一族上半连续函数，那么<span class="math inline">\(\inf f_{\alpha}\)</span>也是上半连续函数</p>
+</blockquote>
+<p>注意到<span class="math inline">\(\{\sup f_{\alpha} &gt; a\} = \bigcup \{f_{\alpha} &gt; a\}\)</span></p>
+<blockquote>
+<p><span class="math inline">\(f\)</span>下半连续当且仅当<span class="math inline">\(\forall x \in X\)</span>，<span class="math inline">\(\lim \inf_{y \to x} f(y) \geq f(x)\)</span></p>
+<p><span class="math inline">\(f\)</span>上半连续当且仅当<span class="math inline">\(\forall x \in X\)</span>，<span class="math inline">\(\lim \sup_{y \to x} f(y) \leq f(x)\)</span></p>
+</blockquote>
+<p>只证明第一条</p>
+<p><span class="math inline">\(\Rightarrow\)</span>：注意到<span class="math inline">\(\lim \inf_{y \to x} f(y) = \sup_{\delta &gt; 0} \inf_{B(x, \delta)} f(y)\)</span></p>
+<p>那么只需证明<span class="math inline">\(\forall \epsilon&gt;0, \exists \delta&gt;0\)</span>，使得<span class="math inline">\(\inf_{B(x,\delta)} f(y) \geq f(x) - \epsilon\)</span></p>
+<p><span class="math inline">\(\{f&gt;f(x)-\epsilon\}\)</span>是一个包含<span class="math inline">\(x\)</span>的开集，因此存在相应的<span class="math inline">\(\delta\)</span>的选取来满足我们的需求</p>
+<p><span class="math inline">\(\Leftarrow\)</span>：考虑<span class="math inline">\(\{f(x)&gt;a\}\)</span>，有<span class="math inline">\(\lim \inf_{y \to x} f(y) \geq f(x) &gt; a\)</span>，因此<span class="math inline">\(\sup \inf f(y) &gt; a\)</span></p>
+<p>那么存在<span class="math inline">\(\delta&gt;0\)</span>，使得<span class="math inline">\(\inf_{B(x,\delta)} f(y) &gt; a\)</span>，即<span class="math inline">\(B(x,\delta) \sub \{f(x)&gt;a\}\)</span>，因此<span class="math inline">\(\{f(x)&gt;a\} = \bigcup_{\{f(x)&gt;a\}} B(x,\delta_x)\)</span></p>
+<h2 id="可测空间测度空间">可测空间、测度空间</h2>
+<h4 id="可测空间">可测空间</h4>
+<p>(Definition)：</p>
+<ol type="1">
+<li><p>设<span class="math inline">\(X\)</span>是一个非空集，<span class="math inline">\(\Gamma \sub 2^X\)</span>，如果</p>
 <ul>
-<li><p>如果<span class="math inline">\(\Gamma\)</span>为<span class="math inline">\(\sigma-\)</span>代数，称<span class="math inline">\(\Gamma\)</span>中元素为<span class="math inline">\(X\)</span>中的可测集，此时，称<span class="math inline">\((X,\Gamma)\)</span>为可测空间</p></li>
-<li><p>如果<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau, f^{-1}(V) \in \Gamma\)</span>，则称<span class="math inline">\(f\)</span>为可测映射（开集的原像为可测集）</p></li>
+<li><span class="math inline">\(X \in \Gamma\)</span></li>
+<li><span class="math inline">\(A \in \Gamma \Rightarrow A^c \in \Gamma\)</span></li>
+<li><span class="math inline">\(\{A_n\} \in \Gamma \Rightarrow \bigcup A_n \in \Gamma\)</span>，对可数并封闭</li>
 </ul>
-<hr />
-<p>可测空间对补集，可数并操作封闭，因而对差集，可数交都封闭</p>
-<p>特别的，如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>，那么<span class="math inline">\(\lim \inf A_n \in \Gamma, \lim \sup A_n \in \Gamma\)</span></p>
-<hr />
-<blockquote>
-<p>如果<span class="math inline">\(f:X\to Y\)</span>可测，<span class="math inline">\(g:Y\to Z\)</span>连续，那么<span class="math inline">\(h=g \circ f:X\to Z\)</span>也是可测函数</p>
-</blockquote>
-<p>不难想象，<span class="math inline">\(Z\)</span>中开集对应到<span class="math inline">\(Y\)</span>中开集再对应到<span class="math inline">\(X\)</span>中可测集</p>
-<blockquote>
-<p>如果<span class="math inline">\(f,g:X\to \mathbb{R}\)</span>可测，<span class="math inline">\(\phi:\mathbb{R}^2 \to \mathbb{R}\)</span>连续，那么<span class="math inline">\(h(x)=\phi(f(x),g(x))\)</span>可测</p>
-</blockquote>
-<p>这个证明用到一个结论：<span class="math inline">\(\mathbb{R}^k\)</span>中的开集是可数个立方体的并</p>
+<p>则称<span class="math inline">\(\Gamma\)</span>是<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数</p></li>
+</ol>
+<p><span class="math inline">\(\sigma-\)</span>代数对交封闭，即</p>
 <blockquote>
 <p>如果<span class="math inline">\(\{\Gamma_i\}_{i \in I}\)</span>为<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数族，那么<span class="math inline">\(\bigcap_{i \in I} \Gamma_i\)</span>为<span class="math inline">\(X\)</span>上的<span class="math inline">\(\sigma-\)</span>代数</p>
 </blockquote>
-<p>按定义写即可</p>
-<hr />
-<ul>
-<li><p>设<span class="math inline">\(X\)</span>非空，<span class="math inline">\(S \sub 2^X\)</span>，称包含<span class="math inline">\(S\)</span>的最小的<span class="math inline">\(\sigma-\)</span>代数为<span class="math inline">\(S\)</span>生成的<span class="math inline">\(\sigma-\)</span>代数，记为<span class="math inline">\(\sigma(S)\)</span></p>
-<p>这个定义是良定义，因为事实上，<span class="math inline">\(\sigma(S) = \bigcap_{\Gamma \;is\;\sigma-algebra, S \sub \Gamma} \Gamma\)</span></p></li>
-<li><p>设<span class="math inline">\((X, \tau)\)</span>为拓扑空间，记<span class="math inline">\(\sigma(\tau)\)</span>为该拓扑空间上的Borel代数，记为<span class="math inline">\(\mathscr{B}(x)\)</span>，<span class="math inline">\(\mathscr{B}(x)\)</span>中的元素称为Borel集</p>
-<p>在拓扑空间<span class="math inline">\(X\)</span>中，可数个闭集的并是Borel集，称其为<span class="math inline">\(F_{\sigma}\)</span>集；可数个开集的交是Borel集，称其为<span class="math inline">\(G_{\sigma}\)</span>集</p></li>
-<li><p>设<span class="math inline">\(X,Y\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau_Y, f^{-1}(V)\)</span>是<span class="math inline">\(X\)</span>中的Borel集，称<span class="math inline">\(f\)</span>为Borel可测（即开集的原像为Borel集）</p></li>
-</ul>
-<hr />
-<blockquote>
-<p>如果<span class="math inline">\(f\)</span>连续，那么<span class="math inline">\(f\)</span>一定是Borel可测的</p>
-</blockquote>
-<p>显然</p>
+<p>(Definition)：2. 如果<span class="math inline">\(\Gamma\)</span>为<span class="math inline">\(\sigma-\)</span>代数，称<span class="math inline">\(\Gamma\)</span>中元素为<span class="math inline">\(X\)</span>中的<strong>可测集</strong>，此时，称<span class="math inline">\((X,\Gamma)\)</span>为<strong>可测空间</strong></p>
+<p>可测空间对补集，可数并操作封闭，因而对差集，可数交都封闭</p>
+<p>特别的，如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>，那么<span class="math inline">\(\lim \inf A_n \in \Gamma, \lim \sup A_n \in \Gamma\)</span></p>
+<p>(Definition)：3. 如果<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau, f^{-1}(V) \in \Gamma\)</span>，则称<span class="math inline">\(f\)</span>为<strong>可测映射</strong>（开集的原像为可测集）</p>
+<p>(Definition)：4. 设<span class="math inline">\(X\)</span>非空，<span class="math inline">\(S \sub 2^X\)</span>，称包含<span class="math inline">\(S\)</span>的最小的<span class="math inline">\(\sigma-\)</span>代数为<span class="math inline">\(S\)</span>生成的<span class="math inline">\(\sigma-\)</span>代数，记为<span class="math inline">\(\sigma(S)\)</span>，由于<span class="math inline">\(\sigma-\)</span>代数对交封闭，故事实上，<span class="math inline">\(\sigma(S) = \bigcap_{\Gamma \;is\;\sigma-algebra, S \sub \Gamma} \Gamma\)</span></p>
+<p>(Definition)：5. 设<span class="math inline">\((X, \tau)\)</span>为拓扑空间，记<span class="math inline">\(\sigma(\tau)\)</span>为该拓扑空间上的<strong>Borel代数</strong>，记为<span class="math inline">\(\mathscr{B}(x)\)</span>，<span class="math inline">\(\mathscr{B}(x)\)</span>中的元素称为<strong>Borel集</strong>，可数个闭集的并是Borel集，称其为<span class="math inline">\(F_{\sigma}\)</span>集，可数个开集的交是Borel集，称其为<span class="math inline">\(G_{\delta}\)</span>集</p>
+<p>(Definition)：6. 设<span class="math inline">\(X,Y\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau_Y, f^{-1}(V)\)</span>是<span class="math inline">\(X\)</span>中的Borel集，称<span class="math inline">\(f\)</span>为<strong>Borel可测</strong>（开集的原像为Borel集）</p>
+<p>关于Borel集，我们介绍一些简单的性质</p>
 <blockquote>
 <p>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，那么</p>
 <ul>
-<li><span class="math inline">\(\{F\sub Y:f^{-1}(F) \sub \Gamma\}\)</span>是<span class="math inline">\(\sigma-\)</span>代数</li>
+<li><span class="math inline">\(\{F\sub Y:f^{-1}(F) \sub \Gamma\}\)</span>是<span class="math inline">\(\sigma-\)</span>代数，即原像为可测集的集合构成<span class="math inline">\(\sigma-\)</span>代数</li>
 <li>如果<span class="math inline">\(f\)</span>可测且<span class="math inline">\(F \sub Y\)</span>为Borel集，那么<span class="math inline">\(f^{-1}(F) \in \Gamma\)</span>，即Borel集在可测映射下的原像为可测集</li>
 <li>如果<span class="math inline">\(f\)</span>可测，<span class="math inline">\(g:Y\to Z\)</span>为Borel可测，那么<span class="math inline">\(g\circ f:X\to Z\)</span>可测</li>
 </ul>
 </blockquote>
-<p>证明都比较简单...</p>
 <hr />
+<h4 id="值域为实数的讨论">值域为实数的讨论</h4>
 <p>接下来，我们考虑更具体的值域<span class="math inline">\(f:X \to [-\infty, +\infty]\)</span></p>
 <blockquote>
 <p>假设<span class="math inline">\(f:X\to (-\infty, +\infty)\)</span>，那么<span class="math inline">\(f\)</span>可测等价于<span class="math inline">\(\forall a \in (-\infty, +\infty), \{x:f(x)&gt;a\}\)</span>为可测集</p>
@@ -4603,6 +4457,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>证明：<span class="math inline">\(\Rightarrow\)</span>是显然的，我们考虑<span class="math inline">\(\Leftarrow\)</span></p>
 <p>由于<span class="math inline">\((a,+\infty)\)</span>为可测集，因此<span class="math inline">\([a,+\infty) = \bigcap_{n=1}^{\infty} (a+\frac{1}{n},+\infty)\)</span>也为可测集，其补集<span class="math inline">\((-\infty, a)\)</span>也为可测集</p>
 <p>此时，<span class="math inline">\((\alpha, \beta) = (\alpha, +\infty) \cap (-\infty, \beta)\)</span>为可测集，形如<span class="math inline">\((\alpha,\beta]\)</span>的区间也是类似的</p>
+<p>下面则是关于可测函数的性质</p>
 <blockquote>
 <p>假设<span class="math inline">\(\{f_n\}:X\to [-\infty, +\infty]\)</span>是一个可测函数列，那么</p>
 <ul>
@@ -4613,38 +4468,18 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </ul>
 </blockquote>
 <p>证明：只证明第一条，注意到<span class="math inline">\(\{\sup f_n(x)&gt;a\} = \bigcup_{n=1}^{\infty} \{f_n(x)&gt;a\}\)</span>为可测集，根据之前的引理即证</p>
-<blockquote>
-<p>Corollary：如果<span class="math inline">\(\{f_n\}\)</span>可测，并且收敛到<span class="math inline">\(f\)</span>，那么<span class="math inline">\(f\)</span>可测</p>
-<p>当<span class="math inline">\(f, g\)</span>可测时，<span class="math inline">\(\max \{f,g\}, \min \{f,g\}\)</span>可测</p>
-</blockquote>
+<p>(Corollary)：1. 如果<span class="math inline">\(\{f_n\}\)</span>可测，并且收敛到<span class="math inline">\(f\)</span>，那么<span class="math inline">\(f\)</span>可测</p>
+<p>(Corollary)：2.当<span class="math inline">\(f, g\)</span>可测时，<span class="math inline">\(\max \{f,g\}, \min \{f,g\}\)</span>可测</p>
 <p>根据以上的推论，我们可以将一个函数<span class="math inline">\(f\)</span>分解为<span class="math inline">\(f^+\)</span>和<span class="math inline">\(f^{-}\)</span>，其中<span class="math inline">\(f^+ = \max \{f,0\}, f^{-}=-\min\{f,0\}\)</span>，那么<span class="math inline">\(f=f^+-f^-\)</span>，并且<span class="math inline">\(f^+,f^- \geq 0\)</span></p>
-<h4 id="简单函数逼近">简单函数逼近</h4>
-<ul>
-<li>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\(S:X\to (-\infty, +\infty)\)</span>称为简单函数，当且仅当<span class="math inline">\(S(X)\)</span>为有限集</li>
-</ul>
-<hr />
-<blockquote>
-<p>对简单函数<span class="math inline">\(S:X\to(-\infty, +\infty)\)</span>，设<span class="math inline">\(S(X)=\{\alpha_1,...,\alpha_n\}\)</span>，再设<span class="math inline">\(A_i = S^{-1}(\{\alpha_i\})\)</span></p>
-<p>那么<span class="math inline">\(S=\sum_{i=1}^n \alpha_i 1_{A_i}\)</span>，并且<span class="math inline">\(S\)</span>可测当且仅当<span class="math inline">\(A_1,...,A_n\)</span>为可测集</p>
-</blockquote>
-<p>只证明第二个命题的<span class="math inline">\(\Leftarrow\)</span>方向，此时，任何一个开区间的原像是若干<span class="math inline">\(A_i\)</span>的并，从而仍然为可测集</p>
-<hr />
-<blockquote>
-<p>如果<span class="math inline">\(f:X\to [0,+\infty]\)</span>是可测函数，那么存在非负简单函数列<span class="math inline">\(\{S_n\}\)</span>，使得</p>
-<ul>
-<li><span class="math inline">\(0\leq S_1 \leq S_2 ... \leq f\)</span></li>
-<li><span class="math inline">\(S_n(x) \to f(x), \forall x \in X\)</span></li>
-</ul>
-</blockquote>
-<p>证明：构造<span class="math inline">\(S_n(x) := \begin{cases} &amp;\frac{k-1}{2^n}, &amp;\frac{k-1}{2^n} \leq f(x)\leq \frac{k}{2^n}, k\in \{1,...,n2^n\} \\ &amp;n, &amp;f(x)\geq n\end{cases}\)</span>即可</p>
 <h4 id="测度空间">测度空间</h4>
-<ul>
-<li><p>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，非负函数<span class="math inline">\(\mu: \Gamma \to [0,+\infty]\)</span>称为<span class="math inline">\(X\)</span>上的正测度，当且仅当<span class="math inline">\(\mu\)</span>满足可列可加性：如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>是一列两两不交的可测集，那么<span class="math inline">\(\mu(\bigcup_{n=1}^{\infty} A_n) = \sum_{n=1}^{\infty} \mu(A_n)\)</span></p>
-<p>在有测度的情况下，我们称<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间</p></li>
-</ul>
+<p>(Definition)：</p>
+<ol type="1">
+<li>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，非负函数<span class="math inline">\(\mu: \Gamma \to [0,+\infty]\)</span>称为<span class="math inline">\(X\)</span>上的<strong>正测度</strong>，当且仅当<span class="math inline">\(\mu\)</span>满足<strong>可列可加性</strong>：</li>
+</ol>
+<p>如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>是一列两两不交的可测集，那么<span class="math inline">\(\mu(\bigcup_{n=1}^{\infty} A_n) = \sum_{n=1}^{\infty} \mu(A_n)\)</span></p>
+<p>在有测度的情况下，我们称<span class="math inline">\((X,\Gamma,\mu)\)</span>为<strong>测度空间</strong></p>
 <p>特别的，对于测度而言，<span class="math inline">\(\mu=+\infty\)</span>是一个平凡的测度，不失一般性，我们假设至少存在一个可测集<span class="math inline">\(E\)</span>，使<span class="math inline">\(\mu(E)\neq +\infty\)</span></p>
-<hr />
-<p>对于测度空间<span class="math inline">\((X,\Gamma,\mu)\)</span>，我们有以下的普适结论</p>
+<p>在上述假设下，对于测度空间<span class="math inline">\((X,\Gamma,\mu)\)</span>，我们有以下的普适结论</p>
 <blockquote>
 <ul>
 <li><span class="math inline">\(\mu(\emptyset) = 0\)</span></li>
@@ -4654,10 +4489,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li>如果<span class="math inline">\(\{A_n\}\)</span>是递减的可测集列，并且<span class="math inline">\(\mu(A_1) &lt; +\infty\)</span>，那么<span class="math inline">\(\mu(A_n) \to \mu(\lim A_n)\)</span></li>
 </ul>
 </blockquote>
-<p>这些都不是很难证明</p>
-<hr />
-<p>下面介绍一个例子：计数测度</p>
-<p>对<span class="math inline">\((X,2^X,\mu)\)</span>可以定义测度：<span class="math inline">\(\mu(E) = \begin{cases} &amp;card(E),&amp;E\;is\;finite \\ &amp; +\infty, &amp;o.w.\end{cases}\)</span></p>
+<p>对于性质4的证明，我们可以考虑设<span class="math inline">\(B_n = A_n \setminus \bigcup_{i=1}^{n-1} A_i\)</span>之后，运用可列可加性</p>
 ]]></content>
       <categories>
         <category>notes</category>
@@ -4670,21 +4502,34 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
     <title>real-analysis-2</title>
     <url>/2022/10/real-analysis-2/</url>
     <content><![CDATA[<h3 id="lebesgue积分">Lebesgue积分</h3>
-<h4 id="lebesgue积分的定义">Lebesgue积分的定义</h4>
-<ul>
-<li>非负简单函数的积分</li>
-</ul>
-<p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>是一个测度空间，<span class="math inline">\(S:X\to[0,+\infty]\)</span>是一个可测简单函数，写为<span class="math inline">\(S = \sum_{i=1}^n \alpha_i 1_{A_i}\)</span></p>
-<p>那么，定义<span class="math inline">\(S\)</span>在<span class="math inline">\(X\)</span>上的Lebesgue积分为<span class="math inline">\(\int_X S \text{d} \mu = \sum_{i=1}^n \alpha_i \mu(A_i)\)</span>，对于任给的<span class="math inline">\(E \in \Gamma\)</span>，定义<span class="math inline">\(S\)</span>在<span class="math inline">\(E\)</span>上的Lebesgue积分为<span class="math inline">\(\int_E S \text{d} \mu = \sum_{i=1}^n \alpha_i \mu(A_i \cap E)\)</span></p>
-<ul>
-<li>可测函数的积分</li>
-</ul>
-<p>对测度空间<span class="math inline">\((X,\Gamma,\mu)\)</span>，非负可测函数<span class="math inline">\(f:X\to[0,+\infty]\)</span>，对<span class="math inline">\(E\in \Gamma\)</span>，定义<span class="math inline">\(f\)</span>在<span class="math inline">\(E\)</span>上积分为</p>
-<p><span class="math inline">\(\int_E f \text{d} \mu = \sup \{\int_E S \text{d} \mu : 0 \leq S \leq f, S \;is\;simple\;and\;measurable\}\)</span></p>
-<p>对于一般的可测函数<span class="math inline">\(f\)</span>，我们将其写为<span class="math inline">\(f=f^+-f^-\)</span>，如果<span class="math inline">\(\int_E f^+ \text{d} \mu\)</span>和<span class="math inline">\(\int_E f^{-} \text{d} \mu\)</span>中至少有一个是有限的，我们就定义<span class="math inline">\(\int_E f\text{d}\mu = \int_E f^+ \text{d} \mu-\int_E f^{-} \text{d} \mu\)</span>，否则，我们称<span class="math inline">\(f\)</span>的积分无定义</p>
-<hr />
-<p>接下来介绍Lebesgue积分的一些性质，设<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间，<span class="math inline">\(E,F\)</span>为可测集，<span class="math inline">\(f,g\)</span>为非负可测函数</p>
+<h4 id="简单函数">简单函数</h4>
+<p>(Definition)：1. 设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\(S:X\to (-\infty, +\infty)\)</span>称为<strong>简单函数</strong>，当且仅当<span class="math inline">\(S(X)\)</span>为有限集</p>
 <blockquote>
+<p>对简单函数<span class="math inline">\(S:X\to(-\infty, +\infty)\)</span>，设<span class="math inline">\(S(X)=\{\alpha_1,...,\alpha_n\}\)</span>，再设<span class="math inline">\(A_i = S^{-1}(\{\alpha_i\})\)</span></p>
+<p>那么<span class="math inline">\(S=\sum_{i=1}^n \alpha_i 1_{A_i}\)</span>，并且<span class="math inline">\(S\)</span>可测当且仅当<span class="math inline">\(A_1,...,A_n\)</span>为可测集</p>
+</blockquote>
+<p>只证明第二个命题的<span class="math inline">\(\Leftarrow\)</span>方向，此时，任何一个开区间的原像是若干<span class="math inline">\(A_i\)</span>的并，从而仍然为可测集</p>
+<p>下面是较为重要的简单函数逼近的构造</p>
+<blockquote>
+<p>如果<span class="math inline">\(f:X\to [0,+\infty]\)</span>是可测函数，那么存在非负简单函数列<span class="math inline">\(\{S_n\}\)</span>，使得</p>
+<ul>
+<li><span class="math inline">\(0\leq S_1 \leq S_2 ... \leq f\)</span></li>
+<li><span class="math inline">\(S_n(x) \to f(x), \forall x \in X\)</span></li>
+</ul>
+</blockquote>
+<p>证明：构造<span class="math inline">\(S_n(x) := \begin{cases} &amp;\frac{k-1}{2^n}, &amp;\frac{k-1}{2^n} \leq f(x)\leq \frac{k}{2^n}, k\in \{1,...,n2^n\} \\ &amp;n, &amp;f(x)\geq n\end{cases}\)</span>即可，<span class="math inline">\(\square\)</span></p>
+<p>注意到在上述构造中，我们保持了<span class="math inline">\(S_n \leq n\)</span></p>
+<h4 id="非负函数的积分">非负函数的积分</h4>
+<p>(Definition)：</p>
+<ol type="1">
+<li><p>非负简单函数的积分：设<span class="math inline">\((X,\Gamma,\mu)\)</span>是一个测度空间，<span class="math inline">\(S:X\to[0,+\infty]\)</span>是一个可测简单函数，写为<span class="math inline">\(S = \sum_{i=1}^n \alpha_i 1_{A_i}\)</span>，那么，定义<span class="math inline">\(S\)</span>在<span class="math inline">\(X\)</span>上的Lebesgue积分为<span class="math inline">\(\int_X S \text{d} \mu = \sum_{i=1}^n \alpha_i \mu(A_i)\)</span>，对于任给的<span class="math inline">\(E \in \Gamma\)</span>，定义<span class="math inline">\(S\)</span>在<span class="math inline">\(E\)</span>上的Lebesgue积分为<span class="math inline">\(\int_E S \text{d} \mu = \sum_{i=1}^n \alpha_i \mu(A_i \cap E)\)</span></p></li>
+<li><p>非负函数的积分：对测度空间<span class="math inline">\((X,\Gamma,\mu)\)</span>，非负可测函数<span class="math inline">\(f:X\to[0,+\infty]\)</span>，对<span class="math inline">\(E\in \Gamma\)</span>，定义<span class="math inline">\(f\)</span>在<span class="math inline">\(E\)</span>上积分为</p>
+<p><span class="math inline">\(\int_E f \text{d} \mu = \sup \{\int_E S \text{d} \mu : 0 \leq S \leq f, S \;is\;simple\;and\;measurable\}\)</span></p></li>
+<li><p>可测函数的积分：对于一般的可测函数<span class="math inline">\(f\)</span>，我们将其写为<span class="math inline">\(f=f^+-f^-\)</span>，如果<span class="math inline">\(\int_E f^+ \text{d} \mu\)</span>和<span class="math inline">\(\int_E f^{-} \text{d} \mu\)</span>中至少有一个是有限的，我们就定义<span class="math inline">\(\int_E f\text{d}\mu = \int_E f^+ \text{d} \mu-\int_E f^{-} \text{d} \mu\)</span>，否则，我们称<span class="math inline">\(f\)</span>的积分无定义</p></li>
+</ol>
+<p>在目前这个阶段，我们能证明Lebesgue积分的一些最简单的性质</p>
+<blockquote>
+<p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间，<span class="math inline">\(E,F\)</span>为可测集，<span class="math inline">\(f,g\)</span>为<strong>非负</strong>可测函数</p>
 <ul>
 <li>如果<span class="math inline">\(0 \leq f \leq g\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu \leq \int_E g\text{d} \mu\)</span></li>
 <li>如果<span class="math inline">\(E \sub F\)</span>，那么<span class="math inline">\(\int_E f \;\text{d}\mu \leq \int_F f\;\text{d} \mu\)</span></li>
@@ -4693,99 +4538,106 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li>如果<span class="math inline">\(E \sub X\)</span>，那么<span class="math inline">\(\int_E f \text{d} \mu = \int_X f 1_{E} \text{d} \mu\)</span></li>
 </ul>
 </blockquote>
+<p>我们对最后一条作出证明：<span class="math inline">\(\int_X f 1_{E} d \mu = \sup_{0 \leq S \leq f1_{E}} \int_X S d \mu = \sup_{S} \sum \alpha_i \mu(A_i)\)</span></p>
+<p><span class="math inline">\(A_i \sub E\)</span>除<span class="math inline">\(\alpha_i = 0\)</span>外一定成立，否则对<span class="math inline">\(x \in A_i \setminus E\)</span>，<span class="math inline">\(\alpha_i = S(x) \leq f1_{E}(x)=0\)</span></p>
+<p>此时，<span class="math inline">\(\sup_{S} \sum \alpha_i \mu(A_i) = \sup_{S \leq f1_{E}} \sum \alpha_i \mu(A_i \cap E) \leq \sup_{S \leq f} \sum \alpha_i \mu(A_i \cap E) = \int_E f d \mu\)</span></p>
+<p>另一方面，$_E f d = <em>E S d = </em>{0S f} <em>X S1</em>{E} d $</p>
+<p><span class="math inline">\(= \sup_{0\leq S1_{E} \leq f1_{E}} \int_X S1_{E} d \mu \leq \sup_{0\leq S \leq f1_{E}} \int_X S d \mu= \int_X f1_{E} d \mu\)</span>，<span class="math inline">\(\square\)</span></p>
 <h4 id="lebesgue-monotone-convergence-theorem">Lebesgue Monotone convergence Theorem</h4>
+<p>下面几个定理都非常重要，因此证明会写的比较详细</p>
 <blockquote>
-<p>单调收敛定理：设<span class="math inline">\(\{f_n\}\)</span>为<span class="math inline">\(X\)</span>上的可测函数列，并且<span class="math inline">\(0 \leq f_1 \leq f_2 ... \leq f_n \leq ... \leq +\infty\)</span>，并且<span class="math inline">\(\forall x \in X, \lim_{n \to \infty} f_n(x) = f(x)\)</span>，那么<span class="math inline">\(f\)</span>非负可测，并且<span class="math inline">\(\lim_{n \to \infty} \int_X f_n \text{d} \mu = \int_X f\text{d}\mu\)</span></p>
+<p>(Lebesgue Monotone convergence Theorem，单调收敛定理)：设<span class="math inline">\(\{f_n\}\)</span>为<span class="math inline">\(X\)</span>上的可测函数列，并且<span class="math inline">\(0 \leq f_1 \leq f_2 ... \leq f_n \leq ... \leq +\infty\)</span>，并且<span class="math inline">\(\forall x \in X, \lim_{n \to \infty} f_n(x) = f(x)\)</span>，那么<span class="math inline">\(f\)</span>非负可测，并且<span class="math inline">\(\lim_{n \to \infty} \int_X f_n \text{d} \mu = \int_X f\text{d}\mu\)</span></p>
 </blockquote>
-<p>证明：<span class="math inline">\(f\)</span>非负可测可以根据我们之前的讨论结果得出</p>
-<p>我们用到如下的引理</p>
-<blockquote>
-<p>如果<span class="math inline">\(S\)</span>是一个简单函数，那么<span class="math inline">\(\varphi(E):=\int_E S\text{d}\mu\)</span>是<span class="math inline">\(\Gamma\)</span>上的测度</p>
-</blockquote>
-<p>首先，<span class="math inline">\(\int_X f_1 \text{d} \mu \leq ... \int_X f_n \text{d} \mu \leq...\leq \int_X f \text{d} \mu\)</span>，因此<span class="math inline">\(\lim \int_X f_n \text{d} \mu \leq \int_X f \text{d} \mu\)</span></p>
-<p>下面证明<span class="math inline">\(\int_X f\text{d} \mu \leq \lim \int_X f_n \text{d} \mu\)</span>，只需证明对满足<span class="math inline">\(0 \leq S \leq f\)</span>的简单函数<span class="math inline">\(S\)</span>，有<span class="math inline">\(\int_X S \text{d} \mu \leq \lim \int_X f_n \text{d} \mu\)</span></p>
-<p>固定<span class="math inline">\(C \in (0,1)\)</span>，设<span class="math inline">\(E_n:=\{f_n(x)&gt;C\cdot S(x)\}\)</span>，那么<span class="math inline">\(E_n\)</span>可测，<span class="math inline">\(E_n \sub E_{n+1}\)</span>，并且<span class="math inline">\(X = \bigcup E_n\)</span></p>
-<p>因此<span class="math inline">\(\int_X f_n \geq \int_{E_n} f_n \geq \int_{E_n} C\cdot S=C\int_{E_n} S\)</span>，令<span class="math inline">\(n \to \infty\)</span>，注意到<span class="math inline">\(\int_E S\)</span>是一个测度，因此<span class="math inline">\(\lim C \int_{E_n} S = C \lim \varphi(E_n)=C \varphi(\bigcup E_n) = C \varphi(X)\)</span>，最终得到<span class="math inline">\(\lim \int_X f_n \geq C \varphi(X)\)</span>，由于<span class="math inline">\(C\)</span>在<span class="math inline">\((0,1)\)</span>中任取，最后又<span class="math inline">\(\lim f_X f_n \geq \varphi(X)=\int_X S\)</span>，证毕</p>
+<p>证明：根据之前的讨论，可测函数的极限是可测函数，因此<span class="math inline">\(f\)</span>非负可测，下面证明<span class="math inline">\(\lim \int f_n = \int f\)</span></p>
 <hr />
-<p>我们使用Lebesgue Monotone convergence Theorem来得到Lebesgue积分的可加性</p>
-<blockquote>
-<p>如果<span class="math inline">\(f,g\)</span>为非负可测函数，那么<span class="math inline">\(\int (f+g)=\int f + \int g\)</span></p>
-</blockquote>
-<p>根据之前的简单函数逼近的讨论，我们知道存在递增简单函数列<span class="math inline">\(\{S_n\},\{T_n\}\)</span>逼近<span class="math inline">\(f,g\)</span>，再根据下面的引理</p>
-<blockquote>
-<p>如果<span class="math inline">\(S,T\)</span>为可测简单函数，那么<span class="math inline">\(\int (S+T)=\int S + \int T\)</span></p>
-</blockquote>
-<p>自然<span class="math inline">\(\{S_n+T_n\}\)</span>逼近<span class="math inline">\(f+g\)</span>，那么根据单调收敛定理，我们有<span class="math inline">\(\int (f+g)=\lim \int (S_n+T_n) = \lim \int S_n + \lim \int T_n = \int f + \int g\)</span></p>
-<hr />
-<p>级数的收敛自然是单调收敛定理的一个情形，因此有</p>
-<blockquote>
-<p>设非负函数<span class="math inline">\(\{f_n\}\)</span>可测，<span class="math inline">\(f = \sum_{n=1}^{\infty} f_n\)</span>，那么<span class="math inline">\(\int_X f \text{d}\mu = \sum_{n=1}^{\infty} \int_X f_n \text{d} \mu\)</span></p>
-</blockquote>
-<p>后者的证明用到了有限和与积分可以交换顺序的性质</p>
-<hr />
-<blockquote>
-<p>(<strong>Fatou's lemma</strong>) 设<strong>非负</strong>函数族<span class="math inline">\(\{f_n\}\)</span>可测，那么<span class="math inline">\(\int_X \lim \inf f_n d\mu \leq \lim \inf \int_X f_n d\mu\)</span></p>
-</blockquote>
-<h4 id="积分的性质">积分的性质</h4>
-<p>接下来，我们将考虑所有的函数，而不仅限于非负函数</p>
 <ul>
-<li><p>设<span class="math inline">\(f\)</span>可测，如果<span class="math inline">\(\int_X |f| d\mu &lt; \infty\)</span>，则称<span class="math inline">\(f\)</span>为Lebesgue可积</p>
-<p>Lebesgue可积函数的全体记为<span class="math inline">\(L^1(X,\mu)\)</span></p></li>
-<li><p>换元：设<span class="math inline">\(f:X\to[0,\infty]\)</span>可测，<span class="math inline">\(\varphi:\Gamma \to[0,\infty], \varphi(E) = \int_E f d \mu\)</span></p>
-<p>那么，<span class="math inline">\(\varphi\)</span>是<span class="math inline">\((X,\Gamma)\)</span>上的正测度，并且<span class="math inline">\(\forall g:X\to[0,\infty]\)</span>，<span class="math inline">\(\int_X g d \varphi = \int_X gf d \mu\)</span></p>
-<p>在这个换元的理解下，<span class="math inline">\(\mu(E) = \int_E 1 d\mu\)</span></p></li>
-<li><p>替换积分域：<span class="math inline">\(\int_E f d\mu = \int_X f1_{E} d\mu\)</span></p>
-<p>特别的，<span class="math inline">\(\int_B f = \int_A f + \int_{B/A} f\)</span></p></li>
-<li><p>绝对值的积分：如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(|\int_X f d\mu| \leq \int_X |f| d\mu\)</span></p></li>
-<li><p>积分的线性性：如果<span class="math inline">\(f,g \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\alpha f + \beta g \in L^1(X,\mu)\)</span>，并且<span class="math inline">\(\int_X \alpha f + \beta g = \alpha \int_X f + \beta \int_X g\)</span></p></li>
+<li>Lemma：如果<span class="math inline">\(S\)</span>是简单函数，那么<span class="math inline">\(\varphi(E):=\int_E S d \mu\)</span>是测度</li>
 </ul>
+<p>引理证明：只需证明可列可加性，假设<span class="math inline">\(\{E_n\} \in \Gamma\)</span>并且<span class="math inline">\(E_i \cap E_j = \emptyset\)</span></p>
+<p>那么<span class="math inline">\(\varphi(\bigcup E_n) = \sum \alpha_i \mu(A_i \cap \bigcup E_n) = \sum \alpha_i \mu(\bigcup (A_i \cap E_n)) = \sum \alpha_i \sum_j \mu(A_i \cap E_j) = \sum \varphi(E_n)\)</span>，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>注意到<span class="math inline">\(\int f_1 \leq \int f_2 ... \leq \int f_n \leq ...\)</span>，因此<span class="math inline">\(\lim \int f_n \leq \int f\)</span>，只需证<span class="math inline">\(\int f \leq \lim \int f_n\)</span>，这等价于证明对<span class="math inline">\(0 \leq S \leq f\)</span>的简单函数<span class="math inline">\(S\)</span>有<span class="math inline">\(\int S \leq \lim \int f_n\)</span></p>
+<p>固定<span class="math inline">\(C \in (0,1)\)</span>，设<span class="math inline">\(E_n := \{f_n(x)&gt;C \cdot S(x)\}\)</span>，那么<span class="math inline">\(E_n\)</span>可测，并且<span class="math inline">\(E_n \sub E_{n+1}\)</span>且<span class="math inline">\(X = \bigcup E_n = \lim E_n\)</span></p>
+<p>那么，<span class="math inline">\(\int_X f_n \geq \int_{E_n} f_n &gt; C \int_{E_n} S = C \varphi_S(E_n)\)</span>，期中<span class="math inline">\(\varphi_S\)</span>是根据引理定义出的测度，根据测度的极限性质，我们有<span class="math inline">\(\lim \int_X f_n \geq C \varphi_S(X) = C \int S\)</span>，此时令<span class="math inline">\(C \to 1\)</span>，我们得到<span class="math inline">\(\lim \int_X f_n \geq \int S\)</span>，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>级数作为收敛的一种特殊情况，我们单独列出</p>
+<blockquote>
+<p>设<span class="math inline">\(\{f_n\}\)</span>非负可测，那么<span class="math inline">\(\int_X \sum f_n d \mu= \sum \int_X f_n d \mu\)</span></p>
+</blockquote>
+<p>在有了单调收敛定理之后，我们可以证明更普遍的性质，比如可加性</p>
+<blockquote>
+<ul>
+<li><p>如果<span class="math inline">\(S_1,S_2\)</span>为简单可测函数，那么<span class="math inline">\(\int(S_1 + S_2) = \int S_1 + \int S_2\)</span></p></li>
+<li><p>如果<span class="math inline">\(f,g\)</span>为非负可测函数，那么<span class="math inline">\(\int (f+g) = \int f + \int g\)</span></p></li>
+</ul>
+</blockquote>
+<p>证明第一条性质只需注意到<span class="math inline">\(\int(S_1+S_2) = \sum (\alpha_i + \beta_j) \mu(A_i \cap B_j)\)</span>，<span class="math inline">\(\int S_1 = \sum \alpha_i \mu(A_i \cap B_j)\)</span>即可</p>
+<p>第二条性质可以用简单函数来逼近非负可测函数，之后使用单调收敛定理</p>
+<blockquote>
+<p>设<span class="math inline">\(f\)</span>为非负可测函数，定义<span class="math inline">\(\varphi(E) = \int_E f\)</span>，那么<span class="math inline">\(\varphi\)</span>为正测度，并且对任意非负函数<span class="math inline">\(g\)</span>，<span class="math inline">\(\int g d \varphi = \int g f d \mu\)</span></p>
+</blockquote>
+<p>证明：设<span class="math inline">\(\{E_n\}\)</span>两两不交，那么<span class="math inline">\(\varphi(\bigcup E_n) = \int f 1_{\bigcup E_n} = \int f \sum 1_{E_n} = \int \sum f1_{E_n}\)</span>，根据级数的收敛定理，我们有<span class="math inline">\(\int \sum f1_{E} = \sum \int f1_{E} = \sum \varphi(E_n)\)</span>，这就说明<span class="math inline">\(\varphi\)</span>是正测度</p>
+<p>对于非负简单函数<span class="math inline">\(S\)</span>，我们证明<span class="math inline">\(\int S d \varphi = \int S f d \mu\)</span>，<span class="math inline">\(\int S d \varphi = \sum \alpha_i \int_{A_i} f d \mu = \sum \alpha_i \int_X f1_{A_i} d \mu\)</span></p>
+<p><span class="math inline">\(= \int_X f \sum \alpha_i 1_{A_i} d \mu = \int_X f Sd \mu\)</span>，对于非负函数，我们取简单递增函数逼近，运用单调收敛定理即可，<span class="math inline">\(\square\)</span></p>
+<h4 id="lebesgue积分的性质">Lebesgue积分的性质</h4>
+<p>(Definition)：1. 设<span class="math inline">\(f\)</span>可测，如果<span class="math inline">\(\int |f| &lt; +\infty\)</span>，那么称<span class="math inline">\(f\)</span>为Lebesgue可积，可积函数的全体记为<span class="math inline">\(L^1(X,\mu)\)</span></p>
+<p>从现在开始，我们将在<span class="math inline">\(L^1\)</span>空间中进行研究，设<span class="math inline">\(f,g \in L^1\)</span></p>
+<blockquote>
+<ul>
+<li><p><span class="math inline">\(\int_E f d\mu = \int_X f1_{E} d\mu\)</span></p>
+<p>特别的，由于<span class="math inline">\(1_{B} = 1_{A} + 1_{B/A}\)</span>，因此<span class="math inline">\(\int_B f = \int_A f + \int_{B/A} f\)</span></p></li>
+<li><p><span class="math inline">\(|\int f| \leq \int |f|\)</span></p></li>
+<li><p><span class="math inline">\(\alpha f + \beta g \in L^1\)</span>，并且<span class="math inline">\(\int \alpha f + \beta g = \alpha \int f + \beta \int g\)</span></p></li>
+</ul>
+</blockquote>
+<p>对于性质1的证明，考虑把<span class="math inline">\(f\)</span>的正部和负部拆开证明，一个小细节是注意<span class="math inline">\((f1_{E})^+ = f^+ 1_{E}\)</span></p>
+<p>对于性质2的证明，<span class="math inline">\(\int |f| = \int f^+ + \int f^-\)</span>，而<span class="math inline">\(|\int f| = |\int f^+ - \int f^-|\)</span>，根据三角不等式即可证明</p>
+<p>性质3实际上告诉我们，<span class="math inline">\(L^1\)</span>是一个线性空间</p>
 <h4 id="lebesgue-dominated-convergence-theorem">Lebesgue Dominated convergence Theorem</h4>
 <blockquote>
-<p>控制收敛定理：设<span class="math inline">\(\{f_n\}\)</span>可测，如果<span class="math inline">\(f_n \to f\)</span>，且存在<span class="math inline">\(g \in L^1(X,\mu)\)</span>使得<span class="math inline">\(|f_n| \leq g\)</span>，那么<span class="math inline">\(f \in L^1(X,\mu)\)</span>，并且<span class="math inline">\(\lim \int_X f_n d \mu = \int_X f d \mu\)</span></p>
+<p>(Lebesgue Dominated convergence Theorem，控制收敛定理)：设<span class="math inline">\(\{f_n\}\)</span>可测，如果<span class="math inline">\(f_n \to f\)</span>，且存在<span class="math inline">\(g \in L^1(X,\mu)\)</span>使得<span class="math inline">\(|f_n| \leq g\)</span>，那么<span class="math inline">\(f \in L^1(X,\mu)\)</span>，并且<span class="math inline">\(\lim \int_X f_n d \mu = \int_X f d \mu\)</span></p>
 </blockquote>
-<p>注意到<span class="math inline">\(2g - |f_n - f|\)</span>非负可测</p>
-<p>应用Fatou's lemma得到<span class="math inline">\(\lim\inf \int 2g-|f_n-f| \geq \int \lim \inf 2g-|f_n-f| = \int 2g\)</span></p>
-<p>这告诉我们<span class="math inline">\(\lim \int |f_n - f| = 0\)</span>，而<span class="math inline">\(|\lim \int f_n - \int f| = |\lim \int(f_n-f)|= \lim |\int (f_n-f)| \leq \lim \int |f_n-f|\)</span></p>
-<blockquote>
-<p>如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\varphi(E):=\int_E f\text{d}\mu\)</span>是<span class="math inline">\(\Gamma\)</span>上的实测度</p>
-</blockquote>
-<p>类似于之前证明正测度，不过我们将使用控制收敛定理而不是单调收敛定理</p>
-<blockquote>
-<p>（积分的绝对连续性）：如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\forall \epsilon&gt;0, \exists \delta&gt;0\)</span>，对<span class="math inline">\(\mu(E)&lt;\delta\)</span>的<span class="math inline">\(E\)</span>，有<span class="math inline">\(\int_E |f| d\mu &lt; \epsilon\)</span></p>
-</blockquote>
-<p>考虑取简单函数列<span class="math inline">\(\{S_n\}\)</span>去逼近<span class="math inline">\(f\)</span>，<span class="math inline">\(S_n\)</span>有界，而<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(f-S_n\)</span>根据收敛性也足够小，从而得到一个证明</p>
-<h4 id="其余讨论">其余讨论</h4>
+<p>证明：由于<span class="math inline">\(|f_n| \leq g\)</span>，因此<span class="math inline">\(|f| \leq g\)</span>，于是<span class="math inline">\(\int |f| \leq \int g &lt; +\infty\)</span>，因此<span class="math inline">\(f \in L^1\)</span></p>
+<p>此时，<span class="math inline">\(|f_n - f| \leq 2g\)</span>，因此<span class="math inline">\(2g - |f_n - f|\)</span>非负可测</p>
+<hr />
 <ul>
-<li><p>almost everywhere 以及almost all的含义都是除了一个零测集外成立，一般根据适用语境的不同会有所调整</p></li>
-<li><p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>是测度空间，且<span class="math inline">\(f,g\)</span>为可测函数，如果<span class="math inline">\(\mu{\{f(x)\neq g(x)\}}=0\)</span>，则称<span class="math inline">\(f,g\)</span>几乎处处相等，记为<span class="math inline">\(f \sim g\)</span>，这是可测函数上的一种等价关系</p></li>
+<li>(Fatou's Lemma)：设<strong>非负</strong>函数族<span class="math inline">\(\{f_n\}\)</span>可测，那么<span class="math inline">\(\int_X \lim \inf f_n d\mu \leq \lim \inf \int_X f_n d\mu\)</span></li>
 </ul>
+<p>证明：令<span class="math inline">\(g_n = \inf_{k \geq n} f_k\)</span>，那么<span class="math inline">\(g_n\)</span>可测，<span class="math inline">\(g_n \leq f_n\)</span>，<span class="math inline">\(g_n \leq g_{n+1}\)</span>，并且<span class="math inline">\(\lim \inf f_n = \lim g_n\)</span></p>
+<p>根据单调收敛定理，<span class="math inline">\(\lim \int g_n = \int \lim g_n = \int \lim \inf f_n\)</span>，故只证<span class="math inline">\(\lim \int g_n \leq \lim \inf \int f_n\)</span></p>
+<p>而<span class="math inline">\(\lim \inf \int f_n \geq \lim \inf \int g_n = \lim \int g_n\)</span>，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>对<span class="math inline">\(\{2g-|f_n-f|\}\)</span>运用Fatou's Lemma，我们得到<span class="math inline">\(\int \lim \inf 2g-|f_n-f| \leq \lim \inf \int 2g-|f_n-f|\)</span></p>
+<p>注意到<span class="math inline">\(\lim \inf 2g-|f_n-f| = 2g\)</span>，而<span class="math inline">\(\lim \inf \int 2g-|f_n-f| = \int 2g - \lim \inf \int|f_n-f|\)</span></p>
+<p>因此我们得到<span class="math inline">\(\lim \inf -|f_n-f| \geq 0\)</span>，即<span class="math inline">\(\lim \sup\int |f_n-f| =0\)</span>，从而<span class="math inline">\(\lim \int|f_n-f|=0\)</span></p>
+<p>最终，<span class="math inline">\(|\lim \int f_n - \int f| = |\lim(\int f_n-f)| \leq \lim \int |f_n-f|=0\)</span>，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>根据控制收敛定理，我们又能得到一些结论</p>
 <blockquote>
-<p>对可测函数<span class="math inline">\(f,g\)</span>，如果<span class="math inline">\(f \sim g\)</span>，那么<span class="math inline">\(f^+ \sim g^+, f^- \sim g^-, |f| \sim |g|\)</span></p>
+<p>设<span class="math inline">\(f\)</span>为可积函数，定义<span class="math inline">\(\varphi(E) = \int_E f\)</span>，那么<span class="math inline">\(\varphi\)</span>为实测度</p>
 </blockquote>
-<p>易证</p>
+<p>这个证明和前面非负函数的证明是类似的，不过使用控制收敛定理而不是单调收敛定理</p>
+<p>以及著名的积分的绝对连续性</p>
 <blockquote>
-<p>如果<span class="math inline">\(f \sim g\)</span>，并且$f <span class="math inline">\(存在，那么\)</span>g<span class="math inline">\(也存在，并且\)</span>g = f$</p>
+<p>(积分的绝对连续性)：如果<span class="math inline">\(f \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\forall \epsilon&gt;0, \exists \delta&gt;0\)</span>，对<span class="math inline">\(\mu(E)&lt;\delta\)</span>的<span class="math inline">\(E\)</span>，有<span class="math inline">\(\int_E |f| d\mu &lt; \epsilon\)</span></p>
 </blockquote>
-<p>这告诉我们，在积分的意义下，零测集没有讨论的意义，举个例子：</p>
-<blockquote>
-<p>设<span class="math inline">\(\{f_n\}:X\to[-\infty,+\infty]\)</span>可测，且<span class="math inline">\(\sum \int_X |f_n| d \mu &lt; +\infty\)</span>，那么</p>
-<p>记<span class="math inline">\(f(x) = \sum f_n(x)\)</span>，对a.a. <span class="math inline">\(x \in X\)</span>，<span class="math inline">\(f(x)\)</span>收敛</p>
-<p>则<span class="math inline">\(f \in L^1(X,\mu)\)</span>，且<span class="math inline">\(\int_X f d \mu = \sum_{n=1}^{\infty} \int_X f_n d \mu\)</span></p>
-</blockquote>
-<p>证明：记<span class="math inline">\(g = \sum |f_n|\)</span>，那么<span class="math inline">\(g\)</span>可测，并且<span class="math inline">\(\int g = \int \sum |f_n| = \sum \int |f_n| &lt; \infty\)</span>（单调收敛定理）</p>
-<p>记<span class="math inline">\(E = \{g(x)&lt;\infty\}\)</span>，由于<span class="math inline">\(g \in L^1(X,\mu)\)</span>，那么<span class="math inline">\(\mu(E^c) = 0\)</span></p>
-<p>从而<span class="math inline">\(\forall x \in E, g(x)=\sum |f_n(x)| &lt; \infty\)</span>，故<span class="math inline">\(f(x)=\sum f_n(x)\)</span>在<span class="math inline">\(E\)</span>上收敛</p>
-<p>注意到在<span class="math inline">\(E\)</span>上，<span class="math inline">\(|f| \leq g &lt; \infty\)</span>，根据控制收敛定理，<span class="math inline">\(f \in L^1(X,\mu)\)</span>，<span class="math inline">\(\int_E \sum f_n(x) = \int_E f d\mu\)</span></p>
-<blockquote>
-<p>设<span class="math inline">\((X,\Gamma,\mu)\)</span>为测度空间，定义<span class="math inline">\(\Gamma^* = \{E:\exists A,B \in \Gamma, A \sub E \sub B, \mu(B/A)=0\}\)</span>，那么<span class="math inline">\(\Gamma^*\)</span>为<span class="math inline">\(\sigma-\)</span>代数</p>
-<p>如果在这里补充定义<span class="math inline">\(\mu(E)=\mu(A)\)</span>，那么<span class="math inline">\((X,\Gamma^*,\mu)\)</span>是完备化的测度空间</p>
-<p>并且，对<span class="math inline">\(\mu(E)=0\)</span>的集合，如果<span class="math inline">\(F \sub E\)</span>，那么<span class="math inline">\(F \in \Gamma^*\)</span>，且<span class="math inline">\(\mu(F)=0\)</span></p>
-</blockquote>
-<p>这可以对零测度进行一个补充定义</p>
-<blockquote>
-<p>对于完备化的测度空间，修改函数在零测集上的函数值不改变该函数的积分</p>
-</blockquote>
-<p>完备化的主要目的在于确保修改定义之后的函数是一个可测函数</p>
+<p>证明：任给<span class="math inline">\(\epsilon &gt; 0\)</span>，存在简单可测函数<span class="math inline">\(0 \leq S_n \leq \max(n,|f|)\)</span>，使得<span class="math inline">\(\int |f| - \int S_n &lt; \epsilon / 2\)</span></p>
+<p>取<span class="math inline">\(\delta = 1/2n\)</span>，那么<span class="math inline">\(\int_E |f| = \int_E S_n + \int_E (|f|-S_n) &lt; n * \delta + \epsilon / 2 = \epsilon\)</span>，<span class="math inline">\(\square\)</span></p>
+<h4 id="零测集的讨论">零测集的讨论</h4>
+<p>(Definition)：</p>
+<ol type="1">
+<li><p>如果<span class="math inline">\(\mu(E)=0\)</span>，那么称<span class="math inline">\(E\)</span>为<strong>零测集</strong></p></li>
+<li><p>对可测函数<span class="math inline">\(f,g\)</span>，如果<span class="math inline">\(\mu(\{f \neq g\}) = 0\)</span>，那么称<span class="math inline">\(f,g\)</span>几乎处处相等，也可以说<span class="math inline">\(f=g\)</span>对几乎所有<span class="math inline">\(x\)</span>成立</p></li>
+</ol>
+<p>不难证明，<span class="math inline">\(f,g\)</span>几乎处处相等是一个等价关系</p>
+<p>如果可测函数<span class="math inline">\(f,g\)</span>相差一个零测集，那么<span class="math inline">\(\int_E f = \int_E g, \forall E \in \Gamma\)</span>，因此零测集一般不影响积分的结果。但这个结论并不能使人满意：和可测函数<span class="math inline">\(f\)</span>相差一个零测集的函数并不一定是可测函数，为此，我们引入完备化的定义</p>
+<p>(Definition)：</p>
+<ol start="3" type="1">
+<li>设<span class="math inline">\((X,\Gamma, \mu)\)</span>是测度空间，定义<span class="math inline">\(\Gamma\)</span>的完备化为</li>
+</ol>
+<p><span class="math inline">\(\Gamma^* = \{E \sub X, \exists A, B \in \Gamma, s.t. A \sub E \sub B, \mu(B\setminus A)=0\}\)</span>，那么<span class="math inline">\(\Gamma^*\)</span>是<span class="math inline">\(\sigma-\)</span>代数</p>
+<p>此时，补充定义<span class="math inline">\(\mu(E) = \mu(A)\)</span>，我们得到了<span class="math inline">\((X,\Gamma^*, \mu)\)</span>，我们称其为完备化的测度空间</p>
+<p>在完备化的测度空间下，任意修改一个零测集的取值，不会修改一个函数的积分值</p>
 <blockquote>
 <ul>
 <li>如果<span class="math inline">\(f:X\to [0,\infty]\)</span>可测，<span class="math inline">\(\int_E f d \mu = 0\)</span>，那么<span class="math inline">\(f\)</span>在<span class="math inline">\(E\)</span>上几乎处处为<span class="math inline">\(0\)</span></li>
@@ -4793,97 +4645,167 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li>如果<span class="math inline">\(f \in L^1(X, \mu)\)</span>且<span class="math inline">\(|\int_X f d \mu| = \int_X |f| d\mu\)</span>，那么<span class="math inline">\(f \geq 0\)</span>或者<span class="math inline">\(f \leq 0\)</span>在<span class="math inline">\(X\)</span>上几乎处处成立</li>
 </ul>
 </blockquote>
-<h4 id="收敛">收敛</h4>
-<ul>
-<li>Def：对于测度空间<span class="math inline">\((X,\Gamma, \mu)\)</span>，<span class="math inline">\(\{f_n\}\)</span>可测，我们有以下几种收敛
-<ul>
-<li>处处收敛：<span class="math inline">\(\forall x, f_n(x) \to f(x)\)</span></li>
-<li>几乎处处收敛：<span class="math inline">\(\mu(\{f_n(x) \not\to f(x)\}) = 0\)</span></li>
-<li>一致收敛：<span class="math inline">\(\forall \epsilon &gt; 0, \exists N, \forall n&gt;N, |f_n(x)-f(x)| &lt; \epsilon\)</span></li>
-<li><span class="math inline">\(L^1\)</span>收敛：当<span class="math inline">\(\{f_n\},f \in L^1(X,\mu)\)</span>时，<span class="math inline">\(f_n \to f\)</span>以<span class="math inline">\(L^1\)</span>收敛当且仅当<span class="math inline">\(\int_X |f_n-f|\to 0\)</span>）（实际上也就是以<span class="math inline">\(L^1\)</span>范数收敛）</li>
-<li>依测度收敛：<span class="math inline">\(\forall \epsilon, \mu(\{|f_n(x)-f(x)|&gt;\epsilon\})\to 0\)</span></li>
-<li>近一致收敛：<span class="math inline">\(\forall \epsilon, \exist \mu(E)&lt;\epsilon\)</span>，使<span class="math inline">\(f_n \to f\)</span>在<span class="math inline">\(X \setminus E\)</span>上一致收敛</li>
-</ul></li>
-</ul>
-<hr />
-<p>下面我们来逐步介绍这些收敛之间的强弱关系</p>
+<p>性质1的证明用到一个技巧，考察集合<span class="math inline">\(\{f&gt;1/n\}\)</span>的测度，性质2，3都是性质1的推论</p>
+<p>在这一节的末尾，我们证明控制收敛定理的一个强大的扩展版本，这个定理来源于严加安《测度论讲义》的定理3.2.7</p>
 <blockquote>
-<p>s1: 如果<span class="math inline">\(\{f_n\}\)</span>依<span class="math inline">\(L^1\)</span>收敛，那么<span class="math inline">\(\{f_n\}\)</span>依测度收敛</p>
+<p>设<span class="math inline">\(\{f_n\} \in L^1\)</span>，且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，再设<span class="math inline">\(\{g_n\},g \in L^1_+\)</span>，<span class="math inline">\(g_n \to g\)</span>几乎处处收敛，<span class="math inline">\(\int g_n \to \int g\)</span>并且<span class="math inline">\(|f_n| \leq g_n\)</span>几乎处处成立，那么<span class="math inline">\(\lim \int |f_n -f|\to 0\)</span></p>
+</blockquote>
+<p>如果令<span class="math inline">\(g_n = g\)</span>，那么我们就得到了控制收敛定理</p>
+<p>证明：将所有的几乎处处成立的集合取交，我们得到的是一个所有性质都成立的集合，这个集合和<span class="math inline">\(X\)</span>只相差一个零测集，在这个集合上，我们进行讨论</p>
+<p>由于<span class="math inline">\(|f_n| \leq g_n\)</span>，因此<span class="math inline">\(|f| \leq g\)</span>，那么<span class="math inline">\(h_n = g_n + g - |f_n - f| \geq 0\)</span>，对<span class="math inline">\(h_n\)</span>运用Fatou's Lemma，我们得到<span class="math inline">\(\lim \sup \int |f_n -f| = 0 = \lim \int|f_n - f|\)</span></p>
+<h4 id="收敛性">收敛性</h4>
+<p>(Definiiton)：对于测度空间<span class="math inline">\(X\)</span>，<span class="math inline">\(\{f_n\}\)</span>收敛，我们可以定义如下的几种收敛模式</p>
+<ol type="1">
+<li><p>处处收敛：<span class="math inline">\(\forall x, f_n(x) \to f(x)\)</span></p></li>
+<li><p>几乎处处收敛：<span class="math inline">\(\mu(\{f_n(x) \not\to f(x)\}) = 0\)</span></p></li>
+<li><p>一致收敛：<span class="math inline">\(\forall \epsilon &gt; 0, \exists N, \forall n&gt;N, |f_n(x)-f(x)| &lt; \epsilon\)</span></p></li>
+<li><p><span class="math inline">\(L^1\)</span>收敛：当<span class="math inline">\(\{f_n\},f \in L^1(X,\mu)\)</span>时，<span class="math inline">\(f_n \to f\)</span>以<span class="math inline">\(L^1\)</span>收敛当且仅当<span class="math inline">\(\int_X |f_n-f|\to 0\)</span>）</p>
+<p>（实际上也就是以<span class="math inline">\(L^1\)</span>范数收敛）</p></li>
+<li><p>依测度收敛：<span class="math inline">\(\forall \epsilon, \mu(\{|f_n(x)-f(x)|&gt;\epsilon\})\to 0\)</span></p></li>
+<li><p>近一致收敛：<span class="math inline">\(\forall \epsilon, \exist \mu(E)&lt;\epsilon\)</span>，使<span class="math inline">\(f_n \to f\)</span>在<span class="math inline">\(X \setminus E\)</span>上一致收敛</p></li>
+</ol>
+<hr />
+<p>下面是一些显然的关系</p>
+<blockquote>
+<p><span class="math inline">\((3)\Rightarrow(1)\Rightarrow (2)\)</span>，<span class="math inline">\((3) \Rightarrow (6)\)</span></p>
+</blockquote>
+<p>接下来，我们探讨一些不显然的关系，除了我们列举的关系以外，其余的关系一般不成立</p>
+<blockquote>
+<p><span class="math inline">\((4) \Rightarrow (5)\)</span>​：如果<span class="math inline">\(\{f_n\}\)</span>依<span class="math inline">\(L^1\)</span>收敛，那么<span class="math inline">\(\{f_n\}\)</span>依测度收敛</p>
 </blockquote>
 <p>证明：<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，如果<span class="math inline">\(f_n \to f\)</span>以<span class="math inline">\(L^1\)</span>收敛，那么<span class="math inline">\(\int_X|f_n-f| \to 0\)</span></p>
-<p>注意到<span class="math inline">\(\mu(\{|f(x)|&gt;\alpha\}) \leq \frac{1}{\alpha} ||f||_1\)</span>，因此<span class="math inline">\(\mu(\{|f_n-f| &gt; \epsilon\}) \leq \frac{1}{\epsilon} ||f_n-f||_1 \to 0\)</span></p>
-<blockquote>
-<p>s2: 如果<span class="math inline">\(\mu(X)&lt;+\infty\)</span>并且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，那么<span class="math inline">\(f_n \to f\)</span>依测度收敛</p>
-</blockquote>
-<p>对应到概率论中，这实际上对应以概率<span class="math inline">\(1\)</span>收敛和依概率收敛</p>
-<p>证明：不难知道，<span class="math inline">\(f_n(x) \to f(x)\)</span>当且仅当<span class="math inline">\(\lim \sup |f_n-f|=0\)</span></p>
-<p>因此$({f_n(x)f(x)}) = 0 (_{m=1}^{} {|f_n - f| &gt; }) = 0 $</p>
-<p>这又等价于说明<span class="math inline">\(\mu(\{\lim \sup |f_n - f| &gt; \frac{1}{m}\}) = 0\)</span></p>
-<p>记<span class="math inline">\(F_n = \bigcup_{k \geq n} \{|f_k - f| &gt; \frac{1}{m}\}\)</span>，自然<span class="math inline">\(X \supset F_1 \supset F_2 ...\)</span>，由于<span class="math inline">\(\mu(X)&lt;+\infty\)</span>，因此<span class="math inline">\(\lim \mu(F_n) = \mu(\lim F_n) = 0\)</span>，而<span class="math inline">\(\mu(\lim F_n) = 0\)</span>等价于<span class="math inline">\(\mu( \{\lim \sup |f_n - f| &gt; \frac{1}{m}\}) = 0\)</span>，这就是我们想证的</p>
-<blockquote>
-<p>s3: 设<span class="math inline">\(\{\epsilon_n\}\)</span>单调递减收敛至<span class="math inline">\(0\)</span>，<span class="math inline">\(\{g_n\}\)</span>可测，令<span class="math inline">\(E_n = \{|g_n(x)|&gt;\epsilon_n\}\)</span>，如果<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，那么<span class="math inline">\(g_n\)</span>几乎处处收敛到<span class="math inline">\(0\)</span>，同时，<span class="math inline">\(g_n\)</span>近一致收敛到<span class="math inline">\(0\)</span></p>
-</blockquote>
-<p>证明：要说明<span class="math inline">\(g_n\)</span>几乎处处收敛到<span class="math inline">\(0\)</span>，我们只需要说明<span class="math inline">\(\mu(\lim \sup |g_n| &gt; \frac{1}{m})=0\)</span></p>
-<p>由于<span class="math inline">\(\{\epsilon_n\}\)</span>单调递减收敛至<span class="math inline">\(0\)</span>，这其实只需要说明<span class="math inline">\(\mu(\lim \sup |g_n| &gt; \epsilon) = 0\)</span>，由下面这个引理可以直接给出</p>
-<ul>
-<li>如果<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，那么<span class="math inline">\(\mu(\lim \sup E_n) = 0\)</span></li>
-</ul>
-<p>说明<span class="math inline">\(g_n\)</span>近一致收敛，当<span class="math inline">\(N\)</span>足够大时，<span class="math inline">\(\sum_{n = N} \mu(E_n) &lt; \epsilon\)</span>，取<span class="math inline">\(E = \bigcup {E_n}\)</span>，在<span class="math inline">\(X \setminus E\)</span>上，<span class="math inline">\(g_n\)</span>处处收敛到<span class="math inline">\(0\)</span></p>
-<blockquote>
-<p>s4: 如果<span class="math inline">\(\{f_n\}\)</span>依测度收敛到<span class="math inline">\(f\)</span>，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>，使得<span class="math inline">\(\{f_{n_{k}}\}\)</span>几乎处处收敛并且近一致收敛到<span class="math inline">\(f\)</span></p>
-</blockquote>
-<p>证明：联想到上一条定理，我们构造<span class="math inline">\(\epsilon_n = \frac{1}{n}, E_m = \mu(\{|f_{n_m}-f| &gt; \epsilon_m\}) &lt; \frac{1}{2^m}\)</span>即可，<span class="math inline">\(n_m\)</span>可够取得则根据依测度收敛的性质</p>
-<blockquote>
-<p>Theorem：如果<span class="math inline">\(\mu(X) &lt; \infty\)</span>并且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，那么<span class="math inline">\(f_n\to f\)</span>近一致收敛</p>
-</blockquote>
-<p>证明：令<span class="math inline">\(g_n = \sup_{k \geq n} f_k\)</span>，那么<span class="math inline">\(\lim g_n = \lim \sup f_n = \lim f_n = f\)</span>，对几乎所有的<span class="math inline">\(x\)</span>，因此<span class="math inline">\(g_n \to f\)</span>几乎处处收敛，根据s2，<span class="math inline">\(g_n\)</span>依概率收敛，根据s4，存在子列<span class="math inline">\(\{g_{n_k}\}\)</span>几乎处处收敛</p>
-<p>注意到<span class="math inline">\(|f_n - f| \geq g_{n_k}, \forall n \geq n_k\)</span>，因此当<span class="math inline">\(g_{n_k}\)</span>收敛到<span class="math inline">\(0\)</span>时，<span class="math inline">\(|f_n-f|\)</span>也收敛到<span class="math inline">\(0\)</span>，因此<span class="math inline">\(f_n\to f\)</span>近一致收敛</p>
-<blockquote>
-<p>Theorem：如果<span class="math inline">\(f_n \to f\)</span>近一致收敛，那么<span class="math inline">\(f_n \to f\)</span>几乎处处并且依测度收敛</p>
-</blockquote>
-<p>证明：<span class="math inline">\(f_n\to f\)</span>近一致收敛，因此对<span class="math inline">\(\epsilon &gt; 0\)</span>，存在<span class="math inline">\(\mu(E_{\epsilon})&lt;0\)</span>，在<span class="math inline">\(X \setminus E_{\epsilon}\)</span>上处处收敛</p>
-<p>注意到<span class="math inline">\(\{f_n(x) \not \to f(x)\} \sub E_{\epsilon}\)</span>，因此<span class="math inline">\(\mu\{f_n(x) \not \to f(x)\} \leq \mu\{E_{\epsilon}\} \leq \epsilon\)</span>，将<span class="math inline">\(\epsilon \to 0\)</span>，我们就得到了<span class="math inline">\(f_n\to f\)</span>几乎处处收敛。固定<span class="math inline">\(c\)</span>，当<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(\{|f_n(x)-f(x)|\geq c\} \sub E_{\epsilon}\)</span>，此时和上面一样，有<span class="math inline">\(\lim \mu\{|f_n(x)-f(x)|\geq c\} = 0\)</span>，这就证明了依测度收敛</p>
-<h4 id="lebesgue测度">Lebesgue测度</h4>
-<ul>
-<li>Def：我们称<span class="math inline">\(I=\{x:a_i&lt;x_i&lt;b_i\}\)</span>为一个开矩体，记其体积为<span class="math inline">\(vol(I) = \prod(b_i - a_i)\)</span></li>
-<li>Def：如果<span class="math inline">\(E \sub \bigcup I_k\)</span>（可数个），其中<span class="math inline">\(I_k\)</span>为开矩体，那么称<span class="math inline">\(\{I_k\}\)</span>为<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖，称<span class="math inline">\(m^*(E) := \inf \{ \sum_{k=1}^{\infty} vol(I_k) : E \sub \bigcup I_k\}\)</span>为<span class="math inline">\(E\)</span>的外测度</li>
-</ul>
+<p>注意到<span class="math inline">\(\mu(\{|f(x)|&gt;\alpha\}) \leq \frac{1}{\alpha} ||f||_1\)</span>，因此<span class="math inline">\(\mu(\{|f_n-f| &gt; \epsilon\}) \leq \frac{1}{\epsilon} ||f_n-f||_1 \to 0\)</span>，<span class="math inline">\(\square\)</span></p>
+<p>其中用到的不等式<span class="math inline">\(\int_X |f| \geq \alpha \mu(|f| &gt; \alpha)\)</span>一般被称为Markov不等式，<span class="math inline">\(\square\)</span></p>
 <hr />
-<p>外测度满足一些类似于测度的性质：</p>
+<p>接下来，我们会讨论几乎处处收敛，近一致收敛，依测度收敛之间的关系</p>
 <blockquote>
+<p><span class="math inline">\((6) \Rightarrow (2), (5)\)</span>：如果<span class="math inline">\(f_n \to f\)</span>近一致收敛，那么<span class="math inline">\(f_n \to f\)</span>几乎处处并且依测度收敛</p>
+</blockquote>
+<p>这就是说近一致收敛是这三者之中最强的</p>
+<p>证明：<span class="math inline">\(\forall \epsilon\)</span>，存在<span class="math inline">\(\mu(E) &lt; \epsilon\)</span>，<span class="math inline">\(f_n \to f\)</span>在<span class="math inline">\(X \setminus E\)</span>上一致收敛，那么<span class="math inline">\(\{f_n \not\to f\} \sub E\)</span>，于是<span class="math inline">\(\mu(\{f_n \not \to f\}) \leq \mu(E) &lt; \epsilon\)</span>，令<span class="math inline">\(\epsilon \to 0\)</span>，我们得到<span class="math inline">\(\mu(\{f_n \not\to f\}) = 0\)</span>，即<span class="math inline">\(f_n \to f\)</span>几乎处处收敛</p>
+<p>固定<span class="math inline">\(c\)</span>，当<span class="math inline">\(n\)</span>足够大时，<span class="math inline">\(\{|f_n-f| \geq c\} \sub E\)</span>，那么<span class="math inline">\(\lim \mu(\{|f_n-f| \geq c\}) \to 0\)</span>，即<span class="math inline">\(f_n\to f\)</span>依测度收敛，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>如果加上了<span class="math inline">\(\mu(X)&lt;\infty\)</span>的条件，我们可以证明几乎处处收敛和近一致收敛是一致的</p>
+<blockquote>
+<p>在<span class="math inline">\(\mu(X)&lt;\infty\)</span>时，<span class="math inline">\((2) \Rightarrow (6)\)</span>：如果<span class="math inline">\(\mu(X) &lt; \infty\)</span>并且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，那么<span class="math inline">\(f_n\to f\)</span>近一致收敛</p>
+</blockquote>
+<p>证明：我们需要若干引理来证明这个命题</p>
+<hr />
 <ul>
-<li><span class="math inline">\(m^*(E) \geq 0\)</span>且<span class="math inline">\(m^*(\emptyset) = 0\)</span></li>
-<li>如果<span class="math inline">\(E_1 \sub E_2\)</span>，那么<span class="math inline">\(m^*(E_1) \leq m^*(E_2)\)</span></li>
-<li><span class="math inline">\(m^*(\bigcup E_k) \leq \sum m^*(E_k)\)</span>（可列次可加性）</li>
+<li>Lemma 1：如果<span class="math inline">\(\mu(X)&lt;\infty\)</span>并且<span class="math inline">\(f_n \to f\)</span>几乎处处收敛，那么<span class="math inline">\(f_n \to f\)</span>依测度收敛</li>
 </ul>
-</blockquote>
+<p>证明：对于几乎处处收敛，即<span class="math inline">\(\mu(\{f_n(x) \not \to f(x)\}) = 0\)</span>，这等价于<span class="math inline">\(\mu(\bigcup_{m} \{\lim \sup_n |f_n-f| &gt; \frac{1}{m}\})=0\)</span></p>
+<p>这又等价于<span class="math inline">\(\mu(\{\lim \sup_n |f_n-f| &gt; \frac{1}{m}\}) = 0\)</span>，对任意<span class="math inline">\(m\)</span>，记<span class="math inline">\(E_n =\{|f_n - f| &gt; \frac{1}{m}\}, F_k = \bigcup_{n \geq k} E_n\)</span></p>
+<p>由于<span class="math inline">\(\mu(X)&lt;+\infty\)</span>且<span class="math inline">\(X \supset F_1 \supset F_2 \supset ...\)</span>，因此<span class="math inline">\(\lim \mu(F_n) = \mu(\lim F_n) =0\)</span></p>
+<p>此时<span class="math inline">\(\lim \sup \mu(E_n) \leq \lim \sup \mu(F_n) = 0\)</span>，因此<span class="math inline">\(\lim \mu(E_n) = 0\)</span>，这实际上就是<span class="math inline">\(f_n\to f\)</span>依测度收敛，<span class="math inline">\(\square\)</span></p>
 <hr />
-<p>外测度还需要有一些看起来很正确的性质：</p>
-<blockquote>
-<p>对于可数点集<span class="math inline">\(A\)</span>，<span class="math inline">\(m^*(A) = 0\)</span></p>
-</blockquote>
-<p>证明一个点是0之后，运用可列次可加性</p>
-<blockquote>
-<p>对于开矩体<span class="math inline">\(I\)</span>，<span class="math inline">\(m^*(\bar{I}) = vol(I)\)</span>，其中<span class="math inline">\(\bar{I}\)</span>为<span class="math inline">\(I\)</span>的闭包</p>
-</blockquote>
-<p>运用紧集的有限子覆盖性质进行夹逼</p>
-<blockquote>
-<p>对于超平面<span class="math inline">\(H\)</span>，<span class="math inline">\(m^*(H) = 0\)</span></p>
-</blockquote>
-<p>超平面虽然是无界的，但我们可以用可数个有界的外测度和为0的开矩体集进行放缩</p>
-<blockquote>
-<p>对于开矩体<span class="math inline">\(I\)</span>，<span class="math inline">\(m^*(I)=vol(I)\)</span></p>
-</blockquote>
-<p>开矩体就是其闭包去除若干超平面</p>
+<p>设<span class="math inline">\(g_n = \sup_{k \geq n} |f_k-f|\)</span>，那么<span class="math inline">\(\lim g_n = \lim |f_n-f| = 0\)</span>几乎处处成立，由此，我们知道<span class="math inline">\(g_n \to 0\)</span>依测度收敛</p>
 <hr />
+<ul>
+<li>Lemma 2：设<span class="math inline">\(\{\epsilon_n\}\)</span>单调递减收敛至<span class="math inline">\(0\)</span>，<span class="math inline">\(\{g_n\}\)</span>可测，令<span class="math inline">\(E_n = \{|g_n(x)|&gt;\epsilon_n\}\)</span>，如果<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，那么<span class="math inline">\(g_n\)</span>几乎处处收敛到<span class="math inline">\(0\)</span>，同时，<span class="math inline">\(g_n\)</span>近一致收敛到<span class="math inline">\(0\)</span></li>
+<li>Lemma 3：如果<span class="math inline">\(\{f_n\}\)</span>依测度收敛到<span class="math inline">\(f\)</span>，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>，使得<span class="math inline">\(\{f_{n_{k}}\}\)</span>几乎处处收敛并且近一致收敛到<span class="math inline">\(f\)</span></li>
+</ul>
+<p>注意引理3并不要求<span class="math inline">\(\mu(X)&lt;\infty\)</span></p>
+<p>引理2的证明：由于<span class="math inline">\(\sum \mu(E_n) &lt; \infty\)</span>，因此对<span class="math inline">\(N\)</span>足够大，<span class="math inline">\(\sum_{n=N} \mu(E_n) &lt; \epsilon\)</span>，取<span class="math inline">\(E_{\epsilon} = \bigcup E_n\)</span>，在<span class="math inline">\(X \setminus E\)</span>上，<span class="math inline">\(|g_n(x)| \leq \epsilon_n\)</span>，从而<span class="math inline">\(g_n(x) \to 0\)</span>，<span class="math inline">\(N\)</span>的选取对<span class="math inline">\(X \setminus E\)</span>上的元素是一致的，这说明了<span class="math inline">\(f\)</span>近一致收敛</p>
+<p>而要说明几乎处处收敛，我们只需要证明<span class="math inline">\(\mu(\{\lim \sup_n |g_n| &gt; \epsilon_m\}) = 0\)</span>，注意到<span class="math inline">\(\{\lim \sup_n |g_n| &gt; \epsilon_m\} = \bigcap_k\bigcup_{n \geq k} \{|g_n| &gt; \epsilon_m\} \sub \bigcap_k\bigcup_n \{|g_n| &gt; \epsilon_n\} = \lim \sup E_n\)</span></p>
+<p>而<span class="math inline">\(\mu(\lim \sup E_n) = 0\)</span>，因此<span class="math inline">\(f\)</span>几乎处处收敛，<span class="math inline">\(\square\)</span></p>
+<p>引理3的证明：取<span class="math inline">\(\epsilon_m = \frac{1}{m}, E_m = \{|f_{n_m} - f| &gt; \epsilon_m\}\)</span>，其中<span class="math inline">\(n_m\)</span>根据<span class="math inline">\(f_n\)</span>依测度收敛的性质选取，使得<span class="math inline">\(\mu(E_m) &lt; 2^{-m}\)</span>，如此选取的子列满足引理2的要求，<span class="math inline">\(\square\)</span></p>
+<hr />
+<p>根据引理，存在子列<span class="math inline">\(\{g_{n_k}\}\)</span>近一致收敛，注意到<span class="math inline">\(|f_n-f| \leq g_{n_k}, \forall n \geq n_k\)</span>，因此<span class="math inline">\(\{g_{n_k}\}\)</span>收敛时，<span class="math inline">\(\{f_n\}\)</span>也收敛到<span class="math inline">\(f\)</span>，<span class="math inline">\(\square\)</span></p>
+<h3 id="lebesgue测度">Lebesgue测度</h3>
+<h4 id="外测度">外测度</h4>
+<p>(Definition)：</p>
+<ol type="1">
+<li>我们称<span class="math inline">\(I=\{x:a_i&lt;x_i&lt;b_i\}\)</span>为一个<strong>开矩体</strong>，记其体积为<span class="math inline">\(|I| = \prod(b_i - a_i)\)</span></li>
+<li>如果<span class="math inline">\(E \sub \bigcup I_k\)</span>（可数个），其中<span class="math inline">\(I_k\)</span>为开矩体，那么称<span class="math inline">\(\{I_k\}\)</span>为<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖，称<span class="math inline">\(m^*(E) := \inf \{ \sum_{k=1}^{\infty} |T_k| : E \sub \bigcup I_k\}\)</span>为<span class="math inline">\(E\)</span>的<strong>外测度</strong></li>
+</ol>
+<p>外测度具有一些类似于测度的性质</p>
+<blockquote>
+<ol type="1">
+<li><p><span class="math inline">\(m^*(E) \geq 0\)</span></p></li>
+<li><p>如果<span class="math inline">\(E_1 \sub E_2\)</span>，那么<span class="math inline">\(m^*(E_1) \leq m^*(E_2)\)</span></p></li>
+<li><p><span class="math inline">\(m^*(\bigcup E_k) \leq \sum m^*(E_k)\)</span>（可列次可加性）</p></li>
+</ol>
+</blockquote>
+<p>性质(1)，(2)显然，考虑性质(3)，我们对于<span class="math inline">\(E_n\)</span>，寻找一个<span class="math inline">\(L-\)</span>覆盖<span class="math inline">\(\{I_{n,k}\}\)</span>，使得<span class="math inline">\(m^*(E_n) \leq \sum |I_{n,k}| \leq m^*(E_n) + \epsilon/2^n\)</span>，如此<span class="math inline">\(\bigcup_n \{I_{n,k}\}\)</span>构成一个<span class="math inline">\(\bigcup E_n\)</span>的<span class="math inline">\(L-\)</span>覆盖，得到<span class="math inline">\(m^*(\bigcup E_k) \leq \sum m^*(E_k) + \epsilon\)</span>，再令<span class="math inline">\(\epsilon \to 0\)</span>即可</p>
+<hr />
+<p>既然我们的外侧度基于开矩体定义，那么至少在开矩体上，它应该是一个良定义的，也即</p>
+<blockquote>
+<ol type="1">
+<li><p>对于可数点集<span class="math inline">\(A\)</span>，<span class="math inline">\(m^*(A) = 0\)</span></p></li>
+<li><p>对于开矩体<span class="math inline">\(I\)</span>，<span class="math inline">\(m^*(\bar{I}) =|I|\)</span>，其中<span class="math inline">\(\bar{I}\)</span>为<span class="math inline">\(I\)</span>的闭包</p></li>
+<li><p>对于超平面<span class="math inline">\(H\)</span>，<span class="math inline">\(m^*(H) = 0\)</span></p></li>
+<li><p>对于开矩体<span class="math inline">\(I\)</span>，<span class="math inline">\(m^*(I)=|I|\)</span></p></li>
+</ol>
+</blockquote>
+<p>单点的外测度为0，根据次可加性，(1)成立</p>
+<p>对于(2)，将开矩体每一维稍微放大，来得到稍大的<span class="math inline">\(\bar{I}\)</span>的<span class="math inline">\(L-\)</span>覆盖，因此<span class="math inline">\(m^*(\bar{I}) \leq |I|\)</span>，而<span class="math inline">\(m^*(\bar{I})\geq |I|\)</span>是显然的</p>
+<p>证明(3)时，一个技巧是将给所有的维数一个界<span class="math inline">\((-n,n)\)</span>，之后对所有<span class="math inline">\(n\)</span>取并，(4)根据(2),(3)可以很快得出</p>
+<hr />
+<p>外测度虽然没有可列可加性，但是有重要的分离可加性</p>
 <blockquote>
 <p>如果<span class="math inline">\(d(E_1,E_2) &gt; 0\)</span>，那么<span class="math inline">\(m^*(E_1\cup E_2) = m^*(E_1) + m^*(E_2)\)</span></p>
 </blockquote>
-<p>我们通过控制覆盖<span class="math inline">\(E_1 \cup E_2\)</span>开矩体集中的开矩体足够小，来保证其不同时与<span class="math inline">\(E_1,E_2\)</span>交，之后就方便放缩了</p>
+<p>证明：只需证<span class="math inline">\(m^*(E_1 \cup E_2) \geq m^*(E_1) + m^*(E_2)\)</span>，任取<span class="math inline">\(E_1 \cup E_2\)</span>的一个<span class="math inline">\(L-\)</span>覆盖<span class="math inline">\(\{I_{n}\}\)</span>，我们可以将<span class="math inline">\(I_n\)</span>的每一维划分为<span class="math inline">\(&lt;\delta\)</span>的若干部分来得到一个更精细的<span class="math inline">\(L-\)</span>覆盖，在这里，我们选取<span class="math inline">\(\delta = d(E_1,E_2) / \dim\)</span>，如此这个覆盖中的每个开矩体只与<span class="math inline">\(E_1,E_2\)</span>中的一个相交，那么<span class="math inline">\(\sum |I_n| \geq m^*(E_1) + m^*(E_2)\)</span>，<span class="math inline">\(\square\)</span></p>
+<h4 id="cantor集">Cantor集</h4>
+<p>(Definition)：定义<span class="math inline">\(I_0 = [0,1]\)</span>，之后每一步将每个区间的中间三分之一的开区间删除，得到<span class="math inline">\(I_{n+1}\)</span>，令<span class="math inline">\(C:= \bigcap_{n=1}^{\infty} I_n\)</span>为<strong>Cantor集</strong></p>
+<p>Cantor集是一个神奇的集合</p>
 <blockquote>
-<p><span class="math inline">\(m^*(E+\{x_0\})=m^*(E)\)</span></p>
+<ol type="1">
+<li><p><span class="math inline">\(C\)</span>是非空有界闭集</p></li>
+<li><p>如果<span class="math inline">\([a_n,b_n]\)</span>是<span class="math inline">\(I_n\)</span>中的端点，那么<span class="math inline">\(a_n,b_n \in C\)</span></p></li>
+<li><p><span class="math inline">\(C\)</span>是完全集，这等价于<span class="math inline">\(C=C&#39;\)</span>，也等价于<span class="math inline">\(C\)</span>没有孤立点</p></li>
+<li><p><span class="math inline">\(C\)</span>没有内点，即<span class="math inline">\(C\)</span>的内部为空集</p></li>
+<li><p><span class="math inline">\(C\)</span>是不可数集</p></li>
+<li><p><span class="math inline">\(m^*(C)=0\)</span></p></li>
+</ol>
 </blockquote>
-<p>不难证明</p>
+<p>(1)根据闭区间套定理知<span class="math inline">\(C\)</span>为非空闭集，(2)根据构造过程可知</p>
+<p>在构造的第<span class="math inline">\(n\)</span>步中，恰有<span class="math inline">\(2^{n}\)</span>个闭区间，每个区间之间距离至少为<span class="math inline">\(3^{-n}\)</span>，每个区间的长度为<span class="math inline">\(3^{-n}\)</span></p>
+<p>因此对于任何<span class="math inline">\(C\)</span>中的点<span class="math inline">\(x\)</span>，<span class="math inline">\(B(x, \delta) \not \sub C\)</span>，且总存在<span class="math inline">\(\{x_n\}\)</span>逼近<span class="math inline">\(x\)</span>，这证明了(3), (4)</p>
+<p>而<span class="math inline">\(m^*(I_n) = (2/3)^n \to 0\)</span>，这证明了(6)，对于(5)，可以证明<span class="math inline">\(C\)</span>中点和<span class="math inline">\(\{\sum_{i=1}^{\infty} \frac{a_i}{3^i}, a_i \in \{0,2\}\}\)</span>一一对应</p>
+<hr />
+<p>(Definition)：定义<span class="math inline">\(C \to [0,1]\)</span>的函数<span class="math inline">\(f\)</span>：<span class="math inline">\(f(\sum_{i=1}^{\infty} \frac{a_i}{3^i}) = \sum_{i=1}^{\infty} \frac{a_i / 2}{2^i}\)</span></p>
+<p>将其扩展到<span class="math inline">\([0,1]\)</span>上，定义<span class="math inline">\(g(x) = \sup \{f(y):y \in C, y \leq x\}\)</span>，称<span class="math inline">\(g\)</span>为<strong>Cantor函数</strong></p>
+<p>Cantor函数也非常神奇</p>
+<blockquote>
+<ol type="1">
+<li><p><span class="math inline">\(f\)</span>是满射，但不是单射，并且<span class="math inline">\(f\)</span>单调递增</p></li>
+<li><p><span class="math inline">\(g|_C = f\)</span>，<span class="math inline">\(g\)</span>单调递增</p></li>
+<li><p><span class="math inline">\(g\)</span>在<span class="math inline">\([0,1]\)</span>上连续，进一步，<span class="math inline">\(|g(x)-g(y)|\leq 2|x-y|^{\alpha}\)</span>，其中<span class="math inline">\(\alpha = \log 2 / \log 3\)</span></p></li>
+<li><p><span class="math inline">\(g\)</span>在Cantor集以外的每个区间上取值为常数，这也说明<span class="math inline">\(g\)</span>的导数处处为<span class="math inline">\(0\)</span></p></li>
+</ol>
+</blockquote>
+<p>其中(3)不好证明</p>
+<hr />
+<p>如果每次不是去掉中间的<span class="math inline">\(1/3\)</span>，而是去掉中间的<span class="math inline">\(\delta, \delta \in (0,1/3)\)</span>，那么我们就得到了类Cantor集，这个集合有测度但是没有内点</p>
+<h4 id="lebesgue可测集">Lebesgue可测集</h4>
+<p>(Definition)：设<span class="math inline">\(E \sub \mathbb{R}^d\)</span>，如果对任意<span class="math inline">\(A \sub \mathbb{R}^d\)</span>有<span class="math inline">\(m^*(A) = m^*(A \cap E) + m^*(A \cap E^c)\)</span>，则称<span class="math inline">\(E\)</span>为<strong>Lebesgue可测集</strong>，记<span class="math inline">\(M\)</span>为Lebesgue可测集的全体</p>
+<p>这个定义由Caratheodory提出，其和Lebesgue提出的定义是等价的，换而言之</p>
+<blockquote>
+<p>对<span class="math inline">\(A \sub \mathbb{R}^d\)</span>有<span class="math inline">\(m^*(A) = m^*(A \cap E) + m^*(A \cap E^c)\)</span>当且仅当对任意开矩体<span class="math inline">\(I\)</span>有<span class="math inline">\(m^*(I) = m^*(I \cap E) + m^*(I \cap E^c)\)</span></p>
+</blockquote>
+<p>证明：</p>
+<p>下面将我们之前的讨论联系起来</p>
+<blockquote>
+<ol type="1">
+<li><p><span class="math inline">\(M\)</span>是一个<span class="math inline">\(\sigma-\)</span>代数</p></li>
+<li><p>对两两不交的集合列<span class="math inline">\(\{E_n\} \in M\)</span>，有<span class="math inline">\(m^*(\bigcup E_n) = \sum m^*(E_n)\)</span></p></li>
+</ol>
+</blockquote>
+<p>也就是说，外测度定义在<span class="math inline">\(M\)</span>上时，它就是真正的测度</p>
+<p>证明：</p>
+<hr />
+<p>既然我们知道了可测集的判定方法，我们就可以尝试什么样的集合在可测集中</p>
+<blockquote>
+<p><span class="math inline">\(\mathbb{R}^d\)</span>中开集为Lebesgue可测集</p>
+</blockquote>
+<p>证明：</p>
+<p>(Corollary)：<span class="math inline">\(\mathbb{R}^d\)</span>中的Borel集是Lebesgue可测集</p>
+<hr />
+<blockquote>
+
+</blockquote>
 ]]></content>
       <categories>
         <category>notes</category>
