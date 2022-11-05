@@ -4345,7 +4345,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li><p>对<span class="math inline">\(x \in X, \{x_n\} \in X\)</span>，如果<span class="math inline">\(\lim_{n \to \infty} d(x_n,x) = 0\)</span>，称<span class="math inline">\(\{x_n\}\)</span>收敛于<span class="math inline">\(x\)</span>，<span class="math inline">\(x\)</span>为<span class="math inline">\(X\)</span>的一个<strong>聚点</strong>或者极限点，聚点的全体记为<span class="math inline">\(X&#39;\)</span>，称为<span class="math inline">\(X\)</span>的<strong>导集</strong></p></li>
 <li><p>记<span class="math inline">\(X&#39; \cup X = \bar{X}\)</span>为<span class="math inline">\(X\)</span>的<strong>闭包</strong>，<span class="math inline">\(X/X&#39;\)</span>为<span class="math inline">\(X\)</span>的<strong>孤立点</strong></p></li>
 <li><p>对<span class="math inline">\(x \in X, \exists c &gt; 0, B(x,c) \subset A\)</span>，则称<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>内点</strong>，<span class="math inline">\(A\)</span>的内点的全体记为<span class="math inline">\(\mathring{A}\)</span>，称为<span class="math inline">\(A\)</span>的<strong>内部</strong></p></li>
-<li><p><span class="math inline">\(\bar{A} / \mathring{A}\)</span>称为<span class="math inline">\(A\)</span>的<strong>边界</strong>，记为<span class="math inline">\(\part A\)</span></p></li>
+<li><p><span class="math inline">\(\bar{A} / \mathring{A}\)</span>称为<span class="math inline">\(A\)</span>的<strong>边界</strong>，记为<span class="math inline">\(\partial A\)</span></p></li>
 <li><p>如果<span class="math inline">\(A \subset \mathring{U}\)</span>，则称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>邻域</strong>，特别的，当<span class="math inline">\(U\)</span>是开集时，称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>开邻域</strong></p></li>
 <li><p>对<span class="math inline">\(A \subset X\)</span>，定义<span class="math inline">\(A\)</span>的<strong>直径</strong>为<span class="math inline">\(diam(A) := \sup_{x,y} \{d(x,y), x,y \in E\}\)</span></p>
 <p>如果<span class="math inline">\(diam(A) &lt; \infty\)</span>，则称<span class="math inline">\(A\)</span>为<strong>有界集</strong></p></li>
@@ -4414,7 +4414,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p><span class="math inline">\(\{f&gt;f(x)-\epsilon\}\)</span>是一个包含<span class="math inline">\(x\)</span>的开集，因此存在相应的<span class="math inline">\(\delta\)</span>的选取来满足我们的需求</p>
 <p><span class="math inline">\(\Leftarrow\)</span>：考虑<span class="math inline">\(\{f(x)&gt;a\}\)</span>，有<span class="math inline">\(\lim \inf_{y \to x} f(y) \geq f(x) &gt; a\)</span>，因此<span class="math inline">\(\sup \inf f(y) &gt; a\)</span></p>
 <p>那么存在<span class="math inline">\(\delta&gt;0\)</span>，使得<span class="math inline">\(\inf_{B(x,\delta)} f(y) &gt; a\)</span>，即<span class="math inline">\(B(x,\delta) \subset \{f(x)&gt;a\}\)</span>，因此<span class="math inline">\(\{f(x)&gt;a\} = \bigcup_{\{f(x)&gt;a\}} B(x,\delta_x)\)</span></p>
-<h2 id="可测空间测度空间">可测空间、测度空间</h2>
+<h3 id="可测空间测度空间">可测空间、测度空间</h3>
 <h4 id="可测空间">可测空间</h4>
 <p>(Definition)：</p>
 <ol type="1">
