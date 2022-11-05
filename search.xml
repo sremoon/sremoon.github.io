@@ -4247,8 +4247,8 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li><p><strong>最大元，最小元</strong>：如果<span class="math inline">\(A\)</span>的上下界属于<span class="math inline">\(A\)</span>，那么称其为最大元，最小元</p>
 <p>最大元，最小元如果存在，那么便是唯一的</p></li>
 <li><p><strong>上确界，下确界</strong>：<span class="math inline">\(A\)</span>的上界的最小元称为上确界，记为<span class="math inline">\(\sup A\)</span>，类似的下确界记为<span class="math inline">\(\inf A\)</span></p></li>
-<li><p><strong>格</strong>：如果<span class="math inline">\(\forall x, y, \sup \{x,y\}\)</span>和<span class="math inline">\(\inf \{x,y\}\)</span>都存在，那么称<span class="math inline">\(X\)</span>为格，如果对<span class="math inline">\(A \sub X\)</span>都满足<span class="math inline">\(\sup A\)</span>与<span class="math inline">\(\inf A\)</span>存在，那么称<span class="math inline">\(X\)</span>为<strong>完备格</strong></p></li>
-<li><p><strong>示性函数</strong>：对<span class="math inline">\(A \sub X\)</span>，我们称<span class="math inline">\(1_A(x) = \begin{cases} 1, x \in A\\ 0, x \notin A\end{cases}\)</span>为<span class="math inline">\(A\)</span>的示性函数</p></li>
+<li><p><strong>格</strong>：如果<span class="math inline">\(\forall x, y, \sup \{x,y\}\)</span>和<span class="math inline">\(\inf \{x,y\}\)</span>都存在，那么称<span class="math inline">\(X\)</span>为格，如果对<span class="math inline">\(A \subset X\)</span>都满足<span class="math inline">\(\sup A\)</span>与<span class="math inline">\(\inf A\)</span>存在，那么称<span class="math inline">\(X\)</span>为<strong>完备格</strong></p></li>
+<li><p><strong>示性函数</strong>：对<span class="math inline">\(A \subset X\)</span>，我们称<span class="math inline">\(1_A(x) = \begin{cases} 1, x \in A\\ 0, x \notin A\end{cases}\)</span>为<span class="math inline">\(A\)</span>的示性函数</p></li>
 </ol>
 <hr />
 <p>(Definition)：</p>
@@ -4284,14 +4284,14 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </blockquote>
 <p>下面列举了一些在做题时用的结论</p>
 <blockquote>
-<p>任给<span class="math inline">\(A \sub\mathbb{R}^n\)</span>，那么<span class="math inline">\(A\)</span>中孤立点至多可数</p>
+<p>任给<span class="math inline">\(A \subset\mathbb{R}^n\)</span>，那么<span class="math inline">\(A\)</span>中孤立点至多可数</p>
 </blockquote>
 <p>证明：<span class="math inline">\(A \cap B(0, n)\)</span>如果是无限集，根据Bolzano-Weierstrass定理，其必定存在一个聚点，矛盾。而<span class="math inline">\(A = \bigcup (A \cap B(0, n))\)</span>，从而为可数集</p>
 <h3 id="拓扑空间度量空间">拓扑空间、度量空间</h3>
 <h4 id="拓扑空间">拓扑空间</h4>
 <p>(Definition)：</p>
 <ol type="1">
-<li><p>设<span class="math inline">\(X\)</span>为集合，<span class="math inline">\(\tau \sub 2^X\)</span>，如果</p>
+<li><p>设<span class="math inline">\(X\)</span>为集合，<span class="math inline">\(\tau \subset 2^X\)</span>，如果</p>
 <ul>
 <li><span class="math inline">\(\emptyset , X \in \tau\)</span></li>
 <li><span class="math inline">\(A_1,...,A_n \in \tau\)</span>，则<span class="math inline">\(\bigcap A_n \in \tau\)</span>，即对有限交封闭</li>
@@ -4301,14 +4301,14 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </ol>
 <p>下面设<span class="math inline">\(X,Y\)</span>为拓扑空间</p>
 <ol start="2" type="1">
-<li><p><span class="math inline">\(A \sub X\)</span>为<strong>闭集</strong>当且仅当<span class="math inline">\(A^c=X \setminus A\)</span>为开集</p></li>
+<li><p><span class="math inline">\(A \subset X\)</span>为<strong>闭集</strong>当且仅当<span class="math inline">\(A^c=X \setminus A\)</span>为开集</p></li>
 <li><p>如果<span class="math inline">\(A\)</span>的任意开覆盖存在有限子覆盖，则称<span class="math inline">\(A\)</span>为<strong>紧集</strong></p></li>
 <li><p>包含<span class="math inline">\(A\)</span>的闭集的最小元为<span class="math inline">\(A\)</span>的<strong>闭包</strong>，记为<span class="math inline">\(\bar{A}\)</span>，由于闭集对交封闭，这实际上就是包含<span class="math inline">\(A\)</span>的闭集的交</p></li>
 <li><p>被<span class="math inline">\(A\)</span>包含的开集的最大元为<span class="math inline">\(A\)</span>的<strong>内部</strong>，记为<span class="math inline">\(\mathring{A}\)</span>，这实际上就是被<span class="math inline">\(A\)</span>包含的开集的并</p></li>
 <li><p>如果<span class="math inline">\(\bar{A} = B\)</span>，则称<span class="math inline">\(A\)</span>在<span class="math inline">\(B\)</span>中<strong>稠密</strong></p></li>
 <li><p>如果<span class="math inline">\(X\)</span>有可数的稠密子集，则称<span class="math inline">\(X\)</span><strong>可分</strong></p></li>
 <li><p>如果<span class="math inline">\(f:X\to Y\)</span>满足<span class="math inline">\(\forall B \in \tau_Y, f^{-1}(B) \in \tau_X\)</span>，即开集的原象是开集，那么称<span class="math inline">\(f\)</span>为<strong>连续映射</strong></p></li>
-<li><p>如果集合<span class="math inline">\(V \subset X\)</span>满足，存在开集<span class="math inline">\(U \subset X\)</span>，使得<span class="math inline">\(x \in U \sub V\)</span>，那么<span class="math inline">\(V\)</span>称为<span class="math inline">\(x\)</span>在<span class="math inline">\(X\)</span>中的<strong>邻域</strong></p>
+<li><p>如果集合<span class="math inline">\(V \subset X\)</span>满足，存在开集<span class="math inline">\(U \subset X\)</span>，使得<span class="math inline">\(x \in U \subset V\)</span>，那么<span class="math inline">\(V\)</span>称为<span class="math inline">\(x\)</span>在<span class="math inline">\(X\)</span>中的<strong>邻域</strong></p>
 <p>特别的，当<span class="math inline">\(V\)</span>是开集时，称<span class="math inline">\(V\)</span>为<span class="math inline">\(x\)</span>的<strong>开邻域</strong></p></li>
 <li><p>称<span class="math inline">\(X\)</span>为Hausdorff的，当且仅当<span class="math inline">\(\forall x \neq y \in X\)</span>，存在<span class="math inline">\(U_x,U_y \in \tau\)</span>，使得<span class="math inline">\(U_x \cap U_y = \emptyset\)</span></p></li>
 </ol>
@@ -4316,7 +4316,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>下面是作业题</p>
 <blockquote>
 <ul>
-<li><p><span class="math inline">\(A \sub K\)</span>时，如果<span class="math inline">\(A\)</span>闭，<span class="math inline">\(K\)</span>紧，那么<span class="math inline">\(A\)</span>紧</p></li>
+<li><p><span class="math inline">\(A \subset K\)</span>时，如果<span class="math inline">\(A\)</span>闭，<span class="math inline">\(K\)</span>紧，那么<span class="math inline">\(A\)</span>紧</p></li>
 <li><p>如果<span class="math inline">\(A\)</span>紧，<span class="math inline">\(B\)</span>紧，那么<span class="math inline">\(A \cup B\)</span>紧</p></li>
 <li><p>如果<span class="math inline">\(\{K_{\alpha}\}\)</span>紧，那么<span class="math inline">\(\bigcap K_{\alpha}\)</span>紧</p></li>
 <li><p>对Hausdorff空间，如果<span class="math inline">\(K\)</span>紧，那么<span class="math inline">\(K\)</span>闭</p></li>
@@ -4344,12 +4344,12 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <ol start="4" type="1">
 <li><p>对<span class="math inline">\(x \in X, \{x_n\} \in X\)</span>，如果<span class="math inline">\(\lim_{n \to \infty} d(x_n,x) = 0\)</span>，称<span class="math inline">\(\{x_n\}\)</span>收敛于<span class="math inline">\(x\)</span>，<span class="math inline">\(x\)</span>为<span class="math inline">\(X\)</span>的一个<strong>聚点</strong>或者极限点，聚点的全体记为<span class="math inline">\(X&#39;\)</span>，称为<span class="math inline">\(X\)</span>的<strong>导集</strong></p></li>
 <li><p>记<span class="math inline">\(X&#39; \cup X = \bar{X}\)</span>为<span class="math inline">\(X\)</span>的<strong>闭包</strong>，<span class="math inline">\(X/X&#39;\)</span>为<span class="math inline">\(X\)</span>的<strong>孤立点</strong></p></li>
-<li><p>对<span class="math inline">\(x \in X, \exist c &gt; 0, B(x,c) \subset A\)</span>，则称<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>内点</strong>，<span class="math inline">\(A\)</span>的内点的全体记为<span class="math inline">\(\mathring{A}\)</span>，称为<span class="math inline">\(A\)</span>的<strong>内部</strong></p></li>
+<li><p>对<span class="math inline">\(x \in X, \exists c &gt; 0, B(x,c) \subset A\)</span>，则称<span class="math inline">\(x\)</span>为<span class="math inline">\(A\)</span>的<strong>内点</strong>，<span class="math inline">\(A\)</span>的内点的全体记为<span class="math inline">\(\mathring{A}\)</span>，称为<span class="math inline">\(A\)</span>的<strong>内部</strong></p></li>
 <li><p><span class="math inline">\(\bar{A} / \mathring{A}\)</span>称为<span class="math inline">\(A\)</span>的<strong>边界</strong>，记为<span class="math inline">\(\part A\)</span></p></li>
-<li><p>如果<span class="math inline">\(A \sub \mathring{U}\)</span>，则称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>邻域</strong>，特别的，当<span class="math inline">\(U\)</span>是开集时，称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>开邻域</strong></p></li>
+<li><p>如果<span class="math inline">\(A \subset \mathring{U}\)</span>，则称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>邻域</strong>，特别的，当<span class="math inline">\(U\)</span>是开集时，称<span class="math inline">\(U\)</span>为<span class="math inline">\(A\)</span>的<strong>开邻域</strong></p></li>
 <li><p>对<span class="math inline">\(A \subset X\)</span>，定义<span class="math inline">\(A\)</span>的<strong>直径</strong>为<span class="math inline">\(diam(A) := \sup_{x,y} \{d(x,y), x,y \in E\}\)</span></p>
 <p>如果<span class="math inline">\(diam(A) &lt; \infty\)</span>，则称<span class="math inline">\(A\)</span>为<strong>有界集</strong></p></li>
-<li><p>对<span class="math inline">\(\{x_n\} \in X\)</span>，如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(\exist N \in \mathbb{N}\)</span>，<span class="math inline">\(\forall m, n \geq N\)</span>，有<span class="math inline">\(d(x_n,x_m) &lt; \epsilon\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>为一<strong>柯西列</strong></p></li>
+<li><p>对<span class="math inline">\(\{x_n\} \in X\)</span>，如果<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(\exists N \in \mathbb{N}\)</span>，<span class="math inline">\(\forall m, n \geq N\)</span>，有<span class="math inline">\(d(x_n,x_m) &lt; \epsilon\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>为一<strong>柯西列</strong></p></li>
 </ol>
 <p>如果<span class="math inline">\(X\)</span>中任意柯西列收敛，称<span class="math inline">\(X\)</span><strong>完备</strong></p>
 <p>下面是一个经常用到的性质</p>
@@ -4365,9 +4365,9 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <hr />
 <p>下面是一些做题用的玩意</p>
 <ul>
-<li><p><span class="math inline">\(x \in \mathring{A}\)</span>等价于对<span class="math inline">\(x \in X, \exist c &gt; 0, B(x,c) \subset A\)</span></p></li>
-<li><p><span class="math inline">\(x \in \bar{A}\)</span>等价于<span class="math inline">\(\forall \delta &gt; 0, B(x, \delta) \cap A \neq \empty\)</span>，即任意小的开球都与<span class="math inline">\(A\)</span>有交</p></li>
-<li><p><span class="math inline">\(x \in A/A&#39;\)</span>等价于<span class="math inline">\(\exist \delta &gt; 0, B(x, \delta) \cap A = \{x\}\)</span></p></li>
+<li><p><span class="math inline">\(x \in \mathring{A}\)</span>等价于对<span class="math inline">\(x \in X, \exists c &gt; 0, B(x,c) \subset A\)</span></p></li>
+<li><p><span class="math inline">\(x \in \bar{A}\)</span>等价于<span class="math inline">\(\forall \delta &gt; 0, B(x, \delta) \cap A \neq \emptyset\)</span>，即任意小的开球都与<span class="math inline">\(A\)</span>有交</p></li>
+<li><p><span class="math inline">\(x \in A/A&#39;\)</span>等价于<span class="math inline">\(\exists \delta &gt; 0, B(x, \delta) \cap A = \{x\}\)</span></p></li>
 </ul>
 <hr />
 <p>紧，列紧等等的关系，先咕着</p>
@@ -4413,12 +4413,12 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>那么只需证明<span class="math inline">\(\forall \epsilon&gt;0, \exists \delta&gt;0\)</span>，使得<span class="math inline">\(\inf_{B(x,\delta)} f(y) \geq f(x) - \epsilon\)</span></p>
 <p><span class="math inline">\(\{f&gt;f(x)-\epsilon\}\)</span>是一个包含<span class="math inline">\(x\)</span>的开集，因此存在相应的<span class="math inline">\(\delta\)</span>的选取来满足我们的需求</p>
 <p><span class="math inline">\(\Leftarrow\)</span>：考虑<span class="math inline">\(\{f(x)&gt;a\}\)</span>，有<span class="math inline">\(\lim \inf_{y \to x} f(y) \geq f(x) &gt; a\)</span>，因此<span class="math inline">\(\sup \inf f(y) &gt; a\)</span></p>
-<p>那么存在<span class="math inline">\(\delta&gt;0\)</span>，使得<span class="math inline">\(\inf_{B(x,\delta)} f(y) &gt; a\)</span>，即<span class="math inline">\(B(x,\delta) \sub \{f(x)&gt;a\}\)</span>，因此<span class="math inline">\(\{f(x)&gt;a\} = \bigcup_{\{f(x)&gt;a\}} B(x,\delta_x)\)</span></p>
+<p>那么存在<span class="math inline">\(\delta&gt;0\)</span>，使得<span class="math inline">\(\inf_{B(x,\delta)} f(y) &gt; a\)</span>，即<span class="math inline">\(B(x,\delta) \subset \{f(x)&gt;a\}\)</span>，因此<span class="math inline">\(\{f(x)&gt;a\} = \bigcup_{\{f(x)&gt;a\}} B(x,\delta_x)\)</span></p>
 <h2 id="可测空间测度空间">可测空间、测度空间</h2>
 <h4 id="可测空间">可测空间</h4>
 <p>(Definition)：</p>
 <ol type="1">
-<li><p>设<span class="math inline">\(X\)</span>是一个非空集，<span class="math inline">\(\Gamma \sub 2^X\)</span>，如果</p>
+<li><p>设<span class="math inline">\(X\)</span>是一个非空集，<span class="math inline">\(\Gamma \subset 2^X\)</span>，如果</p>
 <ul>
 <li><span class="math inline">\(X \in \Gamma\)</span></li>
 <li><span class="math inline">\(A \in \Gamma \Rightarrow A^c \in \Gamma\)</span></li>
@@ -4434,15 +4434,15 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>可测空间对补集，可数并操作封闭，因而对差集，可数交都封闭</p>
 <p>特别的，如果<span class="math inline">\(\{A_n\} \in \Gamma\)</span>，那么<span class="math inline">\(\lim \inf A_n \in \Gamma, \lim \sup A_n \in \Gamma\)</span></p>
 <p>(Definition)：3. 如果<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau, f^{-1}(V) \in \Gamma\)</span>，则称<span class="math inline">\(f\)</span>为<strong>可测映射</strong>（开集的原像为可测集）</p>
-<p>(Definition)：4. 设<span class="math inline">\(X\)</span>非空，<span class="math inline">\(S \sub 2^X\)</span>，称包含<span class="math inline">\(S\)</span>的最小的<span class="math inline">\(\sigma-\)</span>代数为<span class="math inline">\(S\)</span>生成的<span class="math inline">\(\sigma-\)</span>代数，记为<span class="math inline">\(\sigma(S)\)</span>，由于<span class="math inline">\(\sigma-\)</span>代数对交封闭，故事实上，<span class="math inline">\(\sigma(S) = \bigcap_{\Gamma \;is\;\sigma-algebra, S \sub \Gamma} \Gamma\)</span></p>
+<p>(Definition)：4. 设<span class="math inline">\(X\)</span>非空，<span class="math inline">\(S \subset 2^X\)</span>，称包含<span class="math inline">\(S\)</span>的最小的<span class="math inline">\(\sigma-\)</span>代数为<span class="math inline">\(S\)</span>生成的<span class="math inline">\(\sigma-\)</span>代数，记为<span class="math inline">\(\sigma(S)\)</span>，由于<span class="math inline">\(\sigma-\)</span>代数对交封闭，故事实上，<span class="math inline">\(\sigma(S) = \bigcap_{\Gamma \;is\;\sigma-algebra, S \subset \Gamma} \Gamma\)</span></p>
 <p>(Definition)：5. 设<span class="math inline">\((X, \tau)\)</span>为拓扑空间，记<span class="math inline">\(\sigma(\tau)\)</span>为该拓扑空间上的<strong>Borel代数</strong>，记为<span class="math inline">\(\mathscr{B}(x)\)</span>，<span class="math inline">\(\mathscr{B}(x)\)</span>中的元素称为<strong>Borel集</strong>，可数个闭集的并是Borel集，称其为<span class="math inline">\(F_{\sigma}\)</span>集，可数个开集的交是Borel集，称其为<span class="math inline">\(G_{\delta}\)</span>集</p>
 <p>(Definition)：6. 设<span class="math inline">\(X,Y\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，如果<span class="math inline">\(\forall V \in \tau_Y, f^{-1}(V)\)</span>是<span class="math inline">\(X\)</span>中的Borel集，称<span class="math inline">\(f\)</span>为<strong>Borel可测</strong>（开集的原像为Borel集）</p>
 <p>关于Borel集，我们介绍一些简单的性质</p>
 <blockquote>
 <p>设<span class="math inline">\((X,\Gamma)\)</span>为可测空间，<span class="math inline">\((Y,\tau)\)</span>为拓扑空间，<span class="math inline">\(f:X\to Y\)</span>，那么</p>
 <ul>
-<li><span class="math inline">\(\{F\sub Y:f^{-1}(F) \sub \Gamma\}\)</span>是<span class="math inline">\(\sigma-\)</span>代数，即原像为可测集的集合构成<span class="math inline">\(\sigma-\)</span>代数</li>
-<li>如果<span class="math inline">\(f\)</span>可测且<span class="math inline">\(F \sub Y\)</span>为Borel集，那么<span class="math inline">\(f^{-1}(F) \in \Gamma\)</span>，即Borel集在可测映射下的原像为可测集</li>
+<li><span class="math inline">\(\{F\subset Y:f^{-1}(F) \subset \Gamma\}\)</span>是<span class="math inline">\(\sigma-\)</span>代数，即原像为可测集的集合构成<span class="math inline">\(\sigma-\)</span>代数</li>
+<li>如果<span class="math inline">\(f\)</span>可测且<span class="math inline">\(F \subset Y\)</span>为Borel集，那么<span class="math inline">\(f^{-1}(F) \in \Gamma\)</span>，即Borel集在可测映射下的原像为可测集</li>
 <li>如果<span class="math inline">\(f\)</span>可测，<span class="math inline">\(g:Y\to Z\)</span>为Borel可测，那么<span class="math inline">\(g\circ f:X\to Z\)</span>可测</li>
 </ul>
 </blockquote>
@@ -4482,7 +4482,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <ul>
 <li><span class="math inline">\(\mu(\emptyset) = 0\)</span></li>
 <li>如果<span class="math inline">\(A_1,...,A_n\)</span>为两两不交可测集，那么<span class="math inline">\(\mu(\bigcup_{i=1}^n A_i) = \sum_{i=1}^n \mu(A_i)\)</span></li>
-<li>如果<span class="math inline">\(A \sub B\)</span>且<span class="math inline">\(A,B\)</span>可测，那么<span class="math inline">\(\mu(A) \leq \mu(B)\)</span></li>
+<li>如果<span class="math inline">\(A \subset B\)</span>且<span class="math inline">\(A,B\)</span>可测，那么<span class="math inline">\(\mu(A) \leq \mu(B)\)</span></li>
 <li>如果<span class="math inline">\(\{A_n\}\)</span>是递增的可测集列，那么<span class="math inline">\(\mu(A_n) \to \mu(\lim A_n)\)</span></li>
 <li>如果<span class="math inline">\(\{A_n\}\)</span>是递减的可测集列，并且<span class="math inline">\(\mu(A_1) &lt; +\infty\)</span>，那么<span class="math inline">\(\mu(A_n) \to \mu(\lim A_n)\)</span></li>
 </ul>
