@@ -28,7 +28,7 @@
 <meta property="og:description" content="再整理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-13T06:46:56.000Z">
-<meta property="article:modified_time" content="2022-11-05T15:57:12.997Z">
+<meta property="article:modified_time" content="2022-11-06T07:08:44.054Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="real-analysis">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-11-05 23:57:12" itemprop="dateModified" datetime="2022-11-05T23:57:12+08:00">2022-11-05</time>
+        <time title="Modified: 2022-11-06 15:08:44" itemprop="dateModified" datetime="2022-11-06T15:08:44+08:00">2022-11-06</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -303,7 +303,7 @@
 <p>我们对最后一条作出证明：<span class="math inline">\(\int_X f 1_{E} d \mu = \sup_{0 \leq S \leq f1_{E}} \int_X S d \mu = \sup_{S} \sum \alpha_i \mu(A_i)\)</span></p>
 <p><span class="math inline">\(A_i \subset E\)</span>除<span class="math inline">\(\alpha_i = 0\)</span>外一定成立，否则对<span class="math inline">\(x \in A_i \setminus E\)</span>，<span class="math inline">\(\alpha_i = S(x) \leq f1_{E}(x)=0\)</span></p>
 <p>此时，<span class="math inline">\(\sup_{S} \sum \alpha_i \mu(A_i) = \sup_{S \leq f1_{E}} \sum \alpha_i \mu(A_i \cap E) \leq \sup_{S \leq f} \sum \alpha_i \mu(A_i \cap E) = \int_E f d \mu\)</span></p>
-<p>另一方面，$_E f d = <em>E S d = </em>{0S f} <em>X S1</em>{E} d $</p>
+<p>另一方面，<span class="math inline">\(\int_E f d \mu = \sup \int_E S d \mu = \sup_{0\leq S \leq f} \int_X S1_{E} d \mu\)</span></p>
 <p><span class="math inline">\(= \sup_{0\leq S1_{E} \leq f1_{E}} \int_X S1_{E} d \mu \leq \sup_{0\leq S \leq f1_{E}} \int_X S d \mu= \int_X f1_{E} d \mu\)</span>，<span class="math inline">\(\square\)</span></p>
 <h4 id="lebesgue-monotone-convergence-theorem">Lebesgue Monotone convergence Theorem</h4>
 <p>下面几个定理都非常重要，因此证明会写的比较详细</p>
@@ -320,7 +320,7 @@
 <hr />
 <p>注意到<span class="math inline">\(\int f_1 \leq \int f_2 ... \leq \int f_n \leq ...\)</span>，因此<span class="math inline">\(\lim \int f_n \leq \int f\)</span>，只需证<span class="math inline">\(\int f \leq \lim \int f_n\)</span>，这等价于证明对<span class="math inline">\(0 \leq S \leq f\)</span>的简单函数<span class="math inline">\(S\)</span>有<span class="math inline">\(\int S \leq \lim \int f_n\)</span></p>
 <p>固定<span class="math inline">\(C \in (0,1)\)</span>，设<span class="math inline">\(E_n := \{f_n(x)&gt;C \cdot S(x)\}\)</span>，那么<span class="math inline">\(E_n\)</span>可测，并且<span class="math inline">\(E_n \subset E_{n+1}\)</span>且<span class="math inline">\(X = \bigcup E_n = \lim E_n\)</span></p>
-<p>那么，<span class="math inline">\(\int_X f_n \geq \int_{E_n} f_n &gt; C \int_{E_n} S = C \varphi_S(E_n)\)</span>，期中<span class="math inline">\(\varphi_S\)</span>是根据引理定义出的测度，根据测度的极限性质，我们有<span class="math inline">\(\lim \int_X f_n \geq C \varphi_S(X) = C \int S\)</span>，此时令<span class="math inline">\(C \to 1\)</span>，我们得到<span class="math inline">\(\lim \int_X f_n \geq \int S\)</span>，<span class="math inline">\(\square\)</span></p>
+<p>那么，<span class="math inline">\(\int_X f_n \geq \int_{E_n} f_n &gt; C \int_{E_n} S = C \varphi_S(E_n)\)</span>，其中<span class="math inline">\(\varphi_S\)</span>是根据引理定义出的测度，根据测度的极限性质，我们有<span class="math inline">\(\lim \int_X f_n \geq C \varphi_S(X) = C \int S\)</span>，此时令<span class="math inline">\(C \to 1\)</span>，我们得到<span class="math inline">\(\lim \int_X f_n \geq \int S\)</span>，<span class="math inline">\(\square\)</span></p>
 <hr />
 <p>级数作为收敛的一种特殊情况，我们单独列出</p>
 <blockquote>
@@ -628,7 +628,7 @@
       <i class="fa fa-coffee"></i>
     </span>
       <span>Reading time total &asymp;</span>
-    <span title="Reading time total">2:12</span>
+    <span title="Reading time total">2:13</span>
   </span>
 </div>
   <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>

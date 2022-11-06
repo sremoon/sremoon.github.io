@@ -182,8 +182,8 @@ body {
   background: var(--body-bg-color);
   color: var(--text-color);
   font-family: Lato, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-  font-size: 1em;
-  line-height: 2;
+  font-size: 0.9em;
+  line-height: 1.75;
   min-height: 100%;
   position: relative;
   transition: padding 0.2s ease-in-out;
@@ -200,22 +200,22 @@ h6 {
   margin: 20px 0 15px;
 }
 h1 {
-  font-size: 1.5em;
+  font-size: 1.475em;
 }
 h2 {
-  font-size: 1.375em;
+  font-size: 1.35em;
 }
 h3 {
-  font-size: 1.25em;
+  font-size: 1.225em;
 }
 h4 {
-  font-size: 1.125em;
+  font-size: 1.1em;
 }
 h5 {
-  font-size: 1em;
+  font-size: 0.975em;
 }
 h6 {
-  font-size: 0.875em;
+  font-size: 0.85em;
 }
 p {
   margin: 0 0 20px;
@@ -368,7 +368,7 @@ pre {
 }
 figure.highlight,
 pre {
-  line-height: 1.6;
+  line-height: 1.45;
   margin: 0 auto 20px;
 }
 pre,
@@ -2653,13 +2653,13 @@ mjx-container[display="true"] + br {
     padding: 10px;
   }
   .posts-expand .post-button {
-    margin-top: 20px;
+    margin-top: 15px;
   }
   .post-block {
-    padding: 20px;
+    padding: 15px;
   }
   .comments {
-    padding: 10px 20px;
+    padding: 10px 15px;
   }
 }
 @media (max-width: 767px) {
