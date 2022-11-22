@@ -28,7 +28,7 @@
 <meta property="og:description" content="再整理">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-10-13T06:46:56.000Z">
-<meta property="article:modified_time" content="2022-11-22T12:47:16.150Z">
+<meta property="article:modified_time" content="2022-11-22T12:49:52.154Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="real-analysis">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2022-11-22 20:47:16" itemprop="dateModified" datetime="2022-11-22T20:47:16+08:00">2022-11-22</time>
+        <time title="Modified: 2022-11-22 20:49:52" itemprop="dateModified" datetime="2022-11-22T20:49:52+08:00">2022-11-22</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -574,10 +574,10 @@
 <blockquote>
 <p><span class="math inline">\(\mathbb{R}^d\)</span>中开集为Lebesgue可测集</p>
 </blockquote>
-<p>证明：任取<span class="math inline">\(A \sub \mathbb{R}^d\)</span>，对开集<span class="math inline">\(E\)</span>，证明<span class="math inline">\(m^*(A) \geq m^*(A \cap E)+m^*(A \cap E^c)\)</span></p>
+<p>证明：任取<span class="math inline">\(A \subset \mathbb{R}^d\)</span>，对开集<span class="math inline">\(E\)</span>，证明<span class="math inline">\(m^*(A) \geq m^*(A \cap E)+m^*(A \cap E^c)\)</span></p>
 <hr />
 <ul>
-<li>(Carathedory)：设<span class="math inline">\(F\)</span>为开集，<span class="math inline">\(E \sub F\)</span>，令<span class="math inline">\(E_k = \{x\in E:d(x, F^c) \geq 1/k\}\)</span>，那么<span class="math inline">\(\lim m^*(E_k)=m^*(E)\)</span></li>
+<li>(Carathedory)：设<span class="math inline">\(F\)</span>为开集，<span class="math inline">\(E \subset F\)</span>，令<span class="math inline">\(E_k = \{x\in E:d(x, F^c) \geq 1/k\}\)</span>，那么<span class="math inline">\(\lim m^*(E_k)=m^*(E)\)</span></li>
 </ul>
 <p>证明：对<span class="math inline">\(x \in E \subset F, x \notin F^c\)</span>，因此<span class="math inline">\(d(x, F^c) &gt; 0\)</span>，故<span class="math inline">\(\bigcup E_k = E\)</span>，从而<span class="math inline">\(m^*(E_i) \leq m^*(E)\)</span>，<span class="math inline">\(\lim m^*(E_k) \leq m^*(E)\)</span>，下面证明<span class="math inline">\(\lim m^*(E_k) \geq m^*(E)\)</span>，不妨设<span class="math inline">\(\lim m^*(E_k) &lt; \infty\)</span></p>
 <p>令<span class="math inline">\(A_k = E_{k+1} \setminus E_k\)</span>，不难知道<span class="math inline">\(d(A_k,A_{k+2})&gt;0\)</span>，于是<span class="math inline">\(m^*(E_{2k})\geq m^*(\bigcup A_{2j})=\sum m^*(A_{2j})\)</span></p>
@@ -585,7 +585,7 @@
 <p>最后，注意到<span class="math inline">\(m^*(E) \leq m^*(E_{2k})+\sum m^*(A_{2j})+\sum m^*(A_{2j+1})\)</span>，令<span class="math inline">\(k\to \infty\)</span>得到我们想要的，<span class="math inline">\(\square\)</span></p>
 <hr />
 <p>我们对<span class="math inline">\(A \cap E\)</span>带入引理，得到<span class="math inline">\(\lim m^*((A \cap E)_k) = m^*(A \cap E)\)</span></p>
-<p>那么，<span class="math inline">\(m^*(A)\geq m^*((A \cap E^c) \cup F_k) = m^*(A \cap E^c) + m^*(F_k)\)</span>，对<span class="math inline">\(k\)</span>取极限即可，其中需要注意到<span class="math inline">\(F_k \sub A, d(E^c, F_k)&gt;0\)</span>，<span class="math inline">\(\square\)</span></p>
+<p>那么，<span class="math inline">\(m^*(A)\geq m^*((A \cap E^c) \cup F_k) = m^*(A \cap E^c) + m^*(F_k)\)</span>，对<span class="math inline">\(k\)</span>取极限即可，其中需要注意到<span class="math inline">\(F_k \subset A, d(E^c, F_k)&gt;0\)</span>，<span class="math inline">\(\square\)</span></p>
 <p>(Corollary)：<span class="math inline">\(\mathbb{R}^d\)</span>中的Borel集是Lebesgue可测集</p>
 <h4 id="borel集与lebesgue可测集">Borel集与Lebesgue可测集</h4>
 <p>下面是记录《实变函数论》周民强的一些比较凌乱的讨论.</p>
@@ -594,7 +594,7 @@
 <ul>
 <li>存在开集<span class="math inline">\(F \subset E\)</span>，使得<span class="math inline">\(m(F\setminus E) &lt; \epsilon\)</span></li>
 <li>存在闭集<span class="math inline">\(G \supset E\)</span>，使得<span class="math inline">\(m(E \setminus G)&lt;\epsilon\)</span></li>
-<li>如果<span class="math inline">\(m(E)&lt;\infty\)</span>，那么存在紧集<span class="math inline">\(K \sub E\)</span>，使得<span class="math inline">\(m(E \setminus K) &lt; \epsilon\)</span></li>
+<li>如果<span class="math inline">\(m(E)&lt;\infty\)</span>，那么存在紧集<span class="math inline">\(K \subset E\)</span>，使得<span class="math inline">\(m(E \setminus K) &lt; \epsilon\)</span></li>
 </ul>
 </blockquote>
 <p>对1，当<span class="math inline">\(m(E)&lt;\infty\)</span>时，<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖的并就是开集，而<span class="math inline">\(m(E)=\infty\)</span>时，我们对<span class="math inline">\(m(E \cap B(0, k))\)</span>取一个<span class="math inline">\(\epsilon/2^k\)</span>的近似即可</p>
@@ -602,7 +602,7 @@
 <p>(Corollary)：设<span class="math inline">\(E \in M\)</span>，则，存在<span class="math inline">\(G_{\delta}\)</span>集<span class="math inline">\(G \supset E\)</span>，使得<span class="math inline">\(m(G \setminus E) = 0\)</span>且存在<span class="math inline">\(F_{\sigma}\)</span>集<span class="math inline">\(F \subset E\)</span>，使得<span class="math inline">\(m(E \setminus F)=0\)</span></p>
 <p>(Corollary of Corollary)：<strong>Lebesgue测度空间是Borel测度空间的完备化</strong></p>
 <p>对一般的集合<span class="math inline">\(E\)</span>以及外测度，上述定理仍然成立，而可测集上的外测度实际上就是测度，因此我们有下面的定理</p>
-<p>(Corollary，外测度的正则性)：任取<span class="math inline">\(E \sub \mathbb{R}^d\)</span>，那么存在<span class="math inline">\(G_{\delta}\)</span>集<span class="math inline">\(H \supset E\)</span>，使得<span class="math inline">\(m^*(E)=m(H)\)</span></p>
+<p>(Corollary，外测度的正则性)：任取<span class="math inline">\(E \subset \mathbb{R}^d\)</span>，那么存在<span class="math inline">\(G_{\delta}\)</span>集<span class="math inline">\(H \supset E\)</span>，使得<span class="math inline">\(m^*(E)=m(H)\)</span></p>
 <p>(Corollary)：<span class="math inline">\(m^*(\liminf E_k) \leq \liminf m^*(E_k)\)</span></p>
 <p>我们取<span class="math inline">\(H_k \subset E_k\)</span>使得<span class="math inline">\(m^*(E_k)=m(H_k)\)</span>，用<span class="math inline">\(H_k\)</span>改写不等式后，测度实际上就是<span class="math inline">\(1_{H_k}\)</span>的积分，用Fatou's Lemma即可</p>
 <p>上述定理的一个作用在于，如果我们尝试证明一个集合是可测集，可以尝试将其写为可测集和若干零测集的并</p>
