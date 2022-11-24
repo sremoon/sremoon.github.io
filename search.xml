@@ -4867,7 +4867,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <p>取<span class="math inline">\(F = \bigcap_{i=1}^n\)</span>，那么<span class="math inline">\(m(E \setminus F) &lt; \epsilon\)</span>，并且<span class="math inline">\(S_n\)</span>在<span class="math inline">\(F\)</span>上连续并且一致收敛到<span class="math inline">\(g\)</span>，最终有<span class="math inline">\(g\)</span>在<span class="math inline">\(F\)</span>上连续，<span class="math inline">\(\square\)</span></p>
 <blockquote>
 <p>(Corollary)：如果<span class="math inline">\(f: E \to [-\infty, +\infty]\)</span>可测且几乎处处有限，</p>
-<p>那么对任意<span class="math inline">\(\epsilon &gt; 0\)</span>，存在连续函数<span class="math inline">\(g \in C(\mathbb{R}^d)\)</span>，使得<span class="math inline">\(m\{f(x) \neq g(x)\} &lt; \epsilon\)</span>且<span class="math inline">\(\sup |g| \leq \sup |f|\)</span></p>
+<p>那么对任意<span class="math inline">\(\epsilon &gt; 0\)</span>，存在连续函数<span class="math inline">\(g \in C(\mathbb{R}^d)\)</span>，使得<span class="math inline">\(m(E \cap \{f(x) \neq g(x)\}) &lt; \epsilon\)</span>且<span class="math inline">\(\sup |g| \leq \sup |f|\)</span></p>
 <p>进一步，如果<span class="math inline">\(m(E)&lt;\infty\)</span>，那么<span class="math inline">\(g\)</span>可以取<span class="math inline">\(C_c(\mathbb{R}^d)\)</span>中的函数。 更具体地，在<span class="math inline">\(m(E) &lt; \infty\)</span>时，我们可以选取一个有界的开集<span class="math inline">\(G \supset E\)</span>，满足<span class="math inline">\(g \in C_c(G)\)</span></p>
 </blockquote>
 <p>证明：根据Lusin TH，存在闭集<span class="math inline">\(F \subset E\)</span>，使得<span class="math inline">\(m(E \setminus F) &lt; \epsilon\)</span>并且<span class="math inline">\(f|_F\)</span>连续；根据连续函数的延拓定理（一个神奇的构造），存在<span class="math inline">\(g : \mathbb{R}^d \to \mathbb{R}\)</span>连续且使得<span class="math inline">\(g|_F = f|_F\)</span>且<span class="math inline">\(\sup|g| \leq \sup |g|_F|\)</span>，取<span class="math inline">\(g\)</span>即可。</p>
@@ -4881,7 +4881,14 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <blockquote>
 <p>如果<span class="math inline">\(f \in L^1(\mathbb{R}^d)\)</span>，那么<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，存在<span class="math inline">\(g \in C_c(\mathbb{R}^d)\)</span>，使得<span class="math inline">\(\int |f-g| dm &lt; \epsilon\)</span></p>
 </blockquote>
-<p>证明：我们可以选择适合的<span class="math inline">\(M_1,M_2\)</span>，使得<span class="math inline">\(f\)</span>在<span class="math inline">\(\{f(x)\geq M_1\}\)</span>和<span class="math inline">\(\{|x|\geq M_2\}\)</span>上的积分和小于<span class="math inline">\(\epsilon/2\)</span>。记<span class="math inline">\(E\)</span>为前述集合之并的补，在<span class="math inline">\(E\)</span>上考虑<span class="math inline">\(f\)</span>，根据Lusin TH的推论，存在<span class="math inline">\(g \in C_c(B(0,M_2))\)</span>使得<span class="math inline">\(m\{f \neq g\} &lt; \epsilon/4M_1\)</span>，并且<span class="math inline">\(\sup |g| \leq \sup |f| = M_1\)</span>，而此时，<span class="math inline">\(\int |f-g| dm = \int_{E} |f-g| dm = \int_{\{f \neq g\}} |f-g| dm \leq \epsilon/2\)</span>，<span class="math inline">\(\square\)</span></p>
+<p>证明：我们可以选择适合的<span class="math inline">\(M\)</span>，记<span class="math inline">\(E = (\{f(x) \geq M\} \cup \{|x| \geq M\})^c\)</span>，那么<span class="math inline">\(E\)</span>需要满足<span class="math inline">\(\int_{E^c} |f| dm \leq \epsilon/4\)</span></p>
+<p>根据Lusin TH的推论，存在<span class="math inline">\(g \in C_c(B(0,M))\)</span>使得<span class="math inline">\(m\{E\cap(f \neq g)\} &lt; \epsilon/4M\)</span>，并且<span class="math inline">\(\sup |g| \leq \sup |f|\)</span>，特别的，在<span class="math inline">\(E\)</span>上<span class="math inline">\(\sup |g| \leq M\)</span> <span class="math display">\[
+\begin{aligned}
+\int|f-g| dm &amp;= \int_{E}|f-g| dm + \int_{E^c} |f-g| dm
+\\ &amp;\leq \int_{E \cap \{f \neq g\}} |f-g| dm +  2\int_{E^c} |f| dm
+\\ &amp; \leq \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon
+\end{aligned}
+\]</span> 由上，<span class="math inline">\(\square\)</span></p>
 <blockquote>
 <p>(Corollay)：设<span class="math inline">\(f \in L^1\)</span>，那么存在<span class="math inline">\(\exists \{f_n\}_{n=1}^{\infty} \in C_c(\mathbb{R}^d)\)</span>，使得<span class="math inline">\(f_n \to f\)</span>以<span class="math inline">\(L^1\)</span>收敛并且几乎处处收敛，而且有<span class="math inline">\(\sup |f_n| \leq \sup |f|\)</span></p>
 </blockquote>
@@ -4894,7 +4901,8 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <h4 id="lebesgue积分和rieman积分">Lebesgue积分和Rieman积分</h4>
 <p>回顾数学分析，我们使用了达布上和和达布下和以及划分的加细来得到Rieman积分的定义，更具体的，我们需要以下结论</p>
 <blockquote>
-<p>达布上和的极限为达布上积分：<span class="math inline">\(\overline{\int_a^b} f(x) dx = \lim_{n \to \infty} \sum_{i=1}^{k_n} M_i^{n} (x_i^n - x_{i-1}^n)\)</span> 达布下和的极限为达布下积分：<span class="math inline">\(\underline{\int_a^b} f(x) dx = \lim_{n \to \infty} \sum_{i=1}^{k_n} M_i^{n} (x_i^n - x_{i-1}^n)\)</span></p>
+<p>达布上和的极限为达布上积分：<span class="math inline">\(\overline{\int_a^b} f(x) dx = \lim_{n \to \infty} \sum_{i=1}^{k_n} M_i^{n} (x_i^n - x_{i-1}^n)\)</span></p>
+<p>达布下和的极限为达布下积分：<span class="math inline">\(\underline{\int_a^b} f(x) dx = \lim_{n \to \infty} \sum_{i=1}^{k_n} M_i^{n} (x_i^n - x_{i-1}^n)\)</span></p>
 </blockquote>
 <p>接下来开始逐步引入Lebesgue积分：</p>
 <blockquote>
@@ -5035,5 +5043,72 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
       <categories>
         <category>problems</category>
       </categories>
+  </entry>
+  <entry>
+    <title>实变函数3</title>
+    <url>/2022/11/real-analysis-3/</url>
+    <content><![CDATA[<h3 id="lp-space"><span class="math inline">\(L^p\)</span> Space</h3>
+<h4 id="lp空间"><span class="math inline">\(L^p\)</span>空间</h4>
+<p>(Definition)：对可测集<span class="math inline">\(E\)</span></p>
+<ol type="1">
+<li><p>对<span class="math inline">\(1\leq p &lt; \infty\)</span>，定义<span class="math inline">\(||f||_{L^p(E)} := (\int_{|E|} |f|^p dx)^{1/p}\)</span>为<span class="math inline">\(f\)</span>的<span class="math inline">\(L^p\)</span>范数</p></li>
+<li><p>对<span class="math inline">\(p=\infty\)</span>，定义<span class="math inline">\(||f||_{L^{\infty}(E)} := \inf\{M:\exists F \sub E, m(F)=0, \sup_{E\setminus F} |f| \} \leq M\)</span></p>
+<p>也就是说，<span class="math inline">\(|f|\)</span>几乎处处小于等于<span class="math inline">\(||f||_{L^{\infty}(E)}\)</span></p></li>
+<li><p>对<span class="math inline">\(1\leq p &lt; \infty\)</span>，定义<span class="math inline">\(E\)</span>上的<span class="math inline">\(L^p\)</span>可积函数空间为<span class="math inline">\(L^p(E) := \{f:E \to [-\infty, +\infty],\;\int_E |f|^p &lt; \infty,\; f\;measurable\}\)</span></p></li>
+<li><p>对<span class="math inline">\(p=\infty\)</span>，定义<span class="math inline">\(E\)</span>上的<span class="math inline">\(L^{\infty}\)</span>可积函数空间为<span class="math inline">\(L^{\infty}(E):=\{f:E \to [-\infty, +\infty], ||f||_{L^{\infty}(E)}&lt;\infty\}\)</span></p></li>
+</ol>
+<p>不难知道，对<span class="math inline">\(1 \leq p \leq +\infty\)</span>，<span class="math inline">\(L^p\)</span>是一个线性空间，除了线性空间外，<span class="math inline">\(L^p\)</span>空间还有一些优美的性质</p>
+<blockquote>
+<p>如果定义<span class="math inline">\(L^p\)</span>空间上的距离函数<span class="math inline">\(d(f,g) := ||f-g||_{L^p}\)</span>，那么<span class="math inline">\((L^p, d)\)</span>构成度量空间</p>
+</blockquote>
+<hr />
+<ul>
+<li>(Minkowski)：设<span class="math inline">\(E\)</span>可测，那么<span class="math inline">\(||f+g||_{L^p} \leq ||f||_{L^p} + ||g||_{L^p}\)</span></li>
+<li>(Holder's inequality)：定义<span class="math inline">\(p\in[1,\infty]\)</span>的共轭指标为<span class="math inline">\(p^1\)</span>，满足<span class="math inline">\(1/p+1/p^1 = 1\)</span>，<span class="math inline">\(||fg||_{L^1} \leq ||f||_{L^p} \cdot ||g||_{L^{p_1}}\)</span></li>
+</ul>
+<p>上述证明非常经典，这里省略</p>
+<p>(Corollary，加权的Holder's inequality)：令<span class="math inline">\(1 \leq p_1 \leq p \leq p_2 \leq \infty\)</span>且<span class="math inline">\(1/p=\theta/p_1+(1-\theta)/p_2\)</span>，那么<span class="math inline">\(||f||_{L^p} \leq ||f||_{L^{p_1}}^{\theta} \cdot ||f||_{L^{p_2}}^{1-\theta}\)</span></p>
+<p>(Corollary 1)：如果<span class="math inline">\(f\in L^{p_1}\)</span>且<span class="math inline">\(f\in L^{p_2}\)</span>且<span class="math inline">\(p_1 \leq p \leq p_2\)</span>，那么<span class="math inline">\(f \in L^p\)</span></p>
+<p>(Corollary 2)：如果<span class="math inline">\(f\in L^p\)</span>且<span class="math inline">\(m(E) &lt;\infty\)</span>，那么<span class="math inline">\(f \in L^{q}, \forall 1 \leq q \leq p\)</span></p>
+<hr />
+<p>根据Minkowski不等式，容易验证度量空间的性质</p>
+<blockquote>
+<p><span class="math inline">\(L^p\)</span>是一个完备度量空间，即<span class="math inline">\(Cauchy\)</span>列一定收敛</p>
+</blockquote>
+<p>证明：设<span class="math inline">\(\{f_n\} \sub L^p\)</span>为Cauchy列，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>使得<span class="math inline">\(||f_{n_{k+1}} - f_{n_k}|| \leq 1/2^k\)</span>，令<span class="math inline">\(g_m = \sum_{k=1}^m |f_{n_{k+1}} - f_{n_k}|\)</span>，<span class="math inline">\(g = \lim_{m \to \infty} g_m\)</span></p>
+<p>不难知道<span class="math inline">\(||g_m||_{L^p} &lt; 1\)</span>，根据Fatou's Lemma，我们有<span class="math inline">\(\int_E g^p dx \leq 1\)</span>，也就是说<span class="math inline">\(g\)</span>几乎处处有限</p>
+<p>在<span class="math inline">\(g&lt;\infty\)</span>时，我们可以定义出<span class="math inline">\(\lim f_{n_k}\)</span>（绝对收敛），因此定义<span class="math inline">\(f=\begin{cases} \lim f_{n_k}, &amp; g&lt;\infty\\ 0, &amp;g=\infty\end{cases}\)</span>，我们证明<span class="math inline">\(||f-f_n||_{L^p} \to 0\)</span></p>
+<p>对<span class="math inline">\(1 \leq p&lt; \infty\)</span>，考虑Fatou's Lemma，<span class="math inline">\(\int |f-f_n|^p =\int\lim|f-f_{n_k}|^p\leq \lim\inf \int |f_{n_k}- f_n|^p\)</span>（<span class="math inline">\(f=0\)</span>的点是一个零测集，无需考虑），而后者被Caushy列的性质控制。特别的，<span class="math inline">\(p=\infty\)</span>时，<span class="math inline">\(|f-f_n|\)</span>是<span class="math inline">\(|f_{n_k}-f_n|\)</span>的极限，也被Cauchy列性质控制，<span class="math inline">\(\square\)</span></p>
+<blockquote>
+<p>对<span class="math inline">\(1&lt;p&lt;\infty\)</span>，如果<span class="math inline">\(\{f_n\}_{n=1}^{\infty}\sub L^p\)</span>有界，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>，使得<span class="math inline">\(f_{n_k} \overset{w,L^p}{\to} f\)</span></p>
+<p>其中以<span class="math inline">\(L^p\)</span>弱收敛至<span class="math inline">\(f\)</span>是指，对任意<span class="math inline">\(g \in L^{p^1}\)</span>，有<span class="math inline">\(\lim_{k} \int f_{n_k} g = \int fg\)</span></p>
+</blockquote>
+<p>留到泛函来写</p>
+<hr />
+<p>另一个重要的考虑对象是<span class="math inline">\(L^p\)</span>空间的稠密子集</p>
+<blockquote>
+<p>设<span class="math inline">\(1\leq p&lt;\infty\)</span>，那么<span class="math inline">\(C_c(\mathbb{R}^d)\)</span>在<span class="math inline">\(L^p\)</span>中稠密</p>
+</blockquote>
+<p>证明：：我们可以选择适合的<span class="math inline">\(M\)</span>，记<span class="math inline">\(E = (\{f(x) \geq M\} \cup \{|x| \geq M\})^c\)</span>，那么<span class="math inline">\(E\)</span>需要满足<span class="math inline">\(\int_{E^c} |f|^p dm \leq \epsilon/4\)</span></p>
+<p>根据Lusin TH的推论，存在<span class="math inline">\(g \in C_c(B(0,M))\)</span>使得<span class="math inline">\(m\{E\cap(f \neq g)\} &lt; \frac{\epsilon}{2\cdot (2M)^p}\)</span>，并且<span class="math inline">\(\sup |g| \leq \sup |f|\)</span>，特别的，在<span class="math inline">\(E\)</span>上<span class="math inline">\(\sup |g| \leq M\)</span> <span class="math display">\[
+\begin{aligned}
+\int|f-g|^p dm &amp;= \int_{E}|f-g|^p dm + \int_{E^c} |f-g|^p dm
+\\ &amp;\overset{Minkowski}{\leq} \int_{E \cap \{f \neq g\}} |f-g|^p dm +  2\int_{E^c} |f|^p dm
+\\ &amp;\leq  (2M)^p * \frac{\epsilon}{2\cdot (2M)^p} + \frac{\epsilon}{2} =\epsilon
+\end{aligned}
+\]</span> 由上，<span class="math inline">\(\square\)</span></p>
+<p>(Corollary)：对<span class="math inline">\(1 \leq p &lt; \infty\)</span>，<span class="math inline">\(f\in L^p\)</span>，那么<span class="math inline">\(\lim_{h\to 0} \int |f(x+h)-f(x)|^p dx = 0\)</span></p>
+<h4 id="lp范数"><span class="math inline">\(L^p\)</span>范数</h4>
+<blockquote>
+<p>对<span class="math inline">\(1 \leq p \leq \infty\)</span>，<span class="math inline">\(f\in L^p\)</span>，那么<span class="math inline">\(||f||_{L^p} = \sup\{\int fg :||g||_{L^{p&#39;}} \leq 1\}\)</span></p>
+<p>如果<span class="math inline">\(1\leq p &lt; \infty\)</span>，上确界可以取得，即<span class="math inline">\(||f||_{L^p} = \max\{\int fg :||g||_{L^{p&#39;}} \leq 1\}\)</span></p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>real-analysis</tag>
+      </tags>
   </entry>
 </search>
