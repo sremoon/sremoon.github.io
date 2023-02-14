@@ -28,7 +28,7 @@
 <meta property="og:description" content="应该就是实变的最后一篇了，感觉分析还不甚透彻">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-24T06:46:56.000Z">
-<meta property="article:modified_time" content="2023-02-10T14:48:02.375Z">
+<meta property="article:modified_time" content="2023-02-14T10:38:56.548Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="real-analysis">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-02-10 22:48:02" itemprop="dateModified" datetime="2023-02-10T22:48:02+08:00">2023-02-10</time>
+        <time title="Modified: 2023-02-14 18:38:56" itemprop="dateModified" datetime="2023-02-14T18:38:56+08:00">2023-02-14</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -268,7 +268,7 @@
 <p>(Definition)：对可测集<span class="math inline">\(E\)</span></p>
 <ol type="1">
 <li><p>对<span class="math inline">\(1\leq p &lt; \infty\)</span>，定义<span class="math inline">\(||f||_{L^p(E)} := (\int_{|E|} |f|^p dx)^{1/p}\)</span>为<span class="math inline">\(f\)</span>的<span class="math inline">\(L^p\)</span>范数</p></li>
-<li><p>对<span class="math inline">\(p=\infty\)</span>，定义<span class="math inline">\(||f||_{L^{\infty}(E)} := \inf\{M:\exists F \sub E, m(F)=0, \sup_{E\setminus F} |f| \} \leq M\)</span></p>
+<li><p>对<span class="math inline">\(p=\infty\)</span>，定义<span class="math inline">\(||f||_{L^{\infty}(E)} := \inf\{M:\exists F \subset E, m(F)=0, \sup_{E\setminus F} |f| \} \leq M\)</span></p>
 <p>也就是说，<span class="math inline">\(|f|\)</span>几乎处处小于等于<span class="math inline">\(||f||_{L^{\infty}(E)}\)</span></p></li>
 <li><p>对<span class="math inline">\(1\leq p &lt; \infty\)</span>，定义<span class="math inline">\(E\)</span>上的<span class="math inline">\(L^p\)</span>可积函数空间为<span class="math inline">\(L^p(E) := \{f:E \to [-\infty, +\infty],\;\int_E |f|^p &lt; \infty,\; f\;measurable\}\)</span></p></li>
 <li><p>对<span class="math inline">\(p=\infty\)</span>，定义<span class="math inline">\(E\)</span>上的<span class="math inline">\(L^{\infty}\)</span>可积函数空间为<span class="math inline">\(L^{\infty}(E):=\{f:E \to [-\infty, +\infty], ||f||_{L^{\infty}(E)}&lt;\infty\}\)</span></p></li>
@@ -291,12 +291,12 @@
 <blockquote>
 <p><span class="math inline">\(L^p\)</span>是一个完备度量空间，即<span class="math inline">\(Cauchy\)</span>列一定收敛</p>
 </blockquote>
-<p>证明：设<span class="math inline">\(\{f_n\} \sub L^p\)</span>为Cauchy列，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>使得<span class="math inline">\(||f_{n_{k+1}} - f_{n_k}|| \leq 1/2^k\)</span>，令<span class="math inline">\(g_m = \sum_{k=1}^m |f_{n_{k+1}} - f_{n_k}|\)</span>，<span class="math inline">\(g = \lim_{m \to \infty} g_m\)</span></p>
+<p>证明：设<span class="math inline">\(\{f_n\} \subset L^p\)</span>为Cauchy列，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>使得<span class="math inline">\(||f_{n_{k+1}} - f_{n_k}|| \leq 1/2^k\)</span>，令<span class="math inline">\(g_m = \sum_{k=1}^m |f_{n_{k+1}} - f_{n_k}|\)</span>，<span class="math inline">\(g = \lim_{m \to \infty} g_m\)</span></p>
 <p>不难知道<span class="math inline">\(||g_m||_{L^p} &lt; 1\)</span>，根据Fatou's Lemma，我们有<span class="math inline">\(\int_E g^p dx \leq 1\)</span>，也就是说<span class="math inline">\(g\)</span>几乎处处有限</p>
 <p>在<span class="math inline">\(g&lt;\infty\)</span>时，我们可以定义出<span class="math inline">\(\lim f_{n_k}\)</span>（绝对收敛），因此定义<span class="math inline">\(f=\begin{cases} \lim f_{n_k}, &amp; g&lt;\infty\\ 0, &amp;g=\infty\end{cases}\)</span>，我们证明<span class="math inline">\(||f-f_n||_{L^p} \to 0\)</span></p>
 <p>对<span class="math inline">\(1 \leq p&lt; \infty\)</span>，考虑Fatou's Lemma，<span class="math inline">\(\int |f-f_n|^p =\int\lim|f_{n_k}-f_{n}|^p\leq \lim\inf \int |f_{n_k}- f_n|^p\)</span>（<span class="math inline">\(f=0\)</span>的点是一个零测集，无需考虑），而后者被Cauchy列的性质控制。特别的，<span class="math inline">\(p=\infty\)</span>时，<span class="math inline">\(|f-f_n|\)</span>是<span class="math inline">\(|f_{n_k}-f_n|\)</span>的极限，也被Cauchy列性质控制，<span class="math inline">\(\square\)</span></p>
 <blockquote>
-<p>对<span class="math inline">\(1&lt;p&lt;\infty\)</span>，如果<span class="math inline">\(\{f_n\}_{n=1}^{\infty}\sub L^p\)</span>有界，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>，使得<span class="math inline">\(f_{n_k} \overset{w,L^p}{\to} f\)</span></p>
+<p>对<span class="math inline">\(1&lt;p&lt;\infty\)</span>，如果<span class="math inline">\(\{f_n\}_{n=1}^{\infty}\subset L^p\)</span>有界，那么存在子列<span class="math inline">\(\{f_{n_k}\}\)</span>，使得<span class="math inline">\(f_{n_k} \overset{w,L^p}{\to} f\)</span></p>
 <p>其中以<span class="math inline">\(L^p\)</span>弱收敛至<span class="math inline">\(f\)</span>是指，对任意<span class="math inline">\(g \in L^{p&#39;}\)</span>，有<span class="math inline">\(\lim_{k} \int f_{n_k} g = \int fg\)</span></p>
 </blockquote>
 <p>留到泛函来写</p>
@@ -337,7 +337,7 @@
 <li>对几乎所有的<span class="math inline">\(x \in \mathbb{R}^k\)</span>，<span class="math inline">\(f|_x(y) = f(x,y)\)</span>是<span class="math inline">\(\mathbb{R}^l\)</span>上的非负可测（<span class="math inline">\(L^1\)</span>）函数</li>
 <li>令<span class="math inline">\(F(x) = \int f(x,y) \text{d}y\)</span>，则<span class="math inline">\(F(x)\)</span>为<span class="math inline">\(\mathbb{R}^k\)</span>上的非负可测（<span class="math inline">\(L^1\)</span>）函数，且<span class="math inline">\(\int F(x) dx = \int(\int f(x,y) dy)dx = \int f(x,y) dxdy\)</span></li>
 </ul></li>
-<li><p>这个定理的一个推论是如果<span class="math inline">\(E_1 \subset \mathbb{R}^k\)</span>可测，<span class="math inline">\(E_2 \subset \mathbb{R}^l\)</span>可测，那么<span class="math inline">\(E_1 \times E_2 \sub \mathbb{R}^{k+l}\)</span>可测，并且<span class="math inline">\(m(E_1 \times E_2) = m(E_1 ) \cdot m(E_2)\)</span></p>
+<li><p>这个定理的一个推论是如果<span class="math inline">\(E_1 \subset \mathbb{R}^k\)</span>可测，<span class="math inline">\(E_2 \subset \mathbb{R}^l\)</span>可测，那么<span class="math inline">\(E_1 \times E_2 \subset \mathbb{R}^{k+l}\)</span>可测，并且<span class="math inline">\(m(E_1 \times E_2) = m(E_1 ) \cdot m(E_2)\)</span></p>
 <p>（考虑对<span class="math inline">\(1_{E_1}, 1_{E_2}\)</span>运用Fubini定理）</p></li>
 </ul>
 <hr />
@@ -353,27 +353,27 @@
 <p>(Definition)：对于测度空间<span class="math inline">\((X,M,\mu)\)</span>，</p>
 <ol type="1">
 <li><p><span class="math inline">\(1 \leq p &lt; \infty\)</span>时，定义<span class="math inline">\(L^p(X, \mu):=\{f:||f||_{L^p(X,\mu)} &lt; \infty\}\)</span></p></li>
-<li><p><span class="math inline">\(p=\infty\)</span>时，定义<span class="math inline">\(L^p(X, \mu) := \{f:\exists M \in (0,\infty), \exists E\sub X, \mu(E)=0, \forall x \in X \setminus E, |f(x)|\leq M\}\)</span></p></li>
+<li><p><span class="math inline">\(p=\infty\)</span>时，定义<span class="math inline">\(L^p(X, \mu) := \{f:\exists M \in (0,\infty), \exists E\subset X, \mu(E)=0, \forall x \in X \setminus E, |f(x)|\leq M\}\)</span></p></li>
 <li><p>对可测函数<span class="math inline">\(f\)</span>，定义<span class="math inline">\(a_f:(0,\infty) \to [0,\infty]\)</span>满足<span class="math inline">\(a_f(t) = \mu(\{|f(x)|&gt;t\})\)</span>为<span class="math inline">\(f\)</span>的<strong>分布函数</strong></p></li>
 <li><p><span class="math inline">\(1\leq p &lt; \infty\)</span>时，对可测函数<span class="math inline">\(f\)</span>，定义<span class="math inline">\(||f||_{L^{p,\infty}(X, \mu)} = \sup_{t&gt;0} t(a_f(t)^{1/p})\)</span></p>
 <p>定义弱<span class="math inline">\(L^p\)</span>空间为<span class="math inline">\(L^{p,\infty}(X,\mu):= \{ f:||f||_{L^{p,\infty}(X,\mu) &lt; \infty} \}\)</span></p></li>
 <li><p><span class="math inline">\(p=\infty\)</span>时，弱<span class="math inline">\(L^{\infty}\)</span>空间就指<span class="math inline">\(L^{\infty}\)</span>空间</p></li>
 </ol>
 <blockquote>
-<p>对<span class="math inline">\(1 \leq p \leq \infty\)</span>，<span class="math inline">\(L^{p}(X, \mu) \sub L^{p,\infty}(X, \mu)\)</span></p>
+<p>对<span class="math inline">\(1 \leq p \leq \infty\)</span>，<span class="math inline">\(L^{p}(X, \mu) \subset L^{p,\infty}(X, \mu)\)</span></p>
 </blockquote>
 <p>证明：我们只需要证明<span class="math inline">\(\forall t &gt; 0, a_f(t) t^p \leq ||f||_{L^p}^p\)</span></p>
 <p>注意到<span class="math inline">\(a_f(t) = \int_{|f|&gt;t} 1d\mu \leq \int_{|f|&gt;t} \frac{|f(x)|^p}{t^p} d \mu \leq t^{-p} \int_X f|^p d \mu = t^{-p} ||f||_{L^p}^p\)</span>，<span class="math inline">\(\square\)</span></p>
 <blockquote>
 <p>令<span class="math inline">\(1 \leq p &lt; \infty\)</span>，<span class="math inline">\(f \in L^p(\mathbb{R^d})\)</span>，那么<span class="math inline">\(||f||_{L^p}^p = \int_0^{\infty} p t^{p-1} a_f(t) dt\)</span></p>
 </blockquote>
-<p>证明：<span class="math inline">\(\int_0^{\infty} p t^{p-1} a_f(t) dt = \int_0^{\infty} pt^{p-1} \int_{\mathbb{R}^d} 1_{|f|&gt;t} dxdt \overset{Fubini}{=} \int_{\mathbb{R}^d} \int_0^{\infty} pt^{p-1} 1_{f|&gt;t} dt dx = \int_{\mathbb{R}^d} \int_0^{|f(x)|} pt^{p-1} dt dx=\int_{mathbb{R}^d} |f(x)|^p dx\)</span>，<span class="math inline">\(\square\)</span></p>
+<p>证明：<span class="math inline">\(\int_0^{\infty} p t^{p-1} a_f(t) dt = \int_0^{\infty} pt^{p-1} \int_{\mathbb{R}^d} 1_{|f|&gt;t} dxdt \overset{Fubini}{=} \int_{\mathbb{R}^d} \int_0^{\infty} pt^{p-1} 1_{f|&gt;t} dt dx = \int_{\mathbb{R}^d} \int_0^{|f(x)|} pt^{p-1} dt dx=\int_{\mathbb{R}^d} |f(x)|^p dx\)</span>，<span class="math inline">\(\square\)</span></p>
 <h3 id="微分">微分</h3>
 <p>这里的部分对应的是Rudin的书的Chapter 7</p>
 <h4 id="hardy-littlewood极大函数">Hardy-Littlewood极大函数</h4>
 <p>(Definition)：</p>
 <ol type="1">
-<li>定义<span class="math inline">\(L_{loc}^p(E) := \{f \in L^p(K), \forall K compact \sub E\}\)</span>，称该集合中的元素为<span class="math inline">\(L^p\)</span><strong>局部可积函数</strong></li>
+<li>定义<span class="math inline">\(L_{loc}^p(E) := \{f \in L^p(K), \forall K compact \subset E\}\)</span>，称该集合中的元素为<span class="math inline">\(L^p\)</span><strong>局部可积函数</strong></li>
 <li>对<span class="math inline">\(f \in L_{loc}^1(\mathbb{R}^d)\)</span>，称<span class="math inline">\(Mf(x) = \sup_{r&gt;0} \frac{1}{|B(x,r)|} \int_{B(x,r)} |f(y)| dy\)</span>，这个函数称为<strong>Hardy-Littlewood极大函数</strong></li>
 </ol>
 <blockquote>
@@ -404,10 +404,10 @@
 <p>任取<span class="math inline">\(K \subset \{Mf(x)&gt;\epsilon\}\)</span>，对<span class="math inline">\(x \in K\)</span>，存在<span class="math inline">\(r_x\)</span>，使得<span class="math inline">\(|B(x,r_x)| &lt; \epsilon^{-1} \int_{B(x,r_x)} |f(y)| dy\)</span>，根据<span class="math inline">\(K\)</span>的紧性，存在<span class="math inline">\(\{B(x,r_x)\}\)</span>的一个有限子覆盖，再根据下面的引理</p>
 <hr />
 <ul>
-<li>(Vitali covering lemma)：设<span class="math inline">\(W \sub \bigcup_{i=1}^N B(x_0,r_i)\)</span>，那么存在<span class="math inline">\(I \subset \{1,2,...,N\}\)</span>，使得
+<li>(Vitali covering lemma)：设<span class="math inline">\(W \subset \bigcup_{i=1}^N B(x_0,r_i)\)</span>，那么存在<span class="math inline">\(I \subset \{1,2,...,N\}\)</span>，使得
 <ol type="1">
 <li><span class="math inline">\(B(x_i,r_i) \cap B(x_j,r_j) = \emptyset, \forall i \neq j\)</span></li>
-<li><span class="math inline">\(W \sub \bigcup_{i \in I} B(x_i,3r_i)\)</span></li>
+<li><span class="math inline">\(W \subset \bigcup_{i \in I} B(x_i,3r_i)\)</span></li>
 </ol></li>
 </ul>
 <p>证明：我们依次取出还没有和已经被选择出的球相交的球中半径最大的球即可，1很容易保证，对于2，注意到半径更大的球扩大3倍之后可以轻易把原本的球覆盖即可，<span class="math inline">\(\square\)</span></p>
@@ -432,11 +432,11 @@
 <p>证明：不妨设<span class="math inline">\(f \in L^1\)</span>，否则考虑<span class="math inline">\(f_n = f 1_{\overline{B(0,n)}} \in L^1\)</span></p>
 <p>记<span class="math inline">\(M_r f(x) = \frac{1}{B(x,r)} \int_{B(x,r)} |f(y) - f(x)| dy\)</span>，<span class="math inline">\(f^*(x) = \lim_{r \to 0^+} f_r(x)\)</span>，我们证明<span class="math inline">\(f^* \overset{a.e}{ \to } 0\)</span></p>
 <p>任取<span class="math inline">\(\epsilon &gt; 0\)</span>，存在<span class="math inline">\(g \in C_c(\mathbb{R}^d)\)</span>，使得<span class="math inline">\(||f-g||_{L^1} &lt; \epsilon\)</span>，记<span class="math inline">\(h = f-g\)</span>，注意到<span class="math inline">\(M_r f = M_r(g + h) \leq M_rg + M_rh\)</span>，再注意到<span class="math inline">\(g^* = 0\)</span>，我们有<span class="math inline">\(f^* \leq h^*\)</span>。展开<span class="math inline">\(M_r h\)</span>，得到<span class="math inline">\(M_r h \leq M h + |h|\)</span>，于是<span class="math inline">\(f^* \leq h^* \leq Mh + |h|\)</span></p>
-<p>那么，任给<span class="math inline">\(\lambda &gt; 0\)</span>，<span class="math inline">\(\{f^* &gt; \lambda\} \sub \{Mh &gt; \lambda/2\}\cup \{h &gt; \lambda / 2\}\)</span>，于是$m({f^* &gt; }) m({Mh &gt; /2}) + m({h &gt; / 2})||h||_{L^1}  (3^d+1)  (3^d+1) $</p>
+<p>那么，任给<span class="math inline">\(\lambda &gt; 0\)</span>，<span class="math inline">\(\{f^* &gt; \lambda\} \subset \{Mh &gt; \lambda/2\}\cup \{h &gt; \lambda / 2\}\)</span>，于是$m({f^* &gt; }) m({Mh &gt; /2}) + m({h &gt; / 2})||h||_{L^1}  (3^d+1)  (3^d+1) $</p>
 <p>令<span class="math inline">\(\epsilon \to 0\)</span>，再令$ <span class="math inline">\(，我们得到\)</span>f^*  0<span class="math inline">\(，\)</span>$</p>
 <p>下面这个定理揭示了Lebesgue点具有和连续点相近的性质</p>
 <blockquote>
-<p>对<span class="math inline">\(x \in \mathbb{R}^d\)</span>，设<span class="math inline">\(\{E_n\}_{n=1}^\infty\)</span>为一族Borel集，并且<span class="math inline">\(x \in E_n \sub B(x,r_n)\)</span>，其中<span class="math inline">\(\lim_{n \to \infty} r_n = 0\)</span></p>
+<p>对<span class="math inline">\(x \in \mathbb{R}^d\)</span>，设<span class="math inline">\(\{E_n\}_{n=1}^\infty\)</span>为一族Borel集，并且<span class="math inline">\(x \in E_n \subset B(x,r_n)\)</span>，其中<span class="math inline">\(\lim_{n \to \infty} r_n = 0\)</span></p>
 <p>此外，存在<span class="math inline">\(\alpha &gt; 0\)</span>，使得<span class="math inline">\(m(E_n(x)) \geq \alpha |B(x,r_n)|\)</span>，如果<span class="math inline">\(f \in L_{lov}^1(\mathbb{R}^d)\)</span>，那么<span class="math inline">\(f(x) = \lim \frac{1}{m(E_n(x))} \int _{E_n(x)} f dm\)</span>对所有的Lebesgue点<span class="math inline">\(x\)</span>成立（从而几乎处处成立）</p>
 </blockquote>
 <p>证明：<span class="math inline">\(\frac{1}{m(E_n(x))} \int_{E_n(x)} |f(y)-f(x)| dy \leq \frac{1}{\alpha m(B(x,r_n))} \int_{B(x,r_n)} |f(y)-f(x)| dy\to 0\)</span>，从而<span class="math inline">\(f(x) = \lim \frac{1}{m(E_n(x))} \int _{E_n(x)} f dm\)</span>，<span class="math inline">\(\square\)</span></p>
@@ -449,17 +449,17 @@
 <h4 id="vitali-covering-theorem">Vitali Covering Theorem</h4>
 <p>在之前，我们已经介绍了Vitali的一个覆盖定理</p>
 <ul>
-<li>设<span class="math inline">\(W \sub \bigcup_{i=1}^N B(x_0,r_i)\)</span>，那么存在<span class="math inline">\(I \subset \{1,2,...,N\}\)</span>，使得
+<li>设<span class="math inline">\(W \subset \bigcup_{i=1}^N B(x_0,r_i)\)</span>，那么存在<span class="math inline">\(I \subset \{1,2,...,N\}\)</span>，使得
 <ol type="1">
 <li><span class="math inline">\(B(x_i,r_i) \cap B(x_j,r_j) = \emptyset, \forall i \neq j\)</span></li>
-<li><span class="math inline">\(W \sub \bigcup_{i \in I} B(x_i,3r_i)\)</span></li>
+<li><span class="math inline">\(W \subset \bigcup_{i \in I} B(x_i,3r_i)\)</span></li>
 </ol></li>
 </ul>
 <p>为了接下来的讨论，我们需要对这个覆盖定理作一些推广</p>
 <blockquote>
-<p>(Vitali Covering Theorem)：设<span class="math inline">\(\mathcal{F}\)</span>是一个闭球族，满足<span class="math inline">\(\sup_{B \in \mathcal{F}}\{r(B)\} &lt; \infty\)</span>，那么存在<span class="math inline">\(\mathcal{G} \sub \mathcal{F}\)</span>，使得</p>
+<p>(Vitali Covering Theorem)：设<span class="math inline">\(\mathcal{F}\)</span>是一个闭球族，满足<span class="math inline">\(\sup_{B \in \mathcal{F}}\{r(B)\} &lt; \infty\)</span>，那么存在<span class="math inline">\(\mathcal{G} \subset \mathcal{F}\)</span>，使得</p>
 <ul>
-<li><span class="math inline">\(\bigcup_{B \in \mathcal{F}} B \sub \bigcup_{B \in \mathcal{G}} 5B\)</span></li>
+<li><span class="math inline">\(\bigcup_{B \in \mathcal{F}} B \subset \bigcup_{B \in \mathcal{G}} 5B\)</span></li>
 <li><span class="math inline">\(\mathcal{G}\)</span>中闭球两两不交</li>
 </ul>
 </blockquote>
@@ -468,7 +468,7 @@
 <p>定义<span class="math inline">\(\mathcal{G}_1\)</span>为<span class="math inline">\(\mathcal{F}_1\)</span>的极大两两不交的闭球族，根据Zorn's lemma，这个集合存在；之后，定义<span class="math inline">\(\mathcal{\widetilde{F}_1} := \{B \in \mathcal{F}_2 : \forall \widetilde{B} \in \mathcal{G}_1, \widetilde{B} \cap B = \emptyset\}\)</span>，<span class="math inline">\(\mathcal{G}_2\)</span>为<span class="math inline">\(\mathcal{\widetilde{F}_2}\)</span>的极大两两不交的闭球族，依次类推，我们定义出<span class="math inline">\(\mathcal{\widetilde{F}_k},\mathcal{G}_k\)</span></p>
 <p>最后，令<span class="math inline">\(\mathcal{G} = \bigcup_{k=1}^{\infty} \mathcal{G}_k\)</span>即可</p>
 <p>自然<span class="math inline">\(\mathcal{G}\)</span>中元素两两不交，我们下面证明性质1，任取<span class="math inline">\(B \in \mathcal{F}\)</span>，假设<span class="math inline">\(B \in \mathcal{F}_k\)</span></p>
-<p>如果<span class="math inline">\(B \in \mathcal{\widetilde{F}}_k\)</span>，那么存在<span class="math inline">\(\widetilde{B} \in \mathcal{G}_k\)</span>使得<span class="math inline">\(B \cap \widetilde{B}\neq \emptyset\)</span>，如果<span class="math inline">\(B \in \widetilde{F}_k \setminus \mathcal{F}_k\)</span>，那么存在<span class="math inline">\(\widetilde{B} \in G_j(j&lt;k)\)</span>使得<span class="math inline">\(B \cap \widetilde{B}\neq \emptyset\)</span>，无论哪一种情况，存在<span class="math inline">\(\widetilde{B} \in \mathcal{G}\)</span>使得<span class="math inline">\(B\cap \widetilde{B} \neq \emptyset\)</span>且<span class="math inline">\(r(B)&lt;2r(\widetilde{B})\)</span>，此时<span class="math inline">\(B \sub 5\widetilde{B}\)</span>，<span class="math inline">\(\square\)</span></p>
+<p>如果<span class="math inline">\(B \in \mathcal{\widetilde{F}}_k\)</span>，那么存在<span class="math inline">\(\widetilde{B} \in \mathcal{G}_k\)</span>使得<span class="math inline">\(B \cap \widetilde{B}\neq \emptyset\)</span>，如果<span class="math inline">\(B \in \widetilde{F}_k \setminus \mathcal{F}_k\)</span>，那么存在<span class="math inline">\(\widetilde{B} \in G_j(j&lt;k)\)</span>使得<span class="math inline">\(B \cap \widetilde{B}\neq \emptyset\)</span>，无论哪一种情况，存在<span class="math inline">\(\widetilde{B} \in \mathcal{G}\)</span>使得<span class="math inline">\(B\cap \widetilde{B} \neq \emptyset\)</span>且<span class="math inline">\(r(B)&lt;2r(\widetilde{B})\)</span>，此时<span class="math inline">\(B \subset 5\widetilde{B}\)</span>，<span class="math inline">\(\square\)</span></p>
 <p>(Definition)：设闭球族<span class="math inline">\(\mathcal{F}\)</span>为<span class="math inline">\(E\)</span>的覆盖，如果<span class="math inline">\(\forall x \in E\)</span>，<span class="math inline">\(\inf_{x \in B \in \mathcal{F}} \{r(B)\} = 0\)</span>，那么我们称<span class="math inline">\(\mathcal{F}\)</span>为<span class="math inline">\(E\)</span>的一个<strong>细覆盖</strong></p>
 <p>在细覆盖的条件下，我们可以给出Vitali构造的更强的性质：</p>
 <blockquote>
@@ -479,7 +479,7 @@
 <p>证明：<span class="math inline">\(\mathcal{G}\)</span>的取法和Vitali定理的构造是一样的，固定<span class="math inline">\(B_1,...,B_k\)</span></p>
 <p>对<span class="math inline">\(x \in E \setminus (\bigcup_{1\leq i\leq k} B_i)\)</span>，其属于开集<span class="math inline">\((\bigcup_{i=1}^k B_i)^c\)</span>，因此存在<span class="math inline">\(\delta &gt; 0\)</span>，使得<span class="math inline">\(B(x,\delta) \subset (\bigcup_{i=1}^k B_i)^c\)</span></p>
 <p>由于<span class="math inline">\(\mathcal{F}\)</span>是<span class="math inline">\(E\)</span>的细覆盖，因此存在<span class="math inline">\(B_x \in \mathcal{F}\)</span>，使得<span class="math inline">\(B_x \subset B(x,\delta)\)</span>，从而<span class="math inline">\(B_x \cap (\bigcup_{i=1}^k B_i) = \emptyset\)</span></p>
-<p>根据<span class="math inline">\(\mathcal{G}\)</span>的性质，存在<span class="math inline">\(\widetilde{B} \in \mathcal{G} \setminus \bigcup B_i\)</span>，使得<span class="math inline">\(B_x \sub 5\widetilde{B}\)</span>，这就证明了结论，<span class="math inline">\(\square\)</span></p>
+<p>根据<span class="math inline">\(\mathcal{G}\)</span>的性质，存在<span class="math inline">\(\widetilde{B} \in \mathcal{G} \setminus \bigcup B_i\)</span>，使得<span class="math inline">\(B_x \subset 5\widetilde{B}\)</span>，这就证明了结论，<span class="math inline">\(\square\)</span></p>
 <p>如果我们有细覆盖，实际上我们还能揭示<span class="math inline">\(\mathcal{G}\)</span>作为一个子族，它的测度和<span class="math inline">\(\mathcal{F}\)</span>的测度是相近的：</p>
 <blockquote>
 <p>设闭球族<span class="math inline">\(\mathcal{F}\)</span>为<span class="math inline">\(E\)</span>的细覆盖，且<span class="math inline">\(\sup_{B \subset \mathcal{F}}{r(B)} &lt; \infty\)</span>，<span class="math inline">\(m^*(E) &lt; \infty\)</span>时，存在可数子族<span class="math inline">\(\mathcal{G} = \{B_k\}\)</span>满足Vitali覆盖定理中的条件，并且<span class="math inline">\(m^*(E \setminus \bigcup_{k} B_k) = 0\)</span></p>
@@ -503,8 +503,8 @@
 <li>证明<span class="math inline">\(\{D^+ f &gt; D_- f\}\)</span>为零测集，注意到四个导数<span class="math inline">\(\geq 0\)</span>，我们只需要证明对<span class="math inline">\(r, s \in \mathbb{Q}\)</span>，<span class="math inline">\(\{D^+ f &gt; r &gt; s &gt; D_- f\}\)</span>是零测集即可，记该集合为<span class="math inline">\(E_{r,s}\)</span></li>
 </ol>
 <p>由于<span class="math inline">\(f\)</span>为几乎处处连续函数，因此为可测函数，从而<span class="math inline">\(E_{r,s}\)</span>为可测集，那么我们可以取开集<span class="math inline">\(G\)</span>，使得<span class="math inline">\(m(G) &lt; (1+\epsilon) m(E_{r,s})\)</span></p>
-<p><span class="math inline">\(\forall x \in E_{r,s}\)</span>，<span class="math inline">\(D_- f(x) &lt; s\)</span>，根据下极限的性质，我们可以取出一列子列<span class="math inline">\(\{\delta_k\} \to 0\)</span>，使得<span class="math inline">\(\frac{f(x-\delta_k) - f(x)}{-\delta_k} &lt; s\)</span>并且<span class="math inline">\([x-\delta_k,x] \sub G\)</span>，记<span class="math inline">\(\mathcal{F}_x = \{[x-\delta_k, x]\}\)</span>，<span class="math inline">\(\mathcal{F}_1 = \bigcup_{x \in E_{r,s}} \mathcal{F}_x\)</span>，<span class="math inline">\(\mathcal{F}_1\)</span>是<span class="math inline">\(E_{r,s}\)</span>的细覆盖，我们取其Vitali子族<span class="math inline">\(\mathcal{G}_1\)</span></p>
-<p>记<span class="math inline">\(E_{r,s}&#39; = E_{r,s} \cap (\bigcup_{I \in \mathcal{G}_1} I)\)</span>，类似上面的讨论，对于<span class="math inline">\(y \in E_{r,s}&#39;\)</span>，我们可以取一列子列<span class="math inline">\(\{\sigma_k\} \to 0\)</span>，使得<span class="math inline">\(\frac{f(y+\sigma_k) - f(y)}{\sigma_k} &gt; r\)</span>并且<span class="math inline">\([y,y+\sigma_k] \sub [x_n-\delta_n,x_n] \in \mathcal{G}_1\)</span>，同样的，这样的区间的全体构成细覆盖，取其Vitali子族<span class="math inline">\(\mathcal{G}_2\)</span></p>
+<p><span class="math inline">\(\forall x \in E_{r,s}\)</span>，<span class="math inline">\(D_- f(x) &lt; s\)</span>，根据下极限的性质，我们可以取出一列子列<span class="math inline">\(\{\delta_k\} \to 0\)</span>，使得<span class="math inline">\(\frac{f(x-\delta_k) - f(x)}{-\delta_k} &lt; s\)</span>并且<span class="math inline">\([x-\delta_k,x] \subset G\)</span>，记<span class="math inline">\(\mathcal{F}_x = \{[x-\delta_k, x]\}\)</span>，<span class="math inline">\(\mathcal{F}_1 = \bigcup_{x \in E_{r,s}} \mathcal{F}_x\)</span>，<span class="math inline">\(\mathcal{F}_1\)</span>是<span class="math inline">\(E_{r,s}\)</span>的细覆盖，我们取其Vitali子族<span class="math inline">\(\mathcal{G}_1\)</span></p>
+<p>记<span class="math inline">\(E_{r,s}&#39; = E_{r,s} \cap (\bigcup_{I \in \mathcal{G}_1} I)\)</span>，类似上面的讨论，对于<span class="math inline">\(y \in E_{r,s}&#39;\)</span>，我们可以取一列子列<span class="math inline">\(\{\sigma_k\} \to 0\)</span>，使得<span class="math inline">\(\frac{f(y+\sigma_k) - f(y)}{\sigma_k} &gt; r\)</span>并且<span class="math inline">\([y,y+\sigma_k] \subset [x_n-\delta_n,x_n] \in \mathcal{G}_1\)</span>，同样的，这样的区间的全体构成细覆盖，取其Vitali子族<span class="math inline">\(\mathcal{G}_2\)</span></p>
 <ol start="2" type="1">
 <li>根据<span class="math inline">\(\mathcal{G}_1, \mathcal{G}_2\)</span>的选取方式，有如下的性质</li>
 </ol>
@@ -514,7 +514,7 @@
 <li><p><span class="math inline">\(m(\bigcup_{I \in \mathcal{G_2}} I) = \sum_{i=1}^{\infty} \sigma_i \geq m(\bigcup_{I \in \mathcal{G_2}} I \cap E_{r,s}&#39;) =m(E_{r,s}&#39;) = m(E_{r,s})\)</span></p></li>
 <li><p><span class="math inline">\(\forall [x_n - \delta_n,x_n] \in \mathcal{G}_1\)</span>，<span class="math inline">\(f(x_n) - f(x_n - \delta_n) &lt; s \delta_n\)</span></p></li>
 <li><p><span class="math inline">\(\forall [y_m,y_m + \sigma_m] \in \mathcal{G}_2\)</span>，<span class="math inline">\(f(y_m + \sigma_m) - f(y_m) &gt; r \sigma_m\)</span></p></li>
-<li><p><span class="math inline">\([y_m,y_m+\sigma_m] \sub [x_n-\delta_n,x_n]\)</span>并且<span class="math inline">\([y_m,y_m+\sigma_m]\)</span>不交</p></li>
+<li><p><span class="math inline">\([y_m,y_m+\sigma_m] \subset [x_n-\delta_n,x_n]\)</span>并且<span class="math inline">\([y_m,y_m+\sigma_m]\)</span>不交</p></li>
 </ol>
 <p><span class="math inline">\(\sum_{m=1}^{\infty} f(y_m + \sigma_m) - f(y_m) \overset{5}{&gt;} r\sum_{m=1}^{\infty} \sigma_m \overset{3}{\geq} rm(E_{r,s})\)</span></p>
 <p>另一方面，<span class="math inline">\(\sum_{m=1}^{\infty} f(y_m + \sigma_m) - f(y_m) \overset{6}{\leq} \sum_{n=1}^{\infty} f(x_n) - f(x_n - \delta_n) \overset{4}{\leq} s \sum \delta_n \overset{1}{\leq} s(1+\epsilon) m(E_{r,s})\)</span></p>
