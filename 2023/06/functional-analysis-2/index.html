@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/all.min.css" integrity="sha256-2H3fkXt6FEmrReK448mDVGKb3WW2ZZw35gI7vqHOE4Y=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"sremoon.github.io","root":"/","images":"/images","scheme":"Gemini","version":"8.6.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"b2t":true,"scrollpercent":true},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<meta name="description" content="记一些结论算了">
+<meta property="og:type" content="article">
+<meta property="og:title" content="functional-analysis-2">
+<meta property="og:url" content="http://sremoon.github.io/2023/06/functional-analysis-2/index.html">
+<meta property="og:site_name" content="SreMoon&#39;s Lake">
+<meta property="og:description" content="记一些结论算了">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-06-10T09:47:53.000Z">
+<meta property="article:modified_time" content="2023-06-10T17:00:51.411Z">
+<meta property="article:author" content="remoon">
+<meta property="article:tag" content="functional-analysis">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://sremoon.github.io/2023/06/functional-analysis-2/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://sremoon.github.io/2023/06/functional-analysis-2/","path":"2023/06/functional-analysis-2/","title":"functional-analysis-2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>functional-analysis-2 | SreMoon's Lake</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">SreMoon's Lake</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">conjugate but not similar</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#hilbert%E7%A9%BA%E9%97%B4"><span class="nav-text">Hilbert空间</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%80%E8%87%B4%E5%87%B8"><span class="nav-text">一致凸</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B4%E5%92%8C%E5%88%86%E8%A7%A3"><span class="nav-text">直和分解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B9%BA%E6%AD%A3%E5%9F%BA"><span class="nav-text">幺正基</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#riesz%E8%A1%A8%E7%A4%BA%E5%AE%9A%E7%90%86"><span class="nav-text">Riesz表示定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E4%BC%B4%E7%AE%97%E5%AD%90"><span class="nav-text">自伴算子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B4%A7%E7%AE%97%E5%AD%90"><span class="nav-text">紧算子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9F%BA%E7%A1%80-1"><span class="nav-text">基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%B0%B1%E8%AE%BA"><span class="nav-text">谱论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E4%BC%B4%E7%AE%97%E5%AD%90-1"><span class="nav-text">自伴算子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-text">例子</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#lpab"><span class="nav-text">\(L^p[a,b]\)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cab"><span class="nav-text">\(C[a,b]\)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9B%B6%E6%95%A3%E4%BE%8B%E5%AD%90"><span class="nav-text">零散例子</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-overview">
+            <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">remoon</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/sremoon" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;sremoon" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://sremoon.github.io/2023/06/functional-analysis-2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="remoon">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="SreMoon's Lake">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          functional-analysis-2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2023-06-10 17:47:53" itemprop="dateCreated datePublished" datetime="2023-06-10T17:47:53+08:00">2023-06-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2023-06-11 01:00:51" itemprop="dateModified" datetime="2023-06-11T01:00:51+08:00">2023-06-11</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/notes/" itemprop="url" rel="index"><span itemprop="name">notes</span></a>
+        </span>
+    </span>
+
+  
+      </div>
+      <div class="post-meta">
+    <span class="post-meta-item" title="Symbols count in article">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">Symbols count in article: </span>
+      <span>7.9k</span>
+    </span>
+    <span class="post-meta-item" title="Reading time">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">Reading time &asymp;</span>
+      <span>7 mins.</span>
+    </span>
+</div>
+
+            <div class="post-description">记一些结论算了</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <span id="more"></span>
+<p>此节课中，将先完善这门课的工具，之后进行一些经典空间的分析。</p>
+<h3 id="hilbert空间">Hilbert空间</h3>
+<h4 id="基础">基础</h4>
+<ul>
+<li>内积空间：满足正定性、复共轭对称性、复共轭双线性性的玩意就是内积，带着内积的空间就是内积空间</li>
+</ul>
+<p>​ 内积空间下有重要的Cauchy不等式，<span class="math inline">\(|\langle x, y\rangle| \leq ||x||\cdot ||y||\)</span>。值得说明的是，在之前我们用符号<span class="math inline">\(\langle x, y\rangle\)</span>时，<span class="math inline">\(y\)</span>有时指<span class="math inline">\(E^*\)</span>中的元素，尽管意义不同，此时也有<span class="math inline">\(|\langle x, y\rangle| \leq ||x||\cdot ||y||\)</span>。通过Riesz表示定理，我们可以把后式看作Cauchy不等式的推广。</p>
+<p>​ 内积空间可以通过<span class="math inline">\(||\cdot|| = \sqrt{\langle \cdot, \cdot \rangle}\)</span>导出范数空间。范数空间中的范数满足平行四边形法则<span class="math inline">\(||x+y||^2 + ||x-y||^2 = 2(||x||^2 + ||y||^2)\)</span>时，可以通过极化恒等式导出内积。内积是连续函数。在内积空间中，保内积和保范映射等价。</p>
+<ul>
+<li><p>同构：称<span class="math inline">\(H_1,H_2\)</span>同构，如果存在<span class="math inline">\(U:H_1 \to H_2\)</span>是线性双射并且是等距同构。</p></li>
+<li><p>Hilbert空间：完备的内积空间</p></li>
+<li><p>正交：如果<span class="math inline">\(\langle x, y \rangle = 0\)</span>，记为<span class="math inline">\(x \perp y\)</span>，称<span class="math inline">\(x\)</span>与<span class="math inline">\(y\)</span>正交。</p>
+<p><span class="math inline">\(x \perp y\)</span>时，<span class="math inline">\(||x+y||^2 = ||x||^2 + ||y||^2\)</span>。</p></li>
+<li><p>正交补：设<span class="math inline">\(X\)</span>是子空间，<span class="math inline">\(X^{\perp} := \{z : z \perp X\}\)</span>称为<span class="math inline">\(X\)</span>的<strong>正交补</strong></p>
+<p>因<span class="math inline">\(X^{\perp} = \overline{\text{span}(X)}^{\perp}\)</span>，且正交补是闭子空间</p></li>
+</ul>
+<h4 id="一致凸">一致凸</h4>
+<ul>
+<li>一致凸：设<span class="math inline">\(E\)</span>赋范，若<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，<span class="math inline">\(\exists \delta &gt; 0\)</span>，当<span class="math inline">\(x, y\)</span>满足<span class="math inline">\(||x||=||y|| = 1\)</span>且<span class="math inline">\(||x-y|| &gt; \epsilon\)</span>时，有<span class="math inline">\(||\frac{1}{2}(x+y)|| &lt; 1-\delta\)</span>，则称<span class="math inline">\(E\)</span>一致凸</li>
+</ul>
+<p>​ 一致凸具有较良好的性质</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>是一致凸Banach空间，如果<span class="math inline">\(\{x_n\}\)</span>弱收敛于<span class="math inline">\(x_0\)</span>且<span class="math inline">\(\{||x_n||\}\)</span>收敛于<span class="math inline">\(||x_0||\)</span>，那么<span class="math inline">\(\{x_n\}\)</span>收敛于<span class="math inline">\(x_0\)</span></p>
+</blockquote>
+<p>​ 内积空间根据平行四边形法则，是一致凸的空间</p>
+<h4 id="直和分解">直和分解</h4>
+<blockquote>
+<p>（正交投影定理）：设<span class="math inline">\(H\)</span>是一致凸赋范空间，<span class="math inline">\(M\)</span>是<span class="math inline">\(E\)</span>的完备凸子集，任取<span class="math inline">\(x \in E\)</span>，存在唯一的<span class="math inline">\(y \in M\)</span>使<span class="math inline">\(||x-y||=d(x, M)\)</span></p>
+</blockquote>
+<p>​ 根据正交投影定理，可得</p>
+<blockquote>
+<p>（正交分解定理）：设<span class="math inline">\(H\)</span>是内积空间，<span class="math inline">\(W\)</span>是<span class="math inline">\(H\)</span>的完备子空间，则<span class="math inline">\(H = W \oplus W^{\perp}\)</span></p>
+</blockquote>
+<p>​ 该定理的推论为：对Hilbert空间<span class="math inline">\(H\)</span>以及闭子空间<span class="math inline">\(W\)</span>，<span class="math inline">\(H = W \oplus W^{\perp}\)</span></p>
+<h4 id="幺正基">幺正基</h4>
+<ul>
+<li>幺正系：在Hilbert空间中，设<span class="math inline">\(\{e_j\}\)</span>为两两正交的单位向量，则称<span class="math inline">\(\{e_j\}\)</span>为幺正系</li>
+</ul>
+<p>​ 有如下重要的不等式与等式</p>
+<blockquote>
+<p>（Bessel不等式）：设<span class="math inline">\(\{e_n\}\)</span>为幺正系，<span class="math inline">\(\sum_{n=1}^{\infty} |\langle x, e_n \rangle|^2 \leq ||x||^2\)</span>且<span class="math inline">\(\sum_{n=1}^{\infty} \langle x, e_n\rangle e_n\)</span>无条件收敛</p>
+</blockquote>
+<blockquote>
+<p>（Parseval等式）：<span class="math inline">\(\sum_{n=1}^{\infty} |\langle x, e_n\rangle|^2 = ||x||^2\)</span>当且仅当<span class="math inline">\(\sum_{n=1}^{\infty} \langle x,e_n\rangle e_n = x\)</span></p>
+</blockquote>
+<p>​ 根据Bessel不等式，我们可以说明对幺正系<span class="math inline">\(\{e_j\}\)</span>，<span class="math inline">\(\{\langle x, e_j\rangle\}\)</span>中至多有可数个非零项，并且可以定义<span class="math inline">\(\sum_{j} \langle x,e_j\rangle e_j\)</span></p>
+<ul>
+<li>幺正基：设幺正系<span class="math inline">\(\{e_j\}\)</span>满足<span class="math inline">\(\forall x, x = \sum_{j} \langle x, e_j \rangle e_j\)</span>，则称<span class="math inline">\(\{e_j\}\)</span>为幺正基</li>
+</ul>
+<p>​ 幺正基有下列等价刻画：（1）<span class="math inline">\(\{e_j\}\)</span>为极大幺正系（2）<span class="math inline">\(\forall x, ||x||^2 = \sum_j |\langle x, e_j\rangle|^2\)</span> （3）<span class="math inline">\(\overline{\text{span}(\{e_j\})}=H\)</span></p>
+<p>​ 幺正基之间互相等势，称幺正基的维数为Hilbert维数。和有限维情况类似，两个Hilbert空间同构当且仅当Hilbert维数相同。而一个有趣的事实是Hilbert空间可分当且仅当其Hilbert维数至多可数。</p>
+<h4 id="riesz表示定理">Riesz表示定理</h4>
+<p>​ 固定内积中的<strong>第二维</strong><span class="math inline">\(y\)</span>，则<span class="math inline">\(\langle x, y\rangle\)</span>可以视为关于<span class="math inline">\(x\)</span>的线性泛函，且因<span class="math inline">\(\langle x, y\rangle \leq ||x||\cdot ||y||\)</span>，该线性泛函为有界的。我们设该映射为<span class="math inline">\(\tau\)</span>。<span class="math inline">\(\tau\)</span>是复共轭线性保距映射，且<span class="math inline">\(\ker(\tau y) = \{y\}^{\perp}\)</span>。</p>
+<p>​ Riesz表示定理说明内积作为双线性型，其伴随表示和空间中的伴随映射存在一一映射</p>
+<blockquote>
+<p>（Riesz表示定理）设<span class="math inline">\(H\)</span>是Hilbert空间，<span class="math inline">\(f \in H^*\)</span>，那么存在唯一的<span class="math inline">\(y \in H\)</span>，使得<span class="math inline">\(\tau y = f\)</span></p>
+</blockquote>
+<p>​ 根据Riesz表示定理，<span class="math inline">\(\tau:H \to H^*\)</span>实为复共轭线性等距同构，因而不难得到：Hilbert空间是自反的Banach空间</p>
+<h4 id="自伴算子">自伴算子</h4>
+<ul>
+<li>伴随映射：在Hilbert空间<span class="math inline">\(H_1, H_2\)</span>中，设<span class="math inline">\(A \in L(H_1, H_2)\)</span>满足<span class="math inline">\(\forall x \in H_1, y \in H_2\)</span>，<span class="math inline">\(\langle Ax, y\rangle = \langle x, A^*y\rangle\)</span>，那么称<span class="math inline">\(A^*\)</span>为<span class="math inline">\(A\)</span>之<strong>伴随映射</strong></li>
+</ul>
+<p>​ 这里的<span class="math inline">\(\langle \cdot, \cdot\rangle\)</span>对应内积，实际上<span class="math inline">\(A^* = \tau_1^{-1} \bar{A}^* \tau_2 : H_2 \to H_1\)</span>。这里<span class="math inline">\(\bar{A}^*\)</span>是在赋范空间意义下的伴随映射，性质也因此稍有不同：</p>
+<p>​ （1）<span class="math inline">\(A \to A^*\)</span>是复共轭线性保距映射（2）<span class="math inline">\((BA)^* = A^*B^*\)</span> （3）<span class="math inline">\(A^{**} = A\)</span> （4）像与核之间的关系同之前的写法</p>
+<p>​ 当取<span class="math inline">\(H_1 = H_2 = H\)</span>时，<span class="math inline">\(A, A^* \in L(H, H)\)</span>，可以进行比较</p>
+<ul>
+<li><p>自伴算子：对<span class="math inline">\(A \in L(H, H)\)</span>，若<span class="math inline">\(A = A^*\)</span>，称<span class="math inline">\(A\)</span>为<strong>自伴算子</strong></p></li>
+<li><p>正规算子：对<span class="math inline">\(A \in L(H,H)\)</span>，若<span class="math inline">\(AA^* = A^*A\)</span>，称<span class="math inline">\(A\)</span>为<strong>正规算子</strong></p>
+<p>自伴算子是特殊的正规算子，正规算子具有更好的性质</p></li>
+</ul>
+<blockquote>
+<p>设<span class="math inline">\(A \in L(H,H)\)</span>，那么</p>
+<p>（1）<span class="math inline">\(\ker A = \ker A^* = \ker A^2\)</span></p>
+<p>（2）<span class="math inline">\((\text{im} A)^{\perp} = \ker A\)</span>，<span class="math inline">\(\overline{\text{im} A} = (\ker A)^{\perp}\)</span></p>
+</blockquote>
+<ul>
+<li><p>酉算子：对<span class="math inline">\(A \in L(H,H)\)</span>，若<span class="math inline">\(A\)</span>保距，称<span class="math inline">\(A\)</span>为<strong>酉算子</strong></p>
+<p>和有限维情况类似，<span class="math inline">\(A\)</span>为酉算子当且仅当<span class="math inline">\(AA^* = A^*A = I\)</span>，这又当且仅当<span class="math inline">\(A\)</span>保距且正规</p></li>
+</ul>
+<h3 id="紧算子">紧算子</h3>
+<p>下面的讨论应该归属于Riesz-Schauder理论</p>
+<h4 id="基础-1">基础</h4>
+<ul>
+<li><p>紧算子：设<span class="math inline">\(E,F\)</span>赋范，<span class="math inline">\(T \in L(E, F)\)</span>，<span class="math inline">\(\overline{T(B_E(0,1))}\)</span>是紧集，则称<span class="math inline">\(T\)</span>为紧映射</p>
+<p>等价的说法是<span class="math inline">\(T(B_E(0,1))\)</span>是相对紧集</p></li>
+</ul>
+<p>​ 紧算子还有如下的等价定义：（1）<span class="math inline">\(T\)</span>将有界紧映射到相对紧集（2）对有界数列<span class="math inline">\(\{x_n\}\)</span>，<span class="math inline">\(\{Tx_n\}\)</span>有收敛子列</p>
+<p>​ 一个比较无聊的命题是：<span class="math inline">\(I_E\)</span>是紧算子当且仅当<span class="math inline">\(E\)</span>有限维，这是由有限维赋范空间的局部准紧性质决定的</p>
+<p>​ 因有限维空间中有界集均有相对紧集，有限秩算子一定是紧算子。有限秩算子和紧算子构成子空间，记紧算子空间为<span class="math inline">\(L_0\)</span>，有限秩算子空间为<span class="math inline">\(L_{00}\)</span>。当<span class="math inline">\(S,T\)</span>中有一者紧时，<span class="math inline">\(ST\)</span>也将是紧算子。</p>
+<p>下面是我们常用之定理</p>
+<blockquote>
+<p><span class="math inline">\(L_{00}\)</span>是<span class="math inline">\(L_0\)</span>的闭子空间</p>
+</blockquote>
+<p>​ 我们想证明映射为紧算子时，可以尝试用有限秩的算子进行逼近</p>
+<p>​ 特别的，在赋范空间<span class="math inline">\(E\)</span>到Hilbert空间<span class="math inline">\(H\)</span>的映射中，甚至有<span class="math inline">\(\overline{L_{00}(E,H)} = L_0(E,H)\)</span></p>
+<p>​ 最后是常用结论：设<span class="math inline">\(\{x_n\}\)</span>为弱收敛序列，<span class="math inline">\(T\)</span>紧，则<span class="math inline">\(\{Tx_n\}\)</span>收敛</p>
+<p>​ 紧算子的伴随映射的紧性也维持地较好</p>
+<blockquote>
+<p>（Schauder定理）：设<span class="math inline">\(E,F\)</span>赋范，<span class="math inline">\(T \in L(E,F)\)</span>，则<span class="math inline">\(T \in L_0(E, F)\)</span>时有<span class="math inline">\(T^* \in L_0(F^*, E^*)\)</span>。反之，当<span class="math inline">\(T^* \in L_0(F^*, E^*)\)</span>且<span class="math inline">\(F\)</span>完备时，<span class="math inline">\(T \in L_0(E,F)\)</span>。</p>
+</blockquote>
+<h4 id="谱论">谱论</h4>
+<p>​ 到这里就直接陈述结论了，具体过程不进行详述了</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>线性空间，设<span class="math inline">\(A \in End(E)\)</span>，若存在<span class="math inline">\(n_1, n_2\)</span>使得<span class="math inline">\(\ker A^{n_1} = \ker A^{n_1 + 1}\)</span>以及<span class="math inline">\(\text{im} A^{n_2} = \text{im} A^{n_2 + 1}\)</span>，那么存在<span class="math inline">\(n_0\)</span>，使得<span class="math inline">\(\ker A^{n} = \ker A^{n + 1}\)</span>以及<span class="math inline">\(\text{im} A^{n} = \text{im} A^{n + 1}\)</span>仅对一切<span class="math inline">\(n \geq n_0\)</span>成立。此时定义<span class="math inline">\(F_1=\ker A^{\infty} = \ker A^{n_0}, F_2 = \text{im} A^{\infty} = \text{im} A^{n_0}\)</span>，<span class="math inline">\(E\)</span>有直和分解<span class="math inline">\(F_1 \oplus F_2\)</span>，<span class="math inline">\(A|_{F_1}\)</span>为自同构，<span class="math inline">\(A^{n_0}|_{F_2} = 0\)</span></p>
+</blockquote>
+<p>​ 之后我们直接陈述最终的结论</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L_0(E,E)\)</span>，那么</p>
+<p>（1）<span class="math inline">\(\sigma(T) \setminus \{0\} \subseteq \sigma_p(T)\)</span></p>
+<p>（2）任取<span class="math inline">\(\lambda \in \sigma(T) \setminus \{0\}\)</span>，记<span class="math inline">\(V_{\lambda} = \bigcup_{n=1}^{\infty} \ker(\lambda I - T)^n\)</span>，那么<span class="math inline">\(\dim V_{\lambda} &lt; \infty\)</span>且<span class="math inline">\((\lambda I - T)|_{V_{\lambda}}\)</span>幂零</p>
+<p>（3）取<span class="math inline">\(\{\lambda_i\}_{i=1}^k \subseteq \sigma(T) \setminus \{0\}\)</span>，那么<span class="math inline">\(E = V_{\lambda_1} \oplus ... \oplus V_{\lambda_k} \oplus W\)</span>，<span class="math inline">\(W\)</span>是<span class="math inline">\(T\)</span>的不变子空间，<span class="math inline">\(\sigma(T|_W) = \sigma(T) \setminus \{\lambda_i\}_{i=1}^k\)</span></p>
+<p>（4）<span class="math inline">\(\forall \lambda \neq 0\)</span>，<span class="math inline">\(\lambda\)</span>不是<span class="math inline">\(\sigma(T)\)</span>的聚点</p>
+</blockquote>
+<h4 id="自伴算子-1">自伴算子</h4>
+<p>​ 当<span class="math inline">\(A\)</span>是自伴算子时，我们可以定义二次型</p>
+<ul>
+<li><p>二次型：设<span class="math inline">\(H\)</span>为Hilbert空间，<span class="math inline">\(A \in L(H,H)\)</span>自伴，定义<span class="math inline">\((x,y) = \langle Ax, y\rangle\)</span>，那么<span class="math inline">\((\cdot, \cdot)\)</span>有复共轭对称性和复共轭双线性性</p>
+<p><span class="math inline">\(q(x) = (x,x)\)</span>则称为二次型</p></li>
+</ul>
+<p>​ 一般来说，二次型可以通过极化恒等式表达出所有的<span class="math inline">\((x,y)\)</span></p>
+<p>​ 在复数域内<span class="math inline">\(\forall x, \langle Ax,x\rangle = 0\)</span>时，可推导出<span class="math inline">\(A=0\)</span>。但在实数域内，<span class="math inline">\(\forall x, \langle Ax,x\rangle = 0\)</span>需要补充<span class="math inline">\(A\)</span>自伴的条件，方有<span class="math inline">\(A=0\)</span>。</p>
+<p>​ 对<span class="math inline">\(A-A^*\)</span>进行考虑，得到<span class="math inline">\(A=A^*\)</span>当且仅当<span class="math inline">\(\langle Ax, x\rangle \in \mathbb{R}\)</span></p>
+<p>​ 自伴算子的范数可以通过单位球面上的二次型进行刻画：<span class="math inline">\(||A|| = \sup\{|\langle Ax, x\rangle:||x||=1\}\)</span></p>
+<p>​ 以下定理说明正规算子的谱论将有漂亮的分类结果</p>
+<blockquote>
+<p>设<span class="math inline">\(A\)</span>正规，则<span class="math inline">\(r(A) = ||A||\)</span>，进一步，<span class="math inline">\(||A||^n = ||A^n||\)</span></p>
+</blockquote>
+<p>​ 为了应用谱映射定理，先说明一点：对多项式<span class="math inline">\(p\)</span>，<span class="math inline">\(A\)</span>正规自然<span class="math inline">\(p(A)\)</span>正规。而<span class="math inline">\(p\)</span>是实系数多项式时，<span class="math inline">\(A\)</span>自伴则<span class="math inline">\(p(A)\)</span>自伴。</p>
+<blockquote>
+<p>设<span class="math inline">\(A\)</span>为正规算子</p>
+<p>（1）<span class="math inline">\(\sigma_r(A) = \emptyset\)</span></p>
+<p>（2）<span class="math inline">\(V_{\lambda} = \bigcup_{n=1}^{\infty} \ker(\lambda I - A)^n = \ker(\lambda I - A)\)</span></p>
+<p>（3）<span class="math inline">\(\lambda \in \sigma_p(A)\)</span>当且仅当<span class="math inline">\(\lambda^* \in \sigma_p(A^*)\)</span>，且<span class="math inline">\(V_{\lambda}(A) = V_{\lambda^*}(A^*)\)</span></p>
+<p>（4）<span class="math inline">\(\lambda_1, \lambda_2 \in \sigma_p(A)\)</span>且<span class="math inline">\(\lambda_1 \neq \lambda_2\)</span>时，<span class="math inline">\(V_{\lambda_1}(A) \perp V_{\lambda_2}(A)\)</span></p>
+</blockquote>
+<p>​ 和有限维情况类似的有：对自伴算子<span class="math inline">\(A\)</span>，<span class="math inline">\(\sigma(A) \subseteq \mathbb{R}\)</span></p>
+<p>​ 仍和有限维一样，二次型可刻画自伴算子的谱：<span class="math inline">\(\max \sigma(A) = \sup \{\langle Ax,x\rangle : ||x||=1\}\)</span>，<span class="math inline">\(\min \sigma(A)\)</span>类似</p>
+<ul>
+<li>正算子：设<span class="math inline">\(A\)</span>自伴，如果<span class="math inline">\((x,x)_A\geq 0\)</span>恒成立，则称<span class="math inline">\(A\)</span>是正算子，记为<span class="math inline">\(A \geq 0\)</span></li>
+</ul>
+<p>​ 正算子对应半正定，<span class="math inline">\(A - B \geq 0\)</span>时，也记为<span class="math inline">\(A \geq B\)</span></p>
+<p>​ 和有限维一样，<span class="math inline">\(A \geq 0\)</span>当且仅当<span class="math inline">\(\min \sigma(A) \geq 0\)</span></p>
+<h3 id="例子">例子</h3>
+<h4 id="lpab"><span class="math inline">\(L^p[a,b]\)</span></h4>
+<p>​ 下述结果的讨论可以扩展到<span class="math inline">\(\sigma-\)</span>有限的测度空间中，但我们省略</p>
+<p>​ 当<span class="math inline">\(p&lt;\infty\)</span>时，<span class="math inline">\(L^p[a,b]\)</span>是完备、可分的空间</p>
+<p>​ 当<span class="math inline">\(p=\infty\)</span>时，<span class="math inline">\(L^{\infty}[a,b]\)</span>是完备但<strong>不可分</strong>的空间</p>
+<p>​ 我们有如下重要的不等式</p>
+<blockquote>
+<p>当<span class="math inline">\(2 \leq p &lt; \infty\)</span>时，<span class="math inline">\(||f+g||^p_p + ||f-g||_p^p \leq 2^{p-1}(||f||_p^p + ||g||_p^p)\)</span></p>
+<p>当<span class="math inline">\(1 &lt; p \leq 2\)</span>时，<span class="math inline">\(||f+g||_p^{p&#39;} + ||f-g||_p^{p&#39;} \leq 2(||f||_p^p + ||g||_p^p)^{p&#39;-1}\)</span></p>
+</blockquote>
+<p>​ 该不等式说明：<span class="math inline">\(1&lt;p&lt;\infty\)</span>时，<span class="math inline">\(L^p\)</span>空间一致凸且自反</p>
+<p>​ 如下为对偶表示的要论</p>
+<blockquote>
+<p>设<span class="math inline">\(1 \leq p \leq \infty\)</span>，对<span class="math inline">\(f \in L^p, g \in L^{p&#39;}\)</span>，定义<span class="math inline">\(\langle f, g\rangle = \int fg\)</span>，那么：当<span class="math inline">\(1 &lt; p \leq \infty\)</span>时，<span class="math inline">\(Tg = \langle \cdot, g\rangle\)</span>为<span class="math inline">\(L^{p} \to (L^{p&#39;})^*\)</span>的等距同构</p>
+</blockquote>
+<p>​ 注意我们说明<span class="math inline">\(L^1\)</span>关于<span class="math inline">\((L^{\infty})^*\)</span>的对偶表示，这一般是不成立的</p>
+<h4 id="cab"><span class="math inline">\(C[a,b]\)</span></h4>
+<p>​ 一般在<span class="math inline">\(C[a,b]\)</span>上考虑<span class="math inline">\(L^{\infty}\)</span>范数，<span class="math inline">\(C[a,b]\)</span>是完备、可分的空间</p>
+<p>​ 研究紧性则考虑下面的重要定理</p>
+<ul>
+<li>等度连续：对<span class="math inline">\(A \subseteq C[a,b]\)</span>，若<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，存在<span class="math inline">\(\delta &gt; 0\)</span>，当<span class="math inline">\(|x_1-x_2| &lt; \delta\)</span>时，<span class="math inline">\(\forall f \in A\)</span>，有<span class="math inline">\(|f(x_1)-f(x_2)| &lt; \epsilon\)</span>，则称<span class="math inline">\(A\)</span>等度连续</li>
+</ul>
+<blockquote>
+<p>（Arzela-Ascoli定理）<span class="math inline">\(A \subseteq C[a,b]\)</span>紧当且仅当<span class="math inline">\(A\)</span>有界并且等度连续</p>
+</blockquote>
+<p>​ <span class="math inline">\(C[a,b]\)</span>的一类重要的子空间为<span class="math inline">\(C^k[a,b]\)</span>，在其上有<span class="math inline">\(C^k\)</span>范数：<span class="math inline">\(||f||_{C^k} := \sum_{i=0}^k \max_{x \in [a,b]} |f^{(i)}(x)|\)</span>，<span class="math inline">\(C^k\)</span>范数弱于<span class="math inline">\(L^{\infty}\)</span>范数，也即<span class="math inline">\(\exists C&gt;0\)</span>，使得<span class="math inline">\(||f||_{C^k} \leq C \cdot ||f||_{L^{\infty}}\)</span>。由此，我们知道<span class="math inline">\((C^k, ||\cdot||_{C^k})\)</span>也是完备、可分的空间。</p>
+<p>​ 该定理的重要推论是：对<span class="math inline">\(m&gt;l\geq0\)</span>，<span class="math inline">\((C^m[a,b],L^{\infty}) \to (C^l[a,b], L^{\infty})\)</span>为紧映射</p>
+<p>​ <span class="math inline">\(C[a,b]\)</span>是<span class="math inline">\(L^p[a,b]\)</span>的子空间，但对<span class="math inline">\(1 \leq p &lt; \infty\)</span>，<span class="math inline">\((C[a,b], L^p)\)</span>不完备，故<span class="math inline">\(C[a,b]\)</span>非闭子空间（<span class="math inline">\(C[0,1]\)</span>上，考虑<span class="math inline">\(x^n\)</span>的极限）</p>
+<p>​ <span class="math inline">\(C[a,b]\)</span>的对偶表示与测度相关</p>
+<blockquote>
+<p>（Riesz表示定理）：设<span class="math inline">\(K\)</span>为紧Hausdorff空间，记<span class="math inline">\(M(K)\)</span>为所有有限正则Borel测度的全体，对<span class="math inline">\(f\in C(K), \mu \in M(K)\)</span>，定义<span class="math inline">\(\langle f, \mu\rangle = \int f d\mu\)</span>，那么<span class="math inline">\(T\mu = \langle \cdot, \mu\rangle\)</span>为<span class="math inline">\(M(K) \to (C(K))^*\)</span>的等距同构</p>
+</blockquote>
+<p>​ 根据Riesz表示定理，可简化<span class="math inline">\(C[a,b]\)</span>中的弱收敛</p>
+<blockquote>
+<p>在紧Hausdorff空间中，<span class="math inline">\(\{f_n\} \cup \{f_0\} \subseteq C(K)\)</span>，<span class="math inline">\(\{f_n\} \overset{w}\to f_0\)</span>当且仅当<span class="math inline">\(\sup \{||f_n||\} &lt; \infty\)</span>且<span class="math inline">\(\{f_n\}\)</span>点态收敛于<span class="math inline">\(f_0\)</span></p>
+</blockquote>
+<h4 id="零散例子">零散例子</h4>
+<p>​ 在序列上，也有相应的<span class="math inline">\(l^{p}\)</span>空间</p>
+<p>​ 我们较容易得到对偶表示：对<span class="math inline">\(f \in l^p, g \in l^{p&#39;}\)</span>，定义<span class="math inline">\(\langle f, g\rangle = \sum f_i g_i\)</span>，该求和收敛，定义为良定义</p>
+<p>​ 那么按映射<span class="math inline">\(T\)</span>为<span class="math inline">\(Tb = \langle \cdot, b\rangle\)</span>，可说明<span class="math inline">\(T:l^p \to (l^{p&#39;})^*\)</span>为等距同构</p>
+<p>​ 唯一的例外便是<span class="math inline">\(l^1\)</span>，定义<span class="math inline">\(c_0\)</span>为序列极限为<span class="math inline">\(0\)</span>的序列，<span class="math inline">\(c_0\)</span>为<span class="math inline">\(l^{\infty}\)</span>的闭子空间，并且<span class="math inline">\(T:l^1 \to (c_0)^*\)</span>为等距同构</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/functional-analysis/" rel="tag"># functional-analysis</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2023/03/functional-analysis-1/" rel="prev" title="泛函分析">
+                  <i class="fa fa-chevron-left"></i> 泛函分析
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">remoon</span>
+</div>
+<div class="wordcount">
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-line"></i>
+    </span>
+      <span>Symbols count total: </span>
+    <span title="Symbols count total">200k</span>
+  </span>
+  <span class="post-meta-item">
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+      <span>Reading time total &asymp;</span>
+    <span title="Reading time total">3:02</span>
+  </span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":true,"tags":"none","js":{"url":"https://cdn.jsdelivr.net/npm/mathjax@3.2.0/es5/tex-mml-chtml.js","integrity":"sha256-r+3itOMtGGjap0x+10hu6jW/gZCzxHsoKrOd7gyRSGY="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
