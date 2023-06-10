@@ -28,7 +28,7 @@
 <meta property="og:description" content="记一些结论算了">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-03-01T10:51:01.000Z">
-<meta property="article:modified_time" content="2023-06-10T09:38:35.132Z">
+<meta property="article:modified_time" content="2023-06-10T09:45:00.034Z">
 <meta property="article:author" content="remoon">
 <meta property="article:tag" content="functional-analysis">
 <meta name="twitter:card" content="summary">
@@ -224,7 +224,7 @@
           <i class="far fa-calendar-check"></i>
         </span>
         <span class="post-meta-item-text">Edited on</span>
-        <time title="Modified: 2023-06-10 17:38:35" itemprop="dateModified" datetime="2023-06-10T17:38:35+08:00">2023-06-10</time>
+        <time title="Modified: 2023-06-10 17:45:00" itemprop="dateModified" datetime="2023-06-10T17:45:00+08:00">2023-06-10</time>
       </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -297,7 +297,7 @@
 <blockquote>
 <p>（Baire纲性定理）：完备度量空间是第二纲集</p>
 </blockquote>
-<p>​ 常用的是推论形式：<span class="math inline">\(X = \bigcup \overline{A_N}\)</span>，说明存在<span class="math inline">\(\overline{A_N}\)</span>有内点，也可以说明<span class="math inline">\(A_N\)</span>有内点。</p>
+<p>​ 常用的是推论形式：<span class="math inline">\(X = \bigcup \overline{A_N}\)</span>，说明存在<span class="math inline">\(\overline{A_N}\)</span>有内点</p>
 <p>​ 下面则是比较微妙的定理</p>
 <blockquote>
 <p>任何度量空间<span class="math inline">\((X,d)\)</span>皆有完备化<span class="math inline">\((\tilde{X}, \tilde{d})\)</span>，此时<span class="math inline">\(X\)</span>是<span class="math inline">\(\tilde{X}\)</span>的稠密子集</p>
@@ -344,7 +344,7 @@
 <h5 id="对偶空间">对偶空间</h5>
 <p>​ 记<span class="math inline">\(E&#39;\)</span>为<span class="math inline">\(E\)</span>上线性泛函的全体，称为代数对偶空间</p>
 <p>​ 和有限维空间一样，在一组基上定义函数的值可唯一确定出线性函数，且该函数一定存在。考虑一组基<span class="math inline">\(\{e_i\}\)</span>，设<span class="math inline">\(\{e^i\} \subseteq E&#39;\)</span>满足<span class="math inline">\(e^i(e_i) = \delta_{ij}\)</span>，则<span class="math inline">\(\{e^i\}\)</span>线性无关。仅在<span class="math inline">\(\{e_i\}\)</span>有限大小时，<span class="math inline">\(\{e^i\}\)</span>构成一组基，称为<strong>对偶基</strong>。对偶基可表明<span class="math inline">\(\dim E&#39; \geq \dim E\)</span>，仅在有限维取等。</p>
-<p>​ 可定义映射<span class="math inline">\(x \to x^{**}: E \to E&#39;&#39;\)</span>，满足<span class="math inline">\(\langle x^{**}, f\rangle = \lang x, f\rangle\)</span>。那么<span class="math inline">\(**\)</span>映射是线性映射，且是单射。仅在有限维时，<span class="math inline">\(**\)</span>映射为满射，此时<span class="math inline">\(**\)</span>映射构成<span class="math inline">\(E \to E&#39;&#39;\)</span>的同构映射，称为<span class="math inline">\(E\)</span><strong>自反</strong>。注意：自反必须要求<span class="math inline">\(**\)</span>映射为同构，不可为他者同构映射。</p>
+<p>​ 可定义映射<span class="math inline">\(x \to x^{**}: E \to E&#39;&#39;\)</span>，满足<span class="math inline">\(\langle x^{**}, f\rangle = \langle x, f\rangle\)</span>。那么<span class="math inline">\(**\)</span>映射是线性映射，且是单射。仅在有限维时，<span class="math inline">\(**\)</span>映射为满射，此时<span class="math inline">\(**\)</span>映射构成<span class="math inline">\(E \to E&#39;&#39;\)</span>的同构映射，称为<span class="math inline">\(E\)</span><strong>自反</strong>。注意：自反必须要求<span class="math inline">\(**\)</span>映射为同构，不可为他者同构映射。</p>
 <p>​ <span class="math inline">\(E\)</span>自反当且仅当<span class="math inline">\(E&#39;\)</span>自反。</p>
 <h5 id="伴随映射">伴随映射</h5>
 <p>​ 对线性映射<span class="math inline">\(T:E \to F\)</span>，定义<span class="math inline">\(T^* : F&#39; \to E&#39;\)</span>：<span class="math inline">\(y \to y \circ T\)</span>，称为<span class="math inline">\(T\)</span>的<strong>伴随映射</strong>。更常用的为其等价形式：<span class="math inline">\(\langle Tx,y\rangle = \langle x, T^*y\rangle, \forall x \in E, y \in F&#39;\)</span>。伴随映射是线性映射，且<span class="math inline">\((ST)^*=T^*S^*\)</span>。</p>
@@ -414,7 +414,7 @@
 <blockquote>
 <p>赋范空间<span class="math inline">\(E\)</span>中有界集皆为准紧集（相对紧集）当且仅当<span class="math inline">\(E\)</span>有限维</p>
 </blockquote>
-<p>​ 我们再写一个较为有用的推论<strong><span class="math inline">\(E\)</span>有相对紧开集当且仅当<span class="math inline">\(E\)</span>有限维</strong></p>
+<p>​ 一个较为有用的推论：<strong><span class="math inline">\(E\)</span>有相对紧开集当且仅当<span class="math inline">\(E\)</span>有限维</strong></p>
 <h5 id="有限维下的线性映射">有限维下的线性映射</h5>
 <blockquote>
 <p>设<span class="math inline">\(E, F\)</span>为赋范空间，若<span class="math inline">\(T : E \to F\)</span>为线性映射且<span class="math inline">\(E\)</span>有限维，那么<span class="math inline">\(T\)</span>连续</p>
@@ -485,7 +485,7 @@
 </blockquote>
 <p>可以看出一般研究像集需要取闭包，下面给出一个判定像集是否为闭的准则</p>
 <blockquote>
-<p>设<span class="math inline">\(T \in L(E,F)\)</span>且<span class="math inline">\(E\)</span>完备，如果<span class="math inline">\(\exist C &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in E, ||Tx|| &gt; C||x||\)</span>，那么<span class="math inline">\(\text{im}T\)</span>闭</p>
+<p>设<span class="math inline">\(T \in L(E,F)\)</span>且<span class="math inline">\(E\)</span>完备，如果<span class="math inline">\(\exists C &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in E, ||Tx|| &gt; C||x||\)</span>，那么<span class="math inline">\(\text{im}T\)</span>闭</p>
 </blockquote>
 <h5 id="可分">可分</h5>
 <blockquote>
@@ -530,7 +530,7 @@
 <p>​ 设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(\{T_n\} \subseteq L(E,F)\)</span>，如果<span class="math inline">\(\forall x \in E, \{T_nx\}\)</span>存在极限，那么存在<span class="math inline">\(T \in L(E,F)\)</span>使得<span class="math inline">\(||T|| \leq \liminf ||T_n||\)</span>且<span class="math inline">\(\lim T_n x = Tx\)</span>。用下一节的话语来说，完备赋范空间中的点态收敛蕴含序列强收敛。</p>
 <h4 id="弱">弱</h4>
 <ul>
-<li><p>点列弱收敛：如果<span class="math inline">\(\forall x^* \in E^*\)</span>，有<span class="math inline">\(\lim \langle x_n, x^* \rangle = \lang x_0, x^*\rangle\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>弱收敛于<span class="math inline">\(x_0\)</span></p></li>
+<li><p>点列弱收敛：如果<span class="math inline">\(\forall x^* \in E^*\)</span>，有<span class="math inline">\(\lim \langle x_n, x^* \rangle = \langle x_0, x^*\rangle\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>弱收敛于<span class="math inline">\(x_0\)</span></p></li>
 <li><p>点列弱<span class="math inline">\(*\)</span>收敛：如果<span class="math inline">\(\forall x \in E\)</span>，有<span class="math inline">\(\lim \langle x,x_n^*\rangle = \lim \langle x, x_0^*\rangle\)</span>，则称<span class="math inline">\(\{x_n^*\}\)</span>弱<span class="math inline">\(*\)</span>收敛于<span class="math inline">\(x_0^*\)</span></p>
 <p>收敛强于弱收敛，弱收敛强于弱<span class="math inline">\(*\)</span>收敛。弱收敛和弱<span class="math inline">\(*\)</span>收敛有和收敛类似的性质：</p>
 <p>（1）弱（弱<span class="math inline">\(*\)</span>）收敛极限唯一</p>
