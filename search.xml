@@ -1308,7 +1308,7 @@ int main() &#123;
 <blockquote>
 <p>如果<span class="math inline">\(H \leq G\)</span>，我们称<span class="math inline">\(|\{aH : a \in G\}|\)</span>为<span class="math inline">\(H\)</span>在<span class="math inline">\(G\)</span>中的指标，记为<span class="math inline">\([G:H]\)</span></p>
 </blockquote>
-<h4 id="lagrange-定理z">Lagrange 定理z</h4>
+<h4 id="lagrange-定理">Lagrange 定理</h4>
 <blockquote>
 <p>设<span class="math inline">\(H\)</span>为有限群<span class="math inline">\(G\)</span>的子群，则<span class="math inline">\([G:H]=|G|/|H|\)</span></p>
 </blockquote>
@@ -1959,7 +1959,7 @@ int main() &#123;
 </ul>
 <h4 id="schereier定理">Schereier定理</h4>
 <blockquote>
-<p>群<span class="math inline">\(G\)</span>的人任意两个正规群列存在等价的加细</p>
+<p>群<span class="math inline">\(G\)</span>的任意两个正规群列存在等价的加细</p>
 </blockquote>
 <ul>
 <li>证明的思路是假设有两个长为<span class="math inline">\(n, m\)</span>的，凑一个长为<span class="math inline">\(nm\)</span>的来证明，但比较复杂</li>
@@ -4068,7 +4068,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <li><p>如果<span class="math inline">\(f:X\to Y\)</span>满足<span class="math inline">\(\forall B \in \tau_Y, f^{-1}(B) \in \tau_X\)</span>，即开集的原象是开集，那么称<span class="math inline">\(f\)</span>为<strong>连续映射</strong></p></li>
 <li><p>如果集合<span class="math inline">\(V \subset X\)</span>满足，存在开集<span class="math inline">\(U \subset X\)</span>，使得<span class="math inline">\(x \in U \subset V\)</span>，那么<span class="math inline">\(V\)</span>称为<span class="math inline">\(x\)</span>在<span class="math inline">\(X\)</span>中的<strong>邻域</strong></p>
 <p>特别的，当<span class="math inline">\(V\)</span>是开集时，称<span class="math inline">\(V\)</span>为<span class="math inline">\(x\)</span>的<strong>开邻域</strong></p></li>
-<li><p>称<span class="math inline">\(X\)</span>为Hausdorff的，当且仅当<span class="math inline">\(\forall x \neq y \in X\)</span>，存在<span class="math inline">\(x \in U_x, y \in U_y,U_x,U_y \in \tau\)</span>，使得<span class="math inline">\(U_x \cap U_y = \emptyset\)</span></p></li>
+<li><p>称<span class="math inline">\(X\)</span>为Hausdorff的，当且仅当<span class="math inline">\(\forall x \neq y \in X\)</span>，存在<span class="math inline">\(x \in U_x, y \in U_y,U_x,U_y \in \tau\)</span>，使得<span class="math inline">\(U_x \cap U_y = \emptyset\)</span>（任意两个点可以被开集分离）</p></li>
 </ol>
 <p>注意：上述定义在后面的度量空间中是通用的</p>
 <p>下面是作业题</p>
@@ -4813,7 +4813,7 @@ cond(A) = \max_{e_b, b \neq 0} \frac{||A^{-1} e||/||A^{-1}b||}{||e||/||b||} = \m
 <p>对1，当<span class="math inline">\(m(E)&lt;\infty\)</span>时，<span class="math inline">\(E\)</span>的一个<span class="math inline">\(L-\)</span>覆盖的并就是开集，而<span class="math inline">\(m(E)=\infty\)</span>时，我们对<span class="math inline">\(m(E \cap B(0, k))\)</span>取一个<span class="math inline">\(\epsilon/2^k\)</span>的近似即可</p>
 <p>2可以由1得到，对3，设<span class="math inline">\(E_k=E\cap B(0, k)\)</span>，由<span class="math inline">\(m(E)&lt;\infty\)</span>，我们可以取到<span class="math inline">\(m(E\setminus E_k)&lt;\epsilon\)</span>，对<span class="math inline">\(E_k\)</span>用2的结论，取到<span class="math inline">\(\epsilon\)</span>近似的<span class="math inline">\(K\)</span>，此时<span class="math inline">\(m(E \setminus K) &lt; 2\epsilon\)</span>并且<span class="math inline">\(K\)</span>是有界闭集</p>
 <p>(Corollary)：设<span class="math inline">\(E \in M\)</span>，则，存在<span class="math inline">\(G_{\delta}\)</span>集<span class="math inline">\(G \supset E\)</span>，使得<span class="math inline">\(m(G \setminus E) = 0\)</span>且存在<span class="math inline">\(F_{\sigma}\)</span>集<span class="math inline">\(F \subset E\)</span>，使得<span class="math inline">\(m(E \setminus F)=0\)</span></p>
-<p>这个定理也可以表述为任何一个可测集<span class="math inline">\(E\)</span>可以表为<span class="math inline">\(G\setminus Z\)</span>的形式，其中<span class="math inline">\(E \subset G\)</span>为<span class="math inline">\(G_{\delta}\)</span>集，<span class="math inline">\(Z\)</span>为零测集</p>
+<p>这个定理也可以表述为任何一个可测集<span class="math inline">\(E\)</span>可以表为<span class="math inline">\(G\setminus Z\)</span>的形式，其中<span class="math inline">\(G \supset E\)</span>为<span class="math inline">\(G_{\delta}\)</span>集，<span class="math inline">\(Z\)</span>为零测集</p>
 <p>(Corollary of Corollary)：<strong>Lebesgue测度空间是Borel测度空间的完备化</strong></p>
 <p>对一般的集合<span class="math inline">\(E\)</span>以及外测度，上述定理中关于开集的结论仍然成立（以<span class="math inline">\(m(F)-m(E)&lt;\epsilon\)</span>的形式），而可测集上的外测度实际上就是测度，因此我们有</p>
 <p>(Corollary，外测度的正则性)：任取<span class="math inline">\(E \subset \mathbb{R}^d\)</span>，那么存在<span class="math inline">\(G_{\delta}\)</span>集<span class="math inline">\(H \supset E\)</span>，使得<span class="math inline">\(m^*(E)=m(H)\)</span></p>
@@ -5224,7 +5224,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>下面这个定理揭示了Lebesgue点具有和连续点相近的性质</p>
 <blockquote>
 <p>对<span class="math inline">\(x \in \mathbb{R}^d\)</span>，设<span class="math inline">\(\{E_n\}_{n=1}^\infty\)</span>为一族Borel集，并且<span class="math inline">\(x \in E_n \subset B(x,r_n)\)</span>，其中<span class="math inline">\(\lim_{n \to \infty} r_n = 0\)</span></p>
-<p>此外，存在<span class="math inline">\(\alpha &gt; 0\)</span>，使得<span class="math inline">\(m(E_n(x)) \geq \alpha |B(x,r_n)|\)</span>，如果<span class="math inline">\(f \in L_{lov}^1(\mathbb{R}^d)\)</span>，那么<span class="math inline">\(f(x) = \lim \frac{1}{m(E_n(x))} \int _{E_n(x)} f dm\)</span>对所有的Lebesgue点<span class="math inline">\(x\)</span>成立（从而几乎处处成立）</p>
+<p>此外，存在<span class="math inline">\(\alpha &gt; 0\)</span>，使得<span class="math inline">\(m(E_n(x)) \geq \alpha |B(x,r_n)|\)</span>，如果<span class="math inline">\(f \in L_{loc}^1(\mathbb{R}^d)\)</span>，那么<span class="math inline">\(f(x) = \lim \frac{1}{m(E_n(x))} \int _{E_n(x)} f dm\)</span>对所有的Lebesgue点<span class="math inline">\(x\)</span>成立（从而几乎处处成立）</p>
 </blockquote>
 <p>证明：<span class="math inline">\(\frac{1}{m(E_n(x))} \int_{E_n(x)} |f(y)-f(x)| dy \leq \frac{1}{\alpha m(B(x,r_n))} \int_{B(x,r_n)} |f(y)-f(x)| dy\to 0\)</span>，从而<span class="math inline">\(f(x) = \lim \frac{1}{m(E_n(x))} \int _{E_n(x)} f dm\)</span>，<span class="math inline">\(\square\)</span></p>
 <p>接下来，我们定义出导数的概念</p>
@@ -5390,7 +5390,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>如果<span class="math inline">\(f&#39;=0\)</span>几乎处处成立，那么<span class="math inline">\(f\)</span>是常数</p>
 </blockquote>
 <p>证明：<span class="math inline">\(f \in BV([a,b])\)</span>，从而几乎处处可导，并且<span class="math inline">\(f&#39; \in L^1\)</span></p>
-<p>记<span class="math inline">\(E = \{x \in [a,b]:f&#39;(x)=0\}\)</span>，任取<span class="math inline">\(c \in (a,b)\)</span>，记<span class="math inline">\(F = (a,c) \cap E\)</span>，固定<span class="math inline">\(\epsilon &gt; 0\)</span>，对于<span class="math inline">\(y \in E_c\)</span>，存在<span class="math inline">\(h\)</span>，使得<span class="math inline">\([y-h,y] \subset (a,c)\)</span>并且对任意<span class="math inline">\(x \in [y-h,y]\)</span>，有<span class="math inline">\(\frac{|f(y)-f(x)|}{y-x} &lt; \frac{\epsilon}{2(c-a)}\)</span>，此时<span class="math inline">\(\mathcal{F}:=\{[x,y]:y \in E_c, \frac{|f(y)-f(x)|}{y-x} &lt; \frac{\epsilon}{2(c-a)}\}\)</span>构成<span class="math inline">\(E_c\)</span>的细覆盖</p>
+<p>记<span class="math inline">\(E = \{x \in [a,b]:f&#39;(x)=0\}\)</span>，任取<span class="math inline">\(c \in (a,b)\)</span>，记<span class="math inline">\(E_c = (a,c) \cap E\)</span>，固定<span class="math inline">\(\epsilon &gt; 0\)</span>，对于<span class="math inline">\(y \in E_c\)</span>，存在<span class="math inline">\(h\)</span>，使得<span class="math inline">\([y-h,y] \subset (a,c)\)</span>并且对任意<span class="math inline">\(x \in [y-h,y]\)</span>，有<span class="math inline">\(\frac{|f(y)-f(x)|}{y-x} &lt; \frac{\epsilon}{2(c-a)}\)</span>，此时<span class="math inline">\(\mathcal{F}:=\{[x,y]:y \in E_c, \frac{|f(y)-f(x)|}{y-x} &lt; \frac{\epsilon}{2(c-a)}\}\)</span>构成<span class="math inline">\(E_c\)</span>的细覆盖</p>
 <p>根据Vitali覆盖定理，我们可以取出<span class="math inline">\(\mathcal{F}\)</span>中的互不相交的闭区间<span class="math inline">\(\{[x_i,y_i]\}\)</span>并且<span class="math inline">\(\sum y_i - x_i = m(E_c)=c-a\)</span></p>
 <p>设<span class="math inline">\(\delta\)</span>为关于<span class="math inline">\(f,\epsilon/2\)</span>的决定连续性的常数，设<span class="math inline">\(N\)</span>满足<span class="math inline">\(\sum^N y_i - x_i &gt; c - a - \delta\)</span></p>
 <p>不妨设<span class="math inline">\(y_1&lt;x_2,y_2&lt;x_3,...,y_{N-1}&lt;x_N\)</span>，补充<span class="math inline">\(y_0= a,x_{N+1}=c\)</span>，那么<span class="math inline">\(\sum_{i=0}^N |x_{i+1}-y_i| &lt; \delta\)</span></p>
@@ -5400,6 +5400,14 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </blockquote>
 <p>证明：<span class="math inline">\(f \in AC([a,b])\)</span>，因此<span class="math inline">\(f&#39; \in L^1\)</span>，从而<span class="math inline">\(F=\int_a^x f&#39; dm \in AC([a,b])\)</span></p>
 <p>并且<span class="math inline">\(F&#39;=f&#39;\)</span>几乎处处成立（微分定理），因此<span class="math inline">\(f-F\)</span>是常数，通过代入可以得到常数为<span class="math inline">\(f(a)\)</span>，<span class="math inline">\(\square\)</span></p>
+<blockquote>
+<p><span class="math inline">\(f \in BV([a,b])\)</span>，则</p>
+<ol type="i">
+<li><p><span class="math inline">\(f \in AC([a,b])\)</span>当且仅当<span class="math inline">\(V_a^x(f) \in AC([a,b ])\)</span></p></li>
+<li><p><span class="math inline">\(f \in AC([a,b])\)</span>当且仅当<span class="math inline">\(\int_a^b |f&#39;| dm = V_a^b(f)\)</span></p></li>
+<li><p><span class="math inline">\(f \in AC([a,b])\)</span>当且仅当<span class="math inline">\(f\)</span>将零测集映射到零测集</p></li>
+</ol>
+</blockquote>
 <p>在绝对连续函数上的积分有和数分中的积分类似的技巧</p>
 ]]></content>
       <categories>
@@ -5407,6 +5415,332 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
       </categories>
       <tags>
         <tag>real-analysis</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>泛函分析</title>
+    <url>/2023/03/functional-analysis-1/</url>
+    <content><![CDATA[<span id="more"></span>
+<p>感觉跟着一个错误的老师上了该课，这门课主要的难点还是在数学分析和高等代数，自己具有的特色技巧到没啥...</p>
+<p>这是一门比较基础的课程，在其上可以衍生出许多分支，很多事情在该课程观点下看不透彻</p>
+<p>此处罗列定理和各种繁杂的定义，以便查阅</p>
+<h3 id="基础知识">基础知识</h3>
+<h4 id="度量空间">度量空间</h4>
+<h5 id="基础中的基础">基础中的基础</h5>
+<ul>
+<li>度量空间：非空集合<span class="math inline">\(X\)</span>以及<span class="math inline">\(X \times X \to \mathbb{R}\)</span>的映射满足正定性、对称性、三角不等式的<span class="math inline">\(d\)</span>构成的<span class="math inline">\((X, d)\)</span></li>
+</ul>
+<p>​ 在度量空间中，可以定义收敛，称<span class="math inline">\(x_n \to x\)</span>如果<span class="math inline">\(d(x_n,x) \to 0\)</span></p>
+<ul>
+<li><p>开集：<span class="math inline">\(A\)</span>中所有点皆为内点，也即<span class="math inline">\(\forall x, \exists r, B(x, r) \subseteq A\)</span></p></li>
+<li><p>连续映射：下述定义等价</p>
+<p><span class="math inline">\((1)\)</span>：开集的原像为开集</p>
+<p><span class="math inline">\((2)\)</span>：对每一点用<span class="math inline">\(\epsilon-\delta\)</span>语言进行论述</p></li>
+</ul>
+<h5 id="可分性完备性">可分性、完备性</h5>
+<ul>
+<li><p>稠密：如果<span class="math inline">\(A \subseteq \bar{B}\)</span>，称<span class="math inline">\(A\)</span>在<span class="math inline">\(B\)</span>中稠密，等价定义为<span class="math inline">\(B(b, \epsilon) \cap A \neq \emptyset\)</span>。</p></li>
+<li><p>疏朗：对度量空间<span class="math inline">\(X\)</span>，若<span class="math inline">\(A\)</span>在<span class="math inline">\(X\)</span>的任何开集中不稠密，称<span class="math inline">\(A\)</span>在<span class="math inline">\(X\)</span>中疏朗</p>
+<p><strong>上述定义等价于<span class="math inline">\(\bar{A}\)</span>无内点</strong></p></li>
+<li><p>可分：存在可数稠密集</p></li>
+<li><p>完备：Cauchy列皆有极限</p></li>
+</ul>
+<p>完备空间中有闭集交定理</p>
+<p>完备的闭子集为完备子集，闭集的完备子集为闭子集</p>
+<ul>
+<li><p>第一纲集：可表为可数个疏朗集</p>
+<p>第二纲集：不是第一纲集</p></li>
+</ul>
+<blockquote>
+<p>（Baire纲性定理）：完备度量空间是第二纲集</p>
+</blockquote>
+<p>​ 常用的是推论形式：<span class="math inline">\(X = \bigcup \overline{A_N}\)</span>，说明存在<span class="math inline">\(\overline{A_N}\)</span>有内点，也可以说明<span class="math inline">\(A_N\)</span>有内点。</p>
+<p>​ 下面则是比较微妙的定理</p>
+<blockquote>
+<p>任何度量空间<span class="math inline">\((X,d)\)</span>皆有完备化<span class="math inline">\((\tilde{X}, \tilde{d})\)</span>，此时<span class="math inline">\(X\)</span>是<span class="math inline">\(\tilde{X}\)</span>的稠密子集</p>
+<p>满足上述条件的完备化空间在等距同构意义下唯一</p>
+</blockquote>
+<h5 id="紧性">紧性</h5>
+<p>​ 这里是符号的重灾区，基本上没有统一的符号，笔者尤为痛苦，笔者学习的课程老师使用了两本教材，此处符号直接混用，无法区分</p>
+<ul>
+<li><p>相对紧，准紧：任何数列有收敛子列，但极限不一定在集合中</p>
+<p>自列紧，列紧（有时列紧也指上面的定义，注意区分）：任何数列有收敛子列，极限在集合中</p></li>
+<li><p>紧：有限覆盖定理成立</p></li>
+<li><p>完全有界：<span class="math inline">\(\forall \epsilon&gt;0\)</span>，有有限大小的<span class="math inline">\(\epsilon-\)</span>网</p></li>
+</ul>
+<blockquote>
+<p>（Hausdorff）：度量空间中，相对紧可推出完全有界</p>
+<p>在完备度量空间中，相对紧和完全有界等价</p>
+</blockquote>
+<p>利用Lebesgue Number Theorem，我们有</p>
+<blockquote>
+<p>度量空间中，列紧和紧等价</p>
+</blockquote>
+<h4 id="线性空间">线性空间</h4>
+<h5 id="基础中的基础-1">基础中的基础</h5>
+<ul>
+<li><p>在无限维线性空间中，对集合<span class="math inline">\(X\)</span>：</p>
+<p>称其线性无关，如果<span class="math inline">\(X\)</span>的任意有限子集线性无关</p>
+<p><span class="math inline">\(X\)</span>中有限个元素的线性组合构成的集合称为<span class="math inline">\(X\)</span>的生成子集</p></li>
+<li><p>极大线性无关集合称为基，这等价于线性无关以及生成整个空间</p></li>
+</ul>
+<p>​ 基一定存在，且不同基之间等势，基的大小称为维数。并且可将子空间的基扩为整个空间的基</p>
+<h5 id="商空间">商空间</h5>
+<ul>
+<li><p>商空间：对子空间<span class="math inline">\(W\)</span>，可定义商空间<span class="math inline">\(E/W\)</span></p>
+<p>商投射：投射<span class="math inline">\(\pi : E \to E/W\)</span>，其为线性满射且<span class="math inline">\(\ker \pi = W\)</span></p></li>
+</ul>
+<blockquote>
+<p>（同态基本定理）：对线性映射<span class="math inline">\(f:E \to F\)</span>，</p>
+<p>如果<span class="math inline">\(W \subseteq \ker f\)</span>，其诱导同态<span class="math inline">\(\tilde{f}: E/W \to F\)</span>，且<span class="math inline">\(f=\pi \tilde{f}\)</span></p>
+<p>作为特例，其诱导同构<span class="math inline">\(\tilde{f}:E/\ker f \to \text{im} f\)</span></p>
+</blockquote>
+<ul>
+<li>在线性空间中，即使是无限维，补空间一定存在</li>
+</ul>
+<h5 id="对偶空间">对偶空间</h5>
+<p>​ 记<span class="math inline">\(E&#39;\)</span>为<span class="math inline">\(E\)</span>上线性泛函的全体，称为代数对偶空间</p>
+<p>​ 和有限维空间一样，在一组基上定义函数的值可唯一确定出线性函数，且该函数一定存在。考虑一组基<span class="math inline">\(\{e_i\}\)</span>，设<span class="math inline">\(\{e^i\} \subseteq E&#39;\)</span>满足<span class="math inline">\(e^i(e_i) = \delta_{ij}\)</span>，则<span class="math inline">\(\{e^i\}\)</span>线性无关。仅在<span class="math inline">\(\{e_i\}\)</span>有限大小时，<span class="math inline">\(\{e^i\}\)</span>构成一组基，称为<strong>对偶基</strong>。对偶基可表明<span class="math inline">\(\dim E&#39; \geq \dim E\)</span>，仅在有限维取等。</p>
+<p>​ 可定义映射<span class="math inline">\(x \to x^{**}: E \to E&#39;&#39;\)</span>，满足<span class="math inline">\(\langle x^{**}, f\rangle = \lang x, f\rangle\)</span>。那么<span class="math inline">\(**\)</span>映射是线性映射，且是单射。仅在有限维时，<span class="math inline">\(**\)</span>映射为满射，此时<span class="math inline">\(**\)</span>映射构成<span class="math inline">\(E \to E&#39;&#39;\)</span>的同构映射，称为<span class="math inline">\(E\)</span><strong>自反</strong>。注意：自反必须要求<span class="math inline">\(**\)</span>映射为同构，不可为他者同构映射。</p>
+<p>​ <span class="math inline">\(E\)</span>自反当且仅当<span class="math inline">\(E&#39;\)</span>自反。</p>
+<h5 id="伴随映射">伴随映射</h5>
+<p>​ 对线性映射<span class="math inline">\(T:E \to F\)</span>，定义<span class="math inline">\(T^* : F&#39; \to E&#39;\)</span>：<span class="math inline">\(y \to y \circ T\)</span>，称为<span class="math inline">\(T\)</span>的<strong>伴随映射</strong>。更常用的为其等价形式：<span class="math inline">\(\langle Tx,y\rangle = \langle x, T^*y\rangle, \forall x \in E, y \in F&#39;\)</span>。伴随映射是线性映射，且<span class="math inline">\((ST)^*=T^*S^*\)</span>。</p>
+<p>​ 对子空间<span class="math inline">\(W\)</span>，定义<span class="math inline">\(W^{\perp} = \{y\in E&#39; : y|_W = 0\}\)</span>，称为上垂空间。</p>
+<p>​ 对<span class="math inline">\(E&#39;\)</span>的子空间<span class="math inline">\(W&#39;\)</span>，定义<span class="math inline">\((W&#39;)_{\perp} = \{x \in E:(x^{**})|_{W&#39;}=0\}\)</span>，称为下垂空间。</p>
+<p>​ 接下来将是下一节的前瞻：</p>
+<blockquote>
+<p>（线性函数延拓定理）：<span class="math inline">\(W\)</span>为<span class="math inline">\(E\)</span>的子空间，那么<span class="math inline">\(f \in W&#39;\)</span>可延拓为<span class="math inline">\(\tilde{f} \in E&#39;\)</span></p>
+</blockquote>
+<p>​ 利用该定理，我们得到</p>
+<blockquote>
+<p><span class="math inline">\(\iota : W \to E\)</span>为含入，则<span class="math inline">\(\iota^* : E&#39; / W^{\perp} \to W&#39;\)</span>为同构。</p>
+<p><span class="math inline">\(\pi : E \to E/W\)</span>为投射，则<span class="math inline">\(\pi^*:(E/W)&#39; \to W^{\perp}\)</span>为同构。</p>
+</blockquote>
+<p>​ 在线性空间下进行上述讨论不是本课之重点，然下面的定理足以有趣，故还是保留了此节</p>
+<blockquote>
+<p>设<span class="math inline">\(f_1,...,f_n \in E&#39;\)</span>，那么<span class="math inline">\(f\)</span>是<span class="math inline">\(\{f_i\}\)</span>的线性组合当且仅当<span class="math inline">\(\ker f \supseteq \bigcap_{i=1}^n \ker f_i\)</span></p>
+</blockquote>
+<p>推论为：<span class="math inline">\(\exists a \neq 0, f = ag\)</span>当且仅当<span class="math inline">\(\ker f = \ker g\)</span></p>
+<h3 id="赋范空间">赋范空间</h3>
+<h4 id="定义">定义</h4>
+<ul>
+<li>赋范空间：线性空间<span class="math inline">\(X\)</span>以及<span class="math inline">\(X \to \mathbb{R}\)</span>的映射满足正定性、齐次性、三角不等式的<span class="math inline">\(||\cdot||\)</span>构成的<span class="math inline">\((X, ||\cdot||)\)</span></li>
+</ul>
+<p>​ 赋范空间中，极限与数乘和加法操作可交换。赋范空间的子空间可继承原空间范数成为赋范子空间。</p>
+<ul>
+<li>Banach空间：完备赋范空间</li>
+</ul>
+<p>​ 接下来是赋范空间中研究偏容易的一个本质结论：</p>
+<blockquote>
+<p>对赋范空间<span class="math inline">\(E,F\)</span>，线性<span class="math inline">\(T:E \to F\)</span>连续当且仅当<span class="math inline">\(T\)</span>是Lipschitz连续</p>
+</blockquote>
+<p>​ 线性连续和线性有界等价，<span class="math inline">\(T\)</span>线性连续时，可定义<span class="math inline">\(||T|| = \sup_{||x|| \leq 1} ||Tx||\)</span>。</p>
+<p>​ 对线性连续算子<span class="math inline">\(T\)</span>，<span class="math inline">\(\ker T\)</span>是一个闭空间。</p>
+<ul>
+<li><p>线性有界映射空间：对赋范空间，记<span class="math inline">\(L(E,F)\)</span>为所有线性有界映射构成的全体</p>
+<p>对偶空间：特别的，<span class="math inline">\(F\)</span>为数域<span class="math inline">\(\mathbb{F}\)</span>时，简写为<span class="math inline">\(E^*\)</span>，此空间称为<span class="math inline">\(E\)</span>的<strong>对偶空间</strong></p></li>
+</ul>
+<p>​ 我们之前定义了<span class="math inline">\(T\)</span>之范数，事实上，<span class="math inline">\(L(E,F)\)</span>构成赋范线性空间。并且当<span class="math inline">\(F\)</span>完备时，<span class="math inline">\(L(E,F)\)</span>也完备。<strong>因而<span class="math inline">\(E^*\)</span>完备。</strong></p>
+<p>​ 根据Cauchy不等式，<span class="math inline">\(f(x) = x^{**}(f) \leq ||f||\cdot ||x||\)</span>，因而<span class="math inline">\(||x^{**}|| \leq ||x||\)</span>，这说明线性空间中定义的<span class="math inline">\(**\)</span>映射满足<span class="math inline">\(x^{**} \in E^{**}\)</span>。</p>
+<ul>
+<li>自反：<span class="math inline">\(**\)</span>映射为同构映射时，称<span class="math inline">\(E\)</span>自反</li>
+</ul>
+<p>​ 对度量空间有完备化，对赋范空间同理</p>
+<blockquote>
+<p>任何赋范空间<span class="math inline">\((X,||\cdot||)\)</span>皆有完备化<span class="math inline">\((\tilde{X}, \tilde{||\cdot||})\)</span>，且在同构的意义下唯一</p>
+</blockquote>
+<ul>
+<li><p>同构：<span class="math inline">\(T:E\to F\)</span>为线性双射，且<span class="math inline">\(T,T^{-1}\)</span>皆连续时，称<span class="math inline">\(E\)</span>与<span class="math inline">\(F\)</span>间有同构映射</p>
+<p>等距同构：额外加上<span class="math inline">\(T\)</span>保距之条件</p></li>
+</ul>
+<h4 id="有限维赋范空间">有限维赋范空间</h4>
+<h5 id="有限维范数等价定理">有限维范数等价定理</h5>
+<ul>
+<li>等价：在赋范空间<span class="math inline">\(E\)</span>中，称范数<span class="math inline">\(||\cdot||_1\)</span>和范数<span class="math inline">\(||\cdot||_2\)</span>等价当且仅当存在常数<span class="math inline">\(C_1, C_2 &gt; 0\)</span>，使得<span class="math inline">\(C_1||\cdot||_1 \leq ||\cdot||_2 \leq C_2 ||\cdot||_1\)</span></li>
+</ul>
+<blockquote>
+<p>（有限维范数等价性定理）：设<span class="math inline">\(E\)</span>为有限维空间，那么<span class="math inline">\(E\)</span>上所有的范数都等价</p>
+</blockquote>
+<p>​ 所有的空间都与<span class="math inline">\((\mathbb{F}^n, ||\cdot||_2)\)</span>同构，因而有<strong>有限维赋范空间皆完备可分，有限维子空间皆为闭集</strong></p>
+<h5 id="riesz引理">Riesz引理</h5>
+<p>​ 下面介绍非常重要的Riesz引理，其常常用于刻画无限维空间</p>
+<blockquote>
+<p>（Riesz引理）：设<span class="math inline">\(W\)</span>是<span class="math inline">\(E\)</span>的真闭子空间，那么<span class="math inline">\(\forall \epsilon &gt; 0, \exists x \in E\)</span>，使得<span class="math inline">\(||x||=1\)</span>且<span class="math inline">\(d(x, W) &gt; 1-\epsilon\)</span></p>
+</blockquote>
+<p>​ 利用Riesz引理，我们可以得到</p>
+<blockquote>
+<p>赋范空间<span class="math inline">\(E\)</span>中有界集皆为准紧集（相对紧集）当且仅当<span class="math inline">\(E\)</span>有限维</p>
+</blockquote>
+<p>​ 我们再写一个较为有用的推论<strong><span class="math inline">\(E\)</span>有相对紧开集当且仅当<span class="math inline">\(E\)</span>有限维</strong></p>
+<h5 id="有限维下的线性映射">有限维下的线性映射</h5>
+<blockquote>
+<p>设<span class="math inline">\(E, F\)</span>为赋范空间，若<span class="math inline">\(T : E \to F\)</span>为线性映射且<span class="math inline">\(E\)</span>有限维，那么<span class="math inline">\(T\)</span>连续</p>
+</blockquote>
+<p>​ 下面都差不多是没啥用的废话</p>
+<p>​ （1）设<span class="math inline">\(E,F\)</span>为有限维赋范空间，<span class="math inline">\(T\)</span>为线性双射，那么<span class="math inline">\(T\)</span>为同构</p>
+<p>​ （2）设<span class="math inline">\(E,F\)</span>为有限维赋范空间，两者同构当且仅当两者维数相同</p>
+<p>​ （3）有限维赋范空间<span class="math inline">\(E\)</span>必然自反</p>
+<p>​ （4）设<span class="math inline">\(E,F\)</span>为赋范空间，<span class="math inline">\(F\)</span>有限维，<span class="math inline">\(T:E \to F\)</span>为线性映射，那么<span class="math inline">\(T\)</span>连续当且仅当<span class="math inline">\(\ker T\)</span>闭</p>
+<h4 id="hahn-banach定理">Hahn-Banach定理</h4>
+<p>​ 所谓泛函分析的王冠定理，自然归于Hahn-Banach定理所有</p>
+<blockquote>
+<p>（Hahn-Banach泛函延拓定理）：设<span class="math inline">\(E\)</span>是<span class="math inline">\(\mathbb{R}-\)</span>线性空间，<span class="math inline">\(q\)</span>是<span class="math inline">\(E\)</span>上的次线性泛函，设<span class="math inline">\(W\)</span>是<span class="math inline">\(E\)</span>的子空间，<span class="math inline">\(f\)</span>是满足<span class="math inline">\(f \leq q\)</span>的<span class="math inline">\(W\)</span>上的线性泛函，那么存在<span class="math inline">\(f\)</span>的线性延拓<span class="math inline">\(\tilde{f}\)</span>，使得<span class="math inline">\(\tilde{f} \leq q\)</span></p>
+</blockquote>
+<p>​ 该结论十分强大，但我们只需要它的一个特例</p>
+<blockquote>
+<p>（Hahn-Banach保范延拓）：设<span class="math inline">\(E\)</span>赋范，<span class="math inline">\(f\)</span>是子空间<span class="math inline">\(W\)</span>上的线性有界算子，那么存在<span class="math inline">\(f\)</span>的线性有界延拓<span class="math inline">\(\tilde{f}\)</span>，使得<span class="math inline">\(||\tilde{f}|| = ||f||\)</span></p>
+</blockquote>
+<p>​ 我们常用的是保范延拓的以下几个推论</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>赋范，<span class="math inline">\(0 \neq x_0 \in E\)</span>，那么存在<span class="math inline">\(f \in E^*\)</span>使得<span class="math inline">\(||f|| = 1\)</span>且<span class="math inline">\(f(x_0) = ||x_0||\)</span></p>
+</blockquote>
+<p>​ 该推论可以说明：<span class="math inline">\(||x_0||\)</span>的值可以在<span class="math inline">\(E^*\)</span>的单位球面上取到，与之相对的，<span class="math inline">\(||f||\)</span>的值仅能在<span class="math inline">\(E\)</span>的单位球面中取到上确界</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>赋范，<span class="math inline">\(W\)</span>为<span class="math inline">\(E\)</span>的闭子空间，<span class="math inline">\(x_0 \in E \setminus W\)</span>，那么存在<span class="math inline">\(f \in E^*\)</span>使得<span class="math inline">\(||f|| = 1, f|_W = 0\)</span>且<span class="math inline">\(f(x_0) = d(x_0, W)\)</span></p>
+</blockquote>
+<p>​ 该推论则可以说明：<strong>在<span class="math inline">\(Banach\)</span>空间中，<span class="math inline">\(E\)</span>自反当且仅当<span class="math inline">\(E^*\)</span>自反</strong></p>
+<h4 id="商空间与对偶空间">商空间与对偶空间</h4>
+<ul>
+<li>赋范空间下的商空间：当<span class="math inline">\(W\)</span>为<span class="math inline">\(E\)</span>的闭子空间时，定义<span class="math inline">\(||x+W||_{E/W}:= \inf_{w \in W} ||x+w||_E\)</span>。那么在空间<span class="math inline">\(E/W\)</span>上，<span class="math inline">\(||\cdot||_{E/W}\)</span>为良定义并且构成范数，称<span class="math inline">\((E/W, ||\cdot||_{E/W})\)</span>为赋范空间下的商空间</li>
+</ul>
+<p>​ <span class="math inline">\(E\)</span>完备时，<span class="math inline">\(E/W\)</span>也是完备空间，商空间保持完备性。</p>
+<p>​ 考虑<span class="math inline">\(\pi: E \to E/W\)</span>为商投射，商投射具有性质<strong><span class="math inline">\(\pi(B_E(0,r)) = B_{E/W}(0,r)\)</span></strong>，此可以推出<span class="math inline">\(||\pi|| = 1\)</span></p>
+<blockquote>
+<p>（赋范空间下的同态基本定理）对赋范<span class="math inline">\(E,F\)</span>，有线性映射<span class="math inline">\(f:E \to F\)</span>：如果<span class="math inline">\(W \subseteq \ker f\)</span>，其诱导线性有界算子<span class="math inline">\(\tilde{f}: E/W \to F\)</span>，且<span class="math inline">\(f= \tilde{f}\pi\)</span>。作为特例，其诱导线性有界双射<span class="math inline">\(\tilde{f}:E/\ker f \to \text{im} f\)</span></p>
+</blockquote>
+<p>​ 以上定理使我们可以较为方便地调整研究的值域和定义域</p>
+<ul>
+<li><p>伴随映射：对赋范<span class="math inline">\(E,F\)</span>，设<span class="math inline">\(T \in L(E,F)\)</span>，则<span class="math inline">\(\forall f \in F^*\)</span>，<span class="math inline">\(f \circ T \in E^*\)</span>，记映射<span class="math inline">\(T^* : f \to f \circ T\)</span>为伴随映射。</p>
+<p>等价的定义为<span class="math inline">\(\forall x \in E, \forall f \in F^*, \langle Tx, f \rangle = \langle x, T^* f\rangle\)</span></p>
+<p>伴随映射有如下性质</p>
+<p>（1）伴随映射<span class="math inline">\(T \to T^*\)</span>为保距线性映射，满足<span class="math inline">\(||T||=||T^*||\)</span>，从而为单射</p>
+<p>（2）<span class="math inline">\((ST)^* = T^*S^*\)</span></p>
+<p>（3）设<span class="math inline">\(T \in L(E_1,E_2)\)</span>，那么<span class="math inline">\(\varphi_2 T = T^{**} \varphi_1\)</span>，这其实说明<span class="math inline">\(E_1, E_2, E_2^{**}, E_1^{**}\)</span>按以上映射自然构成交换图</p>
+<p>（4）映射<span class="math inline">\(x \to x^{**}\)</span>为保距映射</p>
+<p>（5）对<span class="math inline">\(x \in E\)</span>，<span class="math inline">\(\forall f \in E^*, \langle x, f \rangle = 0\)</span>，则<span class="math inline">\(x = 0\)</span></p>
+<p>性质（3）常用于联系<span class="math inline">\(E\)</span>与<span class="math inline">\(E^{**}\)</span>，性质（5）说明线性有界函数足以确认一个点</p></li>
+<li><p>垂空间：对子空间<span class="math inline">\(W\)</span>，定义<span class="math inline">\(W^{\perp} = \{y\in E^* : y|_W = 0\}\)</span>，称为上垂空间。</p>
+<p>对<span class="math inline">\(E^*\)</span>的子空间<span class="math inline">\(W&#39;\)</span>，定义<span class="math inline">\((W&#39;)_{\perp} = \{x \in E:(x^{**})|_{W&#39;}=0\}\)</span>，称为下垂空间。</p>
+<p><span class="math inline">\(W^{\perp} = (\overline{\text{span}(W)})^{\perp}\)</span>，下垂空间类似，上垂空间与下垂空间都是闭子空间。</p></li>
+</ul>
+<p>​ 下面的定理揭示了垂空间和对偶空间之间的关系</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>赋范，<span class="math inline">\(\iota : W \to E\)</span>为含入，则<span class="math inline">\(\ker \iota^* = W^{\perp}\)</span>。</p>
+<p>再设<span class="math inline">\(\pi : E^* \to E^* / W^{\perp}\)</span>为商投射，则可写<span class="math inline">\(\iota^* = \bar{\iota} \pi\)</span>，其中<span class="math inline">\(\bar{\iota}:E^* / W^{\perp} \to W^*\)</span>为等距同构</p>
+</blockquote>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>赋范，<span class="math inline">\(W\)</span>为闭子空间，<span class="math inline">\(\pi\)</span>为到<span class="math inline">\(E/W\)</span>的商投射，那么<span class="math inline">\(\pi^* : (E/W)^* \to W^{\perp}\)</span>为等距同构</p>
+</blockquote>
+<p>​ 上面两个定理可以说明：对<span class="math inline">\(E\)</span>自反Banach空间，<span class="math inline">\(W\)</span>为其闭子空间，那么<span class="math inline">\(W\)</span>与<span class="math inline">\(E/W\)</span>都自反</p>
+<h4 id="零散结论">零散结论</h4>
+<h5 id="像与核">像与核</h5>
+<p>在本节中，我们说明连续函数的像与核之间的关系</p>
+<blockquote>
+<p>设<span class="math inline">\(T \in L(E,F)\)</span>，那么</p>
+<p>（1）<span class="math inline">\((\text{im} T)^{\perp} = \ker T^*\)</span>，<span class="math inline">\(\overline{\text{im} T} = (\ker T^*)_{\perp}\)</span></p>
+<p>（2）<span class="math inline">\((\text{im} T^*)_{\perp} = \ker T\)</span>，且<span class="math inline">\(E\)</span>自反时，<span class="math inline">\(\overline{\text{im} T^*} = (\ker T)^{\perp}\)</span></p>
+</blockquote>
+<p>可以看出一般研究像集需要取闭包，下面给出一个判定像集是否为闭的准则</p>
+<blockquote>
+<p>设<span class="math inline">\(T \in L(E,F)\)</span>且<span class="math inline">\(E\)</span>完备，如果<span class="math inline">\(\exist C &gt; 0\)</span>，使得<span class="math inline">\(\forall x \in E, ||Tx|| &gt; C||x||\)</span>，那么<span class="math inline">\(\text{im}T\)</span>闭</p>
+</blockquote>
+<h5 id="可分">可分</h5>
+<blockquote>
+<p><span class="math inline">\(E^*\)</span>可分，则<span class="math inline">\(E\)</span>可分</p>
+</blockquote>
+<h3 id="重要定理">重要定理</h3>
+<h4 id="开映射定理">开映射定理</h4>
+<ul>
+<li><p>开映射：对度量空间<span class="math inline">\(X, Y\)</span>和<span class="math inline">\(f : X \to Y\)</span>，如果<span class="math inline">\(f\)</span>将开集映射到开集，那么称<span class="math inline">\(f\)</span>为开映射</p>
+<p>和连续映射同样，我们可以用<span class="math inline">\(\epsilon-\delta\)</span>语言描述开映射，当然，可以选择逆映射的连续性描述</p>
+<p>（1）<span class="math inline">\(f\)</span>为开映射当且仅当<span class="math inline">\(\forall x_0 \in X, \forall \epsilon &gt; 0, \exists \delta, B_F(f(x_0), \delta) \subseteq f(B_E(x_0, \epsilon))\)</span></p>
+<p>（2）<span class="math inline">\(f\)</span>为双射时，<span class="math inline">\(f\)</span>为开映射当且仅当<span class="math inline">\(f^{-1}\)</span>连续</p>
+<p>在赋范空间中，自然有更强的结论：<span class="math inline">\(f\)</span>为开映射当且仅当<span class="math inline">\(\exists r, s &gt; 0, B_F(0, s) \subseteq T(B_E(0, r))\)</span></p>
+<p>商投射是开映射，因此可扩写同态基本定理</p></li>
+</ul>
+<blockquote>
+<p>（赋范空间下的同态基本定理，续）：对赋范<span class="math inline">\(E,F\)</span>及线性映射<span class="math inline">\(f:E \to F\)</span>：如果<span class="math inline">\(W \subseteq \ker f\)</span>，可诱导线性有界<span class="math inline">\(\tilde{f}: E/W \to F\)</span>，并且<span class="math inline">\(f = \tilde{f}\pi\)</span>。那么，<span class="math inline">\(f\)</span>为开映射当且仅当<span class="math inline">\(\tilde{f}\)</span>为开映射，<span class="math inline">\(f\)</span>为连续开映射当且仅当<span class="math inline">\(\tilde{f}\)</span>同构。</p>
+</blockquote>
+<p>​ 接下来介绍泛函分析王冠上的宝珠</p>
+<blockquote>
+<p>（开映射定理）：设<span class="math inline">\(E,F\)</span>为Banach空间，<span class="math inline">\(T:E\to F\)</span>为连续线性满射，则<span class="math inline">\(T\)</span>为开映射</p>
+</blockquote>
+<p>​ 开映射有如下等价形式</p>
+<blockquote>
+<p>（逆算子定理）：设<span class="math inline">\(E,F\)</span>为Banach空间，<span class="math inline">\(T:E\to F\)</span>为连续线性双射，则<span class="math inline">\(T^{-1}\)</span>连续，<span class="math inline">\(T\)</span>为同构</p>
+</blockquote>
+<p>​ 称<span class="math inline">\(\text{gra}(f) = \{(x, f(x)):x\in X\}\)</span>为<span class="math inline">\(f\)</span>的图，当<span class="math inline">\(\text{gra}(f)\)</span>为闭集时，称为闭图。<strong>当<span class="math inline">\(f\)</span>连续时，<span class="math inline">\(\text{gra}(f)\)</span>自然是闭图</strong>。</p>
+<blockquote>
+<p>（闭图定理）：设<span class="math inline">\(E,F\)</span>为Banach空间，<span class="math inline">\(T:E \to F\)</span>线性，若<span class="math inline">\(\text{gra}(T)\)</span>为闭图，那么<span class="math inline">\(T\)</span>连续</p>
+</blockquote>
+<p>​ 闭图定理常用<span class="math inline">\(T\)</span>的连续性说明<span class="math inline">\(T^{-1}\)</span>的连续性</p>
+<h4 id="一致有界定理">一致有界定理</h4>
+<ul>
+<li><p>点态有界：对<span class="math inline">\(\{T_{\alpha}\} \subseteq L(E, F)\)</span>，如果<span class="math inline">\(\forall x \in E\)</span>，<span class="math inline">\(\sup \{||T_{\alpha} x||\} &lt; \infty\)</span>，则称函数族<span class="math inline">\(\{T_{\alpha}\}\)</span>点态有界</p></li>
+<li><p>一致有界：对<span class="math inline">\(\{T_{\alpha}\} \subseteq L(E, F)\)</span>，如果<span class="math inline">\(\sup \{||T_{\alpha}||\} &lt; \infty\)</span>，则称函数族<span class="math inline">\(\{T_{\alpha}\}\)</span>一致有界</p>
+<p><strong>一致有界自然蕴含点态有界</strong>，反之见宝珠之定理：</p></li>
+</ul>
+<blockquote>
+<p>（一致有界定理）：设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(F\)</span>赋范，那么点态有界可导出一致有界</p>
+</blockquote>
+<p>​ 下面是一致有界定理的重要推论</p>
+<p>​ 设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(\{T_n\} \subseteq L(E,F)\)</span>，如果<span class="math inline">\(\forall x \in E, \{T_nx\}\)</span>存在极限，那么存在<span class="math inline">\(T \in L(E,F)\)</span>使得<span class="math inline">\(||T|| \leq \liminf ||T_n||\)</span>且<span class="math inline">\(\lim T_n x = Tx\)</span>。用下一节的话语来说，完备赋范空间中的点态收敛蕴含序列强收敛。</p>
+<h4 id="弱">弱</h4>
+<ul>
+<li><p>点列弱收敛：如果<span class="math inline">\(\forall x^* \in E^*\)</span>，有<span class="math inline">\(\lim \langle x_n, x^* \rangle = \lang x_0, x^*\rangle\)</span>，则称<span class="math inline">\(\{x_n\}\)</span>弱收敛于<span class="math inline">\(x_0\)</span></p></li>
+<li><p>点列弱<span class="math inline">\(*\)</span>收敛：如果<span class="math inline">\(\forall x \in E\)</span>，有<span class="math inline">\(\lim \langle x,x_n^*\rangle = \lim \langle x, x_0^*\rangle\)</span>，则称<span class="math inline">\(\{x_n^*\}\)</span>弱<span class="math inline">\(*\)</span>收敛于<span class="math inline">\(x_0^*\)</span></p>
+<p>收敛强于弱收敛，弱收敛强于弱<span class="math inline">\(*\)</span>收敛。弱收敛和弱<span class="math inline">\(*\)</span>收敛有和收敛类似的性质：</p>
+<p>（1）弱（弱<span class="math inline">\(*\)</span>）收敛极限唯一</p>
+<p>（2）设<span class="math inline">\(\{x_n\}\)</span>弱（弱<span class="math inline">\(*\)</span>）收敛于<span class="math inline">\(x_0\)</span>，<span class="math inline">\(T\)</span>连续，那么<span class="math inline">\(\{Tx_n\}\)</span>弱（弱<span class="math inline">\(*\)</span>）收敛于<span class="math inline">\(Tx_0\)</span></p>
+<p>（3）弱收敛序列有界，在<span class="math inline">\(E\)</span>完备时，弱<span class="math inline">\(*\)</span>收敛序列有界</p>
+<p>下面的引理介绍弱收敛与子空间间的关系</p>
+<p>（1）设<span class="math inline">\(W\)</span>为赋范<span class="math inline">\(E\)</span>的子空间，<span class="math inline">\(\{x_n\} \subseteq W, x_0 \in W\)</span>，那么<span class="math inline">\(\{x_n\}\)</span>在<span class="math inline">\(W\)</span>中弱收敛于<span class="math inline">\(x_0\)</span>当且仅当在<span class="math inline">\(E\)</span>中弱收敛于<span class="math inline">\(x_0\)</span></p>
+<p>（2）设<span class="math inline">\(W\)</span>为闭子空间，那么<span class="math inline">\(\{x_n\}\)</span>在<span class="math inline">\(E\)</span>中若收敛于<span class="math inline">\(x_0\)</span>时有<span class="math inline">\(x_0 \in W\)</span></p></li>
+<li><p>弱Cauchy列：如果<span class="math inline">\(\forall x^* \in E^*\)</span>，<span class="math inline">\(\{\langle x_n, x^*\rangle\}\)</span>构成Cauchy列，则称<span class="math inline">\(\{x_n\}\)</span>是弱Cauchy列，类似可定义弱<span class="math inline">\(*\)</span>Cauchy列</p></li>
+<li><p>弱序列完备：弱Cauchy列均弱收敛，类似的可定义弱<span class="math inline">\(*\)</span>序列完备</p>
+<p>和弱序列的性质类似，弱Cauchy列有如下性质：弱Cauchy列有界，在<span class="math inline">\(E\)</span>完备时，弱<span class="math inline">\(*\)</span>Cauchy列有界</p>
+<p>当<span class="math inline">\(E\)</span>自反时，<span class="math inline">\(E\)</span>将弱序列完备</p></li>
+<li><p>序列强收敛：如果<span class="math inline">\(\forall x \in E\)</span>，有<span class="math inline">\(\lim T_n x = T_0x\)</span>，则称<span class="math inline">\(\{T_n\}\)</span>强收敛于<span class="math inline">\(T_0\)</span></p></li>
+<li><p>序列弱收敛：如果<span class="math inline">\(\forall x \in E\)</span>，<span class="math inline">\(\{T_nx\}\)</span>弱收敛到<span class="math inline">\(T_0x\)</span>，则称<span class="math inline">\(\{T_n\}\)</span>弱收敛于<span class="math inline">\(T_0\)</span></p>
+<p>因收敛和弱收敛的极限唯一，因此序列强收敛和弱收敛的极限也唯一。类似的，在完备空间中，序列弱收敛时，映射列有界。</p>
+<p>此处名字非常混乱，因有下列事情成立：按范数收敛（收敛） <span class="math inline">\(\Rightarrow\)</span> 点态收敛 <span class="math inline">\(\Rightarrow\)</span> 序列强收敛 <span class="math inline">\(\Rightarrow\)</span> 序列弱收敛，其中第二个推出主要用于说明点态收敛的极限一定存在</p></li>
+</ul>
+<h4 id="谱映射定理">谱映射定理</h4>
+<p>以下都是复数域</p>
+<ul>
+<li><p>正则值：设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L(E,E)\)</span>，若<span class="math inline">\(\lambda I - T\)</span>可逆，则称<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(T\)</span>的<strong>正则值</strong>。正则值的全体称为预解集，记为<span class="math inline">\(\rho(T)\)</span>。</p></li>
+<li><p>谱值：使<span class="math inline">\(\lambda I -T\)</span>不可逆的<span class="math inline">\(\lambda\)</span>构成<span class="math inline">\(T\)</span>的<strong>谱值</strong>，谱值的全体称为<span class="math inline">\(T\)</span>的谱，记为<span class="math inline">\(\sigma(T)\)</span>。谱分为以下三类：</p>
+<ul>
+<li><span class="math inline">\(\ker(\lambda I - T) \neq 0\)</span>，因而存在非零特征向量<span class="math inline">\(x\)</span>，也即<span class="math inline">\(Tx = \lambda x\)</span>，此时称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>点谱</strong>，点谱的全体记为<span class="math inline">\(\sigma_p(T)\)</span></li>
+<li><span class="math inline">\(\ker (\lambda I - T) = 0, \overline{\text{im}(\lambda I - T)} = E\)</span>，称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>连续谱</strong>，连续谱的全体记为<span class="math inline">\(\sigma_c(T)\)</span></li>
+<li><span class="math inline">\(\ker(\lambda I - T) = 0, \overline{\text{im}(\lambda I - T)} \neq E\)</span>，称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>剩余谱</strong>，剩余谱的全体记为<span class="math inline">\(\sigma_r(T)\)</span></li>
+</ul>
+<p>值得注意的是，由逆算子定理，当<span class="math inline">\(\lambda I - T\)</span>不可逆时，<span class="math inline">\(\ker(\lambda I - T) = 0\)</span>将导出<span class="math inline">\(\text{im}(\lambda I - T) \neq E\)</span>。点谱是性质最好的谱，剩余谱是性质最差的谱。</p></li>
+</ul>
+<blockquote>
+<p>（谱映射定理）：设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L(E,E)\)</span>，<span class="math inline">\(p(z)\)</span>为多项式，那么<span class="math inline">\(\sigma(p(T)) = p(\sigma(T))\)</span></p>
+</blockquote>
+<h4 id="谱半径公式">谱半径公式</h4>
+<p>​ 下面的工作主要在于定义谱半径</p>
+<blockquote>
+<p>（Gerschgorin圆盘定理）：设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L(E, E)\)</span>，那么<span class="math inline">\(\sigma(T)\)</span>为紧集，且<span class="math inline">\(\sigma(T) \subseteq B_{\mathbb{C}}(0, ||T||)\)</span></p>
+</blockquote>
+<p>​ 一个不平凡的结论是：在Banach空间下，<span class="math inline">\(\sigma(T)\)</span>非空。</p>
+<ul>
+<li>谱半径：对Banach空间<span class="math inline">\(E\)</span>，<span class="math inline">\(T \in L(E,E)\)</span>，<span class="math inline">\(r(T) = \max\{|z|:z \in \sigma(T)\}\)</span>称为<span class="math inline">\(T\)</span>的<strong>谱半径</strong></li>
+</ul>
+<blockquote>
+<p>（谱半径公式）：设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L(E,E)\)</span>，那么<span class="math inline">\(r(T) = \lim_{n \to \infty} ||T^n||^{1/n}\)</span></p>
+</blockquote>
+<h3 id="结尾吐槽">结尾吐槽</h3>
+<p>到一致有界定理为止便是本门课的期中内容了，那么期中考了什么呢？一道Banach映射相关的题，一道紧性的题，一道乱七八糟的举例子题，一道私货题。考的内容之八九在前两周讲完了，甚至紧性因实变已讲直接跳过了，如此本门课的期中考试变得十分之搞笑滑稽，如何对得起泛函分析之名号？不如改名数学分析之期中，或更加之合适。</p>
+<p>这门课是与李代数一同上的，隔壁班老师正好是做李代数的，因而可以看作李代数中鼎鼎大名的<strong>Lax-Milgram</strong>定理只能作为一个小引理出现，令人哭笑不得。</p>
+]]></content>
+      <categories>
+        <category>notes</category>
+      </categories>
+      <tags>
+        <tag>functional-analysis</tag>
       </tags>
   </entry>
 </search>
