@@ -5584,7 +5584,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <h4 id="hahn-banach定理">Hahn-Banach定理</h4>
 <p>​ 所谓泛函分析的王冠定理，自然归于Hahn-Banach定理所有</p>
 <blockquote>
-<p>（Hahn-Banach泛函延拓定理）：设<span class="math inline">\(E\)</span>是<span class="math inline">\(\mathbb{R}-\)</span>线性空间，<span class="math inline">\(q\)</span>是<span class="math inline">\(E\)</span>上的次线性泛函，设<span class="math inline">\(W\)</span>是<span class="math inline">\(E\)</span>的子空间，<span class="math inline">\(f\)</span>是满足<span class="math inline">\(f \leq q\)</span>的<span class="math inline">\(W\)</span>上的线性泛函，那么存在<span class="math inline">\(f\)</span>的线性延拓<span class="math inline">\(\tilde{f}\)</span>，使得<span class="math inline">\(\tilde{f} \leq q\)</span></p>
+<p>（泛函延拓定理）：设<span class="math inline">\(E\)</span>是<span class="math inline">\(\mathbb{R}-\)</span>线性空间，<span class="math inline">\(q\)</span>是<span class="math inline">\(E\)</span>上的次线性泛函，设<span class="math inline">\(W\)</span>是<span class="math inline">\(E\)</span>的子空间，<span class="math inline">\(f\)</span>是满足<span class="math inline">\(f \leq q\)</span>的<span class="math inline">\(W\)</span>上的线性泛函，那么存在<span class="math inline">\(f\)</span>的线性延拓<span class="math inline">\(\tilde{f}\)</span>，使得<span class="math inline">\(\tilde{f} \leq q\)</span></p>
 </blockquote>
 <p>​ 该结论十分强大，但我们只需要它的一个特例</p>
 <blockquote>
@@ -5618,6 +5618,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>（3）设<span class="math inline">\(T \in L(E_1,E_2)\)</span>，那么<span class="math inline">\(\varphi_2 T = T^{**} \varphi_1\)</span>，这其实说明<span class="math inline">\(E_1, E_2, E_2^{**}, E_1^{**}\)</span>按以上映射自然构成交换图</p>
 <p>（4）映射<span class="math inline">\(x \to x^{**}\)</span>为保距映射</p>
 <p>（5）对<span class="math inline">\(x \in E\)</span>，<span class="math inline">\(\forall f \in E^*, \langle x, f \rangle = 0\)</span>，则<span class="math inline">\(x = 0\)</span></p>
+<p>（6）<span class="math inline">\((I_E)^* = I_{E^*}\)</span>，如果<span class="math inline">\(T\)</span>为同构，那么<span class="math inline">\((T^*)^{-1} = (T^{-1})^*\)</span></p>
 <p>性质（3）常用于联系<span class="math inline">\(E\)</span>与<span class="math inline">\(E^{**}\)</span>，性质（5）说明线性有界函数足以确认一个点</p></li>
 <li><p>垂空间：对子空间<span class="math inline">\(W\)</span>，定义<span class="math inline">\(W^{\perp} = \{y\in E^* : y|_W = 0\}\)</span>，称为上垂空间。</p>
 <p>对<span class="math inline">\(E^*\)</span>的子空间<span class="math inline">\(W&#39;\)</span>，定义<span class="math inline">\((W&#39;)_{\perp} = \{x \in E:(x^{**})|_{W&#39;}=0\}\)</span>，称为下垂空间。</p>
@@ -5695,14 +5696,14 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>（3）弱收敛序列有界，在<span class="math inline">\(E\)</span>完备时，弱<span class="math inline">\(*\)</span>收敛序列有界</p>
 <p>下面的引理介绍弱收敛与子空间间的关系</p>
 <p>（1）设<span class="math inline">\(W\)</span>为赋范<span class="math inline">\(E\)</span>的子空间，<span class="math inline">\(\{x_n\} \subseteq W, x_0 \in W\)</span>，那么<span class="math inline">\(\{x_n\}\)</span>在<span class="math inline">\(W\)</span>中弱收敛于<span class="math inline">\(x_0\)</span>当且仅当在<span class="math inline">\(E\)</span>中弱收敛于<span class="math inline">\(x_0\)</span></p>
-<p>（2）设<span class="math inline">\(W\)</span>为闭子空间，那么<span class="math inline">\(\{x_n\}\)</span>在<span class="math inline">\(E\)</span>中若收敛于<span class="math inline">\(x_0\)</span>时有<span class="math inline">\(x_0 \in W\)</span></p></li>
+<p>（2）设<span class="math inline">\(W\)</span>为闭子空间，那么<span class="math inline">\(\{x_n\}\subseteq W\)</span>在<span class="math inline">\(E\)</span>中弱收敛于<span class="math inline">\(x_0\)</span>时有<span class="math inline">\(x_0 \in W\)</span></p></li>
 <li><p>弱Cauchy列：如果<span class="math inline">\(\forall x^* \in E^*\)</span>，<span class="math inline">\(\{\langle x_n, x^*\rangle\}\)</span>构成Cauchy列，则称<span class="math inline">\(\{x_n\}\)</span>是弱Cauchy列，类似可定义弱<span class="math inline">\(*\)</span>Cauchy列</p></li>
 <li><p>弱序列完备：弱Cauchy列均弱收敛，类似的可定义弱<span class="math inline">\(*\)</span>序列完备</p>
 <p>和弱序列的性质类似，弱Cauchy列有如下性质：弱Cauchy列有界，在<span class="math inline">\(E\)</span>完备时，弱<span class="math inline">\(*\)</span>Cauchy列有界</p>
 <p>当<span class="math inline">\(E\)</span>自反时，<span class="math inline">\(E\)</span>将弱序列完备</p></li>
 <li><p>序列强收敛：如果<span class="math inline">\(\forall x \in E\)</span>，有<span class="math inline">\(\lim T_n x = T_0x\)</span>，则称<span class="math inline">\(\{T_n\}\)</span>强收敛于<span class="math inline">\(T_0\)</span></p></li>
 <li><p>序列弱收敛：如果<span class="math inline">\(\forall x \in E\)</span>，<span class="math inline">\(\{T_nx\}\)</span>弱收敛到<span class="math inline">\(T_0x\)</span>，则称<span class="math inline">\(\{T_n\}\)</span>弱收敛于<span class="math inline">\(T_0\)</span></p>
-<p>因收敛和弱收敛的极限唯一，因此序列强收敛和弱收敛的极限也唯一。类似的，在完备空间中，序列弱收敛时，映射列有界。</p>
+<p>因收敛和弱收敛的极限唯一，因此序列强收敛和弱收敛的极限也唯一。类似的，<strong>在完备空间中，序列弱收敛时，映射列有界</strong>。</p>
 <p>此处名字非常混乱，因有下列事情成立：按范数收敛（收敛） <span class="math inline">\(\Rightarrow\)</span> 点态收敛 <span class="math inline">\(\Rightarrow\)</span> 序列强收敛 <span class="math inline">\(\Rightarrow\)</span> 序列弱收敛，其中第二个推出主要用于说明点态收敛的极限一定存在</p></li>
 </ul>
 <h4 id="谱映射定理">谱映射定理</h4>
@@ -5711,7 +5712,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li><p>正则值：设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L(E,E)\)</span>，若<span class="math inline">\(\lambda I - T\)</span>可逆，则称<span class="math inline">\(\lambda\)</span>是<span class="math inline">\(T\)</span>的<strong>正则值</strong>。正则值的全体称为预解集，记为<span class="math inline">\(\rho(T)\)</span>。</p></li>
 <li><p>谱值：使<span class="math inline">\(\lambda I -T\)</span>不可逆的<span class="math inline">\(\lambda\)</span>构成<span class="math inline">\(T\)</span>的<strong>谱值</strong>，谱值的全体称为<span class="math inline">\(T\)</span>的谱，记为<span class="math inline">\(\sigma(T)\)</span>。谱分为以下三类：</p>
 <ul>
-<li><span class="math inline">\(\ker(\lambda I - T) \neq 0\)</span>，因而存在非零特征向量<span class="math inline">\(x\)</span>，也即<span class="math inline">\(Tx = \lambda x\)</span>，此时称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>点谱</strong>，点谱的全体记为<span class="math inline">\(\sigma_p(T)\)</span></li>
+<li><span class="math inline">\(\ker(\lambda I - T) \neq 0\)</span>，因而存在非零特征向量<span class="math inline">\(x\)</span>，也即<span class="math inline">\(Tx = \lambda x\)</span>，此时称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>点谱</strong>，也称为特征值，点谱的全体记为<span class="math inline">\(\sigma_p(T)\)</span></li>
 <li><span class="math inline">\(\ker (\lambda I - T) = 0, \overline{\text{im}(\lambda I - T)} = E\)</span>，称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>连续谱</strong>，连续谱的全体记为<span class="math inline">\(\sigma_c(T)\)</span></li>
 <li><span class="math inline">\(\ker(\lambda I - T) = 0, \overline{\text{im}(\lambda I - T)} \neq E\)</span>，称<span class="math inline">\(\lambda\)</span>为<span class="math inline">\(T\)</span>的<strong>剩余谱</strong>，剩余谱的全体记为<span class="math inline">\(\sigma_r(T)\)</span></li>
 </ul>
@@ -5761,7 +5762,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li><p>正交：如果<span class="math inline">\(\langle x, y \rangle = 0\)</span>，记为<span class="math inline">\(x \perp y\)</span>，称<span class="math inline">\(x\)</span>与<span class="math inline">\(y\)</span>正交。</p>
 <p><span class="math inline">\(x \perp y\)</span>时，<span class="math inline">\(||x+y||^2 = ||x||^2 + ||y||^2\)</span>。</p></li>
 <li><p>正交补：设<span class="math inline">\(X\)</span>是子空间，<span class="math inline">\(X^{\perp} := \{z : z \perp X\}\)</span>称为<span class="math inline">\(X\)</span>的<strong>正交补</strong></p>
-<p>因<span class="math inline">\(X^{\perp} = \overline{\text{span}(X)}^{\perp}\)</span>，且正交补是闭子空间</p></li>
+<p><span class="math inline">\(X^{\perp} = \overline{\text{span}(X)}^{\perp}\)</span>，且正交补是闭子空间</p></li>
 </ul>
 <h4 id="一致凸">一致凸</h4>
 <ul>
@@ -5826,6 +5827,18 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li><p>酉算子：对<span class="math inline">\(A \in L(H,H)\)</span>，若<span class="math inline">\(A\)</span>保距，称<span class="math inline">\(A\)</span>为<strong>酉算子</strong></p>
 <p>和有限维情况类似，<span class="math inline">\(A\)</span>为酉算子当且仅当<span class="math inline">\(AA^* = A^*A = I\)</span>，这又当且仅当<span class="math inline">\(A\)</span>保距且正规</p></li>
 </ul>
+<p>​ 当<span class="math inline">\(A\)</span>是自伴算子时，我们可以定义二次型</p>
+<ul>
+<li><p>二次型：设<span class="math inline">\(H\)</span>为Hilbert空间，<span class="math inline">\(A \in L(H,H)\)</span>自伴，定义<span class="math inline">\((x,y) = \langle Ax, y\rangle\)</span>，那么<span class="math inline">\((\cdot, \cdot)\)</span>有复共轭对称性和复共轭双线性性</p>
+<p><span class="math inline">\(q(x) = (x,x)\)</span>则称为二次型</p></li>
+</ul>
+<p>​ 一般来说，二次型可以通过极化恒等式表达出所有的<span class="math inline">\((x,y)\)</span></p>
+<p>​ 在复数域内<span class="math inline">\(\forall x, \langle Ax,x\rangle = 0\)</span>时，可推导出<span class="math inline">\(A=0\)</span>。但在实数域内，<span class="math inline">\(\forall x, \langle Ax,x\rangle = 0\)</span>需要补充<span class="math inline">\(A\)</span>自伴的条件，方有<span class="math inline">\(A=0\)</span>。</p>
+<p>​ 对<span class="math inline">\(A-A^*\)</span>进行考虑，得到<span class="math inline">\(A=A^*\)</span>当且仅当<span class="math inline">\(\langle Ax, x\rangle \in \mathbb{R}\)</span></p>
+<p>​ 自伴算子的范数可以通过单位球面上的双线性型进行刻画：<span class="math inline">\(||A|| = \sup\{|\langle Ax, x\rangle:||x||=1\}\)</span></p>
+<blockquote>
+<p><span class="math inline">\(||A||^2 = ||A^*||^2 = ||AA^*||\)</span></p>
+</blockquote>
 <h3 id="紧算子">紧算子</h3>
 <p>下面的讨论应该归属于Riesz-Schauder理论</p>
 <h4 id="基础-1">基础</h4>
@@ -5838,7 +5851,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>​ 因有限维空间中有界集均有相对紧集，有限秩算子一定是紧算子。有限秩算子和紧算子构成子空间，记紧算子空间为<span class="math inline">\(L_0\)</span>，有限秩算子空间为<span class="math inline">\(L_{00}\)</span>。当<span class="math inline">\(S,T\)</span>中有一者紧时，<span class="math inline">\(ST\)</span>也将是紧算子。</p>
 <p>下面是我们常用之定理</p>
 <blockquote>
-<p><span class="math inline">\(L_{00}\)</span>是<span class="math inline">\(L_0\)</span>的闭子空间</p>
+<p><span class="math inline">\(F\)</span>完备时，<span class="math inline">\(L_0\)</span>是<span class="math inline">\(L\)</span>的闭子空间</p>
 </blockquote>
 <p>​ 我们想证明映射为紧算子时，可以尝试用有限秩的算子进行逼近</p>
 <p>​ 特别的，在赋范空间<span class="math inline">\(E\)</span>到Hilbert空间<span class="math inline">\(H\)</span>的映射中，甚至有<span class="math inline">\(\overline{L_{00}(E,H)} = L_0(E,H)\)</span></p>
@@ -5855,21 +5868,19 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>​ 之后我们直接陈述最终的结论</p>
 <blockquote>
 <p>设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L_0(E,E)\)</span>，那么</p>
-<p>（1）<span class="math inline">\(\sigma(T) \setminus \{0\} \subseteq \sigma_p(T)\)</span></p>
+<p>（1）<span class="math inline">\(\sigma(T) \setminus \{0\} \subseteq \sigma_p(T)\)</span>，且当<span class="math inline">\(\dim E = \infty\)</span>时，<span class="math inline">\(0 \in \sigma(T)\)</span></p>
 <p>（2）任取<span class="math inline">\(\lambda \in \sigma(T) \setminus \{0\}\)</span>，记<span class="math inline">\(V_{\lambda} = \bigcup_{n=1}^{\infty} \ker(\lambda I - T)^n\)</span>，那么<span class="math inline">\(\dim V_{\lambda} &lt; \infty\)</span>且<span class="math inline">\((\lambda I - T)|_{V_{\lambda}}\)</span>幂零</p>
 <p>（3）取<span class="math inline">\(\{\lambda_i\}_{i=1}^k \subseteq \sigma(T) \setminus \{0\}\)</span>，那么<span class="math inline">\(E = V_{\lambda_1} \oplus ... \oplus V_{\lambda_k} \oplus W\)</span>，<span class="math inline">\(W\)</span>是<span class="math inline">\(T\)</span>的不变子空间，<span class="math inline">\(\sigma(T|_W) = \sigma(T) \setminus \{\lambda_i\}_{i=1}^k\)</span></p>
 <p>（4）<span class="math inline">\(\forall \lambda \neq 0\)</span>，<span class="math inline">\(\lambda\)</span>不是<span class="math inline">\(\sigma(T)\)</span>的聚点</p>
 </blockquote>
+<p>​ 也存在好用的中间结论</p>
+<blockquote>
+<p>设<span class="math inline">\(E\)</span>为Banach空间，<span class="math inline">\(T \in L_0(E,E)\)</span>，那么对<span class="math inline">\(\lambda \neq 0, n &gt; 0\)</span></p>
+<p>（1）<span class="math inline">\(\dim \ker(\lambda I - T)^n &lt; \infty\)</span></p>
+<p>（2）<span class="math inline">\(\text{im}(\lambda I - T)^n\)</span>闭，且<span class="math inline">\(\dim \text{coker}(\lambda I - T)^n = \dim \ker(\lambda I - T^*)^n &lt; \infty\)</span></p>
+</blockquote>
+<p>​ 其中的<span class="math inline">\(\dim \text{coker} A\)</span>为<span class="math inline">\(\text{im} A\)</span>的余维</p>
 <h4 id="自伴算子-1">自伴算子</h4>
-<p>​ 当<span class="math inline">\(A\)</span>是自伴算子时，我们可以定义二次型</p>
-<ul>
-<li><p>二次型：设<span class="math inline">\(H\)</span>为Hilbert空间，<span class="math inline">\(A \in L(H,H)\)</span>自伴，定义<span class="math inline">\((x,y) = \langle Ax, y\rangle\)</span>，那么<span class="math inline">\((\cdot, \cdot)\)</span>有复共轭对称性和复共轭双线性性</p>
-<p><span class="math inline">\(q(x) = (x,x)\)</span>则称为二次型</p></li>
-</ul>
-<p>​ 一般来说，二次型可以通过极化恒等式表达出所有的<span class="math inline">\((x,y)\)</span></p>
-<p>​ 在复数域内<span class="math inline">\(\forall x, \langle Ax,x\rangle = 0\)</span>时，可推导出<span class="math inline">\(A=0\)</span>。但在实数域内，<span class="math inline">\(\forall x, \langle Ax,x\rangle = 0\)</span>需要补充<span class="math inline">\(A\)</span>自伴的条件，方有<span class="math inline">\(A=0\)</span>。</p>
-<p>​ 对<span class="math inline">\(A-A^*\)</span>进行考虑，得到<span class="math inline">\(A=A^*\)</span>当且仅当<span class="math inline">\(\langle Ax, x\rangle \in \mathbb{R}\)</span></p>
-<p>​ 自伴算子的范数可以通过单位球面上的二次型进行刻画：<span class="math inline">\(||A|| = \sup\{|\langle Ax, x\rangle:||x||=1\}\)</span></p>
 <p>​ 以下定理说明正规算子的谱论将有漂亮的分类结果</p>
 <blockquote>
 <p>设<span class="math inline">\(A\)</span>正规，则<span class="math inline">\(r(A) = ||A||\)</span>，进一步，<span class="math inline">\(||A||^n = ||A^n||\)</span></p>
@@ -5889,6 +5900,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 </ul>
 <p>​ 正算子对应半正定，<span class="math inline">\(A - B \geq 0\)</span>时，也记为<span class="math inline">\(A \geq B\)</span></p>
 <p>​ 和有限维一样，<span class="math inline">\(A \geq 0\)</span>当且仅当<span class="math inline">\(\min \sigma(A) \geq 0\)</span></p>
+<p>​ 常用的结论：<span class="math inline">\(A^*A \geq 0\)</span>，利用该形式可以较方便的求<span class="math inline">\(||A||\)</span></p>
 <h3 id="例子">例子</h3>
 <h4 id="lpab"><span class="math inline">\(L^p[a,b]\)</span></h4>
 <p>​ 下述结果的讨论可以扩展到<span class="math inline">\(\sigma-\)</span>有限的测度空间中，但我们省略</p>
@@ -5904,7 +5916,7 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <blockquote>
 <p>设<span class="math inline">\(1 \leq p \leq \infty\)</span>，对<span class="math inline">\(f \in L^p, g \in L^{p&#39;}\)</span>，定义<span class="math inline">\(\langle f, g\rangle = \int fg\)</span>，那么：当<span class="math inline">\(1 &lt; p \leq \infty\)</span>时，<span class="math inline">\(Tg = \langle \cdot, g\rangle\)</span>为<span class="math inline">\(L^{p} \to (L^{p&#39;})^*\)</span>的等距同构</p>
 </blockquote>
-<p>​ 注意我们说明<span class="math inline">\(L^1\)</span>关于<span class="math inline">\((L^{\infty})^*\)</span>的对偶表示，这一般是不成立的</p>
+<p>​ 注意我们未说明<span class="math inline">\(L^1\)</span>关于<span class="math inline">\((L^{\infty})^*\)</span>的对偶表示，这一般是不成立的</p>
 <h4 id="cab"><span class="math inline">\(C[a,b]\)</span></h4>
 <p>​ 一般在<span class="math inline">\(C[a,b]\)</span>上考虑<span class="math inline">\(L^{\infty}\)</span>范数，<span class="math inline">\(C[a,b]\)</span>是完备、可分的空间</p>
 <p>​ 研究紧性则考虑下面的重要定理</p>
@@ -5912,10 +5924,10 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <li>等度连续：对<span class="math inline">\(A \subseteq C[a,b]\)</span>，若<span class="math inline">\(\forall \epsilon &gt; 0\)</span>，存在<span class="math inline">\(\delta &gt; 0\)</span>，当<span class="math inline">\(|x_1-x_2| &lt; \delta\)</span>时，<span class="math inline">\(\forall f \in A\)</span>，有<span class="math inline">\(|f(x_1)-f(x_2)| &lt; \epsilon\)</span>，则称<span class="math inline">\(A\)</span>等度连续</li>
 </ul>
 <blockquote>
-<p>（Arzela-Ascoli定理）<span class="math inline">\(A \subseteq C[a,b]\)</span>紧当且仅当<span class="math inline">\(A\)</span>有界并且等度连续</p>
+<p>（Arzela-Ascoli定理）<span class="math inline">\(A \subseteq C[a,b]\)</span>相对紧当且仅当<span class="math inline">\(A\)</span>有界并且等度连续</p>
 </blockquote>
-<p>​ <span class="math inline">\(C[a,b]\)</span>的一类重要的子空间为<span class="math inline">\(C^k[a,b]\)</span>，在其上有<span class="math inline">\(C^k\)</span>范数：<span class="math inline">\(||f||_{C^k} := \sum_{i=0}^k \max_{x \in [a,b]} |f^{(i)}(x)|\)</span>，<span class="math inline">\(C^k\)</span>范数弱于<span class="math inline">\(L^{\infty}\)</span>范数，也即<span class="math inline">\(\exists C&gt;0\)</span>，使得<span class="math inline">\(||f||_{C^k} \leq C \cdot ||f||_{L^{\infty}}\)</span>。由此，我们知道<span class="math inline">\((C^k, ||\cdot||_{C^k})\)</span>也是完备、可分的空间。</p>
-<p>​ 该定理的重要推论是：对<span class="math inline">\(m&gt;l\geq0\)</span>，<span class="math inline">\((C^m[a,b],L^{\infty}) \to (C^l[a,b], L^{\infty})\)</span>为紧映射</p>
+<p>​ <span class="math inline">\(C[a,b]\)</span>的一类重要的子空间为<span class="math inline">\(C^k[a,b]\)</span>，在其上有<span class="math inline">\(C^k\)</span>范数：<span class="math inline">\(||f||_{C^k} := \sum_{i=0}^k \max_{x \in [a,b]} |f^{(i)}(x)|\)</span>，<span class="math inline">\(C^k\)</span>和<span class="math inline">\(L^{\infty}\)</span>范数等价，也即<span class="math inline">\(\exists C&gt;0\)</span>，使得<span class="math inline">\(||f||_{C^k} \leq C \cdot ||f||_{L^{\infty}}\)</span>。由此，我们知道<span class="math inline">\((C^k, ||\cdot||_{C^k})\)</span>也是完备、可分的空间。</p>
+<p>​ 该定理的重要推论是：对<span class="math inline">\(m&gt;l\geq0\)</span>，<span class="math inline">\(I:(C^m[a,b],L^{\infty}) \to (C^l[a,b], L^{\infty})\)</span>为紧映射</p>
 <p>​ <span class="math inline">\(C[a,b]\)</span>是<span class="math inline">\(L^p[a,b]\)</span>的子空间，但对<span class="math inline">\(1 \leq p &lt; \infty\)</span>，<span class="math inline">\((C[a,b], L^p)\)</span>不完备，故<span class="math inline">\(C[a,b]\)</span>非闭子空间（<span class="math inline">\(C[0,1]\)</span>上，考虑<span class="math inline">\(x^n\)</span>的极限）</p>
 <p>​ <span class="math inline">\(C[a,b]\)</span>的对偶表示与测度相关</p>
 <blockquote>
@@ -5930,6 +5942,10 @@ Ans_k = \sum_{1 \leq i \leq N} (C_i \times \prod_{1 \leq j \leq k}(A_i + B_j))
 <p>​ 我们较容易得到对偶表示：对<span class="math inline">\(f \in l^p, g \in l^{p&#39;}\)</span>，定义<span class="math inline">\(\langle f, g\rangle = \sum f_i g_i\)</span>，该求和收敛，定义为良定义</p>
 <p>​ 那么按映射<span class="math inline">\(T\)</span>为<span class="math inline">\(Tb = \langle \cdot, b\rangle\)</span>，可说明<span class="math inline">\(T:l^p \to (l^{p&#39;})^*\)</span>为等距同构</p>
 <p>​ 唯一的例外便是<span class="math inline">\(l^1\)</span>，定义<span class="math inline">\(c_0\)</span>为序列极限为<span class="math inline">\(0\)</span>的序列，<span class="math inline">\(c_0\)</span>为<span class="math inline">\(l^{\infty}\)</span>的闭子空间，并且<span class="math inline">\(T:l^1 \to (c_0)^*\)</span>为等距同构</p>
+<p>​ <span class="math inline">\(l_1\)</span>还有如下的特性：</p>
+<blockquote>
+<p><span class="math inline">\(l_1\)</span>中弱收敛和收敛等价</p>
+</blockquote>
 ]]></content>
       <categories>
         <category>notes</category>
